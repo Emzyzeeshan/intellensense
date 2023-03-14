@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "741226273836",
+    "project_id": "intellensense",
+    "storage_bucket": "intellensense.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:741226273836:android:aa19bdcea261b1f85ac589",
+        "android_client_info": {
+          "package_name": "com.example.intellensense"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "741226273836-kuaahvh0hthd3htjkckot5q9otqrog9r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvjeiGXyBNK1ks1Z8uAmXU9vizd7K5l7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "741226273836-kuaahvh0hthd3htjkckot5q9otqrog9r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
