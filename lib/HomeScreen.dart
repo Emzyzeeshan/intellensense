@@ -12,6 +12,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/Pages/Notification.dart';
+import 'package:intellensense/SpalashScreen/widgets/Drawer.dart';
 import 'package:intellensense/TRS%20Screens/MPsTrsScreen.dart';
 import 'package:marquee/marquee.dart';
 import 'package:marquee_text/marquee_direction.dart';
@@ -124,7 +126,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     NewsChannelList();
     LiveUpdateList();*/
   }
-bool SecondrowVisible=false;
+
+  bool SecondrowVisible = false;
   String? selectedValue;
   String dropdownvalue = 'Item 1';
   var items = [
@@ -147,28 +150,68 @@ bool SecondrowVisible=false;
                 backgroundColor: Colors.white,
                 extendBodyBehindAppBar: false,
                 appBar: AppBar(
-                  flexibleSpace: Image.asset(
+                  centerTitle: true,
+                  title: Image.asset(
                     'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
                     height: 70,
                   ),
                   actions: [
-                    IconButton(onPressed: (){
-                      setState(() {
-                        SecondrowVisible=!SecondrowVisible;
-                      });
-
-                    }, icon: Icon(Icons.chrome_reader_mode_sharp)),
-                    IconButton(
-                        onPressed: () async {
-                          CoolAlert.show(
-                            confirmBtnColor: Color(0xff00186a),
-                            backgroundColor: Color(0xff001969),
-                            context: context,
-                            type: CoolAlertType.confirm,
-                            onConfirmBtnTap: () => LogoutAPI(context),
-                          );
-                        },
-                        icon: Icon(Icons.logout_rounded))
+                    PopupMenuButton(onSelected: (value) {
+                      if (value == 'notifications') {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Notifications()));
+                      }
+                    }, itemBuilder: (BuildContext bc) {
+                      return [
+                        PopupMenuItem(
+                          child: Text("Reader Mode"),
+                          value: 'Reader',
+                          onTap: () {
+                            setState(() {
+                              SecondrowVisible = !SecondrowVisible;
+                            });
+                          },
+                        ),
+                        PopupMenuItem(
+                          value: 'logout',
+                          child: Text("Logout"),
+                          onTap: () {
+                            CoolAlert.show(
+                              confirmBtnColor: Color(0xff00186a),
+                              backgroundColor: Color(0xff001969),
+                              context: context,
+                              type: CoolAlertType.confirm,
+                              onConfirmBtnTap: () => LogoutAPI(context),
+                            );
+                          },
+                        ),
+                        PopupMenuItem(
+                          value: 'notifications',
+                          child: Text("Notifications"),
+                          onTap: () {},
+                        ),
+                      ];
+                    }),
+                    // IconButton(
+                    //     onPressed: () {
+                    //       setState(() {
+                    //         SecondrowVisible = !SecondrowVisible;
+                    //       });
+                    //     },
+                    //     icon: Icon(Icons.chrome_reader_mode_sharp)),
+                    // IconButton(
+                    //     onPressed: () async {
+                    //       CoolAlert.show(
+                    //         confirmBtnColor: Color(0xff00186a),
+                    //         backgroundColor: Color(0xff001969),
+                    //         context: context,
+                    //         type: CoolAlertType.confirm,
+                    //         onConfirmBtnTap: () => LogoutAPI(context),
+                    //       );
+                    //     },
+                    //     icon: Icon(Icons.logout_rounded))
                   ],
                   iconTheme: IconThemeData(color: Colors.black),
                   elevation: 0,
@@ -191,574 +234,7 @@ bool SecondrowVisible=false;
                     ],
                   ),*/
                 ),
-                drawer: Container(
-                  width: 300,
-                  child: Drawer(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(15))),
-                    child: ListView(
-                      padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      children: [
-                        DrawerHeader(
-                            decoration: BoxDecoration(
-                              color: Colors.blueAccent,
-                            ),
-                            child: Column(children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  CircleAvatar(
-                                      backgroundColor: Colors.white,
-                                      radius: 40),
-                                  DropdownButtonHideUnderline(
-                                    child: DropdownButton2(
-                                      isExpanded: true,
-                                      hint: Row(
-                                        children: [
-                                          /*Icon(
-                                      Icons.list,
-                                      size: 16,
-                                      color: Colors.black,
-                                    ),*/
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              'Social Media & News Analysis',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.bold,
-                                                color: Colors.black,
-                                              ),
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      items: items
-                                          .map((item) =>
-                                              DropdownMenuItem<String>(
-                                                value: item,
-                                                child: Text(
-                                                  item,
-                                                  style: const TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
-                                                  ),
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                ),
-                                              ))
-                                          .toList(),
-                                      value: selectedValue,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          selectedValue = value as String;
-                                        });
-                                        if (selectedValue ==
-                                            "Social Media & News Analysis") {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      HomeScreen()));
-                                        } else if (selectedValue ==
-                                            "Infographics") {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Dashboard()));
-                                        }
-                                      },
-                                      icon: const Icon(
-                                        Icons.arrow_forward_ios_outlined,
-                                      ),
-                                      iconSize: 14,
-                                      iconEnabledColor: Colors.black,
-                                      iconDisabledColor: Colors.grey,
-                                      buttonHeight: 50,
-                                      buttonWidth: 160,
-                                      buttonPadding: const EdgeInsets.only(
-                                          left: 14, right: 14),
-                                      buttonDecoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(12),
-                                        border: Border.all(
-                                          color: Colors.black26,
-                                        ),
-                                        color: Colors.blueAccent,
-                                      ),
-                                      buttonElevation: 2,
-                                      itemHeight: 40,
-                                      itemPadding: const EdgeInsets.only(
-                                          left: 14, right: 14),
-                                      dropdownMaxHeight: 200,
-                                      dropdownWidth: 190,
-                                      dropdownPadding: null,
-                                      dropdownDecoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(14),
-                                        color: Colors.blueAccent,
-                                      ),
-                                      dropdownElevation: 8,
-                                      scrollbarRadius:
-                                          const Radius.circular(40),
-                                      scrollbarThickness: 6,
-                                      scrollbarAlwaysShow: true,
-                                      offset: const Offset(-20, 0),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                children: [
-                                  Text(
-                                    "${logindata.getString('username')}",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${logindata.getString('roleId')}",
-                                    style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 15,
-                                    ),
-                                  )
-                                ],
-                              )
-                            ])),
-                        /*DrawerHeader(
-                    margin: EdgeInsets.only(bottom: 10),
-                    decoration:
-                        BoxDecoration(color: Color.fromRGBO(58, 129, 233, 1)),
-                    currentAccountPicture: Stack(
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            CircleAvatar(),
-                            DropdownButton(
-                              value: dropdownvalue,
-
-                              // Down Arrow Icon
-                              icon: const Icon(Icons.keyboard_arrow_down),
-                              items: items.map((String items) {
-                                return DropdownMenuItem(
-                                  value: items,
-                                  child: Text(items),
-                                );
-                              }).toList(),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  dropdownvalue = newValue!;
-                                });
-                              },
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                    accountName: SizedBox(
-                        child: Text(
-                      "${widget.userDetails['userName']}",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    )),
-                    accountEmail: SizedBox(
-                        child: Text(
-                      "${widget.userDetails['roleId']}",
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                      ),
-                    )), child: null,
-                  ),*/
-                        /*DrawerHeader(
-                  decoration:
-                      BoxDecoration(color: Color.fromRGBO(58, 129, 233, 1),
-                      ),
-                  child: Text(''),
-                ),*/
-
-                        ListTile(
-                          title: Text(
-                            'News',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          leading: Image.asset(
-                            'assets/icons/News-Icon-3D.png',
-                            height: 30,
-                          ),
-                        ),
-                        ExpansionTile(
-                          title: Text('Political Science'),
-                          leading: Image.asset(
-                            'assets/icons/Candidature Analysis.png',
-                            height: 30,
-                          ),
-                          childrenPadding: EdgeInsets.only(left: 60),
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                print('hi');
-                              },
-                              child: GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                MLAsTrsScreen()));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Image.asset(
-                                        'assets/icons/Candidature Analysis.png',
-                                        height: 30,
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Text('Candidature Analysis')
-                                    ],
-                                  )),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                print('hi2');
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/location.png',
-                                    height: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text('Constituency Analysis')
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                print('hi3');
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/locations_icon.png',
-                                    height: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text('District Analysis')
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                print('hi4');
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/communicationChannel.png',
-                                    height: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text('Communication Channel')
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                print('hi5');
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/surveydxp.png',
-                                    height: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text('Survey')
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                print('hi6');
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/Form.png',
-                                    height: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text('Electoral Analysis')
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                print('hi7');
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/newspaperdxp.png',
-                                    height: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text('News Feed')
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                print('hi8');
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/faceEmotiondxp.png',
-                                    height: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text('Face Emotion Analysis')
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => ScoreCardsScreen()));
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/ScoreCard.png',
-                                    height: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text('Score Card')
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                print('hi10');
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/chat_icon.png',
-                                    height: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text('Chat Analysis')
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                print('hi 11  ');
-                              },
-                              child: Row(
-                                children: [
-                                  Image.asset(
-                                    'assets/icons/sentiAnalysis.png',
-                                    height: 30,
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text('Sentiment Analysis')
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            )
-                          ],
-                        ),
-                        ListTile(
-                          title: Text(
-                            'Message and Vision',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          leading: Image.asset(
-                            'assets/icons/Message&Vision-Icon-3D.png',
-                            height: 30,
-                          ),
-                        ),
-                        ListTile(
-                          title: Text(
-                            'Manifesto',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          leading: Image.asset(
-                            'assets/icons/Manifesto-Icon-3D.png',
-                            height: 30,
-                          ),
-                        ),
-                        ListTile(
-                          title: Text(
-                            'History of TRS',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          leading: Image.asset(
-                            'assets/icons/History-0f-TRS-Icon.png',
-                            height: 30,
-                          ),
-                        ),
-                        ListTile(
-                          title: Text(
-                            'Settings',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        SettingsScreen(logindata)));
-                          },
-                          leading: Image.asset(
-                            'assets/icons/Service Portal-icon.png',
-                            height: 30,
-                          ),
-                        ),
-                        ListTile(
-                          title: Text(
-                            'Events',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          leading: Image.asset(
-                            'assets/icons/Events-icon.png',
-                            height: 30,
-                          ),
-                        ),
-                        ListTile(
-                          title: Text(
-                            'Gallery',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          leading: Image.asset(
-                            'assets/icons/Gallery-Icon-3D.png',
-                            height: 30,
-                          ),
-                        ),
-                        const Divider(color: Colors.grey),
-                        ListTile(
-                          title: Text(
-                            'Become a Member',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          leading: Image.asset(
-                            'assets/icons/Become-a-Member-Icon.png',
-                            height: 30,
-                          ),
-                        ),
-                        ListTile(
-                          title: Text(
-                            'FeedBack',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                          leading: Image.asset(
-                            'assets/icons/Feedback-Icon-3D.png',
-                            height: 30,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                drawer: drawer(),
                 body: Container(
                   child: NewsPaperData(),
                 )
@@ -1230,8 +706,7 @@ bool SecondrowVisible=false;
             ),
           ),
           Expanded(
-            child:
-            Container(
+            child: Container(
               color: Colors.grey,
               child: MarqueeText(
                 text: TextSpan(
@@ -1361,8 +836,7 @@ bool SecondrowVisible=false;
                                         height: 30,
                                       )),
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1705,8 +1179,7 @@ bool SecondrowVisible=false;
                                         height: 30,
                                       )),
                                       decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1823,8 +1296,7 @@ bool SecondrowVisible=false;
                 child: Text(
                   textAlign: TextAlign.center,
                   'Candidature Analysis',
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
                 ),
               )
             ]),
@@ -1894,11 +1366,10 @@ bool SecondrowVisible=false;
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
               )
             ]),
-
           ],
         ),
       ),
-      SecondrowVisible==true?SecondRow():Container(),
+      SecondrowVisible == true ? SecondRow() : Container(),
       Flexible(
           child: PageView.builder(
               physics: NeverScrollableScrollPhysics(),
@@ -1990,32 +1461,31 @@ bool SecondrowVisible=false;
     } else {
       print(response.reasonPhrase);
     }
-  }  String addedhastags='';
+  }
+
+  String addedhastags = '';
   NotificationsAPI() async {
-
-    List<String> hastags=[];
+    List<String> hastags = [];
     var response = await get(
-      Uri.parse('http://192.169.1.211:8081/insights/2.60.0/allSourceData?page=0,11'),
-
+      Uri.parse(
+          'http://192.169.1.211:8081/insights/2.60.0/allSourceData?page=0,11'),
     );
     //print(response.toString());
     if (response.statusCode == 200) {
       print(response.body);
       try {
-        setState(() =>
-
-        NotificationsAllResult = jsonDecode(utf8.decode(response.bodyBytes)));
-        for(int i=0;i<NotificationsAllResult.length;i++){
+        setState(() => NotificationsAllResult =
+            jsonDecode(utf8.decode(response.bodyBytes)));
+        for (int i = 0; i < NotificationsAllResult.length; i++) {
           hastags.add(NotificationsAllResult[i]['hashtag']);
-
         }
-     String hash='#';
-        addedhastags=    hastags.join("      #");
+        String hash = '#';
+        addedhastags = hastags.join("      #");
 
-addedhastags=hash+addedhastags;
+        addedhastags = hash + addedhastags;
         print(addedhastags);
       } catch (e) {
-    NotificationsAllResult = [];
+        NotificationsAllResult = [];
       }
     } else {
       print(response.reasonPhrase);
@@ -2674,7 +2144,8 @@ addedhastags=hash+addedhastags;
         Column(children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => ScoreCardsScreen()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ScoreCardsScreen()));
             },
             child: Container(
               height: 60,
@@ -2916,279 +2387,279 @@ addedhastags=hash+addedhastags;
     return response;
   }
 
-
-
-  SecondRow(){
-    return GridView.count(  crossAxisCount: 5,
+  SecondRow() {
+    return GridView.count(
+      crossAxisCount: 5,
       crossAxisSpacing: 2,
       shrinkWrap: true,
-    children: [
-      Column(children: [
-      GestureDetector(
-        onTap: () {
-          PageCount.jumpToPage(7);
-        },
-        child: Container(
-          height: 50,
-          width: 50,
-          child: Center(
-            child: Image.asset(
-              "assets/icons/communicationChannel.png",
-              height: 30,
-            ),
-          ),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: Colors.black,
-                width: 0.3,
-              ),
-              color: Colors.grey[100]),
-          padding: EdgeInsets.all(8),
-          /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                          ) */
-        ),
-      ),
-      Text(
-        textAlign: TextAlign.center,
-        'Communication Channel',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-      )
-    ]),
-      Column(children: [
-        GestureDetector(
-          onTap: () {
-            PageCount.jumpToPage(7);
-          },
-          child: Container(
-            height: 50,
-            width: 50,
-            child: Center(
-              child: Image.asset(
-                "assets/icons/surveydxp.png",
-                height: 30,
-              ),
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 0.3,
+      children: [
+        Column(children: [
+          GestureDetector(
+            onTap: () {
+              PageCount.jumpToPage(7);
+            },
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                child: Image.asset(
+                  "assets/icons/communicationChannel.png",
+                  height: 30,
                 ),
-                color: Colors.grey[100]),
-            padding: EdgeInsets.all(8),
-            /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                          ) */
-          ),
-        ),
-        Text(
-          textAlign: TextAlign.center,
-          'Survey',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-        )
-      ]),
-      Column(children: [
-        GestureDetector(
-          onTap: () {
-            PageCount.jumpToPage(7);
-          },
-          child: Container(
-            height: 50,
-            width: 50,
-            child: Center(
-              child: Image.asset(
-                "assets/icons/Form.png",
-                height: 30,
               ),
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 0.3,
-                ),
-                color: Colors.grey[100]),
-            padding: EdgeInsets.all(8),
-            /*child: Center(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 0.3,
+                  ),
+                  color: Colors.grey[100]),
+              padding: EdgeInsets.all(8),
+              /*child: Center(
                             child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
+            ),
           ),
-        ),
-        Text(
-          textAlign: TextAlign.center,
-          'Electoral Analysis',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-        )
-      ]),
-      Column(children: [
-        GestureDetector(
-          onTap: () {
-            PageCount.jumpToPage(7);
-          },
-          child: Container(
-            height: 50,
-            width: 50,
-            child: Center(
-              child: Image.asset(
-                "assets/icons/newspaperdxp.png",
-                height: 30,
+          Text(
+            textAlign: TextAlign.center,
+            'Communication Channel',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+          )
+        ]),
+        Column(children: [
+          GestureDetector(
+            onTap: () {
+              PageCount.jumpToPage(7);
+            },
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                child: Image.asset(
+                  "assets/icons/surveydxp.png",
+                  height: 30,
+                ),
               ),
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 0.3,
-                ),
-                color: Colors.grey[100]),
-            padding: EdgeInsets.all(8),
-            /*child: Center(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 0.3,
+                  ),
+                  color: Colors.grey[100]),
+              padding: EdgeInsets.all(8),
+              /*child: Center(
                             child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
+            ),
           ),
-        ),
-        Text(
-          textAlign: TextAlign.center,
-          'News Feed',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-        )
-      ]),
-      Column(children: [
-        GestureDetector(
-          onTap: () {
-            PageCount.jumpToPage(7);
-          },
-          child: Container(
-            height: 50,
-            width: 50,
-            child: Center(
-              child: Image.asset(
-                "assets/icons/faceEmotiondxp.png",
-                height: 30,
+          Text(
+            textAlign: TextAlign.center,
+            'Survey',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+          )
+        ]),
+        Column(children: [
+          GestureDetector(
+            onTap: () {
+              PageCount.jumpToPage(7);
+            },
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                child: Image.asset(
+                  "assets/icons/Form.png",
+                  height: 30,
+                ),
               ),
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 0.3,
-                ),
-                color: Colors.grey[100]),
-            padding: EdgeInsets.all(8),
-            /*child: Center(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 0.3,
+                  ),
+                  color: Colors.grey[100]),
+              padding: EdgeInsets.all(8),
+              /*child: Center(
                             child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
+            ),
           ),
-        ),
-        Text(
-          textAlign: TextAlign.center,
-          'Face Emotion Analysis',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-        )
-      ]),
-      Column(children: [
-        GestureDetector(
-          onTap: () {
-            PageCount.jumpToPage(7);
-          },
-          child: Container(
-            height: 50,
-            width: 50,
-            child: Center(
-              child: Image.asset(
-                "assets/icons/ScoreCard.png",
-                height: 30,
+          Text(
+            textAlign: TextAlign.center,
+            'Electoral Analysis',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+          )
+        ]),
+        Column(children: [
+          GestureDetector(
+            onTap: () {
+              PageCount.jumpToPage(7);
+            },
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                child: Image.asset(
+                  "assets/icons/newspaperdxp.png",
+                  height: 30,
+                ),
               ),
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 0.3,
-                ),
-                color: Colors.grey[100]),
-            padding: EdgeInsets.all(8),
-            /*child: Center(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 0.3,
+                  ),
+                  color: Colors.grey[100]),
+              padding: EdgeInsets.all(8),
+              /*child: Center(
                             child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
+            ),
           ),
-        ),
-        Text(
-          textAlign: TextAlign.center,
-          'Score Card',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-        )
-      ]),
-      Column(children: [
-        GestureDetector(
-          onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => ScoreCardsScreen()));
-          },
-          child: Container(
-            height: 50,
-            width: 50,
-            child: Center(
-              child: Image.asset(
-                "assets/icons/chat_icon.png",
-                height: 30,
+          Text(
+            textAlign: TextAlign.center,
+            'News Feed',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+          )
+        ]),
+        Column(children: [
+          GestureDetector(
+            onTap: () {
+              PageCount.jumpToPage(7);
+            },
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                child: Image.asset(
+                  "assets/icons/faceEmotiondxp.png",
+                  height: 30,
+                ),
               ),
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 0.3,
-                ),
-                color: Colors.grey[100]),
-            padding: EdgeInsets.all(8),
-            /*child: Center(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 0.3,
+                  ),
+                  color: Colors.grey[100]),
+              padding: EdgeInsets.all(8),
+              /*child: Center(
                             child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
+            ),
           ),
-        ),
-        Text(
-          textAlign: TextAlign.center,
-          'Chat Analysis',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-        )
-      ]),
-      Column(children: [
-        GestureDetector(
-          onTap: () {
-            PageCount.jumpToPage(7);
-          },
-          child: Container(
-            height: 50,
-            width: 50,
-            child: Center(
-              child: Image.asset(
-                "assets/icons/sentiAnalysis.png",
-                height: 30,
+          Text(
+            textAlign: TextAlign.center,
+            'Face Emotion Analysis',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+          )
+        ]),
+        Column(children: [
+          GestureDetector(
+            onTap: () {
+              PageCount.jumpToPage(7);
+            },
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                child: Image.asset(
+                  "assets/icons/ScoreCard.png",
+                  height: 30,
+                ),
               ),
-            ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(
-                  color: Colors.black,
-                  width: 0.3,
-                ),
-                color: Colors.grey[100]),
-            padding: EdgeInsets.all(8),
-            /*child: Center(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 0.3,
+                  ),
+                  color: Colors.grey[100]),
+              padding: EdgeInsets.all(8),
+              /*child: Center(
                             child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
+            ),
           ),
-        ),
-        Text(
-          textAlign: TextAlign.center,
-          'Sentiment Analysis',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
-        )
-      ]),],);
-
-
+          Text(
+            textAlign: TextAlign.center,
+            'Score Card',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+          )
+        ]),
+        Column(children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ScoreCardsScreen()));
+            },
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                child: Image.asset(
+                  "assets/icons/chat_icon.png",
+                  height: 30,
+                ),
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 0.3,
+                  ),
+                  color: Colors.grey[100]),
+              padding: EdgeInsets.all(8),
+              /*child: Center(
+                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                          ) */
+            ),
+          ),
+          Text(
+            textAlign: TextAlign.center,
+            'Chat Analysis',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+          )
+        ]),
+        Column(children: [
+          GestureDetector(
+            onTap: () {
+              PageCount.jumpToPage(7);
+            },
+            child: Container(
+              height: 50,
+              width: 50,
+              child: Center(
+                child: Image.asset(
+                  "assets/icons/sentiAnalysis.png",
+                  height: 30,
+                ),
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 0.3,
+                  ),
+                  color: Colors.grey[100]),
+              padding: EdgeInsets.all(8),
+              /*child: Center(
+                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                          ) */
+            ),
+          ),
+          Text(
+            textAlign: TextAlign.center,
+            'Sentiment Analysis',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+          )
+        ]),
+      ],
+    );
   }
 }
 

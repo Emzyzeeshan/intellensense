@@ -26,7 +26,6 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
 
   @override
   void initState() {
-
     super.initState();
     _animationController = AnimationController(
       vsync: this,
@@ -97,137 +96,140 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return OrientationBuilder(
       builder: (context, orientation) {
-        if(orientation==Orientation.portrait){
+        if (orientation == Orientation.portrait) {
           return Scaffold(
             backgroundColor: Colors.white,
             body: LayoutBuilder(
                 builder: (BuildContext ctx, BoxConstraints constraints) {
-                  // if the screen width >= 480 i.e Wide Screen
-                  if (constraints.maxHeight > 640.0) {
-                    return  Stack(
-                      children: <Widget>[
-                        AnimatedBuilder(
-                          animation: _whiteTopClipperAnimation,
-                          builder: (_, Widget? child) {
-                            return ClipPath(
-                              clipper: WhiteTopClipper(
-                                yOffset: _whiteTopClipperAnimation.value,
-                              ),
-                              child: child,
-                            );
-                          },
-                          child: Container(color: kGrey),
-                        ),
-                        AnimatedBuilder(
-                          animation: _greyTopClipperAnimation,
-                          builder: (_, Widget? child) {
-                            return ClipPath(
-                              clipper: GreyTopClipper(
-                                yOffset: _greyTopClipperAnimation.value,
-                              ),
-                              child: child,
-                            );
-                          },
-                          child: Container(color: kBlue),
-                        ),
-                        AnimatedBuilder(
-                          animation: _blueTopClipperAnimation,
-                          builder: (_, Widget? child) {
-                            return ClipPath(
-                              clipper: BlueTopClipper(
-                                yOffset: _blueTopClipperAnimation.value,
-                              ),
-                              child: child,
-                            );
-                          },
-                          child: Container(color: kWhite),
-                        ),
-                        SafeArea(
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(vertical: kPaddingL),
-                            child: Column(
-                              children: <Widget>[
-                                Header(animation: _headerTextAnimation),
-                                SizedBox(height: 90,),
-                                Image.asset('assets/icons/output-onlinegiftools(4).gif',height: 400),
-                                LoginForm(animation: _formElementAnimation),
-                              ],
+              // if the screen width >= 480 i.e Wide Screen
+              if (constraints.maxHeight > 640.0) {
+                return Stack(
+                  children: <Widget>[
+                    AnimatedBuilder(
+                      animation: _whiteTopClipperAnimation,
+                      builder: (_, Widget? child) {
+                        return ClipPath(
+                          clipper: WhiteTopClipper(
+                            yOffset: _whiteTopClipperAnimation.value,
+                          ),
+                          child: child,
+                        );
+                      },
+                      child: Container(color: kGrey),
+                    ),
+                    AnimatedBuilder(
+                      animation: _greyTopClipperAnimation,
+                      builder: (_, Widget? child) {
+                        return ClipPath(
+                          clipper: GreyTopClipper(
+                            yOffset: _greyTopClipperAnimation.value,
+                          ),
+                          child: child,
+                        );
+                      },
+                      child: Container(color: kBlue),
+                    ),
+                    AnimatedBuilder(
+                      animation: _blueTopClipperAnimation,
+                      builder: (_, Widget? child) {
+                        return ClipPath(
+                          clipper: BlueTopClipper(
+                            yOffset: _blueTopClipperAnimation.value,
+                          ),
+                          child: child,
+                        );
+                      },
+                      child: Container(color: kWhite),
+                    ),
+                    SafeArea(
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.symmetric(vertical: kPaddingL),
+                        child: Column(
+                          children: <Widget>[
+                            Header(animation: _headerTextAnimation),
+                            SizedBox(
+                              height: 90,
                             ),
-                          ),
-                        ),
-                      ],
-                    );
-                  }
-                  else{
-                    return  SafeArea(
-                      child: Column(
-                        children: <Widget>[
-                          AnimatedBuilder(
-                            animation: _whiteTopClipperAnimation,
-                            builder: (_, Widget? child) {
-                              return ClipPath(
-                                clipper: WhiteTopClipper(
-                                  yOffset: _whiteTopClipperAnimation.value,
-                                ),
-                                child: child,
-                              );
-                            },
-                            child: Container(color: kGrey),
-                          ),
-                          AnimatedBuilder(
-                            animation: _greyTopClipperAnimation,
-                            builder: (_, Widget? child) {
-                              return ClipPath(
-                                clipper: GreyTopClipper(
-                                  yOffset: _greyTopClipperAnimation.value,
-                                ),
-                                child: child,
-                              );
-                            },
-                            child: Container(color: kBlue),
-                          ),
-                          AnimatedBuilder(
-                            animation: _blueTopClipperAnimation,
-                            builder: (_, Widget? child) {
-                              return ClipPath(
-                                clipper: BlueTopClipper(
-                                  yOffset: _blueTopClipperAnimation.value,
-                                ),
-                                child: child,
-                              );
-                            },
-                            child: Container(color: kWhite),
-                          ),
-                          Flexible(
-                            child: Column(
-                              children: <Widget>[
-                                Padding(
-                                  padding: const EdgeInsets.only(top:68.0),
-                                  child: Header(animation: _headerTextAnimation),
-                                ),
-                                // SizedBox(height: 60,),
-                                Spacer(),
-                                Image.asset('assets/icons/output-onlinegiftools(4).gif',height: 200 ),
-
-                                LoginForm(animation: _formElementAnimation),
-                              ],
+                            Flexible(
+                              child: Image.asset(
+                                'assets/icons/output-onlinegiftools(4).gif',
+                              ),
                             ),
-                          ),
-                        ],
+                            LoginForm(animation: _formElementAnimation),
+                          ],
+                        ),
                       ),
-                    );
-                  }
-                }),
+                    ),
+                  ],
+                );
+              } else {
+                return SafeArea(
+                  child: Column(
+                    children: <Widget>[
+                      AnimatedBuilder(
+                        animation: _whiteTopClipperAnimation,
+                        builder: (_, Widget? child) {
+                          return ClipPath(
+                            clipper: WhiteTopClipper(
+                              yOffset: _whiteTopClipperAnimation.value,
+                            ),
+                            child: child,
+                          );
+                        },
+                        child: Container(color: kGrey),
+                      ),
+                      AnimatedBuilder(
+                        animation: _greyTopClipperAnimation,
+                        builder: (_, Widget? child) {
+                          return ClipPath(
+                            clipper: GreyTopClipper(
+                              yOffset: _greyTopClipperAnimation.value,
+                            ),
+                            child: child,
+                          );
+                        },
+                        child: Container(color: kBlue),
+                      ),
+                      AnimatedBuilder(
+                        animation: _blueTopClipperAnimation,
+                        builder: (_, Widget? child) {
+                          return ClipPath(
+                            clipper: BlueTopClipper(
+                              yOffset: _blueTopClipperAnimation.value,
+                            ),
+                            child: child,
+                          );
+                        },
+                        child: Container(color: kWhite),
+                      ),
+                      Flexible(
+                        child: Column(
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.only(top: 68.0),
+                              child: Header(animation: _headerTextAnimation),
+                            ),
+                            // SizedBox(height: 60,),
+                            Spacer(),
+                            Image.asset(
+                                'assets/icons/output-onlinegiftools(4).gif',
+                                height: 200),
+
+                            LoginForm(animation: _formElementAnimation),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            }),
           );
-
-
-        }else{
-          return  Scaffold(
+        } else {
+          return Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: kWhite,
             body: SingleChildScrollView(
@@ -275,8 +277,12 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                       child: Column(
                         children: <Widget>[
                           Header(animation: _headerTextAnimation),
-                          SizedBox(height: 90,),
-                          Image.asset('assets/icons/output-onlinegiftools(4).gif',height: 400),
+                          SizedBox(
+                            height: 90,
+                          ),
+                          Image.asset(
+                              'assets/icons/output-onlinegiftools(4).gif',
+                              height: 400),
                           LoginForm(animation: _formElementAnimation),
                         ],
                       ),
@@ -289,8 +295,5 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
         }
       },
     );
-
-
-
   }
 }
