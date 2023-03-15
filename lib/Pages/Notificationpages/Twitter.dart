@@ -19,7 +19,7 @@ class _TwitterState extends State<Twitter> {
             cursorColor: Colors.grey,
             decoration: InputDecoration(
                 isDense: true,
-                fillColor: Colors.blue.shade100,
+                fillColor: Colors.grey.shade200,
                 filled: true,
                 border: OutlineInputBorder(borderSide: BorderSide.none),
                 hintText: 'Search',

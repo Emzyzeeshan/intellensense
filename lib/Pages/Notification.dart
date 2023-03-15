@@ -22,9 +22,13 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         toolbarHeight: 40,
         centerTitle: true,
         backgroundColor: Colors.white,
+        leading: IconButton(icon:Icon(Icons.arrow_back,color: Colors.black,),onPressed: (){
+          Navigator.pop(context);
+        },),
         title: Image.asset(
           'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
           height: 50,
