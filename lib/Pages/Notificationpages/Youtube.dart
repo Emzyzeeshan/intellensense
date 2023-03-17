@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:intellensense/Pages/Notificationpages/Twitter.dart';
 
 class Youtube extends StatefulWidget {
@@ -9,67 +12,95 @@ class Youtube extends StatefulWidget {
 }
 
 class _YoutubeState extends State<Youtube> {
+  late Future<dynamic> finaldata = YoutubeApi();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView(shrinkWrap: true, children: [
-          TextField(
-            cursorColor: Colors.grey,
-            decoration: InputDecoration(
-                isDense: true,
-                fillColor: Colors.blue.shade100,
-                filled: true,
-                border: OutlineInputBorder(borderSide: BorderSide.none),
-                hintText: 'Search',
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
-                prefixIcon: Container(
-                  padding: EdgeInsets.all(15),
-                  child: Icon(Icons.search_rounded),
-                  width: 18,
-                )),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          YoutubeNotificationtile('YuvaGalam'),
-          SizedBox(
-            height: 5,
-          ),
-          YoutubeNotificationtile('YuvaGalamPadayatra'),
-          SizedBox(
-            height: 5,
-          ),
-          YoutubeNotificationtile('LokeshPadayatra'),
-          SizedBox(
-            height: 5,
-          ),
-          YoutubeNotificationtile('YuvaGalamPadayatra Day-1'),
-          SizedBox(
-            height: 5,
-          ),
-          //==================================
-          YoutubeNotificationtile('YuvaGalamPadayatra Day-2'),
-          SizedBox(
-            height: 5,
-          ),
-          YoutubeNotificationtile('YuvaGalamPadayatra Day-3'),
-          SizedBox(
-            height: 5,
-          ),
-          YoutubeNotificationtile('YuvaGalamPadayatra Day-4'),
-          SizedBox(
-            height: 5,
-          ),
-          YoutubeNotificationtile('YuvaGalamPadayatra Day-5'),
-          SizedBox(
-            height: 5,
-          ),
-        ]),
+      body: FutureBuilder<dynamic>(
+        future: finaldata,
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<dynamic> snapshot,
+        ) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(child: CircularProgressIndicator()),
+                  Text('Please Wait')
+                ]);
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return const Text('Error');
+            } else if (snapshot.hasData) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(children: [
+                  TextField(
+                    cursorColor: Colors.grey,
+                    decoration: InputDecoration(
+                        isDense: true,
+                        fillColor: Colors.blue.shade100,
+                        filled: true,
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                        hintText: 'Search',
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
+                        prefixIcon: Container(
+                          padding: EdgeInsets.all(15),
+                          child: Icon(Icons.search_rounded),
+                          width: 18,
+                        )),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Flexible(
+                    child: ListView.builder(
+                      itemCount: Youtubedata.length,
+                      itemBuilder: (context, index) {
+                        return YoutubeNotificationtile(
+                            '${Youtubedata[index]['id']['tagName']}');
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                ]),
+              );
+            } else {
+              return const Text('Empty data');
+            }
+          } else {
+            return Text('State: ${snapshot.connectionState}');
+          }
+        },
       ),
     );
+  }
+
+  var Youtubedata;
+  Future<dynamic> YoutubeApi() async {
+    // await Future.delayed(Duration(seconds: 1));
+    var headers = {'Content-Type': 'application/json'};
+
+    var response = await get(
+      Uri.parse(
+          'http://192.169.1.211:8081/insights/2.60.0/ytnpTrendingHashTags?page=0,13&field=YOUTUBE'),
+    );
+
+    if (response.statusCode == 200) {
+      setState(() {
+        Youtubedata = jsonDecode(response.body);
+      });
+
+      print(Youtubedata);
+    } else {
+      print(response.reasonPhrase);
+    }
+    return Youtubedata;
   }
 }
 

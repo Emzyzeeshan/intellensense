@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class Twitter extends StatefulWidget {
   const Twitter({super.key});
@@ -8,10 +11,73 @@ class Twitter extends StatefulWidget {
 }
 
 class _TwitterState extends State<Twitter> {
+  late Future<dynamic> finaldata = TwitterApi();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+<<<<<<< HEAD
+      body: FutureBuilder<dynamic>(
+        future: finaldata,
+        builder: (
+          BuildContext context,
+          AsyncSnapshot<dynamic> snapshot,
+        ) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Center(child: CircularProgressIndicator()),
+                  Text('Please Wait')
+                ]);
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return const Text('Error');
+            } else if (snapshot.hasData) {
+              return Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(children: [
+                  TextField(
+                    cursorColor: Colors.grey,
+                    decoration: InputDecoration(
+                        isDense: true,
+                        fillColor: Colors.blue.shade100,
+                        filled: true,
+                        border: OutlineInputBorder(borderSide: BorderSide.none),
+                        hintText: 'Search',
+                        hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
+                        prefixIcon: Container(
+                          padding: EdgeInsets.all(15),
+                          child: Icon(Icons.search_rounded),
+                          width: 18,
+                        )),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Flexible(
+                    child: ListView.builder(
+                      itemCount: twitterdata.length,
+                      itemBuilder: (context, index) {
+                        return TwittterNotificationtile(
+                            '${twitterdata[index]['hashTag']}');
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                ]),
+              );
+            } else {
+              return const Text('Empty data');
+            }
+          } else {
+            return Text('State: ${snapshot.connectionState}');
+          }
+        },
+=======
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(shrinkWrap: true, children: [
@@ -19,7 +85,7 @@ class _TwitterState extends State<Twitter> {
             cursorColor: Colors.grey,
             decoration: InputDecoration(
                 isDense: true,
-                fillColor: Colors.blue.shade100,
+                fillColor: Colors.grey.shade200,
                 filled: true,
                 border: OutlineInputBorder(borderSide: BorderSide.none),
                 hintText: 'Search',
@@ -67,8 +133,31 @@ class _TwitterState extends State<Twitter> {
             height: 5,
           ),
         ]),
+>>>>>>> 6c8ef16840e311fe5b77ce351d7482815045bc7b
       ),
     );
+  }
+
+  var twitterdata;
+  Future<dynamic> TwitterApi() async {
+    // await Future.delayed(Duration(seconds: 1));
+    var headers = {'Content-Type': 'application/json'};
+    var body = json.encode({});
+    var response = await get(
+      Uri.parse(
+          'http://192.169.1.211:8081/insights/2.60.0/trendingHashtags?page=0,14&field=TWITTER'),
+    );
+
+    if (response.statusCode == 200) {
+      setState(() {
+        twitterdata = jsonDecode(response.body);
+      });
+
+      print(twitterdata);
+    } else {
+      print(response.reasonPhrase);
+    }
+    return twitterdata;
   }
 }
 
