@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:carousel_slider/carousel_options.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
@@ -686,6 +688,23 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       "jsdfxnnfjasks","jsfjjksjoasfjanfafj","njsfojbzfjkabsfj","jsajfjszfjabfjafjb"
     ];*/
     return Column(children: [
+      CarouselSlider(
+        options: CarouselOptions(height: 18.0,scrollDirection: Axis.vertical,autoPlay: true),
+        items: [addedhastags].map((i) {
+          return Builder(
+            builder: (BuildContext context) {
+              return Container(
+                  width: MediaQuery.of(context).size.width,
+                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: BoxDecoration(
+                      color: Colors.amber
+                  ),
+                  child: Text(' $i', style: TextStyle(fontSize: 14.0),)
+              );
+            },
+          );
+        }).toList(),
+      ),
       Row(
         children: <Widget>[
           Container(
