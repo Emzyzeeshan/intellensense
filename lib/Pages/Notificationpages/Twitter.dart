@@ -15,8 +15,7 @@ class _TwitterState extends State<Twitter> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-<<<<<<< HEAD
+      backgroundColor: Color(0xffd2dfff),
       body: FutureBuilder<dynamic>(
         future: finaldata,
         builder: (
@@ -77,63 +76,6 @@ class _TwitterState extends State<Twitter> {
             return Text('State: ${snapshot.connectionState}');
           }
         },
-=======
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView(shrinkWrap: true, children: [
-          TextField(
-            cursorColor: Colors.grey,
-            decoration: InputDecoration(
-                isDense: true,
-                fillColor: Colors.grey.shade200,
-                filled: true,
-                border: OutlineInputBorder(borderSide: BorderSide.none),
-                hintText: 'Search',
-                hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
-                prefixIcon: Container(
-                  padding: EdgeInsets.all(15),
-                  child: Icon(Icons.search_rounded),
-                  width: 18,
-                )),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          TwittterNotificationtile('#YuvaGalamPadayatra'),
-          SizedBox(
-            height: 5,
-          ),
-          TwittterNotificationtile('#YuvaGalam'),
-          SizedBox(
-            height: 5,
-          ),
-          TwittterNotificationtile('#LokeshPadayatra'),
-          SizedBox(
-            height: 5,
-          ),
-          TwittterNotificationtile('#PsychoPovaliCycleRavali'),
-          SizedBox(
-            height: 5,
-          ),
-          //==================================
-          TwittterNotificationtile('#JaganPovaliBabuRavali'),
-          SizedBox(
-            height: 5,
-          ),
-          TwittterNotificationtile('#PawanKalyan'),
-          SizedBox(
-            height: 5,
-          ),
-          TwittterNotificationtile('@ncbn'),
-          SizedBox(
-            height: 5,
-          ),
-          TwittterNotificationtile('#JaganFailedCM'),
-          SizedBox(
-            height: 5,
-          ),
-        ]),
->>>>>>> 6c8ef16840e311fe5b77ce351d7482815045bc7b
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intellensense/Pages/PartyFilterscreen.dart';
 
 class drawer extends StatefulWidget {
   const drawer({super.key});
@@ -46,7 +47,11 @@ class _drawerState extends State<drawer> {
               ),
               title: Text('Candidature Analysis'),
               onTap: () {
-                Navigator.pop(context);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PartyFilterScreen(),
+                    ));
               },
             ),
             ListTile(

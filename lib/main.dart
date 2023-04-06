@@ -3,15 +3,18 @@ import 'dart:collection';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intellensense/Pages/PartyFilterscreen.dart';
+import 'package:intellensense/Services/themesetup/DarkThemeProvider.dart';
 import 'package:intellensense/SpalashScreen/screens/login/widgets/login_form.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'Services/themesetup/styles.dart';
 import 'SpalashScreen/screens/login/login.dart';
 import 'SpalashScreen/screens/onboarding/onboarding.dart';
 
-
 Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {
-
-   Firebase.initializeApp(); // options: DefaultFirebaseConfig.platformOptions
+  Firebase.initializeApp(); // options: DefaultFirebaseConfig.platformOptions
   print('Handling a background message ${message.messageId}');
 }
 
@@ -23,36 +26,59 @@ void main() async {
   runApp(MaterialApp(
     home: MyApp(),
   ));
-}late SharedPreferences logindata;
+}
+
+late SharedPreferences logindata;
 var DropdownApidata;
-var data;var Selectedinput;
+var data;
+var Selectedinput;
 GlobalKey DashboardDropdownkey = GlobalKey();
+
 class MyApp extends StatefulWidget {
-   MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
 
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    getCurrentAppTheme();
+    // TODO: implement initState
+    super.initState();
+  }
+
+  DarkThemeProvider themeChangeProvider = DarkThemeProvider();
+  void getCurrentAppTheme() async {
+    themeChangeProvider.darkTheme =
+        await themeChangeProvider.darkThemePreference.getTheme();
+  }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'TRS Party',
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.grey[900],
-        primarySwatch: Colors.blue,
-        fontFamily: 'Urbanist',
-      ),
-      home: Onboarding(screenHeight: screenHeight),
-    );
+    return ChangeNotifierProvider(create: (_) {
+      return themeChangeProvider;
+    }, child: Consumer<DarkThemeProvider>(
+        builder: (BuildContext context, value, Widget? child) {
+      return MaterialApp(
+        theme: Styles.themeData(themeChangeProvider.darkTheme, context),
+        debugShowCheckedModeBanner: false,
+        title: 'TRS Party',
+        home:
+            //  PartyFilterScreen(),
+
+            Onboarding(screenHeight: screenHeight),
+      );
+    }));
   }
 }
-
 
 ///login API
 const rootUrl = 'http://192.169.1.211:8082';

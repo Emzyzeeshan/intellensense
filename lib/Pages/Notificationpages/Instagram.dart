@@ -15,7 +15,7 @@ class _InstagramState extends State<Instagram> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffd2dfff),
       body: FutureBuilder<dynamic>(
         future: finaldata,
         builder: (
@@ -26,7 +26,10 @@ class _InstagramState extends State<Instagram> {
             return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [Center(child: CircularProgressIndicator()), Text('Please Wait')]);
+                children: [
+                  Center(child: CircularProgressIndicator()),
+                  Text('Please Wait')
+                ]);
           } else if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.hasError) {
               return const Text('Error');
