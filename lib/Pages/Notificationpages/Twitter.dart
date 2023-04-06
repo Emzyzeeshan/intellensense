@@ -16,6 +16,7 @@ class _TwitterState extends State<Twitter> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffd2dfff),
+      backgroundColor: Colors.white,
       body: FutureBuilder<dynamic>(
         future: finaldata,
         builder: (
