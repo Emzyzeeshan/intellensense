@@ -15,7 +15,7 @@ class Header extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Image.asset('assets/icons/IntelliSense-Logo-Finall_White.gif',height: 60,),
+        Image.asset('assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',height: 60,color: Colors.white,),
         /*const Logo(
           color: kWhite,
           size: 32.0,

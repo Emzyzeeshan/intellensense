@@ -16,6 +16,7 @@ class NewsPaperScreen extends StatefulWidget {
 
 class _NewsPaperScreenState extends State<NewsPaperScreen> {
   var NewsPaperListResult = [];
+
   @override
   void initState() {
     super.initState();

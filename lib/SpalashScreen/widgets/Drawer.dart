@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../TRS Screens/MLAsTrsScreen.dart';
+
 class drawer extends StatefulWidget {
   const drawer({super.key});
 
@@ -46,7 +48,7 @@ class _drawerState extends State<drawer> {
               ),
               title: Text('Candidature Analysis'),
               onTap: () {
-                Navigator.pop(context);
+               Navigator.push(context, MaterialPageRoute(builder: (context) => MLAsTrsScreen()));
               },
             ),
             ListTile(
