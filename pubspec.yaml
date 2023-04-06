@@ -29,72 +29,67 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animated_bottom_navigation_bar: ^1.2.0
+  auto_size_text: ^3.0.0
+  avatars: ^2.0.0
+  bottom_navy_bar: ^6.0.0
+  bubble_tab_indicator: ^0.1.6
+  cached_network_image: null
+  card_swiper: ^2.0.4
+  carousel_pro: ^1.0.0
+  carousel_slider: ^4.1.1
+  cloud_firestore: null
+  cool_alert: ^1.1.0
+  country_code_picker: null
+  cupertino_icons: ^1.0.2
+  dropdown_button2: ^1.9.2
+  equatable: null
+  expansion_tile_card: ^2.0.0
+  firebase_auth: null
+  firebase_core: null
+  firebase_messaging: null
+  firebase_storage: null
+  fl_chart: ^0.35.0
+  flip_card: ^0.6.0
   flutter:
     sdk: flutter
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  carousel_slider: ^4.1.1
-  url_launcher: ^6.1.4
-  flutter_zoom_drawer: ^2.1.1
-  rating_dialog: ^2.0.0
-  timelines: ^0.1.0
-  getwidget: ^3.0.1
-  http: ^0.13.4
-  carousel_pro: ^1.0.0
-  foundation_flutter: ^0.2.0
-  bubble_tab_indicator: ^0.1.6
-  avatars: ^2.0.0
-  font_awesome_flutter: ^10.1.0
-  google_sign_in:
-  firebase_auth:
-  cloud_firestore:
-  firebase_storage:
-  shared_preferences:
-  image_picker:
-  cached_network_image:
-  fluttertoast:
-  intl:
-  firebase_messaging:
-  photo_view:
-  firebase_core:
-  provider:
-  country_code_picker:
-  equatable:
-  tap_to_expand: ^0.6.1
-  flip_card: ^0.6.0
-  popup_card: ^0.1.0
-  quickalert: ^1.0.0
-  cool_alert: ^1.1.0
-  settings_ui: ^2.0.2
-  dropdown_button2: ^1.9.2
-  google_maps_flutter: ^2.2.3
-  expansion_tile_card: ^2.0.0
+  flutter_spinkit: ^5.1.0
   flutter_svg: ^2.0.3
-  fl_chart: ^0.35.0
-  sleek_circular_slider: ^2.0.1
-  youtube: ^1.0.1
-  text_scroll: ^0.1.2
-  auto_size_text: ^3.0.0
+  flutter_zoom_drawer: ^2.1.1
+  fluttertoast: null
+  foldable_sidebar: ^1.0.0
+  font_awesome_flutter: ^10.1.0
+  foundation_flutter: ^0.2.0
+  geolocator: ^9.0.2
+  getwidget: ^3.0.1
+  google_fonts: ^4.0.3
+  google_maps_flutter: ^2.2.3
+  google_sign_in: null
+  http: ^0.13.4
+  image_picker: null
+  intl: null
   marquee: ^2.2.3
   marquee_text: ^2.5.0+1
-  animated_bottom_navigation_bar: ^1.2.0
-  bottom_navy_bar: ^6.0.0
+  modal_bottom_sheet: ^2.1.2
+  photo_view: null
+  popup_card: ^0.1.0
+  provider: null
+  quickalert: ^1.0.0
+  rating_dialog: ^2.0.0
+  settings_ui: ^2.0.2
+  shared_preferences: null
+  sleek_circular_slider: ^2.0.1
+  tap_to_expand: ^0.6.1
+  text_scroll: ^0.1.2
+  timelines: ^0.1.0
+  url_launcher: ^6.1.4
+  youtube: ^1.0.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
 # The following section is specific to Flutter packages.
 flutter:
   # The following line ensures that the Material Icons font is
@@ -121,18 +116,18 @@ flutter:
     - assets/NotificationIcons/GridDB.png
     - assets/NotificationIcons/Pivot-Unpivot_Icon.png
     - assets/NotificationIcons/Tree.png
+    - assets/icons/newspaperhead.gif
+    - assets/icons/socialmedia.gif
+    - assets/icons/live.gif
 
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

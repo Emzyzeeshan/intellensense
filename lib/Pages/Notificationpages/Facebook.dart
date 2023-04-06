@@ -15,7 +15,7 @@ class _FacebookState extends State<Facebook> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffd2dfff),
       body: FutureBuilder<dynamic>(
         future: finaldata,
         builder: (

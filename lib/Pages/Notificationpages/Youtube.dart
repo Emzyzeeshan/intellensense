@@ -16,7 +16,7 @@ class _YoutubeState extends State<Youtube> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffd2dfff),
       body: FutureBuilder<dynamic>(
         future: finaldata,
         builder: (

@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/Homepage2.dart';
 import 'package:quickalert/models/quickalert_animtype.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
@@ -44,20 +45,22 @@ class _LoginFormState extends State<LoginForm> {
   late StreamSubscription subscription;
   bool isDeviceConnected = false;
   bool isAlertSet = false;
-var userDetails;
+  var userDetails;
 
   clearText() {
     userNameText.clear();
     passWordText.clear();
   }
+
   @override
   void dispose() {
     // Clean up the controller when the widget is disposed.
     userNameText.dispose();
     passWordText.dispose();
-   /* subscription.cancel();*/
+    /* subscription.cancel();*/
     super.dispose();
   }
+
   var newuser;
   void check_if_already_login() async {
     logindata = await SharedPreferences.getInstance();
@@ -65,12 +68,13 @@ var userDetails;
     print(newuser);
     if (newuser == false) {
       Navigator.pushReplacement(
-          context, new MaterialPageRoute(builder: (context) => HomeScreen()));
+          context, new MaterialPageRoute(builder: (context) => Homepage()));
     }
   }
 
   @override
-  initState() {check_if_already_login();
+  initState() {
+    check_if_already_login();
     super.initState();
     userName = 'SASI_MGR';
     userNameText.text = 'SASI_MGR';
@@ -88,10 +92,11 @@ var userDetails;
       );
     });*/
   }
+
   @override
   Widget build(BuildContext context) {
-    final height =
-        MediaQuery.of(context).size.height*3 - MediaQuery.of(context).padding.top;
+    final height = MediaQuery.of(context).size.height * 3 -
+        MediaQuery.of(context).padding.top;
     final space = height > 650 ? kSpaceM : kSpaceS;
 
     return Padding(
@@ -99,156 +104,147 @@ var userDetails;
       child: Column(
         children: <Widget>[
           FadeSlideTransition(
-            animation: widget.animation,
-            additionalOffset: 0.0,
-            child:  TextFormField(
-              keyboardType: TextInputType.text,
-              onChanged: (value) {
-                setState(() {
-                  userName = value;
-                  userError = false;
-                  passError = false;
-                });
-              },
-              controller: userNameText,
-              //controller: controller,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(kPaddingM),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black.withOpacity(0.12)),
+              animation: widget.animation,
+              additionalOffset: 0.0,
+              child: TextFormField(
+                keyboardType: TextInputType.text,
+                onChanged: (value) {
+                  setState(() {
+                    userName = value;
+                    userError = false;
+                    passError = false;
+                  });
+                },
+                controller: userNameText,
+                //controller: controller,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(kPaddingM),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.black.withOpacity(0.12)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.black.withOpacity(0.12)),
+                  ),
+                  hintText: 'UserName',
+                  hintStyle: TextStyle(
+                    color: kBlack.withOpacity(0.5),
+                    fontWeight: FontWeight.w500,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.person,
+                    color: kBlack.withOpacity(0.5),
+                  ),
                 ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black.withOpacity(0.12)),
-                ),
-                hintText: 'UserName',
-                hintStyle: TextStyle(
-                  color: kBlack.withOpacity(0.5),
-                  fontWeight: FontWeight.w500,
-                ),
-                prefixIcon: Icon(
-                  Icons.person,
-                  color: kBlack.withOpacity(0.5),
-                ),
-              ),
-            )
-          ),
+              )),
           SizedBox(height: space),
           FadeSlideTransition(
-            animation: widget.animation,
-            additionalOffset: space,
-            child:  TextFormField(
-              onChanged: (value) {
-                passWord = value;
-                setState(() {
-                  userError = false;
-                  passError = false;
-                });
-              },
-              obscureText: _visible,
-              controller: passWordText,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.all(kPaddingM),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black.withOpacity(0.12)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black.withOpacity(0.12)),
-                ),
-                hintText: 'Password',
-                hintStyle: TextStyle(
-                  color: kBlack.withOpacity(0.5),
-                  fontWeight: FontWeight.w500,
-                ),
-                prefixIcon: Icon(
-                  Icons.lock,
-                  color: kBlack.withOpacity(0.5),
-                ),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    // Based on passwordVisible state choose the icon
-                    _visible
-                        ? Icons.visibility
-                        : Icons.visibility_off,
-                    color: Theme.of(context)
-                        .primaryColorDark,
+              animation: widget.animation,
+              additionalOffset: space,
+              child: TextFormField(
+                onChanged: (value) {
+                  passWord = value;
+                  setState(() {
+                    userError = false;
+                    passError = false;
+                  });
+                },
+                obscureText: _visible,
+                controller: passWordText,
+                decoration: InputDecoration(
+                  contentPadding: const EdgeInsets.all(kPaddingM),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.black.withOpacity(0.12)),
                   ),
-                  onPressed: () {
-                    // Update the state i.e. toogle the state of passwordVisible variable
-                    setState(() {
-                      _visible = !_visible;
-                    });
-                  },
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Colors.black.withOpacity(0.12)),
+                  ),
+                  hintText: 'Password',
+                  hintStyle: TextStyle(
+                    color: kBlack.withOpacity(0.5),
+                    fontWeight: FontWeight.w500,
+                  ),
+                  prefixIcon: Icon(
+                    Icons.lock,
+                    color: kBlack.withOpacity(0.5),
+                  ),
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      // Based on passwordVisible state choose the icon
+                      _visible ? Icons.visibility : Icons.visibility_off,
+                      color: Theme.of(context).primaryColorDark,
+                    ),
+                    onPressed: () {
+                      // Update the state i.e. toogle the state of passwordVisible variable
+                      setState(() {
+                        _visible = !_visible;
+                      });
+                    },
+                  ),
                 ),
-              ),
-            )
-          ),
-
+              )),
           SizedBox(height: space),
           (userError
               ? ListTile(
-            title: Text(
-              'Invalid credentials',
-              style: TextStyle(color: Colors.red),
-            ),
-            subtitle: Text(
-              'Please check username and try again',
-              style: TextStyle(color: Colors.red),
-            ),
-          )
+                  title: Text(
+                    'Invalid credentials',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  subtitle: Text(
+                    'Please check username and try again',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
               : Container(height: 0)),
           (passError
               ? ListTile(
-            title: Text(
-              'Invalid credentials',
-              style: TextStyle(color: Colors.red),
-            ),
-            subtitle: Text(
-              'Please check password and try again',
-              style: TextStyle(color: Colors.red),
-            ),
-          )
+                  title: Text(
+                    'Invalid credentials',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                  subtitle: Text(
+                    'Please check password and try again',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                )
               : Container(height: 0)),
           InkWell(
               onTap: () async {
                 try {
-                  final result =
-                  await InternetAddress.lookup(
-                      'example.com');
-                  if (result.isNotEmpty &&
-                      result[0].rawAddress.isNotEmpty) {
+                  final result = await InternetAddress.lookup('example.com');
+                  if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
                     setState(() {
                       userError = false;
                       passError = false;
                     });
-                    var res = await post(
-                        Uri.parse(rootUrl + '/user/login'),
+                    var res = await post(Uri.parse(rootUrl + '/user/login'),
                         body: jsonEncode({
                           "rsUsername": userNameText.text,
                           "rsPassword": passWordText.text
                         }).toString(),
                         headers: {
-                          'Content-Type':
-                          'application/json',
+                          'Content-Type': 'application/json',
                         });
                     var response = jsonDecode(res.body);
-                    if (response['error'] ==
-                        "Username Incorrect")
+                    if (response['error'] == "Username Incorrect")
                       setState(() {
                         userError = true;
                         islogin = false;
                       });
-                    else if (response['error'] ==
-                        "Password Incorrect" &&
+                    else if (response['error'] == "Password Incorrect" &&
                         !showPasswordField)
-                      setState(
-                              () { showPasswordField = true;
-                          islogin = false;
-                          });
-                    else if (response['error'] ==
-                        "Password Incorrect" &&
+                      setState(() {
+                        showPasswordField = true;
+                        islogin = false;
+                      });
+                    else if (response['error'] == "Password Incorrect" &&
                         showPasswordField)
-                      setState(() {passError = true;
-                      islogin = false;
+                      setState(() {
+                        passError = true;
+                        islogin = false;
                       });
                     else {
                       var login = response['message'] ?? '';
@@ -270,7 +266,8 @@ var userDetails;
                         if (username != '' && password != '') {
                           print('Successfull');
                           logindata.setBool('login', false);
-                          logindata.setString('username', username.toUpperCase());
+                          logindata.setString(
+                              'username', username.toUpperCase());
                           logindata.setString('roleId', response['roleId']);
                           logindata.setString('password', password);
 
@@ -282,8 +279,10 @@ var userDetails;
                               textColor: Colors.white,
                               fontSize: 16.0);
                           setState(() {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: ((context) => HomeScreen())));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: ((context) => Homepage())));
                           });
                         }
 
@@ -347,34 +346,26 @@ var userDetails;
               child: Center(
                 child: islogin == true
                     ? CircularProgressIndicator(
-                  color: Color(0xff00186a),
-                )
+                        color: Color(0xff00186a),
+                      )
                     : Container(
-                  width: MediaQuery.of(context)
-                      .size
-                      .width *
-                      0.5,
-                  height: MediaQuery.of(context)
-                      .size
-                      .height *
-                      0.07,
-                  margin: const EdgeInsets.only(
-                      left: 20, right: 20),
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(50)),
-                    color: Color(0xFF306EFF),
-                  ),
-                  child: Center(
-                    child: Text(
-                      "Login",
-                      style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.white),
-                    ),
-                  ),
-                ),
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: MediaQuery.of(context).size.height * 0.07,
+                        margin: const EdgeInsets.only(left: 20, right: 20),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
+                          color: Color(0xFF306EFF),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.white),
+                          ),
+                        ),
+                      ),
               )),
           /*FadeSlideTransition(
             animation: widget.animation,

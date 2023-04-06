@@ -21,20 +21,28 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffd2dfff),
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 40,
         centerTitle: true,
-        backgroundColor: Colors.white,
-        leading: IconButton(icon:Icon(Icons.arrow_back,color: Colors.black,),onPressed: (){
-          Navigator.pop(context);
-        },),
+        backgroundColor: Color(0xffd2dfff),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
         title: Image.asset(
           'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
           height: 50,
         ),
       ),
       bottomNavigationBar: BottomNavyBar(
+        backgroundColor: Colors.blue.shade100,
         selectedIndex: _selectedIndex,
         showElevation: true, // use this to remove appBar's elevation
         onItemSelected: (index) => setState(() {
