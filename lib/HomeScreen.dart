@@ -688,23 +688,6 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       "jsdfxnnfjasks","jsfjjksjoasfjanfafj","njsfojbzfjkabsfj","jsajfjszfjabfjafjb"
     ];*/
     return Column(children: [
-      CarouselSlider(
-        options: CarouselOptions(height: 18.0,scrollDirection: Axis.vertical,autoPlay: true),
-        items: [addedhastags].map((i) {
-          return Builder(
-            builder: (BuildContext context) {
-              return Container(
-                  width: MediaQuery.of(context).size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: BoxDecoration(
-                      color: Colors.amber
-                  ),
-                  child: Text(' $i', style: TextStyle(fontSize: 14.0),)
-              );
-            },
-          );
-        }).toList(),
-      ),
       Row(
         children: <Widget>[
           Container(
@@ -729,7 +712,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               color: Colors.grey,
               child: MarqueeText(
                 text: TextSpan(
-                  text: addedhastags,
+                  text:addedhastags
                 ),
                 style: const TextStyle(
                   fontSize: 16,
@@ -1483,11 +1466,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   String addedhastags = '';
+  List tags=[];
   NotificationsAPI() async {
-    List<String> hastags = [];
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.60.0/allSourceData?page=0,11'),
+          'http://192.169.1.211:8081/insights/2.60.0/trendingHashtags?page=0,14&field=TWITTER'),
     );
     //print(response.toString());
     if (response.statusCode == 200) {
@@ -1495,14 +1478,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       try {
         setState(() => NotificationsAllResult =
             jsonDecode(utf8.decode(response.bodyBytes)));
-        for (int i = 0; i < NotificationsAllResult.length; i++) {
-          hastags.add(NotificationsAllResult[i]['hashtag']);
+        for(int i=0;i<NotificationsAllResult.length;i++){
+          tags.add(NotificationsAllResult[i]['hashTag']);
         }
-        String hash = '#';
-        addedhastags = hastags.join("      #");
-
-        addedhastags = hash + addedhastags;
-        print(addedhastags);
+        addedhastags=tags.join('    ');
+        print(NotificationsAllResult);
       } catch (e) {
         NotificationsAllResult = [];
       }

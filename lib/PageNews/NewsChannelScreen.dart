@@ -24,6 +24,7 @@ class _NewsChannelScreenState extends State<NewsChannelScreen> {
     //NewsPaperAllAPI();
   }
   late Future<dynamic> finaldata = NewsChannelListAPI();
+
   String? convertUrlToId(String url, {bool trimWhitespaces = true}) {
     if (!url.contains("http") && (url.length == 11)) return url;
     if (trimWhitespaces) url = url.trim();
@@ -180,7 +181,7 @@ class _NewsChannelScreenState extends State<NewsChannelScreen> {
     return NewsChannelListResult.map<Card>((Value) => Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          margin: EdgeInsets.all(6),
+          margin: EdgeInsets.all(4),
           elevation: 20,
           child: Column(
             children: [

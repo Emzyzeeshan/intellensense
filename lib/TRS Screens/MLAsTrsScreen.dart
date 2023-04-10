@@ -56,11 +56,9 @@ class _MLAsTrsScreenState extends State<MLAsTrsScreen> {
 
    partyListAPI() async {
     var headers = {'Content-Type': 'application/json'};
-    var body = json.encode({});
-    var response = await post(
-      Uri.parse('http://192.169.1.211:8081/insights/1.0.0/party/TDP'),
+    var response = await get(
+      Uri.parse('http://192.169.1.211:8081/insights/2.60.0/party/TDP'),
       headers: headers,
-      body: body,
     );
     print(response.toString());
     if (response.statusCode == 200) {
