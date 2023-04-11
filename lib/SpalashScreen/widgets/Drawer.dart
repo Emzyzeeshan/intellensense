@@ -49,8 +49,6 @@ class _drawerState extends State<drawer> {
               ),
               title: Text('Candidature Analysis'),
               onTap: () {
-
-               Navigator.push(context, MaterialPageRoute(builder: (context) => MLAsTrsScreen()));
                 Navigator.push(
                     context,
                     MaterialPageRoute(

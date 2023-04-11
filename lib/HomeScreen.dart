@@ -711,9 +711,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             child: Container(
               color: Colors.grey,
               child: MarqueeText(
-                text: TextSpan(
-                  text:addedhastags
-                ),
+                text: TextSpan(text: addedhastags),
                 style: const TextStyle(
                   fontSize: 16,
                   color: Colors.black,
@@ -1466,7 +1464,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   String addedhastags = '';
-  List tags=[];
+  List tags = [];
   NotificationsAPI() async {
     var response = await get(
       Uri.parse(
@@ -1478,10 +1476,10 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       try {
         setState(() => NotificationsAllResult =
             jsonDecode(utf8.decode(response.bodyBytes)));
-        for(int i=0;i<NotificationsAllResult.length;i++){
+        for (int i = 0; i < NotificationsAllResult.length; i++) {
           tags.add(NotificationsAllResult[i]['hashTag']);
         }
-        addedhastags=tags.join('    ');
+        addedhastags = tags.join('    ');
         print(NotificationsAllResult);
       } catch (e) {
         NotificationsAllResult = [];

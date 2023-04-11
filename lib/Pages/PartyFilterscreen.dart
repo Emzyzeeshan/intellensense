@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/TRS%20Screens/TrsMpDetails.dart';
 import 'package:intellensense/main.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -161,293 +162,27 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
                                   ),
                                 ),
                                 title: Text('${partydata[index]['name']}'),
-                                trailing: Icon(Icons.arrow_drop_up_outlined),
+                                trailing: Icon(Icons.arrow_drop_down),
                                 onTap: () {
                                   showMaterialModalBottomSheet(
+                                    shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            width: 3,
+                                            color: Colors.blue.shade300),
+                                        borderRadius: BorderRadius.only(
+                                            topLeft: Radius.circular(15),
+                                            topRight: Radius.circular(15))),
                                     enableDrag: false,
                                     elevation: 5,
                                     context: context,
                                     builder: (context) => Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.88,
-                                      child: SingleChildScrollView(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.88,
                                         child: Padding(
                                           padding: const EdgeInsets.all(8.0),
-                                          child: Column(
-                                            children: [
-                                              ClipOval(
-                                                child: Image.memory(
-                                                  base64.decode(
-                                                      '${partydata[index]['content'].substring(22) ?? ''}'),
-                                                  height: 100,
-                                                  width: 100,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                height: 5,
-                                              ),
-                                              Text(
-                                                '${partydata[index]['name']}',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Table(
-                                                  defaultColumnWidth:
-                                                      FixedColumnWidth(150.0),
-                                                  border: TableBorder.all(
-                                                      color: Colors.grey,
-                                                      style: BorderStyle.solid,
-                                                      width: 2),
-                                                  children: [
-                                                    TableRow(
-                                                      children: [
-                                                        TableCell(
-                                                          verticalAlignment:
-                                                              TableCellVerticalAlignment
-                                                                  .middle,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10),
-                                                            child: Text(
-                                                              'Contact No',
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        TableCell(
-                                                          verticalAlignment:
-                                                              TableCellVerticalAlignment
-                                                                  .middle,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10),
-                                                            child: Text(
-                                                                '${partydata[index]['contactNumber'] ?? 'N/A'}'),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    TableRow(
-                                                      children: [
-                                                        TableCell(
-                                                          verticalAlignment:
-                                                              TableCellVerticalAlignment
-                                                                  .middle,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10),
-                                                            child: Text(
-                                                              'Religion',
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        TableCell(
-                                                          verticalAlignment:
-                                                              TableCellVerticalAlignment
-                                                                  .middle,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10),
-                                                            child: Text(
-                                                                '${partydata[index]['religion'] ?? 'N/A'}'),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    TableRow(
-                                                      children: [
-                                                        TableCell(
-                                                          verticalAlignment:
-                                                              TableCellVerticalAlignment
-                                                                  .middle,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10),
-                                                            child: Text(
-                                                              'Caste',
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        TableCell(
-                                                          verticalAlignment:
-                                                              TableCellVerticalAlignment
-                                                                  .middle,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10),
-                                                            child: Text(
-                                                                '${partydata[index]['caste'] ?? 'N/A'}'),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                    TableRow(
-                                                      children: [
-                                                        TableCell(
-                                                          verticalAlignment:
-                                                              TableCellVerticalAlignment
-                                                                  .middle,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10),
-                                                            child: Text(
-                                                              'Age',
-                                                              style: TextStyle(
-                                                                  fontSize: 16,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        TableCell(
-                                                          verticalAlignment:
-                                                              TableCellVerticalAlignment
-                                                                  .middle,
-                                                          child: Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(10),
-                                                            child: Text(
-                                                                '${partydata[index]['age'] ?? 'N/A'}'),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ]),
-                                              // ClipOval(
-                                              //   child: Image.memory(
-                                              //     base64.decode(
-                                              //         '${partydata[index]['content'].substring(22) ?? ''}'),
-                                              //     height: 100,
-                                              //     width: 100,
-                                              //   ),
-                                              // ),
-                                              // SizedBox(
-                                              //   height: 5,
-                                              // ),
-                                              // Text(
-                                              //   '${partydata[index]['name']}',
-                                              //   style: TextStyle(
-                                              //       fontWeight:
-                                              //           FontWeight.bold),
-                                              // ),
-                                              // SizedBox(
-                                              //   height: 10,
-                                              // ),
-                                              // ListTile(
-                                              //   leading:
-                                              //       Text('PoliticalType:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['politicalType'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading:
-                                              //       Text('Constitution:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['constitution'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading:
-                                              //       Text('ContactNumber:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['contactNumber'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading: Text('Religion:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['religion'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading: Text('Caste:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['caste'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading: Text('Age:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['age'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading: Text('Education:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['education'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading:
-                                              //       Text('PoliticalCareeer:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['politicalCareeer'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading: Text(
-                                              //       'ActiveInSocialMedia:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['activeInSocialMedia'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading: Text(
-                                              //       'LastFourYearsCampains:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['lastFourYearsCampains'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading: Text('Initiatives:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['initiatives'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading: Text(
-                                              //       'NotableEndorsement:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['notableEndorsement'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading: Text('Spouse:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['spouse'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading: Text('Strenths:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['strenths'] ?? 'N/A'}'),
-                                              // ),
-                                              // ListTile(
-                                              //   leading: Text('Weekness:  '),
-                                              //   trailing: Text(
-                                              //       '${partydata[index]['weekness'] ?? 'N/A'}'),
-                                              // ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                          child: TrsMpDetails(partydata[index]),
+                                        )),
                                   );
                                 },
                               ),
