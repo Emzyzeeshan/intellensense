@@ -2425,6 +2425,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
           )
         ]),
+
+
         Column(children: [
           GestureDetector(
             onTap: () {
