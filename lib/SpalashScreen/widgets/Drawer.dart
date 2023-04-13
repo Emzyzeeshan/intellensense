@@ -13,11 +13,11 @@ class drawer extends StatefulWidget {
 class _drawerState extends State<drawer> {
   @override
   Widget build(BuildContext context) {
-    return Drawer(
+    return Drawer(backgroundColor: Color(0xffd2dfff),
         child: ListView(children: [
       DrawerHeader(
         decoration: BoxDecoration(
-          color: Colors.transparent,
+          color: Color(0xffd2dfff),
         ),
         child:
             Image.asset('assets/icons/IntelliSense-Logo-Finall_01022023_A.gif'),

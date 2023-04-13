@@ -84,6 +84,7 @@ dependencies:
   timelines: ^0.1.0
   url_launcher: ^6.1.4
   youtube: ^1.0.1
+  r_dotted_line_border:
 
 dev_dependencies:
   flutter_test:
@@ -119,6 +120,12 @@ flutter:
     - assets/icons/newspaperhead.gif
     - assets/icons/socialmedia.gif
     - assets/icons/live.gif
+    - assets/new Updated images/Candidature Analysis.png
+    - assets/new Updated images/Communication Channel.png
+    - assets/new Updated images/Constituency Analysis.png
+    - assets/new Updated images/Electrol Analysis.png
+    - assets/new Updated images/News Feed.png
+    - assets/new Updated images/Survey.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -35,6 +35,8 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 import 'PageNews/ScoreCardsScreen.dart';
+import 'Weather screens/ControlScreen.dart';
+import 'credentials.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
@@ -67,12 +69,13 @@ class _HomepageState extends State<Homepage> {
   //   TechNews(),
   //   ForexNews(),
   // ];
+
   bool touchtoflip = false;
   bool carddirection = false;
   List youtubelink = [];
   int duration = Duration.microsecondsPerMillisecond;
   late Future<dynamic> finaldata = NEWSpaperAPI();
-
+  late Future<dynamic> weatherdata = WeatherAPI();
   late Future<dynamic> stockdata1 = TeslaStocksDataAPI();
   late Future<dynamic> Newschanneldata = NewsChannelAPI();
   late Future<dynamic> liveNewsdata = LiveUpdatesAPI();
@@ -90,6 +93,7 @@ class _HomepageState extends State<Homepage> {
   ScrollController? scrollController = ScrollController();
   FlipCardController? flipCardController = FlipCardController();
   Position? _currentPosition;
+  var WeatherDataResult;
   @override
   Widget build(BuildContext context) {
     Position currentPosition;
@@ -208,7 +212,7 @@ class _HomepageState extends State<Homepage> {
                                                       SizedBox(
                                                         height: 10,
                                                       ),
-                                                           
+
                                                       SizedBox(
                                                         height: 10,
                                                       ),
@@ -1109,12 +1113,13 @@ class _HomepageState extends State<Homepage> {
                                       width: 50,
                                       child: Center(
                                         child: Image.asset(
-                                          "assets/icons/Candidature Analysis.png",
+                                          "assets/new Updated images/Candidature Analysis.png",
                                           height: 30,
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 0.3,
@@ -1130,7 +1135,9 @@ class _HomepageState extends State<Homepage> {
                                     child: Text(
                                       textAlign: TextAlign.center,
                                       'Candidature Analysis',
-                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10),
                                     ),
                                   )
                                 ]),
@@ -1144,12 +1151,13 @@ class _HomepageState extends State<Homepage> {
                                       width: 50,
                                       child: Center(
                                         child: Image.asset(
-                                          "assets/icons/location.png",
+                                          "assets/new Updated images/Constituency Analysis.png",
                                           height: 30,
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 0.3,
@@ -1164,7 +1172,9 @@ class _HomepageState extends State<Homepage> {
                                   Text(
                                     textAlign: TextAlign.center,
                                     'Constituency Analysis',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
                                   )
                                 ]),
                                 Column(children: [
@@ -1182,7 +1192,8 @@ class _HomepageState extends State<Homepage> {
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 0.3,
@@ -1197,7 +1208,9 @@ class _HomepageState extends State<Homepage> {
                                   Text(
                                     textAlign: TextAlign.center,
                                     'District Analysis',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
                                   )
                                 ]),
                                 Column(children: [
@@ -1210,12 +1223,13 @@ class _HomepageState extends State<Homepage> {
                                       width: 50,
                                       child: Center(
                                         child: Image.asset(
-                                          "assets/icons/communicationChannel.png",
+                                          "assets/new Updated images/Communication Channel.png",
                                           height: 30,
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 0.3,
@@ -1230,7 +1244,9 @@ class _HomepageState extends State<Homepage> {
                                   Text(
                                     textAlign: TextAlign.center,
                                     'Communication Channel',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
                                   )
                                 ]),
                                 Column(children: [
@@ -1243,12 +1259,13 @@ class _HomepageState extends State<Homepage> {
                                       width: 50,
                                       child: Center(
                                         child: Image.asset(
-                                          "assets/icons/surveydxp.png",
+                                          "assets/new Updated images/Survey.png",
                                           height: 30,
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 0.3,
@@ -1263,7 +1280,9 @@ class _HomepageState extends State<Homepage> {
                                   Text(
                                     textAlign: TextAlign.center,
                                     'Survey',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
                                   )
                                 ]),
                                 Column(children: [
@@ -1276,12 +1295,13 @@ class _HomepageState extends State<Homepage> {
                                       width: 50,
                                       child: Center(
                                         child: Image.asset(
-                                          "assets/icons/Form.png",
+                                          "assets/new Updated images/Electrol Analysis.png",
                                           height: 30,
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 0.3,
@@ -1296,7 +1316,9 @@ class _HomepageState extends State<Homepage> {
                                   Text(
                                     textAlign: TextAlign.center,
                                     'Electoral Analysis',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
                                   )
                                 ]),
                                 Column(children: [
@@ -1309,12 +1331,13 @@ class _HomepageState extends State<Homepage> {
                                       width: 50,
                                       child: Center(
                                         child: Image.asset(
-                                          "assets/icons/newspaperdxp.png",
+                                          "assets/new Updated images/News Feed.png",
                                           height: 30,
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 0.3,
@@ -1329,7 +1352,9 @@ class _HomepageState extends State<Homepage> {
                                   Text(
                                     textAlign: TextAlign.center,
                                     'News Feed',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
                                   )
                                 ]),
                                 Column(children: [
@@ -1347,7 +1372,8 @@ class _HomepageState extends State<Homepage> {
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 0.3,
@@ -1362,13 +1388,19 @@ class _HomepageState extends State<Homepage> {
                                   Text(
                                     textAlign: TextAlign.center,
                                     'Face Emotion Analysis',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
                                   )
                                 ]),
                                 Column(children: [
                                   GestureDetector(
                                     onTap: () {
-                                      PageCount.jumpToPage(7);
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ScoreCardsScreen()));
                                     },
                                     child: Container(
                                       height: 50,
@@ -1380,7 +1412,8 @@ class _HomepageState extends State<Homepage> {
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 0.3,
@@ -1395,14 +1428,19 @@ class _HomepageState extends State<Homepage> {
                                   Text(
                                     textAlign: TextAlign.center,
                                     'Score Card',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
                                   )
                                 ]),
                                 Column(children: [
                                   GestureDetector(
                                     onTap: () {
-                                      Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) => ScoreCardsScreen()));
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ScoreCardsScreen()));
                                     },
                                     child: Container(
                                       height: 50,
@@ -1414,7 +1452,8 @@ class _HomepageState extends State<Homepage> {
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 0.3,
@@ -1429,7 +1468,9 @@ class _HomepageState extends State<Homepage> {
                                   Text(
                                     textAlign: TextAlign.center,
                                     'Chat Analysis',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
                                   )
                                 ]),
                                 Column(children: [
@@ -1447,7 +1488,8 @@ class _HomepageState extends State<Homepage> {
                                         ),
                                       ),
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           border: Border.all(
                                             color: Colors.black,
                                             width: 0.3,
@@ -1462,7 +1504,9 @@ class _HomepageState extends State<Homepage> {
                                   Text(
                                     textAlign: TextAlign.center,
                                     'Sentiment Analysis',
-                                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 10),
                                   )
                                 ]),
                               ],
@@ -1864,15 +1908,7 @@ class _HomepageState extends State<Homepage> {
     return true;
   }
 
-  Future<void> _getCurrentPosition() async {
-    final hasPermission = await _handleLocationPermission();
-
-    if (!hasPermission) return;
-    _currentPosition = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    print(_currentPosition!.latitude);
-    print(_currentPosition!.longitude);
-  }
+  Future<void> _getCurrentPosition() async {}
 
   SliverAppBar createSilverAppBar1() {
     return SliverAppBar(
@@ -1920,27 +1956,109 @@ class _HomepageState extends State<Homepage> {
         }),
       ],
       backgroundColor: Color(0xffd2dfff),
-      expandedHeight: 150,
+      expandedHeight: 130,
       elevation: 0,
       flexibleSpace: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
         return Stack(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 50.0, left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Lottie.asset('assets/Image/bg.json'),
-                  Image.asset(
-                    'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                    // fit: BoxFit.contain,
-                    height: 180, width: 180,
-                  ),
-                ],
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 5),
+                  child: Lottie.asset('assets/Image/bg.json',
+                      height: 140, width: 120),
+                ),
+                Image.asset(
+                  'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
+                  // fit: BoxFit.contain,
+                  height: 120, width: 130,
+                ),
+              ],
             ),
-
+            Positioned(
+                top: 110,
+                left: 230,
+                child: Container(
+                  width: 100,
+                  height: 30,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topRight,
+                      end: Alignment.bottomLeft,
+                      colors: [
+                        Color(0xff467BFF),
+                        Color(0xffC661FF),
+                      ],
+                    ),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10),
+                      topRight: Radius.circular(50),
+                      bottomRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(50),
+                    ),
+                    boxShadow: [
+                      BoxShadow(
+                        offset: const Offset(1.5, 4.5),
+                        blurRadius: 20.0,
+                        spreadRadius: 1,
+                        color: Color(0xff467BFF).withAlpha(150),
+                      ),
+                    ],
+                  ),
+                  child: GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ControllScreen()));
+                    },
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          children: [
+                            FutureBuilder(
+                                future: weatherdata,
+                                builder: ((context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Container(
+                                        child: Center(
+                                            child: SpinKitWave(
+                                      size: 12,
+                                      color: Colors.blue,
+                                    )));
+                                  } else if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return const Text('Data Error');
+                                    } else if (snapshot.hasData) {
+                                      return Column(
+                                        children: [
+                                          Text(
+                                              '${WeatherDataResult['main']['temp']}'),
+                                          Text('${WeatherDataResult['name']}',style: TextStyle(overflow: TextOverflow.fade)),
+                                        ],
+                                      );
+                                    } else {
+                                      return const Text('Server Error');
+                                    }
+                                  } else {
+                                    return Text(
+                                        'State: ${snapshot.connectionState}');
+                                  }
+                                }))
+                          ],
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Icon(Icons.cloud),
+                      ],
+                    ),
+                  ),
+                ))
             // Positioned(
             //     child: _currentPosition!.latitude == null
             //         ? Text('${_currentPosition!.latitude}')
@@ -1958,6 +2076,36 @@ class _HomepageState extends State<Homepage> {
         );
       }),
     );
+  }
+
+  Future<dynamic> WeatherAPI() async {
+    final hasPermission = await _handleLocationPermission();
+
+    if (!hasPermission) return;
+    _currentPosition = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    print(_currentPosition!.latitude);
+    print(_currentPosition!.longitude);
+    print('hi1');
+    var headers = {'Content-Type': 'application/json'};
+    print('hi2');
+    var response = await get(
+      Uri.parse(
+          'http://api.openweathermap.org/data/2.5/weather?lat=${_currentPosition!.latitude}&lon=${_currentPosition!.longitude}&appid=${apiKey}&units=metric'),
+      headers: headers,
+    );
+    print('hi3');
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      try {
+        setState(() =>
+            WeatherDataResult = jsonDecode(utf8.decode(response.bodyBytes)));
+      } catch (e) {}
+    } else {
+      print(response.reasonPhrase);
+    }
+    return WeatherDataResult;
   }
 
   LogoutAPI(BuildContext context) async {

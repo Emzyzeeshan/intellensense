@@ -34,7 +34,7 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
     DeviceSizeConfig().init(context);
     return Scaffold(
         backgroundColor: Color(0xffd2dfff),
-        appBar: AppBar(
+        appBar: AppBar(leading: IconButton(onPressed: () {Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.black,),),
           actions: [
             // IconButton(onPressed: (){}, icon: icon)
           ],

@@ -696,7 +696,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                 ),
                 isExpanded: isExpandedValues[0],
                 canTapOnHeader: true),
-            ExpansionPanel(
+            /*ExpansionPanel(
               headerBuilder: (BuildContext context, bool isExpanded) => Card(
                 child: ListTile(
                   title: Text(
@@ -775,7 +775,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                   })),
               isExpanded: isExpandedValues[1],
               canTapOnHeader: true,
-            )
+            )*/
           ],
           dividerColor: Colors.white,
           elevation: 0,

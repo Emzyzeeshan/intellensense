@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -26,115 +27,383 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
   @override
   Widget build(BuildContext context) {
     FlipCardController _controller = FlipCardController();
-    return Padding(
-        padding: EdgeInsets.all(8),
-        child: Card(
-                color: Colors.grey[300],
-                shape: RoundedRectangleBorder(
-                    side: BorderSide(color: Colors.blueAccent, width: 2),
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                      bottomLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
-                    )),
-                child: Padding(
-                    padding: EdgeInsets.all(6),
-                    child: Card(
-                        child: SingleChildScrollView(
-                            child: Column(children: <Widget>[
-                      Container(
-                        height: 50,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            /*Container(
-              color: Colors.blue,
-            ),*/
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Image.asset(
-                              'assets/icons/statistics.png',
-                              height: 25,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              'Polls',
-                              style: TextStyle(fontSize: 20),
-                            ),
-                            Spacer(),
-                            Tooltip(
-                                message: 'Pin Card',
-                                child: CupertinoButton(
-                                  minSize: double.minPositive,
-                                  padding: EdgeInsets.zero,
-                                  child: Icon(Icons.pin_invoke,
-                                      color: Color.fromRGBO(58, 129, 233, 1),
-                                      size: 30),
-                                  onPressed: () {},
-                                )),
-                            Tooltip(
-                                message: 'Refresh',
-                                child: CupertinoButton(
-                                  minSize: double.minPositive,
-                                  padding: EdgeInsets.zero,
-                                  child: Icon(Icons.refresh,
-                                      color: Color.fromRGBO(58, 129, 233, 1),
-                                      size: 30),
-                                  onPressed: () {},
-                                )),
-                            Tooltip(
-                                message: 'Card Sort',
-                                child: CupertinoButton(
-                                  minSize: double.minPositive,
-                                  padding: EdgeInsets.zero,
-                                  child: Icon(Icons.sort,
-                                      color: Color.fromRGBO(58, 129, 233, 1),
-                                      size: 30),
-                                  onPressed: () {},
-                                )),
-                            Tooltip(
-                                message: 'Calender',
-                                child: CupertinoButton(
-                                  minSize: double.minPositive,
-                                  padding: EdgeInsets.zero,
-                                  child: Icon(Icons.calendar_today,
-                                      color: Color.fromRGBO(58, 129, 233, 1),
-                                      size: 30),
-                                  onPressed: () {},
-                                )),
-                            Tooltip(
-                                message: 'Multi-Filter',
-                                child: CupertinoButton(
-                                  minSize: double.minPositive,
-                                  padding: EdgeInsets.zero,
-                                  child: Icon(Icons.filter_alt_outlined,
-                                      color: Color.fromRGBO(58, 129, 233, 1),
-                                      size: 30),
-                                  onPressed: () {},
-                                )),
-                            Tooltip(
-                                message: 'More',
-                                child: CupertinoButton(
-                                  minSize: double.minPositive,
-                                  padding: EdgeInsets.zero,
-                                  child: Icon(Icons.more_vert,
-                                      color: Color.fromRGBO(58, 129, 233, 1),
-                                      size: 30),
-                                  onPressed: () {},
-                                )),
-                          ],
+    final GlobalKey<ExpansionTileCardState> cardA = new GlobalKey();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(''),
+      ),
+      body: ListView(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+            child: ExpansionTileCard(
+              baseColor: Colors.cyan[50],
+              expandedColor: Colors.white,
+              key: cardA,
+              leading: CircleAvatar(backgroundColor: Colors.grey),
+              title: Text("A V S S AMARNATH GUDIVADA"),
+              subtitle: Column(
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                      ),
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                      ),
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                      ),
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                      ),
+                      Icon(
+                        Icons.star,
+                        color: Colors.yellow,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(onPressed: () {}, child: Text('Follow')),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      ElevatedButton(onPressed: () {}, child: Text('Message'))
+                    ],
+                  )
+                ],
+              ),
+              children: <Widget>[
+                Divider(
+                  thickness: 1.0,
+                  height: 1.0,
+                ),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 8.0,
+                    ),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Table(
+                        defaultColumnWidth: FixedColumnWidth(130.0),
+                        border: TableBorder.all(
+                            color: Colors.grey,
+                            style: BorderStyle.solid,
+                            width: 2),
+                        children: [
+                          TableRow(
+                            children: [
+                              TableCell(
+                                verticalAlignment: TableCellVerticalAlignment.top,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Text(
+                                    'Social Media',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                            ],
+                          ),
+                          TableRow(
+                            children: [
+                              TableCell(
+                                verticalAlignment: TableCellVerticalAlignment.top,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Text(
+                                    'Rank',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text('55'),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text('64'),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text('87'),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text('109'),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text('28'),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text('17'),
+                                ),
+                              ),
+                            ],
+                          ),
+                          TableRow(
+                            children: [
+                              TableCell(
+                                verticalAlignment: TableCellVerticalAlignment.top,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Text(
+                                    'Based on rank',
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                              TableCell(
+                                verticalAlignment:
+                                TableCellVerticalAlignment.middle,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: Text(''),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                ButtonBar(
+                  alignment: MainAxisAlignment.spaceAround,
+                  buttonHeight: 52.0,
+                  buttonMinWidth: 90.0,
+                  children: <Widget>[
+                    Row(
+                      children: [
+                        Text('Analytics'),
+                        SizedBox(
+                          width: 50,
                         ),
+                        Image.asset(
+                          'assets/icons/Social-Media-Icons-IS-01.png',
+                          height: 20,
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset(
+                          'assets/icons/Social-Media-Icons-IS-02.png',
+                          height: 20,
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset(
+                          'assets/icons/Social-Media-Icons-IS-03.png',
+                          height: 20,
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset(
+                          'assets/icons/Social-Media-Icons-IS-04.png',
+                          height: 20,
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset(
+                          'assets/icons/Social-Media-Icons-IS-05.png',
+                          height: 20,
+                          width: 20,
+                        ),
+                      ],
+                    )
+                    /*MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4.0)),
+                      onPressed: () {
+                        cardA.currentState?.expand();
+                      },
+                      child: Column(
+                        children: <Widget>[
+                          Icon(Icons.arrow_downward),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 2.0),
+                          ),
+                          Text('Open'),
+                        ],
                       ),
-                      Divider(
-                        thickness: 4,
-                        color: Colors.grey,
+                    ),
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4.0)),
+                      onPressed: () {
+                        cardA.currentState?.collapse();
+                      },
+                      child: Column(
+                        children: <Widget>[
+                          Icon(Icons.arrow_upward),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 2.0),
+                          ),
+                          Text('Close'),
+                        ],
                       ),
-                      //...YouTubeList()
-                    ]))))));
+                    ),
+                    MaterialButton(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(4.0)),
+                      onPressed: () {
+                      },
+                      child: Column(
+                        children: <Widget>[
+                          Icon(Icons.swap_vert),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 2.0),
+                          ),
+                          Text('Toggle'),
+                        ],
+                      ),
+                    ),*/
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 
   FixContainer() {

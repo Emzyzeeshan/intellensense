@@ -351,7 +351,7 @@
     },
     {
       "name": "flutter_svg",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.4",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_svg-2.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -483,7 +483,7 @@
     },
     {
       "name": "google_sign_in_android",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_android-6.1.8",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_android-6.1.9",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -519,9 +519,9 @@
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-0.8.7+1",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-0.8.7+2",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "image_picker_android",
@@ -639,9 +639,9 @@
     },
     {
       "name": "path_provider_foundation",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_foundation-2.2.1",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/path_provider_foundation-2.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "path_provider_linux",
@@ -728,6 +728,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "r_dotted_line_border",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/r_dotted_line_border-0.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "rating_dialog",
       "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/rating_dialog-2.0.4",
       "packageUri": "lib/",
@@ -759,7 +765,7 @@
     },
     {
       "name": "shared_preferences_foundation",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_foundation-2.2.0",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_foundation-2.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -909,7 +915,7 @@
     },
     {
       "name": "url_launcher_macos",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_macos-3.0.4",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_macos-3.0.5",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -939,19 +945,19 @@
     },
     {
       "name": "vector_graphics",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.4",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics-1.1.5",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics_codec",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.4",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_codec-1.1.5",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "vector_graphics_compiler",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.4",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/vector_graphics_compiler-1.1.5",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -992,7 +998,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-04-10T06:26:20.126840Z",
+  "generated": "2023-04-12T10:35:53.435919Z",
   "generator": "pub",
   "generatorVersion": "2.19.3"
 }

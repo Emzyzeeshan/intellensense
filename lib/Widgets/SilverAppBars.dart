@@ -6,13 +6,12 @@ import 'package:lottie/lottie.dart';
 Position? _currentPosition;
 SliverAppBar createSilverAppBar2() {
   return SliverAppBar(
-    toolbarHeight: 50,
+  forceElevated: true,
     leading: Container(),
     backgroundColor: Color(0xffd2dfff),
     pinned: true,
     flexibleSpace: Padding(
       padding: const EdgeInsets.only(
-        top: 35.0,
         left: 10,
         right: 10,
       ),
@@ -20,9 +19,11 @@ SliverAppBar createSilverAppBar2() {
         height: 50,
         child: TextFormField(
             decoration: InputDecoration(
+              isDense: true,
           border: InputBorder.none,
           suffixIcon: IconButton(
-            onPressed: () {},
+            onPressed: () {
+            },
             icon: Icon(
               Icons.search_outlined,
               color: Colors.black,
