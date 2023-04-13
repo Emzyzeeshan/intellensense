@@ -24,9 +24,9 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
     super.initState();
   }
 
-  var input = 'TDP';
-  List PartyName = ['TDP', 'JSP', 'YSRCP'];
-  late Future<dynamic> finaldata = PartyDataApi('TDP');
+  var input = 'TRS';
+  List PartyName = ['TRS', 'TDP', 'JSP', 'YSRCP'];
+  late Future<dynamic> finaldata = PartyDataApi('TRS');
   ScrollController? scrollController = ScrollController();
   Uint8List? myImage;
   @override
@@ -206,12 +206,12 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
   }
 
   var partydata;
-  Future<dynamic> PartyDataApi(input) async {
+  Future<dynamic> PartyDataApi(Input) async {
     // await Future.delayed(Duration(seconds: 1));
     var headers = {'Content-Type': 'application/json'};
     var body = json.encode({});
     var response = await get(
-      Uri.parse('http://192.169.1.211:8081/insights/2.60.0/party/$input'),
+      Uri.parse('http://192.169.1.211:8081/insights/2.60.0/party/$Input'),
     );
 
     if (response.statusCode == 200) {
