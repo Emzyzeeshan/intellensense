@@ -1096,421 +1096,419 @@ class _HomepageState extends State<Homepage> {
                               ),
                             ),
                           ),
-                          Container(
-                            child: GridView.count(
-                              crossAxisCount: 5,
-                              crossAxisSpacing: 2,
-                              childAspectRatio: 1.2 / 1.18,
-                              shrinkWrap: true,
-                              children: [
-                                Column(children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      PageCount.jumpToPage(7);
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/new Updated images/Candidature Analysis.png",
-                                          height: 30,
-                                        ),
+                          GridView.count(
+                            crossAxisCount: 5,
+                            crossAxisSpacing: 2,
+                            childAspectRatio: 1.2 / 1.18,
+                            shrinkWrap: true,
+                            children: [
+                              Column(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    PageCount.jumpToPage(7);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/new Updated images/Candidature Analysis.png",
+                                        height: 30,
                                       ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.3,
-                                          ),
-                                          color: Colors.grey[100]),
-                                      padding: EdgeInsets.all(8),
-                                      /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                          ) */
                                     ),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      textAlign: TextAlign.center,
-                                      'Candidature Analysis',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10),
-                                    ),
-                                  )
-                                ]),
-                                Column(children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      PageCount.jumpToPage(7);
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/new Updated images/Constituency Analysis.png",
-                                          height: 30,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 0.3,
                                         ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.3,
-                                          ),
-                                          color: Colors.grey[100]),
-                                      padding: EdgeInsets.all(8),
-                                      /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                                        color: Colors.grey[100]),
+                                    padding: EdgeInsets.all(8),
+                                    /*child: Center(
+                          child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
-                                    ),
                                   ),
-                                  Text(
+                                ),
+                                Expanded(
+                                  child: Text(
                                     textAlign: TextAlign.center,
-                                    'Constituency Analysis',
+                                    'Candidature Analysis',
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 10),
-                                  )
-                                ]),
-                                Column(children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      PageCount.jumpToPage(7);
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/icons/locations_icon.png",
-                                          height: 30,
-                                        ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.3,
-                                          ),
-                                          color: Colors.grey[100]),
-                                      padding: EdgeInsets.all(8),
-                                      /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                          ) */
-                                    ),
                                   ),
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    'District Analysis',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10),
-                                  )
-                                ]),
-                                Column(children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      PageCount.jumpToPage(7);
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/new Updated images/Communication Channel.png",
-                                          height: 30,
-                                        ),
+                                )
+                              ]),
+                              Column(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    PageCount.jumpToPage(7);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/new Updated images/Constituency Analysis.png",
+                                        height: 30,
                                       ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.3,
-                                          ),
-                                          color: Colors.grey[100]),
-                                      padding: EdgeInsets.all(8),
-                                      /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                          ) */
                                     ),
-                                  ),
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    'Communication Channel',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10),
-                                  )
-                                ]),
-                                Column(children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      PageCount.jumpToPage(7);
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/new Updated images/Survey.png",
-                                          height: 30,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 0.3,
                                         ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.3,
-                                          ),
-                                          color: Colors.grey[100]),
-                                      padding: EdgeInsets.all(8),
-                                      /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                                        color: Colors.grey[100]),
+                                    padding: EdgeInsets.all(8),
+                                    /*child: Center(
+                          child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
-                                    ),
                                   ),
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    'Survey',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10),
-                                  )
-                                ]),
-                                Column(children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      PageCount.jumpToPage(7);
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/new Updated images/Electrol Analysis.png",
-                                          height: 30,
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  'Constituency Analysis',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                                )
+                              ]),
+                              Column(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    PageCount.jumpToPage(7);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/icons/locations_icon.png",
+                                        height: 30,
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 0.3,
                                         ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.3,
-                                          ),
-                                          color: Colors.grey[100]),
-                                      padding: EdgeInsets.all(8),
-                                      /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                                        color: Colors.grey[100]),
+                                    padding: EdgeInsets.all(8),
+                                    /*child: Center(
+                          child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
-                                    ),
                                   ),
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    'Electoral Analysis',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10),
-                                  )
-                                ]),
-                                Column(children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      PageCount.jumpToPage(7);
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/new Updated images/News Feed.png",
-                                          height: 30,
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  'District Analysis',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                                )
+                              ]),
+                              Column(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    PageCount.jumpToPage(7);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/new Updated images/Communication Channel.png",
+                                        height: 30,
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 0.3,
                                         ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.3,
-                                          ),
-                                          color: Colors.grey[100]),
-                                      padding: EdgeInsets.all(8),
-                                      /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                                        color: Colors.grey[100]),
+                                    padding: EdgeInsets.all(8),
+                                    /*child: Center(
+                          child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
-                                    ),
                                   ),
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    'News Feed',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10),
-                                  )
-                                ]),
-                                Column(children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      PageCount.jumpToPage(7);
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/icons/faceEmotiondxp.png",
-                                          height: 30,
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  'Communication Channel',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                                )
+                              ]),
+                              Column(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    PageCount.jumpToPage(7);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/new Updated images/Survey.png",
+                                        height: 30,
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 0.3,
                                         ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.3,
-                                          ),
-                                          color: Colors.grey[100]),
-                                      padding: EdgeInsets.all(8),
-                                      /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                                        color: Colors.grey[100]),
+                                    padding: EdgeInsets.all(8),
+                                    /*child: Center(
+                          child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
-                                    ),
                                   ),
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    'Face Emotion Analysis',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10),
-                                  )
-                                ]),
-                                Column(children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ScoreCardsScreen()));
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/icons/ScoreCard.png",
-                                          height: 30,
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  'Survey',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                                )
+                              ]),
+                              Column(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    PageCount.jumpToPage(7);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/new Updated images/Electrol Analysis.png",
+                                        height: 30,
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 0.3,
                                         ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.3,
-                                          ),
-                                          color: Colors.grey[100]),
-                                      padding: EdgeInsets.all(8),
-                                      /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                                        color: Colors.grey[100]),
+                                    padding: EdgeInsets.all(8),
+                                    /*child: Center(
+                          child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
-                                    ),
                                   ),
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    'Score Card',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10),
-                                  )
-                                ]),
-                                Column(children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ScoreCardsScreen()));
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/icons/chat_icon.png",
-                                          height: 30,
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  'Electoral Analysis',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                                )
+                              ]),
+                              Column(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    PageCount.jumpToPage(7);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/new Updated images/News Feed.png",
+                                        height: 30,
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 0.3,
                                         ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.3,
-                                          ),
-                                          color: Colors.grey[100]),
-                                      padding: EdgeInsets.all(8),
-                                      /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                                        color: Colors.grey[100]),
+                                    padding: EdgeInsets.all(8),
+                                    /*child: Center(
+                          child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
-                                    ),
                                   ),
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    'Chat Analysis',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10),
-                                  )
-                                ]),
-                                Column(children: [
-                                  GestureDetector(
-                                    onTap: () {
-                                      PageCount.jumpToPage(7);
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: 50,
-                                      child: Center(
-                                        child: Image.asset(
-                                          "assets/icons/sentiAnalysis.png",
-                                          height: 30,
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  'News Feed',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                                )
+                              ]),
+                              Column(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    PageCount.jumpToPage(7);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/icons/faceEmotiondxp.png",
+                                        height: 30,
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 0.3,
                                         ),
-                                      ),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(20),
-                                          border: Border.all(
-                                            color: Colors.black,
-                                            width: 0.3,
-                                          ),
-                                          color: Colors.grey[100]),
-                                      padding: EdgeInsets.all(8),
-                                      /*child: Center(
-                            child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                                        color: Colors.grey[100]),
+                                    padding: EdgeInsets.all(8),
+                                    /*child: Center(
+                          child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
                           ) */
-                                    ),
                                   ),
-                                  Text(
-                                    textAlign: TextAlign.center,
-                                    'Sentiment Analysis',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 10),
-                                  )
-                                ]),
-                              ],
-                            ),
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  'Face Emotion Analysis',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                                )
+                              ]),
+                              Column(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ScoreCardsScreen()));
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/icons/ScoreCard.png",
+                                        height: 30,
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 0.3,
+                                        ),
+                                        color: Colors.grey[100]),
+                                    padding: EdgeInsets.all(8),
+                                    /*child: Center(
+                          child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                          ) */
+                                  ),
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  'Score Card',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                                )
+                              ]),
+                              Column(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ScoreCardsScreen()));
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/icons/chat_icon.png",
+                                        height: 30,
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 0.3,
+                                        ),
+                                        color: Colors.grey[100]),
+                                    padding: EdgeInsets.all(8),
+                                    /*child: Center(
+                          child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                          ) */
+                                  ),
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  'Chat Analysis',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                                )
+                              ]),
+                              Column(children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    PageCount.jumpToPage(7);
+                                  },
+                                  child: Container(
+                                    height: 50,
+                                    width: 50,
+                                    child: Center(
+                                      child: Image.asset(
+                                        "assets/icons/sentiAnalysis.png",
+                                        height: 30,
+                                      ),
+                                    ),
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(20),
+                                        border: Border.all(
+                                          color: Colors.black,
+                                          width: 0.3,
+                                        ),
+                                        color: Colors.grey[100]),
+                                    padding: EdgeInsets.all(8),
+                                    /*child: Center(
+                          child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
+                          ) */
+                                  ),
+                                ),
+                                Text(
+                                  textAlign: TextAlign.center,
+                                  'Sentiment Analysis',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                                )
+                              ]),
+                            ],
                           ),
                           //todo: Stock market
                           // Padding(
@@ -1982,34 +1980,18 @@ class _HomepageState extends State<Homepage> {
                 left: 230,
                 child: Container(
                   width: 100,
-                  height: 30,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                      colors: [
-                        Color(0xff467BFF),
-                        Color(0xffC661FF),
-                      ],
-                    ),
+                  height: 35,
+                  decoration: BoxDecoration(color: Colors.blue,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(10),
-                      topRight: Radius.circular(50),
+                      topRight: Radius.circular(20),
                       bottomRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(50),
+                      bottomLeft: Radius.circular(20),
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        offset: const Offset(1.5, 4.5),
-                        blurRadius: 20.0,
-                        spreadRadius: 1,
-                        color: Color(0xff467BFF).withAlpha(150),
-                      ),
-                    ],
                   ),
                   child: GestureDetector(
                     onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=> ControllScreen()));
+                      //Navigator.push(context, MaterialPageRoute(builder: (context)=> ControllScreen()));
                     },
                     child: Row(
                       children: [
