@@ -85,6 +85,8 @@ dependencies:
   url_launcher: ^6.1.4
   youtube: ^1.0.1
   r_dotted_line_border:
+  share: any
+  permission_handler: any
 
 dev_dependencies:
   flutter_test:
@@ -126,6 +128,12 @@ flutter:
     - assets/new Updated images/Electrol Analysis.png
     - assets/new Updated images/News Feed.png
     - assets/new Updated images/Survey.png
+    - assets/Image/brakes.png
+    - assets/Image/drop.png
+    - assets/Image/header.png
+    - assets/Image/logo.png
+    - assets/Image/sunny.png
+    - assets/Image/wind.png
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:cool_alert/cool_alert.dart';
 
@@ -29,13 +30,16 @@ import 'package:intellensense/SpalashScreen/screens/login/login.dart';
 import 'package:intellensense/SpalashScreen/widgets/Drawer.dart';
 import 'package:intellensense/Widgets/SilverAppBars.dart';
 import 'package:intellensense/main.dart';
+import 'package:intl/intl.dart';
 
 import 'package:lottie/lottie.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
 
 import 'PageNews/ScoreCardsScreen.dart';
-import 'Weather screens/ControlScreen.dart';
+import 'Weather screens/Weather_Screen.dart';
+import 'Weather screens/model/weather_model.dart';
+import 'Weather screens/services/data_services.dart';
 import 'credentials.dart';
 
 class Homepage extends StatefulWidget {
@@ -107,10 +111,11 @@ class _HomepageState extends State<Homepage> {
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               createSilverAppBar1(),
-              createSilverAppBar2(),
+              //createSilverAppBar2(),
             ];
           },
-          body: CustomScrollView(
+          body:
+          CustomScrollView(
             slivers: [
               SliverList(
                   delegate: SliverChildListDelegate([
@@ -121,6 +126,28 @@ class _HomepageState extends State<Homepage> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0,right: 10),
+                            child: Container(
+                              height: 40,
+                              child: TextFormField(
+                                  decoration: InputDecoration(
+                                    isDense: true,
+                                    border: InputBorder.none,
+                                    suffixIcon: IconButton(
+                                      onPressed: () {
+                                      },
+                                      icon: Icon(
+                                        Icons.search_outlined,
+                                        color: Colors.black,
+                                      ),
+                                    ),
+                                    hintText: 'Search...',
+                                    filled: true,
+                                    fillColor: Colors.blue.shade100,
+                                  )),
+                            ),
+                          ),
                           Padding(
                             padding: const EdgeInsets.only(left: 28, right: 28),
                             child: Row(
@@ -1905,11 +1932,11 @@ class _HomepageState extends State<Homepage> {
     }
     return true;
   }
-
+  final ApiResponse dataState = ApiResponse();
   Future<void> _getCurrentPosition() async {}
 
   SliverAppBar createSilverAppBar1() {
-    return SliverAppBar(
+    return  SliverAppBar(
       iconTheme: IconThemeData(
         color: Colors.black,
       ),
@@ -1956,107 +1983,117 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Color(0xffd2dfff),
       expandedHeight: 130,
       elevation: 0,
+      pinned: true,
       flexibleSpace: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-        return Stack(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            return Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 5),
-                  child: Lottie.asset('assets/Image/bg.json',
-                      height: 140, width: 120),
-                ),
-                Image.asset(
-                  'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                  // fit: BoxFit.contain,
-                  height: 120, width: 130,
-                ),
-              ],
-            ),
-            Positioned(
-                top: 110,
-                left: 230,
-                child: Container(
-                  width: 100,
-                  height: 35,
-                  decoration: BoxDecoration(color: Colors.blue,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(10),
-                      topRight: Radius.circular(20),
-                      bottomRight: Radius.circular(10),
-                      bottomLeft: Radius.circular(20),
-                    ),
+                  padding: const EdgeInsets.only(left: 110),
+                  child: Image.asset(
+                    'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
+                     fit: BoxFit.contain,
+                    height: 120, width: 130,
                   ),
-                  child: GestureDetector(
-                    onTap: (){
-                      //Navigator.push(context, MaterialPageRoute(builder: (context)=> ControllScreen()));
-                    },
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          children: [
-                            FutureBuilder(
-                                future: weatherdata,
-                                builder: ((context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Container(
-                                        child: Center(
-                                            child: SpinKitWave(
-                                      size: 12,
-                                      color: Colors.blue,
-                                    )));
-                                  } else if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    if (snapshot.hasError) {
-                                      return const Text('Data Error');
-                                    } else if (snapshot.hasData) {
-                                      return Column(
-                                        children: [
-                                          Text(
-                                              '${WeatherDataResult['main']['temp']}'),
-                                          Text('${WeatherDataResult['name']}',style: TextStyle(overflow: TextOverflow.fade)),
+                ),
+                Positioned(
+                    top: 75,
+                    left: 200,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WeatherScreen()));
+                      },
+                      child: Row(
+                        children: [
+                          Column(
+                            children: [
+                              FutureBuilder<Weather>(
+                                future: dataState.getWeather(),
+                                builder: (context, snapshot) {
+                                  return snapshot.hasData
+                                      ? Container(
+                                   height: 45,
+                                    width: 150,
+                                    child: SingleChildScrollView(
+                                      child: Column(
+                                        children: <Widget>[
+                                          Container(
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(bottom: 6,left: 20),
+                                              child: Column(
+                                                children: <Widget>[
+                                                  Row(
+                                                    children: <Widget>[
+                                                      Column(
+                                                        children: [
+                                                          Text(
+                                                            '${(snapshot.data!.main.temp - 273.15).toInt()}°',
+                                                            style: GoogleFonts.nunitoSans(
+                                                              fontSize: 15.0,
+                                                              fontWeight: FontWeight.w700,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            '${(snapshot.data!.name)}',
+                                                            style: GoogleFonts.nunitoSans(
+                                                              fontSize: 15.0,
+                                                              fontWeight: FontWeight.w700,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      SizedBox(width: 5,),
+                                                      Column(
+                                                        mainAxisAlignment:
+                                                        MainAxisAlignment.center,
+                                                        mainAxisSize: MainAxisSize.min,
+                                                        children: <Widget>[
+                                                          Image.network(
+                                                            'http://openweathermap.org/img/wn/${snapshot.data!.weather[0].icon}.png',
+                                                            height: 50,
+                                                          ),
+                                                        ],
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
                                         ],
-                                      );
-                                    } else {
-                                      return const Text('Server Error');
-                                    }
-                                  } else {
-                                    return Text(
-                                        'State: ${snapshot.connectionState}');
-                                  }
-                                }))
-                          ],
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Icon(Icons.cloud),
-                      ],
-                    ),
-                  ),
-                ))
-            // Positioned(
-            //     child: _currentPosition!.latitude == null
-            //         ? Text('${_currentPosition!.latitude}')
-            //         : Text('No data')
-            //     // IconButton(
-            //     //     onPressed: () {
-            //     //       Navigator.push(
-            //     //           context,
-            //     //           MaterialPageRoute(
-            //     //               builder: (context) => LocationPage()));
-            //     //     },
-            //     //     icon: Icon(Icons.sunny))
-            //     ),
-          ],
-        );
-      }),
+                                      ),
+                                    ),
+                                  )
+                                      : const Center(
+                                    child:
+                                    CircularProgressIndicator(backgroundColor: Colors.black),
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ))
+                // Positioned(
+                //     child: _currentPosition!.latitude == null
+                //         ? Text('${_currentPosition!.latitude}')
+                //         : Text('No data')
+                //     // IconButton(
+                //     //     onPressed: () {
+                //     //       Navigator.push(
+                //     //           context,
+                //     //           MaterialPageRoute(
+                //     //               builder: (context) => LocationPage()));
+                //     //     },
+                //     //     icon: Icon(Icons.sunny))
+                //     ),
+              ],
+            );
+          }),
     );
   }
 
@@ -2068,15 +2105,12 @@ class _HomepageState extends State<Homepage> {
         desiredAccuracy: LocationAccuracy.high);
     print(_currentPosition!.latitude);
     print(_currentPosition!.longitude);
-    print('hi1');
     var headers = {'Content-Type': 'application/json'};
-    print('hi2');
     var response = await get(
       Uri.parse(
           'http://api.openweathermap.org/data/2.5/weather?lat=${_currentPosition!.latitude}&lon=${_currentPosition!.longitude}&appid=${apiKey}&units=metric'),
       headers: headers,
     );
-    print('hi3');
     print(response.statusCode);
     if (response.statusCode == 200) {
       print(response.statusCode);

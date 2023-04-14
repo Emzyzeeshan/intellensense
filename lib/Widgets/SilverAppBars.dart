@@ -7,7 +7,7 @@ Position? _currentPosition;
 SliverAppBar createSilverAppBar2() {
   return SliverAppBar(
   forceElevated: true,
-    leading: Container(),
+    leading: Text(''),
     backgroundColor: Color(0xffd2dfff),
     pinned: true,
     flexibleSpace: Padding(
@@ -16,7 +16,7 @@ SliverAppBar createSilverAppBar2() {
         right: 10,
       ),
       child: Container(
-        height: 50,
+        height: 40,
         child: TextFormField(
             decoration: InputDecoration(
               isDense: true,
