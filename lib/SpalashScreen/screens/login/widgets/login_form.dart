@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/Home3.dart';
 import 'package:intellensense/Homepage2.dart';
 import 'package:quickalert/models/quickalert_animtype.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -68,7 +69,7 @@ class _LoginFormState extends State<LoginForm> {
     print(newuser);
     if (newuser == false) {
       Navigator.pushReplacement(
-          context, new MaterialPageRoute(builder: (context) => Homepage()));
+          context, new MaterialPageRoute(builder: (context) => Home3()));
     }
   }
 
@@ -282,7 +283,7 @@ class _LoginFormState extends State<LoginForm> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: ((context) => Homepage())));
+                                    builder: ((context) => Home3())));
                           });
                         }
 
