@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Services/themesetup/styles.dart';
 import 'SpalashScreen/screens/login/login.dart';
+import 'SpalashScreen/screens/login/mainLoginScreen.dart';
 import 'SpalashScreen/screens/onboarding/onboarding.dart';
 
 Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {
@@ -74,7 +75,7 @@ class _MyAppState extends State<MyApp> {
         home:
             //  PartyFilterScreen(),
 
-            Onboarding(screenHeight: screenHeight),
+        mainLoginScreen(screenHeight: screenHeight),
       );
     }));
   }

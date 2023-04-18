@@ -166,7 +166,7 @@ class _drawerState extends State<drawer> {
                   },
                 ),
               ]),
-          ListTile(
+          /*ListTile(
             leading: Image(
               image: AssetImage('assets/icons/iTransform ETL.png'),
               height: 25,
@@ -187,7 +187,7 @@ class _drawerState extends State<drawer> {
             onTap: () {
               Navigator.pop(context);
             },
-          ),
+          ),*/
         ]));
   }
 }

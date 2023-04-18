@@ -150,13 +150,18 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                         child: Column(
                           children: <Widget>[
                             Header(animation: _headerTextAnimation),
+                            SizedBox(height: 150,),
+                            Text ("Login", style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                            SizedBox(height: 20,),
+                            Text("Welcome back ! Login with your credentials",style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.grey[700],
+                            ),),
                             SizedBox(
                               height: 90,
-                            ),
-                            Flexible(
-                              child: Image.asset(
-                                'assets/icons/output-onlinegiftools(4).gif',
-                              ),
                             ),
                             LoginForm(animation: _formElementAnimation),
                           ],
@@ -212,13 +217,29 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                               padding: const EdgeInsets.only(top: 68.0),
                               child: Header(animation: _headerTextAnimation),
                             ),
-                            // SizedBox(height: 60,),
-                            Spacer(),
-                            Image.asset(
-                                'assets/icons/output-onlinegiftools(4).gif',
-                                height: 200),
-
+                             SizedBox(height: 60,),
+                            Text ("Login", style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                            SizedBox(height: 20,),
+                            Text("Welcome back ! Login with your credentials",style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.grey[700],
+                            ),),
+                            SizedBox(height: 40,),
                             LoginForm(animation: _formElementAnimation),
+                            SizedBox(height: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text("Dont have an account?"),
+                                Text("Sign Up",style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18
+                                ),),
+                              ],
+                            )
                           ],
                         ),
                       ),
@@ -280,9 +301,6 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                           SizedBox(
                             height: 90,
                           ),
-                          Image.asset(
-                              'assets/icons/output-onlinegiftools(4).gif',
-                              height: 400),
                           LoginForm(animation: _formElementAnimation),
                         ],
                       ),
