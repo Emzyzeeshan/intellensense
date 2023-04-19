@@ -29,6 +29,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  animate_do: ^3.0.2
   animated_bottom_navigation_bar: ^1.2.0
   auto_size_text: ^3.0.0
   avatars: ^2.0.0
@@ -45,7 +46,7 @@ dependencies:
   dropdown_button2: ^1.9.2
   equatable: ^2.0.5
   expansion_tile_card: ^2.0.0
-  firebase_auth:
+  firebase_auth: null
   firebase_core: ^2.9.0
   firebase_messaging: ^14.4.1
   firebase_storage: ^11.1.1
@@ -80,7 +81,6 @@ dependencies:
   r_dotted_line_border: ^0.1.1
   rating_dialog: ^2.0.0
   settings_ui: ^2.0.2
-
   shared_preferences: ^2.1.0
   sleek_circular_slider: ^2.0.1
   tap_to_expand: ^0.6.1

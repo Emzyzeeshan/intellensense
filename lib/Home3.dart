@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:animate_do/animate_do.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -59,6 +60,8 @@ class _Home3State extends State<Home3> {
     }
   }
 
+  bool shownews = false;
+  bool showSocialnews = false;
   bool get _isShrink {
     return _scrollController != null &&
         _scrollController!.hasClients &&
@@ -524,7 +527,17 @@ class _Home3State extends State<Home3> {
                                                               ),
                                                             ],
                                                           ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
                                                           ListTile(
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15)),
+                                                            tileColor: Colors
+                                                                .blue.shade100,
                                                             leading: Text(
                                                                 'Darkmode'),
                                                             onTap: () {
@@ -534,6 +547,58 @@ class _Home3State extends State<Home3> {
                                                                 //     !themeChange
                                                                 //         .darkTheme;
                                                               });
+                                                            },
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          ListTile(
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15)),
+                                                            tileColor: Colors
+                                                                .blue.shade100,
+                                                            leading: shownews ==
+                                                                    false
+                                                                ? Text(
+                                                                    'Show News Tab')
+                                                                : Text(
+                                                                    'Hide News Tab'),
+                                                            onTap: () {
+                                                              setState(() {
+                                                                shownews =
+                                                                    !shownews;
+                                                              });
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          ListTile(
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15)),
+                                                            tileColor: Colors
+                                                                .blue.shade100,
+                                                            leading: showSocialnews ==
+                                                                    false
+                                                                ? Text(
+                                                                    'Show SocialNews Tab')
+                                                                : Text(
+                                                                    'Hide SocialNews Tab'),
+                                                            onTap: () {
+                                                              setState(() {
+                                                                showSocialnews =
+                                                                    !showSocialnews;
+                                                              });
+                                                              Navigator.pop(
+                                                                  context);
                                                             },
                                                           ),
                                                           // SettingsSection(
@@ -571,430 +636,484 @@ class _Home3State extends State<Home3> {
                               Padding(
                                   padding: const EdgeInsets.only(
                                       left: 8.0, right: 8),
-                                  child: SingleChildScrollView(
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            FutureBuilder(
-                                                future: finaldata,
-                                                builder: ((context, snapshot) {
-                                                  if (snapshot
-                                                          .connectionState ==
-                                                      ConnectionState.waiting) {
-                                                    return Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 70.0),
-                                                      child: SizedBox(
-                                                        height: 150,
-                                                        width: 150,
-                                                        child: Center(
-                                                            child: SpinKitWave(
-                                                          color: Colors.blue,
-                                                          size: 18,
-                                                        )),
-                                                      ),
-                                                    );
-                                                  } else if (snapshot
-                                                          .connectionState ==
-                                                      ConnectionState.done) {
-                                                    if (snapshot.hasError) {
-                                                      return const Text(
-                                                          'Data Error');
-                                                    } else if (snapshot
-                                                        .hasData) {
-                                                      List Newpaperlist = [
-                                                        NewsTemplate2(
-                                                            "${newsdata[0]['id']['mediaName']}",
-                                                            '${newsdata[0]['id']['headLine']}',
-                                                            'assets/icons/newspaperdxp.png'),
-                                                        NewsTemplate3(
-                                                            '${newsdata[1]['id']['mediaName']}',
-                                                            '${newsdata[1]['id']['headLine']}',
-                                                            'assets/icons/newspaperdxp.png'),
-                                                        NewsTemplate1(
-                                                            '${newsdata[2]['id']['mediaName']}',
-                                                            '${newsdata[2]['id']['headLine']}',
-                                                            'assets/icons/newspaperdxp.png'),
-                                                        NewsTemplate4(
-                                                            '${newsdata[3]['id']['mediaName']}',
-                                                            '${newsdata[3]['id']['headLine']}',
-                                                            'assets/icons/newspaperdxp.png'),
-                                                      ];
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            viewnews = true;
-                                                          });
-                                                          PageCount.jumpToPage(
-                                                              0);
-                                                        },
-                                                        child: SizedBox(
-                                                          height: 130,
-                                                          width: 150,
-                                                          child: Swiper(
-                                                              itemWidth: 150,
-                                                              itemHeight: 130,
-                                                              duration:
-                                                                  duration,
-                                                              layout:
-                                                                  swiperlayout,
-                                                              scrollDirection:
-                                                                  carddirection ==
-                                                                          false
-                                                                      ? Axis
-                                                                          .vertical
-                                                                      : Axis
-                                                                          .horizontal,
-                                                              autoplay: true,
-                                                              itemBuilder:
-                                                                  (BuildContext
-                                                                          context,
-                                                                      int
-                                                                          index) {
-                                                                return Newpaperlist[
-                                                                    index];
-                                                              },
-                                                              itemCount: 4,
-                                                              pagination:
-                                                                  SwiperPagination(
-                                                                      builder:
-                                                                          DotSwiperPaginationBuilder(
-                                                                size: 7,
-                                                                color:
-                                                                    Colors.grey,
-                                                                activeColor:
-                                                                    Colors.blue
-                                                                        .shade200,
-                                                              ))),
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      return const Text(
-                                                          'Server Error');
-                                                    }
-                                                  } else {
-                                                    return Text(
-                                                        'State: ${snapshot.connectionState}');
-                                                  }
-                                                })),
-                                            //Newschannel
-                                            FutureBuilder(
-                                                future: Newschanneldata,
-                                                builder: ((context, snapshot) {
-                                                  if (snapshot
-                                                          .connectionState ==
-                                                      ConnectionState.waiting) {
-                                                    return Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 70.0),
-                                                      child: SizedBox(
-                                                        height: 150,
-                                                        width: 150,
-                                                        child: Center(
-                                                            child: SpinKitWave(
-                                                          color: Colors.blue,
-                                                          size: 18,
-                                                        )),
-                                                      ),
-                                                    );
-                                                  } else if (snapshot
-                                                          .connectionState ==
-                                                      ConnectionState.done) {
-                                                    if (snapshot.hasError) {
-                                                      return const Text(
-                                                          'Data Error');
-                                                    } else if (snapshot
-                                                        .hasData) {
-                                                      List NewschannelList = [
-                                                        NewsTemplate2(
-                                                            "${newchannelldata[0]['mediaChannelName']}",
-                                                            '${newchannelldata[0]['videoTitle']}',
-                                                            'assets/icons/newsdxps.png'),
-                                                        NewsTemplate3(
-                                                            '${newchannelldata[1]['mediaChannelName']}',
-                                                            '${newchannelldata[1]['videoTitle']}',
-                                                            'assets/icons/newsdxps.png'),
-                                                        NewsTemplate1(
-                                                            '${newchannelldata[2]['mediaChannelName']}',
-                                                            '${newchannelldata[2]['videoTitle']}',
-                                                            'assets/icons/newsdxps.png'),
-                                                        NewsTemplate4(
-                                                            '${newchannelldata[3]['mediaChannelName']}',
-                                                            '${newchannelldata[3]['videoTitle']}',
-                                                            'assets/icons/newsdxps.png'),
-                                                      ];
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            viewnews = true;
-                                                          });
-                                                          PageCount.jumpToPage(
-                                                              1);
-                                                        },
-                                                        child: SizedBox(
-                                                          height: 130,
-                                                          width: 150,
-                                                          child: Swiper(
-                                                              itemWidth: 150,
-                                                              itemHeight: 130,
-                                                              duration:
-                                                                  duration,
-                                                              layout:
-                                                                  swiperlayout,
-                                                              scrollDirection:
-                                                                  carddirection ==
-                                                                          false
-                                                                      ? Axis
-                                                                          .vertical
-                                                                      : Axis
-                                                                          .horizontal,
-                                                              autoplay: true,
-                                                              itemBuilder:
-                                                                  (BuildContext
-                                                                          context,
-                                                                      int
-                                                                          index) {
-                                                                return NewschannelList[
-                                                                    index];
-                                                              },
-                                                              itemCount: 4,
-                                                              pagination:
-                                                                  SwiperPagination(
-                                                                      builder:
-                                                                          DotSwiperPaginationBuilder(
-                                                                size: 7,
-                                                                color:
-                                                                    Colors.grey,
-                                                                activeColor:
-                                                                    Colors.blue
-                                                                        .shade200,
-                                                              ))),
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      return const Text(
-                                                          'Server Error');
-                                                    }
-                                                  } else {
-                                                    return Text(
-                                                        'State: ${snapshot.connectionState}');
-                                                  }
-                                                })),
-                                            //Live News
-                                            FutureBuilder(
-                                                future: liveNewsdata,
-                                                builder: ((context, snapshot) {
-                                                  if (snapshot
-                                                          .connectionState ==
-                                                      ConnectionState.waiting) {
-                                                    return Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 70.0),
-                                                      child: SizedBox(
-                                                        height: 150,
-                                                        width: 150,
-                                                        child: Center(
-                                                            child: SpinKitWave(
-                                                          color: Colors.blue,
-                                                          size: 18,
-                                                        )),
-                                                      ),
-                                                    );
-                                                  } else if (snapshot
-                                                          .connectionState ==
-                                                      ConnectionState.done) {
-                                                    if (snapshot.hasError) {
-                                                      return const Text(
-                                                          'Data Error');
-                                                    } else if (snapshot
-                                                        .hasData) {
-                                                      List LiveNewsList = [
-                                                        NewsTemplate2(
-                                                            "${Livenewsdata[0]['id']['mediaName']}",
-                                                            '${Livenewsdata[0]['id']['headLine']}',
-                                                            'assets/icons/live.gif'),
-                                                        NewsTemplate3(
-                                                            '${Livenewsdata[1]['id']['mediaName']}',
-                                                            '${Livenewsdata[1]['id']['headLine']}',
-                                                            'assets/icons/live.gif'),
-                                                        NewsTemplate1(
-                                                            '${Livenewsdata[2]['id']['mediaName']}',
-                                                            '${Livenewsdata[2]['id']['headLine']}',
-                                                            'assets/icons/live.gif'),
-                                                        NewsTemplate4(
-                                                            '${Livenewsdata[3]['id']['mediaName']}',
-                                                            '${Livenewsdata[3]['id']['headLine']}',
-                                                            'assets/icons/live.gif'),
-                                                      ];
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            viewnews = true;
-                                                          });
-                                                          PageCount.jumpToPage(
-                                                              2);
-                                                        },
-                                                        child: SizedBox(
-                                                          height: 130,
-                                                          width: 150,
-                                                          child: Swiper(
-                                                              itemWidth: 150,
-                                                              itemHeight: 130,
-                                                              duration:
-                                                                  duration,
-                                                              layout:
-                                                                  swiperlayout,
-                                                              scrollDirection:
-                                                                  carddirection ==
-                                                                          false
-                                                                      ? Axis
-                                                                          .vertical
-                                                                      : Axis
-                                                                          .horizontal,
-                                                              autoplay: true,
-                                                              itemBuilder:
-                                                                  (BuildContext
-                                                                          context,
-                                                                      int
-                                                                          index) {
-                                                                return LiveNewsList[
-                                                                    index];
-                                                              },
-                                                              itemCount: 4,
-                                                              pagination:
-                                                                  SwiperPagination(
-                                                                      builder:
-                                                                          DotSwiperPaginationBuilder(
-                                                                size: 7,
-                                                                color:
-                                                                    Colors.grey,
-                                                                activeColor:
-                                                                    Colors.blue
-                                                                        .shade200,
-                                                              ))),
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      return const Text(
-                                                          'Server Error');
-                                                    }
-                                                  } else {
-                                                    return Text(
-                                                        'State: ${snapshot.connectionState}');
-                                                  }
-                                                })),
-                                            //Google Trends
-                                            FutureBuilder(
-                                                future: googletrendsdata,
-                                                builder: ((context, snapshot) {
-                                                  if (snapshot
-                                                          .connectionState ==
-                                                      ConnectionState.waiting) {
-                                                    return Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 70.0),
-                                                      child: SizedBox(
-                                                        height: 150,
-                                                        width: 150,
-                                                        child: Center(
-                                                            child: SpinKitWave(
-                                                          color: Colors.blue,
-                                                          size: 18,
-                                                        )),
-                                                      ),
-                                                    );
-                                                  } else if (snapshot
-                                                          .connectionState ==
-                                                      ConnectionState.done) {
-                                                    if (snapshot.hasError) {
-                                                      return const Text(
-                                                          'Data Error');
-                                                    } else if (snapshot
-                                                        .hasData) {
-                                                      List GoogleTrendsList = [
-                                                        NewsTemplate2(
-                                                            "${GoogleTrendsdata[0]['partyName']}",
-                                                            '${GoogleTrendsdata[0]['id']['region']}',
-                                                            'assets/icons/googleTrends.png'),
-                                                        NewsTemplate3(
-                                                            '${GoogleTrendsdata[1]['partyName']}',
-                                                            '${GoogleTrendsdata[1]['id']['region']}',
-                                                            'assets/icons/googleTrends.png'),
-                                                        NewsTemplate1(
-                                                            '${GoogleTrendsdata[2]['partyName']}',
-                                                            '${GoogleTrendsdata[2]['id']['region']}',
-                                                            'assets/icons/googleTrends.png'),
-                                                        NewsTemplate4(
-                                                            '${GoogleTrendsdata[3]['partyName']}',
-                                                            '${GoogleTrendsdata[3]['id']['region']}',
-                                                            'assets/icons/googleTrends.png'),
-                                                      ];
-                                                      return GestureDetector(
-                                                        onTap: () {
-                                                          setState(() {
-                                                            viewnews = true;
-                                                          });
-                                                          PageCount.jumpToPage(
-                                                              3);
-                                                        },
-                                                        child: SizedBox(
-                                                          height: 130,
-                                                          width: 150,
-                                                          child: Swiper(
-                                                              itemWidth: 150,
-                                                              itemHeight: 130,
-                                                              duration:
-                                                                  duration,
-                                                              layout:
-                                                                  swiperlayout,
-                                                              scrollDirection:
-                                                                  carddirection ==
-                                                                          false
-                                                                      ? Axis
-                                                                          .vertical
-                                                                      : Axis
-                                                                          .horizontal,
-                                                              autoplay: true,
-                                                              itemBuilder:
-                                                                  (BuildContext
-                                                                          context,
-                                                                      int
-                                                                          index) {
-                                                                return GoogleTrendsList[
-                                                                    index];
-                                                              },
-                                                              itemCount: 4,
-                                                              pagination:
-                                                                  SwiperPagination(
-                                                                      builder:
-                                                                          DotSwiperPaginationBuilder(
-                                                                size: 7,
-                                                                color:
-                                                                    Colors.grey,
-                                                                activeColor:
-                                                                    Colors.blue
-                                                                        .shade200,
-                                                              ))),
-                                                        ),
-                                                      );
-                                                    } else {
-                                                      return const Text(
-                                                          'Server Error');
-                                                    }
-                                                  } else {
-                                                    return Text(
-                                                        'State: ${snapshot.connectionState}');
-                                                  }
-                                                })),
-                                          ]))),
+                                  child: shownews == true
+                                      ? SlideInUp(
+                                          duration: Duration(seconds: 3),
+                                          child: SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    FutureBuilder(
+                                                        future: finaldata,
+                                                        builder: ((context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .waiting) {
+                                                            return Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      top:
+                                                                          70.0),
+                                                              child: SizedBox(
+                                                                height: 150,
+                                                                width: 150,
+                                                                child: Center(
+                                                                    child:
+                                                                        SpinKitWave(
+                                                                  color: Colors
+                                                                      .blue,
+                                                                  size: 18,
+                                                                )),
+                                                              ),
+                                                            );
+                                                          } else if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .done) {
+                                                            if (snapshot
+                                                                .hasError) {
+                                                              return const Text(
+                                                                  'Data Error');
+                                                            } else if (snapshot
+                                                                .hasData) {
+                                                              List
+                                                                  Newpaperlist =
+                                                                  [
+                                                                NewsTemplate2(
+                                                                    "${newsdata[0]['id']['mediaName']}",
+                                                                    '${newsdata[0]['id']['headLine']}',
+                                                                    'assets/icons/newspaperdxp.png'),
+                                                                NewsTemplate3(
+                                                                    '${newsdata[1]['id']['mediaName']}',
+                                                                    '${newsdata[1]['id']['headLine']}',
+                                                                    'assets/icons/newspaperdxp.png'),
+                                                                NewsTemplate1(
+                                                                    '${newsdata[2]['id']['mediaName']}',
+                                                                    '${newsdata[2]['id']['headLine']}',
+                                                                    'assets/icons/newspaperdxp.png'),
+                                                                NewsTemplate4(
+                                                                    '${newsdata[3]['id']['mediaName']}',
+                                                                    '${newsdata[3]['id']['headLine']}',
+                                                                    'assets/icons/newspaperdxp.png'),
+                                                              ];
+                                                              return GestureDetector(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    viewnews =
+                                                                        true;
+                                                                  });
+                                                                  PageCount
+                                                                      .jumpToPage(
+                                                                          0);
+                                                                },
+                                                                child: SizedBox(
+                                                                  height: 130,
+                                                                  width: 150,
+                                                                  child: Swiper(
+                                                                      itemWidth:
+                                                                          150,
+                                                                      itemHeight:
+                                                                          130,
+                                                                      duration:
+                                                                          duration,
+                                                                      layout:
+                                                                          swiperlayout,
+                                                                      scrollDirection: carddirection == false
+                                                                          ? Axis
+                                                                              .vertical
+                                                                          : Axis
+                                                                              .horizontal,
+                                                                      autoplay:
+                                                                          true,
+                                                                      itemBuilder: (BuildContext
+                                                                              context,
+                                                                          int
+                                                                              index) {
+                                                                        return Newpaperlist[
+                                                                            index];
+                                                                      },
+                                                                      itemCount:
+                                                                          4,
+                                                                      pagination:
+                                                                          SwiperPagination(
+                                                                              builder: DotSwiperPaginationBuilder(
+                                                                        size: 7,
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        activeColor: Colors
+                                                                            .blue
+                                                                            .shade200,
+                                                                      ))),
+                                                                ),
+                                                              );
+                                                            } else {
+                                                              return const Text(
+                                                                  'Server Error');
+                                                            }
+                                                          } else {
+                                                            return Text(
+                                                                'State: ${snapshot.connectionState}');
+                                                          }
+                                                        })),
+                                                    //Newschannel
+                                                    FutureBuilder(
+                                                        future: Newschanneldata,
+                                                        builder: ((context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .waiting) {
+                                                            return Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      top:
+                                                                          70.0),
+                                                              child: SizedBox(
+                                                                height: 150,
+                                                                width: 150,
+                                                                child: Center(
+                                                                    child:
+                                                                        SpinKitWave(
+                                                                  color: Colors
+                                                                      .blue,
+                                                                  size: 18,
+                                                                )),
+                                                              ),
+                                                            );
+                                                          } else if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .done) {
+                                                            if (snapshot
+                                                                .hasError) {
+                                                              return const Text(
+                                                                  'Data Error');
+                                                            } else if (snapshot
+                                                                .hasData) {
+                                                              List
+                                                                  NewschannelList =
+                                                                  [
+                                                                NewsTemplate2(
+                                                                    "${newchannelldata[0]['mediaChannelName']}",
+                                                                    '${newchannelldata[0]['videoTitle']}',
+                                                                    'assets/icons/newsdxps.png'),
+                                                                NewsTemplate3(
+                                                                    '${newchannelldata[1]['mediaChannelName']}',
+                                                                    '${newchannelldata[1]['videoTitle']}',
+                                                                    'assets/icons/newsdxps.png'),
+                                                                NewsTemplate1(
+                                                                    '${newchannelldata[2]['mediaChannelName']}',
+                                                                    '${newchannelldata[2]['videoTitle']}',
+                                                                    'assets/icons/newsdxps.png'),
+                                                                NewsTemplate4(
+                                                                    '${newchannelldata[3]['mediaChannelName']}',
+                                                                    '${newchannelldata[3]['videoTitle']}',
+                                                                    'assets/icons/newsdxps.png'),
+                                                              ];
+                                                              return GestureDetector(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    viewnews =
+                                                                        true;
+                                                                  });
+                                                                  PageCount
+                                                                      .jumpToPage(
+                                                                          1);
+                                                                },
+                                                                child: SizedBox(
+                                                                  height: 130,
+                                                                  width: 150,
+                                                                  child: Swiper(
+                                                                      itemWidth:
+                                                                          150,
+                                                                      itemHeight:
+                                                                          130,
+                                                                      duration:
+                                                                          duration,
+                                                                      layout:
+                                                                          swiperlayout,
+                                                                      scrollDirection: carddirection == false
+                                                                          ? Axis
+                                                                              .vertical
+                                                                          : Axis
+                                                                              .horizontal,
+                                                                      autoplay:
+                                                                          true,
+                                                                      itemBuilder: (BuildContext
+                                                                              context,
+                                                                          int
+                                                                              index) {
+                                                                        return NewschannelList[
+                                                                            index];
+                                                                      },
+                                                                      itemCount:
+                                                                          4,
+                                                                      pagination:
+                                                                          SwiperPagination(
+                                                                              builder: DotSwiperPaginationBuilder(
+                                                                        size: 7,
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        activeColor: Colors
+                                                                            .blue
+                                                                            .shade200,
+                                                                      ))),
+                                                                ),
+                                                              );
+                                                            } else {
+                                                              return const Text(
+                                                                  'Server Error');
+                                                            }
+                                                          } else {
+                                                            return Text(
+                                                                'State: ${snapshot.connectionState}');
+                                                          }
+                                                        })),
+                                                    //Live News
+                                                    FutureBuilder(
+                                                        future: liveNewsdata,
+                                                        builder: ((context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .waiting) {
+                                                            return Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      top:
+                                                                          70.0),
+                                                              child: SizedBox(
+                                                                height: 150,
+                                                                width: 150,
+                                                                child: Center(
+                                                                    child:
+                                                                        SpinKitWave(
+                                                                  color: Colors
+                                                                      .blue,
+                                                                  size: 18,
+                                                                )),
+                                                              ),
+                                                            );
+                                                          } else if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .done) {
+                                                            if (snapshot
+                                                                .hasError) {
+                                                              return const Text(
+                                                                  'Data Error');
+                                                            } else if (snapshot
+                                                                .hasData) {
+                                                              List
+                                                                  LiveNewsList =
+                                                                  [
+                                                                NewsTemplate2(
+                                                                    "${Livenewsdata[0]['id']['mediaName']}",
+                                                                    '${Livenewsdata[0]['id']['headLine']}',
+                                                                    'assets/icons/live.gif'),
+                                                                NewsTemplate3(
+                                                                    '${Livenewsdata[1]['id']['mediaName']}',
+                                                                    '${Livenewsdata[1]['id']['headLine']}',
+                                                                    'assets/icons/live.gif'),
+                                                                NewsTemplate1(
+                                                                    '${Livenewsdata[2]['id']['mediaName']}',
+                                                                    '${Livenewsdata[2]['id']['headLine']}',
+                                                                    'assets/icons/live.gif'),
+                                                                NewsTemplate4(
+                                                                    '${Livenewsdata[3]['id']['mediaName']}',
+                                                                    '${Livenewsdata[3]['id']['headLine']}',
+                                                                    'assets/icons/live.gif'),
+                                                              ];
+                                                              return GestureDetector(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    viewnews =
+                                                                        true;
+                                                                  });
+                                                                  PageCount
+                                                                      .jumpToPage(
+                                                                          2);
+                                                                },
+                                                                child: SizedBox(
+                                                                  height: 130,
+                                                                  width: 150,
+                                                                  child: Swiper(
+                                                                      itemWidth:
+                                                                          150,
+                                                                      itemHeight:
+                                                                          130,
+                                                                      duration:
+                                                                          duration,
+                                                                      layout:
+                                                                          swiperlayout,
+                                                                      scrollDirection: carddirection == false
+                                                                          ? Axis
+                                                                              .vertical
+                                                                          : Axis
+                                                                              .horizontal,
+                                                                      autoplay:
+                                                                          true,
+                                                                      itemBuilder: (BuildContext
+                                                                              context,
+                                                                          int
+                                                                              index) {
+                                                                        return LiveNewsList[
+                                                                            index];
+                                                                      },
+                                                                      itemCount:
+                                                                          4,
+                                                                      pagination:
+                                                                          SwiperPagination(
+                                                                              builder: DotSwiperPaginationBuilder(
+                                                                        size: 7,
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        activeColor: Colors
+                                                                            .blue
+                                                                            .shade200,
+                                                                      ))),
+                                                                ),
+                                                              );
+                                                            } else {
+                                                              return const Text(
+                                                                  'Server Error');
+                                                            }
+                                                          } else {
+                                                            return Text(
+                                                                'State: ${snapshot.connectionState}');
+                                                          }
+                                                        })),
+                                                    //Google Trends
+                                                    FutureBuilder(
+                                                        future:
+                                                            googletrendsdata,
+                                                        builder: ((context,
+                                                            snapshot) {
+                                                          if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .waiting) {
+                                                            return Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      top:
+                                                                          70.0),
+                                                              child: SizedBox(
+                                                                height: 150,
+                                                                width: 150,
+                                                                child: Center(
+                                                                    child:
+                                                                        SpinKitWave(
+                                                                  color: Colors
+                                                                      .blue,
+                                                                  size: 18,
+                                                                )),
+                                                              ),
+                                                            );
+                                                          } else if (snapshot
+                                                                  .connectionState ==
+                                                              ConnectionState
+                                                                  .done) {
+                                                            if (snapshot
+                                                                .hasError) {
+                                                              return const Text(
+                                                                  'Data Error');
+                                                            } else if (snapshot
+                                                                .hasData) {
+                                                              List
+                                                                  GoogleTrendsList =
+                                                                  [
+                                                                NewsTemplate2(
+                                                                    "${GoogleTrendsdata[0]['partyName']}",
+                                                                    '${GoogleTrendsdata[0]['id']['region']}',
+                                                                    'assets/icons/googleTrends.png'),
+                                                                NewsTemplate3(
+                                                                    '${GoogleTrendsdata[1]['partyName']}',
+                                                                    '${GoogleTrendsdata[1]['id']['region']}',
+                                                                    'assets/icons/googleTrends.png'),
+                                                                NewsTemplate1(
+                                                                    '${GoogleTrendsdata[2]['partyName']}',
+                                                                    '${GoogleTrendsdata[2]['id']['region']}',
+                                                                    'assets/icons/googleTrends.png'),
+                                                                NewsTemplate4(
+                                                                    '${GoogleTrendsdata[3]['partyName']}',
+                                                                    '${GoogleTrendsdata[3]['id']['region']}',
+                                                                    'assets/icons/googleTrends.png'),
+                                                              ];
+                                                              return GestureDetector(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    viewnews =
+                                                                        true;
+                                                                  });
+                                                                  PageCount
+                                                                      .jumpToPage(
+                                                                          3);
+                                                                },
+                                                                child: SizedBox(
+                                                                  height: 130,
+                                                                  width: 150,
+                                                                  child: Swiper(
+                                                                      itemWidth:
+                                                                          150,
+                                                                      itemHeight:
+                                                                          130,
+                                                                      duration:
+                                                                          duration,
+                                                                      layout:
+                                                                          swiperlayout,
+                                                                      scrollDirection: carddirection == false
+                                                                          ? Axis
+                                                                              .vertical
+                                                                          : Axis
+                                                                              .horizontal,
+                                                                      autoplay:
+                                                                          true,
+                                                                      itemBuilder: (BuildContext
+                                                                              context,
+                                                                          int
+                                                                              index) {
+                                                                        return GoogleTrendsList[
+                                                                            index];
+                                                                      },
+                                                                      itemCount:
+                                                                          4,
+                                                                      pagination:
+                                                                          SwiperPagination(
+                                                                              builder: DotSwiperPaginationBuilder(
+                                                                        size: 7,
+                                                                        color: Colors
+                                                                            .grey,
+                                                                        activeColor: Colors
+                                                                            .blue
+                                                                            .shade200,
+                                                                      ))),
+                                                                ),
+                                                              );
+                                                            } else {
+                                                              return const Text(
+                                                                  'Server Error');
+                                                            }
+                                                          } else {
+                                                            return Text(
+                                                                'State: ${snapshot.connectionState}');
+                                                          }
+                                                        })),
+                                                  ])),
+                                        )
+                                      : Container()),
 
                               //todo:social media
 
@@ -1016,374 +1135,452 @@ class _Home3State extends State<Home3> {
                                   ],
                                 ),
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 8.0, right: 8),
-                                child: SingleChildScrollView(
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  scrollDirection: Axis.horizontal,
-                                  child: Row(
-                                    children: [
-                                      FutureBuilder(
-                                          future: youtubedata,
-                                          builder: ((context, snapshot) {
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.waiting) {
-                                              return Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 70.0),
-                                                child: SizedBox(
-                                                  height: 150,
-                                                  width: 150,
-                                                  child: Center(
-                                                      child: SpinKitWave(
-                                                    color: Colors.blue,
-                                                    size: 18,
-                                                  )),
-                                                ),
-                                              );
-                                            } else if (snapshot
-                                                    .connectionState ==
-                                                ConnectionState.done) {
-                                              if (snapshot.hasError) {
-                                                return const Text('Data Error');
-                                              } else if (snapshot.hasData) {
-                                                List YoutubeList = [
-                                                  SocialMediaTemplate1(
-                                                      '${Youtubedata[0]['mediaChannelName']}',
-                                                      '${Youtubedata[0]['videoTitle']}'),
-                                                  SocialMediaTemplate1(
-                                                      '${Youtubedata[1]['mediaChannelName']}',
-                                                      '${Youtubedata[1]['videoTitle']}'),
-                                                  SocialMediaTemplate1(
-                                                      '${Youtubedata[2]['mediaChannelName']}',
-                                                      '${Youtubedata[2]['videoTitle']}'),
-                                                  SocialMediaTemplate1(
-                                                      '${Youtubedata[3]['mediaChannelName']}',
-                                                      '${Youtubedata[3]['videoTitle']}'),
-                                                ];
-                                                return SizedBox(
-                                                  height: 130,
-                                                  width: 150,
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        viewnews = true;
-                                                      });
-                                                      PageCount.jumpToPage(4);
-                                                    },
-                                                    child: Swiper(
-                                                        itemWidth: 150,
-                                                        itemHeight: 130,
-                                                        duration: duration,
-                                                        layout: swiperlayout,
-                                                        scrollDirection:
-                                                            carddirection ==
-                                                                    false
-                                                                ? Axis.vertical
-                                                                : Axis
-                                                                    .horizontal,
-                                                        autoplay: true,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return YoutubeList[
-                                                              index];
-                                                        },
-                                                        itemCount: 4,
-                                                        pagination:
-                                                            SwiperPagination(
-                                                                builder:
-                                                                    DotSwiperPaginationBuilder(
-                                                          size: 7,
-                                                          color: Colors.grey,
-                                                          activeColor: Colors
-                                                              .blue.shade200,
-                                                        ))),
-                                                  ),
-                                                );
-                                              } else {
-                                                return const Text(
-                                                    'Server Error');
-                                              }
-                                            } else {
-                                              return Text(
-                                                  'State: ${snapshot.connectionState}');
-                                            }
-                                          })),
+                              showSocialnews == true
+                                  ? SlideInUp(
+                                      duration: Duration(seconds: 3),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                            left: 8.0, right: 8),
+                                        child: SingleChildScrollView(
+                                          clipBehavior:
+                                              Clip.antiAliasWithSaveLayer,
+                                          scrollDirection: Axis.horizontal,
+                                          child: Row(
+                                            children: [
+                                              FutureBuilder(
+                                                  future: youtubedata,
+                                                  builder:
+                                                      ((context, snapshot) {
+                                                    if (snapshot
+                                                            .connectionState ==
+                                                        ConnectionState
+                                                            .waiting) {
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                top: 70.0),
+                                                        child: SizedBox(
+                                                          height: 150,
+                                                          width: 150,
+                                                          child: Center(
+                                                              child:
+                                                                  SpinKitWave(
+                                                            color: Colors.blue,
+                                                            size: 18,
+                                                          )),
+                                                        ),
+                                                      );
+                                                    } else if (snapshot
+                                                            .connectionState ==
+                                                        ConnectionState.done) {
+                                                      if (snapshot.hasError) {
+                                                        return const Text(
+                                                            'Data Error');
+                                                      } else if (snapshot
+                                                          .hasData) {
+                                                        List YoutubeList = [
+                                                          SocialMediaTemplate1(
+                                                              '${Youtubedata[0]['mediaChannelName']}',
+                                                              '${Youtubedata[0]['videoTitle']}'),
+                                                          SocialMediaTemplate1(
+                                                              '${Youtubedata[1]['mediaChannelName']}',
+                                                              '${Youtubedata[1]['videoTitle']}'),
+                                                          SocialMediaTemplate1(
+                                                              '${Youtubedata[2]['mediaChannelName']}',
+                                                              '${Youtubedata[2]['videoTitle']}'),
+                                                          SocialMediaTemplate1(
+                                                              '${Youtubedata[3]['mediaChannelName']}',
+                                                              '${Youtubedata[3]['videoTitle']}'),
+                                                        ];
+                                                        return SizedBox(
+                                                          height: 130,
+                                                          width: 150,
+                                                          child:
+                                                              GestureDetector(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                viewnews = true;
+                                                              });
+                                                              PageCount
+                                                                  .jumpToPage(
+                                                                      4);
+                                                            },
+                                                            child: Swiper(
+                                                                itemWidth: 150,
+                                                                itemHeight: 130,
+                                                                duration:
+                                                                    duration,
+                                                                layout:
+                                                                    swiperlayout,
+                                                                scrollDirection:
+                                                                    carddirection ==
+                                                                            false
+                                                                        ? Axis
+                                                                            .vertical
+                                                                        : Axis
+                                                                            .horizontal,
+                                                                autoplay: true,
+                                                                itemBuilder:
+                                                                    (BuildContext
+                                                                            context,
+                                                                        int
+                                                                            index) {
+                                                                  return YoutubeList[
+                                                                      index];
+                                                                },
+                                                                itemCount: 4,
+                                                                pagination:
+                                                                    SwiperPagination(
+                                                                        builder:
+                                                                            DotSwiperPaginationBuilder(
+                                                                  size: 7,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .blue
+                                                                          .shade200,
+                                                                ))),
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        return const Text(
+                                                            'Server Error');
+                                                      }
+                                                    } else {
+                                                      return Text(
+                                                          'State: ${snapshot.connectionState}');
+                                                    }
+                                                  })),
 
-                                      //Twitter news
-                                      FutureBuilder(
-                                          future: twitterdata,
-                                          builder: ((context, snapshot) {
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.waiting) {
-                                              return Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 70.0),
-                                                child: SizedBox(
-                                                  height: 150,
-                                                  width: 150,
-                                                  child: Center(
-                                                      child: SpinKitWave(
-                                                    color: Colors.blue,
-                                                    size: 18,
-                                                  )),
-                                                ),
-                                              );
-                                            } else if (snapshot
-                                                    .connectionState ==
-                                                ConnectionState.done) {
-                                              if (snapshot.hasError) {
-                                                return const Text('Data Error');
-                                              } else if (snapshot.hasData) {
-                                                List TwitterList = [
-                                                  SocialMediaTemplate2(
-                                                      '${TwitterData[0]['candidateName']}',
-                                                      '${TwitterData[0]['tweetContent']}'),
-                                                  SocialMediaTemplate2(
-                                                      '${TwitterData[1]['candidateName']}',
-                                                      '${TwitterData[1]['tweetContent']}'),
-                                                  SocialMediaTemplate2(
-                                                      '${TwitterData[2]['candidateName']}',
-                                                      '${TwitterData[2]['tweetContent']}'),
-                                                  SocialMediaTemplate2(
-                                                      '${TwitterData[3]['candidateName']}',
-                                                      '${TwitterData[3]['tweetContent']}'),
-                                                ];
-                                                return SizedBox(
-                                                  height: 130,
-                                                  width: 150,
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        viewnews = true;
-                                                      });
-                                                      PageCount.jumpToPage(5);
-                                                    },
-                                                    child: Swiper(
-                                                        itemWidth: 150,
-                                                        itemHeight: 130,
-                                                        duration: duration,
-                                                        layout: swiperlayout,
-                                                        scrollDirection:
-                                                            carddirection ==
-                                                                    false
-                                                                ? Axis.vertical
-                                                                : Axis
-                                                                    .horizontal,
-                                                        autoplay: true,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return TwitterList[
-                                                              index];
-                                                        },
-                                                        itemCount: 4,
-                                                        pagination:
-                                                            SwiperPagination(
-                                                                builder:
-                                                                    DotSwiperPaginationBuilder(
-                                                          size: 7,
-                                                          color: Colors.grey,
-                                                          activeColor: Colors
-                                                              .blue.shade200,
-                                                        ))),
-                                                  ),
-                                                );
-                                              } else {
-                                                return const Text(
-                                                    'Server Error');
-                                              }
-                                            } else {
-                                              return Text(
-                                                  'State: ${snapshot.connectionState}');
-                                            }
-                                          })),
-                                      //FaceBook News
-                                      FutureBuilder(
-                                          future: facebookdata,
-                                          builder: ((context, snapshot) {
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.waiting) {
-                                              return Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 70.0),
-                                                child: SizedBox(
-                                                  height: 150,
-                                                  width: 150,
-                                                  child: Center(
-                                                      child: SpinKitWave(
-                                                    color: Colors.blue,
-                                                    size: 18,
-                                                  )),
-                                                ),
-                                              );
-                                            } else if (snapshot
-                                                    .connectionState ==
-                                                ConnectionState.done) {
-                                              if (snapshot.hasError) {
-                                                return const Text('Data Error');
-                                              } else if (snapshot.hasData) {
-                                                List FaceBookList = [
-                                                  SocialMediaTemplate3(
-                                                      '${Facebookdata[0]['candidateName']}',
-                                                      '${Facebookdata[0]['titleContent']}'),
-                                                  SocialMediaTemplate3(
-                                                      '${Facebookdata[1]['candidateName']}',
-                                                      '${Facebookdata[1]['titleContent']}'),
-                                                  SocialMediaTemplate3(
-                                                      '${Facebookdata[2]['candidateName']}',
-                                                      '${Facebookdata[2]['titleContent']}'),
-                                                  SocialMediaTemplate3(
-                                                      '${Facebookdata[3]['candidateName']}',
-                                                      '${Facebookdata[3]['titleContent']}'),
-                                                ];
-                                                return SizedBox(
-                                                  height: 130,
-                                                  width: 150,
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        viewnews = true;
-                                                      });
-                                                      PageCount.jumpToPage(6);
-                                                    },
-                                                    child: Swiper(
-                                                        itemWidth: 150,
-                                                        itemHeight: 130,
-                                                        duration: duration,
-                                                        layout: swiperlayout,
-                                                        scrollDirection:
-                                                            carddirection ==
-                                                                    false
-                                                                ? Axis.vertical
-                                                                : Axis
-                                                                    .horizontal,
-                                                        autoplay: true,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return FaceBookList[
-                                                              index];
-                                                        },
-                                                        itemCount: 4,
-                                                        pagination:
-                                                            SwiperPagination(
-                                                                builder:
-                                                                    DotSwiperPaginationBuilder(
-                                                          size: 7,
-                                                          color: Colors.grey,
-                                                          activeColor: Colors
-                                                              .blue.shade200,
-                                                        ))),
-                                                  ),
-                                                );
-                                              } else {
-                                                return const Text(
-                                                    'Server Error');
-                                              }
-                                            } else {
-                                              return Text(
-                                                  'State: ${snapshot.connectionState}');
-                                            }
-                                          })),
-                                      //Instagram news
-                                      FutureBuilder(
-                                          future: instagramdata,
-                                          builder: ((context, snapshot) {
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.waiting) {
-                                              return Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 70.0),
-                                                child: SizedBox(
-                                                  height: 150,
-                                                  width: 150,
-                                                  child: Center(
-                                                      child: SpinKitWave(
-                                                    color: Colors.blue,
-                                                    size: 18,
-                                                  )),
-                                                ),
-                                              );
-                                            } else if (snapshot
-                                                    .connectionState ==
-                                                ConnectionState.done) {
-                                              if (snapshot.hasError) {
-                                                return const Text('Data Error');
-                                              } else if (snapshot.hasData) {
-                                                List InstagramList = [
-                                                  SocialMediaTemplate4(
-                                                      '${Instagramdata[0]['candidateName']}',
-                                                      '${Instagramdata[0]['titleContent']}'),
-                                                  SocialMediaTemplate4(
-                                                      '${Instagramdata[1]['candidateName']}',
-                                                      '${Instagramdata[1]['titleContent']}'),
-                                                  SocialMediaTemplate4(
-                                                      '${Instagramdata[2]['candidateName']}',
-                                                      '${Instagramdata[2]['titleContent']}'),
-                                                  SocialMediaTemplate4(
-                                                      '${Instagramdata[3]['candidateName']}',
-                                                      '${Instagramdata[3]['titleContent']}'),
-                                                ];
-                                                return SizedBox(
-                                                  height: 130,
-                                                  width: 150,
-                                                  child: GestureDetector(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        viewnews = true;
-                                                      });
-                                                      PageCount.jumpToPage(7);
-                                                    },
-                                                    child: Swiper(
-                                                        itemWidth: 150,
-                                                        itemHeight: 130,
-                                                        duration: duration,
-                                                        layout: swiperlayout,
-                                                        scrollDirection:
-                                                            carddirection ==
-                                                                    false
-                                                                ? Axis.vertical
-                                                                : Axis
-                                                                    .horizontal,
-                                                        autoplay: true,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return InstagramList[
-                                                              index];
-                                                        },
-                                                        itemCount: 4,
-                                                        pagination:
-                                                            SwiperPagination(
-                                                                builder:
-                                                                    DotSwiperPaginationBuilder(
-                                                          size: 7,
-                                                          color: Colors.grey,
-                                                          activeColor: Colors
-                                                              .blue.shade200,
-                                                        ))),
-                                                  ),
-                                                );
-                                              } else {
-                                                return const Text(
-                                                    'Server Error');
-                                              }
-                                            } else {
-                                              return Text(
-                                                  'State: ${snapshot.connectionState}');
-                                            }
-                                          })),
-                                    ],
-                                  ),
-                                ),
-                              ),
+                                              //Twitter news
+                                              FutureBuilder(
+                                                  future: twitterdata,
+                                                  builder:
+                                                      ((context, snapshot) {
+                                                    if (snapshot
+                                                            .connectionState ==
+                                                        ConnectionState
+                                                            .waiting) {
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                top: 70.0),
+                                                        child: SizedBox(
+                                                          height: 150,
+                                                          width: 150,
+                                                          child: Center(
+                                                              child:
+                                                                  SpinKitWave(
+                                                            color: Colors.blue,
+                                                            size: 18,
+                                                          )),
+                                                        ),
+                                                      );
+                                                    } else if (snapshot
+                                                            .connectionState ==
+                                                        ConnectionState.done) {
+                                                      if (snapshot.hasError) {
+                                                        return const Text(
+                                                            'Data Error');
+                                                      } else if (snapshot
+                                                          .hasData) {
+                                                        List TwitterList = [
+                                                          SocialMediaTemplate2(
+                                                              '${TwitterData[0]['candidateName']}',
+                                                              '${TwitterData[0]['tweetContent']}'),
+                                                          SocialMediaTemplate2(
+                                                              '${TwitterData[1]['candidateName']}',
+                                                              '${TwitterData[1]['tweetContent']}'),
+                                                          SocialMediaTemplate2(
+                                                              '${TwitterData[2]['candidateName']}',
+                                                              '${TwitterData[2]['tweetContent']}'),
+                                                          SocialMediaTemplate2(
+                                                              '${TwitterData[3]['candidateName']}',
+                                                              '${TwitterData[3]['tweetContent']}'),
+                                                        ];
+                                                        return SizedBox(
+                                                          height: 130,
+                                                          width: 150,
+                                                          child:
+                                                              GestureDetector(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                viewnews = true;
+                                                              });
+                                                              PageCount
+                                                                  .jumpToPage(
+                                                                      5);
+                                                            },
+                                                            child: Swiper(
+                                                                itemWidth: 150,
+                                                                itemHeight: 130,
+                                                                duration:
+                                                                    duration,
+                                                                layout:
+                                                                    swiperlayout,
+                                                                scrollDirection:
+                                                                    carddirection ==
+                                                                            false
+                                                                        ? Axis
+                                                                            .vertical
+                                                                        : Axis
+                                                                            .horizontal,
+                                                                autoplay: true,
+                                                                itemBuilder:
+                                                                    (BuildContext
+                                                                            context,
+                                                                        int
+                                                                            index) {
+                                                                  return TwitterList[
+                                                                      index];
+                                                                },
+                                                                itemCount: 4,
+                                                                pagination:
+                                                                    SwiperPagination(
+                                                                        builder:
+                                                                            DotSwiperPaginationBuilder(
+                                                                  size: 7,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .blue
+                                                                          .shade200,
+                                                                ))),
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        return const Text(
+                                                            'Server Error');
+                                                      }
+                                                    } else {
+                                                      return Text(
+                                                          'State: ${snapshot.connectionState}');
+                                                    }
+                                                  })),
+                                              //FaceBook News
+                                              FutureBuilder(
+                                                  future: facebookdata,
+                                                  builder:
+                                                      ((context, snapshot) {
+                                                    if (snapshot
+                                                            .connectionState ==
+                                                        ConnectionState
+                                                            .waiting) {
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                top: 70.0),
+                                                        child: SizedBox(
+                                                          height: 150,
+                                                          width: 150,
+                                                          child: Center(
+                                                              child:
+                                                                  SpinKitWave(
+                                                            color: Colors.blue,
+                                                            size: 18,
+                                                          )),
+                                                        ),
+                                                      );
+                                                    } else if (snapshot
+                                                            .connectionState ==
+                                                        ConnectionState.done) {
+                                                      if (snapshot.hasError) {
+                                                        return const Text(
+                                                            'Data Error');
+                                                      } else if (snapshot
+                                                          .hasData) {
+                                                        List FaceBookList = [
+                                                          SocialMediaTemplate3(
+                                                              '${Facebookdata[0]['candidateName']}',
+                                                              '${Facebookdata[0]['titleContent']}'),
+                                                          SocialMediaTemplate3(
+                                                              '${Facebookdata[1]['candidateName']}',
+                                                              '${Facebookdata[1]['titleContent']}'),
+                                                          SocialMediaTemplate3(
+                                                              '${Facebookdata[2]['candidateName']}',
+                                                              '${Facebookdata[2]['titleContent']}'),
+                                                          SocialMediaTemplate3(
+                                                              '${Facebookdata[3]['candidateName']}',
+                                                              '${Facebookdata[3]['titleContent']}'),
+                                                        ];
+                                                        return SizedBox(
+                                                          height: 130,
+                                                          width: 150,
+                                                          child:
+                                                              GestureDetector(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                viewnews = true;
+                                                              });
+                                                              PageCount
+                                                                  .jumpToPage(
+                                                                      6);
+                                                            },
+                                                            child: Swiper(
+                                                                itemWidth: 150,
+                                                                itemHeight: 130,
+                                                                duration:
+                                                                    duration,
+                                                                layout:
+                                                                    swiperlayout,
+                                                                scrollDirection:
+                                                                    carddirection ==
+                                                                            false
+                                                                        ? Axis
+                                                                            .vertical
+                                                                        : Axis
+                                                                            .horizontal,
+                                                                autoplay: true,
+                                                                itemBuilder:
+                                                                    (BuildContext
+                                                                            context,
+                                                                        int
+                                                                            index) {
+                                                                  return FaceBookList[
+                                                                      index];
+                                                                },
+                                                                itemCount: 4,
+                                                                pagination:
+                                                                    SwiperPagination(
+                                                                        builder:
+                                                                            DotSwiperPaginationBuilder(
+                                                                  size: 7,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .blue
+                                                                          .shade200,
+                                                                ))),
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        return const Text(
+                                                            'Server Error');
+                                                      }
+                                                    } else {
+                                                      return Text(
+                                                          'State: ${snapshot.connectionState}');
+                                                    }
+                                                  })),
+                                              //Instagram news
+                                              FutureBuilder(
+                                                  future: instagramdata,
+                                                  builder:
+                                                      ((context, snapshot) {
+                                                    if (snapshot
+                                                            .connectionState ==
+                                                        ConnectionState
+                                                            .waiting) {
+                                                      return Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                    .only(
+                                                                top: 70.0),
+                                                        child: SizedBox(
+                                                          height: 150,
+                                                          width: 150,
+                                                          child: Center(
+                                                              child:
+                                                                  SpinKitWave(
+                                                            color: Colors.blue,
+                                                            size: 18,
+                                                          )),
+                                                        ),
+                                                      );
+                                                    } else if (snapshot
+                                                            .connectionState ==
+                                                        ConnectionState.done) {
+                                                      if (snapshot.hasError) {
+                                                        return const Text(
+                                                            'Data Error');
+                                                      } else if (snapshot
+                                                          .hasData) {
+                                                        List InstagramList = [
+                                                          SocialMediaTemplate4(
+                                                              '${Instagramdata[0]['candidateName']}',
+                                                              '${Instagramdata[0]['titleContent']}'),
+                                                          SocialMediaTemplate4(
+                                                              '${Instagramdata[1]['candidateName']}',
+                                                              '${Instagramdata[1]['titleContent']}'),
+                                                          SocialMediaTemplate4(
+                                                              '${Instagramdata[2]['candidateName']}',
+                                                              '${Instagramdata[2]['titleContent']}'),
+                                                          SocialMediaTemplate4(
+                                                              '${Instagramdata[3]['candidateName']}',
+                                                              '${Instagramdata[3]['titleContent']}'),
+                                                        ];
+                                                        return SizedBox(
+                                                          height: 130,
+                                                          width: 150,
+                                                          child:
+                                                              GestureDetector(
+                                                            onTap: () {
+                                                              setState(() {
+                                                                viewnews = true;
+                                                              });
+                                                              PageCount
+                                                                  .jumpToPage(
+                                                                      7);
+                                                            },
+                                                            child: Swiper(
+                                                                itemWidth: 150,
+                                                                itemHeight: 130,
+                                                                duration:
+                                                                    duration,
+                                                                layout:
+                                                                    swiperlayout,
+                                                                scrollDirection:
+                                                                    carddirection ==
+                                                                            false
+                                                                        ? Axis
+                                                                            .vertical
+                                                                        : Axis
+                                                                            .horizontal,
+                                                                autoplay: true,
+                                                                itemBuilder:
+                                                                    (BuildContext
+                                                                            context,
+                                                                        int
+                                                                            index) {
+                                                                  return InstagramList[
+                                                                      index];
+                                                                },
+                                                                itemCount: 4,
+                                                                pagination:
+                                                                    SwiperPagination(
+                                                                        builder:
+                                                                            DotSwiperPaginationBuilder(
+                                                                  size: 7,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  activeColor:
+                                                                      Colors
+                                                                          .blue
+                                                                          .shade200,
+                                                                ))),
+                                                          ),
+                                                        );
+                                                      } else {
+                                                        return const Text(
+                                                            'Server Error');
+                                                      }
+                                                    } else {
+                                                      return Text(
+                                                          'State: ${snapshot.connectionState}');
+                                                    }
+                                                  })),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  : Container(),
                               SingleChildScrollView(
                                 physics: ScrollPhysics(),
                                 child: Column(
