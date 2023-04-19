@@ -445,7 +445,86 @@ class _Home3State extends State<Home3> {
                                                           SizedBox(
                                                             height: 10,
                                                           ),
+                                                          ExpansionTile(
+                                                            collapsedShape:
+                                                            RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    15)),
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    15)),
+                                                            title: Text(''),
+                                                            backgroundColor: Colors
+                                                                .blue.shade100,
+                                                            leading: Text(
+                                                                'Custom Swipe'),
+                                                            collapsedBackgroundColor:
+                                                            Colors
+                                                                .blue.shade100,
+                                                            children: [
+                                                              ListTile(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    swiperlayout =
+                                                                        SwiperLayout
+                                                                            .STACK;
+                                                                  });
 
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                leading: Text(
+                                                                  'STACKED',
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                                ),
+                                                              ),
+                                                              ListTile(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    swiperlayout =
+                                                                        SwiperLayout
+                                                                            .TINDER;
+                                                                  });
+
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                leading: Text(
+                                                                  'SHADOW VIEW',
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                                ),
+                                                              ),
+                                                              ListTile(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    swiperlayout =
+                                                                        SwiperLayout
+                                                                            .DEFAULT;
+                                                                  });
+
+                                                                  Navigator.pop(
+                                                                      context);
+                                                                },
+                                                                leading: Text(
+                                                                  'DEFAULT VIEW',
+                                                                  style: TextStyle(
+                                                                      fontWeight:
+                                                                      FontWeight
+                                                                          .w600),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
                                                           SizedBox(
                                                             height: 10,
                                                           ),
@@ -1581,6 +1660,17 @@ class _Home3State extends State<Home3> {
                                       ),
                                     )
                                   : Container(),
+                              viewnews == true
+                                  ? SizedBox(
+                                  height: 450,
+                                  child: PageView.builder(
+                                    // physics: NeverScrollableScrollPhysics(),
+                                      controller: PageCount,
+                                      itemCount: DailyNewsPages.length,
+                                      itemBuilder: (BuildContext, index) {
+                                        return DailyNewsPages[index];
+                                      }))
+                                  : Container(),
                               SingleChildScrollView(
                                 physics: ScrollPhysics(),
                                 child: Column(
@@ -2176,17 +2266,7 @@ class _Home3State extends State<Home3> {
                               //               )))),
                               // ),
 
-                              viewnews == true
-                                  ? SizedBox(
-                                      height: 450,
-                                      child: PageView.builder(
-                                          // physics: NeverScrollableScrollPhysics(),
-                                          controller: PageCount,
-                                          itemCount: DailyNewsPages.length,
-                                          itemBuilder: (BuildContext, index) {
-                                            return DailyNewsPages[index];
-                                          }))
-                                  : Container(),
+
                             ]),
                       ),
                     ),
