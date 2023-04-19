@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intellensense/Pages/PhoneLogin.dart';
 
 import '../../constants.dart';
 import 'widgets/custom_clippers/index.dart';
@@ -100,7 +102,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
           return Scaffold(
-            backgroundColor: Colors.white,
+            // backgroundColor: Color(0xffd2dfff),
             body: LayoutBuilder(
                 builder: (BuildContext ctx, BoxConstraints constraints) {
               // if the screen width >= 480 i.e Wide Screen
@@ -150,20 +152,34 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                         child: Column(
                           children: <Widget>[
                             Header(animation: _headerTextAnimation),
-                            SizedBox(height: 150,),
-                            Text ("Login", style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),),
-                            SizedBox(height: 20,),
-                            Text("Welcome back ! Login with your credentials",style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.grey[700],
-                            ),),
                             SizedBox(
-                              height: 90,
+                              height: 110,
                             ),
+                            Text(
+                              "Welcome!",
+                              style: GoogleFonts.nunitoSans(
+                                fontSize: 27,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            // SizedBox(
+                            //   height: 20,
+                            // ),
+                            // Text(
+                            //   "Welcome back ! Login with your credentials",
+                            //   style: TextStyle(
+                            //     fontSize: 15,
+                            //     color: Colors.grey[700],
+                            //   ),
+                            // ),
+                            SizedBox(
+                              height: 60,
+                            ),
+
                             LoginForm(animation: _formElementAnimation),
+                            SizedBox(
+                              height: 20,
+                            ),
                           ],
                         ),
                       ),
@@ -217,27 +233,43 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
                               padding: const EdgeInsets.only(top: 68.0),
                               child: Header(animation: _headerTextAnimation),
                             ),
-                             SizedBox(height: 60,),
-                            Text ("Login", style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                            ),),
-                            SizedBox(height: 20,),
-                            Text("Welcome back ! Login with your credentials",style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.grey[700],
-                            ),),
-                            SizedBox(height: 40,),
+                            SizedBox(
+                              height: 60,
+                            ),
+                            Text(
+                              "Login",
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "Welcome back ! Login with your credentials",
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.grey[700],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 40,
+                            ),
                             LoginForm(animation: _formElementAnimation),
-                            SizedBox(height: 10,),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text("Dont have an account?"),
-                                Text("Sign Up",style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 18
-                                ),),
+                                Text(
+                                  "Sign Up",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w600,
+                                      fontSize: 18),
+                                ),
                               ],
                             )
                           ],

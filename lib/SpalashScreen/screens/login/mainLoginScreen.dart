@@ -1,4 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:intellensense/Home3.dart';
+import 'package:intellensense/SpalashScreen/screens/login/SignUp.dart';
+import 'package:intellensense/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../constants.dart';
 import 'login.dart';
@@ -25,9 +30,20 @@ class _mainLoginScreenState extends State<mainLoginScreen>
   late final Animation<double> _whiteTopClipperAnimation;
   late final Animation<double> _blueTopClipperAnimation;
   late final Animation<double> _greyTopClipperAnimation;
+  var newuser;
+  void check_if_already_login() async {
+    logindata = await SharedPreferences.getInstance();
+    newuser = (logindata.getBool('login') ?? true);
+    print(newuser);
+    if (newuser == false || FirebaseAuth.instance.authStateChanges() == true) {
+      Navigator.pushReplacement(
+          context, new MaterialPageRoute(builder: (context) => Home3()));
+    }
+  }
 
   @override
   void initState() {
+    check_if_already_login();
     super.initState();
     _animationController = AnimationController(
       vsync: this,
@@ -161,27 +177,47 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                                 'assets/icons/output-onlinegiftools_OUT.gif',
                               ),
                             ),
-                            ElevatedButton(
-                                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Login(screenHeight: screenHeight),));},
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff00186a),
-                                    fixedSize: const Size(150, 50),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(50))),
-                                child: Text('Login')),
-                            SizedBox(
-                              height: 5,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => Login(
+                                                screenHeight: screenHeight),
+                                          ));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color(0xff00186a),
+                                        fixedSize: const Size(150, 50),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50))),
+                                    child: Text('Login')),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => SignUp(
+                                                screenHeight: screenHeight),
+                                          ));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color(0xff00186a),
+                                        fixedSize: const Size(150, 50),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(50))),
+                                    child: Text('SignUp')),
+                              ],
                             ),
-                            ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff00186a),
-                                    fixedSize: const Size(150, 50),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(50))),
-                                child: Text('SignUp')),
+
                             //LoginForm(animation: _formElementAnimation),
                           ],
                         ),
@@ -245,7 +281,12 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                                 height: 250),
                             ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => Login(screenHeight: screenHeight),));
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            Login(screenHeight: screenHeight),
+                                      ));
                                 },
                                 style: ElevatedButton.styleFrom(
                                     backgroundColor: Color(0xff00186a),
@@ -333,7 +374,14 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                               height: 400),
                           //LoginForm(animation: _formElementAnimation),
                           ElevatedButton(
-                              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => Login(screenHeight: screenHeight),));  },
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          Login(screenHeight: screenHeight),
+                                    ));
+                              },
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: Color(0xff00186a),
                                   fixedSize: const Size(150, 50),

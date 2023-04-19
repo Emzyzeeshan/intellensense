@@ -2,11 +2,15 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/Home3.dart';
 import 'package:intellensense/Homepage2.dart';
+import 'package:intellensense/Models/user.dart';
+import 'package:intellensense/Pages/PhoneLogin.dart';
 import 'package:quickalert/models/quickalert_animtype.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
@@ -62,20 +66,8 @@ class _LoginFormState extends State<LoginForm> {
     super.dispose();
   }
 
-  var newuser;
-  void check_if_already_login() async {
-    logindata = await SharedPreferences.getInstance();
-    newuser = (logindata.getBool('login') ?? true);
-    print(newuser);
-    if (newuser == false) {
-      Navigator.pushReplacement(
-          context, new MaterialPageRoute(builder: (context) => Home3()));
-    }
-  }
-
   @override
   initState() {
-    check_if_already_login();
     super.initState();
     userName = 'SASI_MGR';
     userNameText.text = 'SASI_MGR';
@@ -119,14 +111,14 @@ class _LoginFormState extends State<LoginForm> {
                 controller: userNameText,
                 //controller: controller,
                 decoration: InputDecoration(
+                  fillColor: Color.fromARGB(166, 240, 237, 237),
+                  filled: true,
                   contentPadding: const EdgeInsets.all(kPaddingM),
                   focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.black.withOpacity(0.12)),
+                    borderSide: BorderSide.none,
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.black.withOpacity(0.12)),
+                    borderSide: BorderSide.none,
                   ),
                   hintText: 'UserName',
                   hintStyle: TextStyle(
@@ -154,14 +146,14 @@ class _LoginFormState extends State<LoginForm> {
                 obscureText: _visible,
                 controller: passWordText,
                 decoration: InputDecoration(
+                  fillColor: Color.fromARGB(166, 240, 237, 237),
+                  filled: true,
                   contentPadding: const EdgeInsets.all(kPaddingM),
                   focusedBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.black.withOpacity(0.12)),
+                    borderSide: BorderSide.none,
                   ),
                   enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: Colors.black.withOpacity(0.12)),
+                    borderSide: BorderSide.none,
                   ),
                   hintText: 'Password',
                   hintStyle: TextStyle(
@@ -212,6 +204,9 @@ class _LoginFormState extends State<LoginForm> {
                   ),
                 )
               : Container(height: 0)),
+          SizedBox(
+            height: 20,
+          ),
           InkWell(
               onTap: () async {
                 try {
@@ -280,7 +275,7 @@ class _LoginFormState extends State<LoginForm> {
                               textColor: Colors.white,
                               fontSize: 16.0);
                           setState(() {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
                                     builder: ((context) => Home3())));
@@ -360,9 +355,9 @@ class _LoginFormState extends State<LoginForm> {
                         child: Center(
                           child: Text(
                             "Login",
-                            style: TextStyle(
-                                fontSize: 24,
-                                fontWeight: FontWeight.w500,
+                            style: GoogleFonts.nunitoSans(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
                                 color: Colors.white),
                           ),
                         ),
@@ -378,7 +373,7 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () {},
             ),
           ),*/
-          SizedBox(height: 2 * space),
+          // SizedBox(height: 2 * space),
           /*FadeSlideTransition(
             animation: animation,
             additionalOffset: 3 * space,

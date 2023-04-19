@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intellensense/Weather%20screens/services/data_services.dart';
 import 'package:intl/intl.dart';
-import 'package:share/share.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 import 'model/weather_model.dart';

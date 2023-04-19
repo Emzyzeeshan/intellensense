@@ -1,0 +1,107 @@
+Flutter crash report.
+Please report a bug at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter pub get
+
+## exception
+
+PathNotFoundException: PathNotFoundException: Cannot open file, path = 'C:\src\flutter\version' (OS Error: The system cannot find the file specified.
+, errno = 2)
+
+```
+#0      _File.throwIfError (dart:io/file_impl.dart:629:7)
+#1      _File.openSync (dart:io/file_impl.dart:473:5)
+#2      _File.readAsBytesSync (dart:io/file_impl.dart:533:18)
+#3      _File.readAsStringSync (dart:io/file_impl.dart:578:18)
+#4      ForwardingFile.readAsStringSync (package:file/src/forwarding/forwarding_file.dart:99:16)
+#5      ErrorHandlingFile.readAsStringSync.<anonymous closure> (package:flutter_tools/src/base/error_handling_io.dart:222:22)
+#6      _runSync (package:flutter_tools/src/base/error_handling_io.dart:600:14)
+#7      ErrorHandlingFile.readAsStringSync (package:flutter_tools/src/base/error_handling_io.dart:221:12)
+#8      _DefaultPub.get (package:flutter_tools/src/dart/pub.dart:360:50)
+<asynchronous suspension>
+#9      PackagesGetCommand._runPubGet (package:flutter_tools/src/commands/packages.dart:140:7)
+<asynchronous suspension>
+#10     PackagesGetCommand.runCommand (package:flutter_tools/src/commands/packages.dart:175:5)
+<asynchronous suspension>
+#11     FlutterCommand.run.<anonymous closure> (package:flutter_tools/src/runner/flutter_command.dart:1257:27)
+<asynchronous suspension>
+#12     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#13     CommandRunner.runCommand (package:args/command_runner.dart:209:13)
+<asynchronous suspension>
+#14     FlutterCommandRunner.runCommand.<anonymous closure> (package:flutter_tools/src/runner/flutter_command_runner.dart:283:9)
+<asynchronous suspension>
+#15     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#16     FlutterCommandRunner.runCommand (package:flutter_tools/src/runner/flutter_command_runner.dart:229:5)
+<asynchronous suspension>
+#17     run.<anonymous closure>.<anonymous closure> (package:flutter_tools/runner.dart:64:9)
+<asynchronous suspension>
+#18     AppContext.run.<anonymous closure> (package:flutter_tools/src/base/context.dart:150:19)
+<asynchronous suspension>
+#19     main (package:flutter_tools/executable.dart:91:3)
+<asynchronous suspension>
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel stable, 3.7.11, on Microsoft Windows [Version 10.0.19044.1889], locale en-IN)
+    • Flutter version 3.7.11 on channel stable at C:\src\flutter
+    • Upstream repository https://github.com/flutter/flutter.git
+    • Framework revision f72efea43c (7 days ago), 2023-04-11 11:57:21 -0700
+    • Engine revision 1a65d409c7
+    • Dart version 2.19.4
+    • DevTools version 2.20.1
+
+[✓] Windows Version (Installed version of Windows is version 10 or higher)
+
+[✓] Android toolchain - develop for Android devices (Android SDK version 33.0.0)
+    • Android SDK at C:\Users\Shakir\AppData\Local\Android\sdk
+    • Platform android-33, build-tools 33.0.0
+    • Java binary at: C:\Program Files\Android\Android Studio1\jbr\bin\java
+    • Java version OpenJDK Runtime Environment (build 11.0.15+0-b2043.56-8887301)
+    • All Android licenses accepted.
+
+[✓] Chrome - develop for the web
+    • Chrome at C:\Program Files\Google\Chrome\Application\chrome.exe
+
+[✓] Visual Studio - develop for Windows (Visual Studio Community 2022 17.3.4)
+    • Visual Studio at C:\Program Files\Microsoft Visual Studio\2022\Community
+    • Visual Studio Community 2022 version 17.3.32901.215
+    • Windows 10 SDK version 10.0.19041.0
+
+[!] Android Studio (version 2021.3)
+    • Android Studio at C:\Program Files\Android\Android Studio
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    ✗ Unable to determine bundled Java version.
+    • Try updating or re-installing Android Studio.
+
+[✓] Android Studio (version 2022.1)
+    • Android Studio at C:\Program Files\Android\Android Studio1
+    • Flutter plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/9212-flutter
+    • Dart plugin can be installed from:
+      🔨 https://plugins.jetbrains.com/plugin/6351-dart
+    • Java version OpenJDK Runtime Environment (build 11.0.15+0-b2043.56-8887301)
+
+[✓] VS Code (version 1.77.3)
+    • VS Code at C:\Users\Shakir\AppData\Local\Programs\Microsoft VS Code
+    • Flutter extension version 3.62.0
+
+[✓] Connected device (4 available)
+    • sdk gphone x86 (mobile) • emulator-5554 • android-x86    • Android 11 (API 30) (emulator)
+    • Windows (desktop)       • windows       • windows-x64    • Microsoft Windows [Version 10.0.19044.1889]
+    • Chrome (web)            • chrome        • web-javascript • Google Chrome 112.0.5615.121
+    • Edge (web)              • edge          • web-javascript • Microsoft Edge 104.0.1293.54
+
+[✓] HTTP Host Availability
+    • All required HTTP hosts are available
+
+! Doctor found issues in 1 category.
+```

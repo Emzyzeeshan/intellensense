@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 
-
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart' as http;
 import 'package:permission_handler/permission_handler.dart';

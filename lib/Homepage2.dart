@@ -114,8 +114,7 @@ class _HomepageState extends State<Homepage> {
               //createSilverAppBar2(),
             ];
           },
-          body:
-          CustomScrollView(
+          body: CustomScrollView(
             slivers: [
               SliverList(
                   delegate: SliverChildListDelegate([
@@ -127,25 +126,25 @@ class _HomepageState extends State<Homepage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 10.0,right: 10),
+                            padding:
+                                const EdgeInsets.only(left: 10.0, right: 10),
                             child: Container(
                               height: 40,
                               child: TextFormField(
                                   decoration: InputDecoration(
-                                    isDense: true,
-                                    border: InputBorder.none,
-                                    suffixIcon: IconButton(
-                                      onPressed: () {
-                                      },
-                                      icon: Icon(
-                                        Icons.search_outlined,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    hintText: 'Search...',
-                                    filled: true,
-                                    fillColor: Colors.blue.shade100,
-                                  )),
+                                isDense: true,
+                                border: InputBorder.none,
+                                suffixIcon: IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(
+                                    Icons.search_outlined,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                hintText: 'Search...',
+                                filled: true,
+                                fillColor: Colors.blue.shade100,
+                              )),
                             ),
                           ),
                           Padding(
@@ -1144,8 +1143,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1182,8 +1180,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1218,8 +1215,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1254,8 +1250,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1290,8 +1285,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1326,8 +1320,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1362,8 +1355,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1398,8 +1390,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1438,8 +1429,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1478,8 +1468,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1514,8 +1503,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                     ),
                                     decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(20),
+                                        borderRadius: BorderRadius.circular(20),
                                         border: Border.all(
                                           color: Colors.black,
                                           width: 0.3,
@@ -1932,11 +1920,12 @@ class _HomepageState extends State<Homepage> {
     }
     return true;
   }
+
   final ApiResponse dataState = ApiResponse();
   Future<void> _getCurrentPosition() async {}
 
   SliverAppBar createSilverAppBar1() {
-    return  SliverAppBar(
+    return SliverAppBar(
       iconTheme: IconThemeData(
         color: Colors.black,
       ),
@@ -1986,114 +1975,126 @@ class _HomepageState extends State<Homepage> {
       pinned: true,
       flexibleSpace: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            return Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 110),
-                  child: Image.asset(
-                    'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                     fit: BoxFit.contain,
-                    height: 120, width: 130,
-                  ),
-                ),
-                Positioned(
-                    top: 75,
-                    left: 200,
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => WeatherScreen()));
-                      },
-                      child: Row(
+        return Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 110),
+              child: Image.asset(
+                'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
+                fit: BoxFit.contain,
+                height: 120,
+                width: 130,
+              ),
+            ),
+            Positioned(
+                top: 75,
+                left: 200,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WeatherScreen()));
+                  },
+                  child: Row(
+                    children: [
+                      Column(
                         children: [
-                          Column(
-                            children: [
-                              FutureBuilder<Weather>(
-                                future: dataState.getWeather(),
-                                builder: (context, snapshot) {
-                                  return snapshot.hasData
-                                      ? Container(
-                                   height: 45,
-                                    width: 150,
-                                    child: SingleChildScrollView(
-                                      child: Column(
-                                        children: <Widget>[
-                                          Container(
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(bottom: 6,left: 20),
-                                              child: Column(
-                                                children: <Widget>[
-                                                  Row(
-                                                    children: <Widget>[
-                                                      Column(
-                                                        children: [
-                                                          Text(
-                                                            '${(snapshot.data!.main.temp - 273.15).toInt()}°',
-                                                            style: GoogleFonts.nunitoSans(
-                                                              fontSize: 15.0,
-                                                              fontWeight: FontWeight.w700,
+                          FutureBuilder<Weather>(
+                            future: dataState.getWeather(),
+                            builder: (context, snapshot) {
+                              return snapshot.hasData
+                                  ? Container(
+                                      height: 45,
+                                      width: 150,
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          children: <Widget>[
+                                            Container(
+                                              child: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 6, left: 20),
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Row(
+                                                      children: <Widget>[
+                                                        Column(
+                                                          children: [
+                                                            Text(
+                                                              '${(snapshot.data!.main.temp - 273.15).toInt()}°',
+                                                              style: GoogleFonts
+                                                                  .nunitoSans(
+                                                                fontSize: 15.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            '${(snapshot.data!.name)}',
-                                                            style: GoogleFonts.nunitoSans(
-                                                              fontSize: 15.0,
-                                                              fontWeight: FontWeight.w700,
+                                                            Text(
+                                                              '${(snapshot.data!.name)}',
+                                                              style: GoogleFonts
+                                                                  .nunitoSans(
+                                                                fontSize: 15.0,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(width: 5,),
-                                                      Column(
-                                                        mainAxisAlignment:
-                                                        MainAxisAlignment.center,
-                                                        mainAxisSize: MainAxisSize.min,
-                                                        children: <Widget>[
-                                                          Image.network(
-                                                            'http://openweathermap.org/img/wn/${snapshot.data!.weather[0].icon}.png',
-                                                            height: 50,
-                                                          ),
-                                                        ],
-                                                      )
-                                                    ],
-                                                  ),
-                                                ],
+                                                          ],
+                                                        ),
+                                                        SizedBox(
+                                                          width: 5,
+                                                        ),
+                                                        Column(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          children: <Widget>[
+                                                            Image.network(
+                                                              'http://openweathermap.org/img/wn/${snapshot.data!.weather[0].icon}.png',
+                                                              height: 50,
+                                                            ),
+                                                          ],
+                                                        )
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                      : const Center(
-                                    child:
-                                    CircularProgressIndicator(backgroundColor: Colors.black),
-                                  );
-                                },
-                              ),
-                            ],
+                                    )
+                                  : const Center(
+                                      child: CircularProgressIndicator(
+                                          backgroundColor: Colors.black),
+                                    );
+                            },
                           ),
                         ],
                       ),
-                    ))
-                // Positioned(
-                //     child: _currentPosition!.latitude == null
-                //         ? Text('${_currentPosition!.latitude}')
-                //         : Text('No data')
-                //     // IconButton(
-                //     //     onPressed: () {
-                //     //       Navigator.push(
-                //     //           context,
-                //     //           MaterialPageRoute(
-                //     //               builder: (context) => LocationPage()));
-                //     //     },
-                //     //     icon: Icon(Icons.sunny))
-                //     ),
-              ],
-            );
-          }),
+                    ],
+                  ),
+                ))
+            // Positioned(
+            //     child: _currentPosition!.latitude == null
+            //         ? Text('${_currentPosition!.latitude}')
+            //         : Text('No data')
+            //     // IconButton(
+            //     //     onPressed: () {
+            //     //       Navigator.push(
+            //     //           context,
+            //     //           MaterialPageRoute(
+            //     //               builder: (context) => LocationPage()));
+            //     //     },
+            //     //     icon: Icon(Icons.sunny))
+            //     ),
+          ],
+        );
+      }),
     );
   }
 
