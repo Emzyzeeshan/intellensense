@@ -87,7 +87,7 @@ class _FacebookState extends State<Facebook> {
 
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.60.0/trendingHashtags?page=0,14&field=FACEBOOK'),
+          'http://192.169.1.211:8081/insights/2.89.0/trendingHashtags?page=0,14&field=FACEBOOK'),
     );
 
     if (response.statusCode == 200) {

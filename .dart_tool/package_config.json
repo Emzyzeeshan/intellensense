@@ -489,7 +489,7 @@
     },
     {
       "name": "google_sign_in_android",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_android-6.1.9",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/google_sign_in_android-6.1.11",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -525,7 +525,7 @@
     },
     {
       "name": "image_picker",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-0.8.7+3",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/image_picker-0.8.7+4",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -855,13 +855,13 @@
     },
     {
       "name": "sqflite",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/sqflite-2.2.6",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/sqflite-2.2.7",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "sqflite_common",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/sqflite_common-2.4.3",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/sqflite_common-2.4.4",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -891,7 +891,7 @@
     },
     {
       "name": "synchronized",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/synchronized-3.0.1",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/synchronized-3.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1040,7 +1040,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-04-19T10:26:50.946812Z",
+  "generated": "2023-04-24T05:10:54.400141Z",
   "generator": "pub",
   "generatorVersion": "2.19.3"
 }

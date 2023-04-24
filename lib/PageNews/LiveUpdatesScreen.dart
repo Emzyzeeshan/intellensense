@@ -240,7 +240,7 @@ class _LiveUpdatesScreenState extends State<LiveUpdatesScreen> {
   LiveUpdatesListAPI() async {
     var headers = {'Content-Type': 'application/json'};
     var response = await get(
-      Uri.parse('http://192.169.1.211:8081/insights/2.60.0/livenews?page=0,17'),
+      Uri.parse('http://192.169.1.211:8081/insights/2.89.0/livenews?page=0,17'),
       headers: headers,
     );
     print(response.toString());

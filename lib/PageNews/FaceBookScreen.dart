@@ -330,7 +330,7 @@ class _FaceBookScreenState extends State<FaceBookScreen> {
     var headers = {'Content-Type': 'application/json'};
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.60.0/facebookAnalysis?page=0,12'),
+          'http://192.169.1.211:8081/insights/2.89.0/facebookAnalysis?page=0,12'),
       headers: headers,
     );
     print(response.toString());

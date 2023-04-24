@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intellensense/Pages/PhoneLogin.dart';
 import 'package:intellensense/SpalashScreen/screens/login/login.dart';
-import 'package:intellensense/SpalashScreen/screens/login/widgets/fade_slide_transition.dart';
-
 import '../../constants.dart';
 import 'widgets/custom_clippers/index.dart';
 import 'widgets/header.dart';
-import 'widgets/login_form.dart';
 
 class SignUp extends StatefulWidget {
   final double screenHeight;
@@ -164,93 +161,9 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            // SizedBox(
-                            //   height: 20,
-                            // ),
-                            // Text(
-                            //   "Welcome back ! Login with your credentials",
-                            //   style: TextStyle(
-                            //     fontSize: 15,
-                            //     color: Colors.grey[700],
-                            //   ),
-                            // ),
                             SizedBox(
                               height: 20,
                             ),
-                            // TextFormField(
-                            //   keyboardType: TextInputType.text,
-                            //   onChanged: (value) {},
-                            //   //controller: controller,
-                            //   decoration: InputDecoration(
-                            //     fillColor: Color.fromARGB(166, 240, 237, 237),
-                            //     filled: true,
-                            //     contentPadding: const EdgeInsets.all(kPaddingM),
-                            //     focusedBorder: OutlineInputBorder(
-                            //       borderSide: BorderSide.none,
-                            //     ),
-                            //     enabledBorder: OutlineInputBorder(
-                            //       borderSide: BorderSide.none,
-                            //     ),
-                            //     hintText: 'UserName',
-                            //     hintStyle: TextStyle(
-                            //       color: kBlack.withOpacity(0.5),
-                            //       fontWeight: FontWeight.w500,
-                            //     ),
-                            //     prefixIcon: Icon(
-                            //       Icons.person,
-                            //       color: kBlack.withOpacity(0.5),
-                            //     ),
-                            //   ),
-                            // ),
-                            // SizedBox(height: 10),
-                            // TextFormField(
-                            //   onChanged: (value) {},
-                            //   decoration: InputDecoration(
-                            //     fillColor: Color.fromARGB(166, 240, 237, 237),
-                            //     filled: true,
-                            //     contentPadding: const EdgeInsets.all(kPaddingM),
-                            //     focusedBorder: OutlineInputBorder(
-                            //       borderSide: BorderSide.none,
-                            //     ),
-                            //     enabledBorder: OutlineInputBorder(
-                            //       borderSide: BorderSide.none,
-                            //     ),
-                            //     hintText: 'Password',
-                            //     hintStyle: TextStyle(
-                            //       color: kBlack.withOpacity(0.5),
-                            //       fontWeight: FontWeight.w500,
-                            //     ),
-                            //     prefixIcon: Icon(
-                            //       Icons.lock,
-                            //       color: kBlack.withOpacity(0.5),
-                            //     ),
-                            //   ),
-                            // ),
-                            // SizedBox(height: 10),
-                            // TextFormField(
-                            //   onChanged: (value) {},
-                            //   decoration: InputDecoration(
-                            //     fillColor: Color.fromARGB(166, 240, 237, 237),
-                            //     filled: true,
-                            //     contentPadding: const EdgeInsets.all(kPaddingM),
-                            //     focusedBorder: OutlineInputBorder(
-                            //       borderSide: BorderSide.none,
-                            //     ),
-                            //     enabledBorder: OutlineInputBorder(
-                            //       borderSide: BorderSide.none,
-                            //     ),
-                            //     hintText: 'Confirm Password',
-                            //     hintStyle: TextStyle(
-                            //       color: kBlack.withOpacity(0.5),
-                            //       fontWeight: FontWeight.w500,
-                            //     ),
-                            //     prefixIcon: Icon(
-                            //       Icons.lock_person_rounded,
-                            //       color: kBlack.withOpacity(0.5),
-                            //     ),
-                            //   ),
-                            // ),
-                            // LoginForm(animation: _formElementAnimation),
                             Image.asset(
                               'assets/Image/signup.gif',
                               height: 250,
@@ -258,7 +171,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                             ),
 
                             Container(
-                              width: MediaQuery.of(context).size.width * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.6,
                               height: MediaQuery.of(context).size.height * 0.07,
                               margin:
                                   const EdgeInsets.only(left: 20, right: 20),
@@ -290,12 +203,8 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                             SizedBox(
                               height: 5,
                             ),
-
-                            SizedBox(
-                              height: 5,
-                            ),
                             Container(
-                              width: MediaQuery.of(context).size.width * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.6,
                               height: MediaQuery.of(context).size.height * 0.07,
                               margin:
                                   const EdgeInsets.only(left: 20, right: 20),
@@ -408,45 +317,116 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                               padding: const EdgeInsets.only(top: 68.0),
                               child: Header(animation: _headerTextAnimation),
                             ),
-                            SizedBox(
-                              height: 60,
-                            ),
                             Text(
-                              "Login",
-                              style: TextStyle(
-                                fontSize: 30,
+                              "Register",
+                              style: GoogleFonts.nunitoSans(
+                                fontSize: 27,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             SizedBox(
                               height: 20,
                             ),
-                            Text(
-                              "Welcome back ! Login with your credentials",
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.grey[700],
+                            Image.asset(
+                              'assets/Image/signup.gif',
+                              height: 200,
+                              width: 200,
+                            ),
+
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.6,
+                              height: MediaQuery.of(context).size.height * 0.07,
+                              margin:
+                              const EdgeInsets.only(left: 20, right: 20),
+                              decoration: const BoxDecoration(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(50)),
+                                color: Color(0xFF306EFF),
+                              ),
+                              child: MaterialButton(
+                                onPressed: () {},
+                                child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(('SignUp with E-mail'),
+                                        style: GoogleFonts.nunitoSans(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white)),
+                                    SizedBox(
+                                      width: 3,
+                                    ),
+                                    Icon(
+                                      Icons.email,
+                                      color: Colors.white,
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                             SizedBox(
-                              height: 40,
+                              height: 5,
                             ),
-                            LoginForm(animation: _formElementAnimation),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 0.6,
+                              height: MediaQuery.of(context).size.height * 0.07,
+                              margin:
+                              const EdgeInsets.only(left: 20, right: 20),
+                              decoration: const BoxDecoration(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(50)),
+                                color: Color(0xFF306EFF),
+                              ),
+                              child: MaterialButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              PhoneAuthPage()));
+                                },
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(('SignUp With Phone'),
+                                        style: GoogleFonts.nunitoSans(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w700,
+                                            color: Colors.white)),
+                                    Icon(
+                                      Icons.mobile_friendly_sharp,
+                                      color: Colors.white,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                             SizedBox(
-                              height: 10,
+                              height: 5,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Dont have an account?"),
-                                Text(
-                                  "Sign Up",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 18),
-                                ),
+                                Text('Already have an account?  '),
+                                TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => Login(
+                                                  screenHeight:
+                                                  MediaQuery.of(context)
+                                                      .size
+                                                      .height)));
+                                    },
+                                    child: Text(
+                                      'Sign In',
+                                      style: GoogleFonts.nunitoSans(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.blue),
+                                    ))
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -508,7 +488,116 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                           SizedBox(
                             height: 90,
                           ),
-                          LoginForm(animation: _formElementAnimation),
+                          Text(
+                            "Register",
+                            style: GoogleFonts.nunitoSans(
+                              fontSize: 27,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Image.asset(
+                            'assets/Image/signup.gif',
+                            height: 250,
+                            width: 250,
+                          ),
+
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            height: MediaQuery.of(context).size.height * 0.07,
+                            margin:
+                            const EdgeInsets.only(left: 20, right: 20),
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(50)),
+                              color: Color(0xFF306EFF),
+                            ),
+                            child: MaterialButton(
+                              onPressed: () {},
+                              child: Row(
+                                children: [
+                                  Text(('SignUp with E-mail'),
+                                      style: GoogleFonts.nunitoSans(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white)),
+                                  SizedBox(
+                                    width: 3,
+                                  ),
+                                  Icon(
+                                    Icons.email,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.6,
+                            height: MediaQuery.of(context).size.height * 0.07,
+                            margin:
+                            const EdgeInsets.only(left: 20, right: 20),
+                            decoration: const BoxDecoration(
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(50)),
+                              color: Color(0xFF306EFF),
+                            ),
+                            child: MaterialButton(
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            PhoneAuthPage()));
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(('SignUp With Phone'),
+                                      style: GoogleFonts.nunitoSans(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.white)),
+                                  Icon(
+                                    Icons.mobile_friendly_sharp,
+                                    color: Colors.white,
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Already have an account?  '),
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login(
+                                                screenHeight:
+                                                MediaQuery.of(context)
+                                                    .size
+                                                    .height)));
+                                  },
+                                  child: Text(
+                                    'Sign In',
+                                    style: GoogleFonts.nunitoSans(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w700,
+                                        color: Colors.blue),
+                                  ))
+                            ],
+                          ),
                         ],
                       ),
                     ),

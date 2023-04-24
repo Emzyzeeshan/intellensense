@@ -189,11 +189,11 @@ class _NewsPaperScreenState extends State<NewsPaperScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(child:Text(
-                  Value['id']['mediaName'] ?? '',
+                  Value['mediaName'] ?? '',
                   style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
                 ),),
                 Text(
-                  Value['id']['publishedDate'] ?? '',
+                  Value['publishedDate'] ?? '',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -204,7 +204,7 @@ class _NewsPaperScreenState extends State<NewsPaperScreen> {
                   height: 10,
                 ),
                 Text(
-                  Value['id']['headLine'] ?? '',
+                  Value['headLine'] ?? '',
                   maxLines: 3,
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black),
@@ -262,7 +262,7 @@ class _NewsPaperScreenState extends State<NewsPaperScreen> {
 
   Future<dynamic> NewsPaperListAPI() async {
     var response = await get(
-      Uri.parse('http://192.169.1.211:8081/insights/2.60.0/newspaper?page=0,13'),
+      Uri.parse('http://192.169.1.211:8081/insights/2.89.0/newspaper?page=0,13'),
     );
     print(response.toString());
     if (response.statusCode == 200) {

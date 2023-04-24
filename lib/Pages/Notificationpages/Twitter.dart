@@ -70,7 +70,7 @@ class _TwitterState extends State<Twitter> {
                 ]),
               );
             } else {
-              return const Text('Empty data');
+              return Center(child: const Text('Issue With API'));
             }
           } else {
             return Text('State: ${snapshot.connectionState}');
@@ -87,7 +87,7 @@ class _TwitterState extends State<Twitter> {
     var body = json.encode({});
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.60.0/trendingHashtags?page=0,14&field=TWITTER'),
+          'http://192.169.1.211:8081/insights/2.89.0/trendingHashtags?page=0,14&field=TWITTER'),
     );
 
     if (response.statusCode == 200) {

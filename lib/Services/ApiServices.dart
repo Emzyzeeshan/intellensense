@@ -29,7 +29,7 @@ NewsChannelAPI() async {
   var headers = {'Content-Type': 'application/json'};
   var response = await get(
     Uri.parse(
-        'http://192.169.1.211:8081/insights/2.60.0/news/partyName/TDP?page=0,15'),
+        'http://192.169.1.211:8081/insights/2.89.0/news/partyName/TDP?page=0,15'),
     headers: headers,
   );
   print(response.toString());
@@ -49,7 +49,7 @@ var newsdata;
 NEWSpaperAPI() async {
   List<String> hastags = [];
   var response = await get(
-    Uri.parse('http://192.169.1.211:8081/insights/2.60.0/newspaper?page=0,13'),
+    Uri.parse('http://192.169.1.211:8081/insights/2.89.0/newspaper?page=0,13'),
   );
   //print(response.toString());
   if (response.statusCode == 200) {
@@ -71,7 +71,7 @@ var Livenewsdata;
 LiveUpdatesAPI() async {
   var headers = {'Content-Type': 'application/json'};
   var response = await get(
-    Uri.parse('http://192.169.1.211:8081/insights/2.60.0/livenews?page=0,17'),
+    Uri.parse('http://192.169.1.211:8081/insights/2.89.0/livenews?page=0,17'),
     headers: headers,
   );
   print(response.toString());
@@ -95,7 +95,7 @@ GoogleTrendsAPI() async {
   var headers = {'Content-Type': 'application/json'};
   var response = await get(
     Uri.parse(
-        'http://192.169.1.211:8081/insights/2.60.0/googleTrends?page=0,13'),
+        'http://192.169.1.211:8081/insights/2.89.0/googleTrends?page=0,13'),
     headers: headers,
   );
   print(response.toString());
@@ -120,7 +120,7 @@ YouTubeAPI() async {
   /*var body = json.encode({});*/
   var response = await get(
     Uri.parse(
-        'http://192.169.1.211:8081/insights/2.60.0/news/partyName/TDP?page=0,15'),
+        'http://192.169.1.211:8081/insights/2.89.0/news/partyName/TDP?page=0,15'),
     headers: headers,
     //body: body,
   );
@@ -145,7 +145,7 @@ TwitterAPI() async {
   var headers = {'Content-Type': 'application/json'};
   var response = await get(
     Uri.parse(
-        'http://192.169.1.211:8081/insights/2.60.0/twitter/partyName/TDP?page=0,11'),
+        'http://192.169.1.211:8081/insights/2.89.0/twitter/partyName/TDP?page=0,11'),
     headers: headers,
   );
   print(response.toString());
@@ -169,7 +169,7 @@ FacebookAPI() async {
   var headers = {'Content-Type': 'application/json'};
   var response = await get(
     Uri.parse(
-        'http://192.169.1.211:8081/insights/2.60.0/facebookAnalysis?page=0,12'),
+        'http://192.169.1.211:8081/insights/2.89.0/facebookAnalysis?page=0,12'),
     headers: headers,
   );
   print(response.toString());
@@ -194,7 +194,7 @@ InstagramAPI() async {
   /*var body = json.encode({});*/
   var response = await get(
     Uri.parse(
-        'http://192.169.1.211:8081/insights/2.60.0/instagram/partyName?page=0,12&partyName=TDP'),
+        'http://192.169.1.211:8081/insights/2.89.0/instagram/partyName?page=0,12&partyName=TDP'),
     headers: headers,
     //body: body,
   );

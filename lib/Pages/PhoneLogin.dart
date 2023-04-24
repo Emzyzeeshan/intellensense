@@ -6,6 +6,8 @@ import 'package:intellensense/main.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:intellensense/Home3.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert' as convert;
 
 enum PhoneVerificationState { SHOW_PHONE_FORM_STATE, SHOW_OTP_FORM_STATE }
 
@@ -60,6 +62,11 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
   }
 
   _verifyOTPButton() async {
+    if (phoneController.text.length == 10) {
+      SendDatatoSheet();
+    } else {
+      print('Enter 10 digit mobile');
+    }
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
         verificationId: verificationIDFromFirebase!, smsCode: OTp);
     signInWithPhoneAuthCredential(phoneAuthCredential);
@@ -147,7 +154,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
           height: 40.0,
         ),
         OTPTextField(
-          spaceBetween: 10,
+          spaceBetween: 8,
           length: 6,
           width: MediaQuery.of(context).size.width,
           fieldWidth: 50,
@@ -218,5 +225,23 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
         ),
       ),
     ));
+  }
+  void SendDatatoSheet() async {
+    const String scriptURL =
+        'https://script.google.com/macros/s/AKfycbzeEtxTVd-vRNFpG7zqw0yHM0kGtG_ccXmRXqHR7pgFkAZyI7520Y7Era8l0to1IuSG/exec';
+
+    String tempName = phoneController.text;
+    String tempSex = OTp;
+    String tempAge = OTp;
+
+    String queryString = "?name=$tempName&sex=$tempSex&age=$tempAge";
+
+    var finalURI = Uri.parse(scriptURL + queryString);
+    var response = await http.get(finalURI);
+    //print(finalURI);
+    if (response.statusCode == 200) {
+      var bodyR = convert.jsonDecode(response.body);
+      print(bodyR);
+    }
   }
 }

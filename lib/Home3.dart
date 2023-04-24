@@ -14,7 +14,6 @@ import 'package:intellensense/PageNews/ScoreCardsScreen.dart';
 import 'package:intellensense/PageNews/TwitterScreen.dart';
 import 'package:intellensense/PageNews/YouTubeScreen.dart';
 import 'package:intellensense/Pages/Notification.dart';
-import 'package:intellensense/SpalashScreen/screens/login/login.dart';
 import 'package:intellensense/SpalashScreen/screens/login/mainLoginScreen.dart';
 import 'package:intellensense/SpalashScreen/widgets/Drawer.dart';
 
@@ -60,8 +59,8 @@ class _Home3State extends State<Home3> {
     }
   }
 
-  bool shownews = false;
-  bool showSocialnews = false;
+  bool shownews = true;
+  bool showSocialnews = true;
   bool get _isShrink {
     return _scrollController != null &&
         _scrollController!.hasClients &&
@@ -766,20 +765,20 @@ class _Home3State extends State<Home3> {
                                                                   Newpaperlist =
                                                                   [
                                                                 NewsTemplate2(
-                                                                    "${newsdata[0]['id']['mediaName']}",
-                                                                    '${newsdata[0]['id']['headLine']}',
+                                                                    "${newsdata[0]['mediaName']}",
+                                                                    '${newsdata[0]['headLine']}',
                                                                     'assets/icons/newspaperdxp.png'),
                                                                 NewsTemplate3(
-                                                                    '${newsdata[1]['id']['mediaName']}',
-                                                                    '${newsdata[1]['id']['headLine']}',
+                                                                    '${newsdata[1]['mediaName']}',
+                                                                    '${newsdata[1]['headLine']}',
                                                                     'assets/icons/newspaperdxp.png'),
                                                                 NewsTemplate1(
-                                                                    '${newsdata[2]['id']['mediaName']}',
-                                                                    '${newsdata[2]['id']['headLine']}',
+                                                                    '${newsdata[2]['mediaName']}',
+                                                                    '${newsdata[2]['headLine']}',
                                                                     'assets/icons/newspaperdxp.png'),
                                                                 NewsTemplate4(
-                                                                    '${newsdata[3]['id']['mediaName']}',
-                                                                    '${newsdata[3]['id']['headLine']}',
+                                                                    '${newsdata[3]['mediaName']}',
+                                                                    '${newsdata[3]['headLine']}',
                                                                     'assets/icons/newspaperdxp.png'),
                                                               ];
                                                               return GestureDetector(
@@ -998,20 +997,20 @@ class _Home3State extends State<Home3> {
                                                                   LiveNewsList =
                                                                   [
                                                                 NewsTemplate2(
-                                                                    "${Livenewsdata[0]['id']['mediaName']}",
-                                                                    '${Livenewsdata[0]['id']['headLine']}',
+                                                                    "${Livenewsdata[0]['mediaName']}",
+                                                                    '${Livenewsdata[0]['headLine']}',
                                                                     'assets/icons/live.gif'),
                                                                 NewsTemplate3(
-                                                                    '${Livenewsdata[1]['id']['mediaName']}',
-                                                                    '${Livenewsdata[1]['id']['headLine']}',
+                                                                    '${Livenewsdata[1]['mediaName']}',
+                                                                    '${Livenewsdata[1]['headLine']}',
                                                                     'assets/icons/live.gif'),
                                                                 NewsTemplate1(
-                                                                    '${Livenewsdata[2]['id']['mediaName']}',
-                                                                    '${Livenewsdata[2]['id']['headLine']}',
+                                                                    '${Livenewsdata[2]['mediaName']}',
+                                                                    '${Livenewsdata[2]['headLine']}',
                                                                     'assets/icons/live.gif'),
                                                                 NewsTemplate4(
-                                                                    '${Livenewsdata[3]['id']['mediaName']}',
-                                                                    '${Livenewsdata[3]['id']['headLine']}',
+                                                                    '${Livenewsdata[3]['mediaName']}',
+                                                                    '${Livenewsdata[3]['headLine']}',
                                                                     'assets/icons/live.gif'),
                                                               ];
                                                               return GestureDetector(
@@ -1201,7 +1200,7 @@ class _Home3State extends State<Home3> {
                                 child: Row(
                                   children: [
                                     Image.asset(
-                                      'assets/icons/socialmedia.gif',
+                                      'assets/icons/SocialMedia.gif',
                                       height: 30,
                                       width: 30,
                                     ),
@@ -2289,12 +2288,12 @@ class _Home3State extends State<Home3> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        Value['id']['mediaName'] ?? '',
+                        Value['mediaName'] ?? '',
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.grey),
                       ),
                       Text(
-                        Value['id']['publishedDate'] ?? '',
+                        Value['publishedDate'] ?? '',
                         style: TextStyle(fontSize: 16),
                       ),
                     ],
@@ -2305,7 +2304,7 @@ class _Home3State extends State<Home3> {
                         height: 10,
                       ),
                       Text(
-                        Value['id']['headLine'] ?? '',
+                        Value['headLine'] ?? '',
                         maxLines: 3,
                         style: TextStyle(
                             fontWeight: FontWeight.bold, color: Colors.black),
@@ -2622,5 +2621,5 @@ class _Home3State extends State<Home3> {
     return response;
   }
 
-  bool viewnews = false;
+  bool viewnews = true;
 }

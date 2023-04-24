@@ -1,26 +1,16 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/Home3.dart';
-import 'package:intellensense/Homepage2.dart';
-import 'package:intellensense/Models/user.dart';
-import 'package:intellensense/Pages/PhoneLogin.dart';
 import 'package:quickalert/models/quickalert_animtype.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../../../HomeScreen.dart';
 import '../../../../main.dart';
 import '../../../constants.dart';
-import 'custom_button.dart';
-import 'custom_input_field.dart';
 import 'fade_slide_transition.dart';
 
 class LoginForm extends StatefulWidget {

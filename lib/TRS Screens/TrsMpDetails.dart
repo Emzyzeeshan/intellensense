@@ -711,6 +711,24 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                 shrinkWrap: true,
                                 itemCount: Resultdata.length,
                                 itemBuilder: (context, index) {
+                                  // String winnervotespercent ='';
+                                  // String runnervotespercent ='';
+                                  double winnervotespercent = (double.parse(
+                                              Resultdata[index]
+                                                  ['winnerVotes']) /
+                                          (double.parse(Resultdata[index]
+                                                  ['winnerVotes']) +
+                                              double.parse(Resultdata[index]
+                                                  ['runnerVotes']))) *
+                                      100;
+                                  double runnervotespercent = (double.parse(
+                                              Resultdata[index]
+                                                  ['runnerVotes']) /
+                                          (double.parse(Resultdata[index]
+                                                  ['winnerVotes']) +
+                                              double.parse(Resultdata[index]
+                                                  ['runnerVotes']))) *
+                                      100;
                                   return Padding(
                                     padding: const EdgeInsets.only(bottom: 8.0),
                                     child: ExpansionTile(
@@ -874,6 +892,24 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                                           ),
                                                         ),
                                                       ),
+                                                      TableCell(
+                                                        verticalAlignment:
+                                                            TableCellVerticalAlignment
+                                                                .middle,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10),
+                                                          child: Text(
+                                                            'Votes(%)',
+                                                            style: TextStyle(
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
+                                                      ),
                                                     ]),
                                                     TableRow(children: [
                                                       TableCell(
@@ -916,6 +952,23 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                                                   .all(10),
                                                           child: Text(
                                                               '${Resultdata[index]['winnerCandidate']}'),
+                                                        ),
+                                                      ),
+                                                      TableCell(
+                                                        verticalAlignment:
+                                                            TableCellVerticalAlignment
+                                                                .middle,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10),
+                                                          child: Text(
+                                                              '$winnervotespercent'
+                                                                      .toString()
+                                                                      .substring(
+                                                                          0,
+                                                                          6) +
+                                                                  '%'),
                                                         ),
                                                       ),
                                                     ]),
@@ -962,7 +1015,24 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                                               '${Resultdata[index]['runnerCandidate']}'),
                                                         ),
                                                       ),
-                                                    ])
+                                                      TableCell(
+                                                        verticalAlignment:
+                                                            TableCellVerticalAlignment
+                                                                .middle,
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10),
+                                                          child: Text(
+                                                              '$runnervotespercent'
+                                                                      .toString()
+                                                                      .substring(
+                                                                          0,
+                                                                          6) +
+                                                                  '%'),
+                                                        ),
+                                                      ),
+                                                    ]),
                                                   ],
                                                 ),
                                               ),
@@ -1037,7 +1107,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
   Future<dynamic> PartyResultAPI() async {
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.60.0/eleResults/${widget.Value['name']}'),
+          'http://192.169.1.211:8081/insights/2.89.0/eleResults/${widget.Value['name']}'),
     );
     print(response.toString());
     print(response.statusCode);

@@ -206,7 +206,7 @@ class _GoogleTrendsScreenState extends State<GoogleTrendsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  Value['id']['candidateName'] ?? '',
+                  Value['candidateName'] ?? '',
                   maxLines: 2,
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black),
@@ -254,7 +254,7 @@ class _GoogleTrendsScreenState extends State<GoogleTrendsScreen> {
               ],
             ),
             trailing: Text(
-              DateFormat.yMd().format(DateTime.fromMillisecondsSinceEpoch((Value['id']['editDate']?? '')))
+              DateFormat.yMd().format(DateTime.fromMillisecondsSinceEpoch((Value['editDate']?? '')))
               /*DateTime.fromMillisecondsSinceEpoch((Value['id']['editDate']?? '')).toString()*/
              /* Value['id']['editDate'].toString()?? '',*/
               //style: TextStyle(fontSize: 16),
@@ -272,7 +272,7 @@ class _GoogleTrendsScreenState extends State<GoogleTrendsScreen> {
     var headers = {'Content-Type': 'application/json'};
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.60.0/googleTrends?page=0,13'),
+          'http://192.169.1.211:8081/insights/2.89.0/googleTrends?page=0,13'),
       headers: headers,
     );
     print(response.toString());

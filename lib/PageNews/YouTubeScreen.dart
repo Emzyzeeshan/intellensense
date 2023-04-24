@@ -422,7 +422,7 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
     /*var body = json.encode({});*/
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.60.0/news/partyName/TDP?page=0,15'),
+          'http://192.169.1.211:8081/insights/2.89.0/news/partyName/TDP?page=0,15'),
       headers: headers,
       //body: body,
     );

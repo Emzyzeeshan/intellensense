@@ -422,7 +422,7 @@ class _InstagramScreenState extends State<InstagramScreen> {
     /*var body = json.encode({});*/
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.60.0/instagram/partyName?page=0,12&partyName=TDP'),
+          'http://192.169.1.211:8081/insights/2.89.0/instagram/partyName?page=0,12&partyName=TDP'),
       headers: headers,
       //body: body,
     );

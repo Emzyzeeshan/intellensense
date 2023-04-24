@@ -122,200 +122,205 @@ class _mainLoginScreenState extends State<mainLoginScreen>
             backgroundColor: Colors.white,
             body: LayoutBuilder(
                 builder: (BuildContext ctx, BoxConstraints constraints) {
-              // if the screen width >= 480 i.e Wide Screen
-              if (constraints.maxHeight > 640.0) {
-                return Stack(
-                  children: <Widget>[
-                    AnimatedBuilder(
-                      animation: _whiteTopClipperAnimation,
-                      builder: (_, Widget? child) {
-                        return ClipPath(
-                          clipper: WhiteTopClipper(
-                            yOffset: _whiteTopClipperAnimation.value,
-                          ),
-                          child: child,
-                        );
-                      },
-                      child: Container(color: kGrey),
-                    ),
-                    AnimatedBuilder(
-                      animation: _greyTopClipperAnimation,
-                      builder: (_, Widget? child) {
-                        return ClipPath(
-                          clipper: GreyTopClipper(
-                            yOffset: _greyTopClipperAnimation.value,
-                          ),
-                          child: child,
-                        );
-                      },
-                      child: Container(color: kBlue),
-                    ),
-                    AnimatedBuilder(
-                      animation: _blueTopClipperAnimation,
-                      builder: (_, Widget? child) {
-                        return ClipPath(
-                          clipper: BlueTopClipper(
-                            yOffset: _blueTopClipperAnimation.value,
-                          ),
-                          child: child,
-                        );
-                      },
-                      child: Container(color: kWhite),
-                    ),
-                    SafeArea(
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.symmetric(vertical: kPaddingL),
-                        child: Column(
-                          children: <Widget>[
-                            Header(animation: _headerTextAnimation),
-                            SizedBox(
-                              height: 90,
-                            ),
-                            Flexible(
-                              child: Image.asset(
-                                'assets/icons/output-onlinegiftools_OUT.gif',
+                  // if the screen width >= 480 i.e Wide Screen
+                  if (constraints.maxHeight > 640.0) {
+                    return Stack(
+                      children: <Widget>[
+                        AnimatedBuilder(
+                          animation: _whiteTopClipperAnimation,
+                          builder: (_, Widget? child) {
+                            return ClipPath(
+                              clipper: WhiteTopClipper(
+                                yOffset: _whiteTopClipperAnimation.value,
                               ),
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => Login(
-                                                screenHeight: screenHeight),
-                                          ));
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xff00186a),
-                                        fixedSize: const Size(150, 50),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(50))),
-                                    child: Text('Login')),
+                              child: child,
+                            );
+                          },
+                          child: Container(color: kGrey),
+                        ),
+                        AnimatedBuilder(
+                          animation: _greyTopClipperAnimation,
+                          builder: (_, Widget? child) {
+                            return ClipPath(
+                              clipper: GreyTopClipper(
+                                yOffset: _greyTopClipperAnimation.value,
+                              ),
+                              child: child,
+                            );
+                          },
+                          child: Container(color: kBlue),
+                        ),
+                        AnimatedBuilder(
+                          animation: _blueTopClipperAnimation,
+                          builder: (_, Widget? child) {
+                            return ClipPath(
+                              clipper: BlueTopClipper(
+                                yOffset: _blueTopClipperAnimation.value,
+                              ),
+                              child: child,
+                            );
+                          },
+                          child: Container(color: kWhite),
+                        ),
+                        SafeArea(
+                          child: Padding(
+                            padding:
+                            const EdgeInsets.symmetric(vertical: kPaddingL),
+                            child: Column(
+                              children: <Widget>[
+                                Header(animation: _headerTextAnimation),
                                 SizedBox(
-                                  width: 5,
+                                  height: 90,
                                 ),
-                                ElevatedButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => SignUp(
-                                                screenHeight: screenHeight),
-                                          ));
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xff00186a),
-                                        fixedSize: const Size(150, 50),
-                                        shape: RoundedRectangleBorder(
-                                            borderRadius:
+                                Flexible(
+                                  child: Image.asset(
+                                    'assets/icons/output-onlinegiftools_OUT.gif',
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => Login(
+                                                    screenHeight: screenHeight),
+                                              ));
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color(0xff00186a),
+                                            fixedSize: const Size(150, 50),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
                                                 BorderRadius.circular(50))),
-                                    child: Text('SignUp')),
+                                        child: Text('Login')),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => SignUp(
+                                                    screenHeight: screenHeight),
+                                              ));
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Color(0xff00186a),
+                                            fixedSize: const Size(150, 50),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(50))),
+                                        child: Text('SignUp')),
+                                  ],
+                                ),
+
+                                //LoginForm(animation: _formElementAnimation),
                               ],
                             ),
-
-                            //LoginForm(animation: _formElementAnimation),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                );
-              } else {
-                return SafeArea(
-                  child: Column(
-                    children: <Widget>[
-                      AnimatedBuilder(
-                        animation: _whiteTopClipperAnimation,
-                        builder: (_, Widget? child) {
-                          return ClipPath(
-                            clipper: WhiteTopClipper(
-                              yOffset: _whiteTopClipperAnimation.value,
-                            ),
-                            child: child,
-                          );
-                        },
-                        child: Container(color: kGrey),
-                      ),
-                      AnimatedBuilder(
-                        animation: _greyTopClipperAnimation,
-                        builder: (_, Widget? child) {
-                          return ClipPath(
-                            clipper: GreyTopClipper(
-                              yOffset: _greyTopClipperAnimation.value,
-                            ),
-                            child: child,
-                          );
-                        },
-                        child: Container(color: kBlue),
-                      ),
-                      AnimatedBuilder(
-                        animation: _blueTopClipperAnimation,
-                        builder: (_, Widget? child) {
-                          return ClipPath(
-                            clipper: BlueTopClipper(
-                              yOffset: _blueTopClipperAnimation.value,
-                            ),
-                            child: child,
-                          );
-                        },
-                        child: Container(color: kWhite),
-                      ),
-                      Flexible(
-                        child: Column(
-                          children: <Widget>[
-                            Padding(
-                              padding: const EdgeInsets.only(top: 68.0),
-                              child: Header(animation: _headerTextAnimation),
-                            ),
+                      ],
+                    );
+                  } else {
+                    return SafeArea(
+                      child: Column(
+                        children: <Widget>[
+                          AnimatedBuilder(
+                            animation: _whiteTopClipperAnimation,
+                            builder: (_, Widget? child) {
+                              return ClipPath(
+                                clipper: WhiteTopClipper(
+                                  yOffset: _whiteTopClipperAnimation.value,
+                                ),
+                                child: child,
+                              );
+                            },
+                            child: Container(color: kGrey),
+                          ),
+                          AnimatedBuilder(
+                            animation: _greyTopClipperAnimation,
+                            builder: (_, Widget? child) {
+                              return ClipPath(
+                                clipper: GreyTopClipper(
+                                  yOffset: _greyTopClipperAnimation.value,
+                                ),
+                                child: child,
+                              );
+                            },
+                            child: Container(color: kBlue),
+                          ),
+                          AnimatedBuilder(
+                            animation: _blueTopClipperAnimation,
+                            builder: (_, Widget? child) {
+                              return ClipPath(
+                                clipper: BlueTopClipper(
+                                  yOffset: _blueTopClipperAnimation.value,
+                                ),
+                                child: child,
+                              );
+                            },
+                            child: Container(color: kWhite),
+                          ),
+                          Flexible(
+                            child: Column(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 68.0),
+                                  child: Header(animation: _headerTextAnimation),
+                                ),
 
-                            SizedBox(
-                              height: 60,
-                            ),
-                            Image.asset(
-                                'assets/icons/output-onlinegiftools_OUT.gif',
-                                height: 250),
-                            ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            Login(screenHeight: screenHeight),
-                                      ));
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff00186a),
-                                    fixedSize: const Size(150, 50),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
+                                SizedBox(
+                                  height: 60,
+                                ),
+                                Image.asset(
+                                    'assets/icons/output-onlinegiftools_OUT.gif',
+                                    height: 250),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                Login(screenHeight: screenHeight),
+                                          ));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color(0xff00186a),
+                                        fixedSize: const Size(150, 50),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
                                             BorderRadius.circular(50))),
-                                child: Text('Login')),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff00186a),
-                                    fixedSize: const Size(150, 50),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
+                                    child: Text('Login')),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                                ElevatedButton(
+                                    onPressed: () {Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SignUp(
+                                              screenHeight: screenHeight),
+                                        ));},
+                                    style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color(0xff00186a),
+                                        fixedSize: const Size(150, 50),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
                                             BorderRadius.circular(50))),
-                                child: Text('SignUp')),
-                            //LoginForm(animation: _formElementAnimation),
-                          ],
-                        ),
+                                    child: Text('SignUp')),
+                                //LoginForm(animation: _formElementAnimation),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                );
-              }
-            }),
+                    );
+                  }
+                }),
           );
         } else {
           return Scaffold(
