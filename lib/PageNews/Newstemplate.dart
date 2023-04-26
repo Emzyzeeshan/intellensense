@@ -91,7 +91,7 @@ class _NewsTemplate2State extends State<NewsTemplate2> {
           ),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Row(
                   children: [

@@ -131,7 +131,7 @@ class _Home3State extends State<Home3> {
       onWillPop: () async => false,
       child: Scaffold(
           drawer: drawer(),
-          backgroundColor: Color(0xffd2dfff),
+          backgroundColor: Colors.white,
           body: NestedScrollView(
               controller: _scrollController,
               headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -180,117 +180,105 @@ class _Home3State extends State<Home3> {
                       ),
                     ),
                     actions: [
-                      Padding(
-                          padding: const EdgeInsets.only(left: 8, right: 12),
-                          child: GestureDetector(
+                      Row(
+                        children: [
+
+                          GestureDetector(
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => WeatherScreen()));
+                                      builder: (context) =>
+                                          WeatherScreen()));
                             },
                             child: Row(
                               children: [
-                                SizedBox(
-                                  width: 4,
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                WeatherScreen()));
-                                  },
-                                  child: Row(
-                                    children: [
-                                      Column(
-                                        children: [
-                                          FutureBuilder<Weather>(
-                                            future: dataState.getWeather(),
-                                            builder: (context, snapshot) {
-                                              return snapshot.hasData
-                                                  ? Container(
-                                                      height: 45,
-                                                      width: 150,
-                                                      child:
-                                                          SingleChildScrollView(
-                                                        child: Column(
-                                                          children: <Widget>[
-                                                            Container(
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        bottom:
-                                                                            6,
-                                                                        left:
-                                                                            10),
-                                                                child: Column(
-                                                                  children: <
-                                                                      Widget>[
-                                                                    Row(
-                                                                      children: <
-                                                                          Widget>[
-                                                                        Column(
-                                                                          children: [
-                                                                            Text(
-                                                                              '${(snapshot.data!.main.temp - 273.15).toInt()}°',
-                                                                              style: GoogleFonts.nunitoSans(fontSize: 12.0, fontWeight: FontWeight.w700, color: Colors.black),
-                                                                            ),
-                                                                            Text(
-                                                                              '${(snapshot.data!.name)}',
-                                                                              style: GoogleFonts.nunitoSans(
-                                                                                color: Colors.black,
-                                                                                fontSize: 12.0,
-                                                                                fontWeight: FontWeight.w700,
-                                                                              ),
-                                                                            ),
-                                                                          ],
+                                Column(
+                                  children: [
+                                    FutureBuilder<Weather>(
+                                      future: dataState.getWeather(),
+                                      builder: (context, snapshot) {
+                                        return snapshot.hasData
+                                            ? Container(
+                                                height: 45,
+                                                width: 150,
+                                                child:
+                                                    SingleChildScrollView(
+                                                  child: Column(
+                                                    children: <Widget>[
+                                                      Container(
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  bottom:
+                                                                      6,
+                                                                  left:
+                                                                      10),
+                                                          child: Column(
+                                                            children: <
+                                                                Widget>[
+                                                              Row(
+                                                                children: <
+                                                                    Widget>[
+                                                                  Column(
+                                                                    children: [
+                                                                      Text(
+                                                                        '${(snapshot.data!.main.temp - 273.15).toInt()}°',
+                                                                        style: GoogleFonts.nunitoSans(fontSize: 12.0, fontWeight: FontWeight.w700, color: Colors.black),
+                                                                      ),
+                                                                      Text(
+                                                                        '${(snapshot.data!.name)}',
+                                                                        style: GoogleFonts.nunitoSans(
+                                                                          color: Colors.black,
+                                                                          fontSize: 12.0,
+                                                                          fontWeight: FontWeight.w700,
                                                                         ),
-                                                                        SizedBox(
-                                                                          width:
-                                                                              2,
-                                                                        ),
-                                                                        Column(
-                                                                          mainAxisAlignment:
-                                                                              MainAxisAlignment.center,
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.min,
-                                                                          children: <
-                                                                              Widget>[
-                                                                            Image.network(
-                                                                              'http://openweathermap.org/img/wn/${snapshot.data!.weather[0].icon}.png',
-                                                                              height: 50,
-                                                                            ),
-                                                                          ],
-                                                                        )
-                                                                      ],
-                                                                    ),
-                                                                  ],
-                                                                ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width:
+                                                                        2,
+                                                                  ),
+                                                                  Column(
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment.center,
+                                                                    mainAxisSize:
+                                                                        MainAxisSize.min,
+                                                                    children: <
+                                                                        Widget>[
+                                                                      Image.network(
+                                                                        'http://openweathermap.org/img/wn/${snapshot.data!.weather[0].icon}.png',
+                                                                        height: 50,
+                                                                      ),
+                                                                    ],
+                                                                  )
+                                                                ],
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
-                                                    )
-                                                  : const Center(
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                              backgroundColor:
-                                                                  Colors.black),
-                                                    );
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                )
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            : const Center(
+                                                child:
+                                                    CircularProgressIndicator(
+                                                        backgroundColor:
+                                                            Colors.black),
+                                              );
+                                      },
+                                    ),
+                                  ],
+                                ),
                               ],
                             ),
-                          )),
+                          )
+                        ],
+                      ),
                       PopupMenuButton(onSelected: (value) {
                         if (value == 'notifications') {
                           Navigator.push(

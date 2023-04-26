@@ -29,28 +29,47 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
   late Future<dynamic> finaldata = PartyDataApi('TRS');
   ScrollController? scrollController = ScrollController();
   Uint8List? myImage;
+  List fullData = [];
+  List searchData = [];
+  TextEditingController textEditingController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     DeviceSizeConfig().init(context);
     return Scaffold(
-        backgroundColor: Color(0xffd2dfff),
-        appBar: AppBar(leading: IconButton(onPressed: () {Navigator.pop(context);}, icon: Icon(Icons.arrow_back,color: Colors.black,),),
-          actions: [
-            // IconButton(onPressed: (){}, icon: icon)
-          ],
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          leading: Container(),
           toolbarHeight: 70,
           elevation: 0,
-          flexibleSpace: Container(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 30.0),
-              child: Image.asset(
-                'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                height: 70,
-                width: 100,
-              ),
+          flexibleSpace: Padding(
+            padding: const EdgeInsets.only(top: 50.0, left: 8, right: 8),
+            child: Row(
+              children: [
+                Image.asset('assets/icons/IntelliSense-Logo-Finall.gif',
+                    height: 35),
+                Flexible(
+                  child: TextField(
+                    decoration: InputDecoration(
+                        hintText: 'Search....',
+                        isDense: true,
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide.none),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(15),
+                            borderSide: BorderSide.none),
+                        fillColor: Colors.grey.shade200,
+                        filled: true,
+                        focusColor: Colors.grey),
+                    controller: textEditingController,
+                    onChanged: onSearchTextChanged,
+                  ),
+                ),
+              ],
             ),
           ),
-          backgroundColor: Color(0xffd2dfff),
+          backgroundColor: Colors.white,
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -68,15 +87,15 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
                     ),
                   ),
                   items: PartyName.map<DropdownMenuItem<String>>(
-                      (item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item.toString(),
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                          )).toList(),
+                          (item) => DropdownMenuItem<String>(
+                        value: item,
+                        child: Text(
+                          item.toString(),
+                          style: const TextStyle(
+                            fontSize: 14,
+                          ),
+                        ),
+                      )).toList(),
                   value: input,
                   onChanged: (value) {
                     setState(() {
@@ -107,7 +126,7 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
                   scrollbarThickness: 6,
                   dropdownFullScreen: false,
                   dropdownDecoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(15)),
+                  BoxDecoration(borderRadius: BorderRadius.circular(15)),
                   dropdownMaxHeight: MediaQuery.of(context).size.height * 0.5,
                   scrollbarAlwaysShow: true,
                   offset: const Offset(-20, 0),
@@ -115,7 +134,9 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
                 ),
               ),
             ),
-            FutureBuilder(
+            searchData.length ==
+                0 // Check SearchData list is empty or not if empty then show full data else show search data
+                ? FutureBuilder(
               future: finaldata,
               builder: ((context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -127,7 +148,8 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
                       color: Colors.blueAccent,
                     ),
                   );
-                } else if (snapshot.connectionState == ConnectionState.done) {
+                } else if (snapshot.connectionState ==
+                    ConnectionState.done) {
                   if (snapshot.hasError) {
                     return Center(child: const Text('Data Error'));
                   } else if (snapshot.hasData) {
@@ -136,14 +158,14 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
                           itemCount: partydata.length,
                           itemBuilder: (context, index) {
                             return Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 5.0, bottom: 5),
+                              padding: const EdgeInsets.only(
+                                  top: 5.0, bottom: 5),
                               child: ListTile(
                                 dense: true,
-                                tileColor: Colors.grey.shade100,
+                                tileColor: Color(0xffd2dfff),
 
-                                subtitle:
-                                    Text("Party: ${partydata[index]['party']}"),
+                                subtitle: Text(
+                                    "Party: ${partydata[index]['party']}"),
                                 // collapsedBackgroundColor: Colors.grey.shade100,
                                 // tilePadding: EdgeInsets.all(5),
 
@@ -152,8 +174,9 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
                                   radius: 30,
                                   child: ClipOval(
                                     child: Image.memory(
-                                      base64Decode(partydata[index]['content']
-                                              .substring(22) ??
+                                      base64Decode(partydata[index]
+                                      ['content']
+                                          .substring(22) ??
                                           ''),
                                       width: 300,
                                       height: 300,
@@ -161,7 +184,8 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
                                     ),
                                   ),
                                 ),
-                                title: Text('${partydata[index]['name']}'),
+                                title:
+                                Text('${partydata[index]['name']}'),
                                 trailing: Icon(Icons.arrow_drop_down),
                                 onTap: () {
                                   showMaterialModalBottomSheet(
@@ -171,17 +195,21 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
                                             color: Colors.blue.shade300),
                                         borderRadius: BorderRadius.only(
                                             topLeft: Radius.circular(15),
-                                            topRight: Radius.circular(15))),
+                                            topRight:
+                                            Radius.circular(15))),
                                     enableDrag: false,
                                     elevation: 5,
                                     context: context,
                                     builder: (context) => Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                0.88,
+                                        height: MediaQuery.of(context)
+                                            .size
+                                            .height *
+                                            0.88,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child: TrsMpDetails(partydata[index]),
+                                          padding:
+                                          const EdgeInsets.all(8.0),
+                                          child: TrsMpDetails(
+                                              partydata[index]),
                                         )),
                                   );
                                 },
@@ -197,6 +225,85 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
                       child: Text('State: ${snapshot.connectionState}'));
                 }
               }),
+            )
+                : Flexible(
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: searchData.length,
+                itemBuilder: (context, int index) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding:
+                        const EdgeInsets.only(top: 5.0, bottom: 5),
+                        child: ListTile(
+                          onTap: (){
+                            showMaterialModalBottomSheet(
+                              shape: RoundedRectangleBorder(
+                                  side: BorderSide(
+                                      width: 3,
+                                      color: Color(0xffd2dfff)),
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight:
+                                      Radius.circular(15))),
+                              enableDrag: false,
+                              elevation: 5,
+                              context: context,
+                              builder: (context) => Container(
+                                  height: MediaQuery.of(context)
+                                      .size
+                                      .height *
+                                      0.88,
+                                  child: Padding(
+                                    padding:
+                                    const EdgeInsets.all(8.0),
+                                    child: TrsMpDetails(
+                                        searchData[index]),
+                                  )),
+                            );
+                          },
+                          dense: true,
+                          tileColor: Colors.grey.shade100,
+
+                          subtitle: Text(
+                              "Party: ${searchData[index]['party']}"),
+                          // collapsedBackgroundColor: Colors.grey.shade100,
+                          // tilePadding: EdgeInsets.all(5),
+
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            radius: 30,
+                            child: ClipOval(
+                              child: Image.memory(
+                                base64Decode(searchData[index]['content']
+                                    .substring(22) ??
+                                    ''),
+                                width: 300,
+                                height: 300,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                          ),
+                          title: Text('${searchData[index]['name']}'),
+                          trailing: Icon(Icons.arrow_drop_down),
+                        ),
+                      ),
+                      // Text(
+                      //   "Post",
+                      //   style: TextStyle(
+                      //       fontWeight: FontWeight.bold, fontSize: 16),
+                      // ),
+                      // Container(
+                      //   height: 2,
+                      // ),
+                      // Text(searchData[index]['name']),
+                      // Text(searchData[index]['party']),
+                    ],
+                  );
+                },
+              ),
             ),
             // Flexible(
             //   child: HR_Dashboard(),
@@ -218,12 +325,33 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
       setState(() {
         partydata = jsonDecode(response.body);
       });
-
+      fullData = partydata;
       // print(data);
       print(partydata[0]);
     } else {
       print(response.reasonPhrase);
     }
     return partydata;
+  }
+
+  onSearchTextChanged(String text) async {
+    searchData.clear();
+    if (text.isEmpty) {
+      // Check textfield is empty or not
+      setState(() {});
+      return;
+    }
+
+    fullData.forEach((data) {
+      if (data['name']
+          .toString()
+          .toLowerCase()
+          .contains(text.toLowerCase().toString())) {
+        searchData.add(
+            data); // If not empty then add search data into search data list
+      }
+    });
+
+    setState(() {});
   }
 }
