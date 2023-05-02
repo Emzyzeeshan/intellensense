@@ -25,3 +25,24 @@ const Duration kLoginAnimationDuration = Duration(milliseconds: 1500);
 
 // Assets
 const String kGoogleLogoPath = 'assets/images/google_logo.png';
+
+List<String> ConstituencyAnalysisList = [
+  'Assembly Constitution',
+  'Overview & Description',
+  'Insights',
+  'AE & GE Election Analysis',
+  'Top Collabarators',
+  'Electoral Behavior of the Major Castes',
+  'Major Reasons for Win/Loss',
+  'Social and Political Issues',
+  'Administrative Issues',
+  'All Party Assessment',
+  'TRS Organization Assessment(Assembly Level Post Holders )Assessment( District’s all File and Ranks , MP, MLA )',
+  'Prominent AC level Leaders - TRS',
+  'Prominent AC level Leaders - Other Parties',
+  'Suggested Joinings for TRS',
+  'Factions with in TRS',
+  'Inactive Leaders of TRS',
+  'Trouble Makers for TRS',
+  'Challenges and Recommendations',
+];

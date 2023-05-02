@@ -22,8 +22,8 @@ class _InstagramScreenState extends State<InstagramScreen> {
   void initState() {
     super.initState();
     YouTubeListAPI();
-    //NewsPaperAllAPI();
   }
+
   late Future<dynamic> finaldata = YouTubeListAPI();
   String? convertUrlToId(String url, {bool trimWhitespaces = true}) {
     if (!url.contains("http") && (url.length == 11)) return url;
@@ -42,15 +42,6 @@ class _InstagramScreenState extends State<InstagramScreen> {
 
     return null;
   }
-
-  /* String getThumbnail({
-    required String videoId,
-    quality = 50,
-    bool webp = true,
-  }) =>
-      webp
-          ? 'https://i3.ytimg.com/vi_webp/$videoId/$quality.webp'
-          : 'https://i3.ytimg.com/vi/$videoId/$quality.jpg';*/
 
   @override
   Widget build(BuildContext context) {
@@ -72,121 +63,118 @@ class _InstagramScreenState extends State<InstagramScreen> {
                 child: Card(
                     child: SingleChildScrollView(
                         child: Column(children: <Widget>[
-                          Container(
-                            height: 50,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                /*Container(
-              color: Colors.blue,
-            ),*/
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Image.asset(
-                                  'assets/icons/Social-Media-Icons-IS-07.png',
-                                  height: 25,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  'Instagram',
-                                  style: TextStyle(fontSize: 20),
-                                ),
-                                Spacer(),
-                                Tooltip(
-                                    message: 'Pin Card',
-                                    child: CupertinoButton(
-                                      minSize: double.minPositive,
-                                      padding: EdgeInsets.zero,
-                                      child: Icon(Icons.pin_invoke,
-                                          color: Color.fromRGBO(58, 129, 233, 1),
-                                          size: 30),
-                                      onPressed: () {},
-                                    )),
-                                Tooltip(
-                                    message: 'Refresh',
-                                    child: CupertinoButton(
-                                      minSize: double.minPositive,
-                                      padding: EdgeInsets.zero,
-                                      child: Icon(Icons.refresh,
-                                          color: Color.fromRGBO(58, 129, 233, 1),
-                                          size: 30),
-                                      onPressed: () {},
-                                    )),
-                                Tooltip(
-                                    message: 'Card Sort',
-                                    child: CupertinoButton(
-                                      minSize: double.minPositive,
-                                      padding: EdgeInsets.zero,
-                                      child: Icon(Icons.sort,
-                                          color: Color.fromRGBO(58, 129, 233, 1),
-                                          size: 30),
-                                      onPressed: () {},
-                                    )),
-                                Tooltip(
-                                    message: 'Calender',
-                                    child: CupertinoButton(
-                                      minSize: double.minPositive,
-                                      padding: EdgeInsets.zero,
-                                      child: Icon(Icons.calendar_today,
-                                          color: Color.fromRGBO(58, 129, 233, 1),
-                                          size: 30),
-                                      onPressed: () {},
-                                    )),
-                                Tooltip(
-                                    message: 'Multi-Filter',
-                                    child: CupertinoButton(
-                                      minSize: double.minPositive,
-                                      padding: EdgeInsets.zero,
-                                      child: Icon(Icons.filter_alt_outlined,
-                                          color: Color.fromRGBO(58, 129, 233, 1),
-                                          size: 30),
-                                      onPressed: () {},
-                                    )),
-                                Tooltip(
-                                    message: 'More',
-                                    child: CupertinoButton(
-                                      minSize: double.minPositive,
-                                      padding: EdgeInsets.zero,
-                                      child: Icon(Icons.more_vert,
-                                          color: Color.fromRGBO(58, 129, 233, 1),
-                                          size: 30),
-                                      onPressed: () {},
-                                    )),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            thickness: 4,
-                            color: Colors.grey,
-                          ),
-                          FutureBuilder(
-                            future: finaldata,
-                            builder: ((context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(top:70.0),
-                                  child: Center(child: CircularProgressIndicator()),
-                                );
-                              } else if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                if (snapshot.hasError) {
-                                  return const Text('Data Error');
-                                } else if (snapshot.hasData) {
-                                  return Column(children: [...YouTubeList()],);
-                                } else {
-                                  return const Text('Server Error');
-                                }
-                              } else {
-                                return Text(
-                                    'State: ${snapshot.connectionState}');
-                              }
-                            }),
-                          ),
-                        ]))))));
+                  Container(
+                    height: 50,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Image.asset(
+                          'assets/icons/Social-Media-Icons-IS-07.png',
+                          height: 25,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          'Instagram',
+                          style: TextStyle(fontSize: 20),
+                        ),
+                        Spacer(),
+                        Tooltip(
+                            message: 'Pin Card',
+                            child: CupertinoButton(
+                              minSize: double.minPositive,
+                              padding: EdgeInsets.zero,
+                              child: Icon(Icons.pin_invoke,
+                                  color: Color.fromRGBO(58, 129, 233, 1),
+                                  size: 30),
+                              onPressed: () {},
+                            )),
+                        Tooltip(
+                            message: 'Refresh',
+                            child: CupertinoButton(
+                              minSize: double.minPositive,
+                              padding: EdgeInsets.zero,
+                              child: Icon(Icons.refresh,
+                                  color: Color.fromRGBO(58, 129, 233, 1),
+                                  size: 30),
+                              onPressed: () {},
+                            )),
+                        Tooltip(
+                            message: 'Card Sort',
+                            child: CupertinoButton(
+                              minSize: double.minPositive,
+                              padding: EdgeInsets.zero,
+                              child: Icon(Icons.sort,
+                                  color: Color.fromRGBO(58, 129, 233, 1),
+                                  size: 30),
+                              onPressed: () {},
+                            )),
+                        Tooltip(
+                            message: 'Calender',
+                            child: CupertinoButton(
+                              minSize: double.minPositive,
+                              padding: EdgeInsets.zero,
+                              child: Icon(Icons.calendar_today,
+                                  color: Color.fromRGBO(58, 129, 233, 1),
+                                  size: 30),
+                              onPressed: () {},
+                            )),
+                        Tooltip(
+                            message: 'Multi-Filter',
+                            child: CupertinoButton(
+                              minSize: double.minPositive,
+                              padding: EdgeInsets.zero,
+                              child: Icon(Icons.filter_alt_outlined,
+                                  color: Color.fromRGBO(58, 129, 233, 1),
+                                  size: 30),
+                              onPressed: () {},
+                            )),
+                        Tooltip(
+                            message: 'More',
+                            child: CupertinoButton(
+                              minSize: double.minPositive,
+                              padding: EdgeInsets.zero,
+                              child: Icon(Icons.more_vert,
+                                  color: Color.fromRGBO(58, 129, 233, 1),
+                                  size: 30),
+                              onPressed: () {},
+                            )),
+                      ],
+                    ),
+                  ),
+                  Divider(
+                    thickness: 4,
+                    color: Colors.grey,
+                  ),
+                  FutureBuilder(
+                    future: finaldata,
+                    builder: ((context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 70.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return const Text('Data Error');
+                        } else if (snapshot.hasData) {
+                          return Column(
+                            children: [...YouTubeList()],
+                          );
+                        } else {
+                          return const Text('Server Error');
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
+                    }),
+                  ),
+                ]))))));
   }
 
   FixContainer() {
@@ -196,242 +184,129 @@ class _InstagramScreenState extends State<InstagramScreen> {
   List<Card> YouTubeList() {
     if (YouTubeListResult.length == 0) return [];
     return YouTubeListResult.map<Card>((Value) => Card(
-      shape:
-      RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      margin: EdgeInsets.all(4),
-      elevation: 20,
-      child: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          margin: EdgeInsets.all(4),
+          elevation: 20,
+          child: Column(
             children: [
-              SizedBox(width: 10,),
-              Text(
-                Value['candidateName'] ?? '',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold, color: Colors.grey),
-              ),
-              SizedBox(width: 140,),
-              Text(
-                Value['publishedDate'] ?? '',
-                style: TextStyle(fontSize: 16),
-              ),
-            ],
-          ),
-          ListTile(
-            /*leading: GestureDetector(
-              onTap: (){
-                AlertDialog alert  = AlertDialog(
-                  title:Image.network(
-                    YoutubeThumbnail(
-                        youtubeId: convertUrlToId(Value['sourceUrl']) ?? '')
-                        .hd() as String,
-                    width: 300,
-                    height: 300,
-                    fit: BoxFit.fill,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: 10,
                   ),
-                );
-                showDialog(context: context, builder: (BuildContext context) {
-                  return alert;
-                },);
-              },
-              child: CircleAvatar(
-                backgroundColor: Colors.transparent,
-                radius: 30,
-                child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10.0),
-                    child: Image.network(
-                      YoutubeThumbnail(
-                          youtubeId: convertUrlToId(Value['sourceUrl']) ?? '')
-                          .hd() as String,
-                      width: 300,
-                      height: 300,
-                      fit: BoxFit.fill,
-                    )),
-                *//*Image.network(
-                    getThumbnail(videoId: convertUrlToId(Value['sourceUrl'])??''),
-                    height: 10,
-                    // width: 10,
-                    // fit: BoxFit.fill,
-                  ),*//*
+                  Text(
+                    Value['candidateName'] ?? '',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.grey),
+                  ),
+                  SizedBox(
+                    width: 140,
+                  ),
+                  Text(
+                    Value['publishedDate'] ?? '',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ],
               ),
-            ),*/
-            /*title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ListTile(
+                subtitle: Column(
                   children: [
-                    Text(
-                      Value['mediaChannelName'] ?? '',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.grey),
+                    SizedBox(
+                      height: 10,
                     ),
                     Text(
-                      Value['publishedDate'] ?? '',
-                      style: TextStyle(fontSize: 16),
+                      Value['titleContent'] ?? '',
+                      maxLines: 3,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.black),
                     ),
                   ],
-                ),*/
-            subtitle: Column(
-              children: [
-                SizedBox(
-                  height: 10,
                 ),
-                Text(
-                  Value['titleContent'] ?? '',
-                  maxLines: 3,
-                  style: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.black),
-                ),
-                /*Row(
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset('assets/icons/Video ViewsEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
-                        //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video ViewsEmoji.png')),),
-                        Text(Value['videoViews'] ?? '',style: TextStyle(fontSize: 14),)
-                      ],
-                    ),
-                    SizedBox(width: 10,),
-                    Row(
-                      children: [
-                        Image.asset('assets/icons/Video LikesEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
-                        //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video LikesEmoji.png')),),
-                        Text(Value['videoLikes'] ?? '',style: TextStyle(fontSize: 14),)
-                      ],
-                    ),
-                    SizedBox(width: 10,),
-                    Row(
-                      children: [
-                        Image.asset('assets/icons/Video DislikesEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
-                        //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video DislikesEmoji.png')),),
-                        Text(Value['videoDislikes'] ?? '',style: TextStyle(fontSize: 14),)
-                      ],
-                    ),
-                    SizedBox(width: 10,),
-                    Row(
-                      children: [
-                        Image.asset('assets/icons/Video CommentsEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
-                        //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video CommentsEmoji.png')),),
-                        Text(Value['videoCommentsCount'] ?? '',style: TextStyle(fontSize: 14),)
-                      ],
-                    ),
-                    SizedBox(width: 10,),
-                    //IconButton(onPressed: (){}, icon: Icon(Icons.comment))
-                    */
-              ],
-            ),
-            onTap: () => launchUrl(Uri.parse(Value['sourceUrl'])),
-            /*onTap: (){
-              print(Value);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => TrsMpDetails(Value)));
-        },*/
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              /*Row(
+                onTap: () => launchUrl(Uri.parse(Value['sourceUrl'])),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Image.asset(
-                    'assets/icons/Video ViewsEmoji.png',
-                    height: 20,
-                    width: 20,
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/icons/Video LikesEmoji.png',
+                        height: 20,
+                        width: 20,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        Value['likesCount'] ?? '',
+                        style: TextStyle(fontSize: 14),
+                      )
+                    ],
                   ),
                   SizedBox(
                     width: 5,
                   ),
-                  //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video ViewsEmoji.png')),),
-                  Text(
-                    Value['videoViews'] ?? '',
-                    style: TextStyle(fontSize: 14),
-                  )
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/icons/Video CommentsEmoji.png',
+                        height: 20,
+                        width: 20,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        Value['commentsCount'] ?? '',
+                        style: TextStyle(fontSize: 14),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/icons/SharesEmoji.png',
+                        height: 20,
+                        width: 20,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        Value['shareCount'] ?? '',
+                        style: TextStyle(fontSize: 14),
+                      )
+                    ],
+                  ),
                 ],
               ),
               SizedBox(
-                width: 5,
-              ),*/
-              Row(
-                children: [
-                  Image.asset(
-                    'assets/icons/Video LikesEmoji.png',
-                    height: 20,
-                    width: 20,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video LikesEmoji.png')),),
-                  Text(
-                    Value['likesCount'] ?? '',
-                    style: TextStyle(fontSize: 14),
-                  )
-                ],
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Row(
-                children: [
-                  Image.asset(
-                    'assets/icons/Video CommentsEmoji.png',
-                    height: 20,
-                    width: 20,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video CommentsEmoji.png')),),
-                  Text(
-                    Value['commentsCount'] ?? '',
-                    style: TextStyle(fontSize: 14),
-                  )
-                ],
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Row(
-                children: [
-                  Image.asset(
-                    'assets/icons/SharesEmoji.png',
-                    height: 20,
-                    width: 20,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video ViewsEmoji.png')),),
-                  Text(
-                    Value['shareCount'] ?? '',
-                    style: TextStyle(fontSize: 14),
-                  )
-                ],
-              ),
+                height: 5,
+              )
             ],
           ),
-          SizedBox(height: 5,)
-        ],
-      ),
-    )).toList();
+        )).toList();
   }
 
   YouTubeListAPI() async {
     var headers = {'Content-Type': 'application/json'};
-    /*var body = json.encode({});*/
+
     var response = await get(
       Uri.parse(
           'http://192.169.1.211:8081/insights/2.89.0/instagram/partyName?page=0,12&partyName=TDP'),
       headers: headers,
-      //body: body,
     );
     print(response.toString());
     if (response.statusCode == 200) {
       print(response.body);
       try {
         setState(() =>
-        YouTubeListResult = jsonDecode(utf8.decode(response.bodyBytes)));
+            YouTubeListResult = jsonDecode(utf8.decode(response.bodyBytes)));
       } catch (e) {
         print(YouTubeListResult);
         YouTubeListResult = [];

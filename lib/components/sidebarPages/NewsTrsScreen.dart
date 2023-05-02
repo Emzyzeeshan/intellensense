@@ -58,10 +58,6 @@ class NewsTrsScreenState extends State<NewsTrsScreen>
             indicatorHeight: 40.0,
             indicatorColor: Colors.blueAccent,
             tabBarIndicatorSize: TabBarIndicatorSize.tab,
-            // Other flags
-            // indicatorRadius: 1,
-            //insets: EdgeInsets.all(1),
-            //padding: EdgeInsets.all(10)
           ),
           tabs: <Widget>[
             Tab(
@@ -77,21 +73,10 @@ class NewsTrsScreenState extends State<NewsTrsScreen>
           controller: _tabController,
         ),
       ),
-      body: /*ListView(
-        children: NewsPaperData(),
-            ...NewsChannel(context)
-
-      ),*/
-
-          new TabBarView(controller: _tabController, children: [
+      body: new TabBarView(controller: _tabController, children: [
         NewsPaper(),
         NewsChannel(),
         Youtube(),
-        /* ListView(
-          children: [
-            NewsPaperData(),
-          ],
-        )*/
       ]),
     );
   }
@@ -121,8 +106,7 @@ class NewsTrsScreenState extends State<NewsTrsScreen>
     var headers = {'Content-Type': 'application/json'};
     var body = json.encode({});
     var response = await post(
-      Uri.parse(
-          'http://192.169.1.211:8081/api/v1/profile/youtube'),
+      Uri.parse('http://192.169.1.211:8081/api/v1/profile/youtube'),
       headers: headers,
       body: body,
     );
@@ -148,19 +132,6 @@ class NewsTrsScreenState extends State<NewsTrsScreen>
           margin: EdgeInsets.all(4),
           elevation: 20,
           child: ListTile(
-
-            /*leading: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 30,
-          child: ClipOval(
-            child: Image.memory(
-              base64Decode(Value['content'].substring(22) ?? ''),
-              width: 300,
-              height: 300,
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),*/
             title: Text(
               Value['candidateName'] ?? '',
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -175,44 +146,84 @@ class NewsTrsScreenState extends State<NewsTrsScreen>
                   children: [
                     Row(
                       children: [
-                        Image.asset('assets/icons/Video ViewsEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
+                        Image.asset(
+                          'assets/icons/Video ViewsEmoji.png',
+                          height: 20,
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video ViewsEmoji.png')),),
-                        Text(Value['videoViews'] ?? '',style: TextStyle(fontSize: 14),)
+                        Text(
+                          Value['videoViews'] ?? '',
+                          style: TextStyle(fontSize: 14),
+                        )
                       ],
                     ),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Row(
                       children: [
-                        Image.asset('assets/icons/Video LikesEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
+                        Image.asset(
+                          'assets/icons/Video LikesEmoji.png',
+                          height: 20,
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video LikesEmoji.png')),),
-                        Text(Value['videoLikes'] ?? '',style: TextStyle(fontSize: 14),)
+                        Text(
+                          Value['videoLikes'] ?? '',
+                          style: TextStyle(fontSize: 14),
+                        )
                       ],
                     ),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Row(
                       children: [
-                        Image.asset('assets/icons/Video DislikesEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
+                        Image.asset(
+                          'assets/icons/Video DislikesEmoji.png',
+                          height: 20,
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video DislikesEmoji.png')),),
-                        Text(Value['videoDislikes'] ?? '',style: TextStyle(fontSize: 14),)
+                        Text(
+                          Value['videoDislikes'] ?? '',
+                          style: TextStyle(fontSize: 14),
+                        )
                       ],
                     ),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Row(
                       children: [
-                        Image.asset('assets/icons/Video CommentsEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
+                        Image.asset(
+                          'assets/icons/Video CommentsEmoji.png',
+                          height: 20,
+                          width: 20,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video CommentsEmoji.png')),),
-                        Text(Value['videoCommentsCount'] ?? '',style: TextStyle(fontSize: 14),)
+                        Text(
+                          Value['videoCommentsCount'] ?? '',
+                          style: TextStyle(fontSize: 14),
+                        )
                       ],
                     ),
-                    SizedBox(width: 10,),
-                    //IconButton(onPressed: (){}, icon: Icon(Icons.comment))
-                    /*IconButton(onPressed: (){}, icon: Icon(Icons.comment)),
-                    IconButton(onPressed: (){}, icon: Icon(Icons.comment)),
-                    IconButton(onPressed: (){}, icon: Icon(Icons.comment)),*/
+                    SizedBox(
+                      width: 10,
+                    ),
                   ],
                 )
               ],
@@ -222,95 +233,35 @@ class NewsTrsScreenState extends State<NewsTrsScreen>
               style: TextStyle(fontSize: 16),
             ),
             onTap: () => launchUrl(Uri.parse(Value['sourceUrl'])),
-            /*onTap: (){
-          print(Value);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => TrsMpDetails(Value)));
-        },*/
           ),
         )).toList();
   }
+
   List<Card> NewsPaperList() {
     if (YoutubeListResult.length == 0) return [];
     return YoutubeListResult.map<Card>((Value) => Card(
-      margin: EdgeInsets.all(4),
-      elevation: 20,
-      child: ListTile(
-
-        /*leading: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 30,
-          child: ClipOval(
-            child: Image.memory(
-              base64Decode(Value['content'].substring(22) ?? ''),
-              width: 300,
-              height: 300,
-              fit: BoxFit.fill,
+          margin: EdgeInsets.all(4),
+          elevation: 20,
+          child: ListTile(
+            title: Text(
+              Value['candidateName'] ?? '',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-          ),
-        ),*/
-        title: Text(
-          Value['candidateName'] ?? '',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-        subtitle: Column(
-          children: [
-            Text(
-              Value['videoTitle'] ?? '',
-              maxLines: 3,
-            ),
-            /*Row(
+            subtitle: Column(
               children: [
-                Row(
-                  children: [
-                    Image.asset('assets/icons/Video ViewsEmoji.png',height: 20,width: 20,),
-                    SizedBox(width: 10,),
-                    //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video ViewsEmoji.png')),),
-                    Text(Value['videoViews'] ?? '',style: TextStyle(fontSize: 14),)
-                  ],
+                Text(
+                  Value['videoTitle'] ?? '',
+                  maxLines: 3,
                 ),
-                SizedBox(width: 10,),
-                Row(
-                  children: [
-                    Image.asset('assets/icons/Video LikesEmoji.png',height: 20,width: 20,),
-                    SizedBox(width: 10,),
-                    //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video LikesEmoji.png')),),
-                    Text(Value['videoLikes'] ?? '',style: TextStyle(fontSize: 14),)
-                  ],
-                ),
-                SizedBox(width: 10,),
-                Row(
-                  children: [
-                    Image.asset('assets/icons/Video DislikesEmoji.png',height: 20,width: 20,),
-                    SizedBox(width: 10,),
-                    //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video DislikesEmoji.png')),),
-                    Text(Value['videoDislikes'] ?? '',style: TextStyle(fontSize: 14),)
-                  ],
-                ),
-                SizedBox(width: 10,),
-                Row(
-                  children: [
-                    Image.asset('assets/icons/Video CommentsEmoji.png',height: 20,width: 20,),
-                    SizedBox(width: 10,),
-                    //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video CommentsEmoji.png')),),
-                    Text(Value['videoCommentsCount'] ?? '',style: TextStyle(fontSize: 14),)
-                  ],
-                ),
-                SizedBox(width: 10,),
-                //IconButton(onPressed: (){}, icon: Icon(Icons.comment))
-                */
-          ],
-        ),
-        trailing: Text(
-          Value['publishedDate'] ?? '',
-          style: TextStyle(fontSize: 16),
-        ),
-        onTap: () => launchUrl(Uri.parse(Value['sourceUrl'])),
-        /*onTap: (){
-          print(Value);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => TrsMpDetails(Value)));
-        },*/
-      ),
-    )).toList();
+              ],
+            ),
+            trailing: Text(
+              Value['publishedDate'] ?? '',
+              style: TextStyle(fontSize: 16),
+            ),
+            onTap: () => launchUrl(Uri.parse(Value['sourceUrl'])),
+          ),
+        )).toList();
   }
 
   Future<void> _youTubeUrl() async {
@@ -318,24 +269,13 @@ class NewsTrsScreenState extends State<NewsTrsScreen>
       throw 'Could not launch $_url';
     }
   }
+
   List<Card> NewsPaperData() {
     if (NewsPaperAllResult.length == 0) return [];
     return NewsPaperAllResult.map<Card>((Value) => Card(
           margin: EdgeInsets.all(12),
           elevation: 20,
           child: ListTile(
-            /*leading: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 30,
-          child: ClipOval(
-            child: Image.memory(
-              base64Decode(Value['content']),
-              width: 300,
-              height: 300,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),*/
             title: Text(
               Value['newsTitle'],
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -345,10 +285,6 @@ class NewsTrsScreenState extends State<NewsTrsScreen>
               Value['publishedDate'],
               style: TextStyle(fontSize: 16),
             ),
-            /*onTap: (){
-          print(Value);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => TrsMpDetails(Value)));
-        },*/
           ),
         )).toList();
   }
@@ -447,7 +383,10 @@ class NewsTrsScreenState extends State<NewsTrsScreen>
                 Container(
                   color: Colors.blue,
                 ),
-                Image(image: AssetImage('assets/icons/youtubedxps.png',)),
+                Image(
+                    image: AssetImage(
+                  'assets/icons/youtubedxps.png',
+                )),
                 //ImageIcon(AssetImage('assets/icons/youtubedxps.png')),
                 Text(
                   'YouTube',
@@ -511,12 +450,12 @@ class NewsTrsScreenState extends State<NewsTrsScreen>
               ],
             ),
           ),
-          ...YoutubeList()],
+          ...YoutubeList()
+        ],
       ),
     );
   }
 }
-
 
 NewsListData() {}
 
@@ -525,24 +464,3 @@ NewsChannel() {
     child: Text('hello'),
   );
 }
-
-/*NewsPaperAllAPI() async {
-  var headers = {'Content-Type': 'application/json'};
-  var body = json.encode({});
-  var response = await post(
-    Uri.parse('http://192.169.1.173:8086/search/newsPaperAnalysisAll'),
-    headers: headers,
-    body: body,
-  );
-  print(response.toString());
-  if (response.statusCode == 200) {
-    print(response.body);
-    try {
-      setState(() => NewsPaperAllResult = jsonDecode(response.body));
-    } catch (e) {
-      NewsPaperAllResult = [];
-    }
-  } else {
-    print(response.reasonPhrase);
-  }
-}*/

@@ -3,11 +3,9 @@ import 'dart:convert';
 
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
+
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
-
-import '../MapScreens/GoogleMap1.dart';
 
 class TrsMpDetails extends StatefulWidget {
   var Value;
@@ -18,7 +16,6 @@ class TrsMpDetails extends StatefulWidget {
 }
 
 class _TrsMpDetailsState extends State<TrsMpDetails> {
-
   late Future<dynamic> Detailsofpartydata = PartyResultAPI();
   var isExpandedValues = [false, false];
   final Completer<GoogleMapController> _controller =
@@ -28,12 +25,14 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
-@override
-  void initState() {PartyResultAPI();
+  @override
+  void initState() {
+    PartyResultAPI();
     // TODO: implement initState
     super.initState();
   }
-  bool loaded=false;
+
+  bool loaded = false;
   static const CameraPosition _kLake = CameraPosition(
       bearing: 192.8334901395799,
       target: LatLng(37.43296265331129, -122.08832357078792),
@@ -46,21 +45,6 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
         scrollDirection: Axis.vertical,
         child: Column(
           children: <Widget>[
-            // Align(
-            //   alignment: Alignment.topCenter,
-            //   child: CircleAvatar(
-            //     backgroundColor: Colors.transparent,
-            //     radius: 80,
-            //     child: ClipOval(
-            //       child: Image.memory(
-            //         base64Decode(widget.Value['content']),
-            //         width: 300,
-            //         height: 300,
-            //         fit: BoxFit.cover,
-            //       ),
-            //     ),
-            //   ),
-            // ),
             Align(
               alignment: Alignment.topCenter,
               child: CircleAvatar(
@@ -82,21 +66,6 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
             Text(
               widget.Value['name'] ?? '',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            GestureDetector(
-              onTap: () {
-                print('pressed');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => MapsDemo()));
-                print('pressed');
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Icon(Icons.location_on),
-                  Text(widget.Value['constitution'] ?? '')
-                ],
-              ),
             ),
             SizedBox(
               height: 10,
@@ -149,11 +118,6 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
               expandedColor: Colors.grey,
               expandedTextColor: Colors.black,
               title: Text('Profile'),
-              /*shape: RoundedRectangleBorder(
-                side: BorderSide.none,
-              ),
-              collapsedIconColor: Colors.white,
-              collapsedBackgroundColor: Colors.blue[800],*/
               children: [
                 Column(
                   children: <Widget>[
@@ -396,19 +360,45 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                         ],
                       ),
                     ),
-
-                    /*TextButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                    title: Text('Profile Data'),
-                                    insetPadding: EdgeInsets.zero,
-                                    actions: [
-                                      Container(
-                                        margin: EdgeInsets.all(0),
-                                        child: Table(
+                  ],
+                ),
+              ],
+            ),
+            loaded == false
+                ? Center(child: CircularProgressIndicator())
+                : Column(children: <Widget>[
+                    ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: Resultdata.length,
+                        itemBuilder: (context, index) {
+                          double winnervotespercent = (double.parse(
+                                      Resultdata[index]['winnerVotes']) /
+                                  (double.parse(
+                                          Resultdata[index]['winnerVotes']) +
+                                      double.parse(
+                                          Resultdata[index]['runnerVotes']))) *
+                              100;
+                          double runnervotespercent = (double.parse(
+                                      Resultdata[index]['runnerVotes']) /
+                                  (double.parse(
+                                          Resultdata[index]['winnerVotes']) +
+                                      double.parse(
+                                          Resultdata[index]['runnerVotes']))) *
+                              100;
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 8.0),
+                            child: ExpansionTileCard(
+                                baseColor: Colors.cyan[50],
+                                expandedColor: Colors.white,
+                                leading: Text('${Resultdata[index]['year']}'),
+                                title: Container(),
+                                children: [
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Table(
                                           defaultColumnWidth:
                                               FixedColumnWidth(150.0),
                                           border: TableBorder.all(
@@ -427,7 +417,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                                         const EdgeInsets.all(
                                                             20),
                                                     child: Text(
-                                                      'Born',
+                                                      'District',
                                                       style: TextStyle(
                                                           fontSize: 16,
                                                           fontWeight:
@@ -444,7 +434,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                                         const EdgeInsets.all(
                                                             10),
                                                     child: Text(
-                                                        '24 July 1976(age 45 years),Siddipet'),
+                                                        '${Resultdata[index]['district']}'),
                                                   ),
                                                 ),
                                               ],
@@ -460,7 +450,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                                         const EdgeInsets.all(
                                                             20),
                                                     child: Text(
-                                                      'Full Name',
+                                                      'Constituency',
                                                       style: TextStyle(
                                                           fontSize: 16,
                                                           fontWeight:
@@ -477,1021 +467,254 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                                         const EdgeInsets.all(
                                                             10),
                                                     child: Text(
-                                                        'Kalvakuntla Taraka Rama Rao'),
+                                                        '${Resultdata[index]['assemblyConstituency']}'),
                                                   ),
                                                 ),
                                               ],
                                             ),
-                                            TableRow(
-                                              children: [
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .top,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20),
-                                                    child: Text(
-                                                      'Permenant Address',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
+                                          ]),
+                                      SizedBox(
+                                        height: 8,
+                                      ),
+                                      SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: Table(
+                                          defaultColumnWidth:
+                                              FixedColumnWidth(150.0),
+                                          border: TableBorder.all(
+                                              color: Colors.grey,
+                                              style: BorderStyle.solid,
+                                              width: 2),
+                                          children: [
+                                            TableRow(children: [
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .top,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(20),
+                                                  child: Text(
+                                                    'Party',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                 ),
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .middle,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10),
-                                                    child: Text('Siddipet'),
+                                              ),
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .middle,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Text(
+                                                    'Votes',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                            TableRow(
-                                              children: [
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .top,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20),
-                                                    child: Text(
-                                                      'Present Address',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
+                                              ),
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .middle,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Text(
+                                                    'Candidate Name',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                 ),
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .middle,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10),
-                                                    child:
-                                                        Text('Pragathi Bhavan'),
+                                              ),
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .middle,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Text(
+                                                    'Votes(%)',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                            TableRow(
-                                              children: [
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .top,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20),
-                                                    child: Text(
-                                                      'Children',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
+                                              ),
+                                            ]),
+                                            TableRow(children: [
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .top,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(20),
+                                                  child: Text(
+                                                    '${Resultdata[index]['winnerParty']}',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                 ),
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .middle,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10),
-                                                    child: Text(
-                                                        'Himanshu Rao, Alekhya Rao'),
+                                              ),
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .middle,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Text(
+                                                      '${Resultdata[index]['winnerVotes']}'),
+                                                ),
+                                              ),
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .middle,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Text(
+                                                      '${Resultdata[index]['winnerCandidate']}'),
+                                                ),
+                                              ),
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .middle,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Text(
+                                                      '$winnervotespercent'
+                                                              .toString()
+                                                              .substring(0, 6) +
+                                                          '%'),
+                                                ),
+                                              ),
+                                            ]),
+                                            TableRow(children: [
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .top,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(20),
+                                                  child: Text(
+                                                    '${Resultdata[index]['runnerParty']}',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
                                                 ),
-                                              ],
-                                            ),
-                                            TableRow(
-                                              children: [
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .top,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20),
-                                                    child: Text(
-                                                      'Political party',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
+                                              ),
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .middle,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Text(
+                                                      '${Resultdata[index]['runnerVotes']}'),
                                                 ),
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .middle,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10),
-                                                    child: Text(
-                                                        'Telangana Rashtra Samith'),
-                                                  ),
+                                              ),
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .middle,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Text(
+                                                      '${Resultdata[index]['runnerCandidate']}'),
                                                 ),
-                                              ],
-                                            ),
-                                            TableRow(
-                                              children: [
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .top,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20),
-                                                    child: Text(
-                                                      'Parent(s)',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
+                                              ),
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .middle,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(10),
+                                                  child: Text(
+                                                      '$runnervotespercent'
+                                                              .toString()
+                                                              .substring(0, 6) +
+                                                          '%'),
                                                 ),
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .middle,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10),
-                                                    child: Text(
-                                                        'K. Chandrashekar Rao (father)'
-                                                        'Shobha Rao (mother)'),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            TableRow(
-                                              children: [
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .top,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            20),
-                                                    child: Text(
-                                                      'Relatives',
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ),
-                                                TableCell(
-                                                  verticalAlignment:
-                                                      TableCellVerticalAlignment
-                                                          .middle,
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            10),
-                                                    child: Text(
-                                                        'K. Kavitha (sister)'),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
+                                              ),
+                                            ]),
                                           ],
                                         ),
                                       ),
-                                    ]);
-                              });
-                        },
-                        child: Text('More Details....'))*/
-                  ],
-                ),
-              ],
-            ),
-
-            loaded==false?Center(child: CircularProgressIndicator()):  Column(children: <Widget>[
-              ListView.builder(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  itemCount: Resultdata.length,
-                  itemBuilder: (context, index) {
-                    // String winnervotespercent ='';
-                    // String runnervotespercent ='';
-                    double winnervotespercent = (double.parse(
-                        Resultdata[index]
-                        ['winnerVotes']) /
-                        (double.parse(Resultdata[index]
-                        ['winnerVotes']) +
-                            double.parse(Resultdata[index]
-                            ['runnerVotes']))) *
-                        100;
-                    double runnervotespercent = (double.parse(
-                        Resultdata[index]
-                        ['runnerVotes']) /
-                        (double.parse(Resultdata[index]
-                        ['winnerVotes']) +
-                            double.parse(Resultdata[index]
-                            ['runnerVotes']))) *
-                        100;
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: ExpansionTileCard(
-                          baseColor: Colors.cyan[50],
-                          expandedColor: Colors.white,
-                          /*shape: RoundedRectangleBorder(
-                                            side: BorderSide.none,
-                                          ),*/
-                          leading: Text(
-                              '${Resultdata[index]['year']}'),
-                          //collapsedIconColor: Colors.white,
-                          title: Container(),
-                          /*collapsedBackgroundColor:
-                                              Colors.blue[800],*/
-                          children: [
-                            Column(
-                              crossAxisAlignment:
-                              CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Table(
-                                    defaultColumnWidth:
-                                    FixedColumnWidth(150.0),
-                                    border: TableBorder.all(
-                                        color: Colors.grey,
-                                        style: BorderStyle.solid,
-                                        width: 2),
-                                    children: [
-                                      TableRow(
-                                        children: [
-                                          TableCell(
-                                            verticalAlignment:
-                                            TableCellVerticalAlignment
-                                                .top,
-                                            child: Padding(
-                                              padding:
-                                              const EdgeInsets
-                                                  .all(20),
-                                              child: Text(
-                                                'District',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .bold),
-                                              ),
-                                            ),
-                                          ),
-                                          TableCell(
-                                            verticalAlignment:
-                                            TableCellVerticalAlignment
-                                                .middle,
-                                            child: Padding(
-                                              padding:
-                                              const EdgeInsets
-                                                  .all(10),
-                                              child: Text(
-                                                  '${Resultdata[index]['district']}'),
-                                            ),
-                                          ),
-                                        ],
+                                      SizedBox(
+                                        height: 5,
                                       ),
-                                      TableRow(
-                                        children: [
-                                          TableCell(
-                                            verticalAlignment:
-                                            TableCellVerticalAlignment
-                                                .top,
-                                            child: Padding(
-                                              padding:
-                                              const EdgeInsets
-                                                  .all(20),
-                                              child: Text(
-                                                'Constituency',
-                                                style: TextStyle(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .bold),
+                                      Table(
+                                          defaultColumnWidth:
+                                              FixedColumnWidth(150.0),
+                                          border: TableBorder.all(
+                                              color: Colors.grey,
+                                              style: BorderStyle.solid,
+                                              width: 2),
+                                          children: [
+                                            TableRow(children: [
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .top,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(20),
+                                                  child: Text(
+                                                    'Margin-Votes',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
                                               ),
-                                            ),
-                                          ),
-                                          TableCell(
-                                            verticalAlignment:
-                                            TableCellVerticalAlignment
-                                                .middle,
-                                            child: Padding(
-                                              padding:
-                                              const EdgeInsets
-                                                  .all(10),
-                                              child: Text(
-                                                  '${Resultdata[index]['assemblyConstituency']}'),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ]),
-                                SizedBox(
-                                  height: 8,
-                                ),
-                                SingleChildScrollView(
-                                  scrollDirection:
-                                  Axis.horizontal,
-                                  child: Table(
-                                    defaultColumnWidth:
-                                    FixedColumnWidth(150.0),
-                                    border: TableBorder.all(
-                                        color: Colors.grey,
-                                        style: BorderStyle.solid,
-                                        width: 2),
-                                    children: [
-                                      TableRow(children: [
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .top,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(20),
-                                            child: Text(
-                                              'Party',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold),
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .middle,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(10),
-                                            child: Text(
-                                              'Votes',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold),
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .middle,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(10),
-                                            child: Text(
-                                              'Candidate Name',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold),
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .middle,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(10),
-                                            child: Text(
-                                              'Votes(%)',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold),
-                                            ),
-                                          ),
-                                        ),
-                                      ]),
-                                      TableRow(children: [
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .top,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(20),
-                                            child: Text(
-                                              '${Resultdata[index]['winnerParty']}',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold),
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .middle,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(10),
-                                            child: Text(
-                                                '${Resultdata[index]['winnerVotes']}'),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .middle,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(10),
-                                            child: Text(
-                                                '${Resultdata[index]['winnerCandidate']}'),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .middle,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(10),
-                                            child: Text(
-                                                '$winnervotespercent'
-                                                    .toString()
-                                                    .substring(
-                                                    0,
-                                                    6) +
-                                                    '%'),
-                                          ),
-                                        ),
-                                      ]),
-                                      TableRow(children: [
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .top,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(20),
-                                            child: Text(
-                                              '${Resultdata[index]['runnerParty']}',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold),
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .middle,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(10),
-                                            child: Text(
-                                                '${Resultdata[index]['runnerVotes']}'),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .middle,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(10),
-                                            child: Text(
-                                                '${Resultdata[index]['runnerCandidate']}'),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .middle,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(10),
-                                            child: Text(
-                                                '$runnervotespercent'
-                                                    .toString()
-                                                    .substring(
-                                                    0,
-                                                    6) +
-                                                    '%'),
-                                          ),
-                                        ),
-                                      ]),
+                                              TableCell(
+                                                verticalAlignment:
+                                                    TableCellVerticalAlignment
+                                                        .top,
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(20),
+                                                  child: Text(
+                                                    '${Resultdata[index]['margin']}',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                              ),
+                                            ])
+                                          ]),
                                     ],
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 5,
-                                ),
-                                Table(
-                                    defaultColumnWidth:
-                                    FixedColumnWidth(150.0),
-                                    border: TableBorder.all(
-                                        color: Colors.grey,
-                                        style: BorderStyle.solid,
-                                        width: 2),
-                                    children: [
-                                      TableRow(children: [
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .top,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(20),
-                                            child: Text(
-                                              'Margin-Votes',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold),
-                                            ),
-                                          ),
-                                        ),
-                                        TableCell(
-                                          verticalAlignment:
-                                          TableCellVerticalAlignment
-                                              .top,
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets
-                                                .all(20),
-                                            child: Text(
-                                              '${Resultdata[index]['margin']}',
-                                              style: TextStyle(
-                                                  fontSize: 16,
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .bold),
-                                            ),
-                                          ),
-                                        ),
-                                      ])
-                                    ]),
-                              ],
-                            )
-                          ]),
-                    );
-                  })
-            ])
-            // FutureBuilder(
-            //     future: Detailsofpartydata,
-            //     builder: ((context, snapshot) {
-            //       if (snapshot.connectionState == ConnectionState.waiting) {
-            //         return  Center(
-            //               child: SpinKitWave(
-            //             color: Colors.blue,
-            //             size: 18,
-            //           ));
-            //       } else if (snapshot.connectionState == ConnectionState.done) {
-            //         if (snapshot.hasError) {
-            //           return const Text('Data Error');
-            //         } else if (snapshot.hasData) {
-            //           return SingleChildScrollView(
-            //               physics: ScrollPhysics(),
-            //               child: Column(children: <Widget>[
-            //                 ListView.builder(
-            //                     physics: NeverScrollableScrollPhysics(),
-            //                     shrinkWrap: true,
-            //                     itemCount: Resultdata.length,
-            //                     itemBuilder: (context, index) {
-            //                       // String winnervotespercent ='';
-            //                       // String runnervotespercent ='';
-            //                       double winnervotespercent = (double.parse(
-            //                                   Resultdata[index]
-            //                                       ['winnerVotes']) /
-            //                               (double.parse(Resultdata[index]
-            //                                       ['winnerVotes']) +
-            //                                   double.parse(Resultdata[index]
-            //                                       ['runnerVotes']))) *
-            //                           100;
-            //                       double runnervotespercent = (double.parse(
-            //                                   Resultdata[index]
-            //                                       ['runnerVotes']) /
-            //                               (double.parse(Resultdata[index]
-            //                                       ['winnerVotes']) +
-            //                                   double.parse(Resultdata[index]
-            //                                       ['runnerVotes']))) *
-            //                           100;
-            //                       return Padding(
-            //                         padding: const EdgeInsets.only(bottom: 8.0),
-            //                         child: ExpansionTileCard(
-            //                             baseColor: Colors.cyan[50],
-            //                             expandedColor: Colors.white,
-            //                             /*shape: RoundedRectangleBorder(
-            //                               side: BorderSide.none,
-            //                             ),*/
-            //                             leading: Text(
-            //                                 '${Resultdata[index]['year']}'),
-            //                             //collapsedIconColor: Colors.white,
-            //                             title: Container(),
-            //                             /*collapsedBackgroundColor:
-            //                                 Colors.blue[800],*/
-            //                             children: [
-            //                               Column(
-            //                                 crossAxisAlignment:
-            //                                     CrossAxisAlignment.center,
-            //                                 children: <Widget>[
-            //                                   Table(
-            //                                       defaultColumnWidth:
-            //                                           FixedColumnWidth(150.0),
-            //                                       border: TableBorder.all(
-            //                                           color: Colors.grey,
-            //                                           style: BorderStyle.solid,
-            //                                           width: 2),
-            //                                       children: [
-            //                                         TableRow(
-            //                                           children: [
-            //                                             TableCell(
-            //                                               verticalAlignment:
-            //                                                   TableCellVerticalAlignment
-            //                                                       .top,
-            //                                               child: Padding(
-            //                                                 padding:
-            //                                                     const EdgeInsets
-            //                                                         .all(20),
-            //                                                 child: Text(
-            //                                                   'District',
-            //                                                   style: TextStyle(
-            //                                                       fontSize: 16,
-            //                                                       fontWeight:
-            //                                                           FontWeight
-            //                                                               .bold),
-            //                                                 ),
-            //                                               ),
-            //                                             ),
-            //                                             TableCell(
-            //                                               verticalAlignment:
-            //                                                   TableCellVerticalAlignment
-            //                                                       .middle,
-            //                                               child: Padding(
-            //                                                 padding:
-            //                                                     const EdgeInsets
-            //                                                         .all(10),
-            //                                                 child: Text(
-            //                                                     '${Resultdata[index]['district']}'),
-            //                                               ),
-            //                                             ),
-            //                                           ],
-            //                                         ),
-            //                                         TableRow(
-            //                                           children: [
-            //                                             TableCell(
-            //                                               verticalAlignment:
-            //                                                   TableCellVerticalAlignment
-            //                                                       .top,
-            //                                               child: Padding(
-            //                                                 padding:
-            //                                                     const EdgeInsets
-            //                                                         .all(20),
-            //                                                 child: Text(
-            //                                                   'Constituency',
-            //                                                   style: TextStyle(
-            //                                                       fontSize: 16,
-            //                                                       fontWeight:
-            //                                                           FontWeight
-            //                                                               .bold),
-            //                                                 ),
-            //                                               ),
-            //                                             ),
-            //                                             TableCell(
-            //                                               verticalAlignment:
-            //                                                   TableCellVerticalAlignment
-            //                                                       .middle,
-            //                                               child: Padding(
-            //                                                 padding:
-            //                                                     const EdgeInsets
-            //                                                         .all(10),
-            //                                                 child: Text(
-            //                                                     '${Resultdata[index]['assemblyConstituency']}'),
-            //                                               ),
-            //                                             ),
-            //                                           ],
-            //                                         ),
-            //                                       ]),
-            //                                   SizedBox(
-            //                                     height: 8,
-            //                                   ),
-            //                                   SingleChildScrollView(
-            //                                     scrollDirection:
-            //                                         Axis.horizontal,
-            //                                     child: Table(
-            //                                       defaultColumnWidth:
-            //                                           FixedColumnWidth(150.0),
-            //                                       border: TableBorder.all(
-            //                                           color: Colors.grey,
-            //                                           style: BorderStyle.solid,
-            //                                           width: 2),
-            //                                       children: [
-            //                                         TableRow(children: [
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .top,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(20),
-            //                                               child: Text(
-            //                                                 'Party',
-            //                                                 style: TextStyle(
-            //                                                     fontSize: 16,
-            //                                                     fontWeight:
-            //                                                         FontWeight
-            //                                                             .bold),
-            //                                               ),
-            //                                             ),
-            //                                           ),
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .middle,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(10),
-            //                                               child: Text(
-            //                                                 'Votes',
-            //                                                 style: TextStyle(
-            //                                                     fontSize: 16,
-            //                                                     fontWeight:
-            //                                                         FontWeight
-            //                                                             .bold),
-            //                                               ),
-            //                                             ),
-            //                                           ),
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .middle,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(10),
-            //                                               child: Text(
-            //                                                 'Candidate Name',
-            //                                                 style: TextStyle(
-            //                                                     fontSize: 16,
-            //                                                     fontWeight:
-            //                                                         FontWeight
-            //                                                             .bold),
-            //                                               ),
-            //                                             ),
-            //                                           ),
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .middle,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(10),
-            //                                               child: Text(
-            //                                                 'Votes(%)',
-            //                                                 style: TextStyle(
-            //                                                     fontSize: 16,
-            //                                                     fontWeight:
-            //                                                         FontWeight
-            //                                                             .bold),
-            //                                               ),
-            //                                             ),
-            //                                           ),
-            //                                         ]),
-            //                                         TableRow(children: [
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .top,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(20),
-            //                                               child: Text(
-            //                                                 '${Resultdata[index]['winnerParty']}',
-            //                                                 style: TextStyle(
-            //                                                     fontSize: 16,
-            //                                                     fontWeight:
-            //                                                         FontWeight
-            //                                                             .bold),
-            //                                               ),
-            //                                             ),
-            //                                           ),
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .middle,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(10),
-            //                                               child: Text(
-            //                                                   '${Resultdata[index]['winnerVotes']}'),
-            //                                             ),
-            //                                           ),
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .middle,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(10),
-            //                                               child: Text(
-            //                                                   '${Resultdata[index]['winnerCandidate']}'),
-            //                                             ),
-            //                                           ),
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .middle,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(10),
-            //                                               child: Text(
-            //                                                   '$winnervotespercent'
-            //                                                           .toString()
-            //                                                           .substring(
-            //                                                               0,
-            //                                                               6) +
-            //                                                       '%'),
-            //                                             ),
-            //                                           ),
-            //                                         ]),
-            //                                         TableRow(children: [
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .top,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(20),
-            //                                               child: Text(
-            //                                                 '${Resultdata[index]['runnerParty']}',
-            //                                                 style: TextStyle(
-            //                                                     fontSize: 16,
-            //                                                     fontWeight:
-            //                                                         FontWeight
-            //                                                             .bold),
-            //                                               ),
-            //                                             ),
-            //                                           ),
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .middle,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(10),
-            //                                               child: Text(
-            //                                                   '${Resultdata[index]['runnerVotes']}'),
-            //                                             ),
-            //                                           ),
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .middle,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(10),
-            //                                               child: Text(
-            //                                                   '${Resultdata[index]['runnerCandidate']}'),
-            //                                             ),
-            //                                           ),
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .middle,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(10),
-            //                                               child: Text(
-            //                                                   '$runnervotespercent'
-            //                                                           .toString()
-            //                                                           .substring(
-            //                                                               0,
-            //                                                               6) +
-            //                                                       '%'),
-            //                                             ),
-            //                                           ),
-            //                                         ]),
-            //                                       ],
-            //                                     ),
-            //                                   ),
-            //                                   SizedBox(
-            //                                     height: 5,
-            //                                   ),
-            //                                   Table(
-            //                                       defaultColumnWidth:
-            //                                           FixedColumnWidth(150.0),
-            //                                       border: TableBorder.all(
-            //                                           color: Colors.grey,
-            //                                           style: BorderStyle.solid,
-            //                                           width: 2),
-            //                                       children: [
-            //                                         TableRow(children: [
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .top,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(20),
-            //                                               child: Text(
-            //                                                 'Margin-Votes',
-            //                                                 style: TextStyle(
-            //                                                     fontSize: 16,
-            //                                                     fontWeight:
-            //                                                         FontWeight
-            //                                                             .bold),
-            //                                               ),
-            //                                             ),
-            //                                           ),
-            //                                           TableCell(
-            //                                             verticalAlignment:
-            //                                                 TableCellVerticalAlignment
-            //                                                     .top,
-            //                                             child: Padding(
-            //                                               padding:
-            //                                                   const EdgeInsets
-            //                                                       .all(20),
-            //                                               child: Text(
-            //                                                 '${Resultdata[index]['margin']}',
-            //                                                 style: TextStyle(
-            //                                                     fontSize: 16,
-            //                                                     fontWeight:
-            //                                                         FontWeight
-            //                                                             .bold),
-            //                                               ),
-            //                                             ),
-            //                                           ),
-            //                                         ])
-            //                                       ]),
-            //                                 ],
-            //                               )
-            //                             ]),
-            //                       );
-            //                     })
-            //               ]));
-            //         } else {
-            //           return const Text('Server Error');
-            //         }
-            //       } else {
-            //         return Text('State: ${snapshot.connectionState}');
-            //       }
-            //     })),
+                                  )
+                                ]),
+                          );
+                        })
+                  ])
           ],
         ));
   }
@@ -1506,8 +729,9 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
     print(response.statusCode);
     if (response.statusCode == 200) {
       try {
-        Resultdata = jsonDecode(utf8.decode(response.bodyBytes));setState(() {
-          loaded=true;
+        Resultdata = jsonDecode(utf8.decode(response.bodyBytes));
+        setState(() {
+          loaded = true;
         });
 
         print(Resultdata);

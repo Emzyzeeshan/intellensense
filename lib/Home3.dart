@@ -94,10 +94,6 @@ class _Home3State extends State<Home3> {
   SwiperLayout swiperlayout = SwiperLayout.DEFAULT;
   PageController PageCount = PageController();
 
-  // List<Widget> TechNewslist = [
-  //   TechNews(),
-  //   ForexNews(),
-  // ];
 
   bool touchtoflip = false;
   bool carddirection = false;
@@ -182,14 +178,12 @@ class _Home3State extends State<Home3> {
                     actions: [
                       Row(
                         children: [
-
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          WeatherScreen()));
+                                      builder: (context) => WeatherScreen()));
                             },
                             child: Row(
                               children: [
@@ -202,8 +196,7 @@ class _Home3State extends State<Home3> {
                                             ? Container(
                                                 height: 45,
                                                 width: 150,
-                                                child:
-                                                    SingleChildScrollView(
+                                                child: SingleChildScrollView(
                                                   child: Column(
                                                     children: <Widget>[
                                                       Container(
@@ -211,13 +204,10 @@ class _Home3State extends State<Home3> {
                                                           padding:
                                                               const EdgeInsets
                                                                       .only(
-                                                                  bottom:
-                                                                      6,
-                                                                  left:
-                                                                      10),
+                                                                  bottom: 6,
+                                                                  left: 10),
                                                           child: Column(
-                                                            children: <
-                                                                Widget>[
+                                                            children: <Widget>[
                                                               Row(
                                                                 children: <
                                                                     Widget>[
@@ -225,32 +215,44 @@ class _Home3State extends State<Home3> {
                                                                     children: [
                                                                       Text(
                                                                         '${(snapshot.data!.main.temp - 273.15).toInt()}°',
-                                                                        style: GoogleFonts.nunitoSans(fontSize: 12.0, fontWeight: FontWeight.w700, color: Colors.black),
+                                                                        style: GoogleFonts.nunitoSans(
+                                                                            fontSize:
+                                                                                12.0,
+                                                                            fontWeight:
+                                                                                FontWeight.w700,
+                                                                            color: Colors.black),
                                                                       ),
                                                                       Text(
                                                                         '${(snapshot.data!.name)}',
-                                                                        style: GoogleFonts.nunitoSans(
-                                                                          color: Colors.black,
-                                                                          fontSize: 12.0,
-                                                                          fontWeight: FontWeight.w700,
+                                                                        style: GoogleFonts
+                                                                            .nunitoSans(
+                                                                          color:
+                                                                              Colors.black,
+                                                                          fontSize:
+                                                                              12.0,
+                                                                          fontWeight:
+                                                                              FontWeight.w700,
                                                                         ),
                                                                       ),
                                                                     ],
                                                                   ),
                                                                   SizedBox(
-                                                                    width:
-                                                                        2,
+                                                                    width: 2,
                                                                   ),
                                                                   Column(
                                                                     mainAxisAlignment:
-                                                                        MainAxisAlignment.center,
+                                                                        MainAxisAlignment
+                                                                            .center,
                                                                     mainAxisSize:
-                                                                        MainAxisSize.min,
+                                                                        MainAxisSize
+                                                                            .min,
                                                                     children: <
                                                                         Widget>[
-                                                                      Image.network(
+                                                                      Image
+                                                                          .network(
                                                                         'http://openweathermap.org/img/wn/${snapshot.data!.weather[0].icon}.png',
-                                                                        height: 50,
+                                                                        height:
+                                                                            50,
                                                                       ),
                                                                     ],
                                                                   )
@@ -264,7 +266,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                 ),
                                               )
-                                            : const Center(
+                                            :  Center(
                                                 child:
                                                     CircularProgressIndicator(
                                                         backgroundColor:
@@ -433,25 +435,25 @@ class _Home3State extends State<Home3> {
                                                             height: 10,
                                                           ),
                                                           ExpansionTile(
-                                                            collapsedShape:
-                                                            RoundedRectangleBorder(
+                                                            collapsedShape: RoundedRectangleBorder(
                                                                 borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    15)),
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15)),
                                                             shape: RoundedRectangleBorder(
                                                                 borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    15)),
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            15)),
                                                             title: Text(''),
-                                                            backgroundColor: Colors
-                                                                .blue.shade100,
+                                                            backgroundColor:
+                                                                Colors.blue
+                                                                    .shade100,
                                                             leading: Text(
                                                                 'Custom Swipe'),
                                                             collapsedBackgroundColor:
-                                                            Colors
-                                                                .blue.shade100,
+                                                                Colors.blue
+                                                                    .shade100,
                                                             children: [
                                                               ListTile(
                                                                 onTap: () {
@@ -468,8 +470,8 @@ class _Home3State extends State<Home3> {
                                                                   'STACKED',
                                                                   style: TextStyle(
                                                                       fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
+                                                                          FontWeight
+                                                                              .w600),
                                                                 ),
                                                               ),
                                                               ListTile(
@@ -487,8 +489,8 @@ class _Home3State extends State<Home3> {
                                                                   'SHADOW VIEW',
                                                                   style: TextStyle(
                                                                       fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
+                                                                          FontWeight
+                                                                              .w600),
                                                                 ),
                                                               ),
                                                               ListTile(
@@ -506,8 +508,8 @@ class _Home3State extends State<Home3> {
                                                                   'DEFAULT VIEW',
                                                                   style: TextStyle(
                                                                       fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
+                                                                          FontWeight
+                                                                              .w600),
                                                                 ),
                                                               ),
                                                             ],
@@ -667,27 +669,7 @@ class _Home3State extends State<Home3> {
                                                                   context);
                                                             },
                                                           ),
-                                                          // SettingsSection(
-                                                          //   tiles: [
-                                                          //     SettingsTile
-                                                          //         .switchTile(
-                                                          //       title: Text(
-                                                          //           'Use Dark Mode'),
-                                                          //       leading: Icon(Icons
-                                                          //           .phone_android),
-                                                          //       initialValue:
-                                                          //           themeChange
-                                                          //               .darkTheme,
-                                                          //       onToggle: (value) {
-                                                          //         setState(() {
-                                                          //           themeChange
-                                                          //                   .darkTheme =
-                                                          //               value;
-                                                          //         });
-                                                          //       },
-                                                          //     ),
-                                                          //   ],
-                                                          // ),
+                                                         
                                                         ],
                                                       ),
                                                     ),
@@ -1649,14 +1631,14 @@ class _Home3State extends State<Home3> {
                                   : Container(),
                               viewnews == true
                                   ? SizedBox(
-                                  height: 450,
-                                  child: PageView.builder(
-                                    // physics: NeverScrollableScrollPhysics(),
-                                      controller: PageCount,
-                                      itemCount: DailyNewsPages.length,
-                                      itemBuilder: (BuildContext, index) {
-                                        return DailyNewsPages[index];
-                                      }))
+                                      height: 450,
+                                      child: PageView.builder(
+                                          // physics: NeverScrollableScrollPhysics(),
+                                          controller: PageCount,
+                                          itemCount: DailyNewsPages.length,
+                                          itemBuilder: (BuildContext, index) {
+                                            return DailyNewsPages[index];
+                                          }))
                                   : Container(),
                               SingleChildScrollView(
                                 physics: ScrollPhysics(),
@@ -1691,9 +1673,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                   color: Colors.grey[100]),
                                               padding: EdgeInsets.all(8),
-                                              /*child: Center(
-                                                        child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                                                        ) */
+                                              
                                             ),
                                           ),
                                           Expanded(
@@ -1729,9 +1709,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                   color: Colors.grey[100]),
                                               padding: EdgeInsets.all(8),
-                                              /*child: Center(
-                                                        child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                                                        ) */
+                                             
                                             ),
                                           ),
                                           Text(
@@ -1765,9 +1743,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                   color: Colors.grey[100]),
                                               padding: EdgeInsets.all(8),
-                                              /*child: Center(
-                                                        child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                                                        ) */
+                                            
                                             ),
                                           ),
                                           Text(
@@ -1801,9 +1777,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                   color: Colors.grey[100]),
                                               padding: EdgeInsets.all(8),
-                                              /*child: Center(
-                                                        child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                                                        ) */
+                                            
                                             ),
                                           ),
                                           Text(
@@ -1837,9 +1811,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                   color: Colors.grey[100]),
                                               padding: EdgeInsets.all(8),
-                                              /*child: Center(
-                                                        child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                                                        ) */
+                                          
                                             ),
                                           ),
                                           Text(
@@ -1873,9 +1845,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                   color: Colors.grey[100]),
                                               padding: EdgeInsets.all(8),
-                                              /*child: Center(
-                                                        child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                                                        ) */
+                                          
                                             ),
                                           ),
                                           Text(
@@ -1909,9 +1879,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                   color: Colors.grey[100]),
                                               padding: EdgeInsets.all(8),
-                                              /*child: Center(
-                                                        child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                                                        ) */
+                                             
                                             ),
                                           ),
                                           Text(
@@ -1945,9 +1913,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                   color: Colors.grey[100]),
                                               padding: EdgeInsets.all(8),
-                                              /*child: Center(
-                                                        child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                                                        ) */
+                                          
                                             ),
                                           ),
                                           Text(
@@ -1985,9 +1951,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                   color: Colors.grey[100]),
                                               padding: EdgeInsets.all(8),
-                                              /*child: Center(
-                                                        child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                                                        ) */
+                                             
                                             ),
                                           ),
                                           Text(
@@ -2025,9 +1989,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                   color: Colors.grey[100]),
                                               padding: EdgeInsets.all(8),
-                                              /*child: Center(
-                                                        child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                                                        ) */
+                                           
                                             ),
                                           ),
                                           Text(
@@ -2061,9 +2023,7 @@ class _Home3State extends State<Home3> {
                                                   ),
                                                   color: Colors.grey[100]),
                                               padding: EdgeInsets.all(8),
-                                              /*child: Center(
-                                                        child: Image.asset("assets/Image/Government_of_Telangana_Logo.png")
-                                                        ) */
+                                          
                                             ),
                                           ),
                                           Text(
@@ -2079,181 +2039,7 @@ class _Home3State extends State<Home3> {
                                   ],
                                 ),
                               ),
-                              //todo: Stock market
-                              // Padding(
-                              //   padding: const EdgeInsets.only(left: 28),
-                              //   child: Row(
-                              //     children: [
-                              //       Image.asset(
-                              //         'assets/images/stocks.gif',
-                              //         height: 30,
-                              //         width: 30,
-                              //       ),
-                              //       Text(
-                              //         'MARKET HUNT',
-                              //         style: TextStyle(
-                              //             fontSize: 18,
-                              //             fontWeight: FontWeight.w800),
-                              //       ),
-                              //     ],
-                              //   ),
-                              // ),
-                              // FlipCard(
-                              //   onFlip: () {
-                              //     setState(() {
-                              //       touchtoflip = !touchtoflip;
-                              //     });
-                              //   },
-                              //   flipOnTouch: touchtoflip,
-                              //   controller: flipCardController,
-                              //   fill: Fill
-                              //       .fillBack, // Fill the back side of the card to make in the same size as the front.
-                              //   direction: FlipDirection.VERTICAL, // default
-                              //   side: CardSide
-                              //       .FRONT, // The side to initially display.
-                              //   front: Padding(
-                              //     padding:
-                              //         const EdgeInsets.only(left: 8.0, right: 8),
-                              //     child: Card(
-                              //         elevation: 10,
-                              //         child: Padding(
-                              //           padding: const EdgeInsets.all(8.0),
-                              //           child: Container(
-                              //             color: Colors.blueAccent.shade100,
-                              //             height: 160,
-                              //             width: MediaQuery.of(context).size.width,
-                              //             child: Row(
-                              //               children: [
-                              //                 SingleChildScrollView(
-                              //                   child: Column(children: [
-                              //                     FutureBuilder(
-                              //                         future: stockdata1,
-                              //                         builder:
-                              //                             ((context, snapshot) {
-                              //                           if (snapshot
-                              //                                   .connectionState ==
-                              //                               ConnectionState
-                              //                                   .waiting) {
-                              //                             return Padding(
-                              //                               padding:
-                              //                                   const EdgeInsets
-                              //                                           .only(
-                              //                                       top: 70.0),
-                              //                               child: SizedBox(
-                              //                                   height: 150,
-                              //                                   width: 150,
-                              //                                   child: Center(
-                              //                                       child:
-                              //                                           SpinKitWave(
-                              //                                     size: 18,
-                              //                                     color:
-                              //                                         Colors.blue,
-                              //                                   ))),
-                              //                             );
-                              //                           } else if (snapshot
-                              //                                   .connectionState ==
-                              //                               ConnectionState.done) {
-                              //                             if (snapshot.hasError) {
-                              //                               return const Text(
-                              //                                   'Data Error');
-                              //                             } else if (snapshot
-                              //                                 .hasData) {
-                              //                               return StockCardModel(
-                              //                                   Stockname: 'TESLA',
-                              //                                   CurrentPrice:
-                              //                                       '${TeslaStocksData['c']}',
-                              //                                   High: '245',
-                              //                                   Low: '220',
-                              //                                   Change: '23',
-                              //                                   StockIcon:
-                              //                                       'assets/images/tesla.png');
-                              //                             } else {
-                              //                               return const Text(
-                              //                                   'Server Error');
-                              //                             }
-                              //                           } else {
-                              //                             return Text(
-                              //                                 'State: ${snapshot.connectionState}');
-                              //                           }
-                              //                         })),
-                              //                     StockCardModel(
-                              //                       Stockname: 'APPLE',
-                              //                       CurrentPrice: '554',
-                              //                       High: '578',
-                              //                       Low: '543',
-                              //                       Change: '23',
-                              //                       StockIcon:
-                              //                           'assets/images/apple.png',
-                              //                     ),
-                              //                     StockCardModel(
-                              //                         Stockname: 'ALPHABET',
-                              //                         CurrentPrice: '554',
-                              //                         High: '578',
-                              //                         Low: '543',
-                              //                         Change: '23',
-                              //                         StockIcon:
-                              //                             'assets/images/alphabet.png'),
-                              //                   ]),
-                              //                 ),
-                              //                 SizedBox(
-                              //                   width: 25,
-                              //                 ),
-                              //                 Column(
-                              //                   children: [
-                              //                     GestureDetector(
-                              //                       onTap: () {
-                              //                         flipCardController!
-                              //                             .toggleCard();
-                              //                       },
-                              //                       child: Image.asset(
-                              //                         'assets/images/tap.gif',
-                              //                         height: 150,
-                              //                         width: 120,
-                              //                       ),
-                              //                     ),
-                              //                   ],
-                              //                 )
-                              //               ],
-                              //             ),
-                              //           ),
-                              //         )),
-                              //   ),
-                              //   back: Padding(
-                              //       padding:
-                              //           const EdgeInsets.only(left: 8.0, right: 8),
-                              //       child: Card(
-                              //           elevation: 10,
-                              //           child: Padding(
-                              //               padding: const EdgeInsets.all(8.0),
-                              //               child: SizedBox(
-                              //                 // color: Colors.blueAccent.shade100,
-                              //                 height: 160,
-                              //                 width:
-                              //                     MediaQuery.of(context).size.width,
-                              //                 child: Swiper(
-                              //                   itemHeight: 160,
-                              //                   itemWidth: MediaQuery.of(context)
-                              //                       .size
-                              //                       .width,
-                              //                   pagination: SwiperPagination(
-                              //                       builder:
-                              //                           DotSwiperPaginationBuilder(
-                              //                     size: 7,
-                              //                     color: Colors.grey,
-                              //                     activeColor: Colors.blue.shade200,
-                              //                   )),
-                              //                   scrollDirection: Axis.horizontal,
-                              //                   autoplay: false,
-                              //                   itemCount: 2,
-                              //                   itemBuilder: (BuildContext context,
-                              //                       int index) {
-                              //                     return TechNewslist[index];
-                              //                   },
-                              //                 ),
-                              //               )))),
-                              // ),
-
-
+                              
                             ]),
                       ),
                     ),
@@ -2263,65 +2049,9 @@ class _Home3State extends State<Home3> {
     );
   }
 
-  List<Widget> NewsPaperList() {
-    if (newsdata.length == 0) return [];
-    return newsdata
-        .map<Card>((Value) => Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              margin: EdgeInsets.all(4),
-              elevation: 20,
-              child: ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        Value['mediaName'] ?? '',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.grey),
-                      ),
-                      Text(
-                        Value['publishedDate'] ?? '',
-                        style: TextStyle(fontSize: 16),
-                      ),
-                    ],
-                  ),
-                  subtitle: Column(
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        Value['headLine'] ?? '',
-                        maxLines: 3,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, color: Colors.black),
-                      ),
-                    ],
-                  ),
-                  onTap: () {}
-                  // launchUrl(Uri.parse(Value['sourceUrl'])
-                  ),
-            ))
-        .toList();
-  }
+  
 
-  String? convertUrlToId(String url, {bool trimWhitespaces = true}) {
-    if (!url.contains("http") && (url.length == 11)) return url;
-    if (trimWhitespaces) url = url.trim();
-
-    for (var exp in [
-      RegExp(
-          r"^https:\/\/(?:www\.|m\.)?youtube\.com\/watch\?v=([_\-a-zA-Z0-9]{11}).*$"),
-      RegExp(
-          r"^https:\/\/(?:www\.|m\.)?youtube(?:-nocookie)?\.com\/embed\/([_\-a-zA-Z0-9]{11}).*$"),
-      RegExp(r"^https:\/\/youtu\.be\/([_\-a-zA-Z0-9]{11}).*$")
-    ]) {
-      Match? match = exp.firstMatch(url);
-      if (match != null && match.groupCount >= 1) return match.group(1);
-    }
-    return null;
-  }
+  
 
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
@@ -2352,197 +2082,10 @@ class _Home3State extends State<Home3> {
     return true;
   }
 
-  double expandedappbar = 130;
 
-  SliverAppBar createSilverAppBar1() {
-    return
-        // SliverAppBar(
-        //     backgroundColor: Colors.transparent,
-        //     expandedHeight: 160.0,
-        //     floating: true,
-        //     pinned: true,
-        //     snap: true,
-        //     flexibleSpace: FlexibleSpaceBar(
-        //       background: Stack(
-        //         children: <Widget>[
-        //           Positioned.fill(
-        //             child: Image.asset(
-        //               "assets/icons/IntelliSense-Logo-Finall_01022023_A.gif",
-        //               height: 100,
-        //               width: 100,
-        //             ),
-        //           ),
-        //           // Positioned.fill(
-        //           //   child: Align(
-        //           //     alignment: Alignment.center,
-        //           //     child: Padding(
-        //           //       padding: const EdgeInsets.only(bottom: 0.0),
-        //           //       child: Image.asset(
-        //           //         'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-        //           //         fit: BoxFit.fill,
-        //           //         height: 120,
-        //           //         width: 130,
-        //           //       ),
-        //           //     ),
-        //           //   ),
-        //           // ),
-        //         ],
-        //       ),
-        //     ));
 
-        SliverAppBar(
-      iconTheme: IconThemeData(
-        color: Colors.black,
-      ),
-      floating: true,
-      snap: true,
-      actions: [
-        PopupMenuButton(onSelected: (value) {
-          if (value == 'notifications') {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Notifications()));
-          }
-        }, itemBuilder: (BuildContext bc) {
-          return [
-            PopupMenuItem(
-              value: 'Reader',
-              onTap: () {
-                setState(() {
-                  viewnews = false;
-                });
-              },
-              child: Text("Hide News"),
-            ),
-            PopupMenuItem(
-              value: 'logout',
-              child: Text("Logout"),
-              onTap: () {
-                CoolAlert.show(
-                  confirmBtnColor: Color(0xff00186a),
-                  backgroundColor: Color(0xff001969),
-                  context: context,
-                  type: CoolAlertType.confirm,
-                  onConfirmBtnTap: () => LogoutAPI(context),
-                );
-              },
-            ),
-            PopupMenuItem(
-              value: 'notifications',
-              child: Text("Notifications"),
-              onTap: () {},
-            ),
-          ];
-        }),
-      ],
-      backgroundColor: Color(0xffd2dfff),
-      expandedHeight: expandedappbar,
-      elevation: 0,
-      pinned: true,
-      flexibleSpace: LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-        return Stack(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                // Padding(
-                //   padding: const EdgeInsets.only(left: 8.0, top: 5),
-                //   child: Lottie.asset('assets/Image/bg.json',
-                //       height: 140, width: 120),
-                // ),
-                Image.asset(
-                  'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                  // fit: BoxFit.contain,
-                  height: 120, width: 130,
-                ),
-              ],
-            ),
-            Positioned(
-                top: 80,
-                left: 230,
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WeatherScreen()));
-                  },
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Lottie.asset('assets/icons/weather.json',
-                          height: 30, width: 30),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      Column(
-                        children: [
-                          FutureBuilder(
-                              future: weatherdata,
-                              builder: ((context, snapshot) {
-                                if (snapshot.connectionState ==
-                                    ConnectionState.waiting) {
-                                  return Container(
-                                      child: Center(
-                                          child: SpinKitWave(
-                                    size: 12,
-                                    color: Colors.blue,
-                                  )));
-                                } else if (snapshot.connectionState ==
-                                    ConnectionState.done) {
-                                  if (snapshot.hasError) {
-                                    return const Text('Data Error');
-                                  } else if (snapshot.hasData) {
-                                    return Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        AutoSizeText(
-                                            '${WeatherDataResult['main']['temp']}',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 12,
-                                                overflow: TextOverflow.fade)),
-                                        AutoSizeText(
-                                            '${WeatherDataResult['name']}',
-                                            style: TextStyle(
-                                                fontSize: 12,
-                                                overflow: TextOverflow.fade)),
-                                      ],
-                                    );
-                                  } else {
-                                    return const Text('Server Error');
-                                  }
-                                } else {
-                                  return Text(
-                                      'State: ${snapshot.connectionState}');
-                                }
-                              }))
-                        ],
-                      ),
-                    ],
-                  ),
-                ))
-            // Positioned(
-            //     child: _currentPosition!.latitude == null
-            //         ? Text('${_currentPosition!.latitude}')
-            //         : Text('No data')
-            //     // IconButton(
-            //     //     onPressed: () {
-            //     //       Navigator.push(
-            //     //           context,
-            //     //           MaterialPageRoute(
-            //     //               builder: (context) => LocationPage()));
-            //     //     },
-            //     //     icon: Icon(Icons.sunny))
-            //     ),
-          ],
-        );
-      }),
-    );
-  }
+  
+
 
   Future<dynamic> WeatherAPI() async {
     final hasPermission = await _handleLocationPermission();

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intellensense/Pages/PartyFilterscreen.dart';
+import 'package:intellensense/Pages/ChattingPage.dart';
+import 'package:intellensense/Pages/sidebarPages/CandidatureAnalysis.dart';
+import 'package:intellensense/Pages/sidebarPages/ConstituencyAnalusis.dart';
 
 import '../../TRS Screens/MLAsTrsScreen.dart';
 
@@ -66,7 +68,11 @@ class _drawerState extends State<drawer> {
                   ),
                   title: Text('Constituency Analysis'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ConstituencyAnalysis(),
+                        ));
                   },
                 ),
                 ListTile(
@@ -138,7 +144,8 @@ class _drawerState extends State<drawer> {
                   ),
                   title: Text('WhatsApp'),
                   onTap: () {
-                    Navigator.pop(context);
+                    // Navigator.push(context,
+                    //     MaterialPageRoute(builder: (context) => ChatScreen()));
                   },
                 ),
                 ListTile(
@@ -166,28 +173,6 @@ class _drawerState extends State<drawer> {
                   },
                 ),
               ]),
-          /*ListTile(
-            leading: Image(
-              image: AssetImage('assets/icons/iTransform ETL.png'),
-              height: 25,
-            ),
-            title: const Text('Data Integration'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),
-          ListTile(
-            leading: Image(
-              image: AssetImage(
-                'assets/icons/Data-Analytics-icon.png',
-              ),
-              height: 25,
-            ),
-            title: const Text('Data Analytics'),
-            onTap: () {
-              Navigator.pop(context);
-            },
-          ),*/
         ]));
   }
 }

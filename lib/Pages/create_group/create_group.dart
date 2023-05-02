@@ -3,9 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-import '../../HomeScreen.dart';
-import '../../main.dart';
-
 class CreateGroup extends StatefulWidget {
   final List<Map<String, dynamic>> membersList;
 
@@ -52,7 +49,7 @@ class _CreateGroupState extends State<CreateGroup> {
       "type": "notify",
     });
 
-   /* Navigator.of(context).pushAndRemoveUntil(
+    /* Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (_) => HomeScreen()), (route) => false);*/
   }
 
@@ -66,43 +63,43 @@ class _CreateGroupState extends State<CreateGroup> {
       ),
       body: isLoading
           ? Container(
-        height: size.height,
-        width: size.width,
-        alignment: Alignment.center,
-        child: CircularProgressIndicator(),
-      )
+              height: size.height,
+              width: size.width,
+              alignment: Alignment.center,
+              child: CircularProgressIndicator(),
+            )
           : Column(
-        children: [
-          SizedBox(
-            height: size.height / 10,
-          ),
-          Container(
-            height: size.height / 14,
-            width: size.width,
-            alignment: Alignment.center,
-            child: Container(
-              height: size.height / 14,
-              width: size.width / 1.15,
-              child: TextField(
-                controller: _groupName,
-                decoration: InputDecoration(
-                  hintText: "Enter Group Name",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+              children: [
+                SizedBox(
+                  height: size.height / 10,
+                ),
+                Container(
+                  height: size.height / 14,
+                  width: size.width,
+                  alignment: Alignment.center,
+                  child: Container(
+                    height: size.height / 14,
+                    width: size.width / 1.15,
+                    child: TextField(
+                      controller: _groupName,
+                      decoration: InputDecoration(
+                        hintText: "Enter Group Name",
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                SizedBox(
+                  height: size.height / 50,
+                ),
+                ElevatedButton(
+                  onPressed: createGroup,
+                  child: Text("Create Group"),
+                ),
+              ],
             ),
-          ),
-          SizedBox(
-            height: size.height / 50,
-          ),
-          ElevatedButton(
-            onPressed: createGroup,
-            child: Text("Create Group"),
-          ),
-        ],
-      ),
     );
   }
 }

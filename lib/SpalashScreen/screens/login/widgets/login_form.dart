@@ -63,17 +63,6 @@ class _LoginFormState extends State<LoginForm> {
     userNameText.text = 'SASI_MGR';
     passWord = 'P@ssw0rd';
     passWordText.text = 'P@ssw0rd';
-
-    /* WidgetsBinding.instance?.addPostFrameCallback((_) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HighLevelMenu(
-            {},
-          ),
-        ),
-      );
-    });*/
   }
 
   @override
@@ -236,15 +225,7 @@ class _LoginFormState extends State<LoginForm> {
                       var login = response['message'] ?? '';
                       if (login == 'success') {
                         islogin = true;
-                        //  userDetails = {
-                        //   'userName': userNameText.text,
-                        //   'instance': response['instance'],
-                        //   'plant': response['plant'],
-                        //   'env': response['env'],
-                        //   'orgn': response['orgn'],
-                        //   'roleId': response['roleId'],
-                        //   'locale': response['locale']
-                        // };
+
                         print(res);
                         print(userDetails);
                         String username = userNameText.text;
@@ -272,29 +253,6 @@ class _LoginFormState extends State<LoginForm> {
                           });
                         }
 
-                        // await Fluttertoast.showToast(
-                        //     msg: "Welcome",
-                        //     toastLength: Toast.LENGTH_SHORT,
-                        //     gravity: ToastGravity.SNACKBAR,
-                        //     backgroundColor:
-                        //     Color(0xff29378f),
-                        //     textColor: Colors.white,
-                        //     fontSize: 16.0);
-                        // await Timer(Duration(seconds: 3),
-                        //         () {
-                        //       Navigator.push(
-                        //           context,
-                        //           MaterialPageRoute(
-                        //               builder: (_) =>
-                        //                   HomeScreen(
-                        //                       userDetails
-                        //                   ))
-                        //       ).then((value) {
-                        //         setState((){    islogin=false;});
-                        //
-                        //       });
-                        //     });
-
                         setState(() {
                           userName = '';
                           passWord = '';
@@ -321,13 +279,6 @@ class _LoginFormState extends State<LoginForm> {
                     confirmBtnColor: Color(0xff5163da),
                   );
                 }
-
-                /* print("Sign in click");
-                             Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          SmartSearch())); */
               },
               child: Center(
                 child: islogin == true
@@ -353,42 +304,6 @@ class _LoginFormState extends State<LoginForm> {
                         ),
                       ),
               )),
-          /*FadeSlideTransition(
-            animation: widget.animation,
-            additionalOffset: 2 * space,
-            child: CustomButton(
-              color: kBlue,
-              textColor: kWhite,
-              text: 'Login',
-              onPressed: () {},
-            ),
-          ),*/
-          // SizedBox(height: 2 * space),
-          /*FadeSlideTransition(
-            animation: animation,
-            additionalOffset: 3 * space,
-            child: CustomButton(
-              color: kWhite,
-              textColor: kBlack.withOpacity(0.5),
-              text: 'Continue with Google',
-              image: const Image(
-                image: AssetImage(kGoogleLogoPath),
-                height: 48.0,
-              ),
-              onPressed: () {},
-            ),
-          ),
-          SizedBox(height: space),
-          FadeSlideTransition(
-            animation: animation,
-            additionalOffset: 4 * space,
-            child: CustomButton(
-              color: kBlack,
-              textColor: kWhite,
-              text: 'Create a Bubble Account',
-              onPressed: () {},
-            ),
-          ),*/
         ],
       ),
     );

@@ -105,7 +105,8 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                           TableRow(
                             children: [
                               TableCell(
-                                verticalAlignment: TableCellVerticalAlignment.top,
+                                verticalAlignment:
+                                    TableCellVerticalAlignment.top,
                                 child: Padding(
                                   padding: const EdgeInsets.all(20),
                                   child: Text(
@@ -118,7 +119,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -126,7 +127,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -134,7 +135,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -142,7 +143,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -150,7 +151,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -158,7 +159,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -169,7 +170,8 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                           TableRow(
                             children: [
                               TableCell(
-                                verticalAlignment: TableCellVerticalAlignment.top,
+                                verticalAlignment:
+                                    TableCellVerticalAlignment.top,
                                 child: Padding(
                                   padding: const EdgeInsets.all(20),
                                   child: Text(
@@ -182,7 +184,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text('55'),
@@ -190,7 +192,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text('64'),
@@ -198,7 +200,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text('87'),
@@ -206,7 +208,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text('109'),
@@ -214,7 +216,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text('28'),
@@ -222,7 +224,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text('17'),
@@ -233,7 +235,8 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                           TableRow(
                             children: [
                               TableCell(
-                                verticalAlignment: TableCellVerticalAlignment.top,
+                                verticalAlignment:
+                                    TableCellVerticalAlignment.top,
                                 child: Padding(
                                   padding: const EdgeInsets.all(20),
                                   child: Text(
@@ -246,7 +249,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -254,7 +257,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -262,7 +265,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -270,7 +273,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -278,7 +281,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -286,7 +289,7 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                               ),
                               TableCell(
                                 verticalAlignment:
-                                TableCellVerticalAlignment.middle,
+                                    TableCellVerticalAlignment.middle,
                                 child: Padding(
                                   padding: const EdgeInsets.all(10),
                                   child: Text(''),
@@ -349,53 +352,6 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                         ),
                       ],
                     )
-                    /*MaterialButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0)),
-                      onPressed: () {
-                        cardA.currentState?.expand();
-                      },
-                      child: Column(
-                        children: <Widget>[
-                          Icon(Icons.arrow_downward),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 2.0),
-                          ),
-                          Text('Open'),
-                        ],
-                      ),
-                    ),
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0)),
-                      onPressed: () {
-                        cardA.currentState?.collapse();
-                      },
-                      child: Column(
-                        children: <Widget>[
-                          Icon(Icons.arrow_upward),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 2.0),
-                          ),
-                          Text('Close'),
-                        ],
-                      ),
-                    ),
-                    MaterialButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0)),
-                      onPressed: () {
-                      },
-                      child: Column(
-                        children: <Widget>[
-                          Icon(Icons.swap_vert),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 2.0),
-                          ),
-                          Text('Toggle'),
-                        ],
-                      ),
-                    ),*/
                   ],
                 ),
               ],
@@ -418,18 +374,6 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
           margin: EdgeInsets.all(4),
           elevation: 20,
           child: ListTile(
-            /*leading: CircleAvatar(
-          backgroundColor: Colors.transparent,
-          radius: 30,
-          child: ClipOval(
-            child: Image.memory(
-              base64Decode(Value['content'].substring(22) ?? ''),
-              width: 300,
-              height: 300,
-              fit: BoxFit.fill,
-            ),
-          ),
-        ),*/
             title: Text(
               Value['id']['mediaName'] ?? '',
               style: TextStyle(fontWeight: FontWeight.bold, color: Colors.grey),
@@ -445,46 +389,6 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
                   style: TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.black),
                 ),
-                /*Row(
-              children: [
-                Row(
-                  children: [
-                    Image.asset('assets/icons/Video ViewsEmoji.png',height: 20,width: 20,),
-                    SizedBox(width: 10,),
-                    //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video ViewsEmoji.png')),),
-                    Text(Value['videoViews'] ?? '',style: TextStyle(fontSize: 14),)
-                  ],
-                ),
-                SizedBox(width: 10,),
-                Row(
-                  children: [
-                    Image.asset('assets/icons/Video LikesEmoji.png',height: 20,width: 20,),
-                    SizedBox(width: 10,),
-                    //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video LikesEmoji.png')),),
-                    Text(Value['videoLikes'] ?? '',style: TextStyle(fontSize: 14),)
-                  ],
-                ),
-                SizedBox(width: 10,),
-                Row(
-                  children: [
-                    Image.asset('assets/icons/Video DislikesEmoji.png',height: 20,width: 20,),
-                    SizedBox(width: 10,),
-                    //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video DislikesEmoji.png')),),
-                    Text(Value['videoDislikes'] ?? '',style: TextStyle(fontSize: 14),)
-                  ],
-                ),
-                SizedBox(width: 10,),
-                Row(
-                  children: [
-                    Image.asset('assets/icons/Video CommentsEmoji.png',height: 20,width: 20,),
-                    SizedBox(width: 10,),
-                    //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video CommentsEmoji.png')),),
-                    Text(Value['videoCommentsCount'] ?? '',style: TextStyle(fontSize: 14),)
-                  ],
-                ),
-                SizedBox(width: 10,),
-                //IconButton(onPressed: (){}, icon: Icon(Icons.comment))
-                */
               ],
             ),
             trailing: Text(
@@ -492,10 +396,6 @@ class _ScoreCardsScreenState extends State<ScoreCardsScreen> {
               style: TextStyle(fontSize: 16),
             ),
             onTap: () => launchUrl(Uri.parse(Value['sourceUrl'])),
-            /*onTap: (){
-          print(Value);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => TrsMpDetails(Value)));
-        },*/
           ),
         )).toList();
   }

@@ -1,164 +1,167 @@
-  name: intellensense
-  description: A new Flutter project.
+name: intellensense
+description: A new Flutter project.
 
-  # The following line prevents the package from being accidentally published to
-  # pub.dev using `flutter pub publish`. This is preferred for private packages.
-  publish_to: "none" # Remove this line if you wish to publish to pub.dev
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
-  # The following defines the version and build number for your application.
-  # A version number is three numbers separated by dots, like 1.2.43
-  # followed by an optional build number separated by a +.
-  # Both the version and the builder number may be overridden in flutter
-  # build by specifying --build-name and --build-number, respectively.
-  # In Android, build-name is used as versionName while build-number used as versionCode.
-  # Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-  # In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
-  # Read more about iOS versioning at
-  # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-  # In Windows, build-name is used as the major, minor, and patch parts
-  # of the product and file versions while build-number is used as the build suffix.
-  version: 1.0.0+1
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+# In Windows, build-name is used as the major, minor, and patch parts
+# of the product and file versions while build-number is used as the build suffix.
+version: 1.0.0+1
 
-  environment:
-    sdk: ">=2.18.6 <3.0.0"
+environment:
+  sdk: ">=2.18.6 <3.0.0"
 
-  # Dependencies specify other packages that your package needs in order to work.
-  # To automatically upgrade your package dependencies to the latest versions
-  # consider running `flutter pub upgrade --major-versions`. Alternatively,
-  # dependencies can be manually updated by changing the version numbers below to
-  # the latest version available on pub.dev. To see which dependencies have newer
-  # versions available, run `flutter pub outdated`.
-  dependencies:
-    animate_do: ^3.0.2
-    animated_bottom_navigation_bar: ^1.2.0
-    auto_size_text: ^3.0.0
-    avatars: ^2.0.0
-    bottom_navy_bar: ^6.0.0
-    bubble_tab_indicator: ^0.1.6
-    cached_network_image: ^3.2.3
-    card_swiper: ^2.0.4
-    carousel_pro: ^1.0.0
-    carousel_slider: ^4.1.1
-    cloud_firestore: ^4.5.2
-    cool_alert: ^1.1.0
-    country_code_picker: ^3.0.0
-    cupertino_icons: ^1.0.2
-    dropdown_button2: ^1.9.2
-    equatable: ^2.0.5
-    expansion_tile_card: ^2.0.0
-    firebase_auth:
-    firebase_core: ^2.9.0
-    firebase_messaging: ^14.4.1
-    firebase_storage: ^11.1.1
-    fl_chart: ^0.35.0
-    flip_card: ^0.7.0
-    flutter:
-      sdk: flutter
-    flutter_spinkit: ^5.1.0
-    flutter_svg: ^2.0.3
-    flutter_zoom_drawer: ^2.1.1
-    fluttertoast: ^8.2.1
-    foldable_sidebar: ^1.0.0
-    font_awesome_flutter: ^10.1.0
-    foundation_flutter: ^0.2.0
-    geolocator: ^9.0.2
-    getwidget: ^3.0.1
-    google_fonts: ^4.0.3
-    google_maps_flutter: ^2.2.3
-    google_sign_in: ^6.1.0
-    http: ^0.13.4
-    image_picker: ^0.8.7+3
-    intl: ^0.18.1
-    marquee: ^2.2.3
-    marquee_text: ^2.5.0+1
-    modal_bottom_sheet: ^2.1.2
-    otp_text_field: ^1.1.3
-    permission_handler: any
-    photo_view: ^0.14.0
-    popup_card: ^0.1.0
-    provider: ^6.0.5
-    quickalert: ^1.0.0
-    r_dotted_line_border: ^0.1.1
-    rating_dialog: ^2.0.0
-    settings_ui: ^2.0.2
-    shared_preferences: ^2.1.0
-    sleek_circular_slider: ^2.0.1
-    tap_to_expand: ^0.6.1
-    text_scroll: ^0.1.2
-    timelines: ^0.1.0
-    url_launcher: ^6.1.4
-    youtube: ^1.0.1
-
-  dev_dependencies:
-    flutter_test:
-      sdk: flutter
-  # For information on the generic Dart part of this file, see the
-  # following page: https://dart.dev/tools/pub/pubspec
-  # The following section is specific to Flutter packages.
+# Dependencies specify other packages that your package needs in order to work.
+# To automatically upgrade your package dependencies to the latest versions
+# consider running `flutter pub upgrade --major-versions`. Alternatively,
+# dependencies can be manually updated by changing the version numbers below to
+# the latest version available on pub.dev. To see which dependencies have newer
+# versions available, run `flutter pub outdated`.
+dependencies:
+  animate_do: ^3.0.2
+  animated_bottom_navigation_bar: ^1.2.0
+  auto_size_text: ^3.0.0
+  avatars: ^2.0.0
+  bottom_navy_bar: ^6.0.0
+  bubble_tab_indicator: ^0.1.6
+  cached_network_image: ^3.2.3
+  card_swiper: ^2.0.4
+  carousel_pro: ^1.0.0
+  carousel_slider: ^4.1.1
+  cloud_firestore: ^4.5.2
+  collapsible_sidebar: ^2.0.4
+  cool_alert: ^1.1.0
+  country_code_picker: ^3.0.0
+  cupertino_icons: ^1.0.2
+  dropdown_button2: ^1.9.2
+  equatable: ^2.0.5
+  expansion_tile_card: ^2.0.0
+  firebase_auth: null
+  firebase_core: ^2.9.0
+  firebase_messaging: ^14.4.1
+  firebase_storage: ^11.1.1
+  fl_chart: ^0.35.0
+  flip_card: ^0.7.0
   flutter:
-    # The following line ensures that the Material Icons font is
-    # included with your application, so that you can use the icons in
-    # the material Icons class.
-    uses-material-design: true
-    assets:
-      - assets/icons/
-      - assets/Image/
-      - assets/ChatImg/
-      - assets/svg/
-      - assets/icons/Home-Iocn.png
-      - assets/icons/Candidature Analysis.png
-      - assets/icons/location.png
-      - assets/icons/communicationChannel.png
-      - assets/icons/Form.png
-      - assets/icons/faceEmotiondxp.png
-      - assets/icons/compareIconB.png
-      - assets/icons/ScoreCard.png
-      - assets/icons/fb.png
-      - assets/icons/newspaperdxp.png
-      - assets/NotificationIcons/analyticsShowCard.png
-      - assets/NotificationIcons/Open_Docs_Icon.png
-      - assets/NotificationIcons/GridDB.png
-      - assets/NotificationIcons/Pivot-Unpivot_Icon.png
-      - assets/NotificationIcons/Tree.png
-      - assets/icons/newspaperhead.gif
-      - assets/icons/SocialMedia.gif
-      - assets/icons/live.gif
-      - assets/new Updated images/Candidature Analysis.png
-      - assets/new Updated images/Communication Channel.png
-      - assets/new Updated images/Constituency Analysis.png
-      - assets/new Updated images/Electrol Analysis.png
-      - assets/new Updated images/News Feed.png
-      - assets/new Updated images/Survey.png
-      - assets/Image/brakes.png
-      - assets/Image/drop.png
-      - assets/Image/header.png
-      - assets/Image/logo.png
-      - assets/Image/sunny.png
-      - assets/Image/wind.png
-    # To add assets to your application, add an assets section, like this:
-    # assets:
-    #   - images/a_dot_burr.jpeg
-    #   - images/a_dot_ham.jpeg
-    # An image asset can refer to one or more resolution-specific "variants", see
-    # https://flutter.dev/assets-and-images/#resolution-aware
-    # For details regarding adding assets from package dependencies, see
-    # https://flutter.dev/assets-and-images/#from-packages
-    # To add custom fonts to your application, add a fonts section here,
-    # in this "flutter" section. Each entry in this list should have a
-    # "family" key with the font family name, and a "fonts" key with a
-    # list giving the asset and other descriptors for the font. For
-    # example:
-    # fonts:
-    #   - family: Schyler
-    #     fonts:
-    #       - asset: fonts/Schyler-Regular.ttf
-    #       - asset: fonts/Schyler-Italic.ttf
-    #         style: italic
-    #   - family: Trajan Pro
-    #     fonts:
-    #       - asset: fonts/TrajanPro.ttf
-    #       - asset: fonts/TrajanPro_Bold.ttf
-    #         weight: 700
-    #
-    # For details regarding fonts from package dependencies,
-    # see https://flutter.dev/custom-fonts/#from-packages
+    sdk: flutter
+  flutter_spinkit: ^5.1.0
+  flutter_svg: ^2.0.3
+  flutter_zoom_drawer: ^2.1.1
+  fluttertoast: ^8.2.1
+  foldable_sidebar: ^1.0.0
+  font_awesome_flutter: ^10.1.0
+  foundation_flutter: ^0.2.0
+  geolocator: ^9.0.2
+  getwidget: ^3.0.1
+  google_fonts: ^4.0.3
+  google_maps_flutter: ^2.2.3
+  google_sign_in: ^6.1.0
+  http: ^0.13.4
+  image_picker: ^0.8.7+3
+  intl: ^0.18.1
+  marquee: ^2.2.3
+  marquee_text: ^2.5.0+1
+  modal_bottom_sheet: ^2.1.2
+  otp_text_field: ^1.1.3
+  permission_handler: any
+  photo_view: ^0.14.0
+  popup_card: ^0.1.0
+  provider: ^6.0.5
+  quickalert: ^1.0.0
+  r_dotted_line_border: ^0.1.1
+  rating_dialog: ^2.0.0
+  settings_ui: ^2.0.2
+  shared_preferences: ^2.1.0
+  sidebarx: ^0.15.0
+  sleek_circular_slider: ^2.0.1
+  tap_to_expand: ^0.6.1
+  text_scroll: ^0.1.2
+  timelines: ^0.1.0
+  url_launcher: ^6.1.4
+  xml2json: ^5.3.6
+  youtube: ^1.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+# The following section is specific to Flutter packages.
+flutter:
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+  assets:
+    - assets/icons/
+    - assets/Image/
+
+    - assets/svg/
+    - assets/icons/Home-Iocn.png
+    - assets/icons/Candidature Analysis.png
+    - assets/icons/location.png
+    - assets/icons/communicationChannel.png
+    - assets/icons/Form.png
+    - assets/icons/faceEmotiondxp.png
+    - assets/icons/compareIconB.png
+    - assets/icons/ScoreCard.png
+    - assets/icons/fb.png
+    - assets/icons/newspaperdxp.png
+    - assets/NotificationIcons/analyticsShowCard.png
+    - assets/NotificationIcons/Open_Docs_Icon.png
+    - assets/NotificationIcons/GridDB.png
+    - assets/NotificationIcons/Pivot-Unpivot_Icon.png
+    - assets/NotificationIcons/Tree.png
+    - assets/icons/newspaperhead.gif
+    - assets/icons/SocialMedia.gif
+    - assets/icons/live.gif
+    - assets/new Updated images/Candidature Analysis.png
+    - assets/new Updated images/Communication Channel.png
+    - assets/new Updated images/Constituency Analysis.png
+    - assets/new Updated images/Electrol Analysis.png
+    - assets/new Updated images/News Feed.png
+    - assets/new Updated images/Survey.png
+    - assets/Image/brakes.png
+    - assets/Image/drop.png
+    - assets/Image/header.png
+    - assets/Image/logo.png
+    - assets/Image/sunny.png
+    - assets/Image/wind.png
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+  # An image asset can refer to one or more resolution-specific "variants", see
+  # https://flutter.dev/assets-and-images/#resolution-aware
+  # For details regarding adding assets from package dependencies, see
+  # https://flutter.dev/assets-and-images/#from-packages
+  # To add custom fonts to your application, add a fonts section here,
+  # in this "flutter" section. Each entry in this list should have a
+  # "family" key with the font family name, and a "fonts" key with a
+  # list giving the asset and other descriptors for the font. For
+  # example:
+  # fonts:
+  #   - family: Schyler
+  #     fonts:
+  #       - asset: fonts/Schyler-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+  #   - family: Trajan Pro
+  #     fonts:
+  #       - asset: fonts/TrajanPro.ttf
+  #       - asset: fonts/TrajanPro_Bold.ttf
+  #         weight: 700
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/custom-fonts/#from-packages

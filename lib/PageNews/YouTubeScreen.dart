@@ -22,8 +22,8 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
   void initState() {
     super.initState();
     YouTubeListAPI();
-    //NewsPaperAllAPI();
   }
+
   late Future<dynamic> finaldata = YouTubeListAPI();
   String? convertUrlToId(String url, {bool trimWhitespaces = true}) {
     if (!url.contains("http") && (url.length == 11)) return url;
@@ -42,15 +42,6 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
 
     return null;
   }
-
-  /* String getThumbnail({
-    required String videoId,
-    quality = 50,
-    bool webp = true,
-  }) =>
-      webp
-          ? 'https://i3.ytimg.com/vi_webp/$videoId/$quality.webp'
-          : 'https://i3.ytimg.com/vi/$videoId/$quality.jpg';*/
 
   @override
   Widget build(BuildContext context) {
@@ -77,9 +68,6 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        /*Container(
-              color: Colors.blue,
-            ),*/
                         SizedBox(
                           width: 10,
                         ),
@@ -162,30 +150,30 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
                     thickness: 4,
                     color: Colors.grey,
                   ),
-                          FutureBuilder(
-                            future: finaldata,
-                            builder: ((context, snapshot) {
-                              if (snapshot.connectionState ==
-                                  ConnectionState.waiting) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(top:70.0),
-                                  child: Center(child: CircularProgressIndicator()),
-                                );
-                              } else if (snapshot.connectionState ==
-                                  ConnectionState.done) {
-                                if (snapshot.hasError) {
-                                  return const Text('Data Error');
-                                } else if (snapshot.hasData) {
-                                  return Column(children: [...YouTubeList()],);
-                                } else {
-                                  return const Text('Server Error');
-                                }
-                              } else {
-                                return Text(
-                                    'State: ${snapshot.connectionState}');
-                              }
-                            }),
-                          ),
+                  FutureBuilder(
+                    future: finaldata,
+                    builder: ((context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 70.0),
+                          child: Center(child: CircularProgressIndicator()),
+                        );
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return const Text('Data Error');
+                        } else if (snapshot.hasData) {
+                          return Column(
+                            children: [...YouTubeList()],
+                          );
+                        } else {
+                          return const Text('Server Error');
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
+                    }),
+                  ),
                 ]))))));
   }
 
@@ -205,13 +193,17 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  SizedBox(width: 10,),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Text(
                     Value['mediaChannelName'] ?? '',
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.grey),
                   ),
-                  SizedBox(width: 80,),
+                  SizedBox(
+                    width: 80,
+                  ),
                   Text(
                     Value['publishedDate'] ?? '',
                     style: TextStyle(fontSize: 16),
@@ -220,20 +212,24 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
               ),
               ListTile(
                 leading: GestureDetector(
-                  onTap: (){
-                    AlertDialog alert  = AlertDialog(
-                      title:Image.network(
+                  onTap: () {
+                    AlertDialog alert = AlertDialog(
+                      title: Image.network(
                         YoutubeThumbnail(
-                            youtubeId: convertUrlToId(Value['sourceUrl']) ?? '')
+                                youtubeId:
+                                    convertUrlToId(Value['sourceUrl']) ?? '')
                             .hd() as String,
                         width: 300,
                         height: 300,
                         fit: BoxFit.fill,
                       ),
                     );
-                    showDialog(context: context, builder: (BuildContext context) {
-                      return alert;
-                    },);
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return alert;
+                      },
+                    );
                   },
                   child: CircleAvatar(
                     backgroundColor: Colors.transparent,
@@ -241,35 +237,16 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(10.0),
                         child: Image.network(
-                      YoutubeThumbnail(
-                              youtubeId: convertUrlToId(Value['sourceUrl']) ?? '')
-                          .hd() as String,
-                      width: 300,
-                      height: 300,
+                          YoutubeThumbnail(
+                                  youtubeId:
+                                      convertUrlToId(Value['sourceUrl']) ?? '')
+                              .hd() as String,
+                          width: 300,
+                          height: 300,
                           fit: BoxFit.fill,
-                    )),
-                    /*Image.network(
-                    getThumbnail(videoId: convertUrlToId(Value['sourceUrl'])??''),
-                    height: 10,
-                    // width: 10,
-                    // fit: BoxFit.fill,
-                  ),*/
+                        )),
                   ),
                 ),
-                /*title: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      Value['mediaChannelName'] ?? '',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.grey),
-                    ),
-                    Text(
-                      Value['publishedDate'] ?? '',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),*/
                 subtitle: Column(
                   children: [
                     SizedBox(
@@ -281,53 +258,9 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
                       style: TextStyle(
                           fontWeight: FontWeight.bold, color: Colors.black),
                     ),
-                    /*Row(
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset('assets/icons/Video ViewsEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
-                        //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video ViewsEmoji.png')),),
-                        Text(Value['videoViews'] ?? '',style: TextStyle(fontSize: 14),)
-                      ],
-                    ),
-                    SizedBox(width: 10,),
-                    Row(
-                      children: [
-                        Image.asset('assets/icons/Video LikesEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
-                        //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video LikesEmoji.png')),),
-                        Text(Value['videoLikes'] ?? '',style: TextStyle(fontSize: 14),)
-                      ],
-                    ),
-                    SizedBox(width: 10,),
-                    Row(
-                      children: [
-                        Image.asset('assets/icons/Video DislikesEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
-                        //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video DislikesEmoji.png')),),
-                        Text(Value['videoDislikes'] ?? '',style: TextStyle(fontSize: 14),)
-                      ],
-                    ),
-                    SizedBox(width: 10,),
-                    Row(
-                      children: [
-                        Image.asset('assets/icons/Video CommentsEmoji.png',height: 20,width: 20,),
-                        SizedBox(width: 10,),
-                        //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video CommentsEmoji.png')),),
-                        Text(Value['videoCommentsCount'] ?? '',style: TextStyle(fontSize: 14),)
-                      ],
-                    ),
-                    SizedBox(width: 10,),
-                    //IconButton(onPressed: (){}, icon: Icon(Icons.comment))
-                    */
                   ],
                 ),
                 onTap: () => launchUrl(Uri.parse(Value['sourceUrl'])),
-                /*onTap: (){
-              print(Value);
-              Navigator.push(context, MaterialPageRoute(builder: (context) => TrsMpDetails(Value)));
-        },*/
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -342,7 +275,6 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
                       SizedBox(
                         width: 5,
                       ),
-                      //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video ViewsEmoji.png')),),
                       Text(
                         Value['videoViews'] ?? '',
                         style: TextStyle(fontSize: 14),
@@ -362,7 +294,6 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
                       SizedBox(
                         width: 5,
                       ),
-                      //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video LikesEmoji.png')),),
                       Text(
                         Value['videoLikes'] ?? '',
                         style: TextStyle(fontSize: 14),
@@ -382,7 +313,6 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
                       SizedBox(
                         width: 5,
                       ),
-                      //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video CommentsEmoji.png')),),
                       Text(
                         Value['videoCommentsCount'] ?? '',
                         style: TextStyle(fontSize: 14),
@@ -402,7 +332,6 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
                       SizedBox(
                         width: 5,
                       ),
-                      //IconButton(onPressed: () {}, icon: ImageIcon(AssetImage('assets/icons/Video ViewsEmoji.png')),),
                       Text(
                         'Sentiment',
                         style: TextStyle(fontSize: 14),
@@ -411,7 +340,9 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
                   ),
                 ],
               ),
-              SizedBox(height: 5,)
+              SizedBox(
+                height: 5,
+              )
             ],
           ),
         )).toList();
@@ -419,12 +350,11 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
 
   YouTubeListAPI() async {
     var headers = {'Content-Type': 'application/json'};
-    /*var body = json.encode({});*/
+
     var response = await get(
       Uri.parse(
           'http://192.169.1.211:8081/insights/2.89.0/news/partyName/TDP?page=0,15'),
       headers: headers,
-      //body: body,
     );
     print(response.toString());
     if (response.statusCode == 200) {

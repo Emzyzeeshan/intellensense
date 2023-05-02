@@ -2,29 +2,24 @@ import 'package:flutter/material.dart';
 
 class CustomListTile extends StatelessWidget {
   final bool isCollapsed;
-  //final IconData icon;
+
   final String title;
   final Image image;
-  //final ImageIcon imageIcon;
+
   final IconData? doHaveMoreOptions;
   final int infoCount;
   final GestureTapCallback? onTap;
   final bool enabled;
 
-
   const CustomListTile({
     Key? key,
     required this.isCollapsed,
     required this.image,
-    //required this.icon,
-    //required this.imageIcon,
     required this.title,
     this.doHaveMoreOptions,
     this.onTap,
     this.enabled = true,
     required this.infoCount,
-
-
   }) : super(key: key);
 
   @override
@@ -42,11 +37,6 @@ class CustomListTile extends StatelessWidget {
                 child: Stack(
                   clipBehavior: Clip.none,
                   children: [
-                   /* Icon(
-                      icon,
-                      size: 25,
-                      color: Colors.white,
-                    ),*/
                     if (infoCount > 0)
                       Positioned(
                         right: -5,

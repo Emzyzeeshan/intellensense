@@ -26,25 +26,14 @@ class CustomButton extends StatelessWidget {
       child: image != null
           ? OutlinedButton(
               style: OutlinedButton.styleFrom(
-                foregroundColor: color, shape: RoundedRectangleBorder(
+                foregroundColor: color,
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4.0),
                 ),
               ),
               onPressed: onPressed,
               child: Row(
-                children: <Widget>[
-                 /* Padding(
-                    padding: const EdgeInsets.only(right: kPaddingL),
-                    child: image,
-                  ),*/
-                  /*Text(
-                    text,
-                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                          color: textColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),*/
-                ],
+                children: <Widget>[],
               ),
             )
           : TextButton(

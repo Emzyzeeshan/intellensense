@@ -9,32 +9,12 @@ class MLAsTrsScreen extends StatefulWidget {
   State<MLAsTrsScreen> createState() => _MLAsTrsScreenState();
 }
 
-/*partyList()async{
-  var headers = {
-    'Content-Type': 'application/json'
-  };
-  var request = Request('POST', Uri.parse('http://192.169.1.211:8083/api/v1/profile/party/TRS'));
-  request.body = json.encode({});
-  request.headers.addAll(headers);
-
-  StreamedResponse response = await request.send();
-
-  if (response.statusCode == 200) {
-    print(response);
-  }
-  else {
-    print(response.reasonPhrase);
-  }
-
-}*/
 class _MLAsTrsScreenState extends State<MLAsTrsScreen> {
-  //final Debouncer _debouncer = Debouncer();
-
   List ulist = [];
   List userLists = [];
   var partyListAPIResult = [];
   TextEditingController editingController = TextEditingController();
-  //final duplicateItems = List<String>.generate(10000, (i) => "Item $i");
+
   var items = [];
   List<String> SearchList = <String>[];
 
@@ -49,12 +29,9 @@ class _MLAsTrsScreenState extends State<MLAsTrsScreen> {
         userLists = partyListAPIResult;
       });
     });
-
   }
 
-
-
-   partyListAPI() async {
+  partyListAPI() async {
     var headers = {'Content-Type': 'application/json'};
     var response = await get(
       Uri.parse('http://192.169.1.211:8081/insights/2.60.0/party/TDP'),
@@ -78,10 +55,8 @@ class _MLAsTrsScreenState extends State<MLAsTrsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text('Candidature Analysis')
-        /*TextField(
+      appBar: AppBar(centerTitle: true, title: Text('Candidature Analysis')
+          /*TextField(
           onChanged: (value) {
             setState(() {
               filterSearchResults(value);
@@ -98,25 +73,27 @@ class _MLAsTrsScreenState extends State<MLAsTrsScreen> {
                   borderRadius: BorderRadius.all(
                       Radius.circular(25.0)))),
         ),*/
-      ),
-      body:  ListView.builder(
-          itemCount: partyListAPIResult.length,
-          itemBuilder: (context, index) {
-            return  Column(
-            children:[
-              SizedBox(height: 10,),
-              Padding(padding:EdgeInsets.all(5),child:TextField(
+          ),
+      body: ListView.builder(
+        itemCount: partyListAPIResult.length,
+        itemBuilder: (context, index) {
+          return Column(children: [
+            SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: EdgeInsets.all(5),
+              child: TextField(
                 onChanged: (string) {
-                    setState(() {
-                      userLists = ulist
-                          .where(
-                            (u) => (u.text.toLowerCase().contains(
-                          string.toLowerCase(),
-                        )),
-                      )
-                          .toList();
-                    });
-
+                  setState(() {
+                    userLists = ulist
+                        .where(
+                          (u) => (u.text.toLowerCase().contains(
+                                string.toLowerCase(),
+                              )),
+                        )
+                        .toList();
+                  });
                 },
                 controller: editingController,
                 decoration: InputDecoration(
@@ -125,18 +102,18 @@ class _MLAsTrsScreenState extends State<MLAsTrsScreen> {
                     hintText: "Search",
                     prefixIcon: Icon(Icons.search),
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(25.0)))),
-              ),),
-            SizedBox(height: 10,),
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)))),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
             ...partyList(),
-            ]
-              );
-          },
-        ),
+          ]);
+        },
+      ),
 
-        //children: partyList(),
-
+      //children: partyList(),
     );
   }
 
@@ -171,10 +148,10 @@ class _MLAsTrsScreenState extends State<MLAsTrsScreen> {
                     Value['party'] ?? '',
                     style: TextStyle(fontSize: 16),
                   ),
-                  *//*onTap: (){
+                  */ /*onTap: (){
                         print(Value);
                         Navigator.push(context, MaterialPageRoute(builder: (context) => TrsMpDetails(Value)));
-                      },*//*
+                      },*/ /*
                 ),*/
   List<Card> partyList() {
     if (partyListAPIResult.length == 0) return [];
@@ -204,10 +181,13 @@ class _MLAsTrsScreenState extends State<MLAsTrsScreen> {
                   userLists['party'] ?? '',
                   style: TextStyle(fontSize: 16),
                 ),
-                onTap: (){
-          print(userLists);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => TrsMpDetails(userLists)));
-        },
+                onTap: () {
+                  print(userLists);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TrsMpDetails(userLists)));
+                },
               ),
             ))
         .toList();

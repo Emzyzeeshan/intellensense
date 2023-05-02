@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
 
-
-
-
 class SettingScreen extends StatefulWidget {
-
   @override
   State<SettingScreen> createState() => _SettingScreenState();
 }
@@ -32,12 +28,13 @@ class _SettingScreenState extends State<SettingScreen> {
                   semanticContainer: true,
                   elevation: 10,
                   margin: EdgeInsets.all(10),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
                   child: ListTile(
                     leading: CircleAvatar(
                         backgroundColor: Colors.transparent,
                         backgroundImage:
-                        AssetImage('assets/images/MDRM-02.png'),
+                            AssetImage('assets/images/MDRM-02.png'),
                         radius: 25),
                     title: Text('Smart Search'),
                     subtitle: Text('Search and find Master Data Record'),
@@ -55,12 +52,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                     onTap: () {
                       print('Smart Search');
-                     /* Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                SmartSearch(widget.userDetails, widget.mdrmSelection),
-                          ));*/
                     },
                   ),
                 ),
@@ -68,12 +59,13 @@ class _SettingScreenState extends State<SettingScreen> {
                   semanticContainer: true,
                   elevation: 10,
                   margin: EdgeInsets.all(10),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
                   child: ListTile(
                     leading: CircleAvatar(
                         backgroundColor: Colors.transparent,
                         backgroundImage:
-                        AssetImage('assets/images/MDRM-02.png'),
+                            AssetImage('assets/images/MDRM-02.png'),
                         radius: 25),
                     title: Text('ADD Image'),
                     subtitle: Text('Add Image in Records'),
@@ -91,11 +83,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                     onTap: () {
                       print('ADD Image');
-                     /* Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => AddImgScreen(),
-                          ));*/
                     },
                   ),
                 ),
@@ -103,16 +90,17 @@ class _SettingScreenState extends State<SettingScreen> {
                   semanticContainer: true,
                   elevation: 10,
                   margin: EdgeInsets.all(10),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
                   child: ListTile(
                     leading: CircleAvatar(
                         backgroundColor: Colors.transparent,
                         backgroundImage:
-                        AssetImage('assets/images/MDRM-02.png'),
+                            AssetImage('assets/images/MDRM-02.png'),
                         radius: 25),
                     title: Text('Change Request'),
                     subtitle:
-                    Text('Request a change to existing Master Data Record'),
+                        Text('Request a change to existing Master Data Record'),
                     trailing: FittedBox(
                       fit: BoxFit.fitHeight,
                       child: Column(
@@ -127,11 +115,6 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                     onTap: () {
                       print('Change Request');
-                     /* Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ChangeRequest(widget.userDetails, widget.mdrmSelection),
-                          ));*/
                     },
                   ),
                 ),

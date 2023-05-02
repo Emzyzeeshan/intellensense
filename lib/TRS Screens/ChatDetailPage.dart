@@ -69,11 +69,7 @@ class ChatDetailPageState extends State<ChatDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-     /* appBar: AppBar(
-        backgroundColor: Colors.indigoAccent,
-        automaticallyImplyLeading: true,
-        title: Text(""),
-      ),*/
+     
       body: Container(
         constraints: BoxConstraints.expand(),
         decoration: const BoxDecoration(
@@ -81,21 +77,13 @@ class ChatDetailPageState extends State<ChatDetailPage> {
               image: AssetImage("assets/ChatImg/IS-APP-BG.jpg"),
               fit: BoxFit.fill),
         ),
-        //color: Colors.indigo,
-        /*decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [Colors.blueAccent, Colors.indigoAccent])),*/
+
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            /*Text(
-              'CHAT APP',
-              style: TextStyle(fontSize: 82.0, color: Colors.deepOrange,fontStyle: FontStyle.italic),
-            ),*/
+          
             GestureDetector(
               onTap: ControlSignIn,
               child: Center(
