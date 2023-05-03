@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intellensense/Pages/ChattingPage.dart';
-import 'package:intellensense/Pages/sidebarPages/CandidatureAnalysis.dart';
-import 'package:intellensense/Pages/sidebarPages/ConstituencyAnalusis.dart';
+import 'package:intellensense/Pages/DrawerScreens/ConstituencyAnalysis.dart';
+import 'package:intellensense/Pages/DrawerScreens/ElectoralAnalysis/ElectoralAnalysis.dart';
+import 'package:intellensense/Pages/DrawerScreens/PartyFilterscreen.dart';
 
 import '../../TRS Screens/MLAsTrsScreen.dart';
 
@@ -96,7 +97,11 @@ class _drawerState extends State<drawer> {
                   ),
                   title: Text('Electoral Analysis'),
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ElectoralAnalysis(),
+                        ));
                   },
                 ),
                 ListTile(

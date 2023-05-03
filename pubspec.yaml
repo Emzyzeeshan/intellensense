@@ -84,7 +84,9 @@ dependencies:
   settings_ui: ^2.0.2
   shared_preferences: ^2.1.0
   sidebarx: ^0.15.0
+  skeletons: ^0.0.3
   sleek_circular_slider: ^2.0.1
+  syncfusion_flutter_charts: ^21.1.41
   tap_to_expand: ^0.6.1
   text_scroll: ^0.1.2
   timelines: ^0.1.0
