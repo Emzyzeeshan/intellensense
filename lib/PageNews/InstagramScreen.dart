@@ -9,6 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube/youtube.dart';
 import 'package:youtube/youtube_thumbnail.dart';
 
+import '../main.dart';
+
 class InstagramScreen extends StatefulWidget {
   const InstagramScreen({Key? key}) : super(key: key);
 
@@ -298,7 +300,7 @@ class _InstagramScreenState extends State<InstagramScreen> {
 
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.89.0/instagram/partyName?page=0,12&partyName=TDP'),
+          INSIGHTS+'/instagram/partyName?page=0,12&partyName=TDP'),
       headers: headers,
     );
     print(response.toString());
