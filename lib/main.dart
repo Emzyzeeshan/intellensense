@@ -80,7 +80,3 @@ const rootUrl = 'http://192.169.1.211:8082';
 
 ///LogOut Api
 const rootUrl1 = 'https://ifar.pilogcloud.com/';
-
-
-///{{INSIGHTS-URL}}
-const INSIGHTS = 'http://192.169.1.198:8082/insights/3.21.0';

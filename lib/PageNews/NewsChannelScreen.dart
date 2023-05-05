@@ -8,8 +8,6 @@ import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube/youtube_thumbnail.dart';
 
-import '../main.dart';
-
 class NewsChannelScreen extends StatefulWidget {
   const NewsChannelScreen({Key? key}) : super(key: key);
 
@@ -344,7 +342,7 @@ class _NewsChannelScreenState extends State<NewsChannelScreen> {
     var headers = {'Content-Type': 'application/json'};
     var response = await get(
       Uri.parse(
-          INSIGHTS+'/news/partyName/TDP?page=0,15'),
+          'http://192.169.1.211:8081/insights/2.89.0/news/partyName/TDP?page=0,15'),
       headers: headers,
     );
     print(response.toString());

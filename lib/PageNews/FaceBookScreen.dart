@@ -7,8 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../main.dart';
-
 class FaceBookScreen extends StatefulWidget {
   const FaceBookScreen({Key? key}) : super(key: key);
 
@@ -272,7 +270,7 @@ class _FaceBookScreenState extends State<FaceBookScreen> {
     var headers = {'Content-Type': 'application/json'};
     var response = await get(
       Uri.parse(
-          INSIGHTS +'/facebookAnalysis?page=0,12'),
+          'http://192.169.1.211:8081/insights/2.89.0/facebookAnalysis?page=0,12'),
       headers: headers,
     );
     print(response.toString());

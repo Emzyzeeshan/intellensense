@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../main.dart';
-
 class LiveUpdatesScreen extends StatefulWidget {
   const LiveUpdatesScreen({Key? key}) : super(key: key);
 
@@ -216,7 +214,7 @@ class _LiveUpdatesScreenState extends State<LiveUpdatesScreen> {
   LiveUpdatesListAPI() async {
     var headers = {'Content-Type': 'application/json'};
     var response = await get(
-      Uri.parse(INSIGHTS+ '/livenews?page=0,17'),
+      Uri.parse('http://192.169.1.211:8081/insights/2.89.0/livenews?page=0,17'),
       headers: headers,
     );
     print(response.toString());
