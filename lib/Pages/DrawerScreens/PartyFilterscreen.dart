@@ -314,7 +314,7 @@ class _PartyFilterScreenState extends State<PartyFilterScreen> {
     var headers = {'Content-Type': 'application/json'};
     var body = json.encode({});
     var response = await get(
-      Uri.parse('http://192.169.1.211:8081/insights/2.89.0/party/$Input'),
+      Uri.parse('http://192.169.1.198:8082/insights/3.21.0/party/$Input'),
     );
 
     if (response.statusCode == 200) {
