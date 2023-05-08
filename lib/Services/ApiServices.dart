@@ -30,8 +30,7 @@ var newchannelldata;
 NewsChannelAPI() async {
   var headers = {'Content-Type': 'application/json'};
   var response = await get(
-    Uri.parse(
-        INSIGHTS+ '/news/partyName/TDP?page=0,15'),
+    Uri.parse(INSIGHTS + '/youtube-news/partyName/TDP?page=0,15'),
     headers: headers,
   );
   print(response.toString());
@@ -51,7 +50,7 @@ var newsdata;
 NEWSpaperAPI() async {
   List<String> hastags = [];
   var response = await get(
-    Uri.parse(INSIGHTS +'/newspaper?page=0,13'),
+    Uri.parse(INSIGHTS + '/newspaper?page=0,13'),
   );
   //print(response.toString());
   if (response.statusCode == 200) {
@@ -73,7 +72,7 @@ var Livenewsdata;
 LiveUpdatesAPI() async {
   var headers = {'Content-Type': 'application/json'};
   var response = await get(
-    Uri.parse(INSIGHTS +'/livenews?page=0,17'),
+    Uri.parse(INSIGHTS + '/livenews?page=0,17'),
     headers: headers,
   );
   print(response.toString());
@@ -96,8 +95,7 @@ var GoogleTrendsdata;
 GoogleTrendsAPI() async {
   var headers = {'Content-Type': 'application/json'};
   var response = await get(
-    Uri.parse(
-        INSIGHTS +'/googleTrends?page=0,13'),
+    Uri.parse(INSIGHTS + '/googleTrends?page=0,13'),
     headers: headers,
   );
   print(response.toString());
@@ -121,8 +119,7 @@ YouTubeAPI() async {
   var headers = {'Content-Type': 'application/json'};
   /*var body = json.encode({});*/
   var response = await get(
-    Uri.parse(
-        INSIGHTS +'/news/partyName/TDP?page=0,15'),
+    Uri.parse(INSIGHTS + '/youtube-news/partyName/TDP?page=0,15'),
     headers: headers,
     //body: body,
   );
@@ -146,8 +143,7 @@ var TwitterData;
 TwitterAPI() async {
   var headers = {'Content-Type': 'application/json'};
   var response = await get(
-    Uri.parse(
-        INSIGHTS +'/twitter/partyName/TDP?page=0,11'),
+    Uri.parse(INSIGHTS + '/twitter/partyName/TDP?page=0,11'),
     headers: headers,
   );
   print(response.toString());
@@ -170,8 +166,7 @@ var Facebookdata;
 FacebookAPI() async {
   var headers = {'Content-Type': 'application/json'};
   var response = await get(
-    Uri.parse(
-        INSIGHTS +'/facebookAnalysis?page=0,12'),
+    Uri.parse(INSIGHTS + '/facebookAnalysis?page=0,12'),
     headers: headers,
   );
   print(response.toString());
@@ -195,8 +190,7 @@ InstagramAPI() async {
   var headers = {'Content-Type': 'application/json'};
   /*var body = json.encode({});*/
   var response = await get(
-    Uri.parse(
-        INSIGHTS +'/instagram/partyName?page=0,12&partyName=TDP'),
+    Uri.parse(INSIGHTS + '/instagram/partyName?page=0,12&partyName=TDP'),
     headers: headers,
     //body: body,
   );

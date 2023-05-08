@@ -354,8 +354,7 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
     var headers = {'Content-Type': 'application/json'};
 
     var response = await get(
-      Uri.parse(
-          INSIGHTS+'/news/partyName/TDP?page=0,15'),
+      Uri.parse(INSIGHTS + '/youtube-news/partyName/TDP?page=0,15'),
       headers: headers,
     );
     print(response.toString());
