@@ -187,7 +187,7 @@ class _LiveUpdatesScreenState extends State<LiveUpdatesScreen> {
               children: [
                 Flexible(
                   child: Text(
-                    Value['id']['mediaName'] ?? '',
+                    Value['mediaName'] ?? '',
                     style: TextStyle(
                         fontWeight: FontWeight.bold, color: Colors.grey),
                   ),
@@ -197,13 +197,13 @@ class _LiveUpdatesScreenState extends State<LiveUpdatesScreen> {
                   style: TextStyle(fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  Value['id']['publishedDate'] ?? '',
+                  Value['publishedDate'] ?? '',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
             ),
             title: Text(
-              Value['id']['headLine'] ?? '',
+              Value['headLine'] ?? '',
               maxLines: 3,
               style:
                   TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
@@ -216,7 +216,7 @@ class _LiveUpdatesScreenState extends State<LiveUpdatesScreen> {
   LiveUpdatesListAPI() async {
     var headers = {'Content-Type': 'application/json'};
     var response = await get(
-      Uri.parse(INSIGHTS+'/livenews?page=0,17'),
+      Uri.parse(INSIGHTS + '/livenews?page=0,17'),
       headers: headers,
     );
     print(response.toString());
