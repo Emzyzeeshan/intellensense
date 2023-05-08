@@ -9,6 +9,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:youtube/youtube.dart';
 import 'package:youtube/youtube_thumbnail.dart';
 
+import '../main.dart';
+
 class YouTubeScreen extends StatefulWidget {
   const YouTubeScreen({Key? key}) : super(key: key);
 
@@ -353,7 +355,7 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
 
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.89.0/news/partyName/TDP?page=0,15'),
+          INSIGHTS+'/news/partyName/TDP?page=0,15'),
       headers: headers,
     );
     print(response.toString());

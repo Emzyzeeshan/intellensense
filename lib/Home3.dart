@@ -1660,7 +1660,7 @@ class _Home3State extends State<Home3> {
                                               width: 50,
                                               child: Center(
                                                 child: Image.asset(
-                                                  "assets/new Updated images/Candidature Analysis.png",
+                                                  "assets/new Updated images/intellisensesolutions-Icons-61.png",
                                                   height: 30,
                                                 ),
                                               ),
@@ -1696,7 +1696,7 @@ class _Home3State extends State<Home3> {
                                               width: 50,
                                               child: Center(
                                                 child: Image.asset(
-                                                  "assets/new Updated images/Constituency Analysis.png",
+                                                  "assets/new Updated images/intellisensesolutions-Icons-64.png",
                                                   height: 30,
                                                 ),
                                               ),
@@ -1730,7 +1730,7 @@ class _Home3State extends State<Home3> {
                                               width: 50,
                                               child: Center(
                                                 child: Image.asset(
-                                                  "assets/icons/locations_icon.png",
+                                                  "assets/new Updated images/intellisensesolutions-Icons-71.png",
                                                   height: 30,
                                                 ),
                                               ),
@@ -1764,7 +1764,7 @@ class _Home3State extends State<Home3> {
                                               width: 50,
                                               child: Center(
                                                 child: Image.asset(
-                                                  "assets/new Updated images/Communication Channel.png",
+                                                  "assets/new Updated images/intellisensesolutions-Icons-63.png",
                                                   height: 30,
                                                 ),
                                               ),
@@ -1798,7 +1798,7 @@ class _Home3State extends State<Home3> {
                                               width: 50,
                                               child: Center(
                                                 child: Image.asset(
-                                                  "assets/new Updated images/Survey.png",
+                                                  "assets/new Updated images/intellisensesolutions-Icons-65.png",
                                                   height: 30,
                                                 ),
                                               ),
@@ -1832,7 +1832,7 @@ class _Home3State extends State<Home3> {
                                               width: 50,
                                               child: Center(
                                                 child: Image.asset(
-                                                  "assets/new Updated images/Electrol Analysis.png",
+                                                  "assets/new Updated images/intellisensesolutions-Icons-72.png",
                                                   height: 30,
                                                 ),
                                               ),
@@ -1866,7 +1866,7 @@ class _Home3State extends State<Home3> {
                                               width: 50,
                                               child: Center(
                                                 child: Image.asset(
-                                                  "assets/new Updated images/News Feed.png",
+                                                  "assets/new Updated images/news-71.png",
                                                   height: 30,
                                                 ),
                                               ),
@@ -1900,7 +1900,7 @@ class _Home3State extends State<Home3> {
                                               width: 50,
                                               child: Center(
                                                 child: Image.asset(
-                                                  "assets/icons/faceEmotiondxp.png",
+                                                  "assets/new Updated images/intellisensesolutions-Icons-73.png",
                                                   height: 30,
                                                 ),
                                               ),
@@ -1938,7 +1938,7 @@ class _Home3State extends State<Home3> {
                                               width: 50,
                                               child: Center(
                                                 child: Image.asset(
-                                                  "assets/icons/ScoreCard.png",
+                                                  "assets/new Updated images/intellisensesolutions-Icons-66.png",
                                                   height: 30,
                                                 ),
                                               ),
@@ -1976,7 +1976,7 @@ class _Home3State extends State<Home3> {
                                               width: 50,
                                               child: Center(
                                                 child: Image.asset(
-                                                  "assets/icons/chat_icon.png",
+                                                  "assets/new Updated images/intellisensesolutions-Icons-70.png",
                                                   height: 30,
                                                 ),
                                               ),
@@ -2010,7 +2010,7 @@ class _Home3State extends State<Home3> {
                                               width: 50,
                                               child: Center(
                                                 child: Image.asset(
-                                                  "assets/icons/sentiAnalysis.png",
+                                                  "assets/new Updated images/intellisensesolutions-Icons-67.png",
                                                   height: 30,
                                                 ),
                                               ),

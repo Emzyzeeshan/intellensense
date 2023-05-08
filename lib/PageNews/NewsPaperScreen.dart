@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../main.dart';
+
 class NewsPaperScreen extends StatefulWidget {
   const NewsPaperScreen({Key? key}) : super(key: key);
 
@@ -207,7 +209,7 @@ class _NewsPaperScreenState extends State<NewsPaperScreen> {
   Future<dynamic> NewsPaperListAPI() async {
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.89.0/newspaper?page=0,13'),
+          INSIGHTS+'/newspaper?page=0,13'),
     );
     print(response.toString());
     if (response.statusCode == 200) {

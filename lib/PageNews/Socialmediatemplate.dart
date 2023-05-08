@@ -34,7 +34,7 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
           child: Padding(
             padding: const EdgeInsets.all(6.0),
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Row(

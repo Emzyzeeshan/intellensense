@@ -134,12 +134,25 @@ flutter:
     - assets/new Updated images/Electrol Analysis.png
     - assets/new Updated images/News Feed.png
     - assets/new Updated images/Survey.png
+    - assets/new Updated images/intellisensesolutions-Icons-61.png
+    - assets/new Updated images/intellisensesolutions-Icons-62.png
+    - assets/new Updated images/intellisensesolutions-Icons-66.png
+    - assets/new Updated images/intellisensesolutions-Icons-65.png
+    - assets/new Updated images/intellisensesolutions-Icons-64.png
+    - assets/new Updated images/intellisensesolutions-Icons-63.png
+    - assets/new Updated images/intellisensesolutions-Icons-67.png
+    - assets/new Updated images/intellisensesolutions-Icons-70.png
+    - assets/new Updated images/intellisensesolutions-Icons-71.png
+    - assets/new Updated images/intellisensesolutions-Icons-72.png
+    - assets/new Updated images/intellisensesolutions-Icons-73.png
+    - assets/new Updated images/news-71.png
     - assets/Image/brakes.png
     - assets/Image/drop.png
     - assets/Image/header.png
     - assets/Image/logo.png
     - assets/Image/sunny.png
     - assets/Image/wind.png
+    -
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

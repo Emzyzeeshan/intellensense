@@ -39,7 +39,7 @@ class _drawerState extends State<drawer> {
           ExpansionTile(
               title: Text('Political Science'),
               leading: Image.asset(
-                'assets/icons/Candidature Analysis.png',
+                'assets/new Updated images/intellisensesolutions-Icons-62.png',
                 height: 25,
               ),
               childrenPadding: EdgeInsets.only(left: 15),

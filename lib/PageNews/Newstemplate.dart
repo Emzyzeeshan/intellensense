@@ -89,34 +89,37 @@ class _NewsTemplate2State extends State<NewsTemplate2> {
               end: Alignment.bottomRight,
             ),
           ),
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Image.asset(
-                      '${widget.logolink}',
-                      height: 25,
-                      width: 25,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                        widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
-                        style: GoogleFonts.bebasNeue(
-                            fontWeight: FontWeight.bold, fontSize: 12)),
-                  ],
-                ),
-                SizedBox(
-                  height: 3,
-                ),
-                Text(
-                    maxLines: 3,
-                    '${widget.newsdescription}',
-                    style: GoogleFonts.cabin(fontSize: 10))
-              ]),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    children: [
+                      Image.asset(
+                        '${widget.logolink}',
+                        height: 25,
+                        width: 25,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                          widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
+                          style: GoogleFonts.bebasNeue(
+                              fontWeight: FontWeight.bold, fontSize: 12)),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Text(
+                      maxLines: 3,
+                      '${widget.newsdescription}',
+                      style: GoogleFonts.cabin(fontSize: 10))
+                ]),
+          ),
         ));
   }
 }

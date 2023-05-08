@@ -1,7 +1,13 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/SpalashScreen/constants.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:sidebarx/sidebarx.dart';
+import 'package:xml2json/xml2json.dart';
 
 class ConstituencyAnalysis extends StatefulWidget {
   const ConstituencyAnalysis({super.key});
@@ -11,18 +17,27 @@ class ConstituencyAnalysis extends StatefulWidget {
 }
 
 class _ConstituencyAnalysisState extends State<ConstituencyAnalysis> {
+  final myTransformer = Xml2Json();
   TextEditingController editingController = TextEditingController();
   final GlobalKey<ScaffoldState> _key = GlobalKey(); //
-  final duplicateItems = List<String>.generate(1000, (i) => "Candidate $i");
+  var duplicateItems = <String>[];
   var items = <String>[];
-  var ConstituencyAnalysisData;
-
+  List fullData = <String>[];
+  List searchData = <String>[];
+  late Future<dynamic> finaldata = ConstituencyAnalysiAPI();
+  late Future<dynamic> finaldata2 =
+      ConstituencyAnalysisDataDetailsAPI('ACHAMPET');
+  var xmldata;
+  var Details;
+  var jsondata;
   @override
   void initState() {
-    items = duplicateItems;
+    map['constituency'] = 'ACHAMPET';
+
     super.initState();
-    ConstituencyAnalysiAPI();
   }
+
+  var map = new Map<String, dynamic>();
 
   void filterSearchResults(String query) {
     setState(() {
@@ -39,7 +54,7 @@ class _ConstituencyAnalysisState extends State<ConstituencyAnalysis> {
       appBar: AppBar(
         leading: IconButton(
           color: Colors.grey.shade700,
-          icon: Icon(Icons.people_outline_outlined),
+          icon: Icon(Icons.search),
           onPressed: () {
             _key.currentState!.openDrawer();
           },
@@ -68,9 +83,7 @@ class _ConstituencyAnalysisState extends State<ConstituencyAnalysis> {
                 right: 7,
               ),
               child: TextField(
-                onChanged: (value) {
-                  filterSearchResults(value);
-                },
+                onChanged: onSearchTextChanged,
                 controller: editingController,
                 decoration: InputDecoration(
                     suffixIcon: Icon(Icons.search_rounded),
@@ -87,46 +100,310 @@ class _ConstituencyAnalysisState extends State<ConstituencyAnalysis> {
                     focusColor: Colors.grey),
               ),
             ),
-            Expanded(
-              child:  ListView(
-                children: ConstituencyData(),
-              ),
-            ),
+            searchData.length ==
+                    0 // Check SearchData list is empty or not if empty then show full data else show search data
+                ? FutureBuilder(
+                    future: finaldata,
+                    builder: ((context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Padding(
+                          padding: EdgeInsets.only(
+                              top: MediaQuery.of(context).size.height * 0.35),
+                          child: SpinKitWave(
+                            size: 30,
+                            color: Colors.blueAccent,
+                          ),
+                        );
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return Center(child: const Text('Data Error'));
+                        } else if (snapshot.hasData) {
+                          return Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: fullData.length,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: ListTile(
+                                    onTap: () {
+                                      setState(() {
+                                        finaldata2 =
+                                            ConstituencyAnalysisDataDetailsAPI(
+                                                fullData[index].toString());
+                                      });
+
+                                      print(fullData[index]);
+                                    },
+                                    tileColor: Colors.white,
+                                    leading: Icon(Icons.location_on_sharp),
+                                    title:
+                                        Text('${fullData[index]}'.toString()),
+                                  ),
+                                );
+                              },
+                            ),
+                          );
+                        } else {
+                          return Center(child: const Text('Server Error'));
+                        }
+                      } else {
+                        return Center(
+                            child: Text('State: ${snapshot.connectionState}'));
+                      }
+                    }),
+                  )
+                : Flexible(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: searchData.length,
+                      itemBuilder: (context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: ListTile(
+                            onTap: () {
+                              setState(() {
+                                finaldata2 = ConstituencyAnalysisDataDetailsAPI(
+                                    searchData[index].toString());
+                              });
+
+                              print(searchData[index]);
+                            },
+                            tileColor: Colors.white,
+                            title: Text('${searchData[index]}'.toString()),
+                            trailing: Text('Sample'),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
           ],
         ),
       ),
+      // body: FutureBuilder(
+      //   future: finaldata2,
+      //   builder: ((context, snapshot) {
+      //     if (snapshot.connectionState == ConnectionState.waiting) {
+      //       return Padding(
+      //         padding: EdgeInsets.only(
+      //             top: MediaQuery.of(context).size.height * 0.35),
+      //         child: SpinKitWave(
+      //           size: 30,
+      //           color: Colors.blueAccent,
+      //         ),
+      //       );
+      //     } else if (snapshot.connectionState == ConnectionState.done) {
+      //       if (snapshot.hasError) {
+      //         return Center(child: const Text('Data Error'));
+      //       } else if (snapshot.hasData) {
+      //         xmldata =
+      //             ConstituencyAnalysisDataDetailsData['OVERVIEW_DESCRIPTION']
+      //                 .toString();
+      //         print('its XML');
+      //         print(xmldata);
+      //         myTransformer.parse(xmldata);
+      //         jsondata = myTransformer.toGData();
+      //         Details = json.decode(jsondata);
+      //         print(jsondata);
+      //
+      //         return ListView.builder(
+      //
+      //           itemCount: ConstituencyAnalysisList.length,
+      //           itemBuilder: (context, index) {
+      //             return Padding(
+      //               padding: const EdgeInsets.all(4.0),
+      //               child: ListTile(
+      //                 onTap: () {
+      //                   switch (index) {
+      //                     case 0:
+      //                       showMaterialModalBottomSheet(
+      //                           shape: RoundedRectangleBorder(
+      //                               side: BorderSide(
+      //                                   width: 3, color: Color(0xffd2dfff)),
+      //                               borderRadius: BorderRadius.only(
+      //                                   topLeft: Radius.circular(15),
+      //                                   topRight: Radius.circular(15))),
+      //                           enableDrag: false,
+      //                           elevation: 5,
+      //                           context: context,
+      //                           builder: (context) {
+      //                             return Container(
+      //                               height: MediaQuery.of(context).size.height *
+      //                                   0.7,
+      //                               child: Padding(
+      //                                 padding: const EdgeInsets.all(8.0),
+      //                                 child: SingleChildScrollView(
+      //                                   child: Column(
+      //                                     children: [
+      //                                       Text(
+      //                                           ConstituencyAnalysisDataDetailsData[
+      //                                               'ASSEMBLY_CONSTITUTION']),
+      //                                     ],
+      //                                   ),
+      //                                 ),
+      //                               ),
+      //                             );
+      //                           });
+      //                       break;
+      //                     case 1:
+      //                       showMaterialModalBottomSheet(
+      //                           shape: RoundedRectangleBorder(
+      //                               side: BorderSide(
+      //                                   width: 3, color: Color(0xffd2dfff)),
+      //                               borderRadius: BorderRadius.only(
+      //                                   topLeft: Radius.circular(15),
+      //                                   topRight: Radius.circular(15))),
+      //                           enableDrag: false,
+      //                           elevation: 5,
+      //                           context: context,
+      //                           builder: (context) {
+      //                             return Container(
+      //                               height: MediaQuery.of(context).size.height *
+      //                                   0.7,
+      //                               child: Padding(
+      //                                 padding: const EdgeInsets.all(8.0),
+      //                                 child: SingleChildScrollView(
+      //                                   child: Column(
+      //                                     children: [
+      //                                       Text(
+      //                                         ConstituencyAnalysisList[index],
+      //                                         style: GoogleFonts.nunitoSans(
+      //                                             fontSize: 17.0,
+      //                                             fontWeight: FontWeight.w700,
+      //                                             color: Colors.black),
+      //                                       ),
+      //                                       SizedBox(
+      //                                         height: 50,
+      //                                       ),
+      //                                       Padding(
+      //                                         padding:
+      //                                             const EdgeInsets.all(8.0),
+      //                                         child: Text(
+      //                                           "${Details['div']['div']['div'][1]['div']['div'][0]['\u0024t']}"
+      //                                               .trim(),
+      //                                           style: GoogleFonts.nunitoSans(
+      //                                             fontSize: 12.0,
+      //                                             fontWeight: FontWeight.w600,
+      //                                           ),
+      //                                         ),
+      //                                       )
+      //                                     ],
+      //                                   ),
+      //                                 ),
+      //                               ),
+      //                             );
+      //                           });
+      //                       break;
+      //                     default:
+      //                       showMaterialModalBottomSheet(
+      //                           shape: RoundedRectangleBorder(
+      //                               side: BorderSide(
+      //                                   width: 3, color: Color(0xffd2dfff)),
+      //                               borderRadius: BorderRadius.only(
+      //                                   topLeft: Radius.circular(15),
+      //                                   topRight: Radius.circular(15))),
+      //                           enableDrag: false,
+      //                           elevation: 5,
+      //                           context: context,
+      //                           builder: (context) {
+      //                             return Container(
+      //                               height: MediaQuery.of(context).size.height *
+      //                                   0.7,
+      //                               child: Padding(
+      //                                 padding: const EdgeInsets.all(8.0),
+      //                                 child: SingleChildScrollView(
+      //                                   child: Column(
+      //                                     children: [
+      //                                       Text('Default Mode'),
+      //                                     ],
+      //                                   ),
+      //                                 ),
+      //                               ),
+      //                             );
+      //                           });
+      //                   }
+      //                 },
+      //                 leading: Text(ConstituencyAnalysisList[index]),
+      //                 tileColor: Color(0xffd2dfff),
+      //               ),
+      //             );
+      //           },
+      //         );
+      //       } else {
+      //         return Center(child: const Text('Server Error'));
+      //       }
+      //     } else {
+      //       return Center(child: Text('State: ${snapshot.connectionState}'));
+      //     }
+      //   }),
+      // ),
     );
   }
-   List<Card> ConstituencyData() {
-    if (ConstituencyAnalysisData['ASSEMBLY_CONSTITUENCY'] == null ?ConstituencyAnalysisData['ASSEMBLY_CONSTITUENCY']:ConstituencyAnalysisData['ASSEMBLY_CONSTITUENCY'].length == 0) return [];
-    return ConstituencyAnalysisData['ASSEMBLY_CONSTITUENCY'].map<Card>((Value) => Card(
-      margin: EdgeInsets.all(12),
-      elevation: 20,
-      child:   ListTile(
-        title: Text(Value,style: TextStyle(fontWeight: FontWeight.bold),),
-        onTap: (){
-         /* print(Value);
-          Navigator.push(context, MaterialPageRoute(builder: (context) => TrsMpDetails(Value)));*/
-        },
-      ),
-    )).toList();
-  }
+
+  var ConstituencyAnalysisData;
   ConstituencyAnalysiAPI() async {
     var headers = {'Content-Type': 'application/json'};
     var response = await get(
-      Uri.parse(
-          'http://idxp.pilogcloud.com:6652/constituency_names/'),
+      Uri.parse('http://idxp.pilogcloud.com:6652/constituency_names/'),
       headers: headers,
     );
-    print(response.toString());
+
     if (response.statusCode == 200) {
-      print(response.body);
       try {
         ConstituencyAnalysisData = jsonDecode(utf8.decode(response.bodyBytes));
+        setState(() {
+          fullData = ConstituencyAnalysisData['ASSEMBLY_CONSTITUENCY'];
+        });
+
+        print(fullData);
       } catch (e) {}
     } else {
       print(response.reasonPhrase);
     }
     return ConstituencyAnalysisData;
+  }
+
+  var ConstituencyAnalysisDataDetailsData;
+
+  ConstituencyAnalysisDataDetailsAPI(String parameter) async {
+    setState(() {
+      map['constituency'] = parameter;
+    });
+
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6652/constituency_analysis/'),
+        body: map);
+
+    if (response.statusCode == 200) {
+      try {
+        ConstituencyAnalysisDataDetailsData =
+            jsonDecode(utf8.decode(response.bodyBytes));
+      } catch (e) {}
+    } else {
+      print(response.reasonPhrase);
+    }
+    return ConstituencyAnalysisDataDetailsData;
+  }
+
+  onSearchTextChanged(String text) async {
+    searchData.clear();
+    if (text.isEmpty) {
+// Check textfield is empty or not
+      setState(() {});
+      return;
+    }
+
+    fullData.forEach((data) {
+      if (data
+          .toString()
+          .toLowerCase()
+          .contains(text.toLowerCase().toString())) {
+        searchData.add(
+            data); // If not empty then add search data into search data list
+      }
+    });
+
+    setState(() {});
   }
 }
