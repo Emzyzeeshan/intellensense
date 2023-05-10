@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intellensense/main.dart';
 import 'package:otp_text_field/otp_text_field.dart';
-import 'package:intellensense/Home3.dart';
+import 'package:intellensense/HomeScreen.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert' as convert;
@@ -86,7 +86,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
       if (authCredential.user != null) {
         logindata.setBool('login', false);
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Home3()));
+            context, MaterialPageRoute(builder: (context) => HomeScreen()));
       }
     } on FirebaseAuthException catch (e) {
       setState(() {
@@ -226,6 +226,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
       ),
     ));
   }
+
   void SendDatatoSheet() async {
     const String scriptURL =
         'https://script.google.com/macros/s/AKfycbzeEtxTVd-vRNFpG7zqw0yHM0kGtG_ccXmRXqHR7pgFkAZyI7520Y7Era8l0to1IuSG/exec';
