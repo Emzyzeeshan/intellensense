@@ -122,6 +122,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "circular_menu",
+      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/circular_menu-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "clock",
       "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/clock-1.1.1",
       "packageUri": "lib/",
@@ -190,6 +196,12 @@
     {
       "name": "cupertino_icons",
       "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/cupertino_icons-1.0.5",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "datetime_picker_formfield_new",
+      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/datetime_picker_formfield_new-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -632,6 +644,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "page_transition",
+      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/page_transition-2.0.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "path",
       "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/path-1.8.2",
       "packageUri": "lib/",
@@ -842,6 +860,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "side_menu_animation",
+      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/side_menu_animation-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "sidebarx",
       "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/sidebarx-0.15.0",
       "packageUri": "lib/",
@@ -954,6 +978,12 @@
       "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/timelines-0.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "tuanis_sidebar",
+      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/tuanis_sidebar-0.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.19"
     },
     {
       "name": "typed_data",
@@ -1076,7 +1106,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-05-08T06:01:59.596023Z",
+  "generated": "2023-05-10T06:40:17.598654Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

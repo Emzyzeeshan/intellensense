@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intellensense/Pages/ChattingPage.dart';
 import 'package:intellensense/Pages/DrawerScreens/ConstituencyAnalysis.dart';
 import 'package:intellensense/Pages/DrawerScreens/ElectoralAnalysis/ElectoralAnalysis.dart';
-import 'package:intellensense/Pages/DrawerScreens/PartyFilterscreen.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/CandidatureAnalysis.dart';
 
 import '../../TRS Screens/MLAsTrsScreen.dart';
 
@@ -56,7 +56,7 @@ class _drawerState extends State<drawer> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => PartyFilterScreen(),
+                          builder: (context) => CandidatureAnalysis(),
                         ));
                   },
                 ),
