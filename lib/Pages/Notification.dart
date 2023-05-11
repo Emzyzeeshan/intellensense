@@ -52,14 +52,6 @@ class _NotificationsState extends State<Notifications> {
         }),
         items: [
           BottomNavyBarItem(
-            icon: Image.asset(
-              'assets/icons/Social-Media-Icons-IS-08.png',
-              height: 25,
-            ),
-            title: Text('Twitter'),
-            activeColor: Colors.blue,
-          ),
-          BottomNavyBarItem(
               icon: Image.asset(
                 'assets/icons/Social-Media-Icons-IS-10.png',
                 height: 25,
@@ -87,6 +79,14 @@ class _NotificationsState extends State<Notifications> {
               ),
               title: Text('Newspaper'),
               activeColor: Colors.blue),
+          BottomNavyBarItem(
+            icon: Image.asset(
+              'assets/icons/Social-Media-Icons-IS-08.png',
+              height: 25,
+            ),
+            title: Text('Twitter'),
+            activeColor: Colors.blue,
+          ),
         ],
       ),
       body: Column(children: [
@@ -95,11 +95,11 @@ class _NotificationsState extends State<Notifications> {
               controller: _pageController,
               physics: NeverScrollableScrollPhysics(),
               children: [
-                Twitter(),
                 Youtube(),
                 Facebook(),
                 Instagram(),
                 Newspaper(),
+                Twitter(),
               ]),
         ),
       ]),
