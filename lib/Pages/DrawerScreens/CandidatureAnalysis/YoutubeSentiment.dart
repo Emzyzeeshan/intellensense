@@ -47,16 +47,23 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                'Youtube Analysis',
-                style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 20,
+              padding: EdgeInsets.all(8.0),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 30,
+                color: Color(0xff00196b),
+                child: Center(
+                  child: Text(
+                    'Youtube Analysis',
+                    style: TextStyle(
+                        fontFamily: 'Segoe UI',
+                        fontSize: 20,
+                        color: Colors.white),
+                  ),
                 ),
               ),
             ),
