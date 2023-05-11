@@ -8,8 +8,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
-import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/SentimentAnalysis.dart';
+
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/TwitterSentiment.dart';
+
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/YoutubeSentiment.dart';
 import 'package:intellensense/SpalashScreen/widgets/ChartSampleData.dart';
 import 'package:page_transition/page_transition.dart';
@@ -760,17 +761,20 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                             }),
 
                         Container(
-                            height: 150,
+                            height: 170,
                             width: MediaQuery.of(context).size.width,
                             child: Card(
                               color: Colors.cyan[50],
                               child: Column(children: [
+                                SizedBox(
+                                  height: 10,
+                                ),
                                 Text(
                                   'Sentiment Analysis',
                                   style: GoogleFonts.nunitoSans(
                                       fontSize: 17.0,
                                       fontWeight: FontWeight.w700,
-                                      color: Colors.black),
+                                      color: Colors.grey.shade600),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -800,13 +804,35 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                             'assets/icons/Social-Media-Icons-IS-08.png');
                                       },
                                     ),
-                                    SentimentCardTemplate(() {},
-                                        'assets/icons/Social-Media-Icons-IS-10.png'),
+                                    OpenContainer(
+                                      closedColor: Color(0xffd2dfff),
+                                      openColor: Color(0xffd2dfff),
+                                      closedElevation: 10.0,
+                                      openElevation: 10.0,
+                                      closedShape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      transitionType:
+                                          ContainerTransitionType.fade,
+                                      transitionDuration:
+                                          const Duration(milliseconds: 1200),
+                                      openBuilder: (context, action) {
+                                        return YoutubeSentiment(widget.Value);
+                                      },
+                                      closedBuilder: (context, action) {
+                                        return SentimentCardTemplate(() {},
+                                            'assets/icons/Social-Media-Icons-IS-10.png');
+                                      },
+                                    ),
                                     SentimentCardTemplate(
                                         () {}, 'assets/icons/newspaperdxp.png'),
                                     SentimentCardTemplate(
                                         () {}, 'assets/icons/voicedxps.png'),
                                   ],
+                                ),
+                                SizedBox(
+                                  height: 10,
                                 ),
                                 Row(
                                   mainAxisAlignment:

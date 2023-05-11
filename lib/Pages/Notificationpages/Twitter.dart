@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/main.dart';
 
 class Twitter extends StatefulWidget {
   const Twitter({super.key});
@@ -86,8 +87,7 @@ class _TwitterState extends State<Twitter> {
     var headers = {'Content-Type': 'application/json'};
     var body = json.encode({});
     var response = await get(
-      Uri.parse(
-          'http://192.169.1.211:8081/insights/2.89.0/trendingHashtags?page=0,14&field=TWITTER'),
+      Uri.parse(INSIGHTS + '/trendingHashtags?page=0,14&field=TWITTER'),
     );
 
     if (response.statusCode == 200) {

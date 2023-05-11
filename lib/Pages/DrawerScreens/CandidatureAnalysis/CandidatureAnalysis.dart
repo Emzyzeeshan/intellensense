@@ -207,40 +207,6 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
                                           title: Text(
                                               '${partydata[index]['name']}'),
                                           trailing: Icon(Icons.arrow_drop_down),
-                                          // onTap: () {
-                                          // Navigator.push(
-                                          //     context,
-                                          //     PageTransition(
-                                          //       type: PageTransitionType
-                                          //           .rightToLeft,
-                                          //       child: TestContainer(
-                                          //           partydata[index]),
-                                          //     ));
-
-                                          // showMaterialModalBottomSheet(
-                                          //   shape: RoundedRectangleBorder(
-                                          //       side: BorderSide(
-                                          //           width: 3,
-                                          //           color: Colors.blue.shade300),
-                                          //       borderRadius: BorderRadius.only(
-                                          //           topLeft: Radius.circular(15),
-                                          //           topRight:
-                                          //               Radius.circular(15))),
-                                          //   enableDrag: false,
-                                          //   elevation: 5,
-                                          //   context: context,
-                                          //   builder: (context) => Container(
-                                          //       height: MediaQuery.of(context)
-                                          //           .size
-                                          //           .height,
-                                          //       child: Padding(
-                                          //         padding:
-                                          //             const EdgeInsets.all(8.0),
-                                          //         child: TrsMpDetails(
-                                          //             partydata[index]),
-                                          //       )),
-                                          // );
-                                          // },
                                         );
                                       },
                                     ),
@@ -256,83 +222,60 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
                       }
                     }),
                   )
-                : Flexible(
+                : Expanded(
                     child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: searchData.length,
-                      itemBuilder: (context, int index) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 5.0, bottom: 5),
-                              child: ListTile(
-                                onTap: () {
-                                  showMaterialModalBottomSheet(
-                                    shape: RoundedRectangleBorder(
-                                        side: BorderSide(
-                                            width: 3, color: Color(0xffd2dfff)),
-                                        borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(15),
-                                            topRight: Radius.circular(15))),
-                                    enableDrag: false,
-                                    elevation: 5,
-                                    context: context,
-                                    builder: (context) => Container(
-                                        height:
-                                            MediaQuery.of(context).size.height,
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
-                                          child:
-                                              TrsMpDetails(searchData[index]),
-                                        )),
-                                  );
-                                },
-                                dense: true,
-                                tileColor: Colors.grey.shade100,
+                        itemCount: searchData.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 5.0, bottom: 5),
+                            child: OpenContainer(
+                              closedColor: Color(0xffd2dfff),
+                              openColor: Color(0xffd2dfff),
+                              closedElevation: 10.0,
+                              openElevation: 10.0,
+                              closedShape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.0)),
+                              ),
+                              transitionType: ContainerTransitionType.fade,
+                              transitionDuration:
+                                  const Duration(milliseconds: 1200),
+                              openBuilder: (context, action) {
+                                return TrsMpDetails(searchData[index]);
+                              },
+                              closedBuilder: (context, action) {
+                                return ListTile(
+                                  dense: true,
+                                  tileColor: Color(0xffd2dfff),
 
-                                subtitle: Text(
-                                    "Party: ${searchData[index]['party']}"),
-                                // collapsedBackgroundColor: Colors.grey.shade100,
-                                // tilePadding: EdgeInsets.all(5),
+                                  subtitle: Text(
+                                      "Party: ${searchData[index]['party']}"),
+                                  // collapsedBackgroundColor: Colors.grey.shade100,
+                                  // tilePadding: EdgeInsets.all(5),
 
-                                leading: CircleAvatar(
-                                  backgroundColor: Colors.transparent,
-                                  radius: 30,
-                                  child: ClipOval(
-                                    child: Image.memory(
-                                      base64Decode(searchData[index]['content']
-                                              .substring(22) ??
-                                          ''),
-                                      width: 300,
-                                      height: 300,
-                                      fit: BoxFit.fill,
+                                  leading: CircleAvatar(
+                                    backgroundColor: Colors.transparent,
+                                    radius: 30,
+                                    child: ClipOval(
+                                      child: Image.memory(
+                                        base64Decode(searchData[index]
+                                                    ['content']
+                                                .substring(22) ??
+                                            ''),
+                                        width: 300,
+                                        height: 300,
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                title: Text('${searchData[index]['name']}'),
-                                trailing: Icon(Icons.arrow_drop_down),
-                              ),
+                                  title: Text('${searchData[index]['name']}'),
+                                  trailing: Icon(Icons.arrow_drop_down),
+                                );
+                              },
                             ),
-                            // Text(
-                            //   "Post",
-                            //   style: TextStyle(
-                            //       fontWeight: FontWeight.bold, fontSize: 16),
-                            // ),
-                            // Container(
-                            //   height: 2,
-                            // ),
-                            // Text(searchData[index]['name']),
-                            // Text(searchData[index]['party']),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-            // Flexible(
-            //   child: HR_Dashboard(),
-            // ),
+                          );
+                        }),
+                  )
           ]),
         ));
   }
@@ -378,4 +321,27 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
 
     setState(() {});
   }
+}
+
+SocialInfoCard(String imagepath, String info) {
+  return Padding(
+    padding: const EdgeInsets.all(4.0),
+    child: Column(
+      children: [
+        Container(
+          height: 30,
+          width: 30,
+          child: Image.asset(
+            imagepath,
+            height: 30,
+            width: 30,
+          ),
+        ),
+        SizedBox(
+          width: 2,
+        ),
+        Text(info)
+      ],
+    ),
+  );
 }
