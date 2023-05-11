@@ -37,6 +37,7 @@ dependencies:
   bottom_navy_bar: ^6.0.0
   bubble_tab_indicator: ^0.1.6
   cached_network_image: ^3.2.3
+  calendar_view: ^1.0.3
   card_swiper: ^2.0.4
   carousel_pro: ^1.0.0
   carousel_slider: ^4.1.1
@@ -91,7 +92,9 @@ dependencies:
   sidebarx: ^0.15.0
   skeletons: ^0.0.3
   sleek_circular_slider: ^2.0.1
+  syncfusion_flutter_calendar: ^21.2.4
   syncfusion_flutter_charts: ^21.1.41
+  syncfusion_localizations: ^21.2.4
   tap_to_expand: ^0.6.1
   text_scroll: ^0.1.2
   timelines: ^0.1.0

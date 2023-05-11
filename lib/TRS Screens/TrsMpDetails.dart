@@ -8,6 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewspaperSentiment.dart';
 
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/TwitterSentiment.dart';
 
@@ -825,8 +826,27 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                             'assets/icons/Social-Media-Icons-IS-10.png');
                                       },
                                     ),
-                                    SentimentCardTemplate(
-                                        () {}, 'assets/icons/newspaperdxp.png'),
+                                    OpenContainer(
+                                      closedColor: Color(0xffd2dfff),
+                                      openColor: Color(0xffd2dfff),
+                                      closedElevation: 10.0,
+                                      openElevation: 10.0,
+                                      closedShape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      transitionType:
+                                          ContainerTransitionType.fade,
+                                      transitionDuration:
+                                          const Duration(milliseconds: 1200),
+                                      openBuilder: (context, action) {
+                                        return NewsPaperSentiment(widget.Value);
+                                      },
+                                      closedBuilder: (context, action) {
+                                        return SentimentCardTemplate(() {},
+                                            'assets/icons/newspaperdxp.png');
+                                      },
+                                    ),
                                     SentimentCardTemplate(
                                         () {}, 'assets/icons/voicedxps.png'),
                                   ],

@@ -98,6 +98,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "calendar_view",
+      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/calendar_view-1.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "card_swiper",
       "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/card_swiper-2.0.4",
       "packageUri": "lib/",
@@ -932,6 +938,12 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "syncfusion_flutter_calendar",
+      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_calendar-21.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
       "name": "syncfusion_flutter_charts",
       "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_charts-21.1.41",
       "packageUri": "lib/",
@@ -939,7 +951,19 @@
     },
     {
       "name": "syncfusion_flutter_core",
-      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_core-21.1.41",
+      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_core-21.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "syncfusion_flutter_datepicker",
+      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_flutter_datepicker-21.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
+    },
+    {
+      "name": "syncfusion_localizations",
+      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/syncfusion_localizations-21.2.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -976,6 +1000,12 @@
     {
       "name": "timelines",
       "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/timelines-0.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "timezone",
+      "rootUri": "file:///C:/Users/Pilog/AppData/Local/Pub/Cache/hosted/pub.dev/timezone-0.9.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1106,7 +1136,7 @@
       "languageVersion": "2.18"
     }
   ],
-  "generated": "2023-05-10T06:40:17.598654Z",
+  "generated": "2023-05-11T10:30:39.103349Z",
   "generator": "pub",
   "generatorVersion": "2.19.6"
 }

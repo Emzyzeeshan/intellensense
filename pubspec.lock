@@ -129,6 +129,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.2"
+  calendar_view:
+    dependency: "direct main"
+    description:
+      name: calendar_view
+      sha256: "58a8b851ac0a2d62770fd06ad30f06683bd40848a5dd1a1eca332f5a6064bd82"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.3"
   card_swiper:
     dependency: "direct main"
     description:
@@ -1229,6 +1237,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_calendar:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_calendar
+      sha256: ca071f95571c0eac37b52eb4f974e1b29707159d07fc97f69f18b4455563c7d1
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.4"
   syncfusion_flutter_charts:
     dependency: "direct main"
     description:
@@ -1241,10 +1257,26 @@ packages:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: "05b079cb1be26a8d5c1afe714172d2eed9178049f4a7dc773b2cbb8b053eff8d"
+      sha256: dfd138a0cea87d6b1c624513b4b620f06515d884d65f1fa5fb93345266c7592c
       url: "https://pub.dev"
     source: hosted
-    version: "21.1.41"
+    version: "21.2.4"
+  syncfusion_flutter_datepicker:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_datepicker
+      sha256: "2008bdbfa1ffb87a065dc720a55799bb800de2d5a6671c59afacc947fc255b70"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.4"
+  syncfusion_localizations:
+    dependency: "direct main"
+    description:
+      name: syncfusion_localizations
+      sha256: "95247adeecbdffe823419440068da5dfd22f68c17fd9b7ea83e3a0d747b9171e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.4"
   synchronized:
     dependency: transitive
     description:
@@ -1293,6 +1325,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.1.0"
+  timezone:
+    dependency: transitive
+    description:
+      name: timezone
+      sha256: "24c8fcdd49a805d95777a39064862133ff816ebfffe0ceff110fb5960e557964"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.9.1"
   tuanis_sidebar:
     dependency: "direct main"
     description:

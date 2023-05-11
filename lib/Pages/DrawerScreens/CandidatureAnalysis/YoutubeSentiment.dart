@@ -51,12 +51,19 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                'Youtube Analysis',
-                style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 20,
+              padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 30,
+                color: Color(0xff00196b),
+                child: Center(
+                  child: Text(
+                    'Youtube Analysis',
+                    style: TextStyle(
+                        fontFamily: 'Segoe UI',
+                        fontSize: 20,
+                        color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -355,7 +362,10 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
                         'between', '${ToDate.text}', '${FromDate.text}');
                   });
                 },
-                child: Text('Search'),
+                child: Text(
+                  'Search',
+                  style: TextStyle(color: Colors.white),
+                ),
                 color: Colors.blueAccent,
               )
             ],
