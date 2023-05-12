@@ -189,18 +189,15 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
                                           // collapsedBackgroundColor: Colors.grey.shade100,
                                           // tilePadding: EdgeInsets.all(5),
 
-                                          leading: CircleAvatar(
-                                            backgroundColor: Colors.transparent,
-                                            radius: 30,
-                                            child: ClipOval(
-                                              child: Image.memory(
+                                          leading: Container(
+                                            height: 50,
+                                            width: 50,
+                                            child: CircleAvatar(
+                                              backgroundImage: MemoryImage(
                                                 base64Decode(partydata[index]
                                                             ['content']
                                                         .substring(22) ??
                                                     ''),
-                                                width: 300,
-                                                height: 300,
-                                                fit: BoxFit.fill,
                                               ),
                                             ),
                                           ),
