@@ -48,7 +48,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
         child: Column(
           children: [
             Padding(
@@ -342,6 +342,13 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: <Widget>[
+                          Text(
+                            ' Analysis from ${FromDate.text} to ${ToDate.text}',
+                            style: TextStyle(
+                              fontFamily: 'Segoe UI',
+                              fontSize: 16,
+                            ),
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
                             children: [
