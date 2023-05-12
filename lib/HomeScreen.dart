@@ -119,7 +119,11 @@ class _HomeScreenState extends State<HomeScreen> {
   FlipCardController? flipCardController = FlipCardController();
   Position? _currentPosition;
   var WeatherDataResult;
+
   bool selected = false;
+
+  final GlobalKey<ScaffoldState> _key = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -127,6 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+          key: _key,
           drawer: drawer(),
           backgroundColor: Colors.white,
           body: NestedScrollView(
@@ -134,6 +139,15 @@ class _HomeScreenState extends State<HomeScreen> {
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
                   SliverAppBar(
+                    leading: IconButton(
+                      icon: Icon(
+                        Icons.menu,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        _key.currentState!.openDrawer();
+                      },
+                    ),
                     elevation: 0,
                     backgroundColor: Color(0xffd2dfff),
                     pinned: true,

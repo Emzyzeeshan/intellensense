@@ -102,6 +102,7 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
       builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
           return Scaffold(
+            resizeToAvoidBottomInset: false,
             // backgroundColor: Color(0xffd2dfff),
             body: LayoutBuilder(
                 builder: (BuildContext ctx, BoxConstraints constraints) {

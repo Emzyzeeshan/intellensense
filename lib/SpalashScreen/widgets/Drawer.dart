@@ -47,7 +47,7 @@ class _drawerState extends State<drawer> {
                 ListTile(
                   leading: Image(
                     image: AssetImage(
-                      'assets/icons/Candidature Analysis.png',
+                      'assets/new Updated images/intellisensesolutions-Icons-62.png',
                     ),
                     height: 25,
                   ),
@@ -63,7 +63,7 @@ class _drawerState extends State<drawer> {
                 ListTile(
                   leading: Image(
                     image: AssetImage(
-                      'assets/icons/location.png',
+                      'assets/new Updated images/intellisensesolutions-Icons-73 (1).png',
                     ),
                     height: 25,
                   ),
@@ -79,7 +79,7 @@ class _drawerState extends State<drawer> {
                 ListTile(
                   leading: Image(
                     image: AssetImage(
-                      'assets/icons/communicationChannel.png',
+                      'assets/new Updated images/intellisensesolutions-Icons-74.png',
                     ),
                     height: 25,
                   ),
@@ -91,7 +91,7 @@ class _drawerState extends State<drawer> {
                 ListTile(
                   leading: Image(
                     image: AssetImage(
-                      'assets/icons/Form.png',
+                      'assets/new Updated images/intellisensesolutions-Icons-79.png',
                     ),
                     height: 25,
                   ),
@@ -107,7 +107,7 @@ class _drawerState extends State<drawer> {
                 ListTile(
                   leading: Image(
                     image: AssetImage(
-                      'assets/icons/faceEmotiondxp.png',
+                      'assets/new Updated images/intellisensesolutions-Icons-80.png',
                     ),
                     height: 25,
                   ),
@@ -131,7 +131,7 @@ class _drawerState extends State<drawer> {
                 ListTile(
                   leading: Image(
                     image: AssetImage(
-                      'assets/icons/ScoreCard.png',
+                      'assets/new Updated images/intellisensesolutions-Icons-77.png',
                     ),
                     height: 25,
                   ),
@@ -156,7 +156,7 @@ class _drawerState extends State<drawer> {
                 ListTile(
                   leading: Image(
                     image: AssetImage(
-                      'assets/icons/sentiAnalysis.png',
+                      'assets/new Updated images/intellisensesolutions-Icons-76.png',
                     ),
                     height: 25,
                   ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/main.dart';
 
 import '../../main.dart';
 
@@ -88,6 +89,7 @@ class _InstagramState extends State<Instagram> {
     var headers = {'Content-Type': 'application/json'};
 
     var response = await get(
+
       Uri.parse(
           INSIGHTS+'/trendingHashtags?page=0,14&field=INSTAGRAM'),
     );
