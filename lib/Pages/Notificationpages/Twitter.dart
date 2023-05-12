@@ -57,10 +57,10 @@ class _TwitterState extends State<Twitter> {
                   ),
                   Flexible(
                     child: ListView.builder(
-                      itemCount: twitterdata.length,
+                      itemCount: twitterdata['active_twitter_hashtags'].length,
                       itemBuilder: (context, index) {
                         return TwittterNotificationtile(
-                            '${twitterdata[index]['hashTag']}');
+                            '${twitterdata['active_twitter_hashtags'][index]}');
                       },
                     ),
                   ),
@@ -85,14 +85,14 @@ class _TwitterState extends State<Twitter> {
     // await Future.delayed(Duration(seconds: 1));
     var headers = {'Content-Type': 'application/json'};
     var body = json.encode({});
-    var response = await get(
+    var response = await post(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.89.0/trendingHashtags?page=0,14&field=TWITTER'),
+          'http://idxp.pilogcloud.com:6656/active_twitter_hashtags/'),
     );
 
     if (response.statusCode == 200) {
       setState(() {
-        twitterdata = jsonDecode(response.body);
+        twitterdata = json.decode(response.body);
       });
 
       print(twitterdata);

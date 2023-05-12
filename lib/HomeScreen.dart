@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:animate_do/animate_do.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -118,6 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
   FlipCardController? flipCardController = FlipCardController();
   Position? _currentPosition;
   var WeatherDataResult;
+  bool selected = false;
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
@@ -138,15 +140,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     expandedHeight: 250,
                     flexibleSpace: FlexibleSpaceBar(
                       collapseMode: CollapseMode.parallax,
-                      title: _isShrink
-                          ? ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: Image.asset(
-                                'assets/icons/IntelliSense-Logo-Finall.gif',
-                                fit: BoxFit.cover,
-                                height: 30,
-                              ),
-                            )
+                      title: _isShrink==true
+                          ? Image.asset(
+                            'assets/icons/IntelliSense-Logo-Finall.gif',
+                            fit: BoxFit.cover,
+                            height: 50,
+                        width: 180,
+                          )
                           : null,
                       background: SafeArea(
                         child: Column(
@@ -175,7 +175,48 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     actions: [
-                      Row(
+                      Padding(
+                        padding:  EdgeInsets.only(bottom: 12.0, top: 10),
+                        child: _isShrink==false? Container(
+                          child: CarouselSlider(
+                            options: CarouselOptions(
+                              height: 400.0,
+                              scrollDirection: Axis.vertical,
+                              autoPlay: true,
+                              autoPlayInterval: Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 800),
+                            ),
+                            items: ['YuvaGalamAndrapradesh', 'YuvaGalamPadayatra', '#PsychoPovaliCycleRavali', '#LokeshPadayatra', '#YuvaGalamPadayatra'].map((i) {
+                              return Builder(
+                                builder: (BuildContext context) {
+                                  return Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 5.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            '$i',
+                                            style: TextStyle(fontSize: 16.0, color: Colors.black),
+                                          ),
+                                          Icon(Icons.data_usage,size: 18,color: Colors.black,),
+                                        ],
+                                      ));
+                                },
+                              );
+                            }).toList(),
+                          ),
+                          width: 240,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 2, color: Colors.blue),
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
+                          //color: Colors.white,
+                        ):null,
+                      ),
+                      /*Row(
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -279,13 +320,18 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                           )
                         ],
-                      ),
+                      ),*/
                       PopupMenuButton(onSelected: (value) {
                         if (value == 'notifications') {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Notifications()));
+                        } else if (value == 'weather') {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WeatherScreen()));
                         }
                       }, itemBuilder: (BuildContext bc) {
                         return [
@@ -314,6 +360,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           PopupMenuItem(
                             value: 'notifications',
                             child: Text("Notifications"),
+                            onTap: () {},
+                          ),
+                          PopupMenuItem(
+                            value: 'weather',
+                            child: Text("Weather"),
                             onTap: () {},
                           ),
                         ];

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/Pages/Notificationpages/Twitter.dart';
 
+import '../../main.dart';
+
 class Newspaper extends StatefulWidget {
   const Newspaper({super.key});
 
@@ -88,7 +90,7 @@ class _NewspaperState extends State<Newspaper> {
 
     var response = await get(
       Uri.parse(
-          'http://192.169.1.211:8081/insights/2.89.0/ytnpTrendingHashTags?page=0,13&field=NEWS PAPER'),
+          INSIGHTS+'/ytnpTrendingHashTags?page=0,13&field=NEWS PAPER'),
     );
 
     if (response.statusCode == 200) {
