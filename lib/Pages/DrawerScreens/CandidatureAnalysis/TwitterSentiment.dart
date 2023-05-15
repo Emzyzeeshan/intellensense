@@ -52,12 +52,19 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                'Twitter Analysis',
-                style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 20,
+              padding: EdgeInsets.all(8.0),
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                height: 30,
+                color: Color(0xff00196b),
+                child: Center(
+                  child: Text(
+                    'Twitter Analysis',
+                    style: TextStyle(
+                        fontFamily: 'Segoe UI',
+                        fontSize: 20,
+                        color: Colors.white),
+                  ),
                 ),
               ),
             ),
