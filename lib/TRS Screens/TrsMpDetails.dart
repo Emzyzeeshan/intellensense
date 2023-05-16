@@ -11,6 +11,9 @@ import 'package:http/http.dart';
 import 'package:intellensense/PageNews/NewsPaperScreen.dart';
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewspaperSentiment.dart';
 
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewsChannelSentiment.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewspaperSentiment.dart';
+
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/TwitterSentiment.dart';
 
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/YoutubeSentiment.dart';
@@ -845,7 +848,10 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       },
                                       closedBuilder: (context, action) {
                                         return SentimentCardTemplate(() {},
-                                            'assets/icons/newspaperdxp.png');
+
+
+                                            'assets/new Updated images/intellisensesolutions-Icons-83.png');
+
                                       },
                                     ),
                                     SentimentCardTemplate(
@@ -859,8 +865,27 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    SentimentCardTemplate(
-                                        () {}, 'assets/icons/newsdxps.png'),
+                                    OpenContainer(
+                                      closedColor: Color(0xffd2dfff),
+                                      openColor: Color(0xffd2dfff),
+                                      closedElevation: 10.0,
+                                      openElevation: 10.0,
+                                      closedShape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      transitionType:
+                                          ContainerTransitionType.fade,
+                                      transitionDuration:
+                                          const Duration(milliseconds: 1200),
+                                      openBuilder: (context, action) {
+                                        return NewsChannel(widget.Value);
+                                      },
+                                      closedBuilder: (context, action) {
+                                        return SentimentCardTemplate(
+                                            () {}, 'assets/icons/newsdxps.png');
+                                      },
+                                    ),
                                     SentimentCardTemplate(
                                         () {}, 'assets/icons/timelinedxp.png'),
                                     SentimentCardTemplate(() {},

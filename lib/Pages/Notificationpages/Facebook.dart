@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/main.dart';
 
+import '../../main.dart';
+
 class Facebook extends StatefulWidget {
   const Facebook({super.key});
 
@@ -87,7 +89,10 @@ class _FacebookState extends State<Facebook> {
     var headers = {'Content-Type': 'application/json'};
 
     var response = await get(
-      Uri.parse(INSIGHTS + '/trendingHashtags?page=0,14&field=FACEBOOK'),
+
+      Uri.parse(
+          INSIGHTS+'/trendingHashtags?page=0,14&field=FACEBOOK'),
+
     );
 
     if (response.statusCode == 200) {

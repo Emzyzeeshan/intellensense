@@ -5,6 +5,8 @@ import 'package:http/http.dart';
 import 'package:intellensense/Pages/Notificationpages/Twitter.dart';
 import 'package:intellensense/main.dart';
 
+import '../../main.dart';
+
 class Newspaper extends StatefulWidget {
   const Newspaper({super.key});
 
@@ -88,7 +90,11 @@ class _NewspaperState extends State<Newspaper> {
     var headers = {'Content-Type': 'application/json'};
 
     var response = await get(
-      Uri.parse(INSIGHTS + '/ytnpTrendingHashTags?page=0,13&field=NEWS PAPER'),
+
+      Uri.parse(
+          INSIGHTS+'/ytnpTrendingHashTags?page=0,13&field=NEWS PAPER'),
+
+
     );
 
     if (response.statusCode == 200) {
