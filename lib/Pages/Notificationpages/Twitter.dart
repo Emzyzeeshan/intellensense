@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/Pages/Notificationpages/Components/hashtagInfo.dart';
 import 'package:intellensense/main.dart';
 
 class Twitter extends StatefulWidget {
@@ -61,7 +63,11 @@ class _TwitterState extends State<Twitter> {
                       itemCount: twitterdata['active_twitter_hashtags'].length,
                       itemBuilder: (context, index) {
                         return TwittterNotificationtile(
-                            '${twitterdata['active_twitter_hashtags'][index]}');
+                          Hashtag:
+                              '${twitterdata['active_twitter_hashtags'][index]}',
+                          dashboadTap: HashTagInfo(
+                              twitterdata['active_twitter_hashtags'][index]),
+                        );
                       },
                     ),
                   ),
@@ -88,9 +94,7 @@ class _TwitterState extends State<Twitter> {
     var body = json.encode({});
 
     var response = await post(
-      Uri.parse(
-          'http://idxp.pilogcloud.com:6656/active_twitter_hashtags/'),
-
+      Uri.parse('http://idxp.pilogcloud.com:6656/active_twitter_hashtags/'),
     );
 
     if (response.statusCode == 200) {
@@ -107,9 +111,11 @@ class _TwitterState extends State<Twitter> {
 }
 
 class TwittterNotificationtile extends StatefulWidget {
-  String Hashtag;
-  TwittterNotificationtile(
-    @required this.Hashtag, {
+  String? Hashtag;
+  Widget? dashboadTap;
+  TwittterNotificationtile({
+    this.dashboadTap,
+    @required this.Hashtag,
     super.key,
   });
 
@@ -121,49 +127,68 @@ class TwittterNotificationtile extends StatefulWidget {
 class _TwittterNotificationtileState extends State<TwittterNotificationtile> {
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      collapsedBackgroundColor: Colors.grey.shade200,
-      backgroundColor: Colors.grey.shade100,
-      childrenPadding: EdgeInsets.all(5),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      leading: Image.asset(
-        'assets/icons/Social-Media-Icons-IS-08.png',
-        height: 25,
-        width: 25,
+    return Padding(
+      padding: const EdgeInsets.all(3.0),
+      child: ExpansionTile(
+        collapsedBackgroundColor: Colors.grey.shade200,
+        backgroundColor: Colors.grey.shade100,
+        childrenPadding: EdgeInsets.all(5),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        leading: Image.asset(
+          'assets/icons/Social-Media-Icons-IS-08.png',
+          height: 25,
+          width: 25,
+        ),
+        title: Text(widget.Hashtag!),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              OpenContainer(
+                closedColor: Color(0xffd2dfff),
+                openColor: Color(0xffd2dfff),
+                closedElevation: 10.0,
+                openElevation: 10.0,
+                closedShape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                transitionType: ContainerTransitionType.fade,
+                transitionDuration: const Duration(milliseconds: 1200),
+                openBuilder: (context, action) {
+                  return widget.dashboadTap!;
+                },
+                closedBuilder: (context, action) {
+                  return Image.asset(
+                    'assets/NotificationIcons/analyticsShowCard.png',
+                    height: 25,
+                    width: 25,
+                  );
+                },
+              ),
+              Image.asset(
+                'assets/NotificationIcons/GridDB.png',
+                height: 25,
+                width: 25,
+              ),
+              Image.asset(
+                'assets/NotificationIcons/Open_Docs_Icon.png',
+                height: 25,
+                width: 25,
+              ),
+              Image.asset(
+                'assets/NotificationIcons/Pivot-Unpivot_Icon.png',
+                height: 25,
+                width: 25,
+              ),
+              Image.asset(
+                'assets/NotificationIcons/Tree.png',
+                height: 25,
+                width: 25,
+              ),
+            ],
+          )
+        ],
       ),
-      title: Text(widget.Hashtag),
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset(
-              'assets/NotificationIcons/analyticsShowCard.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/GridDB.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/Open_Docs_Icon.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/Pivot-Unpivot_Icon.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/Tree.png',
-              height: 25,
-              width: 25,
-            ),
-          ],
-        )
-      ],
     );
   }
 }
