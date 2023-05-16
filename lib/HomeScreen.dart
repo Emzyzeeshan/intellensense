@@ -120,10 +120,9 @@ class _HomeScreenState extends State<HomeScreen> {
   Position? _currentPosition;
   var WeatherDataResult;
 
-  bool selected = false;
-
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
+  bool selected = false;
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;

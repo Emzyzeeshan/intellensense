@@ -8,6 +8,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/PageNews/NewsPaperScreen.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewspaperSentiment.dart';
 
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewsChannelSentiment.dart';
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewspaperSentiment.dart';
@@ -846,7 +848,10 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       },
                                       closedBuilder: (context, action) {
                                         return SentimentCardTemplate(() {},
+
+
                                             'assets/new Updated images/intellisensesolutions-Icons-83.png');
+
                                       },
                                     ),
                                     SentimentCardTemplate(
