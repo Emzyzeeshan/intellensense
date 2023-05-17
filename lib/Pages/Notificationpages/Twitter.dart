@@ -15,50 +15,54 @@ class Twitter extends StatefulWidget {
 
 class _TwitterState extends State<Twitter> {
   late Future<dynamic> finaldata = TwitterApi();
+  
+  List searchData = [];
+  List fullData = [];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(0xffd2dfff),
-      body: FutureBuilder<dynamic>(
-        future: finaldata,
-        builder: (
-          BuildContext context,
-          AsyncSnapshot<dynamic> snapshot,
-        ) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(child: CircularProgressIndicator()),
-                  Text('Please Wait')
-                ]);
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return const Text('Error');
-            } else if (snapshot.hasData) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(children: [
-                  TextField(
-                    cursorColor: Colors.grey,
-                    decoration: InputDecoration(
-                        isDense: true,
-                        fillColor: Colors.blue.shade100,
-                        filled: true,
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                        hintText: 'Search',
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
-                        prefixIcon: Container(
-                          padding: EdgeInsets.all(15),
-                          child: Icon(Icons.search_rounded),
-                          width: 18,
-                        )),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Flexible(
+    return 
+      
+       Column(
+         children: [ TextField(onChanged: onSearchTextChanged,
+                        cursorColor: Colors.grey,
+                        decoration: InputDecoration(
+                            isDense: true,
+                            fillColor: Colors.blue.shade100,
+                            filled: true,
+                            border: OutlineInputBorder(borderSide: BorderSide.none),
+                            hintText: 'Search',
+                            hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
+                            prefixIcon: Container(
+                              padding: EdgeInsets.all(15),
+                              child: Icon(Icons.search_rounded),
+                              width: 18,
+                            )),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                       searchData.length ==
+                0 // Check SearchData list is empty or not if empty then show full data else show search data
+            ? 
+           FutureBuilder<dynamic>(
+            future: finaldata,
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<dynamic> snapshot,
+            ) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(child: CircularProgressIndicator()),
+                      Text('Please Wait')
+                    ]);
+              } else if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else if (snapshot.hasData) {
+                  return Flexible(
                     child: ListView.builder(
                       itemCount: twitterdata['active_twitter_hashtags'].length,
                       itemBuilder: (context, index) {
@@ -70,28 +74,36 @@ class _TwitterState extends State<Twitter> {
                         );
                       },
                     ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                ]),
-              );
-            } else {
-              return Center(child: const Text('Issue With API'));
-            }
-          } else {
-            return Text('State: ${snapshot.connectionState}');
-          }
-        },
-      ),
-    );
+                  );
+                } else {
+                  return Center(child: const Text('Issue With API'));
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
+      ): Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: searchData.length,
+                  itemBuilder: (context, index) {
+                    return TwittterNotificationtile(Hashtag:'${searchData[index]}',
+                    dashboadTap: HashTagInfo(
+                              searchData[index]),
+                     );
+                  },
+                ), 
+              ),
+         ],
+       );
+    
   }
 
   var twitterdata;
   Future<dynamic> TwitterApi() async {
     // await Future.delayed(Duration(seconds: 1));
-    var headers = {'Content-Type': 'application/json'};
-    var body = json.encode({});
+  
+
 
     var response = await post(
       Uri.parse('http://idxp.pilogcloud.com:6656/active_twitter_hashtags/'),
@@ -101,12 +113,32 @@ class _TwitterState extends State<Twitter> {
       setState(() {
         twitterdata = json.decode(response.body);
       });
-
-      print(twitterdata);
+fullData=twitterdata['active_twitter_hashtags'];
+      print(fullData);
     } else {
       print(response.reasonPhrase);
     }
     return twitterdata;
+  }
+
+   onSearchTextChanged(String text) async {
+    searchData.clear();
+    if (text.isEmpty) {
+      // Check textfield is empty or not
+      setState(() {});
+      return;
+    }
+ fullData.forEach((data) {
+      if (data
+          .toString()
+          .toLowerCase()
+          .contains(text.toLowerCase().toString())) {
+        searchData.add(
+            data); // If not empty then add search data into search data list
+      }
+    });
+    print(searchData.length);
+    setState(() {});
   }
 }
 
@@ -147,7 +179,7 @@ class _TwittterNotificationtileState extends State<TwittterNotificationtile> {
               OpenContainer(
                 closedColor: Color(0xffd2dfff),
                 openColor: Color(0xffd2dfff),
-                closedElevation: 10.0,
+            
                 openElevation: 10.0,
                 closedShape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),

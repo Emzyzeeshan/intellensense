@@ -19,28 +19,9 @@ class _FacebookState extends State<Facebook> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xffd2dfff),
-      body: FutureBuilder<dynamic>(
-        future: finaldata,
-        builder: (
-          BuildContext context,
-          AsyncSnapshot<dynamic> snapshot,
-        ) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Center(child: CircularProgressIndicator()),
-                  Text('Please Wait')
-                ]);
-          } else if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.hasError) {
-              return const Text('Error');
-            } else if (snapshot.hasData) {
-              return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(children: [
-                  TextField(
+      body: Column(
+        children: [
+           TextField(onChanged: onSearchTextChanged,
                     cursorColor: Colors.grey,
                     decoration: InputDecoration(
                         isDense: true,
@@ -58,7 +39,25 @@ class _FacebookState extends State<Facebook> {
                   SizedBox(
                     height: 10,
                   ),
-                  Flexible(
+        searchData.length==0?  FutureBuilder<dynamic>(
+            future: finaldata,
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<dynamic> snapshot,
+            ) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Center(child: CircularProgressIndicator()),
+                      Text('Please Wait')
+                    ]);
+              } else if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else if (snapshot.hasData) {
+                  return Flexible(
                     child: ListView.builder(
                       itemCount: Facebookdata.length,
                       itemBuilder: (context, index) {
@@ -66,19 +65,25 @@ class _FacebookState extends State<Facebook> {
                             '${Facebookdata[index]['hashTag']}');
                       },
                     ),
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                ]),
-              );
-            } else {
-              return const Text('Empty data');
-            }
-          } else {
-            return Text('State: ${snapshot.connectionState}');
-          }
-        },
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
+          ) : Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: searchData.length,
+                  itemBuilder: (context, index) {
+                    return FacebookNotificationtile(
+                        '${searchData[index]['hashTag']}');
+                  },
+                ),
+              ),
+        ],
       ),
     );
   }
@@ -99,12 +104,36 @@ class _FacebookState extends State<Facebook> {
       setState(() {
         Facebookdata = jsonDecode(response.body);
       });
-
+fullData=Facebookdata;
       print(Facebookdata);
     } else {
       print(response.reasonPhrase);
     }
     return Facebookdata;
+  }
+
+
+   List searchData = [];
+  List fullData = [];
+  onSearchTextChanged(String text) async {
+    searchData.clear();
+    if (text.isEmpty) {
+      // Check textfield is empty or not
+      setState(() {});
+      return;
+    }
+
+    fullData.forEach((data) {
+      if (data['hashTag']
+          .toString()
+          .toLowerCase()
+          .contains(text.toLowerCase().toString())) {
+        searchData.add(
+            data); // If not empty then add search data into search data list
+      }
+    });
+    print(searchData.length);
+    setState(() {});
   }
 }
 
