@@ -791,7 +791,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                     OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      closedElevation: 10.0,
+                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -812,7 +812,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                     OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      closedElevation: 10.0,
+                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -833,7 +833,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                     OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      closedElevation: 10.0,
+                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -854,8 +854,28 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
 
                                       },
                                     ),
-                                    SentimentCardTemplate(
-                                        () {}, 'assets/icons/voicedxps.png'),
+                                     OpenContainer(
+                                      closedColor: Color(0xffd2dfff),
+                                      openColor: Color(0xffd2dfff),
+                                      
+                                      openElevation: 10.0,
+                                      closedShape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      transitionType:
+                                          ContainerTransitionType.fade,
+                                      transitionDuration:
+                                          const Duration(milliseconds: 1200),
+                                      openBuilder: (context, action) {
+                                        return Container();
+                                      },
+                                      closedBuilder: (context, action) {
+                                        return  SentimentCardTemplate(
+                                        () {}, 'assets/icons/voicedxps.png');
+                                      },
+                                    ),
+                                   
                                   ],
                                 ),
                                 SizedBox(
@@ -868,7 +888,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                     OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      closedElevation: 10.0,
+                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -886,12 +906,71 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                             () {}, 'assets/icons/newsdxps.png');
                                       },
                                     ),
-                                    SentimentCardTemplate(
-                                        () {}, 'assets/icons/timelinedxp.png'),
-                                    SentimentCardTemplate(() {},
-                                        'assets/icons/faceEmotiondxp.png'),
-                                    SentimentCardTemplate(
-                                        () {}, 'assets/icons/voice_to_text.png')
+                                      OpenContainer(
+                                      closedColor: Color(0xffd2dfff),
+                                      openColor: Color(0xffd2dfff),
+                                      
+                                      openElevation: 10.0,
+                                      closedShape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      transitionType:
+                                          ContainerTransitionType.fade,
+                                      transitionDuration:
+                                          const Duration(milliseconds: 1200),
+                                      openBuilder: (context, action) {
+                                        return Container();
+                                      },
+                                      closedBuilder: (context, action) {
+                                        return    SentimentCardTemplate(
+                                        () {}, 'assets/icons/timelinedxp.png');
+                                      },
+                                    ),
+                                 OpenContainer(
+                                      closedColor: Color(0xffd2dfff),
+                                      openColor: Color(0xffd2dfff),
+                                      
+                                      openElevation: 10.0,
+                                      closedShape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      transitionType:
+                                          ContainerTransitionType.fade,
+                                      transitionDuration:
+                                          const Duration(milliseconds: 1200),
+                                      openBuilder: (context, action) {
+                                        return Container();
+                                      },
+                                      closedBuilder: (context, action) {
+                                        return     SentimentCardTemplate(() {},
+                                        'assets/icons/faceEmotiondxp.png');
+                                      },
+                                    ),
+                                    OpenContainer(
+                                      closedColor: Color(0xffd2dfff),
+                                      openColor: Color(0xffd2dfff),
+                                      
+                                      openElevation: 10.0,
+                                      closedShape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      transitionType:
+                                          ContainerTransitionType.fade,
+                                      transitionDuration:
+                                          const Duration(milliseconds: 1200),
+                                      openBuilder: (context, action) {
+                                        return Container();
+                                      },
+                                      closedBuilder: (context, action) {
+                                        return     SentimentCardTemplate(
+                                        () {}, 'assets/icons/voice_to_text.png');
+                                      },
+                                    ),
+                                  
+                                   
                                   ],
                                 )
                               ]),

@@ -19,7 +19,7 @@ class _HashTagInfoState extends State<HashTagInfo> {
 
   @override
   void initState() {
-    DashboardApi();
+  
     print(widget.choosenhashtag);
 
     super.initState();
