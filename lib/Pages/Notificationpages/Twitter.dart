@@ -6,6 +6,8 @@ import 'package:http/http.dart';
 import 'package:intellensense/Pages/Notificationpages/Components/hashtagInfo.dart';
 import 'package:intellensense/main.dart';
 
+import 'Components/GridDbScreen.dart';
+
 class Twitter extends StatefulWidget {
   const Twitter({super.key});
 
@@ -71,6 +73,9 @@ class _TwitterState extends State<Twitter> {
                               '${twitterdata['active_twitter_hashtags'][index]}',
                           dashboadTap: HashTagInfo(
                               twitterdata['active_twitter_hashtags'][index]),
+                          GridTap: GridDb(
+                              twitterdata['active_twitter_hashtags'][index]
+                          ),
                         );
                       },
                     ),
@@ -145,8 +150,10 @@ fullData=twitterdata['active_twitter_hashtags'];
 class TwittterNotificationtile extends StatefulWidget {
   String? Hashtag;
   Widget? dashboadTap;
+  Widget? GridTap;
   TwittterNotificationtile({
     this.dashboadTap,
+    this.GridTap,
     @required this.Hashtag,
     super.key,
   });
@@ -197,10 +204,26 @@ class _TwittterNotificationtileState extends State<TwittterNotificationtile> {
                   );
                 },
               ),
-              Image.asset(
-                'assets/NotificationIcons/GridDB.png',
-                height: 25,
-                width: 25,
+              OpenContainer(
+                closedColor: Color(0xffd2dfff),
+                openColor: Color(0xffd2dfff),
+
+                openElevation: 10.0,
+                closedShape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(0.0)),
+                ),
+                transitionType: ContainerTransitionType.fade,
+                transitionDuration: const Duration(milliseconds: 1200),
+                openBuilder: (context, action) {
+                  return widget.GridTap!;
+                },
+                closedBuilder: (context, action) {
+                  return Image.asset(
+                    'assets/NotificationIcons/GridDB.png',
+                    height: 25,
+                    width: 25,
+                  );
+                },
               ),
               Image.asset(
                 'assets/NotificationIcons/Open_Docs_Icon.png',
@@ -217,7 +240,7 @@ class _TwittterNotificationtileState extends State<TwittterNotificationtile> {
                 height: 25,
                 width: 25,
               ),
-            ],
+            ]
           )
         ],
       ),
