@@ -15,6 +15,7 @@ import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewsChanne
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewspaperSentiment.dart';
 
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/TwitterSentiment.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/VoiceToText.dart';
 
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/YoutubeSentiment.dart';
 import 'package:intellensense/SpalashScreen/widgets/ChartSampleData.dart';
@@ -962,7 +963,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       transitionDuration:
                                           const Duration(milliseconds: 1200),
                                       openBuilder: (context, action) {
-                                        return Container();
+                                        return VoiceToText();
                                       },
                                       closedBuilder: (context, action) {
                                         return     SentimentCardTemplate(
