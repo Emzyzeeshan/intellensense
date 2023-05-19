@@ -49,6 +49,7 @@ dependencies:
   dropdown_button2: ^1.9.2
   equatable: ^2.0.5
   expansion_tile_card: ^2.0.0
+  fancy_password_field: ^2.0.0
   firebase_auth: null
   firebase_core: ^2.9.0
   firebase_messaging: ^14.4.1
@@ -78,7 +79,8 @@ dependencies:
   page_transition: ^2.0.9
   permission_handler: any
   photo_view: ^0.14.0
-  pluto_grid: ^6.0.4
+  pip_view: ^0.9.7
+  pluto_grid: ^7.0.2
   popup_card: ^0.1.0
   provider: ^6.0.5
   quickalert: ^1.0.0
@@ -90,14 +92,17 @@ dependencies:
   sidebarx: ^0.15.0
   skeletons: ^0.0.3
   sleek_circular_slider: ^2.0.1
+  step_progress_indicator: ^1.0.2
   syncfusion_flutter_charts: ^21.1.41
   tap_to_expand: ^0.6.1
   text_scroll: ^0.1.2
   timelines: ^0.1.0
   tuanis_sidebar: ^0.3.0
   url_launcher: ^6.1.4
-  xml2json: ^5.3.6
+  visibility_detector: ^0.4.0+2
+  xml2json: ^5.3.0
   youtube: ^1.0.1
+  youtube_player_flutter: ^8.1.2
 
 dev_dependencies:
   flutter_test:

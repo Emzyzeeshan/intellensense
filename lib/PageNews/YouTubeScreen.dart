@@ -262,7 +262,11 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
                     ),
                   ],
                 ),
-                onTap: () => launchUrl(Uri.parse(Value['sourceUrl'])),
+                onTap: () {
+                  
+                  launchUrl(Uri.parse(Value['sourceUrl']));
+                 
+                  },
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
