@@ -63,7 +63,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
 
   _verifyOTPButton() async {
     if (phoneController.text.length == 10) {
-      SendDatatoSheet();
+      // SendDatatoSheet();
     } else {
       print('Enter 10 digit mobile');
     }
@@ -227,22 +227,22 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
     ));
   }
 
-  void SendDatatoSheet() async {
-    const String scriptURL =
-        'https://script.google.com/macros/s/AKfycbzeEtxTVd-vRNFpG7zqw0yHM0kGtG_ccXmRXqHR7pgFkAZyI7520Y7Era8l0to1IuSG/exec';
+  // void SendDatatoSheet() async {
+  //   const String scriptURL =
+  //       'https://script.google.com/macros/s/AKfycbzeEtxTVd-vRNFpG7zqw0yHM0kGtG_ccXmRXqHR7pgFkAZyI7520Y7Era8l0to1IuSG/exec';
 
-    String tempName = phoneController.text;
-    String tempSex = OTp;
-    String tempAge = OTp;
+  //   String tempName = phoneController.text;
+  //   String tempSex = OTp;
+  //   String tempAge = OTp;
 
-    String queryString = "?name=$tempName&sex=$tempSex&age=$tempAge";
+  //   String queryString = "?name=$tempName&sex=$tempSex&age=$tempAge";
 
-    var finalURI = Uri.parse(scriptURL + queryString);
-    var response = await http.get(finalURI);
-    //print(finalURI);
-    if (response.statusCode == 200) {
-      var bodyR = convert.jsonDecode(response.body);
-      print(bodyR);
-    }
-  }
+  //   var finalURI = Uri.parse(scriptURL + queryString);
+  //   var response = await http.get(finalURI);
+  //   //print(finalURI);
+  //   if (response.statusCode == 200) {
+  //     var bodyR = convert.jsonDecode(response.body);
+  //     print(bodyR);
+  //   }
+  // }
 }

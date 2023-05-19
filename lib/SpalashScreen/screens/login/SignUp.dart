@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intellensense/Pages/PhoneLogin.dart';
 import 'package:intellensense/SpalashScreen/screens/login/login.dart';
+import 'package:intellensense/SpalashScreen/screens/login/signupform.dart';
 import '../../constants.dart';
 import 'widgets/custom_clippers/index.dart';
 import 'widgets/header.dart';
@@ -181,7 +182,11 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                                 color: Color(0xFF306EFF),
                               ),
                               child: MaterialButton(
-                                onPressed: () {},
+                                onPressed: () {Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SignUpForm()));},
                                 child: Row(
                                   children: [
                                     Text(('SignUp with E-mail'),
@@ -344,7 +349,11 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                                 color: Color(0xFF306EFF),
                               ),
                               child: MaterialButton(
-                                onPressed: () {},
+                                onPressed: () { Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SignUpForm()));},
                                 child: Row(mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(('SignUp with E-mail'),
@@ -515,7 +524,11 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                               color: Color(0xFF306EFF),
                             ),
                             child: MaterialButton(
-                              onPressed: () {},
+                              onPressed: () {Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SignUpForm()));},
                               child: Row(
                                 children: [
                                   Text(('SignUp with E-mail'),

@@ -1,10 +1,12 @@
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:intellensense/HomeScreen.dart';
 import 'package:intellensense/Pages/Notificationpages/Facebook.dart';
 import 'package:intellensense/Pages/Notificationpages/Instagram.dart';
 import 'package:intellensense/Pages/Notificationpages/Twitter.dart';
 import 'package:intellensense/Pages/Notificationpages/Youtube.dart';
+import 'package:pip_view/pip_view.dart';
 
 import 'Notificationpages/Newspaper.dart';
 
@@ -20,7 +22,9 @@ class _NotificationsState extends State<Notifications> {
   var _selectedIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return
+    
+     Scaffold(
       backgroundColor: Color(0xffd2dfff),
       appBar: AppBar(
         elevation: 0,
@@ -90,6 +94,7 @@ class _NotificationsState extends State<Notifications> {
         ],
       ),
       body: Column(children: [
+      
         Flexible(
           child: PageView(
               controller: _pageController,

@@ -17,7 +17,7 @@ import 'package:intellensense/PageNews/YouTubeScreen.dart';
 import 'package:intellensense/Pages/Notification.dart';
 import 'package:intellensense/SpalashScreen/screens/login/mainLoginScreen.dart';
 import 'package:intellensense/SpalashScreen/widgets/Drawer.dart';
-
+import 'package:pip_view/pip_view.dart';
 import 'package:intellensense/Weather%20screens/Weather_Screen.dart';
 import 'package:intellensense/Weather%20screens/model/weather_model.dart';
 import 'package:intellensense/Weather%20screens/services/data_services.dart';
@@ -130,6 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+      
           key: _key,
           drawer: drawer(),
           backgroundColor: Colors.white,
@@ -153,13 +154,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     expandedHeight: 250,
                     flexibleSpace: FlexibleSpaceBar(
                       collapseMode: CollapseMode.parallax,
-                      title: _isShrink==true
+                      title: _isShrink == true
                           ? Image.asset(
-                            'assets/icons/IntelliSense-Logo-Finall.gif',
-                            fit: BoxFit.cover,
-                            height: 50,
-                        width: 180,
-                          )
+                              'assets/icons/IntelliSense-Logo-Finall.gif',
+                              fit: BoxFit.cover,
+                              height: 50,
+                              width: 180,
+                            )
                           : null,
                       background: SafeArea(
                         child: Column(
@@ -189,45 +190,65 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     actions: [
                       Padding(
-                        padding:  EdgeInsets.only(bottom: 12.0, top: 10),
-                        child: _isShrink==false? Container(
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              height: 400.0,
-                              scrollDirection: Axis.vertical,
-                              autoPlay: true,
-                              autoPlayInterval: Duration(seconds: 3),
-                              autoPlayAnimationDuration:
-                                  Duration(milliseconds: 800),
-                            ),
-                            items: ['YuvaGalamAndrapradesh', 'YuvaGalamPadayatra', '#PsychoPovaliCycleRavali', '#LokeshPadayatra', '#YuvaGalamPadayatra'].map((i) {
-                              return Builder(
-                                builder: (BuildContext context) {
-                                  return Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 5.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            '$i',
-                                            style: TextStyle(fontSize: 16.0, color: Colors.black),
-                                          ),
-                                          Icon(Icons.data_usage,size: 18,color: Colors.black,),
-                                        ],
-                                      ));
-                                },
-                              );
-                            }).toList(),
-                          ),
-                          width: 240,
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 2, color: Colors.blue),
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                          ),
-                          //color: Colors.white,
-                        ):null,
+                        padding: EdgeInsets.only(bottom: 12.0, top: 10),
+                        child: _isShrink == false
+                            ? Container(
+                                child: CarouselSlider(
+                                  options: CarouselOptions(
+                                    height: 400.0,
+                                    scrollDirection: Axis.vertical,
+                                    autoPlay: true,
+                                    autoPlayInterval: Duration(seconds: 3),
+                                    autoPlayAnimationDuration:
+                                        Duration(milliseconds: 800),
+                                  ),
+                                  items: [
+                                    'YuvaGalamAndrapradesh',
+                                    'YuvaGalamPadayatra',
+                                    '#PsychoPovaliCycleRavali',
+                                    '#LokeshPadayatra',
+                                    '#YuvaGalamPadayatra'
+                                  ].map((i) {
+                                    return Builder(
+                                      builder: (BuildContext context) {
+                                        return Container(
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            margin: EdgeInsets.symmetric(
+                                                horizontal: 5.0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  '$i',
+                                                  style: TextStyle(
+                                                      fontSize: 16.0,
+                                                      color: Colors.black),
+                                                ),
+                                                Icon(
+                                                  Icons.data_usage,
+                                                  size: 18,
+                                                  color: Colors.black,
+                                                ),
+                                              ],
+                                            ));
+                                      },
+                                    );
+                                  }).toList(),
+                                ),
+                                width: 240,
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(width: 2, color: Colors.blue),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                ),
+                                //color: Colors.white,
+                              )
+                            : null,
                       ),
                       /*Row(
                         children: [
@@ -1259,6 +1280,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           scrollDirection: Axis.horizontal,
                                           child: Row(
                                             children: [
+                                             
                                               FutureBuilder(
                                                   future: youtubedata,
                                                   builder:
