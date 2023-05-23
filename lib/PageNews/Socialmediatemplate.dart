@@ -5,7 +5,7 @@ class SocialMediaTemplate1 extends StatefulWidget {
   String? header;
   String? newsdescription;
 
-  SocialMediaTemplate1(this.header, this.newsdescription, {super.key});
+  SocialMediaTemplate1(this.header, this.newsdescription, );
 
   @override
   State<SocialMediaTemplate1> createState() => _SocialMediaTemplate1State();
@@ -56,8 +56,9 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
                     height: 3,
                   ),
                   Text(
-                      maxLines: 3,
                       '${widget.newsdescription}',
+                      maxLines: 3,
+
                       style: GoogleFonts.cabin(fontSize: 10))
                 ]),
           ),
@@ -68,7 +69,7 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
 class SocialMediaTemplate2 extends StatefulWidget {
   String? header;
   String? newsdescription;
-  SocialMediaTemplate2(this.header, this.newsdescription, {super.key});
+  SocialMediaTemplate2(this.header, this.newsdescription,);
 
   @override
   State<SocialMediaTemplate2> createState() => _SocialMediaTemplate2State();
@@ -122,8 +123,9 @@ class _SocialMediaTemplate2State extends State<SocialMediaTemplate2> {
                     height: 3,
                   ),
                   Text(
-                    maxLines: 3,
                     '${widget.newsdescription}',
+                    maxLines: 3,
+
                     style: GoogleFonts.cabin(fontSize: 10),
                   )
                 ]),
@@ -137,7 +139,7 @@ class _SocialMediaTemplate2State extends State<SocialMediaTemplate2> {
 class SocialMediaTemplate3 extends StatefulWidget {
   String? header;
   String? newsdescription;
-  SocialMediaTemplate3(this.header, this.newsdescription, {super.key});
+  SocialMediaTemplate3(this.header, this.newsdescription, );
 
   @override
   State<SocialMediaTemplate3> createState() => _SocialMediaTemplate3State();
@@ -189,8 +191,9 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
                     height: 3,
                   ),
                   Text(
-                      maxLines: 3,
                       '${widget.newsdescription}',
+                      maxLines: 3,
+
                       style: GoogleFonts.cabin(fontSize: 10))
                 ]),
           ),
@@ -203,7 +206,7 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
 class SocialMediaTemplate4 extends StatefulWidget {
   String? header;
   String? newsdescription;
-  SocialMediaTemplate4(this.header, this.newsdescription, {super.key});
+  SocialMediaTemplate4(this.header, this.newsdescription, );
 
   @override
   State<SocialMediaTemplate4> createState() => _SocialMediaTemplate4State();
@@ -258,8 +261,9 @@ class _SocialMediaTemplate4State extends State<SocialMediaTemplate4> {
                     height: 3,
                   ),
                   Text(
-                      maxLines: 3,
                       '${widget.newsdescription}',
+                      maxLines: 3,
+
                       style: GoogleFonts.cabin(fontSize: 10))
                 ]),
           ),

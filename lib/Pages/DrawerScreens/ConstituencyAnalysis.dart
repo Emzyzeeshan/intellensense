@@ -10,7 +10,6 @@ import 'package:sidebarx/sidebarx.dart';
 import 'package:xml2json/xml2json.dart';
 
 class ConstituencyAnalysis extends StatefulWidget {
-  const ConstituencyAnalysis({super.key});
 
   @override
   State<ConstituencyAnalysis> createState() => _ConstituencyAnalysisState();

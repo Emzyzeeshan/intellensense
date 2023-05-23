@@ -1809,8 +1809,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           Expanded(
                                             child: Text(
-                                              textAlign: TextAlign.center,
                                               'Candidature Analysis',
+                                              textAlign: TextAlign.center,
+
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 10),
@@ -1839,8 +1840,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            textAlign: TextAlign.center,
                                             'Constituency Analysis',
+                                            textAlign: TextAlign.center,
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 10),
@@ -1868,8 +1870,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            textAlign: TextAlign.center,
                                             'District Analysis',
+                                            textAlign: TextAlign.center,
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 10),
@@ -1897,8 +1900,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            textAlign: TextAlign.center,
                                             'Communication Channel',
+                                            textAlign: TextAlign.center,
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 10),
@@ -1926,8 +1930,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            textAlign: TextAlign.center,
+                                           
                                             'Survey',
+                                             textAlign: TextAlign.center,
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 10),
@@ -1955,8 +1960,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            textAlign: TextAlign.center,
                                             'Electoral Analysis',
+                                            textAlign: TextAlign.center,
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 10),
@@ -1984,8 +1990,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            textAlign: TextAlign.center,
                                             'News Feed',
+                                            textAlign: TextAlign.center,
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 10),
@@ -2013,8 +2020,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            textAlign: TextAlign.center,
                                             'Face Emotion Analysis',
+                                            textAlign: TextAlign.center,
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 10),
@@ -2046,8 +2054,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            textAlign: TextAlign.center,
                                             'Score Card',
+                                            textAlign: TextAlign.center,
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 10),
@@ -2079,8 +2088,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            textAlign: TextAlign.center,
                                             'Chat Analysis',
+                                            textAlign: TextAlign.center,
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 10),
@@ -2108,8 +2118,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ),
                                           Text(
-                                            textAlign: TextAlign.center,
                                             'Sentiment Analysis',
+                                            textAlign: TextAlign.center,
+
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 10),

@@ -10,7 +10,6 @@ import 'package:intellensense/Pages/Notificationpages/Youtube.dart';
 import 'Notificationpages/Newspaper.dart';
 
 class Notifications extends StatefulWidget {
-  const Notifications({super.key});
 
   @override
   State<Notifications> createState() => _NotificationsState();

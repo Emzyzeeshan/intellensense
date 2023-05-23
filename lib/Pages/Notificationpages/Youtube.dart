@@ -8,7 +8,6 @@ import 'package:intellensense/main.dart';
 import '../../main.dart';
 
 class Youtube extends StatefulWidget {
-  const Youtube({super.key});
 
   @override
   State<Youtube> createState() => _YoutubeState();
@@ -143,9 +142,7 @@ class _YoutubeState extends State<Youtube> {
 class YoutubeNotificationtile extends StatefulWidget {
   String Hashtag;
   YoutubeNotificationtile(
-    @required this.Hashtag, {
-    super.key,
-  });
+    @required this.Hashtag, );
 
   @override
   State<YoutubeNotificationtile> createState() =>

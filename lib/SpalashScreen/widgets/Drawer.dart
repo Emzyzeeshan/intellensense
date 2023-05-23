@@ -14,7 +14,6 @@ import '../../main.dart';
 import '../screens/login/mainLoginScreen.dart';
 
 class drawer extends StatefulWidget {
-  const drawer({super.key});
 
   @override
   State<drawer> createState() => _drawerState();

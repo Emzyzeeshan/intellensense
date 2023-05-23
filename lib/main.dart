@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,7 @@ import 'package:intellensense/Services/themesetup/DarkThemeProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Services/themesetup/styles.dart';
-
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'SpalashScreen/screens/login/mainLoginScreen.dart';
 
 Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {
@@ -18,6 +19,7 @@ Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  
   Firebase.initializeApp();
 
   FirebaseMessaging.onBackgroundMessage(_firebadeMessagingBackgroundHandler);
@@ -74,7 +76,8 @@ class _MyAppState extends State<MyApp> {
     }));
   }
 }
-
+enum SignUpVerificationState { BYEMAIL, BYPHONE }
+  SignUpVerificationState? currentState ;
 ///login API
 const rootUrl = 'http://192.169.1.173:8080';
 ///login API new

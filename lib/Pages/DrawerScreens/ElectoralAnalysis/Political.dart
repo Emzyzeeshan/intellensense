@@ -13,7 +13,6 @@ import 'package:skeletons/skeletons.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Political extends StatefulWidget {
-  const Political({super.key});
 
   @override
   State<Political> createState() => _PoliticalState();

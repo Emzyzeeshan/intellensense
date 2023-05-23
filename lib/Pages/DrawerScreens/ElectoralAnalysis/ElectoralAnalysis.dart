@@ -5,7 +5,6 @@ import 'Census.dart';
 import 'Political.dart';
 
 class ElectoralAnalysis extends StatefulWidget {
-  const ElectoralAnalysis({super.key});
 
   @override
   State<ElectoralAnalysis> createState() => _ElectoralAnalysisState();

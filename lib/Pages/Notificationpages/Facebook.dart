@@ -7,7 +7,6 @@ import 'package:intellensense/main.dart';
 import '../../main.dart';
 
 class Facebook extends StatefulWidget {
-  const Facebook({super.key});
 
   @override
   State<Facebook> createState() => _FacebookState();
@@ -140,9 +139,7 @@ fullData=Facebookdata;
 class FacebookNotificationtile extends StatefulWidget {
   String Hashtag;
   FacebookNotificationtile(
-    @required this.Hashtag, {
-    super.key,
-  });
+    @required this.Hashtag, );
 
   @override
   State<FacebookNotificationtile> createState() =>

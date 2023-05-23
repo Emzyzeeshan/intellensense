@@ -12,7 +12,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class NewsChannel extends StatefulWidget {
   var Value;
-  NewsChannel(this.Value, {super.key});
+  NewsChannel(this.Value, );
 
   @override
   State<NewsChannel> createState() => _NewsChannelState();
