@@ -11,7 +11,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class NewsPaperSentiment extends StatefulWidget {
   var Value;
-  NewsPaperSentiment(this.Value, {super.key});
+  NewsPaperSentiment(this.Value, );
 
   @override
   State<NewsPaperSentiment> createState() => _NewsPaperSentimentState();

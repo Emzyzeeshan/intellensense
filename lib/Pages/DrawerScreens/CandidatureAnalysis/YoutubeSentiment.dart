@@ -14,7 +14,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class YoutubeSentiment extends StatefulWidget {
   var Value;
-  YoutubeSentiment(this.Value, {super.key});
+  YoutubeSentiment(this.Value, );
 
   @override
   State<YoutubeSentiment> createState() => _YoutubeSentimentState();

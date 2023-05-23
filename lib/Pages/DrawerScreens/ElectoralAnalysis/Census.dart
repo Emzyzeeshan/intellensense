@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Census extends StatefulWidget {
-  const Census({super.key});
 
   @override
   State<Census> createState() => _CensusState();

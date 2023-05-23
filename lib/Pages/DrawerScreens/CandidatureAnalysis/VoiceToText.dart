@@ -11,7 +11,6 @@ import 'package:intellensense/main.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class VoiceToText extends StatefulWidget {
-  const VoiceToText({super.key});
 
   @override
   State<VoiceToText> createState() => _VoiceToTextState();
@@ -108,7 +107,7 @@ TextEditingController ResponseID =TextEditingController();
                           value: input,
                           onChanged: (value) {
                             setState(() {
-                              input=value!;
+                              input=value!.toString();
                             });
                           },
                           buttonHeight: 50,

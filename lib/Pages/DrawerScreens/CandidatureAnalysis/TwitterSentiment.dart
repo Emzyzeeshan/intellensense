@@ -15,7 +15,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class TwitterSentiment extends StatefulWidget {
   var Value;
-  TwitterSentiment(this.Value, {super.key});
+  TwitterSentiment(this.Value,);
 
   @override
   State<TwitterSentiment> createState() => _TwitterSentimentState();

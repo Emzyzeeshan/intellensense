@@ -14,7 +14,6 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:page_transition/page_transition.dart';
 
 class CandidatureAnalysis extends StatefulWidget {
-  const CandidatureAnalysis({super.key});
 
   @override
   State<CandidatureAnalysis> createState() => _CandidatureAnalysisState();
