@@ -11,7 +11,6 @@ import 'package:pip_view/pip_view.dart';
 import 'Notificationpages/Newspaper.dart';
 
 class Notifications extends StatefulWidget {
-  const Notifications({super.key});
 
   @override
   State<Notifications> createState() => _NotificationsState();

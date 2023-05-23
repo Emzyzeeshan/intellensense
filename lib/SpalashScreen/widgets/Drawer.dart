@@ -7,7 +7,6 @@ import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/Candidatur
 import '../../TRS Screens/MLAsTrsScreen.dart';
 
 class drawer extends StatefulWidget {
-  const drawer({super.key});
 
   @override
   State<drawer> createState() => _drawerState();

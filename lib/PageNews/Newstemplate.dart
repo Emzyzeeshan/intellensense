@@ -5,7 +5,7 @@ class NewsTemplate1 extends StatefulWidget {
   String? header;
   String? newsdescription;
   String? logolink;
-  NewsTemplate1(this.header, this.newsdescription, this.logolink, {super.key});
+  NewsTemplate1(this.header, this.newsdescription, this.logolink, );
 
   @override
   State<NewsTemplate1> createState() => _NewsTemplate1State();
@@ -52,8 +52,9 @@ class _NewsTemplate1State extends State<NewsTemplate1> {
                     height: 3,
                   ),
                   Text(
-                      maxLines: 3,
                       '${widget.newsdescription}',
+                      maxLines: 3,
+
                       style: GoogleFonts.cabin(fontSize: 10))
                 ]),
           ),
@@ -65,7 +66,7 @@ class NewsTemplate2 extends StatefulWidget {
   String? header;
   String? newsdescription;
   String? logolink;
-  NewsTemplate2(this.header, this.newsdescription, this.logolink, {super.key});
+  NewsTemplate2(this.header, this.newsdescription, this.logolink, );
 
   @override
   State<NewsTemplate2> createState() => _NewsTemplate2State();
@@ -115,8 +116,9 @@ class _NewsTemplate2State extends State<NewsTemplate2> {
                     height: 3,
                   ),
                   Text(
-                      maxLines: 3,
                       '${widget.newsdescription}',
+                      maxLines: 3,
+
                       style: GoogleFonts.cabin(fontSize: 10))
                 ]),
           ),
@@ -130,7 +132,7 @@ class NewsTemplate3 extends StatefulWidget {
   String? header;
   String? newsdescription;
   String? logolink;
-  NewsTemplate3(this.header, this.newsdescription, this.logolink, {super.key});
+  NewsTemplate3(this.header, this.newsdescription, this.logolink, );
 
   @override
   State<NewsTemplate3> createState() => _NewsTemplate3State();
@@ -177,8 +179,9 @@ class _NewsTemplate3State extends State<NewsTemplate3> {
                     height: 3,
                   ),
                   Text(
-                      maxLines: 3,
                       '${widget.newsdescription}',
+                      maxLines: 3,
+
                       style: GoogleFonts.cabin(fontSize: 10))
                 ]),
           ),
@@ -192,7 +195,7 @@ class NewsTemplate4 extends StatefulWidget {
   String? header;
   String? newsdescription;
   String? logolink;
-  NewsTemplate4(this.header, this.newsdescription, this.logolink, {super.key});
+  NewsTemplate4(this.header, this.newsdescription, this.logolink, );
 
   @override
   State<NewsTemplate4> createState() => _NewsTemplate4State();
@@ -242,8 +245,9 @@ class _NewsTemplate4State extends State<NewsTemplate4> {
                     height: 3,
                   ),
                   Text(
-                      maxLines: 3,
                       '${widget.newsdescription}',
+                      maxLines: 3,
+
                       style: GoogleFonts.cabin(fontSize: 10))
                 ]),
           ),

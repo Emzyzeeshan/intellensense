@@ -8,7 +8,6 @@ import 'package:intellensense/main.dart';
 import 'Components/GridDbScreen.dart';
 
 class Twitter extends StatefulWidget {
-  const Twitter({super.key});
 
   @override
   State<Twitter> createState() => _TwitterState();
@@ -155,7 +154,6 @@ class TwittterNotificationtile extends StatefulWidget {
     this.dashboadTap,
     this.GridTap,
     @required this.Hashtag,
-    super.key,
   });
 
   @override

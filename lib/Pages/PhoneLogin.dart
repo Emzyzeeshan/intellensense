@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:intellensense/SpalashScreen/screens/login/signupform.dart';
 import 'package:intellensense/main.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:intellensense/HomeScreen.dart';
@@ -84,9 +85,14 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
         spinnerLoading = false;
       });
       if (authCredential.user != null) {
-        logindata.setBool('login', false);
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => HomeScreen()));
+       
+              
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SignUpForm(phoneController.text)));
+   
       }
     } on FirebaseAuthException catch (e) {
       setState(() {
@@ -110,7 +116,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
         TextField(
           keyboardType: TextInputType.phone,
           maxLength: 10,
-          // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
           controller: phoneController,
           textAlign: TextAlign.start,
           decoration: const InputDecoration(

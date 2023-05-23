@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intellensense/Pages/EmailSignup.dart';
 import 'package:intellensense/Pages/PhoneLogin.dart';
 import 'package:intellensense/SpalashScreen/screens/login/login.dart';
 import 'package:intellensense/SpalashScreen/screens/login/signupform.dart';
+import 'package:intellensense/main.dart';
 import '../../constants.dart';
 import 'widgets/custom_clippers/index.dart';
 import 'widgets/header.dart';
@@ -19,6 +21,7 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
+
   late final AnimationController _animationController;
   late final Animation<double> _headerTextAnimation;
   late final Animation<double> _formElementAnimation;
@@ -182,11 +185,17 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                                 color: Color(0xFF306EFF),
                               ),
                               child: MaterialButton(
-                                onPressed: () {Navigator.push(
+                                onPressed: () {
+                                  setState((){
+currentState=SignUpVerificationState.BYEMAIL;
+                                  });
+                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SignUpForm()));},
+                                              EmailSignUp()));
+                            
+                                              },
                                 child: Row(
                                   children: [
                                     Text(('SignUp with E-mail'),
@@ -220,6 +229,9 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                               ),
                               child: MaterialButton(
                                 onPressed: () {
+                                  setState(() {
+                                    currentState=SignUpVerificationState.BYPHONE;
+                                  });
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -353,7 +365,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SignUpForm()));},
+                                              EmailSignUp()));},
                                 child: Row(mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(('SignUp with E-mail'),
@@ -524,11 +536,11 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                               color: Color(0xFF306EFF),
                             ),
                             child: MaterialButton(
-                              onPressed: () {Navigator.push(
+                              onPressed: () { Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SignUpForm()));},
+                                              EmailSignUp()));},
                               child: Row(
                                 children: [
                                   Text(('SignUp with E-mail'),

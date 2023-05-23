@@ -8,7 +8,6 @@ import 'package:intellensense/main.dart';
 import '../../main.dart';
 
 class Newspaper extends StatefulWidget {
-  const Newspaper({super.key});
 
   @override
   State<Newspaper> createState() => _NewspaperState();
@@ -142,9 +141,7 @@ fullData=Newspaperdata;
 class NewspaperNotificationtile extends StatefulWidget {
   String Hashtag;
   NewspaperNotificationtile(
-    @required this.Hashtag, {
-    super.key,
-  });
+    @required this.Hashtag, );
 
   @override
   State<NewspaperNotificationtile> createState() =>

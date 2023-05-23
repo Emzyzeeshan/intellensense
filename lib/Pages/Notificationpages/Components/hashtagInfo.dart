@@ -8,7 +8,7 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class HashTagInfo extends StatefulWidget {
   var choosenhashtag;
-  HashTagInfo(this.choosenhashtag, {super.key});
+  HashTagInfo(this.choosenhashtag, );
 
   @override
   State<HashTagInfo> createState() => _HashTagInfoState();

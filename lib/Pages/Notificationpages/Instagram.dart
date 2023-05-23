@@ -7,7 +7,6 @@ import 'package:intellensense/main.dart';
 import '../../main.dart';
 
 class Instagram extends StatefulWidget {
-  const Instagram({super.key});
 
   @override
   State<Instagram> createState() => _InstagramState();
@@ -136,9 +135,7 @@ fullData=Instagramdata;
 class InstagramNotificationtile extends StatefulWidget {
   String Hashtag;
   InstagramNotificationtile(
-    @required this.Hashtag, {
-    super.key,
-  });
+    @required this.Hashtag, );
 
   @override
   State<InstagramNotificationtile> createState() =>
