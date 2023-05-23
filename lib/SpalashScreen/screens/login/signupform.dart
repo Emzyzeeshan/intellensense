@@ -38,7 +38,7 @@ class _SignUpFormState extends State<SignUpForm> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Image.asset(
-                  'assets/icons/IntelliSense-Logo-Finall.gif',
+                  'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
                   height: 200,
                   width: 200,
                 ),

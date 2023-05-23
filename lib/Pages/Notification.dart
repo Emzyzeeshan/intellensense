@@ -6,7 +6,6 @@ import 'package:intellensense/Pages/Notificationpages/Facebook.dart';
 import 'package:intellensense/Pages/Notificationpages/Instagram.dart';
 import 'package:intellensense/Pages/Notificationpages/Twitter.dart';
 import 'package:intellensense/Pages/Notificationpages/Youtube.dart';
-import 'package:pip_view/pip_view.dart';
 
 import 'Notificationpages/Newspaper.dart';
 

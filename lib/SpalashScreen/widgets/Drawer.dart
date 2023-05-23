@@ -1,10 +1,17 @@
+import 'dart:convert';
+
+import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart';
 import 'package:intellensense/Pages/ChattingPage.dart';
 import 'package:intellensense/Pages/DrawerScreens/ConstituencyAnalysis.dart';
 import 'package:intellensense/Pages/DrawerScreens/ElectoralAnalysis/ElectoralAnalysis.dart';
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/CandidatureAnalysis.dart';
 
 import '../../TRS Screens/MLAsTrsScreen.dart';
+import '../../main.dart';
+import '../screens/login/mainLoginScreen.dart';
 
 class drawer extends StatefulWidget {
   const drawer({super.key});
@@ -179,7 +186,53 @@ class _drawerState extends State<drawer> {
                 ),
 
               ]),
-                   
+          ListTile(
+            leading: Icon(Icons.logout_outlined),
+            title: const Text('LogOut'),
+            onTap: () {
+              CoolAlert.show(
+                confirmBtnColor: Color(0xff00186a),
+                backgroundColor: Color(0xff001969),
+                context: context,
+                type: CoolAlertType.confirm,
+                onConfirmBtnTap: () => LogoutAPI(context),
+              );
+            },
+          ),
         ]));
+  }
+  LogoutAPI(BuildContext context) async {
+    var headers = {'Content-Type': 'application/json'};
+    var body =
+    json.encode({"rsUsername": "${logindata.getString('username')}"});
+    var response = await post(
+      Uri.parse('https://imdrm.pilogcloud.com/V10/appUserlogout'),
+      headers: headers,
+      body: body,
+    );
+    if (response.body == 'Success') {
+      print(response.body);
+      logindata.setBool('login', true);
+
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => mainLoginScreen(
+                screenHeight: MediaQuery.of(context).size.height,
+              )));
+
+      await Fluttertoast.showToast(
+          msg: "ThankYou",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.SNACKBAR,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Color.fromRGBO(11, 74, 153, 1),
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else {
+      print(response.reasonPhrase);
+    }
+    Navigator.of(context, rootNavigator: true).pop();
+    return response;
   }
 }

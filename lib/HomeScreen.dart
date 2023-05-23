@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:animate_do/animate_do.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cool_alert/cool_alert.dart';
+import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intellensense/PageNews/FaceBookScreen.dart';
@@ -17,7 +18,6 @@ import 'package:intellensense/PageNews/YouTubeScreen.dart';
 import 'package:intellensense/Pages/Notification.dart';
 import 'package:intellensense/SpalashScreen/screens/login/mainLoginScreen.dart';
 import 'package:intellensense/SpalashScreen/widgets/Drawer.dart';
-import 'package:pip_view/pip_view.dart';
 import 'package:intellensense/Weather%20screens/Weather_Screen.dart';
 import 'package:intellensense/Weather%20screens/model/weather_model.dart';
 import 'package:intellensense/Weather%20screens/services/data_services.dart';
@@ -34,6 +34,7 @@ import 'package:intellensense/PageNews/Socialmediatemplate.dart';
 import 'package:intellensense/Services/ApiServices.dart';
 import 'package:intellensense/main.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:simple_speed_dial/simple_speed_dial.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -156,11 +157,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       collapseMode: CollapseMode.parallax,
                       title: _isShrink == true
                           ? Image.asset(
-                              'assets/icons/IntelliSense-Logo-Finall.gif',
-                              fit: BoxFit.cover,
-                              height: 50,
-                              width: 180,
-                            )
+
+                            'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
+                            fit: BoxFit.cover,
+                            height: 50,
+                        width: 180,
+                          )
                           : null,
                       background: SafeArea(
                         child: Column(
@@ -189,7 +191,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     actions: [
-                      Padding(
+                      /*Padding(
                         padding: EdgeInsets.only(bottom: 12.0, top: 10),
                         child: _isShrink == false
                             ? Container(
@@ -249,7 +251,49 @@ class _HomeScreenState extends State<HomeScreen> {
                                 //color: Colors.white,
                               )
                             : null,
-                      ),
+                      ),*/
+
+                      /*Padding(
+                        padding:  EdgeInsets.only(bottom: 12.0, top: 10),
+                        child: _isShrink==false? Container(
+                          child: CarouselSlider(
+                            options: CarouselOptions(
+                              height: 400.0,
+                              scrollDirection: Axis.vertical,
+                              autoPlay: true,
+                              autoPlayInterval: Duration(seconds: 3),
+                              autoPlayAnimationDuration:
+                                  Duration(milliseconds: 800),
+                            ),
+                            items: ['YuvaGalamAndrapradesh', 'YuvaGalamPadayatra', '#PsychoPovaliCycleRavali', '#LokeshPadayatra', '#YuvaGalamPadayatra'].map((i) {
+                              return Builder(
+                                builder: (BuildContext context) {
+                                  return Container(
+                                      width: MediaQuery.of(context).size.width,
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 5.0),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            '$i',
+                                            style: TextStyle(fontSize: 16.0, color: Colors.black),
+                                          ),
+                                          Icon(Icons.data_usage,size: 18,color: Colors.black,),
+                                        ],
+                                      ));
+                                },
+                              );
+                            }).toList(),
+                          ),
+                          width: 240,
+                          decoration: BoxDecoration(
+                            border: Border.all(width: 2, color: Colors.blue),
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
+                          //color: Colors.white,
+                        ):null,
+                      ),*/
                       /*Row(
                         children: [
                           GestureDetector(
@@ -355,7 +399,13 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                         ],
                       ),*/
-                      PopupMenuButton(onSelected: (value) {
+                      IconButton(color: Colors.black,onPressed: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Notifications()));
+                      }, icon: Icon(Icons.notifications_active)),
+                      /*PopupMenuButton(onSelected: (value) {
                         if (value == 'notifications') {
                           Navigator.push(
                               context,
@@ -402,7 +452,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: () {},
                           ),
                         ];
-                      }),
+                      }),*/
                     ],
                   ),
                 ];
@@ -2073,9 +2123,50 @@ class _HomeScreenState extends State<HomeScreen> {
                             ]),
                       ),
                     ),
-                  ]))
+                  ])),
+
                 ],
-              ))),
+              ),
+
+          ),
+        floatingActionButton: SpeedDial(
+          child: Icon(Icons.add),
+          closedForegroundColor: Colors.black,
+          openForegroundColor: Colors.grey,
+          closedBackgroundColor: Colors.grey,
+          openBackgroundColor: Colors.black,
+          speedDialChildren: <SpeedDialChild>[
+            SpeedDialChild(
+              child: Image.asset('assets/icons/News-Icon-3D.png',width: 30),
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.grey,
+              label: 'Hide News',
+              onPressed: () {
+                setState(() {
+                  viewnews = false;
+                });
+              },
+              closeSpeedDialOnPressed: false,
+            ),
+            SpeedDialChild(
+              child: Image.asset('assets/Image/logo.png',width: 30),
+              //foregroundColor: Colors.black,
+              backgroundColor: Colors.grey,
+              label: 'Weather',
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => WeatherScreen()));
+              },
+            ),
+
+          ],
+        ),
+
+
+      ),
+
     );
   }
 
@@ -2138,40 +2229,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return WeatherDataResult;
   }
 
-  LogoutAPI(BuildContext context) async {
-    var headers = {'Content-Type': 'application/json'};
-    var body =
-        json.encode({"rsUsername": "${logindata.getString('username')}"});
-    var response = await post(
-      Uri.parse('https://ifar.pilogcloud.com/appUserlogout'),
-      headers: headers,
-      body: body,
-    );
-    if (response.body == 'Success') {
-      print(response.body);
-      logindata.setBool('login', true);
 
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => mainLoginScreen(
-                    screenHeight: MediaQuery.of(context).size.height,
-                  )));
-
-      await Fluttertoast.showToast(
-          msg: "ThankYou",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.SNACKBAR,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Color.fromRGBO(11, 74, 153, 1),
-          textColor: Colors.white,
-          fontSize: 16.0);
-    } else {
-      print(response.reasonPhrase);
-    }
-    Navigator.of(context, rootNavigator: true).pop();
-    return response;
-  }
 
   bool viewnews = true;
 }

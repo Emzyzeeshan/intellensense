@@ -93,8 +93,10 @@ class _TwitterState extends State<Twitter> {
                   itemBuilder: (context, index) {
                     return TwittterNotificationtile(Hashtag:'${searchData[index]}',
                     dashboadTap: HashTagInfo(
+
                               searchData[index],),
                               GridTap: GridDb('${searchData[index]}'),
+
                      );
                   },
                 ), 
