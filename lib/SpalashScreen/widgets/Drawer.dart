@@ -4,12 +4,12 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
-import 'package:intellensense/Pages/ChattingPage.dart';
 import 'package:intellensense/Pages/DrawerScreens/ConstituencyAnalysis.dart';
 import 'package:intellensense/Pages/DrawerScreens/ElectoralAnalysis/ElectoralAnalysis.dart';
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/CandidatureAnalysis.dart';
+import 'package:intellensense/SpalashScreen/screens/SettingScreen.dart';
+import 'package:intellensense/SpalashScreen/screens/login/login.dart';
 
-import '../../TRS Screens/MLAsTrsScreen.dart';
 import '../../main.dart';
 import '../screens/login/mainLoginScreen.dart';
 
@@ -185,17 +185,16 @@ class _drawerState extends State<drawer> {
                 ),
 
               ]),
-          ListTile(
-            leading: Icon(Icons.logout_outlined),
-            title: const Text('LogOut'),
+        
+           ListTile(
+            leading: Icon(Icons.settings),
+            title: const Text('Settings'),
             onTap: () {
-              CoolAlert.show(
-                confirmBtnColor: Color(0xff00186a),
-                backgroundColor: Color(0xff001969),
-                context: context,
-                type: CoolAlertType.confirm,
-                onConfirmBtnTap: () => LogoutAPI(context),
-              );
+               Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SettingScreen(),
+                        ));
             },
           ),
         ]));

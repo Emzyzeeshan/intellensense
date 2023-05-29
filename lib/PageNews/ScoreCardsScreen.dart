@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:expansion_tile_card/expansion_tile_card.dart';
-import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';

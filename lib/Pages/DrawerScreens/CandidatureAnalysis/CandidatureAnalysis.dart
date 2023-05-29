@@ -5,13 +5,12 @@ import 'package:animations/animations.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/SpalashScreen/constants.dart';
 
 import 'package:intellensense/TRS%20Screens/TrsMpDetails.dart';
 import 'package:intellensense/components/ResponsiveSize.dart';
 import 'package:intellensense/main.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:page_transition/page_transition.dart';
 
 class CandidatureAnalysis extends StatefulWidget {
 
@@ -39,7 +38,7 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
     DeviceSizeConfig().init(context);
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        backgroundColor: HomeColor,
         appBar: AppBar(
           leading: Container(),
           toolbarHeight: 45,
@@ -71,7 +70,7 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
               ],
             ),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: HomeColor,
         ),
         body: Padding(
           padding: const EdgeInsets.only(left: 8.0,right: 8),

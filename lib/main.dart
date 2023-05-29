@@ -1,13 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:intellensense/HomeScreen.dart';
 
 import 'package:intellensense/Services/themesetup/DarkThemeProvider.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'Pages/DrawerScreens/CandidatureAnalysis/FaceEmotion.dart';
 import 'Services/themesetup/styles.dart';
 import 'SpalashScreen/screens/login/mainLoginScreen.dart';
 
@@ -18,7 +21,7 @@ Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+  MobileAds.instance.initialize();
   Firebase.initializeApp();
 
   FirebaseMessaging.onBackgroundMessage(_firebadeMessagingBackgroundHandler);
@@ -43,6 +46,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+     check_if_already_login();
     getCurrentAppTheme();
     // TODO: implement initState
     super.initState();
@@ -70,9 +74,21 @@ class _MyAppState extends State<MyApp> {
         theme: Styles.themeData(themeChangeProvider.darkTheme, context),
         debugShowCheckedModeBanner: false,
         title: 'TRS Party',
-        home: mainLoginScreen(screenHeight: screenHeight),
+        home:
+        
+         mainLoginScreen(screenHeight: screenHeight),
       );
     }));
+  }
+    var newuser;
+  void check_if_already_login() async {
+    logindata = await SharedPreferences.getInstance();
+    newuser = (logindata.getBool('login') ?? true);
+    print(newuser);
+    if (newuser == false || FirebaseAuth.instance.authStateChanges() == true) {
+      Navigator.pushReplacement(
+          context, new MaterialPageRoute(builder: (context) => HomeScreen()));
+    }
   }
 }
 enum SignUpVerificationState { BYEMAIL, BYPHONE }

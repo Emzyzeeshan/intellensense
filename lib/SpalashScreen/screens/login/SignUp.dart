@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intellensense/Pages/EmailSignup.dart';
 import 'package:intellensense/Pages/PhoneLogin.dart';
 import 'package:intellensense/SpalashScreen/screens/login/login.dart';
-import 'package:intellensense/SpalashScreen/screens/login/signupform.dart';
 import 'package:intellensense/main.dart';
 import '../../constants.dart';
 import 'widgets/custom_clippers/index.dart';
