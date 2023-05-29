@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intellensense/Pages/PhoneLogin.dart';
 
 import '../../constants.dart';
 import 'widgets/custom_clippers/index.dart';

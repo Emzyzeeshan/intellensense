@@ -1,16 +1,12 @@
 import 'dart:convert';
 
 import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
-import 'package:expansion_tile_card/expansion_tile_card.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/CandidatureAnalysis.dart';
 import 'package:intellensense/SpalashScreen/widgets/ChartSampleData.dart';
 import 'package:intl/intl.dart';
-import 'package:skeletons/skeletons.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class TwitterSentiment extends StatefulWidget {

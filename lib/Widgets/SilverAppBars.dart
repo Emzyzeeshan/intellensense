@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 
-import 'package:lottie/lottie.dart';
 
 Position? _currentPosition;
 SliverAppBar createSilverAppBar2() {

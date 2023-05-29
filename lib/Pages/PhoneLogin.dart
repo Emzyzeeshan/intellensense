@@ -3,12 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intellensense/SpalashScreen/screens/login/signupform.dart';
-import 'package:intellensense/main.dart';
 import 'package:otp_text_field/otp_text_field.dart';
-import 'package:intellensense/HomeScreen.dart';
 import 'package:otp_text_field/style.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert' as convert;
 
 enum PhoneVerificationState { SHOW_PHONE_FORM_STATE, SHOW_OTP_FORM_STATE }
 
@@ -138,8 +134,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
         ElevatedButton(
             onPressed: () => _verifyPhoneButton(),
             style: ElevatedButton.styleFrom(
-              primary: Color(0xFF306EFF), // background
-              onPrimary: Colors.white, // foreground
+              foregroundColor: Colors.white, backgroundColor: Color(0xFF306EFF), // foreground
             ),
             child: const Text("Verify")),
       ],
@@ -187,8 +182,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
         ElevatedButton(
           onPressed: () => _verifyOTPButton(),
           style: ElevatedButton.styleFrom(
-            primary: Colors.grey.shade900, // background
-            onPrimary: Colors.white, // foreground
+            foregroundColor: Colors.white, backgroundColor: Colors.grey.shade900, // foreground
           ),
           child: const Text("Verify OTP Number"),
         ),

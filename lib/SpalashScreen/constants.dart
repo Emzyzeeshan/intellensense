@@ -46,3 +46,5 @@ List<String> ConstituencyAnalysisList = [
   'Trouble Makers for TRS',
   'Challenges and Recommendations',
 ];
+//Home Color
+Color HomeColor=Color(0xffd2dfff);

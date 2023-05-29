@@ -49,7 +49,7 @@ class CustomButton extends StatelessWidget {
                 text,
                 style: Theme.of(context)
                     .textTheme
-                    .subtitle1!
+                    .titleMedium!
                     .copyWith(color: textColor, fontWeight: FontWeight.bold),
               ),
             ),

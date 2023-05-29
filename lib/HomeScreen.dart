@@ -1,10 +1,8 @@
 import 'dart:convert';
 import 'package:animate_do/animate_do.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:cool_alert/cool_alert.dart';
-import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intellensense/PageNews/FaceBookScreen.dart';
 import 'package:intellensense/PageNews/GoogleTrendsScreen.dart';
 import 'package:intellensense/PageNews/InstagramScreen.dart';
@@ -16,25 +14,22 @@ import 'package:intellensense/PageNews/ScoreCardsScreen.dart';
 import 'package:intellensense/PageNews/TwitterScreen.dart';
 import 'package:intellensense/PageNews/YouTubeScreen.dart';
 import 'package:intellensense/Pages/Notification.dart';
-import 'package:intellensense/SpalashScreen/screens/login/mainLoginScreen.dart';
+import 'package:intellensense/SpalashScreen/constants.dart';
 import 'package:intellensense/SpalashScreen/widgets/Drawer.dart';
 import 'package:intellensense/Weather%20screens/Weather_Screen.dart';
-import 'package:intellensense/Weather%20screens/model/weather_model.dart';
 import 'package:intellensense/Weather%20screens/services/data_services.dart';
 import 'package:intellensense/credentials.dart';
-import 'package:lottie/lottie.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/PageNews/Socialmediatemplate.dart';
 import 'package:intellensense/Services/ApiServices.dart';
-import 'package:intellensense/main.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:simple_speed_dial/simple_speed_dial.dart';
+
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -73,6 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _scrollController = ScrollController()..addListener(_scrollListener);
+    _initBannerAd();
   }
 
   @override
@@ -81,7 +77,27 @@ class _HomeScreenState extends State<HomeScreen> {
     _scrollController?.dispose();
     super.dispose();
   }
+late BannerAd _bannerAd;
+bool _isAdLoaded=false;
+_initBannerAd(){
+_bannerAd= BannerAd(
+size: AdSize.banner,
+adUnitId: 'ca-app-pub-8354581033947644/1220452753',
+listener: BannerAdListener(
+onAdLoaded: (ad) {setState(() {
+_isAdLoaded=true;
+});
+},
 
+onAdFailedToLoad: (ad, error) {
+  print(error);
+},
+),// BannerAdListener
+request: AdRequest(),
+); // BannerAd
+_bannerAd.load();
+
+}
   bool tempbool = false;
   List<Widget> DailyNewsPages = [
     NewsPaperScreen(),
@@ -131,10 +147,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-      
+      bottomNavigationBar: _isAdLoaded?Container(
+        height: _bannerAd.size.height.toDouble(),
+        width: _bannerAd.size.width.toDouble(),
+        child: AdWidget(ad: _bannerAd),
+      ):Text('Loading'),
           key: _key,
           drawer: drawer(),
-          backgroundColor: Colors.white,
+          backgroundColor: HomeColor,
           body: NestedScrollView(
               controller: _scrollController,
               headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -150,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                     elevation: 0,
-                    backgroundColor: Color(0xffd2dfff),
+                    backgroundColor: HomeColor,
                     pinned: true,
                     expandedHeight: 250,
                     flexibleSpace: FlexibleSpaceBar(

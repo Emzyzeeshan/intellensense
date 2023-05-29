@@ -304,7 +304,7 @@ class SettingsScreen1State extends State<SettingsScreen1> {
                 padding: EdgeInsets.only(left: 50.0, right: 50.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.red, // Background color
+                    backgroundColor: Colors.red, // Background color
                   ),
                   onPressed: logoutUser,
                   child: Text(
