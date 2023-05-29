@@ -7,6 +7,7 @@ import 'package:intellensense/main.dart';
 
 
 import '../../main.dart';
+import 'Components/YoutubeGridDb.dart';
 import 'Components/YoutubeHashTagInfo.dart';
 
 
@@ -75,6 +76,8 @@ class _YoutubeState extends State<Youtube> {
                                 dashboadTap: YoutubeHashTagInfo(
                                 Youtubedata['candidate_names']
                             [index]),
+                              GridTap: YoutubeGridDb(
+                                  Youtubedata['candidate_names'][index]),
                             );
                           },
                         ),
@@ -93,7 +96,13 @@ class _YoutubeState extends State<Youtube> {
                   itemCount: searchData.length,
                   itemBuilder: (context, index) {
                     return YoutubeNotificationtile(
-                        Hashtag:'${searchData[index]}',dashboadTap: YoutubeHashTagInfo(searchData[index]),);
+
+                        Hashtag:'${searchData[index]['candidate_names']}',
+                      dashboadTap: YoutubeHashTagInfo(
+                          searchData[index]),
+                      GridTap: YoutubeGridDb(
+                          searchData[index]),
+                    );
                   },
                 ),
               ),
@@ -154,8 +163,9 @@ fullData=Youtubedata['candidate_names'];
 class YoutubeNotificationtile extends StatefulWidget {
   String Hashtag;
   Widget? dashboadTap;
+  Widget? GridTap;
   YoutubeNotificationtile({
-    required this.Hashtag, this.dashboadTap,});
+    required this.Hashtag, this.dashboadTap,this.GridTap});
 
   @override
   State<YoutubeNotificationtile> createState() =>
@@ -188,7 +198,7 @@ class _YoutubeNotificationtileState extends State<YoutubeNotificationtile> {
 
                 openElevation: 10.0,
                 closedShape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(0.0)),
                 ),
                 transitionType: ContainerTransitionType.fade,
                 transitionDuration: const Duration(milliseconds: 1200),
@@ -203,10 +213,26 @@ class _YoutubeNotificationtileState extends State<YoutubeNotificationtile> {
                   );
                 },
               ),
-              Image.asset(
-                'assets/NotificationIcons/GridDB.png',
-                height: 25,
-                width: 25,
+              OpenContainer(
+                closedColor: Color(0xffd2dfff),
+                openColor: Color(0xffd2dfff),
+
+                openElevation: 10.0,
+                closedShape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(0.0)),
+                ),
+                transitionType: ContainerTransitionType.fade,
+                transitionDuration: const Duration(milliseconds: 1200),
+                openBuilder: (context, action) {
+                  return widget.GridTap!;
+                },
+                closedBuilder: (context, action) {
+                  return Image.asset(
+                    'assets/NotificationIcons/GridDB.png',
+                    height: 25,
+                    width: 25,
+                  );
+                },
               ),
               Image.asset(
                 'assets/NotificationIcons/Open_Docs_Icon.png',

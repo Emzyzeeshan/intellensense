@@ -147,11 +147,11 @@ _bannerAd.load();
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-      bottomNavigationBar: _isAdLoaded?Container(
+      /*bottomNavigationBar: _isAdLoaded?Container(
         height: _bannerAd.size.height.toDouble(),
         width: _bannerAd.size.width.toDouble(),
         child: AdWidget(ad: _bannerAd),
-      ):Text('Loading'),
+      ):Text('Loading'),*/
           key: _key,
           drawer: drawer(),
           backgroundColor: HomeColor,
@@ -827,6 +827,27 @@ _bannerAd.load();
                                                               setState(() {
                                                                 showSocialnews =
                                                                     !showSocialnews;
+                                                              });
+                                                              Navigator.pop(
+                                                                  context);
+                                                            },
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          ListTile(
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                    15)),
+                                                            tileColor: Colors
+                                                                .blue.shade100,
+                                                            leading:  Text(
+                                                                'Hide News Card'),
+                                                            onTap: () {
+                                                              setState(() {
+                                                                viewnews = false;
                                                               });
                                                               Navigator.pop(
                                                                   context);
@@ -2168,7 +2189,7 @@ _bannerAd.load();
               ),
 
           ),
-        floatingActionButton: SpeedDial(
+        /*floatingActionButton: SpeedDial(
           child: Icon(Icons.add),
           closedForegroundColor: Colors.black,
           openForegroundColor: Colors.grey,
@@ -2201,7 +2222,7 @@ _bannerAd.load();
             ),
 
           ],
-        ),
+        ),*/
 
 
       ),

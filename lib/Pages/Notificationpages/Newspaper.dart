@@ -7,6 +7,7 @@ import 'package:intellensense/main.dart';
 
 
 import '../../main.dart';
+import 'Components/NewsPaperGridDb.dart';
 import 'Components/NewspaperHashTagInfo.dart';
 
 class Newspaper extends StatefulWidget {
@@ -69,6 +70,10 @@ class _NewspaperState extends State<Newspaper> {
                           dashboadTap: NewspaperHashTagInfo(
                               Newspaperdata['candidate_names']
                               [index]),
+                          GridTap: NewsPaperGridDb(
+                              Newspaperdata['candidate_names']
+                              [index]
+                          )
                         );
                       },
                     ),
@@ -90,6 +95,9 @@ class _NewspaperState extends State<Newspaper> {
                       dashboadTap: NewspaperHashTagInfo(
                         searchData[index],
                       ),
+                        GridTap: NewsPaperGridDb(
+                            searchData[index]
+                        )
                     );
                   },
                 ),
@@ -153,9 +161,10 @@ class _NewspaperState extends State<Newspaper> {
 class NewspaperNotificationtile extends StatefulWidget {
   String Hashtag;
   Widget? dashboadTap;
+  Widget? GridTap;
   NewspaperNotificationtile({
       this.dashboadTap,
-    required this.Hashtag, });
+    required this.Hashtag,this.GridTap });
 
   @override
   State<NewspaperNotificationtile> createState() =>
@@ -202,10 +211,25 @@ class _NewspaperNotificationtileState extends State<NewspaperNotificationtile> {
                   );
                 },
               ),
-              Image.asset(
-                'assets/NotificationIcons/GridDB.png',
-                height: 25,
-                width: 25,
+              OpenContainer(
+                closedColor: Color(0xffd2dfff),
+                openColor: Color(0xffd2dfff),
+                openElevation: 10.0,
+                closedShape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(0.0)),
+                ),
+                transitionType: ContainerTransitionType.fade,
+                transitionDuration: const Duration(milliseconds: 1200),
+                openBuilder: (context, action) {
+                  return widget.GridTap!;
+                },
+                closedBuilder: (context, action) {
+                  return Image.asset(
+                    'assets/NotificationIcons/GridDB.png',
+                    height: 25,
+                    width: 25,
+                  );
+                },
               ),
               Image.asset(
                 'assets/NotificationIcons/Open_Docs_Icon.png',

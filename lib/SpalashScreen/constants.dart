@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
+
 // Colors
 const Color kBlue = Color(0xFF306EFF);
 const Color kLightBlue = Color(0xFF4985FD);
@@ -47,4 +49,4 @@ List<String> ConstituencyAnalysisList = [
   'Challenges and Recommendations',
 ];
 //Home Color
-Color HomeColor=Color(0xffd2dfff);
+Color HomeColor=Colors.white;

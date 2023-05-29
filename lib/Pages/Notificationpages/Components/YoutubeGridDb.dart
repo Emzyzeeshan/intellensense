@@ -6,23 +6,23 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
 import 'package:pluto_grid/pluto_grid.dart';
 
-class GridDb extends StatefulWidget {
+class YoutubeGridDb extends StatefulWidget {
   var Hashtag;
   var Griddata;
-  GridDb(this.Hashtag, {Key? key}) : super(key: key);
+  YoutubeGridDb(this.Hashtag, {Key? key}) : super(key: key);
 
   @override
-  State<GridDb> createState() => _GridDbState();
+  State<YoutubeGridDb> createState() => _YoutubeGridDbState();
 }
 
-class _GridDbState extends State<GridDb> {
+class _YoutubeGridDbState extends State<YoutubeGridDb> {
   late final PlutoGridStateManager stateManager;
 
   final List<PlutoRow> fakeFetchedRows = [];
 
   Future<PlutoLazyPaginationResponse> fetch(
-    PlutoLazyPaginationRequest request,
-  ) async {
+      PlutoLazyPaginationRequest request,
+      ) async {
     List<PlutoRow> tempList = fakeFetchedRows;
 
     if (request.filterRows.isNotEmpty) {
@@ -108,142 +108,132 @@ class _GridDbState extends State<GridDb> {
   }
 
   GridDate() {
-    if (Griddata == null || Griddata['data'] == null)
+    if (Griddata == null || Griddata['grid_data'] == null)
       return Container(height: 0, width: 0);
 
     List<PlutoColumn> columns = [
-      PlutoColumn(
+     /* PlutoColumn(
         enableEditingMode: false,
         title: 'Twitter Id',
         field: 'Grid_ID',
         type: PlutoColumnType.text(),
-      ),
+      ),*/
       PlutoColumn(
         enableEditingMode: false,
-        title: 'Type',
-        field: 'Grid_Type',
+        title: 'Published Date',
+        field: 'Grid_Published_Date',
         type: PlutoColumnType.text(),
-      ),
-      PlutoColumn(
-        enableEditingMode: false,
-        title: 'Twitter Content',
-        field: 'Grid_Content',
-        type: PlutoColumnType.text(),
-      ),
-
-      PlutoColumn(
-        enableEditingMode: false,
-        title: 'Publish Date',
-        field: 'Grid_Date',
-        type: PlutoColumnType.date(),
       ),
       PlutoColumn(
         enableEditingMode: false,
         title: 'Published Time',
-        field: 'Grid_Time',
+        field: 'Grid_Published_Time',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'User Handle Name',
-        field: 'Grid_UserName',
+        title: 'Title Content',
+        field: 'Grid_Title_Content',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'User Profile Location',
-        field: 'Grid_UserLocation',
+        title: 'Handler Name',
+        field: 'Grid_Handler_Name',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'Likes',
+        title: 'Likes Count',
         field: 'Grid_Likes',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'Retweets',
-        field: 'Grid_Retweets',
+        title: 'Views Count',
+        field: 'Grid_Views',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'Geo Location',
-        field: 'Grid_Location',
+        title: 'Dislikes Count',
+        field: 'Grid_DisLikes',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'Geo Coordination',
-        field: 'Grid_Coordinates',
+        title: 'Comments Count',
+        field: 'Grid_Comments',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'Sentiment',
-        field: 'Grid_sentiment',
+        title: 'Media Types',
+        field: 'Grid_Media_Types',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'Country',
-        field: 'Grid_Country',
+        title: 'Title Sentiment',
+        field: 'Grid_Title_Sentiment',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'State',
-        field: 'Grid_State',
+        title: 'Positive Sentiment',
+        field: 'Grid_Positive_Sentiment',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'District',
-        field: 'Grid_District',
+        title: 'Negative Sentiment',
+        field: 'Grid_Negative_Sentiment',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'Constituency Name',
-        field: 'Grid_Constituency',
+        title: 'Neutral Sentiment',
+        field: 'Grid_Neutral_Sentiment',
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
         enableEditingMode: false,
-        title: 'Candidate Party Name',
-        field: 'Grid_PartyName',
+        title: 'Party Name',
+        field: 'Grid_Party_Name',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        enableEditingMode: false,
+        title: 'Key Words',
+        field: 'Grid_Key_Words',
         type: PlutoColumnType.text(),
       ),
     ];
-    List<PlutoRow> rows = Griddata['data']
+    List<PlutoRow> rows = Griddata['grid_data']
         .map<PlutoRow>((item) => PlutoRow(cells: {
-              'Grid_ID': PlutoCell(value: item['TWEET_ID'] ?? ''),
-              //'record_no': PlutoCell(value: widget.Fetchdata['RECORD_NO']),
-              'Grid_Type':
-                  PlutoCell(value: item['CONTENT_TYPE'] ?? ''),
-              'Grid_Content': PlutoCell(value: item['TITLE_CONTENT'] ?? ''),
-              'Grid_Date': PlutoCell(value: item['PUBLISHED_DATE'] ?? ''),
-              'Grid_Time': PlutoCell(value: item['PUBLISHED_TIME'] ?? ''),
-              'Grid_UserName': PlutoCell(value: item['CANDIDATE_NAME'] ?? ''),
-              'Grid_UserLocation': PlutoCell(value: item['USER_PROFILE_LOCATION'] ?? ''),
-              'Grid_Likes': PlutoCell(value: item['LIKES_COUNT'] ?? ''),
-              'Grid_Retweets': PlutoCell(value: item['RETWEETS_COUNT'] ?? ''),
-              'Grid_Location': PlutoCell(value: item['GEO_LOCATION'] ?? ''),
-              'Grid_Coordinates': PlutoCell(value: item['GEO_COORDINATES'] ?? ''),
-              'Grid_sentiment': PlutoCell(value: item['TRANSLATED_SENTIMENT_RESULT'] ?? ''),
-              'Grid_Country': PlutoCell(value: item['LOCATION_COUNTRY'] ?? ''),
-              'Grid_State': PlutoCell(value: item['LOCATION_STATE'] ?? ''),
-              'Grid_District': PlutoCell(value: item['LOCATION_DISTRICT'] ?? ''),
-              'Grid_Constituency': PlutoCell(value: item['LOCATION_CONSTITUENCY'] ?? ''),
-              'Grid_PartyName': PlutoCell(value: item['CANDIDATE_PARTY_NAME'] ?? ''),
-            }))
+     // 'Grid_ID': PlutoCell(value: item['TWEET_ID'] ?? ''),
+      'Grid_Published_Date': PlutoCell(value: item['PUBLISHED_DATE'] ?? ''),
+      'Grid_Published_Time': PlutoCell(value: item['PUBLISHED_TIME'] ?? ''),
+      'Grid_Title_Content': PlutoCell(value: item['TITLE_CONTENT'] ?? ''),
+      'Grid_Handler_Name': PlutoCell(value: item['HANDLER_NAME'] ?? ''),
+      'Grid_Likes': PlutoCell(value: item['LIKES_COUNT'] ?? ''),
+      'Grid_Views': PlutoCell(value: item['VIEWS_COUNT'] ?? ''),
+      'Grid_DisLikes': PlutoCell(value: item['DISLIKES_COUNT'] ?? ''),
+      'Grid_Comments': PlutoCell(value: item['COMMENTS_COUNT'] ?? ''),
+      'Grid_Media_Types': PlutoCell(value: item['CONTENT_TYPE'] ?? ''),
+      'Grid_Title_Sentiment': PlutoCell(value: item['TRANSLATED_SENTIMENT_RESULT'] ?? ''),
+      'Grid_Positive_Sentiment': PlutoCell(value: item['POSTIVE_SENTIMENT_COUNT'] ?? ''),
+      'Grid_Negative_Sentiment': PlutoCell(value: item['NEGATIVE_SENTIMENT_COUNT'] ?? ''),
+      'Grid_Neutral_Sentiment': PlutoCell(value: item['NEUTRAL_SENTIMENT_COUNT'] ?? ''),
+      'Grid_Party_Name': PlutoCell(value: item['CANDIDATE_PARTY_NAME'] ?? ''),
+      'Grid_Key_Words': PlutoCell(value: item['KEY_WORDS'] ?? ''),
+    }))
         .toList();
     return Column(
       children: [
         Expanded(
             child: Container(
-          padding: EdgeInsets.all(2),
+              padding: EdgeInsets.all(2),
               child: PlutoGrid(
                 columns: columns,
                 rows: rows,
@@ -289,7 +279,7 @@ class _GridDbState extends State<GridDb> {
                   );
                 },*/
               ),
-        ))
+            ))
       ],
     );
   }
@@ -298,13 +288,13 @@ class _GridDbState extends State<GridDb> {
   Map query = new Map<String, dynamic>();
   Future<dynamic> GridDataApi() async {
     setState(() {
-      query['HASH_TAG'] = '${widget.Hashtag}';
-      query['SOCIAL_MEDIA'] = 'TWITTER';
-      query['type'] = 'source_data';
+      query['candidate_name'] = '${widget.Hashtag}';
+      query['channel'] = 'YOUTUBE';
+      query['type'] = 'channel_videos';
     });
 
     var response = await post(
-        Uri.parse('http://idxp.pilogcloud.com:6656/twitter_hashtag_data/'),
+        Uri.parse('http://idxp.pilogcloud.com:6656/active_youtube_channel/'),
         body: query);
 
     if (response.statusCode == 200) {
