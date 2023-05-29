@@ -8,19 +8,17 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
-import 'package:intellensense/PageNews/NewsPaperScreen.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/FaceEmotion.dart';
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewspaperSentiment.dart';
 
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewsChannelSentiment.dart';
-import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewspaperSentiment.dart';
 
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/TwitterSentiment.dart';
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/VoiceToText.dart';
 
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/YoutubeSentiment.dart';
-import 'package:intellensense/SpalashScreen/widgets/ChartSampleData.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:intellensense/SpalashScreen/constants.dart';
+import 'package:intellensense/main.dart';
 
 class TrsMpDetails extends StatefulWidget {
   var Value;
@@ -58,7 +56,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffd2dfff),
+      backgroundColor: HomeColor,
       body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Padding(
@@ -942,7 +940,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       transitionDuration:
                                           const Duration(milliseconds: 1200),
                                       openBuilder: (context, action) {
-                                        return Container();
+                                        return FaceEmotion();
                                       },
                                       closedBuilder: (context, action) {
                                         return     SentimentCardTemplate(() {},
@@ -1002,7 +1000,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
   Future<dynamic> PartyResultAPI() async {
     var response = await get(
       Uri.parse(
-          'http://192.169.1.198:8082/insights/3.21.0/eleResults/${widget.Value['name']}'),
+          INSIGHTS+'/eleResults/${widget.Value['name']}'),
     );
     print(response.toString());
     print(response.statusCode);

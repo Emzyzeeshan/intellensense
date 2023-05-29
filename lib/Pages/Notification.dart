@@ -1,7 +1,5 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:intellensense/HomeScreen.dart';
 import 'package:intellensense/Pages/Notificationpages/Facebook.dart';
 import 'package:intellensense/Pages/Notificationpages/Instagram.dart';
 import 'package:intellensense/Pages/Notificationpages/Twitter.dart';

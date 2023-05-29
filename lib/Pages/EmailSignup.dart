@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -101,8 +100,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
               });
             },
             style: ElevatedButton.styleFrom(
-              primary: Color(0xFF306EFF), // background
-              onPrimary: Colors.white, // foreground
+              foregroundColor: Colors.white, backgroundColor: Color(0xFF306EFF), // foreground
             ),
             child: const Text("Verify")),
       ],
@@ -165,8 +163,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
             }
           },
           style: ElevatedButton.styleFrom(
-            primary: Colors.grey.shade900, // background
-            onPrimary: Colors.white, // foreground
+            foregroundColor: Colors.white, backgroundColor: Colors.grey.shade900, // foreground
           ),
           child: const Text("Verify OTP Number"),
         ),

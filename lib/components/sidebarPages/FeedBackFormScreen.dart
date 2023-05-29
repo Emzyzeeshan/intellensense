@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rating_dialog/rating_dialog.dart';
-import 'dart:ui';
 
 class FeedBackFormScreen extends StatefulWidget {
   @override
@@ -264,8 +263,7 @@ class _FeedBackFormScreenState extends State<FeedBackFormScreen> {
           icon: Icon(Icons.check),
           label: Text("Submit"),
           style: OutlinedButton.styleFrom(
-            primary: Colors.blue,
-            side: BorderSide(color: Colors.blue),
+            foregroundColor: Colors.blue, side: BorderSide(color: Colors.blue),
           ),
         ),
         OutlinedButton.icon(
@@ -280,8 +278,7 @@ class _FeedBackFormScreenState extends State<FeedBackFormScreen> {
           icon: Icon(Icons.refresh),
           label: Text("Reset"),
           style: OutlinedButton.styleFrom(
-            primary: Colors.blue,
-            side: BorderSide(color: Colors.blue),
+            foregroundColor: Colors.blue, side: BorderSide(color: Colors.blue),
           ),
         )
       ],

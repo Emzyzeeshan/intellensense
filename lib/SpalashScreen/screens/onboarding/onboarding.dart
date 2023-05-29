@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:intellensense/main.dart';
 
 import '../../constants.dart';
 import '../login/login.dart';

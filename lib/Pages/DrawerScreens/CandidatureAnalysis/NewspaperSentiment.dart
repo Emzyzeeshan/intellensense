@@ -113,7 +113,7 @@ class _NewsPaperSentimentState extends State<NewsPaperSentiment> {
                           child: Scrollbar(
                             controller: _scrollController,
                             thickness: 5,
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.75,
@@ -348,7 +348,7 @@ class _NewsPaperSentimentState extends State<NewsPaperSentiment> {
                           child: Scrollbar(
                             controller: _scrollController,
                             thickness: 5,
-                            isAlwaysShown: true,
+                            thumbVisibility: true,
                             child: Container(
                               width: MediaQuery.of(context).size.width,
                               height: MediaQuery.of(context).size.height * 0.75,

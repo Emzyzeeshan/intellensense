@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
-import '../../../widgets/logo.dart';
-import 'fade_slide_transition.dart';
 
 class Header extends StatelessWidget {
   final Animation<double> animation;

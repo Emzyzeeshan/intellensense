@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intellensense/SpalashScreen/constants.dart';
 
 import 'Census.dart';
 import 'Political.dart';
@@ -16,6 +17,7 @@ class _ElectoralAnalysisState extends State<ElectoralAnalysis> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: HomeColor,
       key: _key,
       appBar: AppBar(
         leading: IconButton(
@@ -26,7 +28,7 @@ class _ElectoralAnalysisState extends State<ElectoralAnalysis> {
           },
         ),
         centerTitle: true,
-        backgroundColor: Color(0xffd2dfff),
+        backgroundColor: HomeColor,
         title: Image.asset(
           'assets/icons/IntelliSense-Logo-Finall.gif',
           fit: BoxFit.cover,

@@ -6,9 +6,7 @@ import 'package:fancy_password_field/fancy_password_field.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
-import 'package:intellensense/HomeScreen.dart';
 import 'package:intellensense/SpalashScreen/screens/login/login.dart';
-import 'package:intellensense/SpalashScreen/screens/login/widgets/login_form.dart';
 import 'package:intellensense/main.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
@@ -146,6 +144,7 @@ class _SignUpFormState extends State<SignUpForm> {
                                       return 'Pls enter Username';
                                     }
                                     ;
+                                    return null;
                                   },
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.person),
@@ -173,6 +172,7 @@ class _SignUpFormState extends State<SignUpForm> {
                                       return 'Pls enter Password';
                                     }
                                     ;
+                                    return null;
                                   },
                                   decoration: InputDecoration(
                                       prefixIcon: Icon(Icons.key),

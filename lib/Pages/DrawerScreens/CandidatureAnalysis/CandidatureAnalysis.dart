@@ -5,13 +5,12 @@ import 'package:animations/animations.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/SpalashScreen/constants.dart';
 
 import 'package:intellensense/TRS%20Screens/TrsMpDetails.dart';
 import 'package:intellensense/components/ResponsiveSize.dart';
 import 'package:intellensense/main.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:page_transition/page_transition.dart';
 
 class CandidatureAnalysis extends StatefulWidget {
 
@@ -39,7 +38,7 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
     DeviceSizeConfig().init(context);
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: Colors.white,
+        backgroundColor: HomeColor,
         appBar: AppBar(
           leading: Container(),
           toolbarHeight: 70,
@@ -71,7 +70,7 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
               ],
             ),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: HomeColor,
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -282,7 +281,7 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
     var headers = {'Content-Type': 'application/json'};
     var body = json.encode({});
     var response = await get(
-      Uri.parse('http://192.169.1.198:8082/insights/3.21.0/party/$Input'),
+      Uri.parse(INSIGHTS+'/party/$Input'),
     );
 
     if (response.statusCode == 200) {

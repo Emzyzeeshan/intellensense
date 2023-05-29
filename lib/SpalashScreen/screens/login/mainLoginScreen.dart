@@ -9,7 +9,6 @@ import '../../constants.dart';
 import 'login.dart';
 import 'widgets/custom_clippers/index.dart';
 import 'widgets/header.dart';
-import 'widgets/login_form.dart';
 
 class mainLoginScreen extends StatefulWidget {
   final double screenHeight;
@@ -30,20 +29,11 @@ class _mainLoginScreenState extends State<mainLoginScreen>
   late final Animation<double> _whiteTopClipperAnimation;
   late final Animation<double> _blueTopClipperAnimation;
   late final Animation<double> _greyTopClipperAnimation;
-  var newuser;
-  void check_if_already_login() async {
-    logindata = await SharedPreferences.getInstance();
-    newuser = (logindata.getBool('login') ?? true);
-    print(newuser);
-    if (newuser == false || FirebaseAuth.instance.authStateChanges() == true) {
-      Navigator.pushReplacement(
-          context, new MaterialPageRoute(builder: (context) => HomeScreen()));
-    }
-  }
+
 
   @override
   void initState() {
-    check_if_already_login();
+   
     super.initState();
     _animationController = AnimationController(
       vsync: this,
