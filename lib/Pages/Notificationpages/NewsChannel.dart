@@ -7,10 +7,10 @@ import 'package:intellensense/Pages/Notificationpages/Twitter.dart';
 import 'package:intellensense/main.dart';
 
 import '../../main.dart';
+import 'Components/NewsChannelGridDb.dart';
 import 'Components/NewsChannelHashTagInfo.dart';
 
 class NewsChannelPage extends StatefulWidget {
-
   @override
   State<NewsChannelPage> createState() => _NewsChannelPageState();
 }
@@ -19,7 +19,7 @@ class _NewsChannelPageState extends State<NewsChannelPage> {
   late Future<dynamic> finaldata = NewsChannelApi();
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       children: [
         TextField(
           onChanged: onSearchTextChanged,
@@ -41,62 +41,64 @@ class _NewsChannelPageState extends State<NewsChannelPage> {
           height: 10,
         ),
         searchData.length ==
-            0 // Check SearchData list is empty or not if empty then show full data else show search data
+                0 // Check SearchData list is empty or not if empty then show full data else show search data
             ? FutureBuilder<dynamic>(
-          future: finaldata,
-          builder: (
-              BuildContext context,
-              AsyncSnapshot<dynamic> snapshot,
-              ) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Center(child: CircularProgressIndicator()),
-                    Text('Please Wait')
-                  ]);
-            } else if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasError) {
-                return const Text('Error');
-              } else if (snapshot.hasData) {
-                return Flexible(
-                  child: ListView.builder(
-                    itemCount: NewsChanneldata['candidate_names'].length,
-                    itemBuilder: (context, index) {
-                      return NewsChannelNotificationtile(
-                        Hashtag:'${NewsChanneldata['candidate_names'][index]}',
-                        dashboadTap: NewsChannelHashTagInfo(
-                            NewsChanneldata['candidate_names']
-                            [index]),
+                future: finaldata,
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<dynamic> snapshot,
+                ) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Center(child: CircularProgressIndicator()),
+                          Text('Please Wait')
+                        ]);
+                  } else if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return const Text('Error');
+                    } else if (snapshot.hasData) {
+                      return Flexible(
+                        child: ListView.builder(
+                          itemCount: NewsChanneldata['candidate_names'].length,
+                          itemBuilder: (context, index) {
+                            return NewsChannelNotificationtile(
+                                Hashtag:
+                                    '${NewsChanneldata['candidate_names'][index]}',
+                                dashboadTap: NewsChannelHashTagInfo(
+                                    NewsChanneldata['candidate_names'][index]),
+                                GridTap: NewsChannelGridDb(
+                                    NewsChanneldata['candidate_names'][index]));
+                          },
+                        ),
                       );
-                    },
-                  ),
-                );
-              } else {
-                return const Text('Empty data');
-              }
-            } else {
-              return Text('State: ${snapshot.connectionState}');
-            }
-          },
-        ) : Flexible(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: searchData.length,
-            itemBuilder: (context, index) {
-              return NewsChannelNotificationtile(
-                Hashtag:'${searchData[index]}',
-                dashboadTap: NewsChannelHashTagInfo(
-                  searchData[index],
+                    } else {
+                      return const Text('Empty data');
+                    }
+                  } else {
+                    return Text('State: ${snapshot.connectionState}');
+                  }
+                },
+              )
+            : Flexible(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: searchData.length,
+                  itemBuilder: (context, index) {
+                    return NewsChannelNotificationtile(
+                        Hashtag: '${searchData[index]}',
+                        dashboadTap: NewsChannelHashTagInfo(
+                          searchData[index],
+                        ),
+                        GridTap: NewsChannelGridDb(
+                            searchData[index]));
+                  },
                 ),
-              );
-            },
-          ),
-        ),
+              ),
       ],
     );
-
   }
 
   var NewsChanneldata;
@@ -152,16 +154,20 @@ class _NewsChannelPageState extends State<NewsChannelPage> {
 class NewsChannelNotificationtile extends StatefulWidget {
   String Hashtag;
   Widget? dashboadTap;
+  Widget? GridTap;
   NewsChannelNotificationtile({
     this.dashboadTap,
-    required this.Hashtag, });
+    this.GridTap,
+    required this.Hashtag,
+  });
 
   @override
   State<NewsChannelNotificationtile> createState() =>
       _NewsChannelNotificationtileState();
 }
 
-class _NewsChannelNotificationtileState extends State<NewsChannelNotificationtile> {
+class _NewsChannelNotificationtileState
+    extends State<NewsChannelNotificationtile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -186,7 +192,7 @@ class _NewsChannelNotificationtileState extends State<NewsChannelNotificationtil
                 openColor: Color(0xffd2dfff),
                 openElevation: 10.0,
                 closedShape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                  borderRadius: BorderRadius.all(Radius.circular(0.0)),
                 ),
                 transitionType: ContainerTransitionType.fade,
                 transitionDuration: const Duration(milliseconds: 1200),
@@ -201,10 +207,25 @@ class _NewsChannelNotificationtileState extends State<NewsChannelNotificationtil
                   );
                 },
               ),
-              Image.asset(
-                'assets/NotificationIcons/GridDB.png',
-                height: 25,
-                width: 25,
+              OpenContainer(
+                closedColor: Color(0xffd2dfff),
+                openColor: Color(0xffd2dfff),
+                openElevation: 10.0,
+                closedShape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(0.0)),
+                ),
+                transitionType: ContainerTransitionType.fade,
+                transitionDuration: const Duration(milliseconds: 1200),
+                openBuilder: (context, action) {
+                  return widget.GridTap!;
+                },
+                closedBuilder: (context, action) {
+                  return Image.asset(
+                    'assets/NotificationIcons/GridDB.png',
+                    height: 25,
+                    width: 25,
+                  );
+                },
               ),
               Image.asset(
                 'assets/NotificationIcons/Open_Docs_Icon.png',

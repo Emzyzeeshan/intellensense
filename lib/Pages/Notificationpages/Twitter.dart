@@ -6,10 +6,8 @@ import 'package:http/http.dart';
 import 'package:intellensense/Pages/Notificationpages/Components/TwitterhashtagInfo.dart';
 import 'package:intellensense/main.dart';
 
-import 'package:intellensense/Pages/Notificationpages/Components/hashtagInfo.dart';
 
-
-import 'Components/GridDbScreen.dart';
+import 'Components/TwitterGridDbScreen.dart';
 
 class Twitter extends StatefulWidget {
   @override
@@ -75,7 +73,7 @@ class _TwitterState extends State<Twitter> {
                               dashboadTap: TwitterHashTagInfo(
                                   twitterdata['active_twitter_hashtags']
                                       [index]),
-                              GridTap: GridDb(
+                              GridTap: TwitterGridDb(
                                   twitterdata['active_twitter_hashtags']
                                       [index]),
                             );
@@ -100,7 +98,7 @@ class _TwitterState extends State<Twitter> {
                       dashboadTap: TwitterHashTagInfo(
                         searchData[index],
                       ),
-                      GridTap: GridDb('${searchData[index]}'),
+                      GridTap: TwitterGridDb('${searchData[index]}'),
                     );
                   },
                 ),
