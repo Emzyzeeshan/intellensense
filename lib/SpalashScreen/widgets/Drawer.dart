@@ -199,5 +199,38 @@ class _drawerState extends State<drawer> {
           ),
         ]));
   }
- 
+  LogoutAPI(BuildContext context) async {
+    var headers = {'Content-Type': 'application/json'};
+    var body =
+    json.encode({"rsUsername": "${logindata.getString('username')}"});
+    var response = await post(
+      Uri.parse('https://ifar.pilogcloud.com/'),
+      headers: headers,
+      body: body,
+    );
+    if (response.body == 'Success') {
+      print(response.body);
+      logindata.setBool('login', true);
+
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => mainLoginScreen(
+                screenHeight: MediaQuery.of(context).size.height,
+              )));
+
+      await Fluttertoast.showToast(
+          msg: "ThankYou",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.SNACKBAR,
+          timeInSecForIosWeb: 1,
+          backgroundColor: Color.fromRGBO(11, 74, 153, 1),
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else {
+      print(response.reasonPhrase);
+    }
+    Navigator.of(context, rootNavigator: true).pop();
+    return response;
+  }
 }

@@ -20,6 +20,8 @@ import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/YoutubeSen
 import 'package:intellensense/SpalashScreen/constants.dart';
 import 'package:intellensense/main.dart';
 
+import '../main.dart';
+
 class TrsMpDetails extends StatefulWidget {
   var Value;
   TrsMpDetails(this.Value);
@@ -65,17 +67,14 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
               children: <Widget>[
                 Align(
                   alignment: Alignment.topCenter,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    radius: 80,
-                    child: ClipOval(
-                      child: Image.memory(
-                        base64Decode(
-                            widget.Value['content'].substring(22) ?? ''),
-                        width: 300,
-                        height: 300,
-                        fit: BoxFit.cover,
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.memory(
+                      base64Decode(
+                          widget.Value['content'].substring(22) ?? ''),
+                      width: 300,
+                      height: 300,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),

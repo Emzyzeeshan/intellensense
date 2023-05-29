@@ -41,10 +41,10 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
         backgroundColor: HomeColor,
         appBar: AppBar(
           leading: Container(),
-          toolbarHeight: 70,
+          toolbarHeight: 45,
           elevation: 0,
           flexibleSpace: Padding(
-            padding: const EdgeInsets.only(top: 50.0, left: 8, right: 8),
+            padding: const EdgeInsets.only( top: 25, left: 8, right: 8),
             child: Row(
               children: [
                 Image.asset('assets/icons/IntelliSense-Logo-Finall.gif',
@@ -73,7 +73,7 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
           backgroundColor: HomeColor,
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(left: 8.0,right: 8),
           child: Column(children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -187,15 +187,15 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
                                           // collapsedBackgroundColor: Colors.grey.shade100,
                                           // tilePadding: EdgeInsets.all(5),
 
-                                          leading: Container(
+                                          leading: Container(decoration: BoxDecoration(shape: BoxShape.circle),
                                             height: 50,
                                             width: 50,
-                                            child: CircleAvatar(
+                                            child: CircleAvatar(minRadius: 30,
                                               backgroundImage: MemoryImage(
                                                 base64Decode(partydata[index]
                                                             ['content']
                                                         .substring(22) ??
-                                                    ''),
+                                                    ''),scale: 10
                                               ),
                                             ),
                                           ),
