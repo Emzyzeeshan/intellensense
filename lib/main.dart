@@ -9,7 +9,6 @@ import 'package:intellensense/Services/themesetup/DarkThemeProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'Services/themesetup/styles.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'SpalashScreen/screens/login/mainLoginScreen.dart';
 
 Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {

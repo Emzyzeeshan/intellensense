@@ -145,49 +145,52 @@ class InstagramNotificationtile extends StatefulWidget {
 class _InstagramNotificationtileState extends State<InstagramNotificationtile> {
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      collapsedBackgroundColor: Colors.grey.shade200,
-      backgroundColor: Colors.grey.shade100,
-      childrenPadding: EdgeInsets.all(5),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      leading: Image.asset(
-        'assets/icons/Social-Media-Icons-IS-07.png',
-        height: 25,
-        width: 25,
+    return Padding(
+      padding: const EdgeInsets.all(3.0),
+      child: ExpansionTile(
+        collapsedBackgroundColor: Colors.grey.shade200,
+        backgroundColor: Colors.grey.shade100,
+        childrenPadding: EdgeInsets.all(5),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        leading: Image.asset(
+          'assets/icons/Social-Media-Icons-IS-07.png',
+          height: 25,
+          width: 25,
+        ),
+        title: Text(widget.Hashtag),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Image.asset(
+                'assets/NotificationIcons/analyticsShowCard.png',
+                height: 25,
+                width: 25,
+              ),
+              Image.asset(
+                'assets/NotificationIcons/GridDB.png',
+                height: 25,
+                width: 25,
+              ),
+              Image.asset(
+                'assets/NotificationIcons/Open_Docs_Icon.png',
+                height: 25,
+                width: 25,
+              ),
+              Image.asset(
+                'assets/NotificationIcons/Pivot-Unpivot_Icon.png',
+                height: 25,
+                width: 25,
+              ),
+              Image.asset(
+                'assets/NotificationIcons/Tree.png',
+                height: 25,
+                width: 25,
+              ),
+            ],
+          )
+        ],
       ),
-      title: Text(widget.Hashtag),
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset(
-              'assets/NotificationIcons/analyticsShowCard.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/GridDB.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/Open_Docs_Icon.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/Pivot-Unpivot_Icon.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/Tree.png',
-              height: 25,
-              width: 25,
-            ),
-          ],
-        )
-      ],
     );
   }
 }

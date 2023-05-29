@@ -164,9 +164,11 @@ class _GoogleTrendsScreenState extends State<GoogleTrendsScreen> {
                 ),
               ],
             ),
-            trailing: Text(DateFormat.yMd().format(
-                DateTime.fromMillisecondsSinceEpoch(
-                    (Value['editDate'] ?? '')))),
+            trailing: Text(
+
+                    (
+
+                        Value['editDate'][2].toString() +"/"+ Value['editDate'][1].toString()+ "/"+Value['editDate'][0].toString())??''),
             onTap: () => launchUrl(Uri.parse(Value['sourceUrl'])),
           ),
         )).toList();

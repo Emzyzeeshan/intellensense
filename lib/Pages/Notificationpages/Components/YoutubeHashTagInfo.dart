@@ -6,20 +6,20 @@ import 'package:http/http.dart';
 import 'package:intellensense/SpalashScreen/widgets/ChartSampleData.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class HashTagInfo extends StatefulWidget {
+class YoutubeHashTagInfo extends StatefulWidget {
   var choosenhashtag;
-  HashTagInfo(this.choosenhashtag, );
+  YoutubeHashTagInfo(this.choosenhashtag, );
 
   @override
-  State<HashTagInfo> createState() => _HashTagInfoState();
+  State<YoutubeHashTagInfo> createState() => _YoutubeHashTagInfoState();
 }
 
-class _HashTagInfoState extends State<HashTagInfo> {
+class _YoutubeHashTagInfoState extends State<YoutubeHashTagInfo> {
   List<ChartSampleData> chartData = [];
 
   @override
   void initState() {
-  
+
     print(widget.choosenhashtag);
 
     super.initState();
@@ -42,22 +42,22 @@ class _HashTagInfoState extends State<HashTagInfo> {
             FutureBuilder<dynamic>(
               future: _value1,
               builder: (
-                BuildContext context,
-                AsyncSnapshot<dynamic> snapshot,
-              ) {
+                  BuildContext context,
+                  AsyncSnapshot<dynamic> snapshot,
+                  ) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
                       child: SpinKitWave(
-                    color: Colors.blue,
-                    size: 18,
-                  ));
+                        color: Colors.blue,
+                        size: 18,
+                      ));
                 } else if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return const Text('Error');
                   } else if (snapshot.hasData) {
                     return Card(
                       elevation: 7,
-                      child: SfCartesianChart(
+                      child:SfCartesianChart(
                         plotAreaBorderWidth: 0,
                         title: ChartTitle(
                             text: '${widget.choosenhashtag} Analysis'),
@@ -67,7 +67,7 @@ class _HashTagInfoState extends State<HashTagInfo> {
                             labelPlacement: LabelPlacement.onTicks),
                         primaryYAxis: NumericAxis(
                             minimum: 0,
-                            maximum: 1000,
+                            maximum: 5,
                             axisLine: const AxisLine(width: 0),
                             edgeLabelPlacement: EdgeLabelPlacement.shift,
                             labelFormat: '',
@@ -76,7 +76,7 @@ class _HashTagInfoState extends State<HashTagInfo> {
                           SplineSeries<ChartSampleData, String>(
                             dataSource: chartData,
                             xValueMapper: (ChartSampleData sales, _) =>
-                                sales.x as String,
+                            sales.x as String,
                             yValueMapper: (ChartSampleData sales, _) => sales.y,
                             markerSettings: const MarkerSettings(isVisible: true),
                             name: 'Count',
@@ -102,24 +102,24 @@ class _HashTagInfoState extends State<HashTagInfo> {
   Map query = new Map<String, dynamic>();
   Future<dynamic> DashboardApi() async {
     setState(() {
-      query['HASH_TAG'] = '${widget.choosenhashtag}';
-      query['SOCIAL_MEDIA'] = 'TWITTER';
-      query['type'] = 'dashboards';
+      query['candidate_name'] = '${widget.choosenhashtag}';
+      query['channel'] = 'YOUTUBE';
+      query['type'] = 'channel_videos';
     });
 
     var response = await post(
-        Uri.parse('http://idxp.pilogcloud.com:6656/twitter_hashtag_data/'),
+        Uri.parse('http://idxp.pilogcloud.com:6656/active_youtube_channel/'),
         body: query);
 
     if (response.statusCode == 200) {
       setState(() {
         Dashboarddata = json.decode(response.body);
       });
-      for (int i = 0; i < Dashboarddata['hashtag_data'].length; i++) {
+      for (int i = 0; i < Dashboarddata['channel_videos'].length; i++) {
         chartData.add(ChartSampleData(
-          x: '${Dashboarddata['hashtag_data'][i]['PUBLISHED_DATE']}'
+          x: '${Dashboarddata['channel_videos'][i]['PUBLISHED_DATE']}'
               .substring(0, 10),
-          y: Dashboarddata['hashtag_data'][i]['COUNT'],
+          y: Dashboarddata['channel_videos'][i]['COUNT'],
         ));
       }
       print(Dashboarddata);

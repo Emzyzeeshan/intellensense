@@ -51,7 +51,7 @@
     },
     {
       "name": "avatars",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/avatars-2.2.1",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/avatars-3.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -165,9 +165,9 @@
     },
     {
       "name": "cool_alert",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/cool_alert-1.1.0",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/cool_alert-2.0.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "country_code_picker",
@@ -219,9 +219,9 @@
     },
     {
       "name": "expansion_tile_card",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/expansion_tile_card-2.0.0",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/expansion_tile_card-3.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "fading_edge_scrollview",
@@ -327,9 +327,9 @@
     },
     {
       "name": "fl_chart",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.35.0",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.62.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "flare_flutter",
@@ -405,13 +405,13 @@
     },
     {
       "name": "flutter_zoom_drawer",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_zoom_drawer-2.3.1+1",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_zoom_drawer-3.0.4+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "fluttertoast",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/fluttertoast-8.2.1",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/fluttertoast-8.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -591,7 +591,7 @@
     },
     {
       "name": "lottie",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/lottie-1.4.3",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/lottie-2.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -999,7 +999,7 @@
     },
     {
       "name": "text_scroll",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/text_scroll-0.1.2",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/text_scroll-0.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1100,12 +1100,6 @@
       "languageVersion": "2.14"
     },
     {
-      "name": "visibility_detector",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/visibility_detector-0.4.0+2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "win32",
       "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/win32-4.1.4",
       "packageUri": "lib/",
@@ -1125,9 +1119,9 @@
     },
     {
       "name": "xml2json",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/xml2json-5.3.6",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/xml2json-6.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "youtube",
@@ -1145,10 +1139,10 @@
       "name": "intellensense",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-05-23T06:06:18.640252Z",
+  "generated": "2023-05-24T11:26:13.959452Z",
   "generator": "pub",
   "generatorVersion": "3.0.1"
 }

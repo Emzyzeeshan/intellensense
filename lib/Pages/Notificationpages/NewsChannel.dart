@@ -7,24 +7,22 @@ import 'package:intellensense/Pages/Notificationpages/Twitter.dart';
 import 'package:intellensense/main.dart';
 
 import '../../main.dart';
-import 'Components/YoutubeHashTagInfo.dart';
+import 'Components/NewsChannelHashTagInfo.dart';
 
-class Youtube extends StatefulWidget {
+class NewsChannelPage extends StatefulWidget {
 
   @override
-  State<Youtube> createState() => _YoutubeState();
+  State<NewsChannelPage> createState() => _NewsChannelPageState();
 }
 
-class _YoutubeState extends State<Youtube> {
-  TextEditingController textEditingController = new TextEditingController();
-  late Future<dynamic> finaldata = YoutubeApi();
+class _NewsChannelPageState extends State<NewsChannelPage> {
+  late Future<dynamic> finaldata = NewsChannelApi();
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return  Column(
       children: [
         TextField(
           onChanged: onSearchTextChanged,
-          controller: textEditingController,
           cursorColor: Colors.grey,
           decoration: InputDecoration(
               isDense: true,
@@ -43,69 +41,70 @@ class _YoutubeState extends State<Youtube> {
           height: 10,
         ),
         searchData.length ==
-                0 // Check SearchData list is empty or not if empty then show full data else show search data
+            0 // Check SearchData list is empty or not if empty then show full data else show search data
             ? FutureBuilder<dynamic>(
-                future: finaldata,
-                builder: (
-                  BuildContext context,
-                  AsyncSnapshot<dynamic> snapshot,
-                ) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return SingleChildScrollView(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Center(child: CircularProgressIndicator()),
-                            Text('Please Wait')
-                          ]),
-                    );
-                  } else if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasError) {
-                      return const Text('Error');
-                    } else if (snapshot.hasData) {
-                      return Flexible(
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: Youtubedata['candidate_names'].length,
-                          itemBuilder: (context, index) {
-                            return YoutubeNotificationtile(
-                                Hashtag: '${Youtubedata['candidate_names'][index]}',
-                                dashboadTap: YoutubeHashTagInfo(
-                                Youtubedata['candidate_names']
+          future: finaldata,
+          builder: (
+              BuildContext context,
+              AsyncSnapshot<dynamic> snapshot,
+              ) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Center(child: CircularProgressIndicator()),
+                    Text('Please Wait')
+                  ]);
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return const Text('Error');
+              } else if (snapshot.hasData) {
+                return Flexible(
+                  child: ListView.builder(
+                    itemCount: NewsChanneldata['candidate_names'].length,
+                    itemBuilder: (context, index) {
+                      return NewsChannelNotificationtile(
+                        Hashtag:'${NewsChanneldata['candidate_names'][index]}',
+                        dashboadTap: NewsChannelHashTagInfo(
+                            NewsChanneldata['candidate_names']
                             [index]),
-                            );
-                          },
-                        ),
                       );
-                    } else {
-                      return const Text('Empty data');
-                    }
-                  } else {
-                    return Text('State: ${snapshot.connectionState}');
-                  }
-                },
-              )
-            : Flexible(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: searchData.length,
-                  itemBuilder: (context, index) {
-                    return YoutubeNotificationtile(
-                        Hashtag:'${searchData[index]['candidate_names']}');
-                  },
+                    },
+                  ),
+                );
+              } else {
+                return const Text('Empty data');
+              }
+            } else {
+              return Text('State: ${snapshot.connectionState}');
+            }
+          },
+        ) : Flexible(
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemCount: searchData.length,
+            itemBuilder: (context, index) {
+              return NewsChannelNotificationtile(
+                Hashtag:'${searchData[index]}',
+                dashboadTap: NewsChannelHashTagInfo(
+                  searchData[index],
                 ),
-              ),
+              );
+            },
+          ),
+        ),
       ],
     );
+
   }
 
-  var Youtubedata;
+  var NewsChanneldata;
   Map Selectionquery = new Map<String, dynamic>();
-  Future<dynamic> YoutubeApi() async {
+  Future<dynamic> NewsChannelApi() async {
     setState(() {
       Selectionquery['type'] = 'candidate_names';
-      Selectionquery['channel'] = 'YOUTUBE';
+      Selectionquery['channel'] = 'NEWS_CHANNEL';
     });
     var response = await post(
         Uri.parse('http://idxp.pilogcloud.com:6656/active_youtube_channel/'),
@@ -114,16 +113,16 @@ class _YoutubeState extends State<Youtube> {
     print(response.statusCode);
     if (response.statusCode == 200) {
       try {
-        Youtubedata = json.decode(utf8.decode(response.bodyBytes));
+        NewsChanneldata = json.decode(utf8.decode(response.bodyBytes));
 
-        print(Youtubedata);
+        print(NewsChanneldata);
       } catch (e) {
-        print(Youtubedata);
+        print(NewsChanneldata);
       }
     } else {
       print(response.reasonPhrase);
     }
-    return Youtubedata;
+    return NewsChanneldata;
   }
 
   List searchData = [];
@@ -137,7 +136,7 @@ class _YoutubeState extends State<Youtube> {
     }
 
     fullData.forEach((data) {
-      if (data['id']['tagName']
+      if (data['candidate_names']
           .toString()
           .toLowerCase()
           .contains(text.toLowerCase().toString())) {
@@ -150,18 +149,19 @@ class _YoutubeState extends State<Youtube> {
   }
 }
 
-class YoutubeNotificationtile extends StatefulWidget {
+class NewsChannelNotificationtile extends StatefulWidget {
   String Hashtag;
   Widget? dashboadTap;
-  YoutubeNotificationtile({
-    required this.Hashtag, this.dashboadTap,});
+  NewsChannelNotificationtile({
+    this.dashboadTap,
+    required this.Hashtag, });
 
   @override
-  State<YoutubeNotificationtile> createState() =>
-      _YoutubeNotificationtileState();
+  State<NewsChannelNotificationtile> createState() =>
+      _NewsChannelNotificationtileState();
 }
 
-class _YoutubeNotificationtileState extends State<YoutubeNotificationtile> {
+class _NewsChannelNotificationtileState extends State<NewsChannelNotificationtile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -172,7 +172,7 @@ class _YoutubeNotificationtileState extends State<YoutubeNotificationtile> {
         childrenPadding: EdgeInsets.all(5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         leading: Image.asset(
-          'assets/icons/Social-Media-Icons-IS-10.png',
+          'assets/new Updated images/news-71.png',
           height: 25,
           width: 25,
         ),
@@ -184,7 +184,6 @@ class _YoutubeNotificationtileState extends State<YoutubeNotificationtile> {
               OpenContainer(
                 closedColor: Color(0xffd2dfff),
                 openColor: Color(0xffd2dfff),
-
                 openElevation: 10.0,
                 closedShape: const RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),

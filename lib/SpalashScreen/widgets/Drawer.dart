@@ -205,7 +205,7 @@ class _drawerState extends State<drawer> {
     var body =
     json.encode({"rsUsername": "${logindata.getString('username')}"});
     var response = await post(
-      Uri.parse('https://imdrm.pilogcloud.com/V10/appUserlogout'),
+      Uri.parse('https://ifar.pilogcloud.com/'),
       headers: headers,
       body: body,
     );

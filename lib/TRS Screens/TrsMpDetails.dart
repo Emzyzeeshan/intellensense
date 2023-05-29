@@ -22,6 +22,8 @@ import 'package:intellensense/SpalashScreen/widgets/ChartSampleData.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../main.dart';
+
 class TrsMpDetails extends StatefulWidget {
   var Value;
   TrsMpDetails(this.Value);
@@ -67,17 +69,14 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
               children: <Widget>[
                 Align(
                   alignment: Alignment.topCenter,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    radius: 80,
-                    child: ClipOval(
-                      child: Image.memory(
-                        base64Decode(
-                            widget.Value['content'].substring(22) ?? ''),
-                        width: 300,
-                        height: 300,
-                        fit: BoxFit.cover,
-                      ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Image.memory(
+                      base64Decode(
+                          widget.Value['content'].substring(22) ?? ''),
+                      width: 300,
+                      height: 300,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -1002,7 +1001,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
   Future<dynamic> PartyResultAPI() async {
     var response = await get(
       Uri.parse(
-          'http://192.169.1.198:8082/insights/3.21.0/eleResults/${widget.Value['name']}'),
+          INSIGHTS+'/eleResults/${widget.Value['name']}'),
     );
     print(response.toString());
     print(response.statusCode);

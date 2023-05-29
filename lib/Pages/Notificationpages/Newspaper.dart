@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/Pages/Notificationpages/Twitter.dart';
 import 'package:intellensense/main.dart';
 
 import '../../main.dart';
+import 'Components/NewspaperHashTagInfo.dart';
 
 class Newspaper extends StatefulWidget {
 
@@ -60,10 +62,14 @@ class _NewspaperState extends State<Newspaper> {
                 } else if (snapshot.hasData) {
                   return Flexible(
                     child: ListView.builder(
-                      itemCount: Newspaperdata.length,
+                      itemCount: Newspaperdata['candidate_names'].length,
                       itemBuilder: (context, index) {
                         return NewspaperNotificationtile(
-                            '${Newspaperdata[index]['id']['tagName']}');
+                            Hashtag:'${Newspaperdata['candidate_names'][index]}',
+                          dashboadTap: NewspaperHashTagInfo(
+                              Newspaperdata['candidate_names']
+                              [index]),
+                        );
                       },
                     ),
                   );
@@ -80,7 +86,11 @@ class _NewspaperState extends State<Newspaper> {
                   itemCount: searchData.length,
                   itemBuilder: (context, index) {
                     return NewspaperNotificationtile(
-                        '${searchData[index]['id']['tagName']}');
+                        Hashtag:'${searchData[index]}',
+                      dashboadTap: NewspaperHashTagInfo(
+                        searchData[index],
+                      ),
+                    );
                   },
                 ),
               ),
@@ -90,24 +100,25 @@ class _NewspaperState extends State<Newspaper> {
   }
 
   var Newspaperdata;
+  Map Selectionquery = new Map<String, dynamic>();
   Future<dynamic> NewspaperApi() async {
-    // await Future.delayed(Duration(seconds: 1));
-    var headers = {'Content-Type': 'application/json'};
+    setState(() {
+      Selectionquery['type'] = 'candidate_names';
+      //Selectionquery['channel'] = 'YOUTUBE';
+    });
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6656/active_news_channel/'),
+        body: Selectionquery);
 
-    var response = await get(
-
-      Uri.parse(
-          INSIGHTS+'/ytnpTrendingHashTags?page=0,13&field=NEWS PAPER'),
-
-
-    );
-
+    print(response.statusCode);
     if (response.statusCode == 200) {
-      setState(() {
-        Newspaperdata = jsonDecode(response.body);
-      });
-fullData=Newspaperdata;
-      print(Newspaperdata);
+      try {
+        Newspaperdata = json.decode(utf8.decode(response.bodyBytes));
+
+        print(Newspaperdata);
+      } catch (e) {
+        print(Newspaperdata);
+      }
     } else {
       print(response.reasonPhrase);
     }
@@ -125,7 +136,7 @@ fullData=Newspaperdata;
     }
 
     fullData.forEach((data) {
-      if (data['id']['tagName']
+      if (data['candidate_names']
           .toString()
           .toLowerCase()
           .contains(text.toLowerCase().toString())) {
@@ -140,8 +151,10 @@ fullData=Newspaperdata;
 
 class NewspaperNotificationtile extends StatefulWidget {
   String Hashtag;
-  NewspaperNotificationtile(
-    @required this.Hashtag, );
+  Widget? dashboadTap;
+  NewspaperNotificationtile({
+      this.dashboadTap,
+    required this.Hashtag, });
 
   @override
   State<NewspaperNotificationtile> createState() =>
@@ -151,49 +164,67 @@ class NewspaperNotificationtile extends StatefulWidget {
 class _NewspaperNotificationtileState extends State<NewspaperNotificationtile> {
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      collapsedBackgroundColor: Colors.grey.shade200,
-      backgroundColor: Colors.grey.shade100,
-      childrenPadding: EdgeInsets.all(5),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      leading: Image.asset(
-        'assets/icons/newspaperdxp.png',
-        height: 25,
-        width: 25,
+    return Padding(
+      padding: const EdgeInsets.all(3.0),
+      child: ExpansionTile(
+        collapsedBackgroundColor: Colors.grey.shade200,
+        backgroundColor: Colors.grey.shade100,
+        childrenPadding: EdgeInsets.all(5),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        leading: Image.asset(
+          'assets/new Updated images/intellisensesolutions-Icons-83.png',
+          height: 25,
+          width: 25,
+        ),
+        title: Text(widget.Hashtag),
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              OpenContainer(
+                closedColor: Color(0xffd2dfff),
+                openColor: Color(0xffd2dfff),
+                openElevation: 10.0,
+                closedShape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                ),
+                transitionType: ContainerTransitionType.fade,
+                transitionDuration: const Duration(milliseconds: 1200),
+                openBuilder: (context, action) {
+                  return widget.dashboadTap!;
+                },
+                closedBuilder: (context, action) {
+                  return Image.asset(
+                    'assets/NotificationIcons/analyticsShowCard.png',
+                    height: 25,
+                    width: 25,
+                  );
+                },
+              ),
+              Image.asset(
+                'assets/NotificationIcons/GridDB.png',
+                height: 25,
+                width: 25,
+              ),
+              Image.asset(
+                'assets/NotificationIcons/Open_Docs_Icon.png',
+                height: 25,
+                width: 25,
+              ),
+              Image.asset(
+                'assets/NotificationIcons/Pivot-Unpivot_Icon.png',
+                height: 25,
+                width: 25,
+              ),
+              Image.asset(
+                'assets/NotificationIcons/Tree.png',
+                height: 25,
+                width: 25,
+              ),
+            ],
+          )
+        ],
       ),
-      title: Text(widget.Hashtag),
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Image.asset(
-              'assets/NotificationIcons/analyticsShowCard.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/GridDB.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/Open_Docs_Icon.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/Pivot-Unpivot_Icon.png',
-              height: 25,
-              width: 25,
-            ),
-            Image.asset(
-              'assets/NotificationIcons/Tree.png',
-              height: 25,
-              width: 25,
-            ),
-          ],
-        )
-      ],
     );
   }
 }

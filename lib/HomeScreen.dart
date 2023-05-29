@@ -139,7 +139,13 @@ class _HomeScreenState extends State<HomeScreen> {
               controller: _scrollController,
               headerSliverBuilder: (context, innerBoxIsScrolled) {
                 return [
-                  SliverAppBar(
+                  SliverAppBar(title: Image.asset(
+
+                    'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
+                    fit: BoxFit.contain,
+                    height: 40,
+                    width: 180,
+                  ),
                     leading: IconButton(
                       icon: Icon(
                         Icons.menu,
@@ -150,20 +156,20 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                     elevation: 0,
-                    backgroundColor: Color(0xffd2dfff),
+                    backgroundColor: Colors.white,
                     pinned: true,
                     expandedHeight: 250,
                     flexibleSpace: FlexibleSpaceBar(
                       collapseMode: CollapseMode.parallax,
-                      title: _isShrink == true
-                          ? Image.asset(
-
-                            'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                            fit: BoxFit.cover,
-                            height: 50,
-                        width: 180,
-                          )
-                          : null,
+                      // title: _isShrink == true
+                      //     ? Image.asset(
+                      //
+                      //       'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
+                      //       fit: BoxFit.cover,
+                      //       height: 50,
+                      //   width: 180,
+                      //     )
+                      //     : null,
                       background: SafeArea(
                         child: Column(
                           children: [
