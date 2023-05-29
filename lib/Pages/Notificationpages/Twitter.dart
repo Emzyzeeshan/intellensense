@@ -5,10 +5,6 @@ import 'package:http/http.dart';
 
 import 'package:intellensense/Pages/Notificationpages/Components/TwitterhashtagInfo.dart';
 import 'package:intellensense/main.dart';
-
-import 'package:intellensense/Pages/Notificationpages/Components/hashtagInfo.dart';
-
-
 import 'Components/GridDbScreen.dart';
 
 class Twitter extends StatefulWidget {

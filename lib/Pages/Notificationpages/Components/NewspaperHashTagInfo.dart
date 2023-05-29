@@ -66,8 +66,8 @@ class _NewspaperHashTagInfoState extends State<NewspaperHashTagInfo> {
                             majorGridLines: const MajorGridLines(width: 0),
                             labelPlacement: LabelPlacement.onTicks),
                         primaryYAxis: NumericAxis(
-                            minimum: 0,
-                            maximum: 5,
+                            minimum: min.toDouble(),
+                            maximum: max.toDouble(),
                             axisLine: const AxisLine(width: 0),
                             edgeLabelPlacement: EdgeLabelPlacement.shift,
                             labelFormat: '',
@@ -99,6 +99,9 @@ class _NewspaperHashTagInfoState extends State<NewspaperHashTagInfo> {
 
 //API
   var Dashboarddata;
+    List COUNT=[];
+var max;
+var min;
   Map query = new Map<String, dynamic>();
   Future<dynamic> DashboardApi() async {
     setState(() {
@@ -121,7 +124,13 @@ class _NewspaperHashTagInfoState extends State<NewspaperHashTagInfo> {
               .substring(5, 10),
           y: Dashboarddata['channel_videos'][i]['COUNT'],
         ));
+        COUNT.add(Dashboarddata['channel_videos'][i]['COUNT']);
+            
       }
+       print(COUNT.reduce((curr, next) => curr > next? curr: next));
+      max=COUNT.reduce((curr, next) => curr > next? curr: next);
+      min=COUNT.reduce((curr, next) => curr < next? curr: next);
+       print(COUNT.reduce((curr, next) => curr < next? curr: next));
       print(Dashboarddata);
     } else {
       print(response.reasonPhrase);

@@ -51,9 +51,7 @@
     },
     {
       "name": "avatars",
-
       "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/avatars-3.0.2",
-
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -167,7 +165,7 @@
     },
     {
       "name": "cool_alert",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/cool_alert-2.0.1",
+      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/cool_alert-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -221,7 +219,7 @@
     },
     {
       "name": "expansion_tile_card",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/expansion_tile_card-3.0.0",
+      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/expansion_tile_card-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -329,7 +327,7 @@
     },
     {
       "name": "fl_chart",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.62.0",
+      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.62.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -413,13 +411,13 @@
     },
     {
       "name": "flutter_zoom_drawer",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_zoom_drawer-3.0.4+1",
+      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_zoom_drawer-3.0.4+1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "fluttertoast",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/fluttertoast-8.2.2",
+      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/fluttertoast-8.2.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -605,7 +603,7 @@
     },
     {
       "name": "lottie",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/lottie-2.3.2",
+      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/lottie-2.3.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1013,7 +1011,7 @@
     },
     {
       "name": "text_scroll",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/text_scroll-0.2.0",
+      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/text_scroll-0.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1043,7 +1041,7 @@
     },
     {
       "name": "url_launcher_android",
-      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.0.34",
+      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher_android-6.0.35",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -1114,7 +1112,6 @@
       "languageVersion": "2.14"
     },
     {
-
       "name": "visibility_detector",
       "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/visibility_detector-0.3.3",
       "packageUri": "lib/",
@@ -1164,7 +1161,7 @@
     },
     {
       "name": "xml2json",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/xml2json-6.0.0",
+      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/xml2json-6.1.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -1187,8 +1184,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-05-24T11:26:13.959452Z",
-
+  "generated": "2023-05-29T04:48:40.130380Z",
   "generator": "pub",
   "generatorVersion": "3.0.1"
 }
