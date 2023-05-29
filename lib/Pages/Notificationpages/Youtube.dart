@@ -96,6 +96,7 @@ class _YoutubeState extends State<Youtube> {
                   itemCount: searchData.length,
                   itemBuilder: (context, index) {
                     return YoutubeNotificationtile(
+
                         Hashtag:'${searchData[index]['candidate_names']}',
                       dashboadTap: YoutubeHashTagInfo(
                           searchData[index]),
@@ -123,8 +124,8 @@ class _YoutubeState extends State<Youtube> {
     print(response.statusCode);
     if (response.statusCode == 200) {
       try {
-        Youtubedata = json.decode(utf8.decode(response.bodyBytes));
-
+        Youtubedata = json.decode(response.body);
+fullData=Youtubedata['candidate_names'];
         print(Youtubedata);
       } catch (e) {
         print(Youtubedata);
@@ -146,7 +147,7 @@ class _YoutubeState extends State<Youtube> {
     }
 
     fullData.forEach((data) {
-      if (data['id']['tagName']
+      if (data
           .toString()
           .toLowerCase()
           .contains(text.toLowerCase().toString())) {

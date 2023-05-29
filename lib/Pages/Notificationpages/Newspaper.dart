@@ -121,7 +121,8 @@ class _NewspaperState extends State<Newspaper> {
     print(response.statusCode);
     if (response.statusCode == 200) {
       try {
-        Newspaperdata = json.decode(utf8.decode(response.bodyBytes));
+         Newspaperdata = json.decode(response.body);
+       fullData=Newspaperdata['candidate_names'];
 
         print(Newspaperdata);
       } catch (e) {
@@ -144,7 +145,7 @@ class _NewspaperState extends State<Newspaper> {
     }
 
     fullData.forEach((data) {
-      if (data['candidate_names']
+      if (data
           .toString()
           .toLowerCase()
           .contains(text.toLowerCase().toString())) {

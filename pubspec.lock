@@ -1377,10 +1377,10 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: "1a5848f598acc5b7d8f7c18b8cb834ab667e59a13edc3c93e9d09cf38cc6bc87"
+      sha256: eed4e6a1164aa9794409325c3b707ff424d4d1c2a785e7db67f8bbda00e36e51
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.34"
+    version: "6.0.35"
   url_launcher_ios:
     dependency: transitive
     description:
@@ -1537,10 +1537,10 @@ packages:
     dependency: "direct main"
     description:
       name: xml2json
-      sha256: c39bf22898b4458ccca91d5087ba86ebda078f0e2291bd73de80372a37d83e52
+      sha256: "12ebc382f8684cafcc1e3ae5c982de82b5a52007a5d0ac79b22745d34f5ba975"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.0"
+    version: "6.1.0"
   youtube:
     dependency: "direct main"
     description:

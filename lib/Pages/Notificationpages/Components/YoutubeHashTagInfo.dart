@@ -66,8 +66,8 @@ class _YoutubeHashTagInfoState extends State<YoutubeHashTagInfo> {
                             majorGridLines: const MajorGridLines(width: 0),
                             labelPlacement: LabelPlacement.onTicks),
                         primaryYAxis: NumericAxis(
-                            minimum: 0,
-                            maximum: 5,
+                            minimum: min.toDouble(),
+                            maximum: max.toDouble(),
                             axisLine: const AxisLine(width: 0),
                             edgeLabelPlacement: EdgeLabelPlacement.shift,
                             labelFormat: '',
@@ -99,29 +99,38 @@ class _YoutubeHashTagInfoState extends State<YoutubeHashTagInfo> {
 
 //API
   var Dashboarddata;
+    List COUNT=[];
+var max;
+var min;
   Map query = new Map<String, dynamic>();
   Future<dynamic> DashboardApi() async {
     setState(() {
       query['candidate_name'] = '${widget.choosenhashtag}';
       query['channel'] = 'YOUTUBE';
       query['type'] = 'channel_videos';
-    });
+    }); 
 
     var response = await post(
         Uri.parse('http://idxp.pilogcloud.com:6656/active_youtube_channel/'),
         body: query);
-
+print(response.statusCode);
     if (response.statusCode == 200) {
       setState(() {
         Dashboarddata = json.decode(response.body);
       });
+      print(Dashboarddata);
       for (int i = 0; i < Dashboarddata['channel_videos'].length; i++) {
         chartData.add(ChartSampleData(
           x: '${Dashboarddata['channel_videos'][i]['PUBLISHED_DATE']}'
               .substring(0, 10),
           y: Dashboarddata['channel_videos'][i]['COUNT'],
         ));
+        COUNT.add(Dashboarddata['channel_videos'][i]['COUNT']);
       }
+       print(COUNT.reduce((curr, next) => curr > next? curr: next));
+      max=COUNT.reduce((curr, next) => curr > next? curr: next);
+      min=COUNT.reduce((curr, next) => curr < next? curr: next);
+       print(COUNT.reduce((curr, next) => curr < next? curr: next));
       print(Dashboarddata);
     } else {
       print(response.reasonPhrase);

@@ -115,8 +115,8 @@ class _NewsChannelPageState extends State<NewsChannelPage> {
     print(response.statusCode);
     if (response.statusCode == 200) {
       try {
-        NewsChanneldata = json.decode(utf8.decode(response.bodyBytes));
-
+        NewsChanneldata = json.decode(response.body);
+fullData=NewsChanneldata['candidate_names'];
         print(NewsChanneldata);
       } catch (e) {
         print(NewsChanneldata);
@@ -138,7 +138,7 @@ class _NewsChannelPageState extends State<NewsChannelPage> {
     }
 
     fullData.forEach((data) {
-      if (data['candidate_names']
+      if (data
           .toString()
           .toLowerCase()
           .contains(text.toLowerCase().toString())) {
