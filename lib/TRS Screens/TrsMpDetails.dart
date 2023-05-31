@@ -8,13 +8,15 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
-import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/FaceEmotion.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/Face%20Emotion/faceemotionlist.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/Voice%20to%20Text/voicetotextlist.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/Face%20Emotion/FaceEmotion.dart';
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewspaperSentiment.dart';
 
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/NewsChannelSentiment.dart';
 
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/TwitterSentiment.dart';
-import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/VoiceToText.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/Voice%20to%20Text/VoiceToText.dart';
 
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/YoutubeSentiment.dart';
 import 'package:intellensense/SpalashScreen/constants.dart';
@@ -866,7 +868,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       transitionDuration:
                                           const Duration(milliseconds: 1200),
                                       openBuilder: (context, action) {
-                                        return Container();
+                                        return  FaceEmotionlist();
                                       },
                                       closedBuilder: (context, action) {
                                         return  SentimentCardTemplate(
@@ -939,7 +941,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       transitionDuration:
                                           const Duration(milliseconds: 1200),
                                       openBuilder: (context, action) {
-                                        return FaceEmotion();
+                                        return Container();
                                       },
                                       closedBuilder: (context, action) {
                                         return     SentimentCardTemplate(() {},
@@ -960,7 +962,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       transitionDuration:
                                           const Duration(milliseconds: 1200),
                                       openBuilder: (context, action) {
-                                        return VoiceToText();
+                                        return ContentCardScreen();
                                       },
                                       closedBuilder: (context, action) {
                                         return     SentimentCardTemplate(
