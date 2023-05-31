@@ -111,30 +111,16 @@ return null;
                               input=value!.toString();
                             });
                           },
-                          buttonHeight: 50,
-                          buttonWidth: MediaQuery.of(context).size.width,
-                          itemHeight: 40,
-                          iconSize: 14,
-                          buttonPadding:
-                              const EdgeInsets.only(left: 14, right: 14),
-                          buttonDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(14),
-                            color: Colors.grey[200],
+                          buttonStyleData: const ButtonStyleData(
+                            height: 40,
+                            width: 200,
                           ),
-                          itemPadding: const EdgeInsets.only(left: 14, right: 14),
-                          dropdownPadding: null,
-                          dropdownElevation: 8,
-                          dropdownOverButton: true,
-                          scrollbarRadius: const Radius.circular(40),
-                          scrollbarThickness: 6,
-                          dropdownFullScreen: false,
-                          dropdownDecoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15)),
-                          dropdownMaxHeight:
-                              MediaQuery.of(context).size.height * 0.5,
-                          scrollbarAlwaysShow: true,
-                          offset: const Offset(-20, 0),
-                          isDense: true,
+                          dropdownStyleData: const DropdownStyleData(
+                            maxHeight: 200,
+                          ),
+                          menuItemStyleData: const MenuItemStyleData(
+                            height: 40,
+                          ),
                         ),
                       ),
                     ),

@@ -29,6 +29,8 @@ import 'package:intellensense/Services/ApiServices.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:simple_speed_dial/simple_speed_dial.dart';
 
+import 'Pages/StateOverview.dart';
+
 
 
 class HomeScreen extends StatefulWidget {
@@ -431,8 +433,14 @@ _bannerAd.load();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
+                                builder: (context) => StateOverviewScreen()));
+                      }, icon: Image.asset('assets/new Updated images/megaphone.png',height: 20,)),
+                      IconButton(color: Colors.black,onPressed: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
                                 builder: (context) => Notifications()));
-                      }, icon: Icon(Icons.notifications_active)),
+                      }, icon: Image.asset('assets/new Updated images/Notifications.png',height: 20,)),
                       /*PopupMenuButton(onSelected: (value) {
                         if (value == 'notifications') {
                           Navigator.push(
