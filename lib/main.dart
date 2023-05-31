@@ -10,7 +10,7 @@ import 'package:intellensense/Services/themesetup/DarkThemeProvider.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Pages/DrawerScreens/CandidatureAnalysis/FaceEmotion.dart';
+import 'Pages/DrawerScreens/CandidatureAnalysis/Face Emotion/FaceEmotion.dart';
 import 'Services/themesetup/styles.dart';
 import 'SpalashScreen/screens/login/mainLoginScreen.dart';
 
