@@ -5,15 +5,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/SpalashScreen/constants.dart';
 
-class FaceEmotion extends StatefulWidget {
+class AudioEmotion extends StatefulWidget {
   var ytlink;
-  FaceEmotion({@required this.ytlink, Key? key}) : super(key: key);
+  AudioEmotion({@required this.ytlink, Key? key}) : super(key: key);
 
   @override
-  State<FaceEmotion> createState() => _FaceEmotionState();
+  State<AudioEmotion> createState() => _AudioEmotionState();
 }
 
-class _FaceEmotionState extends State<FaceEmotion> {
+class _AudioEmotionState extends State<AudioEmotion> {
   @override
   void initState() {
     print(widget.ytlink);
@@ -21,7 +21,7 @@ class _FaceEmotionState extends State<FaceEmotion> {
   }
 
   TextEditingController _editingController = TextEditingController();
-  late Future<dynamic> _value1 = FaceEmotionAPI();
+  late Future<dynamic> _value1 = AudioEmotionAPI();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class _FaceEmotionState extends State<FaceEmotion> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                      'assets/new Updated images/faceEmotion.gif',
+                                      'assets/new Updated images/AudioEmotion.gif',
                                       height: 170,
                                       width: 170),
                                 ],
@@ -74,7 +74,7 @@ class _FaceEmotionState extends State<FaceEmotion> {
                     return GridView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemCount: FaceEmotiontdata['res'].length,
+                      itemCount: AudioEmotiontdata['res'].length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisSpacing: 3,
                           mainAxisSpacing: 2,
@@ -83,14 +83,14 @@ class _FaceEmotionState extends State<FaceEmotion> {
                       itemBuilder: (BuildContext context, int index) {
                         return FrameCard(
                             'data:image/png;base64,' +
-                                FaceEmotiontdata['res'][index]['EMOTION_IMAGE'],
-                            FaceEmotiontdata['res'][index]['SAD'].toString()+'%',
-                            FaceEmotiontdata['res'][index]['ANGRY'].toString()+'%',
-                            FaceEmotiontdata['res'][index]['DISGUST'].toString()+'%',
-                            FaceEmotiontdata['res'][index]['FEAR'].toString()+'%',
-                            FaceEmotiontdata['res'][index]['HAPPY'].toString()+'%',
-                            FaceEmotiontdata['res'][index]['SURPRISE'].toString()+'%',
-                            FaceEmotiontdata['res'][index]['NEUTRAL'].toString()+'%',
+                                AudioEmotiontdata['res'][index]['EMOTION_IMAGE'],
+                            AudioEmotiontdata['res'][index]['SAD'].toString()+'%',
+                            AudioEmotiontdata['res'][index]['ANGRY'].toString()+'%',
+                            AudioEmotiontdata['res'][index]['DISGUST'].toString()+'%',
+                            AudioEmotiontdata['res'][index]['FEAR'].toString()+'%',
+                            AudioEmotiontdata['res'][index]['HAPPY'].toString()+'%',
+                            AudioEmotiontdata['res'][index]['SURPRISE'].toString()+'%',
+                            AudioEmotiontdata['res'][index]['NEUTRAL'].toString()+'%',
 
                             );
                       },
@@ -109,9 +109,9 @@ class _FaceEmotionState extends State<FaceEmotion> {
     );
   }
 
-  var FaceEmotiontdata;
+  var AudioEmotiontdata;
   Map Selectionquery = new Map<String, dynamic>();
-  Future<dynamic> FaceEmotionAPI() async {
+  Future<dynamic> AudioEmotionAPI() async {
     setState(() {
       Selectionquery['URL'] = '${widget.ytlink}';
     });
@@ -123,16 +123,16 @@ class _FaceEmotionState extends State<FaceEmotion> {
     print(response.statusCode);
     if (response.statusCode == 200) {
       try {
-        FaceEmotiontdata = json.decode(utf8.decode(response.bodyBytes));
+        AudioEmotiontdata = json.decode(utf8.decode(response.bodyBytes));
 
-        print(FaceEmotiontdata);
+        print(AudioEmotiontdata);
       } catch (e) {
-        print(FaceEmotiontdata);
+        print(AudioEmotiontdata);
       }
     } else {
       print(response.reasonPhrase);
     }
-    return FaceEmotiontdata;
+    return AudioEmotiontdata;
   }
 
   FrameCard(String base64String, String sad, String angry, String disgusting,
