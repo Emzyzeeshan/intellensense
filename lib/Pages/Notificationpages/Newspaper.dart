@@ -18,7 +18,6 @@ class Newspaper extends StatefulWidget {
 
 class _NewspaperState extends State<Newspaper> {
   late Future<dynamic> finaldata = NewspaperApi();
-
   @override
   Widget build(BuildContext context) {
     return  Column(
