@@ -19,7 +19,7 @@ class _ElectoralAnalysisState extends State<ElectoralAnalysis> {
     return Scaffold(
       backgroundColor: HomeColor,
       key: _key,
-      appBar: AppBar(
+      appBar: AppBar(elevation: 0,
         leading: IconButton(
           color: Colors.grey.shade700,
           icon: Icon(Icons.bar_chart),

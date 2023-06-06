@@ -8,17 +8,20 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/Audio%20Emotion/AudioEmotionList.dart';
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/Voice%20to%20Text/voicetotextlist.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/Audio%20Emotion/Audioanalysis.dart';
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/newspaper%20emotion/NewspaperSentiment.dart';
+
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/newschannel%20emotion/NewsChannelSentiment.dart';
+
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/twitter%20emotion/TwitterSentiment.dart';
 import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/Voice%20to%20Text/VoiceToText.dart';
 
+import 'package:intellensense/Pages/DrawerScreens/CandidatureAnalysis/youtube%20emotion/YoutubeSentiment.dart';
 import 'package:intellensense/SpalashScreen/constants.dart';
 import 'package:intellensense/main.dart';
 
-import '../Pages/DrawerScreens/CandidatureAnalysis/Audio Emotion/AudioEmotionList.dart';
-import '../Pages/DrawerScreens/CandidatureAnalysis/newschannel emotion/NewsChannelSentiment.dart';
-import '../Pages/DrawerScreens/CandidatureAnalysis/newspaper emotion/NewspaperSentiment.dart';
-import '../Pages/DrawerScreens/CandidatureAnalysis/twitter emotion/TwitterSentiment.dart';
-import '../Pages/DrawerScreens/CandidatureAnalysis/youtube emotion/YoutubeSentiment.dart';
 import '../main.dart';
 
 class TrsMpDetails extends StatefulWidget {
@@ -68,12 +71,12 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                   alignment: Alignment.topCenter,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: CircleAvatar(
-                      radius: 80,
-                      backgroundImage: MemoryImage(
-                        base64Decode(
-                            widget.Value['content'].substring(22) ?? ''),
-                      ),
+                    child: Image.memory(
+                      base64Decode(
+                          widget.Value['content'].substring(22) ?? ''),
+                      width: 300,
+                      height: 300,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
