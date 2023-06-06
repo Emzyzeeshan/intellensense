@@ -100,4 +100,4 @@ const rootURL1 = 'http://192.169.1.198:8082/insights/3.67.0';
 const rootUrl1 = 'https://ifar.pilogcloud.com/';
 
 ///{{INSIGHTS-URL}}
-const INSIGHTS = 'http://192.169.1.198:8082/insights/3.67.0';
+const INSIGHTS = 'http://192.169.1.211:8082/insights/3.67.0';

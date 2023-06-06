@@ -94,9 +94,6 @@ class _AudioEmotionlistState extends State<AudioEmotionlist> {
                                           : 3),
                           itemBuilder: (BuildContext context, int index) {
                             return  OpenContainer(
-                                    
-                                      
-                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(

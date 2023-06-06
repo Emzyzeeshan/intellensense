@@ -60,7 +60,7 @@ class _AudioEmotionState extends State<AudioEmotion> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                      'assets/new Updated images/AudioEmotion.gif',
+                                      'assets/new Updated images/faceEmotion.gif',
                                       height: 170,
                                       width: 170),
                                 ],
