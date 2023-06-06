@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:animations/animations.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -78,14 +79,12 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: DropdownButtonHideUnderline(
-                child: DropdownButton2(
+                child: DropdownButton2(isExpanded: true,
                   key: DashboardDropdownkey,
-                  hint: Text(
+                  hint: AutoSizeText(
                     '${input}',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Theme.of(context).hintColor,
-                    ),
+                    //style: TextStyle(fontSize: 30),
+                    maxLines: 2,
                   ),
                   items: PartyName.map<DropdownMenuItem<String>>(
                       (item) => DropdownMenuItem<String>(
