@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:ffi';
 
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
@@ -82,17 +81,19 @@ class _AudioEmotionlistState extends State<AudioEmotionlist> {
                         return const Text('Error');
                       } else if (snapshot.hasData) {
                         return GridView.builder(
-
                           physics: NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: AudioEmotionData['video_urls'].length,
                           gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(crossAxisSpacing: 3,mainAxisSpacing: 3,
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisSpacing: 3,
+                                  mainAxisSpacing: 3,
                                   crossAxisCount:
                                       (orientation == Orientation.portrait)
                                           ? 2
                                           : 3),
                           itemBuilder: (BuildContext context, int index) {
+
                             return  OpenContainer(
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
@@ -118,17 +119,21 @@ class _AudioEmotionlistState extends State<AudioEmotionlist> {
                                         'null'
                                     ? 'N/A'
                                     : AudioEmotionData['video_urls'][index]
-                                            ['PUBLISHED_DATE']
-                                        .toString(),
-                                AudioEmotionData['video_urls'][index]
-                                    ['AUDIO_LINK'],
+                                            ['PUBLISHED_DATE'].toString(),
                                     AudioEmotionData['video_urls'][index]
-                                    ['AUDIO_LINK']);
-
-                                      },
-                                    );
-                            
-                            
+                                                    ['PUBLISHED_DATE']
+                                                .toString() ==
+                                            'null'
+                                        ? 'N/A'
+                                        : AudioEmotionData['video_urls'][index]
+                                                ['PUBLISHED_DATE']
+                                            .toString(),
+                                    AudioEmotionData['video_urls'][index]
+                                        ['AUDIO_LINK'],
+                                    AudioEmotionData['video_urls'][index]
+                                        ['AUDIO_LINK']);
+                              },
+                            );
                           },
                         );
                       } else {
@@ -154,8 +159,7 @@ class _AudioEmotionlistState extends State<AudioEmotionlist> {
     });
 
     var response = await post(
-        Uri.parse(
-            'http://apihub.pilogcloud.com:6656/emotion_app_urls'),
+        Uri.parse('http://apihub.pilogcloud.com:6656/emotion_app_urls'),
         body: query);
     print(response.statusCode);
     if (response.statusCode == 200) {
@@ -169,7 +173,8 @@ class _AudioEmotionlistState extends State<AudioEmotionlist> {
     return AudioEmotionData;
   }
 
-  Widget InfoCard(String title, String date, String thumbnailURL,String ytlink) {
+  Widget InfoCard(
+      String title, String date, String thumbnailURL, String ytlink) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       color: Color(0xffd2dfff),
@@ -189,8 +194,7 @@ class _AudioEmotionlistState extends State<AudioEmotionlist> {
                         fit: BoxFit.fill,
                         image: NetworkImage(
                           YoutubeThumbnail(
-                                  youtubeId:
-                                      convertUrlToId(thumbnailURL) ?? '')
+                                  youtubeId: convertUrlToId(thumbnailURL) ?? '')
                               .hd() as String,
                         ))),
               ),
