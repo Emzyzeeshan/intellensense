@@ -93,26 +93,33 @@ class _AudioEmotionlistState extends State<AudioEmotionlist> {
                                           ? 2
                                           : 3),
                           itemBuilder: (BuildContext context, int index) {
-                            return OpenContainer(
-                              openElevation: 10.0,
-                              closedShape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15.0)),
-                              ),
-                              transitionType: ContainerTransitionType.fade,
-                              transitionDuration:
-                                  const Duration(milliseconds: 1200),
-                              openBuilder: (context, action) {
-                                return AudioEmotion(
-                                  ytlink: AudioEmotionData['video_urls'][index]
-                                      ['AUDIO_LINK'],
-                                );
-                              },
-                              closedBuilder: (context, action) {
-                                return InfoCard(
-                                    AudioEmotionData['video_urls'][index]
-                                            ['AUDIO_TITLE']
-                                        .toString(),
+
+                            return  OpenContainer(
+                                      openElevation: 10.0,
+                                      closedShape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15.0)),
+                                      ),
+                                      transitionType:
+                                          ContainerTransitionType.fade,
+                                      transitionDuration:
+                                          const Duration(milliseconds: 1200),
+                                      openBuilder: (context, action) {
+                                        return AudioEmotion( ytlink: AudioEmotionData['video_urls'][index]
+                                    ['AUDIO_LINK'] ,);
+                                      },
+                                      closedBuilder: (context, action) {
+                                        return  InfoCard(
+                                AudioEmotionData['video_urls'][index]
+                                        ['AUDIO_TITLE']
+                                    .toString(),
+                                AudioEmotionData['video_urls'][index]
+                                                ['PUBLISHED_DATE']
+                                            .toString() ==
+                                        'null'
+                                    ? 'N/A'
+                                    : AudioEmotionData['video_urls'][index]
+                                            ['PUBLISHED_DATE'].toString(),
                                     AudioEmotionData['video_urls'][index]
                                                     ['PUBLISHED_DATE']
                                                 .toString() ==

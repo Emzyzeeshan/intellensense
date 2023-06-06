@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:animated_rail/animated_rail.dart';
+import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -165,7 +166,82 @@ late Future<dynamic> finaldata=StateNameApi();
     return Scaffold(
       backgroundColor: HomeColor,
       appBar: AppBar(),
-      body: AnimatedRail(
+      body:SafeArea(
+        child: DefaultTabController(
+          length: 5,
+          child: Column(
+            children: <Widget>[
+              ButtonsTabBar(
+                backgroundColor: Colors.blue.shade100,
+                unselectedBackgroundColor: Colors.grey[300],
+                unselectedLabelStyle: TextStyle(color: Colors.black),
+                labelStyle:
+                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                tabs: [
+                  Tab(
+                    icon: Image.asset(
+                      'assets/icons/Social-Media-Icons-IS-08.png',
+                      height: 20,
+                    ),
+                    text: "Twitter",
+                  ),
+                  Tab(
+                    icon: Image.asset(
+                      'assets/icons/Social-Media-Icons-IS-10.png',
+                      height: 20,
+                    ),
+                    text: "YouTube",
+                  ),
+                  Tab(
+                    icon: Image.asset(
+                      'assets/new Updated images/intellisensesolutions-Icons-83.png',
+                      height: 20,
+                    ),
+                    text: "NewsPaper",
+                  ),
+                  Tab(
+                    icon: Image.asset(
+                      'assets/new Updated images/news-71.png',
+                      height: 20,
+                    ),
+                    text: "NewsChannel",
+                  ),
+                  Tab(
+                    icon: Image.asset(
+                      'assets/icons/Social-Media-Icons-IS-06.png',
+                      height: 20,
+                    ),
+                    text: "FaceBook",
+                  ),
+                ],
+              ),
+              _buildTest('Twitter'),
+              Expanded(
+                child: TabBarView(
+                  children: <Widget>[
+                    Center(
+                      child: Icon(Icons.directions_car),
+                    ),
+                    Center(
+                      child: Icon(Icons.directions_transit),
+                    ),
+                    Center(
+                      child: Icon(Icons.directions_bike),
+                    ),
+                    Center(
+                      child: Icon(Icons.directions_car),
+                    ),
+                    Center(
+                      child: Icon(Icons.directions_transit),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      /*AnimatedRail(
         cursorSize: Size(60, 60),
         //background: hexToColor('#8B77DD'),
         maxWidth: 275,
@@ -215,7 +291,7 @@ late Future<dynamic> finaldata=StateNameApi();
               label: 'FaceBook',
               screen: _buildTest('FaceBook')),
         ],
-      ),
+      ),*/
     );
   }
 

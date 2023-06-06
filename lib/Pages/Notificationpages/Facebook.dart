@@ -7,6 +7,8 @@ import 'package:intellensense/main.dart';
 
 
 import '../../main.dart';
+import 'Components/FaceBookGridDb.dart';
+import 'Components/FaceBookHashTagInfo.dart';
 import 'Components/NewsPaperGridDb.dart';
 import 'Components/NewspaperHashTagInfo.dart';
 
@@ -66,13 +68,13 @@ class _FacebookState extends State<Facebook> {
                   child: ListView.builder(
                     itemCount: Facebookdata['active_facebook_hashtags'].length,
                     itemBuilder: (context, index) {
-                      return NewspaperNotificationtile(
+                      return FaceBookNotificationtile(
                           Hashtag:'${Facebookdata['active_facebook_hashtags'][index]}',
-                          dashboadTap: NewspaperHashTagInfo(
-                              Facebookdata['active_facebook_hashtags']
+                          dashboadTap: FaceBookHashTagInfo(
+                              Facebookdata['active_facebook_hashtags'][index]
                           ),
-                          GridTap: NewsPaperGridDb(
-                              Facebookdata['active_facebook_hashtags']
+                          GridTap: FaceBookGridDb(
+                              Facebookdata['active_facebook_hashtags'][index]
                           )
                       );
                     },
@@ -90,12 +92,12 @@ class _FacebookState extends State<Facebook> {
             shrinkWrap: true,
             itemCount: searchData.length,
             itemBuilder: (context, index) {
-              return NewspaperNotificationtile(
+              return FaceBookNotificationtile(
                   Hashtag:'${searchData[index]}',
-                  dashboadTap: NewspaperHashTagInfo(
+                  dashboadTap: FaceBookHashTagInfo(
                     searchData[index],
                   ),
-                  GridTap: NewsPaperGridDb(
+                  GridTap: FaceBookGridDb(
                       searchData[index]
                   )
               );
@@ -158,20 +160,20 @@ class _FacebookState extends State<Facebook> {
   }
 }
 
-class NewspaperNotificationtile extends StatefulWidget {
+class FaceBookNotificationtile extends StatefulWidget {
   String Hashtag;
   Widget? dashboadTap;
   Widget? GridTap;
-  NewspaperNotificationtile({
+  FaceBookNotificationtile({
     this.dashboadTap,
     required this.Hashtag,this.GridTap });
 
   @override
-  State<NewspaperNotificationtile> createState() =>
-      _NewspaperNotificationtileState();
+  State<FaceBookNotificationtile> createState() =>
+      _FaceBookNotificationtileState();
 }
 
-class _NewspaperNotificationtileState extends State<NewspaperNotificationtile> {
+class _FaceBookNotificationtileState extends State<FaceBookNotificationtile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
