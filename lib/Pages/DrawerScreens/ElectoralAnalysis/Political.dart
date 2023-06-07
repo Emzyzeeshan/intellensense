@@ -405,30 +405,7 @@ class _PoliticalState extends State<Political> {
                         color: Color(0xffd2dfff),
                         elevation: 10,
                         child: Table(children: [
-                          TableRow(children: [
-                            Container(
-                                height: 30,
-                                color: Color(0xff00196b),
-                                child: Center(
-                                    child: Text(
-                                  'Andhra Pradesh',
-                                  style: GoogleFonts.nunitoSans(
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white),
-                                ))),
-                            Container(
-                                height: 30,
-                                color: Color(0xff00196b),
-                                child: Center(
-                                    child: Text(
-                                  'Electoral Data',
-                                  style: GoogleFonts.nunitoSans(
-                                      fontSize: 12.0,
-                                      fontWeight: FontWeight.w400,
-                                      color: Colors.white),
-                                ))),
-                          ]),
+                          
                           ..._ElectoralTabledata
                         ]),
                       ),

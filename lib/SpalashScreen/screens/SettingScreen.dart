@@ -9,6 +9,7 @@ import 'package:http/http.dart';
 import 'package:intellensense/HomeScreen.dart';
 import 'package:intellensense/SpalashScreen/constants.dart';
 import 'package:intellensense/SpalashScreen/screens/login/login.dart';
+import 'package:intellensense/SpalashScreen/screens/login/mainLoginScreen.dart';
 import 'package:intellensense/main.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -98,7 +99,7 @@ class _SettingScreenState extends State<SettingScreen> {
   LogoutAPI(BuildContext context) async {
     var headers = {'Content-Type': 'application/json'};
     var body =
-        json.encode({"rsUsername": "${logindata.getString('username')}"});
+        json.encode({"rsUsername": "SASI_MGR"});
     var response = await post(
       Uri.parse('https://ifar.pilogcloud.com/appUserlogout'),
       headers: headers,
@@ -108,10 +109,10 @@ class _SettingScreenState extends State<SettingScreen> {
       print(response.body);
       logindata.setBool('login', true);
 
-      Navigator.pushReplacement(
+     await Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => Login(
+              builder: (context) => mainLoginScreen(
                     screenHeight: MediaQuery.of(context).size.height,
                   )));
 
