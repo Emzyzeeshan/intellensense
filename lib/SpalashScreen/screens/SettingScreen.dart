@@ -100,7 +100,7 @@ class _SettingScreenState extends State<SettingScreen> {
     var body =
         json.encode({"rsUsername": "${logindata.getString('username')}"});
     var response = await post(
-      Uri.parse('https://imdrm.pilogcloud.com/V10/appUserlogout'),
+      Uri.parse('https://ifar.pilogcloud.com/appUserlogout'),
       headers: headers,
       body: body,
     );

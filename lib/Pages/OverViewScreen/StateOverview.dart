@@ -2,10 +2,12 @@ import 'dart:convert';
 
 import 'package:animated_rail/animated_rail.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/SpalashScreen/constants.dart';
+import 'package:skeletons/skeletons.dart';
 
 class StateOverviewScreen extends StatefulWidget {
   const StateOverviewScreen({Key? key}) : super(key: key);
@@ -17,17 +19,25 @@ class StateOverviewScreen extends StatefulWidget {
 class _StateOverviewScreenState extends State<StateOverviewScreen> {
   final List<String> items = [];
   List fullData = [];
+  List fullData1 = [];
   List searchData = [];
   String? selectedValue = 'TELANGANA';
   final TextEditingController textEditingController = TextEditingController();
-
-
+bool isLoaded = false;
   @override
   void dispose() {
     textEditingController.dispose();
     super.dispose();
   }
-late Future<dynamic> finaldata=StateNameApi();
+  @override
+  void initState(){
+    super.initState();
+    //TwitterOverViewApi();
+    //StateNameApi();
+  }
+
+  late Future<dynamic> finaldata = StateNameApi();
+  late Future<dynamic> finaldata1 = TwitterOverViewApi();
   Widget _buildTest(String title) {
     return Container(
       //color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
@@ -42,13 +52,19 @@ late Future<dynamic> finaldata=StateNameApi();
                   AsyncSnapshot<dynamic> snapshot,
                 ) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Center(child: CircularProgressIndicator()),
-                          Text('Please Wait')
-                        ]);
+                    return SkeletonParagraph(
+                      style: SkeletonParagraphStyle(
+                          lines: 1,
+
+                          lineStyle: SkeletonLineStyle(
+
+                            height: 30,
+                            width:  MediaQuery.of(context).size.width,
+                            borderRadius: BorderRadius.circular(8),
+                            // minLength: MediaQuery.of(context).size.width / 6,
+                            // maxLength: MediaQuery.of(context).size.width / 3,
+                          )),
+                    );;
                   } else if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasError) {
                       return const Text('Error');
@@ -64,21 +80,23 @@ late Future<dynamic> finaldata=StateNameApi();
                             ),
                           ),
                           items: StateNamedata['state_names']!
-                              .map<DropdownMenuItem<String>>((item) => DropdownMenuItem<String>(
-                                    value: item,
-                                    child: Text(
-                                      item,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ))
+                              .map<DropdownMenuItem<String>>(
+                                  (item) => DropdownMenuItem<String>(
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ))
                               .toList(),
 
                           value: selectedValue,
                           onChanged: (value) {
                             setState(() {
                               selectedValue = value as String;
+                              finaldata1 = TwitterOverViewApi();
                             });
                           },
                           buttonStyleData: ButtonStyleData(
@@ -126,7 +144,8 @@ late Future<dynamic> finaldata=StateNameApi();
                             ),
                             searchMatchFn: (item, searchValue) {
                               return (item.value
-                                  .toString().toUpperCase()
+                                  .toString()
+                                  .toUpperCase()
                                   .contains(searchValue.toUpperCase()));
                             },
                           ),
@@ -146,12 +165,12 @@ late Future<dynamic> finaldata=StateNameApi();
                   }
                 },
               )),
-          ElevatedButton(
+         /* ElevatedButton(
               onPressed: () {
-                StateNameApi();
+                //StateNameApi();
                 print(selectedValue);
               },
-              child: Text('Verify')),
+              child: Text('Search')),*/
         ],
       ),
     );
@@ -166,7 +185,7 @@ late Future<dynamic> finaldata=StateNameApi();
     return Scaffold(
       backgroundColor: HomeColor,
       appBar: AppBar(),
-      body:SafeArea(
+      body: SafeArea(
         child: DefaultTabController(
           length: 5,
           child: Column(
@@ -176,7 +195,7 @@ late Future<dynamic> finaldata=StateNameApi();
                 unselectedBackgroundColor: Colors.grey[300],
                 unselectedLabelStyle: TextStyle(color: Colors.black),
                 labelStyle:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                 tabs: [
                   Tab(
                     icon: Image.asset(
@@ -219,9 +238,7 @@ late Future<dynamic> finaldata=StateNameApi();
               Expanded(
                 child: TabBarView(
                   children: <Widget>[
-                    Center(
-                      child: Icon(Icons.directions_car),
-                    ),
+                    Center(child: TwitterOverviewScreen()),
                     Center(
                       child: Icon(Icons.directions_transit),
                     ),
@@ -295,6 +312,148 @@ late Future<dynamic> finaldata=StateNameApi();
     );
   }
 
+  TwitterOverviewScreen() {
+    return Scaffold(
+        body:   isLoaded==true?
+        FutureBuilder<dynamic>(
+          future: finaldata1,
+          builder: (
+              BuildContext context,
+              AsyncSnapshot<dynamic> snapshot,
+              ) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return SkeletonParagraph(
+                style: SkeletonParagraphStyle(
+                    lines: 5,
+                    spacing: 6,
+                    lineStyle: SkeletonLineStyle(
+                      randomLength: true,
+                      height: 20,
+                      borderRadius: BorderRadius.circular(8),
+                      minLength:
+                      MediaQuery.of(context).size.width / 2,
+                    )),
+              );
+            } else if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasError) {
+                return const Text('Error');
+              } else if (snapshot.hasData) {
+
+                // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
+                //
+                // }
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: DataTable(
+                        headingRowColor:
+                        MaterialStateColor.resolveWith((states) => Color(0xff00196b)),
+                      dataRowColor: MaterialStateColor.resolveWith((states) { return
+                        Color(0xffd2dfff);
+                      }),
+                        border: TableBorder.all(color:Colors.black ),
+                        // Datatable widget that have the property columns and rows.
+                        columns: [
+                          // Set the name of the column
+                          DataColumn(
+                            label: Text('CANDIDATE PARTY NAME',style: TextStyle(color: Colors.white),),
+                          ),
+                          DataColumn(
+                            label: Text(TwitterOverviewdata['party_data']['INC'][0]['CANDIDATE_PARTY_NAME'],style: TextStyle(color: Colors.white)),
+                          ),
+                          DataColumn(
+                            label: Text(TwitterOverviewdata['party_data']['TRS'][0]['CANDIDATE_PARTY_NAME'],style: TextStyle(color: Colors.white)),
+                          ),
+                          DataColumn(
+                            label: Text(TwitterOverviewdata['party_data']['BJP'][0]['CANDIDATE_PARTY_NAME'],style: TextStyle(color: Colors.white)),
+                          ),
+                        ],
+                        rows: [
+                          // Set the values to the columns
+                          
+                          DataRow(cells: [
+                            DataCell(Text("USER FOLLOWERS",style: TextStyle(fontWeight: FontWeight.bold),)),
+                            DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['USER_FOLLOWERS'])),
+                            DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['USER_FOLLOWERS'])),
+                            DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['USER_FOLLOWERS'])),
+                          ],),
+
+                          DataRow(cells: [
+                            DataCell(Text("LIKES",style: TextStyle(fontWeight: FontWeight.bold),)),
+                            DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+                            DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
+                            DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),
+                          ]),
+                          DataRow(cells: [
+                            DataCell(Text("RETWEET COUNT",style: TextStyle(fontWeight: FontWeight.bold),)),
+                            DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                            DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                            DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString())),
+                          ]),
+                        ]),
+                  ),
+                );
+              } else {
+                return const Text('Empty data');
+              }
+            } else {
+              return Text('State: ${snapshot.connectionState}');
+            }
+          },
+        ):Container()
+        );
+  }
+  ///twitteroverviewData API
+  var TwitterOverviewdata;
+  Map Selectionquery1 = new Map<String, dynamic>();
+  Future<dynamic> TwitterOverViewApi() async {
+    setState(() {
+      Selectionquery1['type'] = 'party_data';
+      Selectionquery1['STATE'] = selectedValue;
+      Selectionquery1['party_list'] = 'INC,TRS,BJP';
+      //Selectionquery['channel'] = 'YOUTUBE';
+    });
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6659/social_media/'),
+        body: Selectionquery1);
+
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      try {
+        TwitterOverviewdata = jsonDecode(utf8.decode(response.bodyBytes));
+        fullData1 = TwitterOverviewdata['party_data'];
+
+        print(TwitterOverviewdata);
+      } catch (e) {
+        print(TwitterOverviewdata);
+      }
+    } else {
+      print(response.reasonPhrase);
+    }
+    return TwitterOverviewdata;
+  }
+
+  onSearchTextChanged1(String text) async {
+    searchData.clear();
+    if (text.isEmpty) {
+      // Check textfield is empty or not
+      setState(() {});
+      return;
+    }
+
+    fullData.forEach((data) {
+      if (data['name']
+          .toString()
+          .toLowerCase()
+          .contains(text.toLowerCase().toString())) {
+        searchData.add(
+            data); // If not empty then add search data into search data list
+      }
+    });
+  }
+
+  ///Statenames API
   var StateNamedata;
   Map Selectionquery = new Map<String, dynamic>();
   Future<dynamic> StateNameApi() async {
@@ -312,6 +471,9 @@ late Future<dynamic> finaldata=StateNameApi();
         StateNamedata = jsonDecode(utf8.decode(response.bodyBytes));
         fullData = StateNamedata['state_names'];
 
+        setState(() {
+             isLoaded=true;
+        });
         print(StateNamedata);
       } catch (e) {
         print(StateNamedata);
@@ -339,7 +501,5 @@ late Future<dynamic> finaldata=StateNameApi();
             data); // If not empty then add search data into search data list
       }
     });
-
-    setState(() {});
   }
 }
