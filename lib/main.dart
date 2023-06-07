@@ -95,7 +95,7 @@ enum SignUpVerificationState { BYEMAIL, BYPHONE }
 ///login API
 const rootUrl = 'http://192.169.1.173:8080';
 ///login API new
-const rootURL1 = 'http://192.169.1.198:8082/insights/3.67.0';
+const rootURL1 = 'http://192.169.1.211:8082/insights/3.67.0';
 ///LogOut Api
 const rootUrl1 = 'https://ifar.pilogcloud.com/';
 
