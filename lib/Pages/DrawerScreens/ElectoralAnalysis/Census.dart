@@ -5,7 +5,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
-import 'package:intellensense/Pages/DrawerScreens/ElectoralAnalysis/censusdatagrid.dart';
+
 import 'package:pluto_grid/pluto_grid.dart';
 import 'package:skeletons/skeletons.dart';
 
@@ -15,7 +15,7 @@ class Census extends StatefulWidget {
 }
 
 class _CensusState extends State<Census> {
-  late final PlutoGridStateManager stateManager;
+  List<TableRow> _CensusTabledata = [];
   late final PlutoGridOnLoadedEvent loded;
   final List<PlutoRow> fakeFetchedRows = [];
 
@@ -27,7 +27,7 @@ class _CensusState extends State<Census> {
     if (request.filterRows.isNotEmpty) {
       final filter = FilterHelper.convertRowsToFilter(
         request.filterRows,
-        stateManager.refColumns,
+        stateManager!.refColumns,
       );
 
       tempList = fakeFetchedRows.where(filter!).toList();
@@ -81,7 +81,7 @@ class _CensusState extends State<Census> {
   List Districtlist = [];
   List Subdistrictlist = [];
   List Villagelist = [];
-
+  PlutoGridStateManager? stateManager;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -141,8 +141,6 @@ class _CensusState extends State<Census> {
                               value: input1,
                               onChanged: (value) {
                                 setState(() {
-                                  
-                                 
                                   input1 = value as String;
                                   Districtlist.clear();
                                   print(input1);
@@ -152,6 +150,7 @@ class _CensusState extends State<Census> {
                                       : null;
                                   SUB_DISTRICT = 'Select Sub District';
                                   Subdistrictlist.clear();
+                                  _CensusTabledata.clear();
                                   StateoverviewTabledata.clear();
                                   _value1 = StateoverviewAPI();
                                 });
@@ -449,6 +448,7 @@ class _CensusState extends State<Census> {
                 ),
               ],
             ),
+
             SizedBox(
               height: 20,
             ),
@@ -459,7 +459,27 @@ class _CensusState extends State<Census> {
                 AsyncSnapshot<dynamic> snapshot,
               ) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Padding(
+                  return Column(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                              color: Color(0xffd2dfff),
+                              elevation: 10,
+                              child: SkeletonParagraph(
+                                style: SkeletonParagraphStyle(
+                                    lines: 12,
+                                    spacing: 6,
+                                    lineStyle: SkeletonLineStyle(
+                                      randomLength: true,
+                                      height: 13,
+                                      borderRadius: BorderRadius.circular(8),
+                                      minLength:
+                                          MediaQuery.of(context).size.width / 2,
+                                    )),
+                              ))),
+                              SizedBox(height: 20,),
+                               Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
                           color: Color(0xffd2dfff),
@@ -475,11 +495,13 @@ class _CensusState extends State<Census> {
                                   minLength:
                                       MediaQuery.of(context).size.width / 2,
                                 )),
-                          )));
+                          )))
+                    ],
+                  );
                 } else if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return const Text('Error');
-                  } else if (snapshot.hasData) {      
+                  } else if (snapshot.hasData) {
                     return GridDate();
                   } else {
                     return const Text('Empty data');
@@ -725,62 +747,91 @@ class _CensusState extends State<Census> {
                   PlutoCell(value: item['AGRICULTURAL_LABOURS'] ?? ''),
             }))
         .toList();
-    return Container(
-      color: Color(0xffd2dfff),
-      height: 450,
-      width: 400,
-      child: PlutoGrid(
-        columns: columns,
-        rows: rows,
-
-        onLoaded: (PlutoGridOnLoadedEvent event) {
-          setState(() { 
-            stateManager = event.stateManager;
-            stateManager.setShowColumnFilter(true);
-      
-          });
-
-          print(event);
-        },
-        configuration: const PlutoGridConfiguration(
-            style: PlutoGridStyleConfig(
-          rowColor: Color(0xffd2dfff),
-          borderColor: Colors.grey,
-          gridBackgroundColor: Color(0xffd2dfff),
-        )),
-        createFooter: (stateManager) {
-          stateManager.setPageSize(100, notify: false); // default 40
-          return PlutoPagination(stateManager);
-        },
-        /*createFooter: (stateManager) {
-          return PlutoLazyPagination(
-            // Determine the first page.
-            // Default is 1.
-            initialPage: 1,
-    
-            // First call the fetch function to determine whether to load the page.
-            // Default is true.
-            initialFetch: false,
-    
-            // Decide whether sorting will be handled by the server.
-            // If false, handle sorting on the client side.
-            // Default is true.
-            fetchWithSorting: true,
-    
-            // Decide whether filtering is handled by the server.
-            // If false, handle filtering on the client side.
-            // Default is true.
-            fetchWithFiltering: true,
-    
-            // Determines the page size to move to the previous and next page buttons.
-            // Default value is null. In this case,
-            // it moves as many as the number of page buttons visible on the screen.
-            pageSizeToMove: 15,
-            fetch: fetch,
-            stateManager: stateManager,
-          );
-        },*/
-      ),
+    return Column(
+      children: [
+        Card( color: Color(0xffd2dfff),
+                        elevation: 10,child: Table(children: [
+                          
+                          TableRow(children: [  Container(
+                                    height: 30,
+                                    color: Color(0xff00196b),
+                                    child: Center(
+                                        child: Text(
+                                      '$input1 ',
+                                      style: GoogleFonts.nunitoSans(
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white),
+                                    ))),
+                                      Container(
+                                    height: 30,
+                                    color: Color(0xff00196b),
+                                    child: Center(
+                                        child: Text(
+                                      'Census Data',
+                                      style: GoogleFonts.nunitoSans(
+                                          fontSize: 12.0,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.white),
+                                    ))
+                                   ),]),
+                          ..._CensusTabledata])),
+                          SizedBox(height: 20,),
+        Container(
+          color: Color(0xffd2dfff),
+          height: 450,
+          width: 400,
+          child: PlutoGrid(
+            columns: columns,
+            rows: rows,
+            onLoaded: (PlutoGridOnLoadedEvent event) {
+              setState(() {
+                stateManager = event.stateManager;
+                stateManager!.setShowColumnFilter(true);
+              });
+              print(event);
+            },
+            configuration: const PlutoGridConfiguration(
+                style: PlutoGridStyleConfig(
+              rowColor: Color(0xffd2dfff),
+              borderColor: Colors.grey,
+              gridBackgroundColor: Color(0xffd2dfff),
+            )),
+            createFooter: (stateManager) {
+              stateManager.setPageSize(100, notify: false); // default 40
+              return PlutoPagination(stateManager);
+            },
+            /*createFooter: (stateManager) {
+              return PlutoLazyPagination(
+                // Determine the first page.
+                // Default is 1.
+                initialPage: 1,
+        
+                // First call the fetch function to determine whether to load the page.
+                // Default is true.
+                initialFetch: false,
+        
+                // Decide whether sorting will be handled by the server.
+                // If false, handle sorting on the client side.
+                // Default is true.
+                fetchWithSorting: true,
+        
+                // Decide whether filtering is handled by the server.
+                // If false, handle filtering on the client side.
+                // Default is true.
+                fetchWithFiltering: true,
+        
+                // Determines the page size to move to the previous and next page buttons.
+                // Default value is null. In this case,
+                // it moves as many as the number of page buttons visible on the screen.
+                pageSizeToMove: 15,
+                fetch: fetch,
+                stateManager: stateManager,
+              );
+            },*/
+          ),
+        ),
+      ],
     );
   }
 
@@ -1110,13 +1161,42 @@ class _CensusState extends State<Census> {
     var response = await post(
         Uri.parse('http://idxp.pilogcloud.com:6652/electoral_analysis_census/'),
         body: Selectionquery5);
-
     print(response.statusCode);
     if (response.statusCode == 200) {
       try {
         setState(() {
           SateOverviewdata = json.decode(response.body);
-         
+        });
+
+        SateOverviewdata['STATE_OVERVIEW'][0].keys.forEach((key) {
+          setState(() {
+            _CensusTabledata.add(
+              TableRow(children: [
+                Center(
+                    child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                    '${key}',
+                    style: GoogleFonts.nunitoSans(
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
+                  ),
+                )),
+                Center(
+                    child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                    '${SateOverviewdata['STATE_OVERVIEW'][0]['${key}']}',
+                    style: GoogleFonts.nunitoSans(
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black),
+                  ),
+                )),
+              ]),
+            );
+          });
         });
 
         print(SateOverviewdata);
