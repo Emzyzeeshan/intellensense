@@ -489,10 +489,12 @@ class _PoliticalState extends State<Political> {
                                       color: Colors.black),
                                 ),
                               ),
-                              Table(
+                              Table(border: TableBorder.all(color: Colors.grey),
                                   defaultColumnWidth: FixedColumnWidth(130.0),
                                   children: [
-                                    TableRow(children: [
+                                    TableRow(
+                                     
+                                      children: [
                                       Container(
                                           height: 30,
                                           color: Color(0xff00196b),
@@ -829,7 +831,9 @@ class _PoliticalState extends State<Political> {
 
         for (int i = 0; i < AssemblyConstituencyData.length; i++) {
           AssemblyConstituencyTabledata.add(
-            TableRow(children: [
+            TableRow(
+             
+              children: [
               Center(
                   child: Padding(
                 padding: const EdgeInsets.all(5.0),
