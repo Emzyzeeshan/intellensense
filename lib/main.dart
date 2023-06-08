@@ -4,14 +4,14 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:intellensense/HomeScreen_Pages/HomeScreen.dart';
+import 'package:intellensense/HomeScreen.dart';
 
+import 'package:intellensense/Services/themesetup/DarkThemeProvider.dart';
 
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'Constants/themesetup/DarkThemeProvider.dart';
-import 'Constants/themesetup/styles.dart';
-import 'LoginPages/mainLoginScreen.dart';
+import 'Services/themesetup/styles.dart';
+import 'SpalashScreen/screens/login/mainLoginScreen.dart';
 
 Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {
   Firebase.initializeApp(); // options: DefaultFirebaseConfig.platformOptions

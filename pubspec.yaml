@@ -123,6 +123,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/Image/
+    - assets/svg/
     - assets/icons/Home-Iocn.png
     - assets/icons/Candidature Analysis.png
     - assets/icons/location.png
@@ -131,6 +132,7 @@ flutter:
     - assets/icons/faceEmotiondxp.png
     - assets/icons/compareIconB.png
     - assets/icons/ScoreCard.png
+    - assets/icons/fb.png
     - assets/icons/newspaperdxp.png
     - assets/NotificationIcons/analyticsShowCard.png
     - assets/NotificationIcons/Open_Docs_Icon.png
@@ -140,6 +142,12 @@ flutter:
     - assets/icons/newspaperhead.gif
     - assets/icons/SocialMedia.gif
     - assets/icons/live.gif
+    - assets/new Updated images/Candidature Analysis.png
+    - assets/new Updated images/Communication Channel.png
+    - assets/new Updated images/Constituency Analysis.png
+    - assets/new Updated images/Electrol Analysis.png
+    - assets/new Updated images/News Feed.png
+    - assets/new Updated images/Survey.png
     - assets/new Updated images/intellisensesolutions-Icons-61.png
     - assets/new Updated images/intellisensesolutions-Icons-62.png
     - assets/new Updated images/intellisensesolutions-Icons-66.png
@@ -157,6 +165,13 @@ flutter:
     - assets/new Updated images/intellisensesolutions-Icons-79.png
     - assets/new Updated images/news-71.png
     - assets/new Updated images/
+    - assets/Image/brakes.png
+    - assets/Image/drop.png
+    - assets/Image/header.png
+    - assets/Image/logo.png
+    - assets/Image/sunny.png
+    - assets/Image/wind.png
+    - assets/Image/logo.png
     - assets/new Updated images/megaphone.png
     - assets/new Updated images/Notifications.png
   # To add assets to your application, add an assets section, like this:

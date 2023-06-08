@@ -1,0 +1,298 @@
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
+import 'package:intellensense/HomeScreen.dart';
+import 'package:quickalert/models/quickalert_animtype.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
+import '../../../../main.dart';
+import '../../../constants.dart';
+import 'fade_slide_transition.dart';
+
+class LoginForm extends StatefulWidget {
+  final Animation<double> animation;
+
+  const LoginForm({
+    required this.animation,
+  });
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  String userName = '', passWord = '';
+  final GlobalKey<FormFieldState> formFieldKey = GlobalKey();
+  bool userError = false, showPasswordField = false, passError = false;
+  final userNameText = TextEditingController();
+  final passWordText = TextEditingController();
+  bool _visible = true;
+  bool islogin = false;
+  late StreamSubscription subscription;
+  bool isDeviceConnected = false;
+  bool isAlertSet = false;
+  var userDetails;
+
+  clearText() {
+    userNameText.clear();
+    passWordText.clear();
+  }
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    userNameText.dispose();
+    passWordText.dispose();
+    /* subscription.cancel();*/
+    super.dispose();
+  }
+
+  @override
+  initState() {
+    super.initState();
+
+  }
+  final ValueNotifier<bool> popup = ValueNotifier<bool>(false);
+  @override
+  Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height * 3 -
+        MediaQuery.of(context).padding.top;
+    final space = height > 650 ? kSpaceM : kSpaceS;
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kPaddingL),
+      child: Form(
+        key: formFieldKey,
+        child: Column(
+          children: <Widget>[
+            FadeSlideTransition(
+                animation: widget.animation,
+                additionalOffset: 0.0,
+                child: TextFormField(
+                  keyboardType: TextInputType.text,
+
+                  controller: userNameText,
+                  //controller: controller,
+                  decoration: InputDecoration(errorText: userError==true?'User Not Found':'',
+border: InputBorder.none,
+                    fillColor: Color.fromARGB(166, 240, 237, 237),
+                    filled: true,
+                    contentPadding: const EdgeInsets.all(kPaddingM),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: 'UserName',
+                    hintStyle: TextStyle(
+                      color: kBlack.withOpacity(0.5),
+                      fontWeight: FontWeight.w500,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.person,
+                      color: kBlack.withOpacity(0.5),
+                    ),
+                  ),
+                )),
+            SizedBox(height: space),
+            FadeSlideTransition(
+                animation: widget.animation,
+                additionalOffset: space,
+                child: TextFormField(
+
+                  obscureText: _visible,
+                  controller: passWordText,
+                  decoration: InputDecoration(border: InputBorder.none,
+                    errorText: passError==true?'Invalid Password':'',
+                    fillColor: Color.fromARGB(166, 240, 237, 237),
+                    filled: true,
+                    contentPadding: const EdgeInsets.all(kPaddingM),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                    hintText: 'Password',
+                    hintStyle: TextStyle(
+                      color: kBlack.withOpacity(0.5),
+                      fontWeight: FontWeight.w500,
+                    ),
+                    prefixIcon: Icon(
+                      Icons.lock,
+                      color: kBlack.withOpacity(0.5),
+                    ),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        // Based on passwordVisible state choose the icon
+                        _visible ? Icons.visibility : Icons.visibility_off,
+                        color: Theme.of(context).primaryColorDark,
+                      ),
+                      onPressed: () {
+                        // Update the state i.e. toogle the state of passwordVisible variable
+                        setState(() {
+                          _visible = !_visible;
+                        });
+                      },
+                    ),
+                  ),
+                )),
+            SizedBox(height: space),
+
+
+
+
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: Align(
+              alignment: Alignment.center,
+              child: ValueListenableBuilder<bool>(
+                  valueListenable: popup,
+                  builder: (context, value, _) {
+                    return popup.value
+                        ? SpinKitSpinningLines(
+                      lineWidth: 5,
+                      size: 50,
+                      color: Colors.blueAccent,
+                    )
+                        : ElevatedButton(
+                      onPressed: () async {
+                        setState(() {
+                          popup.value = true;
+                        });
+                        await Future.delayed(Duration(seconds: 2));
+                        try {
+                          final result = await InternetAddress.lookup('example.com');
+                          if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+                            LoginAPI();
+                          }
+                        } on SocketException catch (_) {
+                          islogin = false;
+                          print('not connected');
+                          return await QuickAlert.show(
+                            animType: QuickAlertAnimType.slideInUp,
+                            backgroundColor: Colors.white,
+                            context: context,
+                            type: QuickAlertType.error,
+                            title: 'Oops...',
+                            text: 'Please Check Your Internet!!',
+                            confirmBtnColor: Color(0xff5163da),
+                          );
+                        }
+                      },
+                      style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 40.0, vertical: 20.0),
+                        backgroundColor: Color(0xff6d96fa),
+                        shape: StadiumBorder(),
+                      ),
+                      /*shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(80.0)),
+                              textColor: Colors.white,
+                              padding: const EdgeInsets.all(0),*/
+
+                          child: Text(
+                            "Login",
+                            style: GoogleFonts.nunitoSans(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.white),
+                          ),
+
+
+                    );
+                  }),
+            ),
+          ),
+            // InkWell(
+            //     onTap: () async {
+            //
+            //
+            //     },
+            //     child:
+            //
+            //
+            //     Container(
+            //               width: MediaQuery.of(context).size.width * 0.5,
+            //               height: MediaQuery.of(context).size.height * 0.07,
+            //               margin: const EdgeInsets.only(left: 20, right: 20),
+            //               decoration: const BoxDecoration(
+            //                 borderRadius: BorderRadius.all(Radius.circular(50)),
+            //                 color: Color(0xFF306EFF),
+            //               ),
+            //               child: Center(
+            //                 child: Text(
+            //                   "Login",
+            //                   style: GoogleFonts.nunitoSans(
+            //                       fontSize: 15,
+            //                       fontWeight: FontWeight.w700,
+            //                       color: Colors.white),
+            //                 ),
+            //               ),
+            //             ),
+            //     ),
+          ],
+        ),
+      ),
+    );
+  }
+
+
+  //Login APi
+  var loginData;
+LoginAPI()async{
+  var headers = {'Content-Type': 'application/json'};
+  var body=json.encode({
+    "userName": "${userNameText.text}",
+    "password": "${passWordText.text}"
+  });
+  print('hi2');
+  var response = await post(
+    Uri.parse(
+        'http://192.169.1.211:8082/insights/3.67.0/login'),
+    headers: headers,
+    body:body,
+  );
+
+  print(response.statusCode);
+  if (response.statusCode == 200) {
+print(response.body);
+    print(response.statusCode);
+    try {
+      setState(() {
+        loginData = response.body.toString();
+      });
+      if(loginData.toString()=='success'){
+        logindata.setBool('login', false);
+
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  HomeScreen(),
+            ));
+        popup.value=false;
+      }else if(loginData.toString()=='failed'){
+
+        setState(() {
+          passError=true;  popup.value=false;
+        });
+      }
+    } catch (e) {}
+  }else if(response.statusCode==400){
+   setState(() {
+     userError=true;
+     popup.value=false;
+   });
+  }
+  else {
+    print(response.reasonPhrase);
+  }
+  return loginData;
+}
+}
+
