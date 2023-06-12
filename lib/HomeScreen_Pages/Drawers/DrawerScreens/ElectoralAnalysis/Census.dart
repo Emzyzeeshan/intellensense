@@ -67,10 +67,12 @@ class _CensusState extends State<Census> {
   }
 
   late Future<dynamic> _value1 = StateoverviewAPI();
+  late Future<dynamic> _value2 = DistrictoverviewAPI();
+    late Future<dynamic> _value3 = SubDistrictoverviewAPI();
   late Future<dynamic> statenamedata = CensusStateNamesAPI();
   late Future<dynamic> Districtnamedata = CensusDistrictNamesAPI();
   late Future<dynamic> SubDistrictnamedata = CensusSubDistrictNamesAPI();
-  late Future<dynamic> villagenamedata = CensusVillageNamesAPI();
+  // late Future<dynamic> villagenamedata = CensusVillageNamesAPI();
   List<TableRow> StateoverviewTabledata = [];
 
   String? input1 = 'TELANGANA';
@@ -80,7 +82,7 @@ class _CensusState extends State<Census> {
   List Statelist = [];
   List Districtlist = [];
   List Subdistrictlist = [];
-  List Villagelist = [];
+  // List Villagelist = [];
   PlutoGridStateManager? stateManager;
   @override
   Widget build(BuildContext context) {
@@ -141,6 +143,8 @@ class _CensusState extends State<Census> {
                               value: input1,
                               onChanged: (value) {
                                 setState(() {
+                                  Subdistrictdataloaded=false;
+                                  districtdataloaded = false;
                                   input1 = value as String;
                                   Districtlist.clear();
                                   print(input1);
@@ -232,12 +236,16 @@ class _CensusState extends State<Census> {
                               value: input2,
                               onChanged: (value) {
                                 setState(() {
+                                  Subdistrictdataloaded=false;
+                                  _DistrictTabledata.clear();
+                                  districtdataloaded = true;
                                   input2 = value as String;
                                   print(input2);
                                   districtloaded == true
                                       ? SubDistrictnamedata =
                                           CensusSubDistrictNamesAPI()
                                       : null;
+                                  _value2 = DistrictoverviewAPI();
                                 });
                               },
                               buttonStyleData: const ButtonStyleData(
@@ -328,12 +336,16 @@ class _CensusState extends State<Census> {
                               value: SUB_DISTRICT,
                               onChanged: (value) {
                                 setState(() {
+                                  Subdistrictdataloaded=true;
+                                  districtdataloaded=false;
+                                  _SubDistrictTabledata.clear();
                                   SUB_DISTRICT = value as String;
                                   print(SUB_DISTRICT);
-                                  Subdistrictloaded == true
-                                      ? villagenamedata =
-                                          CensusVillageNamesAPI()
-                                      : null;
+                                  // Subdistrictloaded == true
+                                  //     ? villagenamedata =
+                                  //         CensusVillageNamesAPI()
+                                  //     : null;
+                                  _value3=SubDistrictoverviewAPI();
                                 });
                               },
                               buttonStyleData: const ButtonStyleData(
@@ -365,93 +377,95 @@ class _CensusState extends State<Census> {
                     },
                   ),
                 ),
-                Spacer(),
-                //village
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.47,
-                  child: FutureBuilder<dynamic>(
-                    future: villagenamedata,
-                    builder: (
-                      BuildContext context,
-                      AsyncSnapshot<dynamic> snapshot,
-                    ) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return SkeletonParagraph(
-                          style: SkeletonParagraphStyle(
-                              lines: 1,
-                              lineStyle: SkeletonLineStyle(
-                                height: 30,
-                                width: MediaQuery.of(context).size.width * 0.42,
-                                borderRadius: BorderRadius.circular(8),
-                                // minLength: MediaQuery.of(context).size.width / 6,
-                                // maxLength: MediaQuery.of(context).size.width / 3,
-                              )),
-                        );
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.done) {
-                        if (snapshot.hasError) {
-                          return const Text('Error');
-                        } else if (snapshot.hasData) {
-                          return DropdownButtonHideUnderline(
-                            child: DropdownButton2(
-                              isExpanded: true,
-                              hint: Text(
-                                '${Village}',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Theme.of(context).hintColor,
-                                ),
-                              ),
-                              items: Villagelist.map<DropdownMenuItem<String>>(
-                                  (itemm) => DropdownMenuItem<String>(
-                                        value: itemm.toString(),
-                                        child: Text(
-                                          itemm,
-                                          style: const TextStyle(),
-                                        ),
-                                      )).toList(),
-                              value: Village,
-                              onChanged: (value) {
-                                setState(() {
-                                  Village = value as String;
-                                  print(Village);
-                                });
-                              },
-                              buttonStyleData: const ButtonStyleData(
-                                padding: EdgeInsets.all(6),
-                                decoration: BoxDecoration(
-                                    color: Color.fromARGB(255, 245, 239, 239),
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(15),
-                                        bottomLeft: Radius.circular(15),
-                                        bottomRight: Radius.circular(15),
-                                        topLeft: Radius.circular(15))),
-                                height: 40,
-                              ),
-                              dropdownStyleData: const DropdownStyleData(
-                                maxHeight: 200,
-                              ),
-                              menuItemStyleData: const MenuItemStyleData(
-                                height: 40,
-                              ),
-                              isDense: true,
-                            ),
-                          );
-                        } else {
-                          return const Text('Empty data');
-                        }
-                      } else {
-                        return Text('State: ${snapshot.connectionState}');
-                      }
-                    },
-                  ),
-                ),
+                // Spacer(),
+                // //village
+                // Container(
+                //   width: MediaQuery.of(context).size.width * 0.47,
+                //   child: FutureBuilder<dynamic>(
+                //     future: villagenamedata,
+                //     builder: (
+                //       BuildContext context,
+                //       AsyncSnapshot<dynamic> snapshot,
+                //     ) {
+                //       if (snapshot.connectionState == ConnectionState.waiting) {
+                //         return SkeletonParagraph(
+                //           style: SkeletonParagraphStyle(
+                //               lines: 1,
+                //               lineStyle: SkeletonLineStyle(
+                //                 height: 30,
+                //                 width: MediaQuery.of(context).size.width * 0.42,
+                //                 borderRadius: BorderRadius.circular(8),
+                //                 // minLength: MediaQuery.of(context).size.width / 6,
+                //                 // maxLength: MediaQuery.of(context).size.width / 3,
+                //               )),
+                //         );
+                //       } else if (snapshot.connectionState ==
+                //           ConnectionState.done) {
+                //         if (snapshot.hasError) {
+                //           return const Text('Error');
+                //         } else if (snapshot.hasData) {
+                //           return DropdownButtonHideUnderline(
+                //             child: DropdownButton2(
+                //               isExpanded: true,
+                //               hint: Text(
+                //                 '${Village}',
+                //                 style: TextStyle(
+                //                   fontSize: 12,
+                //                   color: Theme.of(context).hintColor,
+                //                 ),
+                //               ),
+                //               items: Villagelist.map<DropdownMenuItem<String>>(
+                //                   (itemm) => DropdownMenuItem<String>(
+                //                         value: itemm.toString(),
+                //                         child: Text(
+                //                           itemm,
+                //                           style: const TextStyle(),
+                //                         ),
+                //                       )).toList(),
+                //               value: Village,
+                //               onChanged: (value) {
+                //                 setState(() {
+                //                   Village = value as String;
+                //                   print(Village);
+                //                 });
+                //               },
+                //               buttonStyleData: const ButtonStyleData(
+                //                 padding: EdgeInsets.all(6),
+                //                 decoration: BoxDecoration(
+                //                     color: Color.fromARGB(255, 245, 239, 239),
+                //                     borderRadius: BorderRadius.only(
+                //                         topRight: Radius.circular(15),
+                //                         bottomLeft: Radius.circular(15),
+                //                         bottomRight: Radius.circular(15),
+                //                         topLeft: Radius.circular(15))),
+                //                 height: 40,
+                //               ),
+                //               dropdownStyleData: const DropdownStyleData(
+                //                 maxHeight: 200,
+                //               ),
+                //               menuItemStyleData: const MenuItemStyleData(
+                //                 height: 40,
+                //               ),
+                //               isDense: true,
+                //             ),
+                //           );
+                //         } else {
+                //           return const Text('Empty data');
+                //         }
+                //       } else {
+                //         return Text('State: ${snapshot.connectionState}');
+                //       }
+                //     },
+                //   ),
+                // ),
               ],
             ),
 
             SizedBox(
               height: 20,
             ),
+
+            districtdataloaded==false&&Subdistrictdataloaded==false?
             FutureBuilder<dynamic>(
               future: _value1,
               builder: (
@@ -505,6 +519,7 @@ class _CensusState extends State<Census> {
                     return const Text('Error');
                   } else if (snapshot.hasData) {
                     return GridDate();
+                        
                   } else {
                     return const Text('Empty data');
                   }
@@ -512,7 +527,133 @@ class _CensusState extends State<Census> {
                   return Text('State: ${snapshot.connectionState}');
                 }
               },
-            ),
+            ):Container(),
+
+districtdataloaded==true? FutureBuilder<dynamic>(
+              future: _value2,
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<dynamic> snapshot,
+              ) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Column(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                              color: Color(0xffd2dfff),
+                              elevation: 10,
+                              child: SkeletonParagraph(
+                                style: SkeletonParagraphStyle(
+                                    lines: 12,
+                                    spacing: 6,
+                                    lineStyle: SkeletonLineStyle(
+                                      randomLength: true,
+                                      height: 13,
+                                      borderRadius: BorderRadius.circular(8),
+                                      minLength:
+                                          MediaQuery.of(context).size.width / 2,
+                                    )),
+                              ))),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                              color: Color(0xffd2dfff),
+                              elevation: 10,
+                              child: SkeletonParagraph(
+                                style: SkeletonParagraphStyle(
+                                    lines: 12,
+                                    spacing: 6,
+                                    lineStyle: SkeletonLineStyle(
+                                      randomLength: true,
+                                      height: 13,
+                                      borderRadius: BorderRadius.circular(8),
+                                      minLength:
+                                          MediaQuery.of(context).size.width / 2,
+                                    )),
+                              )))
+                    ],
+                  );
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return const Text('Error');
+                  } else if (snapshot.hasData) {
+                    return   DistrictData();
+                        
+                  } else {
+                    return const Text('Empty data');
+                  }
+                } else {
+                  return Text('State: ${snapshot.connectionState}');
+                }
+              },
+            ):Container(),
+            Subdistrictdataloaded==true?FutureBuilder<dynamic>(
+              future: _value3,
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<dynamic> snapshot,
+              ) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Column(
+                    children: [
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                              color: Color(0xffd2dfff),
+                              elevation: 10,
+                              child: SkeletonParagraph(
+                                style: SkeletonParagraphStyle(
+                                    lines: 12,
+                                    spacing: 6,
+                                    lineStyle: SkeletonLineStyle(
+                                      randomLength: true,
+                                      height: 13,
+                                      borderRadius: BorderRadius.circular(8),
+                                      minLength:
+                                          MediaQuery.of(context).size.width / 2,
+                                    )),
+                              ))),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Card(
+                              color: Color(0xffd2dfff),
+                              elevation: 10,
+                              child: SkeletonParagraph(
+                                style: SkeletonParagraphStyle(
+                                    lines: 12,
+                                    spacing: 6,
+                                    lineStyle: SkeletonLineStyle(
+                                      randomLength: true,
+                                      height: 13,
+                                      borderRadius: BorderRadius.circular(8),
+                                      minLength:
+                                          MediaQuery.of(context).size.width / 2,
+                                    )),
+                              )))
+                    ],
+                  );
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return const Text('Error');
+                  } else if (snapshot.hasData) {
+                    return   SubDistrictData();
+                        
+                  } else {
+                    return const Text('Empty data');
+                  }
+                } else {
+                  return Text('State: ${snapshot.connectionState}');
+                }
+              },
+            ):Container(),
+              
           ],
         ),
       ),
@@ -751,36 +892,40 @@ class _CensusState extends State<Census> {
         .toList();
     return Column(
       children: [
-        Card(
-            color: Color(0xffd2dfff),
-            elevation: 10,
-            child: Table(children: [
-              TableRow(children: [
-                Container(
-                    height: 30,
-                    color: Color(0xff00196b),
-                    child: Center(
-                        child: Text(
-                      '$input1 ',
-                      style: GoogleFonts.nunitoSans(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
-                    ))),
-                Container(
-                    height: 30,
-                    color: Color(0xff00196b),
-                    child: Center(
-                        child: Text(
-                      'Census Data',
-                      style: GoogleFonts.nunitoSans(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
-                    ))),
-              ]),
-              ..._CensusTabledata
-            ])),
+        Container(
+          height: 450,
+            width: 400,
+          child: Card(
+              color: Color(0xffd2dfff),
+              elevation: 10,
+              child: Table(children: [
+                TableRow(children: [
+                  Container(
+                      height: 30,
+                      color: Color(0xff00196b),
+                      child: Center(
+                          child: Text(
+                        '$input1 ',
+                        style: GoogleFonts.nunitoSans(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ))),
+                  Container(
+                      height: 30,
+                      color: Color(0xff00196b),
+                      child: Center(
+                          child: Text(
+                        'Census Data',
+                        style: GoogleFonts.nunitoSans(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ))),
+                ]),
+                ..._CensusTabledata
+              ])),
+        ),
         SizedBox(
           height: 20,
         ),
@@ -840,6 +985,657 @@ class _CensusState extends State<Census> {
         ),
       ],
     );
+  }
+
+  DistrictData() {
+     if (DistrictOverviewdata == null || DistrictOverviewdata['DISTRICT_AGG_DATA'] == null)
+      return Container(height: 0, width: 0);
+
+    List<PlutoColumn> columns2 = [
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'SUB-DISTRICT',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'SUB-DISTRICT',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'SUB-DISTRICT',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'TOTAL HOUSEHOLDS',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'TOTAL HOUSEHOLDS',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'TOTAL_HOUSEHOLDS',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'TOTAL POPULATION',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'TOTAL POPULATION',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'TOTAL_POPULATION',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'TOTAL POP MALE',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'TOTAL POP MALE',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'TOTAL_POP_MALE',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'TOTAL POP FEMALE',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'TOTAL POP FEMALE',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'TOTAL_POP_FEMALE',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'SC POPULATION',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'SC POPULATION',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'SC_POPULATION',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'ST POPULATION',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'ST POPULATION',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'ST_POPULATION',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'LITERATES',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'LITERATES',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'LITERATES',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'ILLITERATES',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'ILLITERATES',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'ILLITERATES',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'TOTAL WORKERS',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'TOTAL WORKERS',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'TOTAL_WORKERS',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'CULTIVATORS',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'CULTIVATORS',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'CULTIVATORS',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'AGRICULTURAL LABOURS',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'AGRICULTURAL LABOURS',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'AGRICULTURAL_LABOURS',
+        type: PlutoColumnType.text(),
+      ),
+    ];
+    List<PlutoRow> rows2 = DistrictOverviewdata['DISTRICT_AGG_DATA']
+        .map<PlutoRow>((item) => PlutoRow(cells: {
+              'SUB-DISTRICT': PlutoCell(value: item['SUB_DISTRICT'] ?? ''),
+              'TOTAL_HOUSEHOLDS':
+                  PlutoCell(value: item['TOTAL_HOUSEHOLDS'] ?? ''),
+              'TOTAL_POPULATION':
+                  PlutoCell(value: item['TOTAL_POPULATION'] ?? ''),
+              'TOTAL_POP_MALE': PlutoCell(value: item['TOTAL_POP_MALE'] ?? ''),
+              'TOTAL_POP_FEMALE':
+                  PlutoCell(value: item['TOTAL_POP_FEMALE'] ?? ''),
+              'SC_POPULATION': PlutoCell(value: item['SC_POPULATION'] ?? ''),
+              'ST_POPULATION': PlutoCell(value: item['ST_POPULATION'] ?? ''),
+              'LITERATES': PlutoCell(value: item['LITERATES'] ?? ''),
+              'ILLITERATES': PlutoCell(value: item['ILLITERATES'] ?? ''),
+              'TOTAL_WORKERS': PlutoCell(value: item['TOTAL_WORKERS'] ?? ''),
+              'CULTIVATORS': PlutoCell(value: item['CULTIVATORS'] ?? ''),
+              'AGRICULTURAL_LABOURS':
+                  PlutoCell(value: item['AGRICULTURAL_LABOURS'] ?? ''),
+            }))
+        .toList();
+    return Column(
+      children: [
+        Container(
+          height: 450,
+            width: 400,
+          child: Card(
+              color: Color(0xffd2dfff),
+              elevation: 10,
+              child: Table(children: [
+                TableRow(children: [
+                  Container(
+                      height: 30,
+                      color: Color(0xff00196b),
+                      child: Center(
+                          child: Text(
+                        '$input2 ',
+                        style: GoogleFonts.nunitoSans(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ))),
+                  Container(
+                      height: 30,
+                      color: Color(0xff00196b),
+                      child: Center(
+                          child: Text(
+                        'Census Data',
+                        style: GoogleFonts.nunitoSans(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ))),
+                ]),
+                ..._DistrictTabledata
+              ])),
+        ),
+              SizedBox(
+          height: 20,
+        ),
+        Container(
+          color: Color(0xffd2dfff),
+          height: 450,
+          width: 400,
+          child: PlutoGrid(
+            columns: columns2,
+            rows: rows2,
+            onLoaded: (PlutoGridOnLoadedEvent event) {
+              setState(() {
+                stateManager = event.stateManager;
+                stateManager!.setShowColumnFilter(true);
+              });
+              print(event);
+            },
+            configuration: const PlutoGridConfiguration(
+                style: PlutoGridStyleConfig(
+              rowColor: Color(0xffd2dfff),
+              borderColor: Colors.grey,
+              gridBackgroundColor: Color(0xffd2dfff),
+            )),
+            createFooter: (stateManager) {
+              stateManager.setPageSize(100, notify: false); // default 40
+              return PlutoPagination(stateManager);
+            },
+            /*createFooter: (stateManager) {
+              return PlutoLazyPagination(
+                // Determine the first page.
+                // Default is 1.
+                initialPage: 1,
+    
+                // First call the fetch function to determine whether to load the page.
+                // Default is true.
+                initialFetch: false,
+    
+                // Decide whether sorting will be handled by the server.
+                // If false, handle sorting on the client side.
+                // Default is true.
+                fetchWithSorting: true,
+    
+                // Decide whether filtering is handled by the server.
+                // If false, handle filtering on the client side.
+                // Default is true.
+                fetchWithFiltering: true,
+    
+                // Determines the page size to move to the previous and next page buttons.
+                // Default value is null. In this case,
+                // it moves as many as the number of page buttons visible on the screen.
+                pageSizeToMove: 15,
+                fetch: fetch,
+                stateManager: stateManager,
+              );
+            },*/
+          ),
+        ),
+      ],
+    );
+  }
+
+  SubDistrictData(){  if (
+    SubDistrictOverviewdata == null || SubDistrictOverviewdata['SUB_DISTRICT_AGG_DATA'] == null)
+      return Container(height: 0, width: 0);
+     List<PlutoColumn> columns3 = [
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'VILLAGE',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'VILLAGE',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'VILLAGE',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'TOTAL HOUSEHOLDS',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'TOTAL HOUSEHOLDS',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'TOTAL_HOUSEHOLDS',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'TOTAL POPULATION',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'TOTAL POPULATION',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'TOTAL_POPULATION',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'TOTAL POP MALE',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'TOTAL POP MALE',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'TOTAL_POP_MALE',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'TOTAL POP FEMALE',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'TOTAL POP FEMALE',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'TOTAL_POP_FEMALE',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'SC POPULATION',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'SC POPULATION',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'SC_POPULATION',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'ST POPULATION',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'ST POPULATION',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'ST_POPULATION',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'LITERATES',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'LITERATES',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'LITERATES',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'ILLITERATES',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'ILLITERATES',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'ILLITERATES',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'TOTAL WORKERS',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'TOTAL WORKERS',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'TOTAL_WORKERS',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'CULTIVATORS',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'CULTIVATORS',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'CULTIVATORS',
+        type: PlutoColumnType.text(),
+      ),
+      PlutoColumn(
+        backgroundColor: Color(0xff00196b),
+        enableEditingMode: false,
+        title: 'AGRICULTURAL LABOURS',
+        titleSpan: TextSpan(
+          children: [
+            WidgetSpan(
+              child: Text(
+                'AGRICULTURAL LABOURS',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+        field: 'AGRICULTURAL_LABOURS',
+        type: PlutoColumnType.text(),
+      ),
+    ];
+    List<PlutoRow> rows3 = SubDistrictOverviewdata['SUB_DISTRICT_AGG_DATA']
+        .map<PlutoRow>((item) => PlutoRow(cells: {
+              'VILLAGE': PlutoCell(value: item['VILLAGE'] ?? ''),
+              'TOTAL_HOUSEHOLDS':
+                  PlutoCell(value: item['TOTAL_HOUSEHOLDS'] ?? ''),
+              'TOTAL_POPULATION':
+                  PlutoCell(value: item['TOTAL_POPULATION'] ?? ''),
+              'TOTAL_POP_MALE': PlutoCell(value: item['TOTAL_POP_MALE'] ?? ''),
+              'TOTAL_POP_FEMALE':
+                  PlutoCell(value: item['TOTAL_POP_FEMALE'] ?? ''),
+              'SC_POPULATION': PlutoCell(value: item['SC_POPULATION'] ?? ''),
+              'ST_POPULATION': PlutoCell(value: item['ST_POPULATION'] ?? ''),
+              'LITERATES': PlutoCell(value: item['LITERATES'] ?? ''),
+              'ILLITERATES': PlutoCell(value: item['ILLITERATES'] ?? ''),
+              'TOTAL_WORKERS': PlutoCell(value: item['TOTAL_WORKERS'] ?? ''),
+              'CULTIVATORS': PlutoCell(value: item['CULTIVATORS'] ?? ''),
+              'AGRICULTURAL_LABOURS':
+                  PlutoCell(value: item['AGRICULTURAL_LABOURS'] ?? ''),
+            }))
+        .toList();
+    return Column(
+      children: [
+        Container(
+          height: 450,
+            width: 400,
+          child: Card(
+              color: Color(0xffd2dfff),
+              elevation: 10,
+              child: Table(children: [
+                TableRow(children: [
+                  Container(
+                      height: 30,
+                      color: Color(0xff00196b),
+                      child: Center(
+                          child: Text(
+                        '$SUB_DISTRICT',
+                        style: GoogleFonts.nunitoSans(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ))),
+                  Container(
+                      height: 30,
+                      color: Color(0xff00196b),
+                      child: Center(
+                          child: Text(
+                        'Census Data',
+                        style: GoogleFonts.nunitoSans(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white),
+                      ))),
+                ]),
+                ..._SubDistrictTabledata
+              ])),
+        ),
+              SizedBox(
+          height: 20,
+        ),
+        Container(
+          color: Color(0xffd2dfff),
+          height: 450,
+          width: 400,
+          child: PlutoGrid(
+            columns: columns3,
+            rows: rows3,
+            onLoaded: (PlutoGridOnLoadedEvent event) {
+              setState(() {
+                stateManager = event.stateManager;
+                stateManager!.setShowColumnFilter(true);
+              });
+              print(event);
+            },
+            configuration: const PlutoGridConfiguration(
+                style: PlutoGridStyleConfig(
+              rowColor: Color(0xffd2dfff),
+              borderColor: Colors.grey,
+              gridBackgroundColor: Color(0xffd2dfff),
+            )),
+            createFooter: (stateManager) {
+              stateManager.setPageSize(100, notify: false); // default 40
+              return PlutoPagination(stateManager);
+            },
+            /*createFooter: (stateManager) {
+              return PlutoLazyPagination(
+                // Determine the first page.
+                // Default is 1.
+                initialPage: 1,
+    
+                // First call the fetch function to determine whether to load the page.
+                // Default is true.
+                initialFetch: false,
+    
+                // Decide whether sorting will be handled by the server.
+                // If false, handle sorting on the client side.
+                // Default is true.
+                fetchWithSorting: true,
+    
+                // Decide whether filtering is handled by the server.
+                // If false, handle filtering on the client side.
+                // Default is true.
+                fetchWithFiltering: true,
+    
+                // Determines the page size to move to the previous and next page buttons.
+                // Default value is null. In this case,
+                // it moves as many as the number of page buttons visible on the screen.
+                pageSizeToMove: 15,
+                fetch: fetch,
+                stateManager: stateManager,
+              );
+            },*/
+          ),
+        ),]);
   }
 
   var CensusStateNamesdata;
@@ -936,7 +1732,7 @@ class _CensusState extends State<Census> {
           CensusSubDistrictNamesdata = json.decode(response.body);
           Subdistrictlist = CensusSubDistrictNamesdata['SUBDISTRICT_NAMES'];
           SUB_DISTRICT = Subdistrictlist[0];
-          Subdistrictloaded = true;
+          // Subdistrictloaded = true;
         });
 
         print(Subdistrictlist);
@@ -949,214 +1745,164 @@ class _CensusState extends State<Census> {
     return CensusSubDistrictNamesdata;
   }
 
-  //Village
-  var CensusVillageNamesdata;
-  bool Subdistrictloaded = false;
-  Map Selectionquery4 = new Map<String, dynamic>();
-  CensusVillageNamesAPI() async {
+  // //Village
+  // var CensusVillageNamesdata;
+  // bool Subdistrictloaded = false;
+  // Map Selectionquery4 = new Map<String, dynamic>();
+  // CensusVillageNamesAPI() async {
+  //   setState(() {
+  //     Selectionquery4['type'] = 'VILLAGE_NAMES';
+  //     Selectionquery4['STATE'] = input1.toString();
+  //     Selectionquery4['DISTRICT'] = input2.toString();
+  //     Selectionquery4['SUB_DISTRICT'] = SUB_DISTRICT.toString();
+  //   });
+  //   var response = await post(
+  //       Uri.parse('http://idxp.pilogcloud.com:6652/electoral_analysis_census/'),
+  //       body: Selectionquery4);
+
+  //   print(response.statusCode);
+  //   if (response.statusCode == 200) {
+  //     try {
+  //       setState(() {
+  //         CensusVillageNamesdata = json.decode(response.body);
+  //         if (CensusVillageNamesdata['VILLAGE_NAMES'].isEmpty) {
+  //           Villagelist.add('Select Village');
+  //         } else {
+  //           Villagelist = CensusVillageNamesdata['VILLAGE_NAMES'];
+  //         }
+
+  //         Village = Villagelist[0];
+  //       });
+
+  //       print(Village);
+  //     } catch (e) {
+  //       print(e);
+  //     }
+  //   } else {
+  //     print(response.reasonPhrase);
+  //   }
+  //   return CensusVillageNamesdata;
+  // }
+
+  //District Overview api
+  bool districtdataloaded = false;
+  var DistrictOverviewdata;
+  List<TableRow> _DistrictTabledata = [];
+  Map Selectionquery6 = new Map<String, dynamic>();
+  DistrictoverviewAPI() async {
     setState(() {
-      Selectionquery4['type'] = 'VILLAGE_NAMES';
-      Selectionquery4['STATE'] = input1.toString();
-      Selectionquery4['DISTRICT'] = input2.toString();
-      Selectionquery4['SUB_DISTRICT'] = SUB_DISTRICT.toString();
+      Selectionquery6['type'] = 'DISTRICT_OVERVIEW';
+      Selectionquery6['STATE'] = input1.toString();
+      Selectionquery6['DISTRICT'] = input2.toString();
     });
     var response = await post(
         Uri.parse('http://idxp.pilogcloud.com:6652/electoral_analysis_census/'),
-        body: Selectionquery4);
+        body: Selectionquery6);
 
     print(response.statusCode);
     if (response.statusCode == 200) {
       try {
         setState(() {
-          CensusVillageNamesdata = json.decode(response.body);
-          if (CensusVillageNamesdata['VILLAGE_NAMES'].isEmpty) {
-            Villagelist.add('Select Village');
-          } else {
-            Villagelist = CensusVillageNamesdata['VILLAGE_NAMES'];
-          }
-
-          Village = Villagelist[0];
+          DistrictOverviewdata = json.decode(response.body);
+        });
+        DistrictOverviewdata['DISTRICT_OVERVIEW'][0].keys.forEach((key) {
+          _DistrictTabledata.add(TableRow(children: [
+            Center(
+                child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                '${key}',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+              ),
+            )),
+            Center(
+                child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                '${DistrictOverviewdata['DISTRICT_OVERVIEW'][0]['${key}']}',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+              ),
+            )),
+          ]));
         });
 
-        print(Village);
+        print(DistrictOverviewdata);
       } catch (e) {
         print(e);
       }
     } else {
       print(response.reasonPhrase);
     }
-    return CensusVillageNamesdata;
+    return DistrictOverviewdata;
   }
 
-//   //State Overview api
-//      var  SateOverviewdata;
 
-//   Map Selectionquery5 = new Map<String, dynamic>();
-//   StateoverviewAPI()async{
-//  setState(() {
-//       Selectionquery5['type'] = 'STATE_OVERVIEW';
-//       Selectionquery5['STATE'] = input1.toString();
+//sub district overview API
+  bool Subdistrictdataloaded = false;
+  var SubDistrictOverviewdata;
+  List<TableRow> _SubDistrictTabledata = [];
+  Map Selectionquery7 = new Map<String, dynamic>();
+  SubDistrictoverviewAPI() async {
+    setState(() {
+      Selectionquery6['type'] = 'SUB_DISTRICT_OVERVIEW';
+      Selectionquery6['STATE'] = input1.toString();
+      Selectionquery6['DISTRICT'] = input2.toString();
+         Selectionquery6['SUB_DISTRICT'] = SUB_DISTRICT.toString();
+    });
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6652/electoral_analysis_census/'),
+        body: Selectionquery6);
 
-//     });
-//     var response = await post(
-//         Uri.parse('http://idxp.pilogcloud.com:6652/electoral_analysis_census/'),
-//         body: Selectionquery5);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      try {
+        setState(() {
+          SubDistrictOverviewdata = json.decode(response.body);
+        });
+        SubDistrictOverviewdata['SUB_DISTRICT_OVERVIEW'][0].keys.forEach((key) {
+          _SubDistrictTabledata.add(TableRow(children: [
+            Center(
+                child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                '${key}',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+              ),
+            )),
+            Center(
+                child: Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                '${SubDistrictOverviewdata['SUB_DISTRICT_OVERVIEW'][0]['${key}']}',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+              ),
+            )),
+          ]));
+        });
 
-//     print(response.statusCode);
-//     if (response.statusCode == 200) {
-//       try {
+        print(SubDistrictOverviewdata);
+      } catch (e) {
+        print(e);
+      }
+    } else {
+      print(response.reasonPhrase);
+    }
+    return SubDistrictOverviewdata;
+  }
 
-//      setState(() {
-//        SateOverviewdata = json.decode(response.body);
-//  });
-//        for(int i=0;i<SateOverviewdata['STATE_AGG_DATA'].length;i++){
-//         StateoverviewTabledata.add( TableRow(children: [
-//               Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['DISTRICT']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//               Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['TOTAL_HOUSEHOLDS']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//               Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['TOTAL_POPULATION']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//               Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['TOTAL_POP_MALE']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//               Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['TOTAL_POP_FEMALE']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//               Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['SC_POPULATION']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//               Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['ST_POPULATION']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//               Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['LITERATES']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//                Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['ILLITERATES']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//                Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['TOTAL_WORKERS']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//                Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['CULTIVATORS']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//                Center(
-//                   child: Padding(
-//                 padding: const EdgeInsets.all(5.0),
-//                 child: Text(
-//                   '${SateOverviewdata['STATE_AGG_DATA'][i]['AGRICULTURAL_LABOURS']}',
-//                   style: GoogleFonts.nunitoSans(
-//                       fontSize: 12.0,
-//                       fontWeight: FontWeight.w400,
-//                       color: Colors.black),
-//                 ),
-//               )),
-//             ]),);
-//        }
-
-// print(SateOverviewdata);
-//       } catch (e) {
-//         print(e);
-//       }
-//     } else {
-//       print(response.reasonPhrase);
-//     }
-//     return SateOverviewdata;
-//   }
-// }
-
+//State overview data
   var SateOverviewdata;
 
   Map Selectionquery5 = new Map<String, dynamic>();

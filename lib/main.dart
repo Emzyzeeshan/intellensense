@@ -69,13 +69,18 @@ class _MyAppState extends State<MyApp> {
       return themeChangeProvider;
     }, child: Consumer<DarkThemeProvider>(
         builder: (BuildContext context, value, Widget? child) {
-      return MaterialApp(
-        theme: Styles.themeData(themeChangeProvider.darkTheme, context),
-        debugShowCheckedModeBanner: false,
-        title: 'TRS Party',
-        home:
-        
-         mainLoginScreen(screenHeight: screenHeight),
+      return GestureDetector(
+        onTap: (){
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: MaterialApp(
+          theme: Styles.themeData(themeChangeProvider.darkTheme, context),
+          debugShowCheckedModeBanner: false,
+          title: 'TRS Party',
+          home:HomeScreen()
+          
+          //  mainLoginScreen(screenHeight: screenHeight),
+        ),
       );
     }));
   }
