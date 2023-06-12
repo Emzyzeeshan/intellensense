@@ -149,6 +149,7 @@ TwitterAPI() async {
   print(response.toString());
   if (response.statusCode == 200) {
     print(response.body);
+
     try {
       TwitterData = jsonDecode(utf8.decode(response.bodyBytes));
     } catch (e) {
@@ -230,3 +231,5 @@ WeatherAPI(String lat, String lon) async {
   }
   return Weatherdata;
 }
+
+

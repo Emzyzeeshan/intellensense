@@ -27,7 +27,7 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
   }
 
   var input = 'TRS';
-  List PartyName = ['TRS', 'TDP', 'JSP', 'YSRCP'];
+  List PartyName = [ "IND", "JSP", "SHIV SENA ", "COMMUNIST PARTY OF INDIA (MARXIST)", "BJP", "RASHTRIYA JANATA DAL", "TRS", "AIFB", "ALL INDIA TRINAMOOL CONGRESS ", "SAMAJWADI PARTY", "INC", "AIMIM", "TDP", "JANATHA DAL (SECULAR)", "BHARATHIYA JANATHA PARTI", "JANATHA DAL (UNITED)", "DRAVIDA MUNNETRA KAZHAGAM(DMK)", "YSRCP", "AAM AADMI PARTY", "NATIONALIST CONGRESS PARTY"];
   late Future<dynamic> finaldata = PartyDataApi('TRS');
   ScrollController? scrollController = ScrollController();
   Uint8List? myImage;
@@ -298,8 +298,7 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
   onSearchTextChanged(String text) async {
     searchData.clear();
     if (text.isEmpty) {
-      // Check textfield is empty or not
-      setState(() {});
+
       return;
     }
 
@@ -313,7 +312,7 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
       }
     });
 
-    setState(() {});
+
   }
 }
 
