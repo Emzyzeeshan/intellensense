@@ -294,6 +294,7 @@ class _TwitterScreenState extends State<TwitterScreen> {
     print(response.toString());
     if (response.statusCode == 200) {
       print(response.body);
+      print('ajhdsjhjfjiafnjafhaof');
       try {
         setState(() =>
             TwitterListResult = jsonDecode(utf8.decode(response.bodyBytes)));
