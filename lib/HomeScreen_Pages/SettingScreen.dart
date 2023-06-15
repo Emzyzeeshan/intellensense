@@ -106,16 +106,19 @@ class _SettingScreenState extends State<SettingScreen> {
     );
     if (response.body == 'Success') {
       print(response.body);
-      logindata.setBool('login', true);
 
-      await Navigator.push(
-          context,
-          PageTransition(
-            duration: Duration(seconds: 1),
-              type: PageTransitionType.leftToRightWithFade,
-              child: mainLoginScreen(
-                screenHeight: MediaQuery.of(context).size.height,
-              )));
+        logindata.setBool('login', true); await Navigator.push(
+            context,
+            PageTransition(
+                duration: Duration(seconds: 1),
+                type: PageTransitionType.leftToRightWithFade,
+                child: mainLoginScreen(
+                  screenHeight: MediaQuery.of(context).size.height,
+                )));
+
+
+
+
 
       await Fluttertoast.showToast(
           msg: "ThankYou",

@@ -892,40 +892,36 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         .toList();
     return Column(
       children: [
-        Container(
-          height: 450,
-            width: 400,
-          child: Card(
-              color: Color(0xffd2dfff),
-              elevation: 10,
-              child: Table(children: [
-                TableRow(children: [
-                  Container(
-                      height: 30,
-                      color: Color(0xff00196b),
-                      child: Center(
-                          child: Text(
-                        '$input1 ',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white),
-                      ))),
-                  Container(
-                      height: 30,
-                      color: Color(0xff00196b),
-                      child: Center(
-                          child: Text(
-                        'Census Data',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white),
-                      ))),
-                ]),
-                ..._CensusTabledata
-              ])),
-        ),
+        Card(
+            color: Color(0xffd2dfff),
+            elevation: 10,
+            child: Table(children: [
+              TableRow(children: [
+                Container(
+                    height: 30,
+                    color: Color(0xff00196b),
+                    child: Center(
+                        child: Text(
+                      '$input1 ',
+                      style: GoogleFonts.nunitoSans(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ))),
+                Container(
+                    height: 30,
+                    color: Color(0xff00196b),
+                    child: Center(
+                        child: Text(
+                      'Census Data',
+                      style: GoogleFonts.nunitoSans(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ))),
+              ]),
+              ..._CensusTabledata
+            ])),
         SizedBox(
           height: 20,
         ),
@@ -1219,40 +1215,36 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         .toList();
     return Column(
       children: [
-        Container(
-          height: 450,
-            width: 400,
-          child: Card(
-              color: Color(0xffd2dfff),
-              elevation: 10,
-              child: Table(children: [
-                TableRow(children: [
-                  Container(
-                      height: 30,
-                      color: Color(0xff00196b),
-                      child: Center(
-                          child: Text(
-                        '$input2 ',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white),
-                      ))),
-                  Container(
-                      height: 30,
-                      color: Color(0xff00196b),
-                      child: Center(
-                          child: Text(
-                        'Census Data',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white),
-                      ))),
-                ]),
-                ..._DistrictTabledata
-              ])),
-        ),
+        Card(
+            color: Color(0xffd2dfff),
+            elevation: 10,
+            child: Table(children: [
+              TableRow(children: [
+                Container(
+                    height: 30,
+                    color: Color(0xff00196b),
+                    child: Center(
+                        child: Text(
+                      '$input2 ',
+                      style: GoogleFonts.nunitoSans(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ))),
+                Container(
+                    height: 30,
+                    color: Color(0xff00196b),
+                    child: Center(
+                        child: Text(
+                      'Census Data',
+                      style: GoogleFonts.nunitoSans(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ))),
+              ]),
+              ..._DistrictTabledata
+            ])),
               SizedBox(
           height: 20,
         ),
@@ -1545,40 +1537,36 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         .toList();
     return Column(
       children: [
-        Container(
-          height: 450,
-            width: 400,
-          child: Card(
-              color: Color(0xffd2dfff),
-              elevation: 10,
-              child: Table(children: [
-                TableRow(children: [
-                  Container(
-                      height: 30,
-                      color: Color(0xff00196b),
-                      child: Center(
-                          child: Text(
-                        '$SUB_DISTRICT',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white),
-                      ))),
-                  Container(
-                      height: 30,
-                      color: Color(0xff00196b),
-                      child: Center(
-                          child: Text(
-                        'Census Data',
-                        style: GoogleFonts.nunitoSans(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.white),
-                      ))),
-                ]),
-                ..._SubDistrictTabledata
-              ])),
-        ),
+        Card(
+            color: Color(0xffd2dfff),
+            elevation: 10,
+            child: Table(children: [
+              TableRow(children: [
+                Container(
+                    height: 30,
+                    color: Color(0xff00196b),
+                    child: Center(
+                        child: Text(
+                      '$SUB_DISTRICT',
+                      style: GoogleFonts.nunitoSans(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ))),
+                Container(
+                    height: 30,
+                    color: Color(0xff00196b),
+                    child: Center(
+                        child: Text(
+                      'Census Data',
+                      style: GoogleFonts.nunitoSans(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.white),
+                    ))),
+              ]),
+              ..._SubDistrictTabledata
+            ])),
               SizedBox(
           height: 20,
         ),

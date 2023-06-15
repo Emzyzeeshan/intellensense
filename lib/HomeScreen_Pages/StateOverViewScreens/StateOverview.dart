@@ -32,6 +32,7 @@ bool isLoaded = false;
   @override
   void initState(){
     super.initState();
+    StateNameApi();
     //TwitterOverViewApi();
     //StateNameApi();
   }
