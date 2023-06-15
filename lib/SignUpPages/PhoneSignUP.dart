@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:intellensense/SignUpPages/SIgnUpRegister_Page.dart';
+import 'package:intellensense/SignUpPages/SIgnUpRegister_Phone.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 
@@ -87,7 +87,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              SignUpForm(phoneController.text)));
+                                              SignUpPhone(phoneController.text)));
    
       }
     } on FirebaseAuthException catch (e) {

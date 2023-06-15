@@ -93,24 +93,26 @@ class _NewsTemplate2State extends State<NewsTemplate2> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+               //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Row(
-                    children: [
-                      Image.asset(
-                        '${widget.logolink}',
-                        height: 25,
-                        width: 25,
-                      ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                          widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
-                          style: GoogleFonts.bebasNeue(
-                              fontWeight: FontWeight.bold, fontSize: 12)),
-                    ],
+                  Container(
+                    child: Row(
+                      children: [
+                        Image.asset(
+                          '${widget.logolink}',
+                          height: 25,
+                          width: 25,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                            widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
+                            style: GoogleFonts.bebasNeue(
+                                fontWeight: FontWeight.bold, fontSize: 12)),
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 3,
@@ -228,7 +230,7 @@ class _NewsTemplate4State extends State<NewsTemplate4> {
                   Row(
                     children: [
                       Image.asset(
-                        '${widget.logolink}',
+                        'assets/icons/newspaperdxp.png',
                         height: 20,
                         width: 20,
                       ),
@@ -254,3 +256,4 @@ class _NewsTemplate4State extends State<NewsTemplate4> {
         ));
   }
 }
+

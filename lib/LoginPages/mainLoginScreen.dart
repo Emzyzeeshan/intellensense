@@ -182,7 +182,7 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                                           ));
                                     },
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xff00186a),
+                                        backgroundColor: Color(0xff6d96fa),
                                         fixedSize: const Size(150, 50),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -201,7 +201,7 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                                           ));
                                     },
                                     style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xff00186a),
+                                        backgroundColor: Color(0xff6d96fa),
                                         fixedSize: const Size(150, 50),
                                         shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -281,7 +281,7 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                                       ));
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff00186a),
+                                    backgroundColor: Color(0xff6d96fa),
                                     fixedSize: const Size(150, 50),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
@@ -300,7 +300,7 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                                       ));
                                 },
                                 style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff00186a),
+                                    backgroundColor: Color(0xff6d96fa),
                                     fixedSize: const Size(150, 50),
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
@@ -382,7 +382,7 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                                     ));
                               },
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0xff00186a),
+                                  backgroundColor: Color(0xff6d96fa),
                                   fixedSize: const Size(150, 50),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50))),
@@ -393,7 +393,7 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                           ElevatedButton(
                               onPressed: () {},
                               style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(0xff00186a),
+                                  backgroundColor: Color(0xff6d96fa),
                                   fixedSize: const Size(150, 50),
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(50))),

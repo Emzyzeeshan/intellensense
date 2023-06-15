@@ -863,6 +863,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ],
                             ),
                           ),
+                          //main card
                           Padding(
                               padding:
                                   const EdgeInsets.only(left: 8.0, right: 8),

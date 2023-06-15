@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
-import 'package:intellensense/SignUpPages/SIgnUpRegister_Page.dart';
+import 'package:intellensense/SignUpPages/SIgnUpRegister_Phone.dart';
 import 'package:intellensense/main.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
+
+import 'SignUpRegistration_Email.dart';
 
 enum EmailVerificationState { SHOW_PHONE_FORM_STATE, SHOW_OTP_FORM_STATE }
 
@@ -151,7 +153,7 @@ class _EmailSignUpState extends State<EmailSignUp> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => SignUpForm(EmailController.text)));
+                      builder: (context) => SignUpEmail(EmailController.text)));
             } else {
               Fluttertoast.showToast(
                   msg: "Incorrect OTP",

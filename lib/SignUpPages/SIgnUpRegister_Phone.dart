@@ -10,15 +10,15 @@ import 'package:intellensense/LoginPages/login.dart';
 import 'package:intellensense/main.dart';
 import 'package:step_progress_indicator/step_progress_indicator.dart';
 
-class SignUpForm extends StatefulWidget {
+class SignUpPhone extends StatefulWidget {
   var data;
-  SignUpForm(this.data,);
+  SignUpPhone(this.data,);
 
   @override
-  State<SignUpForm> createState() => _SignUpFormState();
+  State<SignUpPhone> createState() => _SignUpPhoneState();
 }
 
-class _SignUpFormState extends State<SignUpForm> {
+class _SignUpPhoneState extends State<SignUpPhone> {
   final _formKey = GlobalKey<FormState>();
   bool checkedValue = false;
   var input = 'MM_REQUESTOR';
@@ -30,7 +30,13 @@ class _SignUpFormState extends State<SignUpForm> {
     // TODO: implement initState
     super.initState();
   }
-
+@override
+  void dispose() {
+    username.dispose();
+    _pass.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
   List Requestor = [
     'MM_REQUESTOR',
     'MM_APPROVER',
@@ -277,7 +283,10 @@ class _SignUpFormState extends State<SignUpForm> {
                                 child: MaterialButton(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
-                                      SignupFormAPI();
+                                      setState(() {
+                                        SignUpPhoneAPI();
+                                      });
+
                                     }
                                   },
                                   child: Text(
@@ -386,11 +395,12 @@ class _SignUpFormState extends State<SignUpForm> {
 
   //form
   var formdata;
-  SignupFormAPI() async {
+  SignUpPhoneAPI() async {
     var body;
     var headers = {'Content-Type': 'application/json'};
-    setState(() {
+    /*setState(() {
       if (currentState == SignUpVerificationState.BYPHONE) {
+        print('phone');
         body = json.encode({
           "userName": "${username.text}",
           "email": "Byphone@piloggroup.com",
@@ -401,8 +411,9 @@ class _SignUpFormState extends State<SignUpForm> {
           "mobile": "${widget.data.toString()}"
         });
       } else if (currentState == SignUpVerificationState.BYEMAIL) {
+        print('email');
         body = json.encode({
-          "userName": "${username.text}",
+          "userName": "${username.text.toString()}",
           "email": "${widget.data.toString()}",
           "password": "${_pass.text}",
           "role": "${input}",
@@ -411,15 +422,24 @@ class _SignUpFormState extends State<SignUpForm> {
           "mobile": "123456789"
         });
       }
-    });
+    });*/
     print(body);
     var response = await post(
       Uri.parse(INSIGHTS + '/register'),
       headers: headers,
-      body: body,
+      body: json.encode({
+        "userName": "${username.text}",
+        "email": "Byphone@piloggroup.com",
+        "password": "${_pass.text}",
+        "role": "${input}",
+        "firstName": "zeeshan",
+        "lastName": "mohd",
+        "mobile": "${widget.data.toString()}"
+      }),
     );
 
     print(response.statusCode);
+    print(response.body);
     if (response.statusCode == 201) {
       formdata = response.body;
       if (formdata.toString() == 'Successfully registered ${username.text}') {

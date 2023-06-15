@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intellensense/HomeScreen_Pages/HomeScreen.dart';
+import 'package:intellensense/LoginPages/login.dart';
 
 
 import 'package:provider/provider.dart';
@@ -77,7 +78,7 @@ class _MyAppState extends State<MyApp> {
           theme: Styles.themeData(themeChangeProvider.darkTheme, context),
           debugShowCheckedModeBanner: false,
           title: 'TRS Party',
-          home:HomeScreen()
+          home:mainLoginScreen(screenHeight: MediaQuery.of(context).size.height,)
           
           //  mainLoginScreen(screenHeight: screenHeight),
         ),
@@ -100,9 +101,9 @@ enum SignUpVerificationState { BYEMAIL, BYPHONE }
 ///login API
 const rootUrl = 'http://192.169.1.173:8080';
 ///login API new
-const rootURL1 = 'http://192.169.1.211:8082/insights/3.67.0';
+const rootURL1 = 'http://apimobile.pilogcloud.com:8080/insights/3.67.0';
 ///LogOut Api
 const rootUrl1 = 'https://ifar.pilogcloud.com/';
 
 ///{{INSIGHTS-URL}}
-const INSIGHTS = 'http://192.169.1.211:8082/insights/3.67.0';
+const INSIGHTS = 'http://apimobile.pilogcloud.com:8080/insights/3.67.0';
