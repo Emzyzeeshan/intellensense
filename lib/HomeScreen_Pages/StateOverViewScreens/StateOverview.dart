@@ -318,7 +318,7 @@ bool isLoaded = false;
     print(partyData.toString());
     bool isHighestCount = partyData.keys
         .where((p)=>p!=party).map((p){print(p); return p.toString();})
-        .every((p)=>(int.parse(partyData[p][0][attribute]) <= int.parse(partyData[party][0][attribute]) as bool));
+        .every((p)=>(double.parse(partyData[p][0][attribute].toString()) <= double.parse(partyData[party][0][attribute].toString())as bool));
     if (isHighestCount) return TextStyle(color: Colors.green);
 
     return null;
@@ -386,22 +386,23 @@ bool isLoaded = false;
 
                           DataRow(cells: [
                             DataCell(Text("USER FOLLOWERS",style: TextStyle(fontWeight: FontWeight.bold),)),
-                            ...TwitterOverviewdata['party_data'].keys.map((p)=>DataCell(Text(TwitterOverviewdata['party_data'][p][0]['USER_FOLLOWERS'], style: highestCountStyle(TwitterOverviewdata['party_data'],p,'USER_FOLLOWERS'))),)
+                            ...TwitterOverviewdata['party_data'].keys.map((p)=>DataCell(Text(TwitterOverviewdata['party_data'][p][0]['USER_FOLLOWERS'].toString(), style: highestCountStyle(TwitterOverviewdata['party_data'],p,'USER_FOLLOWERS'))),)
                           ],),
                           DataRow(cells: [
                             DataCell(Text("LIKES",style: TextStyle(fontWeight: FontWeight.bold),)),
-                            //...TwitterOverviewdata['party_data'].keys.map((p)=>DataCell(Text(TwitterOverviewdata['party_data'][p][0]['LIKES'], style: highestCountStyle(TwitterOverviewdata['party_data'],p,'LIKES'))),),
-                            DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+                            ...TwitterOverviewdata['party_data'].keys.map((p)=>DataCell(Text(TwitterOverviewdata['party_data'][p][0]['LIKES'].toString(), style: highestCountStyle(TwitterOverviewdata['party_data'],p,'LIKES'))),),
+                           /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
                             DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
-                            DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),
+                            DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
                           ]),
                           DataRow(cells: [
                             DataCell(Text("RETWEET COUNT",style: TextStyle(fontWeight: FontWeight.bold),)),
-                            DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                            ...TwitterOverviewdata['party_data'].keys.map((p)=>DataCell(Text(TwitterOverviewdata['party_data'][p][0]['RETWEET_COUNT'].toString(), style: highestCountStyle(TwitterOverviewdata['party_data'],p,'RETWEET_COUNT'))),),
+                            /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
                             DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
-                            DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),
+                            DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
 
-                            ),
+
                           ]),
                         ]),
                   ),
