@@ -18,6 +18,7 @@ class _AudioEmotionState extends State<AudioEmotion> {
   void initState() {
     print(widget.ytlink);
     super.initState();
+    
   }
 
   TextEditingController _editingController = TextEditingController();
