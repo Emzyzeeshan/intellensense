@@ -52,8 +52,11 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  var _currIndex = 0;
+  bool isnewshidden = false;
   bool shownews = true;
   bool showSocialnews = true;
+  bool newson=false;
   bool get _isShrink {
     return _scrollController != null &&
         _scrollController!.hasClients &&
@@ -136,8 +139,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   bool selected = false;
+      
+  double _height = 450;
+  double _width = 370;
   @override
   Widget build(BuildContext context) {
+
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return WillPopScope(
@@ -1762,17 +1769,152 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 )
                               : Container(),
-                          viewnews == true
-                              ? SizedBox(
-                                  height: 450,
-                                  child: PageView.builder(
-                                      // physics: NeverScrollableScrollPhysics(),
-                                      controller: PageCount,
-                                      itemCount: DailyNewsPages.length,
-                                      itemBuilder: (BuildContext, index) {
-                                        return DailyNewsPages[index];
-                                      }))
-                              : Container(),
+
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15)),
+                              color: Color(0xffa3bdea),
+                              elevation: 7,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Flexible(child: Divider(thickness: 1)),
+                                      Text(
+                                        'NEWS',
+                                        style: TextStyle(
+                                          fontFamily: 'Segoe UI',
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      IconButton(
+                                        icon: AnimatedSwitcher(
+                                            duration: const Duration(
+                                                milliseconds: 300),
+                                            transitionBuilder: (child, anim) =>
+                                                RotationTransition(
+                                                  turns: child.key ==
+                                                          ValueKey('icon1')
+                                                      ? Tween<double>(
+                                                              begin: 1,
+                                                              end: 0.75)
+                                                          .animate(anim)
+                                                      : Tween<double>(
+                                                              begin: 0.75,
+                                                              end: 1)
+                                                          .animate(anim),
+                                                  child: FadeTransition(
+                                                      opacity: anim,
+                                                      child: child),
+                                                ),
+                                            child: _currIndex == 0
+                                                ? Icon(
+                                                    Icons
+                                                        .arrow_circle_left_outlined,
+                                                    size: 30,
+                                                    key:
+                                                        const ValueKey('icon1'))
+                                                : Icon(
+                                                    Icons.arrow_circle_up_sharp,
+                                                    size: 30,
+                                                    key:
+                                                        const ValueKey('icon2'),
+                                                  )),
+                                        onPressed: () {
+                                          setState(() {
+                                            
+                                            _currIndex =
+                                                _currIndex == 0 ? 1 : 0;
+                                            if (_currIndex == 0) {
+                                              setState(() {
+                                                    newson=false;
+                                              });
+                                              _height = 0;
+                                              _width = 0;
+
+                                            } else if (_currIndex == 1) {
+                                              setState(() {
+                                                      newson=true;
+                                              });
+                                              
+// if(_height == 450)     {
+//   setState(() {
+//       newson=true;
+//   });
+// }                                             
+                                            
+                                          
+                                              _height = 450;
+                                              _width = MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.93;
+                                            }
+                                          });
+                                        },
+                                      ),
+                                      // IconButton(
+                                      //     onPressed: () {
+                                      //       setState(() {
+                                      //         isnewshidden = !isnewshidden;
+                                      //       });
+                                      //     },
+                                      //     icon: isnewshidden == false
+                                      //         ? Icon(
+                                      //             Icons
+                                      //                 .arrow_circle_down_rounded,
+                                      //             size: 30,
+                                      //           )
+                                      //         : Icon()),
+                                      Flexible(
+                                          child: Divider(
+                                        thickness: 1,
+                                      ))
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                   newson==true?   AnimatedContainer(
+                                        
+                                       
+                                          curve: Curves.linear,
+                                          height: _height,
+                                          width: _width,
+                                          alignment: Alignment.center,
+                                          duration: Duration(seconds: 2),
+                                          child:
+                                          
+                                           PageView.builder(
+                                              // physics: NeverScrollableScrollPhysics(),
+                                              controller: PageCount,
+                                              itemCount: DailyNewsPages.length,
+                                              itemBuilder:
+                                                  (BuildContext, index) {
+                                                return  DailyNewsPages[index];
+                                              }),
+                                          decoration: BoxDecoration()):Container(),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+
+                          // viewnews == true
+                          //     ? SizedBox(
+                          //         height: 450,
+                          //         child: PageView.builder(
+                          //             // physics: NeverScrollableScrollPhysics(),
+                          //             controller: PageCount,
+                          //             itemCount: DailyNewsPages.length,
+                          //             itemBuilder: (BuildContext, index) {
+                          //               return DailyNewsPages[index];
+                          //             }))
+                          //     : Container(),
                           SingleChildScrollView(
                             physics: ScrollPhysics(),
                             child: Column(

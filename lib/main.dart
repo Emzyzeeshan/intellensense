@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intellensense/HomeScreen_Pages/HomeScreen.dart';
 import 'package:intellensense/LoginPages/login.dart';
+import 'package:intellensense/SplashScreen/splashanimation.dart';
 
 
 import 'package:provider/provider.dart';
@@ -46,7 +47,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-     check_if_already_login();
+ 
     getCurrentAppTheme();
     // TODO: implement initState
     super.initState();
@@ -78,23 +79,15 @@ class _MyAppState extends State<MyApp> {
           theme: Styles.themeData(themeChangeProvider.darkTheme, context),
           debugShowCheckedModeBanner: false,
           title: 'TRS Party',
-          home:mainLoginScreen(screenHeight: MediaQuery.of(context).size.height,)
+          home:SplashAnimation()
           
           //  mainLoginScreen(screenHeight: screenHeight),
         ),
       );
     }));
   }
-    var newuser;
-  void check_if_already_login() async {
-    logindata = await SharedPreferences.getInstance();
-    newuser = (logindata.getBool('login') ?? true);
-    print(newuser);
-    if (newuser == false || FirebaseAuth.instance.authStateChanges() == true) {
-      Navigator.pushReplacement(
-          context, new MaterialPageRoute(builder: (context) => HomeScreen()));
-    }
-  }
+ 
+
 }
 enum SignUpVerificationState { BYEMAIL, BYPHONE }
   SignUpVerificationState? currentState ;
