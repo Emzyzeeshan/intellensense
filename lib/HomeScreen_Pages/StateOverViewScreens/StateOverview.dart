@@ -19,6 +19,7 @@ class StateOverviewScreen extends StatefulWidget {
 
 class _StateOverviewScreenState extends State<StateOverviewScreen> {
   final List<String> items = [];
+  
   List fullData = [];
   List fullData1 = [];
   List searchData = [];
@@ -35,6 +36,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
   void initState() {
     statedropdownvisible == true;
     TopPartyFinaldata = TopPartylistApi();
+    Youtubetoppartydata=YoutubeTopPartylistApi();
+    newschannelfinaldata=NewsChannelTopPartylistApi();
     super.initState();
 
     //TwitterOverViewApi();
@@ -45,6 +48,10 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
   late Future<dynamic> finaldata1 = TwitterOverViewApi();
   late Future<dynamic> TopPartyFinaldata = TopPartylistApi();
   late Future<dynamic> NewsPaperOverviewFutureData = NewspaperOverviewApi();
+  late Future<dynamic> Youtubetoppartydata=YoutubeTopPartylistApi();
+  late Future<dynamic> Youtubefinaldata=YoutubeOverViewApi();
+  late Future<dynamic> newschannelfinaldata=NewsChannelTopPartylistApi();
+  late Future<dynamic> NewschannelOverviewfinaldata=NewschannelOverViewApi();
   Widget _buildTest(String title) {
     return Container(
       //color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
@@ -75,6 +82,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                     if (snapshot.hasError) {
                       return const Text('Error');
                     } else if (snapshot.hasData) {
+                      
                       return DropdownButtonHideUnderline(
                         child: DropdownButton2<String>(
                           isExpanded: true,
@@ -101,13 +109,23 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                           value: selectedValue,
                           onChanged: (value) {
                             setState(() {
+                              
+                              istablevisible=false;
+                              isNewsChannelvisible=false;
                               _NewspaperOverviewTabledata.clear();
                               statedropdownvisible = false;
                               selectedValue = value as String;
-
+                      YoutubeTopPartylistdata=YoutubeTopPartylistApi();
                               TopPartyFinaldata = TopPartylistApi();
                               NewsPaperOverviewFutureData =
                                   NewspaperOverviewApi();
+                                  Youtubetablecolumn.clear();
+                                  newschannelfinaldata=NewsChannelTopPartylistApi();
+                                  NewsChanneltablecolumn.clear();
+isytvisible=false;
+isnewschannelvisible=false;
+statedropdownvisible=false;
+
                             });
                           },
                              buttonStyleData: const ButtonStyleData(
@@ -269,15 +287,38 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                       MediaQuery.of(context).size.width / 2,
                                 )),
                           ),
-                    Center(
-                      child: Icon(Icons.directions_transit),
-                    ),
+                          isytvisible == true
+                        ? YoutubeOverviewScreen()
+                        : SkeletonParagraph(
+                            style: SkeletonParagraphStyle(
+                                lines: 5,
+                                spacing: 6,
+                                lineStyle: SkeletonLineStyle(
+                                  randomLength: true,
+                                  height: 20,
+                                  borderRadius: BorderRadius.circular(8),
+                                  minLength:
+                                      MediaQuery.of(context).size.width / 2,
+                                )),
+                          ),
+                  
                     Center(
                       child: NewsPaperOverviewScreen(),
                     ),
-                    Center(
-                      child: Icon(Icons.directions_car),
-                    ),
+                      isnewschannelvisible == true
+                        ? NewschannelOverviewScreen()
+                        : SkeletonParagraph(
+                            style: SkeletonParagraphStyle(
+                                lines: 5,
+                                spacing: 6,
+                                lineStyle: SkeletonLineStyle(
+                                  randomLength: true,
+                                  height: 20,
+                                  borderRadius: BorderRadius.circular(8),
+                                  minLength:
+                                      MediaQuery.of(context).size.width / 2,
+                                )),
+                          ),
                     Center(
                       child: Icon(Icons.directions_transit),
                     ),
@@ -524,7 +565,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                   ),
                 ),
                 SizedBox(height: 20,),
-                Image.asset('assets/Image/celebrate.gif',height: 250,width: MediaQuery.of(context).size.width,)
+                TwitterOverviewdata['lead'][0]=='INC'?
+                Image.asset('assets/new Updated images/twitter_001.gif',height: 250,width: MediaQuery.of(context).size.width,):Container()
               ],
             );
           } else {
@@ -536,6 +578,177 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
       },
     );
   }
+
+
+bool isytvisible=false;
+bool istablevisible=false;
+//Youtube Overview Screen
+YoutubeOverviewScreen(){
+return TopPartylistdata['top_parties'].isEmpty? 
+Image.asset('assets/Image/datanotfound.gif'):FutureBuilder<dynamic>(
+      future: Youtubefinaldata,
+      builder: (
+        BuildContext context,
+        AsyncSnapshot<dynamic> snapshot,
+      ) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return SkeletonParagraph(
+            style: SkeletonParagraphStyle(
+                lines: 5,
+                spacing: 6,
+                lineStyle: SkeletonLineStyle(
+                  randomLength: true,
+                  height: 20,
+                  borderRadius: BorderRadius.circular(8),
+                  minLength: MediaQuery.of(context).size.width / 2,
+                )),
+          );
+        } else if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return const Text('Error');
+          } else if (snapshot.hasData) {
+            // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
+            //
+            // }
+            return Column(
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child:istablevisible==true? DataTable(
+                        headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color(0xff00196b)),
+                        dataRowColor: MaterialStateColor.resolveWith((states) {
+                          return Color(0xffd2dfff);
+                        }),
+                        border: TableBorder.all(color: Colors.black),
+                        // Datatable widget that have the property columns and rows.
+                        columns: [
+                          // Set the name of the column
+                          DataColumn(
+                            label: Text(
+                              'PARTY NAME',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          ...Youtubetablecolumn
+                          // DataColumn(
+                          //   label: Text(
+                          //       YoutubeOverviewdata['party_data'][partyt1][0]
+                          //           ['CANDIDATE_PARTY_NAME'],
+                          //       style: TextStyle(color: Colors.white)),
+                          // ),
+                          // DataColumn(
+                          //   label: Text(
+                          //       YoutubeOverviewdata['party_data'][partyt2][0]
+                          //           ['CANDIDATE_PARTY_NAME'],
+                          //       style: TextStyle(color: Colors.white)),
+                          // ),
+                          // DataColumn(
+                          //   label: Text(
+                          //       YoutubeOverviewdata['party_data'][partyt3][0]
+                          //           ['CANDIDATE_PARTY_NAME'],
+                          //       style: TextStyle(color: Colors.white)),
+                          // ),
+                        ],
+                        rows: [
+                          // Set the values to the columns
+                          DataRow(
+                            cells: [
+                              DataCell(Text(
+                                "LIKES",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                              ...YoutubeOverviewdata['party_data'].keys.map(
+                                    (p) => DataCell(Text(
+                                        YoutubeOverviewdata['party_data'][p][0]
+                                                ['LIKES']
+                                            .toString(),
+                                        // style: highestCountStyle(
+                                        //     YoutubeOverviewdata['party_data'],
+                                        //     p,
+                                        //     'LIKES')
+                                            )),
+                                  )
+                            ],
+                          ),
+                          DataRow(cells: [
+                            DataCell(Text(
+                              "COMMENTS",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )),
+                            ...YoutubeOverviewdata['party_data'].keys.map(
+                                  (p) => DataCell(Text(
+                                      YoutubeOverviewdata['party_data'][p][0]
+                                              ['COMMENTS']
+                                          .toString(),
+                                      // style: highestCountStyle(
+                                      //     YoutubeOverviewdata['party_data'],
+                                      //     p,
+                                      //     'COMMENTS')
+                                          )),
+                                ),
+                            /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+                                DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
+                                DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
+                          ]),
+                          DataRow(cells: [
+                            DataCell(Text(
+                              "VIEWS",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )),
+                            ...YoutubeOverviewdata['party_data'].keys.map(
+                                  (p) => DataCell(Text(
+                                      YoutubeOverviewdata['party_data'][p][0]
+                                              ['VIEWS']
+                                          .toString(),
+                                      // style: highestCountStyle(
+                                      //     YoutubeOverviewdata['party_data'],
+                                      //     p,
+                                      //     'VIEWS')
+                                          )),
+                                ),
+                            /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                                DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                          ]),
+                          // DataRow(cells: [
+                          //   DataCell(Text(
+                          //     "CANDIDATE_PARTY_NAME",
+                          //     style: TextStyle(fontWeight: FontWeight.bold),
+                          //   )),
+                          //   ...YoutubeOverviewdata['party_data'].keys.map(
+                          //         (p) => DataCell(Text(
+                          //             YoutubeOverviewdata['party_data'][p][0]
+                          //                     ['CANDIDATE_PARTY_NAME']
+                          //                 .toString(),
+                          //             // style: highestCountStyle(
+                          //             //     YoutubeOverviewdata['party_data'],
+                          //             //     p,
+                          //             //     'CANDIDATE_PARTY_NAME')
+                          //                 )),
+                          //       ),
+                          //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                          //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                          //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                          // ]),
+                        ]):Container(),
+                  ),
+                ),
+               
+              ],
+            );
+          } else {
+            return const Text('Empty data');
+          }
+        } else {
+          return Text('State: ${snapshot.connectionState}');
+        }
+      },
+    );
+}
+
 
 //NewsPaperOverview Screen
   NewsPaperOverviewScreen() {
@@ -599,6 +812,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                             color: Colors.white),
                                       ))),
                                 ]),
+
+                                
                                 ..._NewspaperOverviewTabledata,
                               ],
                             ),
@@ -625,27 +840,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
               ],
             );
 
-            //  ListView.builder(
-            //   itemCount:   isnull==false?NewspaperOverviewdata['party_data'].length :1,
-            //   itemBuilder: (context,index){
-            //   return Padding(
-            //     padding: const EdgeInsets.all(8.0),
-            //     child: Container(
-            //       height: 70,
-            //       child: Card(color:Color(0xffd2dfff),child: Padding(
-            //         padding: const EdgeInsets.all(8.0),
-            //         child:
-
-            //         isnull==false?
-            //         Column(
-            //           children: [
-            //             Text('Party Name : ${NewspaperOverviewdata['party_data'][index]['PARTY_NAME']}'),
-            //             Text('Count : ${NewspaperOverviewdata['party_data'][index]['COUNT']}'),
-            //           ],
-            //         ):Container(child: Center(child: Text('N/A'),),),
-            //       ),)),
-            //   );
-            // });
+            
           } else {
             return const Text('Empty data');
           }
@@ -655,6 +850,181 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
       },
     );
   }
+
+
+bool isNewsChannelvisible=false;
+NewschannelOverviewScreen(){
+  return NewsChannelTopPartylistdata['top_parties'].isEmpty? 
+Image.asset('assets/Image/datanotfound.gif'):FutureBuilder<dynamic>(
+      future: NewschannelOverviewfinaldata,
+      builder: (
+        BuildContext context,
+        AsyncSnapshot<dynamic> snapshot,
+      ) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return SkeletonParagraph(
+            style: SkeletonParagraphStyle(
+                lines: 5,
+                spacing: 6,
+                lineStyle: SkeletonLineStyle(
+                  randomLength: true,
+                  height: 20,
+                  borderRadius: BorderRadius.circular(8),
+                  minLength: MediaQuery.of(context).size.width / 2,
+                )),
+          );
+        } else if (snapshot.connectionState == ConnectionState.done) {
+          if (snapshot.hasError) {
+            return const Text('Error');
+          } else if (snapshot.hasData) {
+            // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
+            //
+            // }
+            return Column(
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child:isNewsChannelvisible==true? DataTable(
+                        headingRowColor: MaterialStateColor.resolveWith(
+                            (states) => Color(0xff00196b)),
+                        dataRowColor: MaterialStateColor.resolveWith((states) {
+                          return Color(0xffd2dfff);
+                        }),
+                        border: TableBorder.all(color: Colors.black),
+                        // Datatable widget that have the property columns and rows.
+                        columns: [
+                          // Set the name of the column
+                          DataColumn(
+                            label: Text(
+                              'PARTY NAME',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                          ...NewsChanneltablecolumn
+                          // DataColumn(
+                          //   label: Text(
+                          //       YoutubeOverviewdata['party_data'][partyt1][0]
+                          //           ['CANDIDATE_PARTY_NAME'],
+                          //       style: TextStyle(color: Colors.white)),
+                          // ),
+                          // DataColumn(
+                          //   label: Text(
+                          //       YoutubeOverviewdata['party_data'][partyt2][0]
+                          //           ['CANDIDATE_PARTY_NAME'],
+                          //       style: TextStyle(color: Colors.white)),
+                          // ),
+                          // DataColumn(
+                          //   label: Text(
+                          //       YoutubeOverviewdata['party_data'][partyt3][0]
+                          //           ['CANDIDATE_PARTY_NAME'],
+                          //       style: TextStyle(color: Colors.white)),
+                          // ),
+                        ],
+                        rows: [
+                          // Set the values to the columns
+                          DataRow(
+                            cells: [
+                              DataCell(Text(
+                                "LIKES",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                              ...NewschannelOverviewdata['party_data'].keys.map(
+                                    (p) => DataCell(Text(
+                                        NewschannelOverviewdata['party_data'][p][0]
+                                                ['LIKES']
+                                            .toString(),
+                                        // style: highestCountStyle(
+                                        //     YoutubeOverviewdata['party_data'],
+                                        //     p,
+                                        //     'LIKES')
+                                            )),
+                                  )
+                            ],
+                          ),
+                          DataRow(cells: [
+                            DataCell(Text(
+                              "COMMENTS",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )),
+                            ...NewschannelOverviewdata['party_data'].keys.map(
+                                  (p) => DataCell(Text(
+                                      NewschannelOverviewdata['party_data'][p][0]
+                                              ['COMMENTS']
+                                          .toString(),
+                                      // style: highestCountStyle(
+                                      //     YoutubeOverviewdata['party_data'],
+                                      //     p,
+                                      //     'COMMENTS')
+                                          )),
+                                ),
+                            /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+                                DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
+                                DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
+                          ]),
+                          DataRow(cells: [
+                            DataCell(Text(
+                              "VIEWS",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            )),
+                            ...NewschannelOverviewdata['party_data'].keys.map(
+                                  (p) => DataCell(Text(
+                                      NewschannelOverviewdata['party_data'][p][0]
+                                              ['VIEWS']
+                                          .toString(),
+                                      // style: highestCountStyle(
+                                      //     YoutubeOverviewdata['party_data'],
+                                      //     p,
+                                      //     'VIEWS')
+                                          )),
+                                ),
+                            /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                                DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                          ]),
+                          // DataRow(cells: [
+                          //   DataCell(Text(
+                          //     "CANDIDATE_PARTY_NAME",
+                          //     style: TextStyle(fontWeight: FontWeight.bold),
+                          //   )),
+                          //   ...YoutubeOverviewdata['party_data'].keys.map(
+                          //         (p) => DataCell(Text(
+                          //             YoutubeOverviewdata['party_data'][p][0]
+                          //                     ['CANDIDATE_PARTY_NAME']
+                          //                 .toString(),
+                          //             // style: highestCountStyle(
+                          //             //     YoutubeOverviewdata['party_data'],
+                          //             //     p,
+                          //             //     'CANDIDATE_PARTY_NAME')
+                          //                 )),
+                          //       ),
+                          //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                          //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                          //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                          // ]),
+                        ]):Container(),
+                  ),
+                ),
+               
+              ],
+            );
+          } else {
+            return const Text('Empty data');
+          }
+        } else {
+          return Text('State: ${snapshot.connectionState}');
+        }
+      },
+    );
+}
+
+//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+///          API CALLS    / //////////////////////////////////
+
+
+
 
   ///twitteroverviewData API
   var TwitterOverviewdata;
@@ -688,24 +1058,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
     return TwitterOverviewdata;
   }
 
-  onSearchTextChanged1(String text) async {
-    searchData.clear();
-    if (text.isEmpty) {
-      // Check textfield is empty or not
-      setState(() {});
-      return;
-    }
-
-    fullData.forEach((data) {
-      if (data['name']
-          .toString()
-          .toLowerCase()
-          .contains(text.toLowerCase().toString())) {
-        searchData.add(
-            data); // If not empty then add search data into search data list
-      }
-    });
-  }
+  
 
   ///Statenames API
   var StateNamedata;
@@ -780,8 +1133,96 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
     return TopPartylistdata;
   }
 
-  //Newspaper overview api
+//Youtube top party list api
+  var YoutubeTopPartylistdata;
+  var locallist=[];
+  List <DataColumn>Youtubetablecolumn=[];
+  Future<dynamic> YoutubeTopPartylistApi() async {
+    print('YT top');
+        var body=json.encode({
+        "type": "top_parties",
+  "STATE": selectedValue.toString(),
+  "social_handle": "YOUTUBE"
+    });
+    var headers = {
+  'Content-Type': 'application/json'
+};
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6659/social_media_YT/'),
+        headers: headers,
+        body: body);
 
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      try {
+        setState(() {
+          YoutubeTopPartylistdata = jsonDecode(utf8.decode(response.bodyBytes));
+          locallist=YoutubeTopPartylistdata['top_parties'];
+          Youtubefinaldata=YoutubeOverViewApi();
+        isytvisible=true;
+        for(int i=0;i<YoutubeTopPartylistdata['top_parties'].length;i++){
+Youtubetablecolumn.add( DataColumn(
+                            label: Text(
+                              '${YoutubeTopPartylistdata['top_parties'][i]}',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),);
+        }
+
+        });
+        print(locallist.toList());
+      } catch (e) {
+        print(YoutubeTopPartylistdata);
+      }
+    } else {
+      print(response.reasonPhrase);
+    }
+    return YoutubeTopPartylistdata;
+  }
+
+
+//Youtube Overview data api
+ var YoutubeOverviewdata;
+  Future<dynamic> YoutubeOverViewApi() async {
+   
+    String partylist=locallist.join(",");
+   
+    
+  var body =json.encode({
+ "type": "party_data",
+  "STATE": selectedValue.toString(),
+  "party_list": "$partylist",
+  "social_handle": "YOUTUBE"
+  });
+      var headers = {
+  'Content-Type': 'application/json'
+};
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6659/social_media_YT/'),
+        headers: headers,
+        body: body);
+
+
+    if (response.statusCode == 200) {
+      try {
+        
+        YoutubeOverviewdata = jsonDecode(utf8.decode(response.bodyBytes));
+        setState(() {
+          istablevisible=true;
+          statedropdownvisible = true;
+        });
+
+      } catch (e) {
+        print(YoutubeOverviewdata);
+      }
+    } else {
+      print(response.reasonPhrase);
+    }
+    return YoutubeOverviewdata;
+  }
+
+
+  //Newspaper overview api
   var NewspaperOverviewdata;
   List<TableRow> _NewspaperOverviewTabledata = [];
   Map NewspaperOverviewquery = new Map<String, dynamic>();
@@ -794,7 +1235,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
         Uri.parse('http://idxp.pilogcloud.com:6659/social_media_NP/'),
         body: NewspaperOverviewquery);
 
-    print(response.statusCode);
+
     if (response.statusCode == 200) {
       try {
         NewspaperOverviewdata = jsonDecode(utf8.decode(response.bodyBytes));
@@ -825,7 +1266,6 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           ]));
         }
 
-        print(NewspaperOverviewdata);
       } catch (e) {
         print(NewspaperOverviewdata);
       }
@@ -835,22 +1275,99 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
     return NewspaperOverviewdata;
   }
 
-  onSearchTextChanged(String text) async {
-    searchData.clear();
-    if (text.isEmpty) {
-      // Check textfield is empty or not
-      setState(() {});
-      return;
-    }
-
-    fullData.forEach((data) {
-      if (data['name']
-          .toString()
-          .toLowerCase()
-          .contains(text.toLowerCase().toString())) {
-        searchData.add(
-            data); // If not empty then add search data into search data list
-      }
+//NewsChannel top party list api
+  var NewsChannelTopPartylistdata;
+  var NewsChannellocallist=[];
+  List <DataColumn>NewsChanneltablecolumn=[];
+  Future<dynamic> NewsChannelTopPartylistApi() async {
+    print('YT top');
+        var body=json.encode({
+        "type": "top_parties",
+  "STATE": selectedValue.toString(),
+  "social_handle": "NEWS_CHANNEL"
     });
+    var headers = {
+  'Content-Type': 'application/json'
+};
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6659/social_media_YT/'),
+        headers: headers,
+        body: body);
+
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      try {
+        setState(() {
+          
+          NewsChannelTopPartylistdata = jsonDecode(utf8.decode(response.bodyBytes));
+          NewsChannellocallist=NewsChannelTopPartylistdata['top_parties'];
+          NewschannelOverviewfinaldata=NewschannelOverViewApi();
+       isnewschannelvisible=true;
+       
+        for(int i=0;i<NewsChannelTopPartylistdata['top_parties'].length;i++){
+NewsChanneltablecolumn.add( DataColumn(
+                            label: Text(
+                              '${NewsChannelTopPartylistdata['top_parties'][i]}',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),);
+        }
+
+        });
+        print('newschannel top party list');
+        print(NewsChannellocallist.toList());
+      } catch (e) {
+        print(NewsChannelTopPartylistdata);
+      }
+    } else {
+      print(response.reasonPhrase);
+    }
+    return NewsChannelTopPartylistdata;
   }
+
+//Newschannel Overview data api
+bool isnewschannelvisible=false;
+ var NewschannelOverviewdata;
+  Future<dynamic> NewschannelOverViewApi() async {
+    print('list heree');
+    String partylist=NewsChannellocallist.join(",");
+   print(partylist);
+    
+  var body =json.encode({
+ "type": "party_data",
+  "STATE": selectedValue.toString(),
+  "party_list": "$partylist",
+  "social_handle": "NEWS_CHANNEL"
+  });
+      var headers = {
+  'Content-Type': 'application/json'
+};
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6659/social_media_YT/'),
+        headers: headers,
+        body: body);
+
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      try {
+        
+        NewschannelOverviewdata = jsonDecode(utf8.decode(response.bodyBytes));
+        setState(() {
+          isNewsChannelvisible=true;
+          statedropdownvisible = true;
+        });
+print('its Newschannel party data');
+print(partylist);
+        print(NewschannelOverviewdata);
+      } catch (e) {
+        print(NewschannelOverviewdata);
+      }
+    } else {
+      print(response.reasonPhrase);
+    }
+    return NewschannelOverviewdata;
+  }
+
+
+  
 }

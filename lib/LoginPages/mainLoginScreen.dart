@@ -37,6 +37,7 @@ class _mainLoginScreenState extends State<mainLoginScreen>
   void initState() {
    
     super.initState();
+    
     _animationController = AnimationController(
       vsync: this,
       duration: kLoginAnimationDuration,

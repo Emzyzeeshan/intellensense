@@ -3,10 +3,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/HomeScreen_Pages/HomeScreen.dart';
 import 'package:intellensense/LoginPages/widgets/fade_slide_transition.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:quickalert/models/quickalert_animtype.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
@@ -25,6 +27,7 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  
   String userName = '', passWord = '';
   final GlobalKey<FormFieldState> formFieldKey = GlobalKey();
   bool userError = false, showPasswordField = false, passError = false;
@@ -169,22 +172,22 @@ border: InputBorder.none,
                         });
                         await Future.delayed(Duration(seconds: 2));
                         try {
-                          final result = await InternetAddress.lookup('example.com');
-                          if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
+                          // final result = await InternetAddress.lookup('example.com');
+                          // if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
                             LoginAPI();
-                          }
-                        } on SocketException catch (_) {
-                          islogin = false;
-                          print('not connected');
-                          return await QuickAlert.show(
-                            animType: QuickAlertAnimType.slideInUp,
-                            backgroundColor: Colors.white,
-                            context: context,
-                            type: QuickAlertType.error,
-                            title: 'Oops...',
-                            text: 'Please Check Your Internet!!',
-                            confirmBtnColor: Color(0xff5163da),
-                          );
+          //}
+                        } catch (_) {
+                          // islogin = false;
+                          // print('not connected');
+                          // return await QuickAlert.show(
+                          //   animType: QuickAlertAnimType.slideInUp,
+                          //   backgroundColor: Colors.white,
+                          //   context: context,
+                          //   type: QuickAlertType.error,
+                          //   title: 'Oops...',
+                          //   text: 'Please Check Your Internet!!',
+                          //   confirmBtnColor: Color(0xff5163da),
+                          // );
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -247,7 +250,9 @@ border: InputBorder.none,
   //Login APi
   var loginData;
 LoginAPI()async{
-  var headers = {'Content-Type': 'application/json'};
+   bool result= await InternetConnectionChecker().hasConnection;
+if(result==true){
+   var headers = {'Content-Type': 'application/json'};
   var body=json.encode({
     "userName": "${userNameText.text}",
     "password": "${passWordText.text}"
@@ -281,7 +286,8 @@ print(response.body);
       }else if(loginData.toString()=='failed'){
 
         setState(() {
-          passError=true;  popup.value=false;
+          passError=true; 
+           popup.value=false;
         });
       }
     } catch (e) {}
@@ -294,6 +300,22 @@ print(response.body);
   else {
     print(response.reasonPhrase);
   }
+}else{setState(() {
+  Fluttertoast.showToast(
+        msg: "Pls Check Internet",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.SNACKBAR,
+        timeInSecForIosWeb: 1,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0
+    );
+   popup.value=false;
+
+});
+
+}
+ 
   return loginData;
 }
 }
