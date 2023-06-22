@@ -35,9 +35,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
   @override
   void initState() {
     statedropdownvisible == true;
-    TopPartyFinaldata = TopPartylistApi();
-    Youtubetoppartydata=YoutubeTopPartylistApi();
-    newschannelfinaldata=NewsChannelTopPartylistApi();
+
     super.initState();
 
     //TwitterOverViewApi();
@@ -397,7 +395,10 @@ statedropdownvisible=false;
   }
 
   TwitterOverviewScreen() {
-    return FutureBuilder<dynamic>(
+    return
+    TopPartylistdata['top_parties'].isEmpty? 
+Image.asset('assets/Image/datanotfound.gif'):
+     FutureBuilder<dynamic>(
       future: finaldata1,
       builder: (
         BuildContext context,
@@ -579,12 +580,11 @@ statedropdownvisible=false;
     );
   }
 
-
 bool isytvisible=false;
 bool istablevisible=false;
 //Youtube Overview Screen
 YoutubeOverviewScreen(){
-return TopPartylistdata['top_parties'].isEmpty? 
+return YoutubeTopPartylistdata['top_parties'].isEmpty? 
 Image.asset('assets/Image/datanotfound.gif'):FutureBuilder<dynamic>(
       future: Youtubefinaldata,
       builder: (
@@ -1033,7 +1033,7 @@ Image.asset('assets/Image/datanotfound.gif'):FutureBuilder<dynamic>(
     setState(() {
       Selectionquery1['type'] = 'party_data';
       Selectionquery1['STATE'] = selectedValue;
-      Selectionquery1['party_list'] = '$partyt1,$partyt2,$partyt3';
+      Selectionquery1['party_list'] = '${TopPartylistdata['top_parties'].join(",")}';
       //Selectionquery['channel'] = 'YOUTUBE';
     });
     var response = await post(
@@ -1046,6 +1046,7 @@ Image.asset('assets/Image/datanotfound.gif'):FutureBuilder<dynamic>(
         TwitterOverviewdata = jsonDecode(utf8.decode(response.bodyBytes));
         setState(() {
           statedropdownvisible = true;
+ 
         });
 
         print(TwitterOverviewdata);
@@ -1080,6 +1081,9 @@ Image.asset('assets/Image/datanotfound.gif'):FutureBuilder<dynamic>(
 
         setState(() {
           isLoaded = true;
+              TopPartyFinaldata = TopPartylistApi();
+    Youtubetoppartydata=YoutubeTopPartylistApi();
+    newschannelfinaldata=NewsChannelTopPartylistApi();
         });
         print(StateNamedata);
       } catch (e) {
@@ -1091,6 +1095,8 @@ Image.asset('assets/Image/datanotfound.gif'):FutureBuilder<dynamic>(
     return StateNamedata;
   }
 
+
+//Twitter top party list
   var statedropdownvisible = false;
 //top party list api
   String? partyt1;
@@ -1132,7 +1138,6 @@ Image.asset('assets/Image/datanotfound.gif'):FutureBuilder<dynamic>(
     }
     return TopPartylistdata;
   }
-
 //Youtube top party list api
   var YoutubeTopPartylistdata;
   var locallist=[];
@@ -1160,14 +1165,7 @@ Image.asset('assets/Image/datanotfound.gif'):FutureBuilder<dynamic>(
           locallist=YoutubeTopPartylistdata['top_parties'];
           Youtubefinaldata=YoutubeOverViewApi();
         isytvisible=true;
-        for(int i=0;i<YoutubeTopPartylistdata['top_parties'].length;i++){
-Youtubetablecolumn.add( DataColumn(
-                            label: Text(
-                              '${YoutubeTopPartylistdata['top_parties'][i]}',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),);
-        }
+   
 
         });
         print(locallist.toList());
@@ -1185,13 +1183,13 @@ Youtubetablecolumn.add( DataColumn(
  var YoutubeOverviewdata;
   Future<dynamic> YoutubeOverViewApi() async {
    
-    String partylist=locallist.join(",");
+    // String partylist=locallist.join(",");
    
     
   var body =json.encode({
  "type": "party_data",
   "STATE": selectedValue.toString(),
-  "party_list": "$partylist",
+  "party_list": "${YoutubeTopPartylistdata['top_parties'].join(",")}",
   "social_handle": "YOUTUBE"
   });
       var headers = {
@@ -1210,6 +1208,14 @@ Youtubetablecolumn.add( DataColumn(
         setState(() {
           istablevisible=true;
           statedropdownvisible = true;
+               for(int i=0;i<YoutubeTopPartylistdata['top_parties'].length;i++){
+Youtubetablecolumn.add( DataColumn(
+                            label: Text(
+                              '${YoutubeTopPartylistdata['top_parties'][i]}',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),);
+        }
         });
 
       } catch (e) {
@@ -1304,14 +1310,7 @@ Youtubetablecolumn.add( DataColumn(
           NewschannelOverviewfinaldata=NewschannelOverViewApi();
        isnewschannelvisible=true;
        
-        for(int i=0;i<NewsChannelTopPartylistdata['top_parties'].length;i++){
-NewsChanneltablecolumn.add( DataColumn(
-                            label: Text(
-                              '${NewsChannelTopPartylistdata['top_parties'][i]}',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),);
-        }
+ 
 
         });
         print('newschannel top party list');
@@ -1355,6 +1354,14 @@ bool isnewschannelvisible=false;
         setState(() {
           isNewsChannelvisible=true;
           statedropdownvisible = true;
+                 for(int i=0;i<NewsChannelTopPartylistdata['top_parties'].length;i++){
+NewsChanneltablecolumn.add( DataColumn(
+                            label: Text(
+                              '${NewsChannelTopPartylistdata['top_parties'][i]}',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),);
+        }
         });
 print('its Newschannel party data');
 print(partylist);
