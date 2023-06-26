@@ -32,6 +32,7 @@ dependencies:
   animate_do: ^3.0.2
   animated_bottom_navigation_bar: ^1.2.0
   animated_rail: ^2.0.2
+  animated_text_kit: ^4.2.2
   animations: ^2.0.7
   auto_size_text: ^3.0.0
   avatars: ^3.0.2
