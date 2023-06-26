@@ -3,6 +3,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:intellensense/HomeScreen_Pages/Banners.dart/YoutubeBanner.dart';
+import 'package:intellensense/HomeScreen_Pages/Banners.dart/twitterbanner.dart';
 import 'package:intellensense/HomeScreen_Pages/NewsWIdget/FaceBookScreen.dart';
 import 'package:intellensense/HomeScreen_Pages/NewsWIdget/NewsPaperScreen.dart';
 import 'package:intellensense/HomeScreen_Pages/Widgets/Newstemplate.dart';
@@ -17,6 +19,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/HomeScreen_Pages/Widgets/Socialmediatemplate.dart';
 import 'package:intellensense/Services/ApiServices.dart';
+
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:simple_speed_dial/simple_speed_dial.dart';
 
@@ -39,10 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
   ScrollController? _scrollController;
   bool lastStatus = true;
   double height = 200;
-  List<String>? swipeimage = [
-    'assets/Image/Intellisense-banners-01.jpg',
-    'assets/Image/Intellisense-banners-02.jpg',
-    'assets/Image/Intellisense-banners-03.jpg'
+  List<Widget>? swipeimage = [
+    Twitterbanner(),
+    Youtubebanner(),
+    // 'assets/Image/Intellisense-banners-01.jpg',
+    // 'assets/Image/Intellisense-banners-02.jpg',
+    // 'assets/Image/Intellisense-banners-03.jpg'
   ];
   void _scrollListener() {
     if (_isShrink != lastStatus) {
@@ -181,7 +186,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 elevation: 0,
                 backgroundColor: HomeColor,
                 pinned: true,
-                expandedHeight: 250,
+                expandedHeight: 310,
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.parallax,
                   // title: _isShrink == true
@@ -194,22 +199,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   //     )
                   //     : null,
                   background: SafeArea(
-                    child: Column(
+                    child:
+                    
+                    Column(
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 48),
                           child: Container(
-                            height: 202,
+                            height: 260,
                             width: MediaQuery.of(context).size.width,
-                            child: Swiper(
+                            child: 
+                            
+                             Swiper(duration: 1500,
                               itemBuilder: (BuildContext context, int index) {
-                                return Image.asset(
-                                  swipeimage![index],
-                                  fit: BoxFit.fill,
-                                );
+                                return  swipeimage![index];
                               },
-                              itemCount: 3,
-                              autoplay: true,
+                              itemCount: 2,
+                              autoplay: false,
                               pagination: SwiperPagination(),
                             ),
                           ),
@@ -1770,137 +1776,117 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )
                               : Container(),
 
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Card(
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15)),
-                              color: Color(0xffa3bdea),
-                              elevation: 7,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Flexible(child: Divider(thickness: 1)),
-                                      Text(
-                                        'NEWS',
-                                        style: TextStyle(
-                                          fontFamily: 'Segoe UI',
-                                          fontSize: 16,
-                                        ),
+                          Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            // color: Color(0xffa3bdea),
+                            elevation: 7,
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Flexible(child: Divider(thickness: 1)),
+                                    Text(
+                                      'NEWS',
+                                      style: TextStyle(
+                                        fontFamily: 'Segoe UI',
+                                        fontSize: 16,
                                       ),
-                                      IconButton(
-                                        icon: AnimatedSwitcher(
-                                            duration: const Duration(
-                                                milliseconds: 300),
-                                            transitionBuilder: (child, anim) =>
-                                                RotationTransition(
-                                                  turns: child.key ==
-                                                          ValueKey('icon1')
-                                                      ? Tween<double>(
-                                                              begin: 1,
-                                                              end: 0.75)
-                                                          .animate(anim)
-                                                      : Tween<double>(
-                                                              begin: 0.75,
-                                                              end: 1)
-                                                          .animate(anim),
-                                                  child: FadeTransition(
-                                                      opacity: anim,
-                                                      child: child),
-                                                ),
-                                            child: _currIndex == 0
-                                                ? Icon(
-                                                    Icons
-                                                        .arrow_circle_left_outlined,
-                                                    size: 30,
-                                                    key:
-                                                        const ValueKey('icon1'))
-                                                : Icon(
-                                                    Icons.arrow_circle_up_sharp,
-                                                    size: 30,
-                                                    key:
-                                                        const ValueKey('icon2'),
-                                                  )),
-                                        onPressed: () {
-                                          setState(() {
-                                            
-                                            _currIndex =
-                                                _currIndex == 0 ? 1 : 0;
-                                            if (_currIndex == 0) {
-                                              setState(() {
-                                                    newson=false;
-                                              });
-                                              _height = 0;
-                                              _width = 0;
+                                    ),
+                                    IconButton(
+                                      icon: AnimatedSwitcher(
+                                          duration: const Duration(
+                                              milliseconds: 300),
+                                          transitionBuilder: (child, anim) =>
+                                              RotationTransition(
+                                                turns: child.key ==
+                                                        ValueKey('icon1')
+                                                    ? Tween<double>(
+                                                            begin: 1,
+                                                            end: 0.75)
+                                                        .animate(anim)
+                                                    : Tween<double>(
+                                                            begin: 0.75,
+                                                            end: 1)
+                                                        .animate(anim),
+                                                child: FadeTransition(
+                                                    opacity: anim,
+                                                    child: child),
+                                              ),
+                                          child: _currIndex == 0
+                                              ? Icon(
+                                                  Icons
+                                                      .arrow_circle_left_outlined,
+                                                  size: 30,
+                                                  key:
+                                                      const ValueKey('icon1'))
+                                              : Icon(
+                                                  Icons.arrow_circle_up_sharp,
+                                                  size: 30,
+                                                  key:
+                                                      const ValueKey('icon2'),
+                                                )),
+                                      onPressed: () {
+                                        setState(() {
+                                          
+                                          _currIndex =
+                                              _currIndex == 0 ? 1 : 0;
+                                          if (_currIndex == 0) {
+                                            setState(() {
+                                                  newson=false;
+                                            });
+                                            _height = 0;
+                                            _width = 0;
 
-                                            } else if (_currIndex == 1) {
-                                              setState(() {
-                                                      newson=true;
-                                              });
-                                              
-// if(_height == 450)     {
-//   setState(() {
-//       newson=true;
-//   });
-// }                                             
+                                          } else if (_currIndex == 1) {
+                                            setState(() {
+                                                    newson=true;
+                                            });
                                             
-                                          
-                                              _height = 450;
-                                              _width = MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.93;
-                                            }
-                                          });
-                                        },
-                                      ),
-                                      // IconButton(
-                                      //     onPressed: () {
-                                      //       setState(() {
-                                      //         isnewshidden = !isnewshidden;
-                                      //       });
-                                      //     },
-                                      //     icon: isnewshidden == false
-                                      //         ? Icon(
-                                      //             Icons
-                                      //                 .arrow_circle_down_rounded,
-                                      //             size: 30,
-                                      //           )
-                                      //         : Icon()),
-                                      Flexible(
-                                          child: Divider(
-                                        thickness: 1,
-                                      ))
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                   newson==true?   AnimatedContainer(
+                                 
                                         
-                                       
-                                          curve: Curves.linear,
-                                          height: _height,
-                                          width: _width,
-                                          alignment: Alignment.center,
-                                          duration: Duration(seconds: 2),
-                                          child:
-                                          
-                                           PageView.builder(
-                                              // physics: NeverScrollableScrollPhysics(),
-                                              controller: PageCount,
-                                              itemCount: DailyNewsPages.length,
-                                              itemBuilder:
-                                                  (BuildContext, index) {
-                                                return  DailyNewsPages[index];
-                                              }),
-                                          decoration: BoxDecoration()):Container(),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                            _height = 450;
+                                            _width = MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.93;
+                                          }
+                                        });
+                                      },
+                                    ),
+                                   
+                                    Flexible(
+                                        child: Divider(
+                                      thickness: 1,
+                                    ))
+                                  ],
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                 newson==true?   AnimatedContainer(
+                                      
+                                     
+                                        curve: Curves.linear,
+                                        height: _height,
+                                        width: _width,
+                                        alignment: Alignment.center,
+                                        duration: Duration(seconds: 2),
+                                        child:
+                                        
+                                         PageView.builder(
+                                            // physics: NeverScrollableScrollPhysics(),
+                                            controller: PageCount,
+                                            itemCount: DailyNewsPages.length,
+                                            itemBuilder:
+                                                (BuildContext, index) {
+                                              return  DailyNewsPages[index];
+                                            }),
+                                        decoration: BoxDecoration()):Container(),
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
 
@@ -1922,7 +1908,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 GridView.count(
                                   physics: NeverScrollableScrollPhysics(),
                                   crossAxisCount: 5,
-                                  crossAxisSpacing: 2,
+                                  crossAxisSpacing: 0,
                                   shrinkWrap: true,
                                   children: [
                                     Column(children: [
