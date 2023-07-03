@@ -243,7 +243,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Segoe UI')),
                               new TextSpan(
-                                  text: 'JSP',
+                                  text: 'INC',
                                   style: new TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.green,
