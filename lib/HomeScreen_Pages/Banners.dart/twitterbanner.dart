@@ -51,8 +51,10 @@ class _TwitterbannerState extends State<Twitterbanner> {
                   borderRadius: BorderRadius.circular(15),
                   gradient: LinearGradient(
                     colors: const [
-                      Color.fromARGB(255, 100, 149, 235),
-                      Color(0xffe4e0f8),
+                      /*Color.fromARGB(255, 100, 149, 235),
+                      Color(0xffe4e0f8),*/
+                      Colors.white,
+                      Colors.white
                     ],
                     tileMode: TileMode.decal,
                     begin: Alignment.topLeft,
@@ -63,10 +65,10 @@ class _TwitterbannerState extends State<Twitterbanner> {
                   children: [
                     Positioned(
                       top: 25,
-                      left: 125,
+                      left: 100,
                       child: DefaultTextStyle(
                         style: const TextStyle(
-                          fontSize: 25.0,
+                          fontSize: 20.0,
                           fontFamily: 'Segoe UI',
                         ),
                         child: AnimatedTextKit(
@@ -75,11 +77,11 @@ class _TwitterbannerState extends State<Twitterbanner> {
                             RotateAnimatedText('TWITTER',
                                 textStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: 'Segoe UI')),
+                                    fontFamily: 'Segoe UI',color: Colors.black)),
                             RotateAnimatedText('BATTLE',
                                 textStyle: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: 'Segoe UI')),
+                                    fontFamily: 'Segoe UI',color: Colors.black)),
                           ],
                           onTap: () {
                             print("Tap Event");
@@ -92,12 +94,12 @@ class _TwitterbannerState extends State<Twitterbanner> {
                         left: 20,
                         child: Image.asset(
                           'assets/icons/Social-Media-Icons-IS-08.png',
-                          height: 100,
-                          width: 100,
+                          height: 50,
+                          width: 50,
                         )),
                     Positioned(
                         top: 105,
-                        left: 230,
+                        left: 190,
                         child: Container(
                           height: 145,
                           width: 145,
@@ -140,7 +142,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                         )),
                                 Positioned(
                           top: 10,
-                          right: 35,
+                          right: 45,
                           child:     Text('LIKES',style: TextStyle(fontSize: 10),)),
                         Positioned(
                           top: 232,
@@ -148,7 +150,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                           child:     Text('FOLLOWERS',style: TextStyle(fontSize: 10),)),
                     Positioned(
                       top: 0,
-                      left: 230,
+                      left: 190,
                       child: FutureBuilder<dynamic>(
                         future: LineChartfuturecall,
                         builder: (
@@ -176,7 +178,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                   plotAreaBorderWidth: 0,
                                   primaryXAxis: CategoryAxis(
                                     labelStyle:
-                                        const TextStyle(color: Colors.white),
+                                        const TextStyle(color: Colors.black,fontSize: 8),
                                     axisLine: const AxisLine(width: 0),
                                     labelPosition:
                                         ChartDataLabelPosition.outside,
@@ -186,16 +188,19 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                         const MajorGridLines(width: 0),
                                   ),
                                   primaryYAxis: NumericAxis(
+                                      labelStyle:
+                                      const TextStyle(color: Colors.black,fontSize: 8),
+                                    labelPosition:ChartDataLabelPosition.outside ,
                                       isVisible: false,
                                       minimum: 0,
-                                      maximum: 3000),
+                                      maximum: 2000),
                                   series: <ColumnSeries<ChartSampleData,
                                       String>>[
                                     ColumnSeries<ChartSampleData, String>(
                                       width: 0.9,
                                       dataLabelSettings:
                                           const DataLabelSettings(
-                                              isVisible: true,
+                                              isVisible: false,
                                               labelAlignment:
                                                   ChartDataLabelAlignment.top),
                                       dataSource: <ChartSampleData>[
@@ -226,13 +231,13 @@ class _TwitterbannerState extends State<Twitterbanner> {
                       left: 22,
                       top: 150,
                       child: Container(
-                        width: 230,
+                        width: 180,
                         child: RichText(
                           text: new TextSpan(
                             // Note: Styles for TextSpans must be explicitly defined.
                             // Child text spans will inherit styles from parent
                             style: new TextStyle(
-                              fontSize: 14.0,
+                              fontSize: 12.0,
                               color: Colors.black,
                             ),
                             children: <TextSpan>[
@@ -243,11 +248,11 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                       fontWeight: FontWeight.bold,
                                       fontFamily: 'Segoe UI')),
                               new TextSpan(
-                                  text: 'INC',
+                                  text: 'BJP',
                                   style: new TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.green,
-                                      fontSize: 25,
+                                      fontSize: 20,
                                       fontFamily: 'Segoe UI')),
                               new TextSpan(
                                   text:
