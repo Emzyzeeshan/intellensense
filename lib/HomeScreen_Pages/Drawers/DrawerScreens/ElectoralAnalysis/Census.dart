@@ -665,16 +665,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
       return Container(height: 0, width: 0);
 
     List<PlutoColumn> columns = [
-      PlutoColumn(
+    PlutoColumn( textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'DISTRICT',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'DISTRICT',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'DISTRICT',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -682,16 +684,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'DISTRICT',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL HOUSEHOLDS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL HOUSEHOLDS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL HOUSEHOLDS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -699,16 +703,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_HOUSEHOLDS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL POPULATION',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL POPULATION',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL POPULATION',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -716,16 +722,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POPULATION',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL POP MALE',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL POP MALE',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL POP MALE',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -733,16 +741,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_MALE',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL POP FEMALE',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL POP FEMALE',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL POP FEMALE',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -750,16 +760,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_FEMALE',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'SC POPULATION',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'SC POPULATION',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'SC POPULATION',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -767,16 +779,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'SC_POPULATION',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'ST POPULATION',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'ST POPULATION',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'ST POPULATION',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -784,16 +798,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ST_POPULATION',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'LITERATES',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'LITERATES',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'LITERATES',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -801,16 +817,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'LITERATES',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'ILLITERATES',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'ILLITERATES',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'ILLITERATES',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -818,16 +836,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ILLITERATES',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL WORKERS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL WORKERS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL WORKERS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -835,16 +855,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_WORKERS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'CULTIVATORS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'CULTIVATORS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'CULTIVATORS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -852,16 +874,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'CULTIVATORS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'AGRICULTURAL LABOURS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'AGRICULTURAL LABOURS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'AGRICULTURAL LABOURS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -988,16 +1012,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
       return Container(height: 0, width: 0);
 
     List<PlutoColumn> columns2 = [
-      PlutoColumn(
+     PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'SUB-DISTRICT',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'SUB-DISTRICT',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'SUB-DISTRICT',
+                  style: TextStyle(color: Colors.white,),
+                ),
               ),
             ),
           ],
@@ -1005,16 +1031,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'SUB-DISTRICT',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL HOUSEHOLDS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL HOUSEHOLDS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL HOUSEHOLDS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1022,16 +1050,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_HOUSEHOLDS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL POPULATION',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL POPULATION',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL POPULATION',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1039,16 +1069,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POPULATION',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL POP MALE',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL POP MALE',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL POP MALE',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1056,16 +1088,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_MALE',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL POP FEMALE',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL POP FEMALE',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL POP FEMALE',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1073,16 +1107,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_FEMALE',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'SC POPULATION',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'SC POPULATION',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'SC POPULATION',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1090,16 +1126,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'SC_POPULATION',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'ST POPULATION',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'ST POPULATION',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'ST POPULATION',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1107,16 +1145,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ST_POPULATION',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'LITERATES',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'LITERATES',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'LITERATES',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1124,16 +1164,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'LITERATES',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'ILLITERATES',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'ILLITERATES',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'ILLITERATES',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1141,16 +1183,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ILLITERATES',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL WORKERS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL WORKERS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL WORKERS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1158,16 +1202,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_WORKERS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'CULTIVATORS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'CULTIVATORS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'CULTIVATORS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1175,16 +1221,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'CULTIVATORS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'AGRICULTURAL LABOURS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'AGRICULTURAL LABOURS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'AGRICULTURAL LABOURS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1197,7 +1245,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         .map<PlutoRow>((item) => PlutoRow(cells: {
               'SUB-DISTRICT': PlutoCell(value: item['SUB_DISTRICT'] ?? ''),
               'TOTAL_HOUSEHOLDS':
-                  PlutoCell(value: item['TOTAL_HOUSEHOLDS'] ?? ''),
+                  PlutoCell(value: item['TOTAL_HOUSEHOLDS'] ?? '',),
               'TOTAL_POPULATION':
                   PlutoCell(value: item['TOTAL_POPULATION'] ?? ''),
               'TOTAL_POP_MALE': PlutoCell(value: item['TOTAL_POP_MALE'] ?? ''),
@@ -1310,16 +1358,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
     SubDistrictOverviewdata == null || SubDistrictOverviewdata['SUB_DISTRICT_AGG_DATA'] == null)
       return Container(height: 0, width: 0);
      List<PlutoColumn> columns3 = [
-      PlutoColumn(
+  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'VILLAGE',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'VILLAGE',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'VILLAGE',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1327,16 +1377,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'VILLAGE',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL HOUSEHOLDS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL HOUSEHOLDS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL HOUSEHOLDS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1344,16 +1396,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_HOUSEHOLDS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL POPULATION',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL POPULATION',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL POPULATION',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1361,16 +1415,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POPULATION',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL POP MALE',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL POP MALE',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL POP MALE',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1378,16 +1434,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_MALE',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL POP FEMALE',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL POP FEMALE',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL POP FEMALE',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1395,16 +1453,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_FEMALE',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'SC POPULATION',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'SC POPULATION',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'SC POPULATION',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1412,16 +1472,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'SC_POPULATION',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'ST POPULATION',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'ST POPULATION',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'ST POPULATION',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1429,16 +1491,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ST_POPULATION',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'LITERATES',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'LITERATES',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'LITERATES',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1446,16 +1510,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'LITERATES',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'ILLITERATES',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'ILLITERATES',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'ILLITERATES',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1463,16 +1529,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ILLITERATES',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'TOTAL WORKERS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'TOTAL WORKERS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'TOTAL WORKERS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1480,16 +1548,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_WORKERS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'CULTIVATORS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'CULTIVATORS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'CULTIVATORS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],
@@ -1497,16 +1567,18 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'CULTIVATORS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
         backgroundColor: Color(0xff00196b),
         enableEditingMode: false,
         title: 'AGRICULTURAL LABOURS',
         titleSpan: TextSpan(
           children: [
             WidgetSpan(
-              child: Text(
-                'AGRICULTURAL LABOURS',
-                style: TextStyle(color: Colors.white),
+              child: Center(
+                child: Text(
+                  'AGRICULTURAL LABOURS',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
           ],

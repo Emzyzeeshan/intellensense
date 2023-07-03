@@ -423,152 +423,154 @@ Image.asset('assets/Image/datanotfound.gif'):
             // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
             //
             // }
-            return Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: DataTable(
-                        headingRowColor: MaterialStateColor.resolveWith(
-                            (states) => Color(0xff00196b)),
-                        dataRowColor: MaterialStateColor.resolveWith((states) {
-                          return Color(0xffd2dfff);
-                        }),
-                        border: TableBorder.all(color: Colors.black),
-                        // Datatable widget that have the property columns and rows.
-                        columns: [
-                          // Set the name of the column
-                          DataColumn(
-                            label: Text(
-                              'PARTY NAME',
-                              style: TextStyle(color: Colors.white),
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: DataTable(
+                          headingRowColor: MaterialStateColor.resolveWith(
+                              (states) => Color(0xff00196b)),
+                          dataRowColor: MaterialStateColor.resolveWith((states) {
+                            return Color(0xffd2dfff);
+                          }),
+                          border: TableBorder.all(color: Colors.black),
+                          // Datatable widget that have the property columns and rows.
+                          columns: [
+                            // Set the name of the column
+                            DataColumn(
+                              label: Text(
+                                'PARTY NAME',
+                                style: TextStyle(color: Colors.white),
+                              ),
                             ),
-                          ),
-                          DataColumn(
-                            label: Text(
-                                TwitterOverviewdata['party_data'][partyt1][0]
-                                    ['CANDIDATE_PARTY_NAME'],
-                                style: TextStyle(color: Colors.white)),
-                          ),
-                          DataColumn(
-                            label: Text(
-                                TwitterOverviewdata['party_data'][partyt2][0]
-                                    ['CANDIDATE_PARTY_NAME'],
-                                style: TextStyle(color: Colors.white)),
-                          ),
-                          DataColumn(
-                            label: Text(
-                                TwitterOverviewdata['party_data'][partyt3][0]
-                                    ['CANDIDATE_PARTY_NAME'],
-                                style: TextStyle(color: Colors.white)),
-                          ),
-                        ],
-                        rows: [
-                          // Set the values to the columns
+                            DataColumn(
+                              label: Text(
+                                  TwitterOverviewdata['party_data'][partyt1][0]
+                                      ['CANDIDATE_PARTY_NAME'],
+                                  style: TextStyle(color: Colors.white)),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                  TwitterOverviewdata['party_data'][partyt2][0]
+                                      ['CANDIDATE_PARTY_NAME'],
+                                  style: TextStyle(color: Colors.white)),
+                            ),
+                            DataColumn(
+                              label: Text(
+                                  TwitterOverviewdata['party_data'][partyt3][0]
+                                      ['CANDIDATE_PARTY_NAME'],
+                                  style: TextStyle(color: Colors.white)),
+                            ),
+                          ],
+                          rows: [
+                            // Set the values to the columns
 
-                          DataRow(
-                            cells: [
+                            DataRow(
+                              cells: [
+                                DataCell(Text(
+                                  "USER FOLLOWERS",
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                )),
+                                ...TwitterOverviewdata['party_data'].keys.map(
+                                      (p) => DataCell(Text(
+                                          TwitterOverviewdata['party_data'][p][0]
+                                                  ['USER_FOLLOWERS']
+                                              .toString(),
+                                          style: highestCountStyle(
+                                              TwitterOverviewdata['party_data'],
+                                              p,
+                                              'USER_FOLLOWERS'))),
+                                    )
+                              ],
+                            ),
+                            DataRow(cells: [
                               DataCell(Text(
-                                "USER FOLLOWERS",
+                                "LIKES",
                                 style: TextStyle(fontWeight: FontWeight.bold),
                               )),
                               ...TwitterOverviewdata['party_data'].keys.map(
                                     (p) => DataCell(Text(
                                         TwitterOverviewdata['party_data'][p][0]
-                                                ['USER_FOLLOWERS']
+                                                ['LIKES']
                                             .toString(),
                                         style: highestCountStyle(
                                             TwitterOverviewdata['party_data'],
                                             p,
-                                            'USER_FOLLOWERS'))),
-                                  )
-                            ],
-                          ),
-                          DataRow(cells: [
-                            DataCell(Text(
-                              "LIKES",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            )),
-                            ...TwitterOverviewdata['party_data'].keys.map(
-                                  (p) => DataCell(Text(
-                                      TwitterOverviewdata['party_data'][p][0]
-                                              ['LIKES']
-                                          .toString(),
-                                      style: highestCountStyle(
-                                          TwitterOverviewdata['party_data'],
-                                          p,
-                                          'LIKES'))),
-                                ),
-                            /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
-                                DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
-                                DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
+                                            'LIKES'))),
+                                  ),
+                              /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+                                  DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
+                                  DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
+                            ]),
+                            DataRow(cells: [
+                              DataCell(Text(
+                                "RETWEET COUNT",
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              )),
+                              ...TwitterOverviewdata['party_data'].keys.map(
+                                    (p) => DataCell(Text(
+                                        TwitterOverviewdata['party_data'][p][0]
+                                                ['RETWEET_COUNT']
+                                            .toString(),
+                                        style: highestCountStyle(
+                                            TwitterOverviewdata['party_data'],
+                                            p,
+                                            'RETWEET_COUNT'))),
+                                  ),
+                              /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                  DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                                  DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                            ]),
                           ]),
-                          DataRow(cells: [
-                            DataCell(Text(
-                              "RETWEET COUNT",
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            )),
-                            ...TwitterOverviewdata['party_data'].keys.map(
-                                  (p) => DataCell(Text(
-                                      TwitterOverviewdata['party_data'][p][0]
-                                              ['RETWEET_COUNT']
-                                          .toString(),
-                                      style: highestCountStyle(
-                                          TwitterOverviewdata['party_data'],
-                                          p,
-                                          'RETWEET_COUNT'))),
-                                ),
-                            /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
-                                DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
-                                DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          ]),
-                        ]),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Card(
-                  color: Color(0xffd2dfff),
-                  elevation: 5,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: RichText(
-                      text: new TextSpan(
-                        // Note: Styles for TextSpans must be explicitly defined.
-                        // Child text spans will inherit styles from parent
-                        style: new TextStyle(
-                          fontSize: 14.0,
-                          color: Colors.black,
-                        ),
-                        children: <TextSpan>[
-                          new TextSpan(
-                              text:
-                                  'With Huge Difference In counts for Tweets and Re-Tweets reports says that '),
-                          new TextSpan(
-                              text: '${TwitterOverviewdata['lead'][0]}',
-                              style: new TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.green,
-                                  fontSize: 25)),
-                          new TextSpan(
-                              text: ' is relatively Dominant in Twitter Data'),
-                        ],
-                      ),
                     ),
-
-                    //  Text(
-                    //         '""', style: TextStyle(
-                    //                   fontFamily: 'Segoe UI',
-                    //                   fontSize: 16,
-                    //                 ),),
                   ),
-                ),
-                SizedBox(height: 20,),
-                TwitterOverviewdata['lead'][0]=='INC'?
-                Image.asset('assets/new Updated images/twitter_001.gif',height: 250,width: MediaQuery.of(context).size.width,):Container()
-              ],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Card(
+                    color: Color(0xffd2dfff),
+                    elevation: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: RichText(
+                        text: new TextSpan(
+                          // Note: Styles for TextSpans must be explicitly defined.
+                          // Child text spans will inherit styles from parent
+                          style: new TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.black,
+                          ),
+                          children: <TextSpan>[
+                            new TextSpan(
+                                text:
+                                    'With Huge Difference In counts for Tweets and Re-Tweets reports says that '),
+                            new TextSpan(
+                                text: '${TwitterOverviewdata['lead'][0]}',
+                                style: new TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green,
+                                    fontSize: 25)),
+                            new TextSpan(
+                                text: ' is relatively Dominant in Twitter Data'),
+                          ],
+                        ),
+                      ),
+
+                      //  Text(
+                      //         '""', style: TextStyle(
+                      //                   fontFamily: 'Segoe UI',
+                      //                   fontSize: 16,
+                      //                 ),),
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  TwitterOverviewdata['lead'][0]=='INC'?
+                  Image.asset('assets/new Updated images/twitter_001.gif',height: 250,width: MediaQuery.of(context).size.width,):Container()
+                ],
+              ),
             );
           } else {
             return const Text('Empty data');
