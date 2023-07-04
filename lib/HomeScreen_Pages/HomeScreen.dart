@@ -521,7 +521,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 28, right: 28),
+                            padding: const EdgeInsets.only(left: 20),
                             child: Row(
                               children: [
                                 Image.asset(
@@ -1356,11 +1356,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           //todo:social media
 
                           Padding(
-                            padding: const EdgeInsets.only(left: 28),
+                            padding: const EdgeInsets.only(left: 20),
                             child: Row(
                               children: [
                                 Image.asset(
-                                  'assets/icons/SocialMedia.gif',
+                                  'assets/new Updated images/social-media-icons-unscreen.gif',
                                   height: 30,
                                   width: 30,
                                 ),
