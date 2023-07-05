@@ -40,6 +40,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
   );
   @override
   void initState() {
+    print(widget.Value);
     PartyResultAPI();
     // TODO: implement initState
     super.initState();
