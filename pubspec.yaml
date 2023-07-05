@@ -106,6 +106,7 @@ dependencies:
   tap_to_expand: ^0.6.1
   text_scroll: ^0.2.0
   timelines: ^0.1.0
+  toggle_switch: ^2.1.0
   tuanis_sidebar: ^0.3.0
   url_launcher: ^6.1.4
   xml2json: ^6.0.0
