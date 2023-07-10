@@ -61,11 +61,12 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  String NewsHeading = '';
   var _currIndex = 0;
   bool isnewshidden = false;
   bool shownews = true;
   bool showSocialnews = true;
-  bool newson=false;
+  bool newson = false;
   bool get _isShrink {
     return _scrollController != null &&
         _scrollController!.hasClients &&
@@ -148,12 +149,11 @@ class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _key = GlobalKey();
 
   bool selected = false;
-      
+
   double _height = 450;
   double _width = 370;
   @override
   Widget build(BuildContext context) {
-
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return WillPopScope(
@@ -203,20 +203,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   //     )
                   //     : null,
                   background: SafeArea(
-                    child:
-                    
-                    Column(
+                    child: Column(
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 48),
                           child: Container(
                             height: 260,
                             width: MediaQuery.of(context).size.width,
-                            child: 
-                            
-                             Swiper(duration: 1500,
+                            child: Swiper(
+                              duration: 1500,
                               itemBuilder: (BuildContext context, int index) {
-                                return  swipeimage![index];
+                                return swipeimage![index];
                               },
                               itemCount: 4,
                               autoplay: false,
@@ -933,24 +930,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NewsTemplate2(
                                                                 "${newsdata[0]['mediaName']}",
                                                                 '${newsdata[0]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png'),
+                                                                'assets/icons/newspaperdxp.png','- ${newsdata[0]['candidateName']}'),
                                                             NewsTemplate3(
                                                                 '${newsdata[1]['mediaName']}',
                                                                 '${newsdata[1]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png'),
+                                                                'assets/icons/newspaperdxp.png','- ${newsdata[1]['candidateName']}'),
                                                             NewsTemplate1(
                                                                 '${newsdata[2]['mediaName']}',
                                                                 '${newsdata[2]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png'),
+                                                                'assets/icons/newspaperdxp.png','- ${newsdata[2]['candidateName']}'),
                                                             NewsTemplate4(
                                                                 '${newsdata[3]['mediaName']}',
                                                                 '${newsdata[3]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png'),
+                                                                'assets/icons/newspaperdxp.png','- ${newsdata[3]['candidateName']}'),
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
                                                               setState(() {
                                                                 viewnews = true;
+                                                                newson = true;
+                                                                NewsHeading =
+                                                                    'NewsPaper';
+                                                                _currIndex = 0;
                                                               });
                                                               PageCount
                                                                   .jumpToPage(
@@ -1048,24 +1049,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NewsTemplate2(
                                                                 "${newchannelldata[0]['mediaChannelName']}",
                                                                 '${newchannelldata[0]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png'),
+                                                                'assets/icons/newsdxps.png','- ${newchannelldata[0]['candidateName']}'),
                                                             NewsTemplate3(
                                                                 '${newchannelldata[1]['mediaChannelName']}',
                                                                 '${newchannelldata[1]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png'),
+                                                                'assets/icons/newsdxps.png','-${newchannelldata[1]['candidateName']}'),
                                                             NewsTemplate1(
                                                                 '${newchannelldata[2]['mediaChannelName']}',
                                                                 '${newchannelldata[2]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png'),
+                                                                'assets/icons/newsdxps.png','- ${newsdata[2]['candidateName']}'),
                                                             NewsTemplate4(
                                                                 '${newchannelldata[3]['mediaChannelName']}',
                                                                 '${newchannelldata[3]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png'),
+                                                                'assets/icons/newsdxps.png','- ${newchannelldata[3]['candidateName']}'),
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
                                                               setState(() {
                                                                 viewnews = true;
+                                                                newson = true;
+                                                                NewsHeading =
+                                                                    'NewsChannel';
+                                                                _currIndex = 0;
                                                               });
                                                               PageCount
                                                                   .jumpToPage(
@@ -1162,24 +1167,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NewsTemplate2(
                                                                 "${Livenewsdata[0]['mediaName']}",
                                                                 '${Livenewsdata[0]['headLine']}',
-                                                                'assets/icons/live.gif'),
+                                                                'assets/icons/live.gif','${Livenewsdata[0]['publishedDate']}'),
                                                             NewsTemplate3(
                                                                 '${Livenewsdata[1]['mediaName']}',
                                                                 '${Livenewsdata[1]['headLine']}',
-                                                                'assets/icons/live.gif'),
+                                                                'assets/icons/live.gif','${Livenewsdata[1]['publishedDate']}'),
                                                             NewsTemplate1(
                                                                 '${Livenewsdata[2]['mediaName']}',
                                                                 '${Livenewsdata[2]['headLine']}',
-                                                                'assets/icons/live.gif'),
+                                                                'assets/icons/live.gif','${Livenewsdata[2]['publishedDate']}'),
                                                             NewsTemplate4(
                                                                 '${Livenewsdata[3]['mediaName']}',
                                                                 '${Livenewsdata[3]['headLine']}',
-                                                                'assets/icons/live.gif'),
+                                                                'assets/icons/live.gif','${Livenewsdata[3]['publishedDate']}'),
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
                                                               setState(() {
                                                                 viewnews = true;
+                                                                newson = true;
+                                                                NewsHeading =
+                                                                    'Live Updates';
+                                                                _currIndex = 0;
                                                               });
                                                               PageCount
                                                                   .jumpToPage(
@@ -1278,24 +1287,27 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NewsTemplate2(
                                                                 "${GoogleTrendsdata[0]['partyName']}",
                                                                 '${GoogleTrendsdata[0]['id']['region']}',
-                                                                'assets/icons/googleTrends.png'),
+                                                                'assets/icons/googleTrends.png','- ${GoogleTrendsdata[0]['id']['candidateName']}'),
                                                             NewsTemplate3(
                                                                 '${GoogleTrendsdata[1]['partyName']}',
                                                                 '${GoogleTrendsdata[1]['id']['region']}',
-                                                                'assets/icons/googleTrends.png'),
+                                                                'assets/icons/googleTrends.png','- ${GoogleTrendsdata[1]['id']['candidateName']}'),
                                                             NewsTemplate1(
                                                                 '${GoogleTrendsdata[2]['partyName']}',
                                                                 '${GoogleTrendsdata[2]['id']['region']}',
-                                                                'assets/icons/googleTrends.png'),
+                                                                'assets/icons/googleTrends.png','- ${GoogleTrendsdata[2]['id']['candidateName']}'),
                                                             NewsTemplate4(
                                                                 '${GoogleTrendsdata[3]['partyName']}',
                                                                 '${GoogleTrendsdata[3]['id']['region']}',
-                                                                'assets/icons/googleTrends.png'),
+                                                                'assets/icons/googleTrends.png','- ${GoogleTrendsdata[3]['id']['candidateName']}'),
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
                                                               setState(() {
                                                                 viewnews = true;
+                                                                newson = true;
+                                                                NewsHeading =
+                                                                    'Google Trends';
                                                               });
                                                               PageCount
                                                                   .jumpToPage(
@@ -1418,16 +1430,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     List YoutubeList = [
                                                       SocialMediaTemplate1(
                                                           '${Youtubedata[0]['mediaChannelName']}',
-                                                          '${Youtubedata[0]['videoTitle']}'),
+                                                          '${Youtubedata[0]['videoTitle']}','Views - ${Youtubedata[0]['videoViews']}    Likes - ${Youtubedata[0]['videoLikes']}'),
                                                       SocialMediaTemplate1(
                                                           '${Youtubedata[1]['mediaChannelName']}',
-                                                          '${Youtubedata[1]['videoTitle']}'),
+                                                          '${Youtubedata[1]['videoTitle']}','Views - ${Youtubedata[1]['videoViews']}    Likes - ${Youtubedata[1]['videoLikes']}'),
                                                       SocialMediaTemplate1(
                                                           '${Youtubedata[2]['mediaChannelName']}',
-                                                          '${Youtubedata[2]['videoTitle']}'),
+                                                          '${Youtubedata[2]['videoTitle']}','Views - ${Youtubedata[2]['videoViews']}    Likes - ${Youtubedata[2]['videoLikes']}'),
                                                       SocialMediaTemplate1(
                                                           '${Youtubedata[3]['mediaChannelName']}',
-                                                          '${Youtubedata[3]['videoTitle']}'),
+                                                          '${Youtubedata[3]['videoTitle']}','Views - ${Youtubedata[3]['videoViews']}    Likes - ${Youtubedata[3]['videoLikes']}'),
                                                     ];
                                                     return SizedBox(
                                                       height: 130,
@@ -1436,6 +1448,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         onTap: () {
                                                           setState(() {
                                                             viewnews = true;
+                                                            newson = true;
+                                                            NewsHeading =
+                                                                'Youtube';
+                                                            _currIndex = 0;
                                                           });
                                                           PageCount.jumpToPage(
                                                               4);
@@ -1515,16 +1531,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     List TwitterList = [
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[0]['candidateName']}',
-                                                          '${TwitterData[0]['tweetContent']}'),
+                                                          '${TwitterData[0]['tweetContent']}','- ${TwitterData[0]['candidateName']}'),
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[1]['candidateName']}',
-                                                          '${TwitterData[1]['tweetContent']}'),
+                                                          '${TwitterData[1]['tweetContent']}','- ${TwitterData[1]['candidateName']}'),
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[2]['candidateName']}',
-                                                          '${TwitterData[2]['tweetContent']}'),
+                                                          '${TwitterData[2]['tweetContent']}','- ${TwitterData[2]['candidateName']}'),
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[3]['candidateName']}',
-                                                          '${TwitterData[3]['tweetContent']}'),
+                                                          '${TwitterData[3]['tweetContent']}','- ${TwitterData[3]['candidateName']}'),
                                                     ];
                                                     return SizedBox(
                                                       height: 130,
@@ -1533,6 +1549,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         onTap: () {
                                                           setState(() {
                                                             viewnews = true;
+                                                            newson = true;
+                                                            NewsHeading =
+                                                                'Twitter';
+                                                            _currIndex = 0;
                                                           });
                                                           PageCount.jumpToPage(
                                                               5);
@@ -1609,18 +1629,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         'Data Error');
                                                   } else if (snapshot.hasData) {
                                                     List FaceBookList = [
+                                                      SocialMediaTemplate3(  
+                                                          '${Facebookdata[0]['keyWords']}',
+                                                          '${Facebookdata[0]['titleContent']}',
+                                                          '${Facebookdata[0]['candidateName']}'.length > 16 ?  '- ${Facebookdata[0]['candidateName'].substring(0, 10)}...' :  '- ${Facebookdata[0]['candidateName']}'
+                                                          
+                                                          // '${Facebookdata[0]['candidateName']}'
+                                                          ),
                                                       SocialMediaTemplate3(
-                                                          '${Facebookdata[0]['candidateName']}',
-                                                          '${Facebookdata[0]['titleContent']}'),
+                                                          '${Facebookdata[1]['keyWords']}',
+                                                          '${Facebookdata[1]['titleContent']}',
+                                                            '${Facebookdata[1]['candidateName']}'.length > 16 ?  '- ${Facebookdata[1]['candidateName'].substring(0, 10)}...' :  '- ${Facebookdata[1]['candidateName']}'
+                                                            // ,'${Facebookdata[1]['candidateName']}'
+                                                          ),
+
                                                       SocialMediaTemplate3(
-                                                          '${Facebookdata[1]['candidateName']}',
-                                                          '${Facebookdata[1]['titleContent']}'),
+                                                          '${Facebookdata[2]['keyWords']}',
+                                                          '${Facebookdata[2]['titleContent']}',
+                                                          '${Facebookdata[2]['candidateName']}'.length > 16 ?  '- ${Facebookdata[2]['candidateName'].substring(0, 10)}...' :  '- ${Facebookdata[2]['candidateName']}'
+                                                          
+                                                          // '${Facebookdata[2]['candidateName']}'
+                                                          ),
                                                       SocialMediaTemplate3(
-                                                          '${Facebookdata[2]['candidateName']}',
-                                                          '${Facebookdata[2]['titleContent']}'),
-                                                      SocialMediaTemplate3(
-                                                          '${Facebookdata[3]['candidateName']}',
-                                                          '${Facebookdata[3]['titleContent']}'),
+                                                          '${Facebookdata[3]['keyWords']}',
+                                                          '${Facebookdata[3]['titleContent']}',
+                                                          '${Facebookdata[3]['candidateName']}'.length > 16 ?  '- ${Facebookdata[3]['candidateName'].substring(0, 10)}...' :  '- ${Facebookdata[3]['candidateName']}'
+                                                          // '${Facebookdata[3]['candidateName']}'
+                                                          ),
                                                     ];
                                                     return SizedBox(
                                                       height: 130,
@@ -1629,6 +1664,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         onTap: () {
                                                           setState(() {
                                                             viewnews = true;
+                                                            newson = true;
+                                                            NewsHeading =
+                                                                'FaceBook';
+                                                            _currIndex = 0;
                                                           });
                                                           PageCount.jumpToPage(
                                                               6);
@@ -1707,16 +1746,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     List InstagramList = [
                                                       SocialMediaTemplate4(
                                                           '${Instagramdata[0]['candidateName']}',
-                                                          '${Instagramdata[0]['titleContent']}'),
+                                                          '${Instagramdata[0]['titleContent']}',  'Likes- ${Instagramdata[0]['likesCount']}   Comments- ${Instagramdata[0]['commentsCount']}'),
                                                       SocialMediaTemplate4(
                                                           '${Instagramdata[1]['candidateName']}',
-                                                          '${Instagramdata[1]['titleContent']}'),
+                                                          '${Instagramdata[1]['titleContent']}',  'Likes- ${Instagramdata[1]['likesCount']}   Comments- ${Instagramdata[1]['commentsCount']}'),
                                                       SocialMediaTemplate4(
                                                           '${Instagramdata[2]['candidateName']}',
-                                                          '${Instagramdata[2]['titleContent']}'),
+                                                          '${Instagramdata[2]['titleContent']}',  'Likes- ${Instagramdata[2]['likesCount']}   Comments- ${Instagramdata[2]['commentsCount']}'),
                                                       SocialMediaTemplate4(
                                                           '${Instagramdata[3]['candidateName']}',
-                                                          '${Instagramdata[3]['titleContent']}'),
+                                                          '${Instagramdata[3]['titleContent']}',  'Likes- ${Instagramdata[3]['likesCount']}   Comments- ${Instagramdata[3]['commentsCount']}'),
                                                     ];
                                                     return SizedBox(
                                                       height: 130,
@@ -1725,6 +1764,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         onTap: () {
                                                           setState(() {
                                                             viewnews = true;
+                                                            newson = true;
+                                                            NewsHeading =
+                                                                'Instagram';
+                                                            _currIndex = 0;
                                                           });
                                                           PageCount.jumpToPage(
                                                               7);
@@ -1792,74 +1835,51 @@ class _HomeScreenState extends State<HomeScreen> {
                                   children: [
                                     Flexible(child: Divider(thickness: 1)),
                                     Text(
-                                      'NEWS',
+                                      '$NewsHeading',
                                       style: TextStyle(
                                         fontFamily: 'Segoe UI',
                                         fontSize: 16,
                                       ),
                                     ),
                                     IconButton(
-                                      icon: AnimatedSwitcher(
-                                          duration: const Duration(
-                                              milliseconds: 300),
-                                          transitionBuilder: (child, anim) =>
-                                              RotationTransition(
-                                                turns: child.key ==
-                                                        ValueKey('icon1')
-                                                    ? Tween<double>(
-                                                            begin: 1,
-                                                            end: 0.75)
-                                                        .animate(anim)
-                                                    : Tween<double>(
-                                                            begin: 0.75,
-                                                            end: 1)
-                                                        .animate(anim),
-                                                child: FadeTransition(
-                                                    opacity: anim,
-                                                    child: child),
-                                              ),
-                                          child: _currIndex == 0
-                                              ? Icon(
-                                                  Icons
-                                                      .arrow_circle_left_outlined,
-                                                  size: 30,
-                                                  key:
-                                                      const ValueKey('icon1'))
-                                              : Icon(
-                                                  Icons.arrow_circle_up_sharp,
-                                                  size: 30,
-                                                  key:
-                                                      const ValueKey('icon2'),
-                                                )),
+                                      icon: newson == true
+                                          ? Icon(Icons.arrow_drop_down)
+                                          : Icon(Icons.arrow_drop_up_outlined),
+
+                                      //  AnimatedSwitcher(
+                                      //     duration:
+                                      //         const Duration(milliseconds: 300),
+                                      //     transitionBuilder: (child, anim) =>
+                                      //         RotationTransition(
+                                      //           turns: child.key ==
+                                      //                   ValueKey('icon1')
+                                      //               ? Tween<double>(
+                                      //                       begin: 1, end: 0.75)
+                                      //                   .animate(anim)
+                                      //               : Tween<double>(
+                                      //                       begin: 0.75, end: 1)
+                                      //                   .animate(anim),
+                                      //           child: FadeTransition(
+                                      //               opacity: anim,
+                                      //               child: child),
+                                      //         ),
+                                      //     child: _currIndex == 0
+                                      //         ? Icon(
+                                      //             Icons
+                                      //                 .arrow_circle_left_outlined,
+                                      //             size: 30,
+                                      //             key: const ValueKey('icon1'))
+                                      //         : Icon(
+                                      //             Icons.arrow_circle_up_sharp,
+                                      //             size: 30,
+                                      //             key: const ValueKey('icon2'),
+                                      //           )),
                                       onPressed: () {
                                         setState(() {
-                                          
-                                          _currIndex =
-                                              _currIndex == 0 ? 1 : 0;
-                                          if (_currIndex == 0) {
-                                            setState(() {
-                                                  newson=false;
-                                            });
-                                            _height = 0;
-                                            _width = 0;
-
-                                          } else if (_currIndex == 1) {
-                                            setState(() {
-                                                    newson=true;
-                                            });
-                                            
-                                 
-                                        
-                                            _height = 450;
-                                            _width = MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.93;
-                                          }
+                                          newson = !newson;
                                         });
                                       },
                                     ),
-                                   
                                     Flexible(
                                         child: Divider(
                                       thickness: 1,
@@ -1869,25 +1889,26 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                 newson==true?   AnimatedContainer(
-                                      
-                                     
-                                        curve: Curves.linear,
-                                        height: _height,
-                                        width: _width,
-                                        alignment: Alignment.center,
-                                        duration: Duration(seconds: 2),
-                                        child:
-                                        
-                                         PageView.builder(
-                                            // physics: NeverScrollableScrollPhysics(),
-                                            controller: PageCount,
-                                            itemCount: DailyNewsPages.length,
-                                            itemBuilder:
-                                                (BuildContext, index) {
-                                              return  DailyNewsPages[index];
-                                            }),
-                                        decoration: BoxDecoration()):Container(),
+                                    newson == true
+                                        ? Container(
+                                            height: 450,
+                                            width: 400,
+                                            // curve: Curves.linear,
+                                            // height: _height,
+                                            // width: _width,
+                                            // alignment: Alignment.center,
+                                            // duration: Duration(seconds: 2),
+                                            child: PageView.builder(
+                                                // physics: NeverScrollableScrollPhysics(),
+                                                controller: PageCount,
+                                                itemCount:
+                                                    DailyNewsPages.length,
+                                                itemBuilder:
+                                                    (BuildContext, index) {
+                                                  return DailyNewsPages[index];
+                                                }),
+                                            decoration: BoxDecoration())
+                                        : Container(),
                                   ],
                                 ),
                               ],

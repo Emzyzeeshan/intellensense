@@ -4,8 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class SocialMediaTemplate1 extends StatefulWidget {
   String? header;
   String? newsdescription;
-
-  SocialMediaTemplate1(this.header, this.newsdescription, );
+String ? CandidateName;
+  SocialMediaTemplate1(this.header, this.newsdescription, this.CandidateName);
 
   @override
   State<SocialMediaTemplate1> createState() => _SocialMediaTemplate1State();
@@ -32,10 +32,10 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(6.0),
+                    padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
@@ -48,19 +48,34 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
                           widget.header!.length > 16
                               ? '${widget.header!.substring(0, 10)}...'
                               : widget.header!,
-                          style: GoogleFonts.bebasNeue(
+                          style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 12)),
                     ],
                   ),
                   SizedBox(
                     height: 3,
                   ),
-                  Text(
-                      '${widget.newsdescription}',
-                      maxLines: 3,
-
-                      style: GoogleFonts.cabin(fontSize: 10))
-                ]),
+                  Padding(
+                    padding: const EdgeInsets.only(right:8.0),
+                    child: Text(
+                        '${widget.newsdescription}',
+                        maxLines: 3,
+                  
+                     style: GoogleFonts.raleway(fontSize: 10)),
+                  ),
+         Spacer(),
+                  Row(  mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                padding: const EdgeInsets.only(right:8.0,bottom: 8),
+                        child: Text(
+                            '${widget.CandidateName}',
+                            maxLines: 4,
+                      
+                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                      ),
+                    ],
+                  ),              ]),
           ),
         ));
   }
@@ -68,8 +83,8 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
 
 class SocialMediaTemplate2 extends StatefulWidget {
   String? header;
-  String? newsdescription;
-  SocialMediaTemplate2(this.header, this.newsdescription,);
+  String? newsdescription;String ? CandidateName;
+  SocialMediaTemplate2(this.header, this.newsdescription,this.CandidateName);
 
   @override
   State<SocialMediaTemplate2> createState() => _SocialMediaTemplate2State();
@@ -96,10 +111,10 @@ class _SocialMediaTemplate2State extends State<SocialMediaTemplate2> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(6.0),
+                 padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
@@ -115,19 +130,33 @@ class _SocialMediaTemplate2State extends State<SocialMediaTemplate2> {
                           widget.header!.length > 16
                               ? '${widget.header!.substring(0, 10)}...'
                               : widget.header!,
-                          style: GoogleFonts.bebasNeue(
+                          style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 12)),
                     ],
                   ),
                   SizedBox(
                     height: 3,
                   ),
-                  Text(
-                    '${widget.newsdescription}',
-                    maxLines: 3,
-
-                    style: GoogleFonts.cabin(fontSize: 10),
-                  )
+                  Padding(
+               padding: const EdgeInsets.only(right:8.0),
+                    child: Text(
+                      '${widget.newsdescription}',
+                      maxLines: 3,
+                     style: GoogleFonts.raleway(fontSize: 10)),
+                  ),
+                   Spacer(),
+                  Row(  mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                padding: const EdgeInsets.only(right:8.0,bottom: 8),
+                        child: Text(
+                            '${widget.CandidateName}',
+                            maxLines: 4,
+                      
+                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                      ),
+                    ],
+                  ),
                 ]),
           ),
         ));
@@ -138,8 +167,8 @@ class _SocialMediaTemplate2State extends State<SocialMediaTemplate2> {
 
 class SocialMediaTemplate3 extends StatefulWidget {
   String? header;
-  String? newsdescription;
-  SocialMediaTemplate3(this.header, this.newsdescription, );
+  String? newsdescription;String ? CandidateName;
+  SocialMediaTemplate3(this.header, this.newsdescription, this.CandidateName);
 
   @override
   State<SocialMediaTemplate3> createState() => _SocialMediaTemplate3State();
@@ -166,10 +195,10 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(6.0),
+                    padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
@@ -182,7 +211,7 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
                         widget.header!.length > 16
                             ? '${widget.header!.substring(0, 10)}...'
                             : widget.header!,
-                        style: GoogleFonts.bebasNeue(
+                        style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 12),
                       ),
                     ],
@@ -190,11 +219,27 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
                   SizedBox(
                     height: 3,
                   ),
-                  Text(
-                      '${widget.newsdescription}',
-                      maxLines: 3,
-
-                      style: GoogleFonts.cabin(fontSize: 10))
+                  Padding(
+                     padding: const EdgeInsets.only(right:8.0),
+                    child: Text(
+                        '${widget.newsdescription}',
+                        maxLines: 3,
+                  
+                          style: GoogleFonts.raleway(fontSize: 10)),
+                  ),
+                   Spacer(),
+                  Row(  mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                padding: const EdgeInsets.only(right:8.0,bottom: 8),
+                        child: Text(
+                            '${widget.CandidateName}',
+                            maxLines: 4,
+                      
+                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                      ),
+                    ],
+                  ),
                 ]),
           ),
         ));
@@ -205,8 +250,8 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
 
 class SocialMediaTemplate4 extends StatefulWidget {
   String? header;
-  String? newsdescription;
-  SocialMediaTemplate4(this.header, this.newsdescription, );
+  String? newsdescription;String ? CandidateName;
+  SocialMediaTemplate4(this.header, this.newsdescription,this.CandidateName );
 
   @override
   State<SocialMediaTemplate4> createState() => _SocialMediaTemplate4State();
@@ -233,10 +278,10 @@ class _SocialMediaTemplate4State extends State<SocialMediaTemplate4> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(6.0),
+                   padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
@@ -252,7 +297,7 @@ class _SocialMediaTemplate4State extends State<SocialMediaTemplate4> {
                         widget.header!.length > 16
                             ? '${widget.header!.substring(0, 10)}...'
                             : widget.header!,
-                        style: GoogleFonts.bebasNeue(
+                        style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 12),
                       ),
                     ],
@@ -260,11 +305,27 @@ class _SocialMediaTemplate4State extends State<SocialMediaTemplate4> {
                   SizedBox(
                     height: 3,
                   ),
-                  Text(
-                      '${widget.newsdescription}',
-                      maxLines: 3,
-
-                      style: GoogleFonts.cabin(fontSize: 10))
+                  Padding(
+                    padding: const EdgeInsets.only(right:8.0),
+                    child: Text(
+                        '${widget.newsdescription}',
+                        maxLines: 3,
+                  
+                       style: GoogleFonts.raleway(fontSize: 10)),
+                  ),
+                   Spacer(),
+                  Row(  mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                padding: const EdgeInsets.only(right:8.0,bottom: 8),
+                        child: Text(
+                            '${widget.CandidateName}',
+                            maxLines: 4,
+                      
+                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                      ),
+                    ],
+                  ),
                 ]),
           ),
         ));
