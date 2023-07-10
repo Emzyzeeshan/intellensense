@@ -23,6 +23,8 @@ import 'package:intellensense/Services/ApiServices.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:simple_speed_dial/simple_speed_dial.dart';
 
+import 'Banners.dart/FaceBookBanner.dart';
+import 'Banners.dart/NewsChannelBanner.dart';
 import 'NewsWIdget/GoogleTrendsScreen.dart';
 import 'NewsWIdget/InstagramScreen.dart';
 import 'NewsWIdget/LiveUpdatesScreen.dart';
@@ -44,7 +46,9 @@ class _HomeScreenState extends State<HomeScreen> {
   double height = 200;
   List<Widget>? swipeimage = [
     Twitterbanner(),
-    Youtubebanner(),
+    YoutubeBanner(),
+    NewsChannelBanner(),
+    FaceBookBanner(),
     // 'assets/Image/Intellisense-banners-01.jpg',
     // 'assets/Image/Intellisense-banners-02.jpg',
     // 'assets/Image/Intellisense-banners-03.jpg'
@@ -214,7 +218,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               itemBuilder: (BuildContext context, int index) {
                                 return  swipeimage![index];
                               },
-                              itemCount: 2,
+                              itemCount: 4,
                               autoplay: false,
                               pagination: SwiperPagination(),
                             ),

@@ -80,7 +80,6 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           title: 'TRS Party',
           home:SplashAnimation()
-          
           //  mainLoginScreen(screenHeight: screenHeight),
         ),
       );

@@ -4,15 +4,15 @@ import 'package:http/http.dart';
 import 'package:intellensense/LoginPages/widgets/ChartSampleData.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class Twitterbanner extends StatefulWidget {
-  const Twitterbanner({Key? key}) : super(key: key);
+class FaceBookBanner extends StatefulWidget {
+  const FaceBookBanner({Key? key}) : super(key: key);
 
   @override
-  State<Twitterbanner> createState() => _TwitterbannerState();
+  State<FaceBookBanner> createState() => _FaceBookBannerState();
 }
 
-class _TwitterbannerState extends State<Twitterbanner> {
-  late Future<dynamic> LineChartfuturecall = TwitterBannerGraphApi();
+class _FaceBookBannerState extends State<FaceBookBanner> {
+  late Future<dynamic> LineChartfuturecall = FaceBookBannerGraphApi();
   TooltipBehavior? _tooltipBehavior;
   TooltipBehavior? _tooltipBehavior1;
   List<ChartSampleData>? chartData;
@@ -108,8 +108,8 @@ class _TwitterbannerState extends State<Twitterbanner> {
                               child: SfCircularChart(
                                   tooltipBehavior: _tooltipBehavior1,
                                   palette: [
-                                    Color.fromRGBO(19, 136, 8,0),
                                     Color.fromRGBO(254, 1, 117,0),
+                                    Color.fromRGBO(19, 136, 8,0),
                                     Color.fromRGBO(249, 125, 9,0),
                                   ],
                                   series: <PieSeries<ChartSampleData, String>>[
@@ -141,7 +141,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                   ]),
                             ),
                             Text(
-                              'FOLLOWERS',
+                              'Likes',
                               style: TextStyle(fontSize: 10),
                             ),
                           ],
@@ -166,8 +166,8 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                         height: 120,
                                         width: 120,
                                         child: SfFunnelChart(palette: [
-                                          Color.fromRGBO(19, 136, 8,0),
                                           Color.fromRGBO(254, 1, 117,0),
+                                          Color.fromRGBO(19, 136, 8,0),
                                           Color.fromRGBO(249, 125, 9,0),
                                         ],
                                             //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
@@ -204,7 +204,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                               },
                             ),
                             Text(
-                              'Re-Tweet',
+                              'Comments',
                               style: TextStyle(fontSize: 10),
                             )
                           ],
@@ -259,7 +259,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                           'LIKES',
                           style: TextStyle(fontSize: 10),
                         )),*/
-                   /* Positioned(
+                    /* Positioned(
                         top: 120,
                         left: 220,
                         child: Text(
@@ -351,17 +351,16 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 1.0,top: 50),
                                   child: Image.asset(
-                                    'assets/icons/Social-Media-Icons-IS-08.png',
+                                    'assets/icons/Social-Media-Icons-IS-06.png',
                                     height: 18,
                                     width: 18,
-                                    
                                   ),
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 140.0,left: 5),
                                   child: Container(
-                                    height: 165,
-                                    width: 165,
+                                    height: 150,
+                                    width: 150,
                                     child: RichText(
                                       text: new TextSpan(
                                         // Note: Styles for TextSpans must be explicitly defined.
@@ -372,12 +371,6 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                         ),
                                         children: <TextSpan>[
                                           TextSpan(
-                                              text:
-                                              'With Huge Difference In counts for Tweets and Re-Tweets reports says that ',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontFamily: 'Segoe UI')),
-                                          TextSpan(
                                               text: BarGraphdata['lead'][0],
                                               style: new TextStyle(
                                                   fontWeight: FontWeight.bold,
@@ -386,10 +379,26 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                                   fontFamily: 'Segoe UI')),
                                           TextSpan(
                                               text:
-                                              ' is relatively Dominant in Twitter Data.',
+                                              ' is overpowering ',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
+                                                  fontSize: 18,
                                                   fontFamily: 'Segoe UI')),
+                                          TextSpan(
+                                              text: "YSRCP",
+                                              style: new TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  color: Colors.red,
+                                                  fontSize: 20,
+                                                  fontFamily: 'Segoe UI')),
+                                          TextSpan(
+                                              text:
+                                              ' in all aspects',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18,
+                                                  fontFamily: 'Segoe UI')),
+
                                         ],
                                       ),
                                     ),
@@ -476,7 +485,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                       ),
                                     ),
                                     Text(
-                                      'Likes',
+                                      'Views',
                                       style: TextStyle(fontSize: 10),
                                     )
                                   ],
@@ -491,7 +500,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                         }
                       },
                     ),
-                   /* Positioned(
+                    /* Positioned(
                         top: 140,
                         left: 2,
                         child: Image.asset(
@@ -723,16 +732,18 @@ class _TwitterbannerState extends State<Twitterbanner> {
   List<ChartSampleData> BargraphChartdata = [];
   List<ChartSampleData> PiegraphChartData = [];
   List<ChartSampleData> FunnelgraphChartData = [];
-  Future<dynamic> TwitterBannerGraphApi() async {
-    setState(() {
-      Selectionquery1['type'] = 'party_data';
-      Selectionquery1['STATE'] = 'TELANGANA';
-      Selectionquery1['party_list'] = 'INC,TRS,BJP';
-      //Selectionquery['channel'] = 'YOUTUBE';
+  Future<dynamic> FaceBookBannerGraphApi() async {
+    var body = json.encode({
+      "type": "party_data",
+      "STATE": 'ANDHRA PRADESH',
+      "party_list": 'TDP, YSRCP',
+      //"social_handle": "YOUTUBE"
     });
+    var headers = {'Content-Type': 'application/json'};
     var response = await post(
-        Uri.parse('http://idxp.pilogcloud.com:6659/social_media/'),
-        body: Selectionquery1);
+        Uri.parse('http://idxp.pilogcloud.com:6659/social_media_FB/'),
+        headers: headers,
+        body: body);
 
     print(response.statusCode);
     if (response.statusCode == 200) {
@@ -751,13 +762,13 @@ class _TwitterbannerState extends State<Twitterbanner> {
             PiegraphChartData.add(
               ChartSampleData(
                   x: '$key',
-                  y: BarGraphdata['party_data'][key][0]['USER_FOLLOWERS'],
+                  y: BarGraphdata['party_data'][key][0]['COMMENTS'],
                   text: '$key'),
             );
             FunnelgraphChartData.add(
               ChartSampleData(
                   x: '$key',
-                  y: BarGraphdata['party_data'][key][0]['RETWEET_COUNT'],
+                  y: BarGraphdata['party_data'][key][0]['SHARES'],
                   text: '$key'),
             );
           });
