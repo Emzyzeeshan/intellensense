@@ -179,7 +179,7 @@ flutter:
     - assets/Image/celebrate.gif
     - assets/Image/logo.png
     - assets/new Updated images/megaphone.png
-    - assets/new Updated images/Notifications.png
+    - assets/new Updated images/social-media-icons-unscreen.gif
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
@@ -197,5 +197,8 @@ flutter:
     - family: Segoe UI
       fonts:
         - asset: fonts/Segoe-UI-Bold.ttf
+    - family: Raleway
+      fonts:
+        - asset: fonts/Raleway-ExtraLightItalic.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

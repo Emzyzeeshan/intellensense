@@ -5,7 +5,8 @@ class NewsTemplate1 extends StatefulWidget {
   String? header;
   String? newsdescription;
   String? logolink;
-  NewsTemplate1(this.header, this.newsdescription, this.logolink, );
+    String? CandidateName;
+  NewsTemplate1(this.header, this.newsdescription, this.logolink,this.CandidateName );
 
   @override
   State<NewsTemplate1> createState() => _NewsTemplate1State();
@@ -30,10 +31,10 @@ class _NewsTemplate1State extends State<NewsTemplate1> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(6.0),
+            padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
                     children: [
@@ -44,18 +45,35 @@ class _NewsTemplate1State extends State<NewsTemplate1> {
                       ),
                       Text(
                           widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
-                          style: GoogleFonts.bebasNeue(
+                          style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 12)),
                     ],
                   ),
                   SizedBox(
                     height: 3,
                   ),
-                  Text(
-                      '${widget.newsdescription}',
-                      maxLines: 3,
-
-                      style: GoogleFonts.cabin(fontSize: 10))
+                  Padding(
+                padding: const EdgeInsets.only(right:8.0),
+                    child: Text(
+                        '${widget.newsdescription}',
+                        maxLines: 4,
+                  
+                        style: GoogleFonts.raleway(fontSize: 10)),
+                  ),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                padding: const EdgeInsets.only(right:8.0,bottom: 8),
+                        child: Text(
+                            '${widget.CandidateName}',
+                            maxLines: 4,
+                      
+                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                      ),
+                    ],
+                  ),
                 ]),
           ),
         ));
@@ -66,7 +84,8 @@ class NewsTemplate2 extends StatefulWidget {
   String? header;
   String? newsdescription;
   String? logolink;
-  NewsTemplate2(this.header, this.newsdescription, this.logolink, );
+    String? CandidateName;
+  NewsTemplate2(this.header, this.newsdescription, this.logolink,this.CandidateName );
 
   @override
   State<NewsTemplate2> createState() => _NewsTemplate2State();
@@ -91,25 +110,26 @@ class _NewsTemplate2State extends State<NewsTemplate2> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
             child: Column(
-                //crossAxisAlignment: CrossAxisAlignment.center,
-               //mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+               mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
                     child: Row(
+                  
                       children: [
                         Image.asset(
                           '${widget.logolink}',
-                          height: 25,
-                          width: 25,
+                          height: 20,
+                          width: 20,
                         ),
                         SizedBox(
                           width: 5,
                         ),
                         Text(
                             widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
-                            style: GoogleFonts.bebasNeue(
+                            style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 12)),
                       ],
                     ),
@@ -117,11 +137,27 @@ class _NewsTemplate2State extends State<NewsTemplate2> {
                   SizedBox(
                     height: 3,
                   ),
-                  Text(
-                      '${widget.newsdescription}',
-                      maxLines: 3,
-
-                      style: GoogleFonts.cabin(fontSize: 10))
+                  Padding(
+                    padding: const EdgeInsets.only(right:8.0),
+                    child: Text(
+                        '${widget.newsdescription}',
+                        maxLines: 4,
+                  
+                     style: GoogleFonts.raleway(fontSize: 10)),
+                  ),
+                 Spacer(),
+                  Row(  mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                padding: const EdgeInsets.only(right:8.0,bottom: 8),
+                        child: Text(
+                            '${widget.CandidateName}',
+                            maxLines: 4,
+                      
+                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                      ),
+                    ],
+                  ),
                 ]),
           ),
         ));
@@ -133,8 +169,8 @@ class _NewsTemplate2State extends State<NewsTemplate2> {
 class NewsTemplate3 extends StatefulWidget {
   String? header;
   String? newsdescription;
-  String? logolink;
-  NewsTemplate3(this.header, this.newsdescription, this.logolink, );
+  String? logolink;    String? CandidateName;
+  NewsTemplate3(this.header, this.newsdescription, this.logolink, this.CandidateName);
 
   @override
   State<NewsTemplate3> createState() => _NewsTemplate3State();
@@ -159,10 +195,10 @@ class _NewsTemplate3State extends State<NewsTemplate3> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(6.0),
+      padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
@@ -173,18 +209,34 @@ class _NewsTemplate3State extends State<NewsTemplate3> {
                       ),
                       Text(
                           widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
-                          style: GoogleFonts.bebasNeue(
+                          style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 12)),
                     ],
                   ),
                   SizedBox(
                     height: 3,
                   ),
-                  Text(
-                      '${widget.newsdescription}',
-                      maxLines: 3,
-
-                      style: GoogleFonts.cabin(fontSize: 10))
+                  Padding(
+                 padding: const EdgeInsets.only(right:8.0),
+                    child: Text(
+                        '${widget.newsdescription}',
+                        maxLines: 4,
+                  
+                         style: GoogleFonts.raleway(fontSize: 10)),
+                  ),
+                Spacer(),
+                  Row(  mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                padding: const EdgeInsets.only(right:8.0,bottom: 8),
+                        child: Text(
+                            '${widget.CandidateName}',
+                            maxLines: 4,
+                      
+                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                      ),
+                    ],
+                  ),
                 ]),
           ),
         ));
@@ -196,8 +248,8 @@ class _NewsTemplate3State extends State<NewsTemplate3> {
 class NewsTemplate4 extends StatefulWidget {
   String? header;
   String? newsdescription;
-  String? logolink;
-  NewsTemplate4(this.header, this.newsdescription, this.logolink, );
+  String? logolink;    String? CandidateName;
+  NewsTemplate4(this.header, this.newsdescription, this.logolink, this.CandidateName);
 
   @override
   State<NewsTemplate4> createState() => _NewsTemplate4State();
@@ -222,15 +274,15 @@ class _NewsTemplate4State extends State<NewsTemplate4> {
             ),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(6.0),
+     padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
             child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
+                   mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
                       Image.asset(
-                        'assets/icons/newspaperdxp.png',
+                        '${widget.logolink}',
                         height: 20,
                         width: 20,
                       ),
@@ -239,18 +291,34 @@ class _NewsTemplate4State extends State<NewsTemplate4> {
                       ),
                       Text(
                           widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
-                          style: GoogleFonts.bebasNeue(
-                              fontWeight: FontWeight.bold, fontSize: 12)),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 11)),
                     ],
                   ),
                   SizedBox(
                     height: 3,
                   ),
-                  Text(
-                      '${widget.newsdescription}',
-                      maxLines: 3,
-
-                      style: GoogleFonts.cabin(fontSize: 10))
+                  Padding(
+                    padding: const EdgeInsets.only(right:8.0),
+                    child: Text(
+                        '${widget.newsdescription}',
+                        maxLines: 4,
+                  
+                          style: GoogleFonts.raleway(fontSize: 10)),
+                  ),
+                  Spacer(),
+                  Row(  mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                padding: const EdgeInsets.only(right:8.0,bottom: 8),
+                        child: Text(
+                            '${widget.CandidateName}',
+                            maxLines: 4,
+                      
+                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                      ),
+                    ],
+                  ),
                 ]),
           ),
         ));

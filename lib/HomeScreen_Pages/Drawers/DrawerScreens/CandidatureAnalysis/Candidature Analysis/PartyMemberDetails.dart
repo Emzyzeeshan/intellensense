@@ -72,7 +72,6 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                       backgroundImage: MemoryImage(
                         base64Decode(
                             widget.Value['content'].substring(22) ?? ''),
-
                       ),
                     ),
                   ),
@@ -393,26 +392,46 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                             itemCount: Resultdata.length,
                             itemBuilder: (context, index) {
                               double winnervotespercent = (double.parse(
-                                          Resultdata[index]['winnerVotes']) /
+                                          Resultdata[index]['winnerVotes'] == null
+                                              ? 0.00
+                                              : Resultdata[index]
+                                                  ['winnerVotes']) /
                                       (double.parse(Resultdata[index]
-                                              ['winnerVotes']) +
+                                                      ['winnerVotes'] ==
+                                                  null
+                                              ? 0.00
+                                              : Resultdata[index]
+                                                  ['winnerVotes']) +
                                           double.parse(Resultdata[index]
-                                              ['runnerVotes']))) *
+                                                      ['runnerVotes'] ==
+                                                  null
+                                              ? 0.00
+                                              : Resultdata[index]['runnerVotes']))) *
                                   100;
                               double runnervotespercent = (double.parse(
-                                          Resultdata[index]['runnerVotes']) /
+                                          Resultdata[index]['runnerVotes'] == null
+                                              ? 0.00
+                                              : Resultdata[index]
+                                                  ['runnerVotes']) /
                                       (double.parse(Resultdata[index]
-                                              ['winnerVotes']) +
+                                                      ['winnerVotes'] ==
+                                                  null
+                                              ? 0.00
+                                              : Resultdata[index]
+                                                  ['winnerVotes']) +
                                           double.parse(Resultdata[index]
-                                              ['runnerVotes']))) *
+                                                      ['runnerVotes'] ==
+                                                  null
+                                              ? 0.00
+                                              : Resultdata[index]['runnerVotes']))) *
                                   100;
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: ExpansionTileCard(
                                     baseColor: Colors.cyan[50],
                                     expandedColor: Colors.white,
-                                    leading:
-                                        Text('${Resultdata[index]['year']}'),
+                                    leading: Text(
+                                        '${Resultdata[index]['id']['year']}'),
                                     title: Container(),
                                     children: [
                                       Column(
@@ -611,7 +630,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                                           const EdgeInsets.all(
                                                               10),
                                                       child: Text(
-                                                          '${Resultdata[index]['winnerVotes']}'),
+                                                          '${Resultdata[index]['winnerVotes'].toString()}'),
                                                     ),
                                                   ),
                                                   TableCell(
@@ -623,7 +642,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                                           const EdgeInsets.all(
                                                               10),
                                                       child: Text(
-                                                          '${Resultdata[index]['winnerCandidate']}'),
+                                                          '${Resultdata[index]['id']['winnerCandidate']}'),
                                                     ),
                                                   ),
                                                   TableCell(
@@ -653,7 +672,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                                           const EdgeInsets.all(
                                                               20),
                                                       child: Text(
-                                                        '${Resultdata[index]['runnerParty']}',
+                                                        '${Resultdata[index]['runnerParty'].toString()}',
                                                         style: TextStyle(
                                                             fontSize: 16,
                                                             fontWeight:
@@ -671,7 +690,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                                           const EdgeInsets.all(
                                                               10),
                                                       child: Text(
-                                                          '${Resultdata[index]['runnerVotes']}'),
+                                                          '${Resultdata[index]['runnerVotes'].toString()}'),
                                                     ),
                                                   ),
                                                   TableCell(
@@ -788,7 +807,6 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                     OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -809,7 +827,6 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                     OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -830,7 +847,6 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                     OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -845,16 +861,12 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       },
                                       closedBuilder: (context, action) {
                                         return SentimentCardTemplate(() {},
-
-
                                             'assets/new Updated images/intellisensesolutions-Icons-83.png');
-
                                       },
                                     ),
-                                     OpenContainer(
+                                    OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -865,14 +877,13 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       transitionDuration:
                                           const Duration(milliseconds: 1200),
                                       openBuilder: (context, action) {
-                                        return  Container();
+                                        return Container();
                                       },
                                       closedBuilder: (context, action) {
-                                        return  SentimentCardTemplate(
-                                        () {}, 'assets/icons/voicedxps.png');
+                                        return SentimentCardTemplate(() {},
+                                            'assets/icons/voicedxps.png');
                                       },
                                     ),
-                                   
                                   ],
                                 ),
                                 SizedBox(
@@ -885,7 +896,6 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                     OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -903,10 +913,9 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                             () {}, 'assets/icons/newsdxps.png');
                                       },
                                     ),
-                                      OpenContainer(
+                                    OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -920,14 +929,13 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                         return Container();
                                       },
                                       closedBuilder: (context, action) {
-                                        return    SentimentCardTemplate(
-                                        () {}, 'assets/icons/timelinedxp.png');
+                                        return SentimentCardTemplate(() {},
+                                            'assets/icons/timelinedxp.png');
                                       },
                                     ),
-                                 OpenContainer(
+                                    OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -941,14 +949,13 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                         return AudioEmotionlist();
                                       },
                                       closedBuilder: (context, action) {
-                                        return     SentimentCardTemplate(() {},
-                                        'assets/icons/faceEmotiondxp.png');
+                                        return SentimentCardTemplate(() {},
+                                            'assets/icons/faceEmotiondxp.png');
                                       },
                                     ),
                                     OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),
-                                      
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -962,12 +969,10 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                         return ContentCardScreen();
                                       },
                                       closedBuilder: (context, action) {
-                                        return     SentimentCardTemplate(
-                                        () {}, 'assets/icons/voice_to_text.png');
+                                        return SentimentCardTemplate(() {},
+                                            'assets/icons/voice_to_text.png');
                                       },
                                     ),
-                                  
-                                   
                                   ],
                                 )
                               ]),
@@ -997,8 +1002,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
   var Resultdata;
   Future<dynamic> PartyResultAPI() async {
     var response = await get(
-      Uri.parse(
-          INSIGHTS+'/eleResults/${widget.Value['name']}'),
+      Uri.parse(INSIGHTS + '/isEleResults/${widget.Value['name']}'),
     );
     print(response.toString());
     print(response.statusCode);
