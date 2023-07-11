@@ -49,7 +49,7 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
                               ? '${widget.header!.substring(0, 10)}...'
                               : widget.header!,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12)),
+                              fontWeight: FontWeight.bold, fontSize: 10)),
                     ],
                   ),
                   SizedBox(
@@ -61,7 +61,7 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
                         '${widget.newsdescription}',
                         maxLines: 3,
                   
-                     style: GoogleFonts.raleway(fontSize: 10)),
+                     style: GoogleFonts.raleway(fontSize: 9)),
                   ),
          Spacer(),
                   Row(  mainAxisAlignment: MainAxisAlignment.end,
@@ -131,7 +131,7 @@ class _SocialMediaTemplate2State extends State<SocialMediaTemplate2> {
                               ? '${widget.header!.substring(0, 10)}...'
                               : widget.header!,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12)),
+                              fontWeight: FontWeight.bold, fontSize: 10)),
                     ],
                   ),
                   SizedBox(
@@ -142,7 +142,7 @@ class _SocialMediaTemplate2State extends State<SocialMediaTemplate2> {
                     child: Text(
                       '${widget.newsdescription}',
                       maxLines: 3,
-                     style: GoogleFonts.raleway(fontSize: 10)),
+                     style: GoogleFonts.raleway(fontSize: 9)),
                   ),
                    Spacer(),
                   Row(  mainAxisAlignment: MainAxisAlignment.end,
@@ -212,7 +212,7 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
                             ? '${widget.header!.substring(0, 10)}...'
                             : widget.header!,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 12),
+                            fontWeight: FontWeight.bold, fontSize: 10),
                       ),
                     ],
                   ),
@@ -225,7 +225,7 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
                         '${widget.newsdescription}',
                         maxLines: 3,
                   
-                          style: GoogleFonts.raleway(fontSize: 10)),
+                          style: GoogleFonts.raleway(fontSize: 9)),
                   ),
                    Spacer(),
                   Row(  mainAxisAlignment: MainAxisAlignment.end,
@@ -298,7 +298,7 @@ class _SocialMediaTemplate4State extends State<SocialMediaTemplate4> {
                             ? '${widget.header!.substring(0, 10)}...'
                             : widget.header!,
                         style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 12),
+                            fontWeight: FontWeight.bold, fontSize: 10),
                       ),
                     ],
                   ),
@@ -311,7 +311,7 @@ class _SocialMediaTemplate4State extends State<SocialMediaTemplate4> {
                         '${widget.newsdescription}',
                         maxLines: 3,
                   
-                       style: GoogleFonts.raleway(fontSize: 10)),
+                       style: GoogleFonts.raleway(fontSize: 9)),
                   ),
                    Spacer(),
                   Row(  mainAxisAlignment: MainAxisAlignment.end,

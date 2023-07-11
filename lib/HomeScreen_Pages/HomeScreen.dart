@@ -167,7 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ):Text('Loading'),*/
         key: _key,
         drawer: drawer(),
-        backgroundColor: HomeColor,
+        // backgroundColor: HomeColor,
         body: NestedScrollView(
           controller: _scrollController,
           headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -189,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                 ),
                 elevation: 0,
-                backgroundColor: HomeColor,
+                backgroundColor: Colors.white,
                 pinned: true,
                 expandedHeight: 310,
                 flexibleSpace: FlexibleSpaceBar(
@@ -884,6 +884,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Spacer(),
                                 IconButton(
+
                                   onPressed: () {
                                     setState(() {
                                       shownews =
@@ -970,16 +971,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
-                                                              setState(() {
-                                                                viewnews = true;
-                                                                newson = true;
-                                                                NewsHeading =
-                                                                    'NewsPaper';
-                                                                _currIndex = 0;
+                                                              showMaterialModalBottomSheet(context: context, 
+                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
+                                                              builder:(context){
+                                                                return   Container(
+                                                                 height: MediaQuery.of(context).size.height*0.6, 
+                                                                  child: NewsPaperScreen());
                                                               });
-                                                              PageCount
-                                                                  .jumpToPage(
-                                                                      0);
+                                                              // setState(() {
+                                                              //   viewnews = true;
+                                                              //   newson = true;
+                                                              //   NewsHeading =
+                                                              //       'NewsPaper';
+                                                              //   _currIndex = 0;
+                                                              // });
+                                                              // PageCount
+                                                              //     .jumpToPage(
+                                                              //         0);
                                                             },
                                                             child: SizedBox(
                                                               height: 130,
@@ -1093,16 +1101,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
-                                                              setState(() {
-                                                                viewnews = true;
-                                                                newson = true;
-                                                                NewsHeading =
-                                                                    'NewsChannel';
-                                                                _currIndex = 0;
+                                                               showMaterialModalBottomSheet(context: context, 
+                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
+                                                              builder:(context){
+                                                                return   Container(
+                                                                 height: MediaQuery.of(context).size.height*0.6, 
+                                                                  child: NewsChannelScreen(),);
                                                               });
-                                                              PageCount
-                                                                  .jumpToPage(
-                                                                      1);
+                                                              // setState(() {
+                                                              //   viewnews = true;
+                                                              //   newson = true;
+                                                              //   NewsHeading =
+                                                              //       'NewsChannel';
+                                                              //   _currIndex = 0;
+                                                              // });
+                                                              // PageCount
+                                                              //     .jumpToPage(
+                                                              //         1);
                                                             },
                                                             child: SizedBox(
                                                               height: 130,
@@ -1215,16 +1230,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
-                                                              setState(() {
-                                                                viewnews = true;
-                                                                newson = true;
-                                                                NewsHeading =
-                                                                    'Live Updates';
-                                                                _currIndex = 0;
+                                                               showMaterialModalBottomSheet(context: context, 
+                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
+                                                              builder:(context){
+                                                                return   Container(
+                                                                 height: MediaQuery.of(context).size.height*0.6, 
+                                                                  child:  LiveUpdatesScreen(),);
                                                               });
-                                                              PageCount
-                                                                  .jumpToPage(
-                                                                      2);
+                                                              // setState(() {
+                                                              //   viewnews = true;
+                                                              //   newson = true;
+                                                              //   NewsHeading =
+                                                              //       'Live Updates';
+                                                              //   _currIndex = 0;
+                                                              // });
+                                                              // PageCount
+                                                              //     .jumpToPage(
+                                                              //         2);
                                                             },
                                                             child: SizedBox(
                                                               height: 130,
@@ -1339,15 +1361,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
-                                                              setState(() {
-                                                                viewnews = true;
-                                                                newson = true;
-                                                                NewsHeading =
-                                                                    'Google Trends';
+                                                               showMaterialModalBottomSheet(context: context, 
+                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
+                                                              builder:(context){
+                                                                return   Container(
+                                                                 height: MediaQuery.of(context).size.height*0.6, 
+                                                                  child: GoogleTrendsScreen());
                                                               });
-                                                              PageCount
-                                                                  .jumpToPage(
-                                                                      3);
+                                                              // setState(() {
+                                                              //   viewnews = true;
+                                                              //   newson = true;
+                                                              //   NewsHeading =
+                                                              //       'Google Trends';
+                                                              // });
+                                                              // PageCount
+                                                              //     .jumpToPage(
+                                                              //         3);
                                                             },
                                                             child: SizedBox(
                                                               height: 130,
@@ -1409,19 +1438,16 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           Padding(
                             padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  'assets/new Updated images/social-media-icons-unscreen.gif',
-                                  height: 30,
-                                  width: 30,
-                                ),
-                                Text(
-                                  'SOCIAL MEDIA',
-                                  style: TextStyle(
-                                    fontFamily: 'Segoe UI',
-                                    fontSize: 16,
+                            child: AnimatedContainer(
+                              duration: Duration(seconds: 2),
+                              child: Row(
+                                children: [
+                                  Image.asset(
+                                    'assets/new Updated images/social-media-icons-unscreen.gif',
+                                    height: 30,
+                                    width: 30,
                                   ),
+
                                 ),
                                 Spacer(),
                                 IconButton(
@@ -1436,10 +1462,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                       : Icon(Icons.arrow_drop_up_outlined),
                                 ),
                               ],
+                                  Text(
+                                    'SOCIAL MEDIA',
+                                    style: TextStyle(
+                                      fontFamily: 'Segoe UI',
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                 
+                                ],
+                              ),
                             ),
                           ),
                           showSocialnews == true
-                              ? SlideInUp(
+                              ? SlideInDown(
                                   duration: Duration(seconds: 3),
                                   child: Padding(
                                     padding: const EdgeInsets.only(
@@ -1498,15 +1534,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       width: 150,
                                                       child: GestureDetector(
                                                         onTap: () {
-                                                          setState(() {
-                                                            viewnews = true;
-                                                            newson = true;
-                                                            NewsHeading =
-                                                                'Youtube';
-                                                            _currIndex = 0;
-                                                          });
-                                                          PageCount.jumpToPage(
-                                                              4);
+                                                          showMaterialModalBottomSheet(context: context, 
+                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
+                                                              builder:(context){
+                                                                return   Container(
+                                                                 height: MediaQuery.of(context).size.height*0.6, 
+                                                                  child:YouTubeScreen(), );
+                                                              });
+                                                          // setState(() {
+                                                          //   viewnews = true;
+                                                          //   newson = true;
+                                                          //   NewsHeading =
+                                                          //       'Youtube';
+                                                          //   _currIndex = 0;
+                                                          // });
+                                                          // PageCount.jumpToPage(
+                                                          //     4);
                                                         },
                                                         child: Swiper(
                                                             itemWidth: 150,
@@ -1552,7 +1595,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       'State: ${snapshot.connectionState}');
                                                 }
                                               })),
-
+                                      
                                           //Twitter news
                                           FutureBuilder(
                                               future: twitterdata,
@@ -1584,34 +1627,38 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[0]['candidateName']}',
                                                           '${TwitterData[0]['tweetContent']}',
-                                                          '- ${TwitterData[0]['candidateName']}'),
+                                                          '- ${TwitterData[0]['candidatePartyName']}'),
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[1]['candidateName']}',
-                                                          '${TwitterData[1]['tweetContent']}',
-                                                          '- ${TwitterData[1]['candidateName']}'),
+                                                          '${TwitterData[1]['tweetContent']}','- ${TwitterData[1]['candidatePartyName']}'),
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[2]['candidateName']}',
-                                                          '${TwitterData[2]['tweetContent']}',
-                                                          '- ${TwitterData[2]['candidateName']}'),
+                                                          '${TwitterData[2]['tweetContent']}','- ${TwitterData[2]['candidatePartyName']}'),
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[3]['candidateName']}',
-                                                          '${TwitterData[3]['tweetContent']}',
-                                                          '- ${TwitterData[3]['candidateName']}'),
+                                                          '${TwitterData[3]['tweetContent']}','- ${TwitterData[3]['candidatePartyName']}'),
                                                     ];
                                                     return SizedBox(
                                                       height: 130,
                                                       width: 150,
                                                       child: GestureDetector(
                                                         onTap: () {
-                                                          setState(() {
-                                                            viewnews = true;
-                                                            newson = true;
-                                                            NewsHeading =
-                                                                'Twitter';
-                                                            _currIndex = 0;
-                                                          });
-                                                          PageCount.jumpToPage(
-                                                              5);
+                                                          showMaterialModalBottomSheet(context: context, 
+                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
+                                                              builder:(context){
+                                                                return   Container(
+                                                                 height: MediaQuery.of(context).size.height*0.6, 
+                                                                  child:TwitterScreen(), );
+                                                              });
+                                                          // setState(() {
+                                                          //   viewnews = true;
+                                                          //   newson = true;
+                                                          //   NewsHeading =
+                                                          //       'Twitter';
+                                                          //   _currIndex = 0;
+                                                          // });
+                                                          // PageCount.jumpToPage(
+                                                          //     5);
                                                         },
                                                         child: Swiper(
                                                             itemWidth: 150,
@@ -1733,15 +1780,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       width: 150,
                                                       child: GestureDetector(
                                                         onTap: () {
-                                                          setState(() {
-                                                            viewnews = true;
-                                                            newson = true;
-                                                            NewsHeading =
-                                                                'FaceBook';
-                                                            _currIndex = 0;
-                                                          });
-                                                          PageCount.jumpToPage(
-                                                              6);
+                                                          showMaterialModalBottomSheet(context: context, 
+                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
+                                                              builder:(context){
+                                                                return   Container(
+                                                                 height: MediaQuery.of(context).size.height*0.6, 
+                                                                  child:   FaceBookScreen(), );
+                                                              });
+                                                          // setState(() {
+                                                          //   viewnews = true;
+                                                          //   newson = true;
+                                                          //   NewsHeading =
+                                                          //       'FaceBook';
+                                                          //   _currIndex = 0;
+                                                          // });
+                                                          // PageCount.jumpToPage(
+                                                          //     6);
                                                         },
                                                         child: Swiper(
                                                             itemWidth: 150,
@@ -1837,15 +1891,22 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       width: 150,
                                                       child: GestureDetector(
                                                         onTap: () {
-                                                          setState(() {
-                                                            viewnews = true;
-                                                            newson = true;
-                                                            NewsHeading =
-                                                                'Instagram';
-                                                            _currIndex = 0;
-                                                          });
-                                                          PageCount.jumpToPage(
-                                                              7);
+                                                          showMaterialModalBottomSheet(context: context, 
+                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
+                                                              builder:(context){
+                                                                return   Container(
+                                                                 height: MediaQuery.of(context).size.height*0.6, 
+                                                                  child: InstagramScreen());
+                                                              });
+                                                          // setState(() {
+                                                          //   viewnews = true;
+                                                          //   newson = true;
+                                                          //   NewsHeading =
+                                                          //       'Instagram';
+                                                          //   _currIndex = 0;
+                                                          // });
+                                                          // PageCount.jumpToPage(
+                                                          //     7);
                                                         },
                                                         child: Swiper(
                                                             itemWidth: 150,
@@ -1898,97 +1959,98 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )
                               : Container(),
 
-                          Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15)),
-                            // color: Color(0xffa3bdea),
-                            elevation: 7,
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Flexible(child: Divider(thickness: 1)),
-                                    Text(
-                                      '$NewsHeading',
-                                      style: TextStyle(
-                                        fontFamily: 'Segoe UI',
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    IconButton(
-                                      icon: newson == true
-                                          ? Icon(Icons.arrow_drop_down)
-                                          : Icon(Icons.arrow_drop_up_outlined),
+                          // Card(
+                          //   shape: RoundedRectangleBorder(
+                          //       borderRadius: BorderRadius.circular(15)),
+                          //   // color: Color(0xffa3bdea),
+                          //   elevation: 7,
+                          //   child: Column(
+                          //     children: [
+                          //       Row(
+                          //         mainAxisAlignment: MainAxisAlignment.center,
+                          //         children: [
+                          //           Flexible(child: Divider(thickness: 1)),
+                          //           Text(
+                          //             '$NewsHeading',
+                          //             style: TextStyle(
+                          //               fontFamily: 'Segoe UI',
+                          //               fontSize: 16,
+                          //             ),
+                          //           ),
+                          //           IconButton(
+                          //             icon: newson == true
+                          //                 ? Icon(Icons.arrow_drop_down)
+                          //                 : Icon(Icons.arrow_drop_up_outlined),
 
-                                      //  AnimatedSwitcher(
-                                      //     duration:
-                                      //         const Duration(milliseconds: 300),
-                                      //     transitionBuilder: (child, anim) =>
-                                      //         RotationTransition(
-                                      //           turns: child.key ==
-                                      //                   ValueKey('icon1')
-                                      //               ? Tween<double>(
-                                      //                       begin: 1, end: 0.75)
-                                      //                   .animate(anim)
-                                      //               : Tween<double>(
-                                      //                       begin: 0.75, end: 1)
-                                      //                   .animate(anim),
-                                      //           child: FadeTransition(
-                                      //               opacity: anim,
-                                      //               child: child),
-                                      //         ),
-                                      //     child: _currIndex == 0
-                                      //         ? Icon(
-                                      //             Icons
-                                      //                 .arrow_circle_left_outlined,
-                                      //             size: 30,
-                                      //             key: const ValueKey('icon1'))
-                                      //         : Icon(
-                                      //             Icons.arrow_circle_up_sharp,
-                                      //             size: 30,
-                                      //             key: const ValueKey('icon2'),
-                                      //           )),
-                                      onPressed: () {
-                                        setState(() {
-                                          newson = !newson;
-                                        });
-                                      },
-                                    ),
-                                    Flexible(
-                                        child: Divider(
-                                      thickness: 1,
-                                    ))
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    newson == true
-                                        ? Container(
-                                            height: 450,
-                                            width: 350,
-                                            // curve: Curves.linear,
-                                            // height: _height,
-                                            // width: _width,
-                                            // alignment: Alignment.center,
-                                            // duration: Duration(seconds: 2),
-                                            child: PageView.builder(
-                                                // physics: NeverScrollableScrollPhysics(),
-                                                controller: PageCount,
-                                                itemCount:
-                                                    DailyNewsPages.length,
-                                                itemBuilder:
-                                                    (BuildContext, index) {
-                                                  return DailyNewsPages[index];
-                                                }),
-                                            decoration: BoxDecoration())
-                                        : Container(),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
+
+                          //             //  AnimatedSwitcher(
+                          //             //     duration:
+                          //             //         const Duration(milliseconds: 300),
+                          //             //     transitionBuilder: (child, anim) =>
+                          //             //         RotationTransition(
+                          //             //           turns: child.key ==
+                          //             //                   ValueKey('icon1')
+                          //             //               ? Tween<double>(
+                          //             //                       begin: 1, end: 0.75)
+                          //             //                   .animate(anim)
+                          //             //               : Tween<double>(
+                          //             //                       begin: 0.75, end: 1)
+                          //             //                   .animate(anim),
+                          //             //           child: FadeTransition(
+                          //             //               opacity: anim,
+                          //             //               child: child),
+                          //             //         ),
+                          //             //     child: _currIndex == 0
+                          //             //         ? Icon(
+                          //             //             Icons
+                          //             //                 .arrow_circle_left_outlined,
+                          //             //             size: 30,
+                          //             //             key: const ValueKey('icon1'))
+                          //             //         : Icon(
+                          //             //             Icons.arrow_circle_up_sharp,
+                          //             //             size: 30,
+                          //             //             key: const ValueKey('icon2'),
+                          //             //           )),
+                          //             onPressed: () {
+                          //               setState(() {
+                          //                 newson = !newson;
+                          //               });
+                          //             },
+                          //           ),
+                          //           Flexible(
+                          //               child: Divider(
+                          //             thickness: 1,
+                          //           ))
+                          //         ],
+                          //       ),
+                          //       Row(
+                          //         mainAxisAlignment: MainAxisAlignment.center,
+                          //         children: [
+                          //           newson == true
+                          //               ? Container(
+                          //                   height: 450,
+                          //                   width: 400,
+                          //                   // curve: Curves.linear,
+                          //                   // height: _height,
+                          //                   // width: _width,
+                          //                   // alignment: Alignment.center,
+                          //                   // duration: Duration(seconds: 2),
+                          //                   child: PageView.builder(
+                          //                       // physics: NeverScrollableScrollPhysics(),
+                          //                       controller: PageCount,
+                          //                       itemCount:
+                          //                           DailyNewsPages.length,
+                          //                       itemBuilder:
+                          //                           (BuildContext, index) {
+                          //                         return DailyNewsPages[index];
+                          //                       }),
+                          //                   decoration: BoxDecoration())
+                          //               : Container(),
+                          //         ],
+                          //       ),
+                          //     ],
+                          //   ),
+                          // ),
 
                           // viewnews == true
                           //     ? SizedBox(
