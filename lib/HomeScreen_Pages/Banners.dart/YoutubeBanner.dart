@@ -347,6 +347,8 @@ class _YoutubeBannerState extends State<YoutubeBanner> {
                             return const Text('Error');
                           } else if (snapshot.hasData) {
                             return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(left: 1.0,top: 50),

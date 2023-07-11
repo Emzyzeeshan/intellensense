@@ -45,10 +45,10 @@ class _HomeScreenState extends State<HomeScreen> {
   bool lastStatus = true;
   double height = 200;
   List<Widget>? swipeimage = [
-    Twitterbanner(),
     YoutubeBanner(),
     NewsChannelBanner(),
     FaceBookBanner(),
+    Twitterbanner(),
     // 'assets/Image/Intellisense-banners-01.jpg',
     // 'assets/Image/Intellisense-banners-02.jpg',
     // 'assets/Image/Intellisense-banners-03.jpg'
@@ -67,6 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
   bool shownews = true;
   bool showSocialnews = true;
   bool newson = false;
+  bool newson1 = false;
   bool get _isShrink {
     return _scrollController != null &&
         _scrollController!.hasClients &&
@@ -206,7 +207,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 48),
+                          padding: const EdgeInsets.only(top: 50),
                           child: Container(
                             height: 260,
                             width: MediaQuery.of(context).size.width,
@@ -217,7 +218,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               },
                               itemCount: 4,
                               autoplay: false,
-                              pagination: SwiperPagination(),
+                              pagination: SwiperPagination(
+                                  builder: new DotSwiperPaginationBuilder(
+                                      color: Colors.grey,
+                                      activeColor: Color(0xff38547C))),
+                              control: new SwiperControl(
+                                size: 18,
+                                padding: EdgeInsets.all(2),
+                                color: Color(0xff38547C),
+                              ),
                             ),
                           ),
                         ),
@@ -458,6 +467,342 @@ class _HomeScreenState extends State<HomeScreen> {
                         'assets/new Updated images/Notifications.png',
                         height: 20,
                       )),
+                  IconButton(
+                      onPressed: () {
+                        showMaterialModalBottomSheet(
+                            backgroundColor: Color(0xffd2dfff),
+                            elevation: 10,
+                            bounce: true,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(15),
+                                    topRight:
+                                    Radius.circular(15))),
+                            context: context,
+                            builder: (context) {
+                              return SizedBox(
+                                height: MediaQuery.of(context)
+                                    .size
+                                    .height *
+                                    0.5,
+                                child: SingleChildScrollView(
+                                  child: Padding(
+                                    padding:
+                                    const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment
+                                          .center,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment
+                                          .center,
+                                      children: [
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text('PREFERENCES',
+                                            style: GoogleFonts
+                                                .bebasNeue(
+                                                fontWeight:
+                                                FontWeight
+                                                    .bold,
+                                                fontSize:
+                                                15)),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        ListTile(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius
+                                                    .circular(
+                                                    15)),
+                                            tileColor: Colors
+                                                .blue.shade100,
+                                            onTap: () {
+                                              setState(() {
+                                                carddirection =
+                                                !carddirection;
+                                              });
+                                              Navigator.pop(
+                                                  context);
+                                            },
+                                            leading: Text(
+                                              'Scroll Direction',
+                                              style: TextStyle(
+                                                  fontWeight:
+                                                  FontWeight
+                                                      .w600),
+                                            ),
+                                            trailing: carddirection ==
+                                                false
+                                                ? Text('Vertical')
+                                                : Text(
+                                                'Horizontal')),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        ExpansionTile(
+                                          collapsedShape:
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  15)),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  15)),
+                                          title: Text(''),
+                                          backgroundColor: Colors
+                                              .blue.shade100,
+                                          leading: Text(
+                                              'Custom Swipe'),
+                                          collapsedBackgroundColor:
+                                          Colors
+                                              .blue.shade100,
+                                          children: [
+                                            ListTile(
+                                              onTap: () {
+                                                setState(() {
+                                                  swiperlayout =
+                                                      SwiperLayout
+                                                          .STACK;
+                                                });
+
+                                                Navigator.pop(
+                                                    context);
+                                              },
+                                              leading: Text(
+                                                'STACKED',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w600),
+                                              ),
+                                            ),
+                                            ListTile(
+                                              onTap: () {
+                                                setState(() {
+                                                  swiperlayout =
+                                                      SwiperLayout
+                                                          .TINDER;
+                                                });
+
+                                                Navigator.pop(
+                                                    context);
+                                              },
+                                              leading: Text(
+                                                'SHADOW VIEW',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w600),
+                                              ),
+                                            ),
+                                            ListTile(
+                                              onTap: () {
+                                                setState(() {
+                                                  swiperlayout =
+                                                      SwiperLayout
+                                                          .DEFAULT;
+                                                });
+
+                                                Navigator.pop(
+                                                    context);
+                                              },
+                                              leading: Text(
+                                                'DEFAULT VIEW',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w600),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        ExpansionTile(
+                                          collapsedShape:
+                                          RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  15)),
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  15)),
+                                          title: Text(''),
+                                          backgroundColor: Colors
+                                              .blue.shade100,
+                                          leading:
+                                          Text('Swipe Speed'),
+                                          collapsedBackgroundColor:
+                                          Colors
+                                              .blue.shade100,
+                                          children: [
+                                            ListTile(
+                                              onTap: () {
+                                                setState(() {
+                                                  duration = 2200;
+                                                });
+
+                                                Navigator.pop(
+                                                    context);
+                                              },
+                                              leading: Text(
+                                                'SLOW',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w600),
+                                              ),
+                                            ),
+                                            ListTile(
+                                              onTap: () {
+                                                setState(() {
+                                                  duration = Duration
+                                                      .microsecondsPerMillisecond;
+                                                });
+
+                                                Navigator.pop(
+                                                    context);
+                                              },
+                                              leading: Text(
+                                                'MEDIUM',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w600),
+                                              ),
+                                            ),
+                                            ListTile(
+                                              onTap: () {
+                                                setState(() {
+                                                  duration = 10;
+                                                });
+
+                                                Navigator.pop(
+                                                    context);
+                                              },
+                                              leading: Text(
+                                                'FAST',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                    FontWeight
+                                                        .w600),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        /*ListTile(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  15)),
+                                          tileColor: Colors
+                                              .blue.shade100,
+                                          leading:
+                                          Text('Darkmode'),
+                                          onTap: () {
+                                            setState(() {
+                                              // themeChange
+                                              //         .darkTheme =
+                                              //     !themeChange
+                                              //         .darkTheme;
+                                            });
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),*/
+                                        /*ListTile(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  15)),
+                                          tileColor: Colors
+                                              .blue.shade100,
+                                          leading: shownews ==
+                                              false
+                                              ? Text(
+                                              'Show News Tab')
+                                              : Text(
+                                              'Hide News Tab'),
+                                          onTap: () {
+                                            setState(() {
+                                              shownews =
+                                              !shownews;
+                                            });
+                                            Navigator.pop(
+                                                context);
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        ListTile(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  15)),
+                                          tileColor: Colors
+                                              .blue.shade100,
+                                          leading: showSocialnews ==
+                                              false
+                                              ? Text(
+                                              'Show SocialNews Tab')
+                                              : Text(
+                                              'Hide SocialNews Tab'),
+                                          onTap: () {
+                                            setState(() {
+                                              showSocialnews =
+                                              !showSocialnews;
+                                            });
+                                            Navigator.pop(
+                                                context);
+                                          },
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        ListTile(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius
+                                                  .circular(
+                                                  15)),
+                                          tileColor: Colors
+                                              .blue.shade100,
+                                          leading: Text(
+                                              'Hide News Card'),
+                                          onTap: () {
+                                            setState(() {
+                                              viewnews = false;
+                                            });
+                                            Navigator.pop(
+                                                context);
+                                          },
+                                        ),*/
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            });
+                      },
+                      icon: Icon(Icons.settings,color: Colors.black,)),
                   /*PopupMenuButton(onSelected: (value) {
                         if (value == 'notifications') {
                           Navigator.push(
@@ -539,341 +884,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Spacer(),
                                 IconButton(
-                                    onPressed: () {
-                                      showMaterialModalBottomSheet(
-                                          backgroundColor: Color(0xffd2dfff),
-                                          elevation: 10,
-                                          bounce: true,
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius: BorderRadius.only(
-                                                  topLeft: Radius.circular(15),
-                                                  topRight:
-                                                      Radius.circular(15))),
-                                          context: context,
-                                          builder: (context) {
-                                            return SizedBox(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height *
-                                                  0.5,
-                                              child: SingleChildScrollView(
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Column(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      Text('PREFERENCES',
-                                                          style: GoogleFonts
-                                                              .bebasNeue(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize:
-                                                                      15)),
-                                                      SizedBox(
-                                                        height: 15,
-                                                      ),
-                                                      ListTile(
-                                                          shape: RoundedRectangleBorder(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          15)),
-                                                          tileColor: Colors
-                                                              .blue.shade100,
-                                                          onTap: () {
-                                                            setState(() {
-                                                              carddirection =
-                                                                  !carddirection;
-                                                            });
-                                                            Navigator.pop(
-                                                                context);
-                                                          },
-                                                          leading: Text(
-                                                            'Scroll Direction',
-                                                            style: TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600),
-                                                          ),
-                                                          trailing: carddirection ==
-                                                                  false
-                                                              ? Text('Vertical')
-                                                              : Text(
-                                                                  'Horizontal')),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      ExpansionTile(
-                                                        collapsedShape:
-                                                            RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15)),
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        15)),
-                                                        title: Text(''),
-                                                        backgroundColor: Colors
-                                                            .blue.shade100,
-                                                        leading: Text(
-                                                            'Custom Swipe'),
-                                                        collapsedBackgroundColor:
-                                                            Colors
-                                                                .blue.shade100,
-                                                        children: [
-                                                          ListTile(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                swiperlayout =
-                                                                    SwiperLayout
-                                                                        .STACK;
-                                                              });
-
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            leading: Text(
-                                                              'STACKED',
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
-                                                            ),
-                                                          ),
-                                                          ListTile(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                swiperlayout =
-                                                                    SwiperLayout
-                                                                        .TINDER;
-                                                              });
-
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            leading: Text(
-                                                              'SHADOW VIEW',
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
-                                                            ),
-                                                          ),
-                                                          ListTile(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                swiperlayout =
-                                                                    SwiperLayout
-                                                                        .DEFAULT;
-                                                              });
-
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            leading: Text(
-                                                              'DEFAULT VIEW',
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      ExpansionTile(
-                                                        collapsedShape:
-                                                            RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            15)),
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        15)),
-                                                        title: Text(''),
-                                                        backgroundColor: Colors
-                                                            .blue.shade100,
-                                                        leading:
-                                                            Text('Swipe Speed'),
-                                                        collapsedBackgroundColor:
-                                                            Colors
-                                                                .blue.shade100,
-                                                        children: [
-                                                          ListTile(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                duration = 2200;
-                                                              });
-
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            leading: Text(
-                                                              'SLOW',
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
-                                                            ),
-                                                          ),
-                                                          ListTile(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                duration = Duration
-                                                                    .microsecondsPerMillisecond;
-                                                              });
-
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            leading: Text(
-                                                              'MEDIUM',
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
-                                                            ),
-                                                          ),
-                                                          ListTile(
-                                                            onTap: () {
-                                                              setState(() {
-                                                                duration = 10;
-                                                              });
-
-                                                              Navigator.pop(
-                                                                  context);
-                                                            },
-                                                            leading: Text(
-                                                              'FAST',
-                                                              style: TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      ListTile(
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        15)),
-                                                        tileColor: Colors
-                                                            .blue.shade100,
-                                                        leading:
-                                                            Text('Darkmode'),
-                                                        onTap: () {
-                                                          setState(() {
-                                                            // themeChange
-                                                            //         .darkTheme =
-                                                            //     !themeChange
-                                                            //         .darkTheme;
-                                                          });
-                                                        },
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      ListTile(
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        15)),
-                                                        tileColor: Colors
-                                                            .blue.shade100,
-                                                        leading: shownews ==
-                                                                false
-                                                            ? Text(
-                                                                'Show News Tab')
-                                                            : Text(
-                                                                'Hide News Tab'),
-                                                        onTap: () {
-                                                          setState(() {
-                                                            shownews =
-                                                                !shownews;
-                                                          });
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      ListTile(
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        15)),
-                                                        tileColor: Colors
-                                                            .blue.shade100,
-                                                        leading: showSocialnews ==
-                                                                false
-                                                            ? Text(
-                                                                'Show SocialNews Tab')
-                                                            : Text(
-                                                                'Hide SocialNews Tab'),
-                                                        onTap: () {
-                                                          setState(() {
-                                                            showSocialnews =
-                                                                !showSocialnews;
-                                                          });
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                      ),
-                                                      SizedBox(
-                                                        height: 10,
-                                                      ),
-                                                      ListTile(
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        15)),
-                                                        tileColor: Colors
-                                                            .blue.shade100,
-                                                        leading: Text(
-                                                            'Hide News Card'),
-                                                        onTap: () {
-                                                          setState(() {
-                                                            viewnews = false;
-                                                          });
-                                                          Navigator.pop(
-                                                              context);
-                                                        },
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          });
-                                    },
-                                    icon: Icon(Icons.settings))
+                                  onPressed: () {
+                                    setState(() {
+                                      shownews =
+                                      !shownews;
+                                    });
+                                  },
+                                  icon: shownews == true
+                                      ? Icon(Icons.arrow_drop_down)
+                                      : Icon(Icons.arrow_drop_up_outlined),
+                                ),
                               ],
                             ),
                           ),
@@ -930,19 +950,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NewsTemplate2(
                                                                 "${newsdata[0]['mediaName']}",
                                                                 '${newsdata[0]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png','- ${newsdata[0]['candidateName']}'),
+                                                                'assets/icons/newspaperdxp.png',
+                                                                '- ${newsdata[0]['candidateName']}'),
                                                             NewsTemplate3(
                                                                 '${newsdata[1]['mediaName']}',
                                                                 '${newsdata[1]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png','- ${newsdata[1]['candidateName']}'),
+                                                                'assets/icons/newspaperdxp.png',
+                                                                '- ${newsdata[1]['candidateName']}'),
                                                             NewsTemplate1(
                                                                 '${newsdata[2]['mediaName']}',
                                                                 '${newsdata[2]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png','- ${newsdata[2]['candidateName']}'),
+                                                                'assets/icons/newspaperdxp.png',
+                                                                '- ${newsdata[2]['candidateName']}'),
                                                             NewsTemplate4(
                                                                 '${newsdata[3]['mediaName']}',
                                                                 '${newsdata[3]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png','- ${newsdata[3]['candidateName']}'),
+                                                                'assets/icons/newspaperdxp.png',
+                                                                '- ${newsdata[3]['candidateName']}'),
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
@@ -1049,19 +1073,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NewsTemplate2(
                                                                 "${newchannelldata[0]['mediaChannelName']}",
                                                                 '${newchannelldata[0]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png','- ${newchannelldata[0]['candidateName']}'),
+                                                                'assets/icons/newsdxps.png',
+                                                                '- ${newchannelldata[0]['candidateName']}'),
                                                             NewsTemplate3(
                                                                 '${newchannelldata[1]['mediaChannelName']}',
                                                                 '${newchannelldata[1]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png','-${newchannelldata[1]['candidateName']}'),
+                                                                'assets/icons/newsdxps.png',
+                                                                '-${newchannelldata[1]['candidateName']}'),
                                                             NewsTemplate1(
                                                                 '${newchannelldata[2]['mediaChannelName']}',
                                                                 '${newchannelldata[2]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png','- ${newsdata[2]['candidateName']}'),
+                                                                'assets/icons/newsdxps.png',
+                                                                '- ${newsdata[2]['candidateName']}'),
                                                             NewsTemplate4(
                                                                 '${newchannelldata[3]['mediaChannelName']}',
                                                                 '${newchannelldata[3]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png','- ${newchannelldata[3]['candidateName']}'),
+                                                                'assets/icons/newsdxps.png',
+                                                                '- ${newchannelldata[3]['candidateName']}'),
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
@@ -1167,19 +1195,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NewsTemplate2(
                                                                 "${Livenewsdata[0]['mediaName']}",
                                                                 '${Livenewsdata[0]['headLine']}',
-                                                                'assets/icons/live.gif','${Livenewsdata[0]['publishedDate']}'),
+                                                                'assets/icons/live.gif',
+                                                                '${Livenewsdata[0]['publishedDate']}'),
                                                             NewsTemplate3(
                                                                 '${Livenewsdata[1]['mediaName']}',
                                                                 '${Livenewsdata[1]['headLine']}',
-                                                                'assets/icons/live.gif','${Livenewsdata[1]['publishedDate']}'),
+                                                                'assets/icons/live.gif',
+                                                                '${Livenewsdata[1]['publishedDate']}'),
                                                             NewsTemplate1(
                                                                 '${Livenewsdata[2]['mediaName']}',
                                                                 '${Livenewsdata[2]['headLine']}',
-                                                                'assets/icons/live.gif','${Livenewsdata[2]['publishedDate']}'),
+                                                                'assets/icons/live.gif',
+                                                                '${Livenewsdata[2]['publishedDate']}'),
                                                             NewsTemplate4(
                                                                 '${Livenewsdata[3]['mediaName']}',
                                                                 '${Livenewsdata[3]['headLine']}',
-                                                                'assets/icons/live.gif','${Livenewsdata[3]['publishedDate']}'),
+                                                                'assets/icons/live.gif',
+                                                                '${Livenewsdata[3]['publishedDate']}'),
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
@@ -1287,19 +1319,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             NewsTemplate2(
                                                                 "${GoogleTrendsdata[0]['partyName']}",
                                                                 '${GoogleTrendsdata[0]['id']['region']}',
-                                                                'assets/icons/googleTrends.png','- ${GoogleTrendsdata[0]['id']['candidateName']}'),
+                                                                'assets/icons/googleTrends.png',
+                                                                '- ${GoogleTrendsdata[0]['id']['candidateName']}'),
                                                             NewsTemplate3(
                                                                 '${GoogleTrendsdata[1]['partyName']}',
                                                                 '${GoogleTrendsdata[1]['id']['region']}',
-                                                                'assets/icons/googleTrends.png','- ${GoogleTrendsdata[1]['id']['candidateName']}'),
+                                                                'assets/icons/googleTrends.png',
+                                                                '- ${GoogleTrendsdata[1]['id']['candidateName']}'),
                                                             NewsTemplate1(
                                                                 '${GoogleTrendsdata[2]['partyName']}',
                                                                 '${GoogleTrendsdata[2]['id']['region']}',
-                                                                'assets/icons/googleTrends.png','- ${GoogleTrendsdata[2]['id']['candidateName']}'),
+                                                                'assets/icons/googleTrends.png',
+                                                                '- ${GoogleTrendsdata[2]['id']['candidateName']}'),
                                                             NewsTemplate4(
                                                                 '${GoogleTrendsdata[3]['partyName']}',
                                                                 '${GoogleTrendsdata[3]['id']['region']}',
-                                                                'assets/icons/googleTrends.png','- ${GoogleTrendsdata[3]['id']['candidateName']}'),
+                                                                'assets/icons/googleTrends.png',
+                                                                '- ${GoogleTrendsdata[3]['id']['candidateName']}'),
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
@@ -1387,6 +1423,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fontSize: 16,
                                   ),
                                 ),
+                                Spacer(),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      showSocialnews =
+                                      !showSocialnews;
+                                    });
+                                  },
+                                  icon: showSocialnews == true
+                                      ? Icon(Icons.arrow_drop_down)
+                                      : Icon(Icons.arrow_drop_up_outlined),
+                                ),
                               ],
                             ),
                           ),
@@ -1430,16 +1478,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     List YoutubeList = [
                                                       SocialMediaTemplate1(
                                                           '${Youtubedata[0]['mediaChannelName']}',
-                                                          '${Youtubedata[0]['videoTitle']}','Views - ${Youtubedata[0]['videoViews']}    Likes - ${Youtubedata[0]['videoLikes']}'),
+                                                          '${Youtubedata[0]['videoTitle']}',
+                                                          'Views - ${Youtubedata[0]['videoViews']}    Likes - ${Youtubedata[0]['videoLikes']}'),
                                                       SocialMediaTemplate1(
                                                           '${Youtubedata[1]['mediaChannelName']}',
-                                                          '${Youtubedata[1]['videoTitle']}','Views - ${Youtubedata[1]['videoViews']}    Likes - ${Youtubedata[1]['videoLikes']}'),
+                                                          '${Youtubedata[1]['videoTitle']}',
+                                                          'Views - ${Youtubedata[1]['videoViews']}    Likes - ${Youtubedata[1]['videoLikes']}'),
                                                       SocialMediaTemplate1(
                                                           '${Youtubedata[2]['mediaChannelName']}',
-                                                          '${Youtubedata[2]['videoTitle']}','Views - ${Youtubedata[2]['videoViews']}    Likes - ${Youtubedata[2]['videoLikes']}'),
+                                                          '${Youtubedata[2]['videoTitle']}',
+                                                          'Views - ${Youtubedata[2]['videoViews']}    Likes - ${Youtubedata[2]['videoLikes']}'),
                                                       SocialMediaTemplate1(
                                                           '${Youtubedata[3]['mediaChannelName']}',
-                                                          '${Youtubedata[3]['videoTitle']}','Views - ${Youtubedata[3]['videoViews']}    Likes - ${Youtubedata[3]['videoLikes']}'),
+                                                          '${Youtubedata[3]['videoTitle']}',
+                                                          'Views - ${Youtubedata[3]['videoViews']}    Likes - ${Youtubedata[3]['videoLikes']}'),
                                                     ];
                                                     return SizedBox(
                                                       height: 130,
@@ -1531,16 +1583,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     List TwitterList = [
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[0]['candidateName']}',
-                                                          '${TwitterData[0]['tweetContent']}','- ${TwitterData[0]['candidateName']}'),
+                                                          '${TwitterData[0]['tweetContent']}',
+                                                          '- ${TwitterData[0]['candidateName']}'),
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[1]['candidateName']}',
-                                                          '${TwitterData[1]['tweetContent']}','- ${TwitterData[1]['candidateName']}'),
+                                                          '${TwitterData[1]['tweetContent']}',
+                                                          '- ${TwitterData[1]['candidateName']}'),
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[2]['candidateName']}',
-                                                          '${TwitterData[2]['tweetContent']}','- ${TwitterData[2]['candidateName']}'),
+                                                          '${TwitterData[2]['tweetContent']}',
+                                                          '- ${TwitterData[2]['candidateName']}'),
                                                       SocialMediaTemplate2(
                                                           '${TwitterData[3]['candidateName']}',
-                                                          '${TwitterData[3]['tweetContent']}','- ${TwitterData[3]['candidateName']}'),
+                                                          '${TwitterData[3]['tweetContent']}',
+                                                          '- ${TwitterData[3]['candidateName']}'),
                                                     ];
                                                     return SizedBox(
                                                       height: 130,
@@ -1629,31 +1685,46 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         'Data Error');
                                                   } else if (snapshot.hasData) {
                                                     List FaceBookList = [
-                                                      SocialMediaTemplate3(  
+                                                      SocialMediaTemplate3(
                                                           '${Facebookdata[0]['keyWords']}',
                                                           '${Facebookdata[0]['titleContent']}',
-                                                          '${Facebookdata[0]['candidateName']}'.length > 16 ?  '- ${Facebookdata[0]['candidateName'].substring(0, 10)}...' :  '- ${Facebookdata[0]['candidateName']}'
-                                                          
+                                                          '${Facebookdata[0]['candidateName']}'
+                                                                      .length >
+                                                                  16
+                                                              ? '- ${Facebookdata[0]['candidateName'].substring(0, 10)}...'
+                                                              : '- ${Facebookdata[0]['candidateName']}'
+
                                                           // '${Facebookdata[0]['candidateName']}'
                                                           ),
                                                       SocialMediaTemplate3(
                                                           '${Facebookdata[1]['keyWords']}',
                                                           '${Facebookdata[1]['titleContent']}',
-                                                            '${Facebookdata[1]['candidateName']}'.length > 16 ?  '- ${Facebookdata[1]['candidateName'].substring(0, 10)}...' :  '- ${Facebookdata[1]['candidateName']}'
-                                                            // ,'${Facebookdata[1]['candidateName']}'
+                                                          '${Facebookdata[1]['candidateName']}'
+                                                                      .length >
+                                                                  16
+                                                              ? '- ${Facebookdata[1]['candidateName'].substring(0, 10)}...'
+                                                              : '- ${Facebookdata[1]['candidateName']}'
+                                                          // ,'${Facebookdata[1]['candidateName']}'
                                                           ),
-
                                                       SocialMediaTemplate3(
                                                           '${Facebookdata[2]['keyWords']}',
                                                           '${Facebookdata[2]['titleContent']}',
-                                                          '${Facebookdata[2]['candidateName']}'.length > 16 ?  '- ${Facebookdata[2]['candidateName'].substring(0, 10)}...' :  '- ${Facebookdata[2]['candidateName']}'
-                                                          
+                                                          '${Facebookdata[2]['candidateName']}'
+                                                                      .length >
+                                                                  16
+                                                              ? '- ${Facebookdata[2]['candidateName'].substring(0, 10)}...'
+                                                              : '- ${Facebookdata[2]['candidateName']}'
+
                                                           // '${Facebookdata[2]['candidateName']}'
                                                           ),
                                                       SocialMediaTemplate3(
                                                           '${Facebookdata[3]['keyWords']}',
                                                           '${Facebookdata[3]['titleContent']}',
-                                                          '${Facebookdata[3]['candidateName']}'.length > 16 ?  '- ${Facebookdata[3]['candidateName'].substring(0, 10)}...' :  '- ${Facebookdata[3]['candidateName']}'
+                                                          '${Facebookdata[3]['candidateName']}'
+                                                                      .length >
+                                                                  16
+                                                              ? '- ${Facebookdata[3]['candidateName'].substring(0, 10)}...'
+                                                              : '- ${Facebookdata[3]['candidateName']}'
                                                           // '${Facebookdata[3]['candidateName']}'
                                                           ),
                                                     ];
@@ -1746,16 +1817,20 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     List InstagramList = [
                                                       SocialMediaTemplate4(
                                                           '${Instagramdata[0]['candidateName']}',
-                                                          '${Instagramdata[0]['titleContent']}',  'Likes- ${Instagramdata[0]['likesCount']}   Comments- ${Instagramdata[0]['commentsCount']}'),
+                                                          '${Instagramdata[0]['titleContent']}',
+                                                          'Likes- ${Instagramdata[0]['likesCount']}   Comments- ${Instagramdata[0]['commentsCount']}'),
                                                       SocialMediaTemplate4(
                                                           '${Instagramdata[1]['candidateName']}',
-                                                          '${Instagramdata[1]['titleContent']}',  'Likes- ${Instagramdata[1]['likesCount']}   Comments- ${Instagramdata[1]['commentsCount']}'),
+                                                          '${Instagramdata[1]['titleContent']}',
+                                                          'Likes- ${Instagramdata[1]['likesCount']}   Comments- ${Instagramdata[1]['commentsCount']}'),
                                                       SocialMediaTemplate4(
                                                           '${Instagramdata[2]['candidateName']}',
-                                                          '${Instagramdata[2]['titleContent']}',  'Likes- ${Instagramdata[2]['likesCount']}   Comments- ${Instagramdata[2]['commentsCount']}'),
+                                                          '${Instagramdata[2]['titleContent']}',
+                                                          'Likes- ${Instagramdata[2]['likesCount']}   Comments- ${Instagramdata[2]['commentsCount']}'),
                                                       SocialMediaTemplate4(
                                                           '${Instagramdata[3]['candidateName']}',
-                                                          '${Instagramdata[3]['titleContent']}',  'Likes- ${Instagramdata[3]['likesCount']}   Comments- ${Instagramdata[3]['commentsCount']}'),
+                                                          '${Instagramdata[3]['titleContent']}',
+                                                          'Likes- ${Instagramdata[3]['likesCount']}   Comments- ${Instagramdata[3]['commentsCount']}'),
                                                     ];
                                                     return SizedBox(
                                                       height: 130,
@@ -1892,7 +1967,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     newson == true
                                         ? Container(
                                             height: 450,
-                                            width: 400,
+                                            width: 350,
                                             // curve: Curves.linear,
                                             // height: _height,
                                             // width: _width,

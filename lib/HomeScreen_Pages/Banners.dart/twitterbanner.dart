@@ -108,9 +108,9 @@ class _TwitterbannerState extends State<Twitterbanner> {
                               child: SfCircularChart(
                                   tooltipBehavior: _tooltipBehavior1,
                                   palette: [
-                                    Color.fromRGBO(19, 136, 8,0),
-                                    Color.fromRGBO(254, 1, 117,0),
-                                    Color.fromRGBO(249, 125, 9,0),
+                                    Color.fromRGBO(19, 136, 8, 0),
+                                    Color.fromRGBO(254, 1, 117, 0),
+                                    Color.fromRGBO(249, 125, 9, 0),
                                   ],
                                   series: <PieSeries<ChartSampleData, String>>[
                                     PieSeries<ChartSampleData, String>(
@@ -128,16 +128,19 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                           // ChartSampleData(
                                           //     x: 'Others', y: 38, text: 'Other \n 38%'),
                                         ],
-                                        xValueMapper: (ChartSampleData data, _) =>
-                                        data.x as String,
-                                        yValueMapper: (ChartSampleData data, _) =>
-                                        data.y,
+                                        xValueMapper:
+                                            (ChartSampleData data, _) =>
+                                                data.x as String,
+                                        yValueMapper:
+                                            (ChartSampleData data, _) => data.y,
                                         dataLabelMapper:
-                                            (ChartSampleData data, _) => data.text,
+                                            (ChartSampleData data, _) =>
+                                                data.text,
                                         startAngle: 90,
                                         endAngle: 90,
-                                        dataLabelSettings: const DataLabelSettings(
-                                            isVisible: true)),
+                                        dataLabelSettings:
+                                            const DataLabelSettings(
+                                                isVisible: true)),
                                   ]),
                             ),
                             Text(
@@ -151,9 +154,9 @@ class _TwitterbannerState extends State<Twitterbanner> {
                             FutureBuilder<dynamic>(
                               future: LineChartfuturecall,
                               builder: (
-                                  BuildContext context,
-                                  AsyncSnapshot<dynamic> snapshot,
-                                  ) {
+                                BuildContext context,
+                                AsyncSnapshot<dynamic> snapshot,
+                              ) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
                                   return CircularProgressIndicator();
@@ -162,44 +165,53 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                   if (snapshot.hasError) {
                                     return const Text('Error');
                                   } else if (snapshot.hasData) {
-                                    return Container(
-                                        height: 120,
-                                        width: 120,
-                                        child: SfFunnelChart(palette: [
-                                          Color.fromRGBO(19, 136, 8,0),
-                                          Color.fromRGBO(254, 1, 117,0),
-                                          Color.fromRGBO(249, 125, 9,0),
-                                        ],
-                                            //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
-                                            tooltipBehavior:
-                                            TooltipBehavior(enable: true),
-                                            series: FunnelSeries<ChartSampleData,
-                                                String>(
-                                                dataSource: <ChartSampleData>[
-                                                  ...FunnelgraphChartData,
-                                                ],
-                                                xValueMapper:
-                                                    (ChartSampleData data, _) =>
-                                                data.x as String,
-                                                yValueMapper:
-                                                    (ChartSampleData data, _) =>
-                                                data.y,
-                                                /*  explode: isCardView ? false : explode,
+                                    return Padding(
+                                      padding: const EdgeInsets.only(right: 8.0),
+                                      child: Container(
+                                          height: 120,
+                                          width: 120,
+                                          child: SfFunnelChart(
+                                              palette: [
+                                                Color.fromRGBO(19, 136, 8, 0),
+                                                Color.fromRGBO(254, 1, 117, 0),
+                                                Color.fromRGBO(249, 125, 9, 0),
+                                              ],
+                                              //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
+                                              tooltipBehavior:
+                                                  TooltipBehavior(enable: true),
+                                              series: FunnelSeries<
+                                                      ChartSampleData, String>(
+                                                  dataSource: <ChartSampleData>[
+                                                    ...FunnelgraphChartData,
+                                                  ],
+                                                  xValueMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.x as String,
+                                                  yValueMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.y,
+                                                  /*  explode: isCardView ? false : explode,
     gapRatio: isCardView ? 0 : gapRatio,*/
-                                                neckHeight: /*isCardView ? */
-                                                '20%' /*: neckHeight.toString()*/ +
-                                                    '%',
-                                                neckWidth: /*isCardView ?*/
-                                                '25%' /*: neckWidth.toString()*/ +
-                                                    '%',
-                                                dataLabelSettings:
-                                                const DataLabelSettings(textStyle: TextStyle(fontSize: 8 ),
-                                                    isVisible: true))));
+                                                  neckHeight: /*isCardView ? */
+                                                      '20%' /*: neckHeight.toString()*/ +
+                                                          '%',
+                                                  neckWidth: /*isCardView ?*/
+                                                      '25%' /*: neckWidth.toString()*/ +
+                                                          '%',
+                                                  dataLabelSettings:
+                                                      const DataLabelSettings(
+                                                          textStyle: TextStyle(
+                                                              fontSize: 8),
+                                                          isVisible: true)))),
+                                    );
                                   } else {
                                     return const Text('Empty data');
                                   }
                                 } else {
-                                  return Text('State: ${snapshot.connectionState}');
+                                  return Text(
+                                      'State: ${snapshot.connectionState}');
                                 }
                               },
                             ),
@@ -259,7 +271,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                           'LIKES',
                           style: TextStyle(fontSize: 10),
                         )),*/
-                   /* Positioned(
+                    /* Positioned(
                         top: 120,
                         left: 220,
                         child: Text(
@@ -312,13 +324,13 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                           yValueMapper:
                                               (ChartSampleData data, _) =>
                                                   data.y,
-                                          *//*  explode: isCardView ? false : explode,
-    gapRatio: isCardView ? 0 : gapRatio,*//*
-                                          neckHeight: *//*isCardView ? *//*
-                                              '20%' *//*: neckHeight.toString()*//* +
+                                          */ /*  explode: isCardView ? false : explode,
+    gapRatio: isCardView ? 0 : gapRatio,*/ /*
+                                          neckHeight: */ /*isCardView ? */ /*
+                                              '20%' */ /*: neckHeight.toString()*/ /* +
                                                   '%',
-                                          neckWidth: *//*isCardView ?*//*
-                                              '25%' *//*: neckWidth.toString()*//* +
+                                          neckWidth: */ /*isCardView ?*/ /*
+                                              '25%' */ /*: neckWidth.toString()*/ /* +
                                                   '%',
                                           dataLabelSettings:
                                               const DataLabelSettings(textStyle: TextStyle(fontSize: 8 ),
@@ -335,9 +347,9 @@ class _TwitterbannerState extends State<Twitterbanner> {
                     FutureBuilder<dynamic>(
                       future: LineChartfuturecall,
                       builder: (
-                          BuildContext context,
-                          AsyncSnapshot<dynamic> snapshot,
-                          ) {
+                        BuildContext context,
+                        AsyncSnapshot<dynamic> snapshot,
+                      ) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
                           return CircularProgressIndicator();
@@ -347,18 +359,21 @@ class _TwitterbannerState extends State<Twitterbanner> {
                             return const Text('Error');
                           } else if (snapshot.hasData) {
                             return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 1.0,top: 50),
+                                  padding:
+                                      const EdgeInsets.only(left: 1.0, top: 50),
                                   child: Image.asset(
                                     'assets/icons/Social-Media-Icons-IS-08.png',
                                     height: 18,
                                     width: 18,
-                                    
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 140.0,left: 5),
+                                  padding: const EdgeInsets.only(
+                                      top: 140.0, left: 5),
                                   child: Container(
                                     height: 165,
                                     width: 165,
@@ -373,7 +388,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                         children: <TextSpan>[
                                           TextSpan(
                                               text:
-                                              'With Huge Difference In counts for Tweets and Re-Tweets reports says that ',
+                                                  'With Huge Difference In counts for Tweets and Re-Tweets reports says that ',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontFamily: 'Segoe UI')),
@@ -386,7 +401,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                                   fontFamily: 'Segoe UI')),
                                           TextSpan(
                                               text:
-                                              ' is relatively Dominant in Twitter Data.',
+                                                  ' is relatively Dominant in Twitter Data.',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontFamily: 'Segoe UI')),
@@ -398,13 +413,14 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                 Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.only(top: 100.0),
+                                      padding:
+                                          const EdgeInsets.only(top: 100.0),
                                       child: FutureBuilder<dynamic>(
                                         future: LineChartfuturecall,
                                         builder: (
-                                            BuildContext context,
-                                            AsyncSnapshot<dynamic> snapshot,
-                                            ) {
+                                          BuildContext context,
+                                          AsyncSnapshot<dynamic> snapshot,
+                                        ) {
                                           if (snapshot.connectionState ==
                                               ConnectionState.waiting) {
                                             return CircularProgressIndicator();
@@ -426,51 +442,72 @@ class _TwitterbannerState extends State<Twitterbanner> {
                                                   plotAreaBorderWidth: 0,
                                                   primaryXAxis: CategoryAxis(
                                                     labelStyle: const TextStyle(
-                                                        color: Colors.black, fontSize: 8),
-                                                    axisLine: const AxisLine(width: 0),
+                                                        color: Colors.black,
+                                                        fontSize: 8),
+                                                    axisLine: const AxisLine(
+                                                        width: 0),
                                                     labelPosition:
-                                                    ChartDataLabelPosition.outside,
+                                                        ChartDataLabelPosition
+                                                            .outside,
                                                     majorTickLines:
-                                                    const MajorTickLines(width: 0),
+                                                        const MajorTickLines(
+                                                            width: 0),
                                                     majorGridLines:
-                                                    const MajorGridLines(width: 0),
+                                                        const MajorGridLines(
+                                                            width: 0),
                                                   ),
                                                   primaryYAxis: NumericAxis(
-                                                      labelStyle: const TextStyle(
-                                                          color: Colors.black, fontSize: 8),
+                                                      labelStyle:
+                                                          const TextStyle(
+                                                              color:
+                                                                  Colors.black,
+                                                              fontSize: 8),
                                                       labelPosition:
-                                                      ChartDataLabelPosition.outside,
+                                                          ChartDataLabelPosition
+                                                              .outside,
                                                       isVisible: false,
                                                       minimum: 0,
-                                                      maximum: 2000),
-                                                  series: <ColumnSeries<ChartSampleData,
-                                                      String>>[
-                                                    ColumnSeries<ChartSampleData, String>(
+                                                      maximum: 3000),
+                                                  series: <ColumnSeries<
+                                                      ChartSampleData, String>>[
+                                                    ColumnSeries<
+                                                        ChartSampleData,
+                                                        String>(
                                                       width: 0.9,
                                                       dataLabelSettings:
-                                                      const DataLabelSettings(
-                                                          isVisible: false,
-                                                          labelAlignment:
-                                                          ChartDataLabelAlignment.top),
+                                                          const DataLabelSettings(
+                                                              isVisible: false,
+                                                              labelAlignment:
+                                                                  ChartDataLabelAlignment
+                                                                      .top),
                                                       dataSource: <ChartSampleData>[
                                                         ...BargraphChartdata
                                                       ],
-                                                      borderRadius: BorderRadius.circular(10),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
                                                       xValueMapper:
-                                                          (ChartSampleData sales, _) =>
-                                                      sales.x as String,
+                                                          (ChartSampleData
+                                                                      sales,
+                                                                  _) =>
+                                                              sales.x as String,
                                                       yValueMapper:
-                                                          (ChartSampleData sales, _) => sales.y,
+                                                          (ChartSampleData
+                                                                      sales,
+                                                                  _) =>
+                                                              sales.y,
                                                     ),
                                                   ],
-                                                  tooltipBehavior: _tooltipBehavior,
+                                                  tooltipBehavior:
+                                                      _tooltipBehavior,
                                                 ),
                                               );
                                             } else {
                                               return const Text('Empty data');
                                             }
                                           } else {
-                                            return Text('State: ${snapshot.connectionState}');
+                                            return Text(
+                                                'State: ${snapshot.connectionState}');
                                           }
                                         },
                                       ),
@@ -491,7 +528,7 @@ class _TwitterbannerState extends State<Twitterbanner> {
                         }
                       },
                     ),
-                   /* Positioned(
+                    /* Positioned(
                         top: 140,
                         left: 2,
                         child: Image.asset(
