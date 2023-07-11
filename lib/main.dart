@@ -76,7 +76,16 @@ class _MyAppState extends State<MyApp> {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: MaterialApp(
-          theme: Styles.themeData(themeChangeProvider.darkTheme, context),
+          theme: ThemeData(
+        brightness: Brightness.light,
+        /* light theme settings */
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.light,
+        /* dark theme settings */
+      ),
+      themeMode: ThemeMode.light, 
+          // theme: Styles.themeData(themeChangeProvider.darkTheme, context),
           debugShowCheckedModeBanner: false,
           title: 'TRS Party',
           home:SplashAnimation()

@@ -143,7 +143,7 @@ var TwitterData;
 TwitterAPI() async {
   var headers = {'Content-Type': 'application/json'};
   var response = await get(
-    Uri.parse(INSIGHTS + '/twitter/partyName/TDP?page=0,11'),
+    Uri.parse(INSIGHTS + '/twitter'),
     headers: headers,
   );
   print(response.toString());

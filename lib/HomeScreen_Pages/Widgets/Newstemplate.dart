@@ -46,7 +46,7 @@ class _NewsTemplate1State extends State<NewsTemplate1> {
                       Text(
                           widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12)),
+                              fontWeight: FontWeight.bold, fontSize: 10)),
                     ],
                   ),
                   SizedBox(
@@ -58,7 +58,7 @@ class _NewsTemplate1State extends State<NewsTemplate1> {
                         '${widget.newsdescription}',
                         maxLines: 4,
                   
-                        style: GoogleFonts.raleway(fontSize: 10)),
+                        style: GoogleFonts.raleway(fontSize: 9)),
                   ),
                   Spacer(),
                   Row(
@@ -130,7 +130,7 @@ class _NewsTemplate2State extends State<NewsTemplate2> {
                         Text(
                             widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 12)),
+                                fontWeight: FontWeight.bold, fontSize: 10)),
                       ],
                     ),
                   ),
@@ -143,7 +143,7 @@ class _NewsTemplate2State extends State<NewsTemplate2> {
                         '${widget.newsdescription}',
                         maxLines: 4,
                   
-                     style: GoogleFonts.raleway(fontSize: 10)),
+                     style: GoogleFonts.raleway(fontSize: 9)),
                   ),
                  Spacer(),
                   Row(  mainAxisAlignment: MainAxisAlignment.end,
@@ -210,7 +210,7 @@ class _NewsTemplate3State extends State<NewsTemplate3> {
                       Text(
                           widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12)),
+                              fontWeight: FontWeight.bold, fontSize: 10)),
                     ],
                   ),
                   SizedBox(
@@ -222,7 +222,7 @@ class _NewsTemplate3State extends State<NewsTemplate3> {
                         '${widget.newsdescription}',
                         maxLines: 4,
                   
-                         style: GoogleFonts.raleway(fontSize: 10)),
+                         style: GoogleFonts.raleway(fontSize: 9)),
                   ),
                 Spacer(),
                   Row(  mainAxisAlignment: MainAxisAlignment.end,
@@ -292,7 +292,7 @@ class _NewsTemplate4State extends State<NewsTemplate4> {
                       Text(
                           widget.header!.length > 16 ? '${widget.header!.substring(0, 10)}...' : widget.header!,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 11)),
+                              fontWeight: FontWeight.bold, fontSize: 10)),
                     ],
                   ),
                   SizedBox(
@@ -304,7 +304,7 @@ class _NewsTemplate4State extends State<NewsTemplate4> {
                         '${widget.newsdescription}',
                         maxLines: 4,
                   
-                          style: GoogleFonts.raleway(fontSize: 10)),
+                          style: GoogleFonts.raleway(fontSize: 9)),
                   ),
                   Spacer(),
                   Row(  mainAxisAlignment: MainAxisAlignment.end,
