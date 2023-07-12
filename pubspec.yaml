@@ -178,8 +178,11 @@ flutter:
     - assets/Image/wind.png
     - assets/Image/celebrate.gif
     - assets/Image/logo.png
+    - assets/new Updated images/img.png
     - assets/new Updated images/megaphone.png
     - assets/new Updated images/social-media-icons-unscreen.gif
+    - assets/new Updated images/image_2023_07_12T10_18_25_781Z.png
+    - assets/new Updated images/image_2023_07_12T10_18_35_331Z.png
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

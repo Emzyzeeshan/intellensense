@@ -146,6 +146,29 @@ class _YoutubeBannerState extends State<YoutubeBanner> {
                             ),
                           ],
                         ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 35.0),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Text(BarGraphdata['lead'][0]),
+                                  Image.asset('assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',height: 30,)
+                                ],
+                              ),
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Image.asset('assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',height: 30,),
+                                      Text('BJP'),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
                         Column(
                           children: [
                             FutureBuilder<dynamic>(
@@ -351,7 +374,7 @@ class _YoutubeBannerState extends State<YoutubeBanner> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 1.0,top: 50),
+                                  padding: const EdgeInsets.only(left: 1.0,top: 60),
                                   child: Image.asset(
                                     'assets/icons/Social-Media-Icons-IS-10.png',
                                     height: 18,

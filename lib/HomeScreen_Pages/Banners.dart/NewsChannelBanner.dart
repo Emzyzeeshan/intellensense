@@ -353,9 +353,9 @@ class _NewsChannelBannerState extends State<NewsChannelBanner> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5.0,top: 60),
                                   child: Image.asset(
-                                    'assets/new Updated images/news-71.png',
-                                    height: 18,
-                                    width: 18,
+                                    'assets/new Updated images/img.png',
+                                    height: 29,
+                                    width: 29,
                                   ),
                                 ),
                                 Padding(

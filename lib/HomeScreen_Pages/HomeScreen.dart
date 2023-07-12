@@ -25,6 +25,10 @@ import 'package:simple_speed_dial/simple_speed_dial.dart';
 
 import 'Banners.dart/FaceBookBanner.dart';
 import 'Banners.dart/NewsChannelBanner.dart';
+import 'Drawers/DrawerScreens/CandidatureAnalysis/AllCandidateList.dart';
+import 'Drawers/DrawerScreens/CandidatureAnalysis/CandidatureAnalysis.dart';
+import 'Drawers/DrawerScreens/Constituency Analysis/ConstituencyAnalysis.dart';
+import 'Drawers/DrawerScreens/ElectoralAnalysis/ElectoralAnalysis.dart';
 import 'NewsWIdget/GoogleTrendsScreen.dart';
 import 'NewsWIdget/InstagramScreen.dart';
 import 'NewsWIdget/LiveUpdatesScreen.dart';
@@ -1447,29 +1451,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 30,
                                     width: 30,
                                   ),
-
+                              Text(
+                                'SOCIAL MEDIA',
+                                style: TextStyle(
+                                  fontFamily: 'Segoe UI',
+                                  fontSize: 16,
                                 ),
-                                Spacer(),
-                                IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      showSocialnews =
-                                      !showSocialnews;
-                                    });
-                                  },
-                                  icon: showSocialnews == true
-                                      ? Icon(Icons.arrow_drop_down)
-                                      : Icon(Icons.arrow_drop_up_outlined),
-                                ),
-                              ],
-                                  Text(
-                                    'SOCIAL MEDIA',
-                                    style: TextStyle(
-                                      fontFamily: 'Segoe UI',
-                                      fontSize: 16,
-                                    ),
+                              ),
+                                  Spacer(),
+                                  IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        showSocialnews =
+                                        !showSocialnews;
+                                      });
+                                    },
+                                    icon: showSocialnews == true
+                                        ? Icon(Icons.arrow_drop_down)
+                                        : Icon(Icons.arrow_drop_up_outlined),
                                   ),
-                                 
                                 ],
                               ),
                             ),
@@ -2076,7 +2076,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Column(children: [
                                       GestureDetector(
                                         onTap: () {
-                                          PageCount.jumpToPage(7);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AllCandidateList()));
+
                                         },
                                         child: Container(
                                           height: 50,
@@ -2107,7 +2112,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Column(children: [
                                       GestureDetector(
                                         onTap: () {
-                                          PageCount.jumpToPage(7);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ConstituencyAnalysis()));
                                         },
                                         child: Container(
                                           height: 50,
@@ -2223,7 +2232,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                     Column(children: [
                                       GestureDetector(
                                         onTap: () {
-                                          PageCount.jumpToPage(7);
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ElectoralAnalysis()));
                                         },
                                         child: Container(
                                           height: 50,

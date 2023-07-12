@@ -131,7 +131,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                 ),
                 ExpansionTileCard(
                   baseColor: Colors.cyan[50],
-                  expandedColor: Colors.grey,
+                  expandedColor: Colors.white,
                   expandedTextColor: Colors.black,
                   title: Text('Profile'),
                   children: [
