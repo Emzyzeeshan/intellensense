@@ -349,7 +349,7 @@ class _FaceBookBannerState extends State<FaceBookBanner> {
                             return Row(
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 1.0,top: 50),
+                                  padding: const EdgeInsets.only(left: 1.0,top: 60),
                                   child: Image.asset(
                                     'assets/icons/Social-Media-Icons-IS-06.png',
                                     height: 18,
@@ -371,6 +371,13 @@ class _FaceBookBannerState extends State<FaceBookBanner> {
                                         ),
                                         children: <TextSpan>[
                                           TextSpan(
+                                              text:
+                                              ' From Posts to public response ',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18,
+                                                  fontFamily: 'Segoe UI')),
+                                          TextSpan(
                                               text: BarGraphdata['lead'][0],
                                               style: new TextStyle(
                                                   fontWeight: FontWeight.bold,
@@ -379,26 +386,11 @@ class _FaceBookBannerState extends State<FaceBookBanner> {
                                                   fontFamily: 'Segoe UI')),
                                           TextSpan(
                                               text:
-                                              ' is overpowering ',
+                                              ' is leading in all aspects',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18,
                                                   fontFamily: 'Segoe UI')),
-                                          TextSpan(
-                                              text: "YSRCP",
-                                              style: new TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Colors.red,
-                                                  fontSize: 20,
-                                                  fontFamily: 'Segoe UI')),
-                                          TextSpan(
-                                              text:
-                                              ' in all aspects',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 18,
-                                                  fontFamily: 'Segoe UI')),
-
                                         ],
                                       ),
                                     ),
