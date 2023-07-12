@@ -56,17 +56,17 @@ class _NewsChannelBannerState extends State<NewsChannelBanner> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                  // gradient: LinearGradient(
-                  //   colors: const [
-                  //     /*Color.fromARGB(255, 100, 149, 235),
-                  //     Color(0xffe4e0f8),*/
-                  //     Colors.white,
-                  //     Colors.white
-                  //   ],
-                  //   tileMode: TileMode.decal,
-                  //   begin: Alignment.topLeft,
-                  //   end: Alignment.bottomRight,
-                  // ),
+                  gradient: LinearGradient(
+                    colors: const [
+                      /*Color.fromARGB(255, 100, 149, 235),
+                      Color(0xffe4e0f8),*/
+                      Colors.white,
+                      Colors.white
+                    ],
+                    tileMode: TileMode.decal,
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
                 ),
                 child: Stack(
                   children: [
@@ -347,9 +347,11 @@ class _NewsChannelBannerState extends State<NewsChannelBanner> {
                             return const Text('Error');
                           } else if (snapshot.hasData) {
                             return Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 1.0,top: 60),
+                                  padding: const EdgeInsets.only(left: 5.0,top: 60),
                                   child: Image.asset(
                                     'assets/new Updated images/img.png',
                                     height: 29,
@@ -393,7 +395,7 @@ class _NewsChannelBannerState extends State<NewsChannelBanner> {
                                                   fontFamily: 'Segoe UI')),
                                           TextSpan(
                                               text:
-                                              ' in all aspects',
+                                              ' in all aspects.',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 18,
@@ -451,7 +453,7 @@ class _NewsChannelBannerState extends State<NewsChannelBanner> {
                                                       ChartDataLabelPosition.outside,
                                                       isVisible: false,
                                                       minimum: 0,
-                                                      maximum: 2000),
+                                                      maximum: 800),
                                                   series: <ColumnSeries<ChartSampleData,
                                                       String>>[
                                                     ColumnSeries<ChartSampleData, String>(

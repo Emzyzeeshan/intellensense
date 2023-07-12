@@ -5,7 +5,6 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/Constants/constants.dart';
@@ -53,7 +52,6 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
   late Future<dynamic> NewschannelOverviewfinaldata = NewschannelOverViewApi();
   late Future<dynamic> FaceBookfinaldata = FaceBookOverViewApi();
   late Future<dynamic> FaceBooktoppartydata = FaceBookTopPartylistApi();
-  late Future<dynamic> _TopCandidaitevalue=TopCandidatelistApi();
   Widget _buildTest(String title) {
     return Container(
       //color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
@@ -131,8 +129,6 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                               isnewschannelvisible = false;
                               statedropdownvisible = false;
                               isFaceBookvisible = false;
-                              TopCandidatequery.clear();
-                              _TopCandidaitevalue=TopCandidatelistApi();
                             });
                           },
                           buttonStyleData: const ButtonStyleData(
@@ -467,23 +463,20 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                   ),
                                   DataColumn(
                                     label: Text(
-                                        TwitterOverviewdata['party_data']
-                                                [partyt1][0]
-                                            ['CANDIDATE_PARTY_NAME'],
+                                        TwitterOverviewdata['party_data'][partyt1]
+                                            [0]['CANDIDATE_PARTY_NAME'],
                                         style: TextStyle(color: Colors.white)),
                                   ),
                                   DataColumn(
                                     label: Text(
-                                        TwitterOverviewdata['party_data']
-                                                [partyt2][0]
-                                            ['CANDIDATE_PARTY_NAME'],
+                                        TwitterOverviewdata['party_data'][partyt2]
+                                            [0]['CANDIDATE_PARTY_NAME'],
                                         style: TextStyle(color: Colors.white)),
                                   ),
                                   DataColumn(
                                     label: Text(
-                                        TwitterOverviewdata['party_data']
-                                                [partyt3][0]
-                                            ['CANDIDATE_PARTY_NAME'],
+                                        TwitterOverviewdata['party_data'][partyt3]
+                                            [0]['CANDIDATE_PARTY_NAME'],
                                         style: TextStyle(color: Colors.white)),
                                   ),
                                 ],
@@ -501,9 +494,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                           .keys
                                           .map(
                                             (p) => DataCell(Text(
-                                                TwitterOverviewdata[
-                                                            'party_data'][p][0]
-                                                        ['USER_FOLLOWERS']
+                                                TwitterOverviewdata['party_data']
+                                                        [p][0]['USER_FOLLOWERS']
                                                     .toString(),
                                                 style: highestCountStyle(
                                                     TwitterOverviewdata[
@@ -516,15 +508,13 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                   DataRow(cells: [
                                     DataCell(Text(
                                       "LIKES",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                      style:
+                                          TextStyle(fontWeight: FontWeight.bold),
                                     )),
-                                    ...TwitterOverviewdata['party_data']
-                                        .keys
-                                        .map(
+                                    ...TwitterOverviewdata['party_data'].keys.map(
                                           (p) => DataCell(Text(
-                                              TwitterOverviewdata['party_data']
-                                                      [p][0]['LIKES']
+                                              TwitterOverviewdata['party_data'][p]
+                                                      [0]['LIKES']
                                                   .toString(),
                                               style: highestCountStyle(
                                                   TwitterOverviewdata[
@@ -539,15 +529,13 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                   DataRow(cells: [
                                     DataCell(Text(
                                       "RETWEET COUNT",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                      style:
+                                          TextStyle(fontWeight: FontWeight.bold),
                                     )),
-                                    ...TwitterOverviewdata['party_data']
-                                        .keys
-                                        .map(
+                                    ...TwitterOverviewdata['party_data'].keys.map(
                                           (p) => DataCell(Text(
-                                              TwitterOverviewdata['party_data']
-                                                      [p][0]['RETWEET_COUNT']
+                                              TwitterOverviewdata['party_data'][p]
+                                                      [0]['RETWEET_COUNT']
                                                   .toString(),
                                               style: highestCountStyle(
                                                   TwitterOverviewdata[
@@ -603,154 +591,15 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                           ),
                         ),
                         SizedBox(
-                          height: 15,
-                        ),
-                        FutureBuilder<dynamic>(
-                          future: _TopCandidaitevalue,
-                          builder: (
-                            BuildContext context,
-                            AsyncSnapshot<dynamic> snapshot,
-                          ) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return CircularProgressIndicator();
-                            } else if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              if (snapshot.hasError) {
-                                return  Text('${snapshot.error}');
-                              } else if (snapshot.hasData) {
-                                return Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15.0),
-                                          child: Text(
-                                            'TOP CANDIDATES',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Container(
-                                      height: 145,
-                                      child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          shrinkWrap: true,
-                                          itemCount: 4,
-                                          itemBuilder: ((context, index) {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Card(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                color: Color(0xffd2dfff),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Container(
-                                                    height: 130,
-                                                    width: 110,
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            Icon(
-                                                              Icons.person_2,
-                                                              size: 17,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 2,
-                                                            ),
-                                                             TopCandidate['top_candidates'][index]['CANDIDATE_NAME'].toString().length>10?Text(
-                                                             
-                                                              '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}'.substring(0,12),
-                                                              style: _textStyle,
-                                                             
-                                                            ):
-                                                            Text(
-                                                             
-                                                              '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}',
-                                                              style: _textStyle,
-                                                          
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Icon(
-                                                                Icons
-                                                                    .person_add_alt_1_rounded,
-                                                                size: 17),
-                                                            SizedBox(
-                                                              width: 2,
-                                                            ),
-                                                            Text(
-                                                              '${TopCandidate['top_candidates'][index]['USER_FOLLOWERS']}',
-                                                              style: _textStyle,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Icon(
-                                                                Icons
-                                                                    .person_pin_rounded,
-                                                                size: 17),
-                                                            SizedBox(
-                                                              width: 2,
-                                                            ),
-                                                            Text(
-                                                              '${TopCandidate['top_candidates'][index]['CANDIDATE_PARTY_NAME']}',
-                                                              style: _textStyle,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              'Count : ${TopCandidate['top_candidates'][index]['COUNT']}',
-                                                              style: _textStyle,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          })),
-                                    ),
-                                  ],
-                                );
-                              } else {
-                                return const Text('Empty data');
-                              }
-                            } else {
-                              return Text('State: ${snapshot.connectionState}');
-                            }
-                          },
+                          height: 20,
                         ),
                         TwitterOverviewdata['lead'][0] == 'INC'
                             ? Image.asset(
                                 'assets/new Updated images/twitter_001.gif',
-                                height: 220,
+                                height: 250,
                                 width: MediaQuery.of(context).size.width,
                               )
-                            : Container(),
+                            : Container()
                       ],
                     ),
                   );
@@ -764,7 +613,6 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           );
   }
 
-  TextStyle _textStyle = TextStyle(fontSize: 12, fontWeight: FontWeight.w600);
   bool isytvisible = false;
   bool istablevisible = false;
 //Youtube Overview Screen
@@ -1138,15 +986,15 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                               .keys
                                               .map(
                                                 (p) => DataCell(Text(
-                                                    NewschannelOverviewdata[
-                                                                'party_data'][p]
-                                                            [0]['LIKES']
-                                                        .toString(),
-                                                    style: highestCountStyle(
-                                                        NewschannelOverviewdata[
-                                                            'party_data'],
-                                                        p,
-                                                        'LIKES'))),
+                                                  NewschannelOverviewdata[
+                                                              'party_data'][p]
+                                                          [0]['LIKES']
+                                                      .toString(),
+                                                   style: highestCountStyle(
+                                                       NewschannelOverviewdata['party_data'],
+                                                       p,
+                                                       'LIKES')
+                                                )),
                                               )
                                         ],
                                       ),
@@ -1160,15 +1008,15 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                             .keys
                                             .map(
                                               (p) => DataCell(Text(
-                                                  NewschannelOverviewdata[
-                                                              'party_data'][p]
-                                                          [0]['COMMENTS']
-                                                      .toString(),
-                                                  style: highestCountStyle(
-                                                      NewschannelOverviewdata[
-                                                          'party_data'],
-                                                      p,
-                                                      'COMMENTS'))),
+                                                NewschannelOverviewdata[
+                                                            'party_data'][p][0]
+                                                        ['COMMENTS']
+                                                    .toString(),
+                                                style: highestCountStyle(
+                                                    NewschannelOverviewdata['party_data'],
+                                                    p,
+                                                    'COMMENTS')
+                                              )),
                                             ),
                                         /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
@@ -1184,15 +1032,15 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                             .keys
                                             .map(
                                               (p) => DataCell(Text(
-                                                  NewschannelOverviewdata[
-                                                              'party_data'][p]
-                                                          [0]['VIEWS']
-                                                      .toString(),
-                                                  style: highestCountStyle(
-                                                      NewschannelOverviewdata[
-                                                          'party_data'],
-                                                      p,
-                                                      'VIEWS'))),
+                                                NewschannelOverviewdata[
+                                                            'party_data'][p][0]
+                                                        ['VIEWS']
+                                                    .toString(),
+                                                 style: highestCountStyle(
+                                                     NewschannelOverviewdata['party_data'],
+                                                     p,
+                                                     'VIEWS')
+                                              )),
                                             ),
                                         /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
@@ -1833,40 +1681,5 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
       print(response.reasonPhrase);
     }
     return FaceBookOverviewdata;
-  }
-
-  //TopCandidate List
-  var TopCandidate;
-  Map TopCandidatequery = new Map<String, dynamic>();
-  Future<dynamic> TopCandidatelistApi() async {
-    print('API INIT');
-
-           TopCandidatequery['type'] = 'top_candidates';
-      TopCandidatequery['STATE'] = selectedValue.toString();
-  
-
-   
-
-    var response = await post(
-        Uri.parse('http://idxp.pilogcloud.com:6659/social_media/'),
-     
-        body: TopCandidatequery);
-
-    print(response.statusCode);
-    if (response.statusCode == 200) {
-      print('Its top party details');
-      try {
-        setState(() {
-           TopCandidate = jsonDecode(utf8.decode(response.bodyBytes));
-        });
-         
-   
-      } catch (e) {
-        print(TopCandidate);
-      }
-    } else {
-      print(response.reasonPhrase);
-    }
-    return TopCandidate;
   }
 }
