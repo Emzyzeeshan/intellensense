@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/LoginPages/widgets/ChartSampleData.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -146,6 +147,54 @@ class _NewsChannelBannerState extends State<NewsChannelBanner> {
                             ),
                           ],
                         ),
+                        FutureBuilder<dynamic>(
+                          future: LineChartfuturecall,
+                          builder: (
+                              BuildContext context,
+                              AsyncSnapshot<dynamic> snapshot,
+                              ) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return SpinKitWave(
+                                color: Colors.blue,
+                                size: 18,
+                              );
+                            } else if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot.hasError) {
+                                return const Text('Error');
+                              } else if (snapshot.hasData) {
+                                return  Padding(
+                                  padding: const EdgeInsets.only(top: 35.0),
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(BarGraphdata['lead'][0]),
+                                          Image.asset('assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',height: 30,)
+                                        ],
+                                      ),
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Image.asset('assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',height: 30,),
+                                              Text('TDP'),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              } else {
+                                return const Text('Empty data');
+                              }
+                            } else {
+                              return Text('State: ${snapshot.connectionState}');
+                            }
+                          },
+                        ),
                         Column(
                           children: [
                             FutureBuilder<dynamic>(
@@ -156,7 +205,10 @@ class _NewsChannelBannerState extends State<NewsChannelBanner> {
                                   ) {
                                 if (snapshot.connectionState ==
                                     ConnectionState.waiting) {
-                                  return CircularProgressIndicator();
+                                  return SpinKitWave(
+                                    color: Colors.blue,
+                                    size: 18,
+                                  );
                                 } else if (snapshot.connectionState ==
                                     ConnectionState.done) {
                                   if (snapshot.hasError) {
@@ -340,7 +392,10 @@ class _NewsChannelBannerState extends State<NewsChannelBanner> {
                           ) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return CircularProgressIndicator();
+                          return SpinKitWave(
+                            color: Colors.blue,
+                            size: 18,
+                          );
                         } else if (snapshot.connectionState ==
                             ConnectionState.done) {
                           if (snapshot.hasError) {
@@ -418,7 +473,10 @@ class _NewsChannelBannerState extends State<NewsChannelBanner> {
                                             ) {
                                           if (snapshot.connectionState ==
                                               ConnectionState.waiting) {
-                                            return CircularProgressIndicator();
+                                            return SpinKitWave(
+                                              color: Colors.blue,
+                                              size: 18,
+                                            );
                                           } else if (snapshot.connectionState ==
                                               ConnectionState.done) {
                                             if (snapshot.hasError) {
