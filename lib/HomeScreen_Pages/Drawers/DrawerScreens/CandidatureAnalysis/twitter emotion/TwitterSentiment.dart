@@ -12,7 +12,9 @@ import '../CandidatureAnalysis.dart';
 
 class TwitterSentiment extends StatefulWidget {
   var Value;
-  TwitterSentiment(this.Value,);
+  TwitterSentiment(
+    this.Value,
+  );
 
   @override
   State<TwitterSentiment> createState() => _TwitterSentimentState();
@@ -46,7 +48,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
-        child: Column(
+        child: Stack(
           children: [
             Padding(
               padding: EdgeInsets.all(8.0),
@@ -78,6 +80,47 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                     ],
                   ),
                 )),
+            Positioned(
+              bottom: 0,
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      if (_pagecontroller.page == 0) {
+                        _pagecontroller.jumpToPage(1);
+                      } else if (_pagecontroller.page == 1) {
+                        _pagecontroller.jumpToPage(0);
+                      }
+                    });
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 30,
+                    color: Color(0xff00196b),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                          _pagecontroller.page == 0?  'Custom Analysis':'Previous',
+                            style: TextStyle(
+                                fontFamily: 'Segoe UI',
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                          Icon(
+                               _pagecontroller.page == 0? Icons.navigate_next_outlined:null,
+                            size: 25,
+                            color: Colors.white,
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
@@ -120,19 +163,22 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                                   SocialInfoCard(
                                       'assets/icons/FollowersEmoji.png',
                                       '${Sentimentdata['user_info']['USER_FOLLOWERS']}'),
                                   SocialInfoCard('assets/icons/LikesEmoji.png',
                                       '${Sentimentdata['user_info']['LIKES']}'),
-                                  SocialInfoCard('assets/icons/RetweetEmoji.png',
+                                  SocialInfoCard(
+                                      'assets/icons/RetweetEmoji.png',
                                       '${Sentimentdata['user_info']['RETWEETS_COUNT']}'),
                                   SocialInfoCard(
                                       'assets/icons/FollowersEmoji.png',
                                       '${Sentimentdata['user_info']['USER_MENTIONS']}'),
-                                  SocialInfoCard('assets/icons/HashTagsEmoji.png',
+                                  SocialInfoCard(
+                                      'assets/icons/HashTagsEmoji.png',
                                       '${Sentimentdata['user_info']['HASHTAG_COUNT']}'),
                                   SocialInfoCard('assets/icons/TweetsEmoji.png',
                                       '${Sentimentdata['user_info']['TWEET_COUNT']}'),
@@ -150,10 +196,11 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                                         explodeIndex: 0,
                                         explodeOffset: '10%',
                                         dataSource: TweetGraphData,
-                                        xValueMapper: (ChartSampleData data, _) =>
-                                            data.x as String,
-                                        yValueMapper: (ChartSampleData data, _) =>
-                                            data.y,
+                                        xValueMapper:
+                                            (ChartSampleData data, _) =>
+                                                data.x as String,
+                                        yValueMapper:
+                                            (ChartSampleData data, _) => data.y,
                                         dataLabelMapper:
                                             (ChartSampleData data, _) =>
                                                 data.text,
@@ -181,10 +228,11 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                                         explodeIndex: 0,
                                         explodeOffset: '10%',
                                         dataSource: CommentsGraphData,
-                                        xValueMapper: (ChartSampleData data, _) =>
-                                            data.x as String,
-                                        yValueMapper: (ChartSampleData data, _) =>
-                                            data.y,
+                                        xValueMapper:
+                                            (ChartSampleData data, _) =>
+                                                data.x as String,
+                                        yValueMapper:
+                                            (ChartSampleData data, _) => data.y,
                                         dataLabelMapper:
                                             (ChartSampleData data, _) =>
                                                 data.text,
