@@ -48,7 +48,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
-        child: Stack(
+        child: Column(
           children: [
             Padding(
               padding: EdgeInsets.all(8.0),
@@ -73,6 +73,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                   height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   child: PageView(
+                    physics: NeverScrollableScrollPhysics(),
                     controller: _pagecontroller,
                     children: [
                       LastSevenDaysAnalysis(),
@@ -80,47 +81,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                     ],
                   ),
                 )),
-            Positioned(
-              bottom: 0,
-              child: Padding(
-                padding: EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                      if (_pagecontroller.page == 0) {
-                        _pagecontroller.jumpToPage(1);
-                      } else if (_pagecontroller.page == 1) {
-                        _pagecontroller.jumpToPage(0);
-                      }
-                    });
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 30,
-                    color: Color(0xff00196b),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                          _pagecontroller.page == 0?  'Custom Analysis':'Previous',
-                            style: TextStyle(
-                                fontFamily: 'Segoe UI',
-                                fontSize: 20,
-                                color: Colors.white),
-                          ),
-                          Icon(
-                               _pagecontroller.page == 0? Icons.navigate_next_outlined:null,
-                            size: 25,
-                            color: Colors.white,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+           
           ],
         ),
       ),
@@ -134,7 +95,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
         child: Column(
           children: [
             Text(
-              ' Last seven days analysis',
+              'Last seven days analysis',
               style: TextStyle(
                 fontFamily: 'Segoe UI',
                 fontSize: 16,
@@ -244,6 +205,41 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                                   ],
                                 ),
                               ),
+                              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                     
+                        _pagecontroller.jumpToPage(1);
+                    });
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 30,
+                    color: Color(0xff00196b),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Custom Analysis',
+                            style: TextStyle(
+                                fontFamily: 'Segoe UI',
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                          Icon(
+                              Icons.navigate_next_outlined,
+                            size: 25,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
                             ]),
                       );
                     } else {
@@ -255,6 +251,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                 },
               ),
             ),
+             
           ],
         ),
       ),
@@ -263,221 +260,264 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
 
   //Select duration for analysis
   Selectdurationforanalysis() {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Text(
-            'Select duration for analysis',
-            style: TextStyle(
-              fontFamily: 'Segoe UI',
-              fontSize: 16,
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Text(
+              'Select duration for analysis',
+              style: TextStyle(
+                fontFamily: 'Segoe UI',
+                fontSize: 16,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'From: ',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        DateTimeField(
+                          controller: FromDate,
+                          decoration: InputDecoration(
+                              filled: true,
+                              hintText: 'mm/dd/yyyy',
+                              isDense: true,
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(5)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey),
+                          format: format,
+                          onShowPicker: (context, currentValue) {
+                            return showDatePicker(
+                                context: context,
+                                firstDate: DateTime(1900),
+                                initialDate: currentValue ?? DateTime.now(),
+                                lastDate: DateTime(2100));
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Flexible(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'To : ',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        DateTimeField(
+                          controller: ToDate,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(5)),
+                              filled: true,
+                              hintText: 'mm/dd/yyyy',
+                              isDense: true,
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey),
+                          format: format,
+                          onShowPicker: (context, currentValue) {
+                            return showDatePicker(
+                                context: context,
+                                firstDate: DateTime(1900),
+                                initialDate: currentValue ?? DateTime.now(),
+                                lastDate: DateTime(2100));
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Flexible(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'From: ',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      DateTimeField(
-                        controller: FromDate,
-                        decoration: InputDecoration(
-                            filled: true,
-                            hintText: 'mm/dd/yyyy',
-                            isDense: true,
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(5)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            fillColor: Colors.white,
-                            focusColor: Colors.grey),
-                        format: format,
-                        onShowPicker: (context, currentValue) {
-                          return showDatePicker(
-                              context: context,
-                              firstDate: DateTime(1900),
-                              initialDate: currentValue ?? DateTime.now(),
-                              lastDate: DateTime(2100));
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Flexible(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'To : ',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      DateTimeField(
-                        controller: ToDate,
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(5)),
-                            filled: true,
-                            hintText: 'mm/dd/yyyy',
-                            isDense: true,
-                            fillColor: Colors.white,
-                            focusColor: Colors.grey),
-                        format: format,
-                        onShowPicker: (context, currentValue) {
-                          return showDatePicker(
-                              context: context,
-                              firstDate: DateTime(1900),
-                              initialDate: currentValue ?? DateTime.now(),
-                              lastDate: DateTime(2100));
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                MaterialButton(
+                  onPressed: () {
+                    setState(() {
+                      TweetGraphData1.clear();
+                      CommentsGraphData1.clear();
+    
+                      SelectionSentimentdata.clear();
+                      _value1 = SelectionSentimentAPI(
+                          'between', '${ToDate.text}', '${FromDate.text}');
+                    });
+                  },
+                  child: Text('Search'),
+                  color: Colors.blueAccent,
+                )
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MaterialButton(
-                onPressed: () {
-                  setState(() {
-                    TweetGraphData1.clear();
-                    CommentsGraphData1.clear();
-
-                    SelectionSentimentdata.clear();
-                    _value1 = SelectionSentimentAPI(
-                        'between', '${ToDate.text}', '${FromDate.text}');
-                  });
+            SafeArea(
+              child: FutureBuilder<dynamic>(
+                future: _value1,
+                builder: (
+                  BuildContext context,
+                  AsyncSnapshot<dynamic> snapshot,
+                ) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(
+                        child: SpinKitWave(
+                      color: Colors.blue,
+                      size: 18,
+                    ));
+                  } else if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.hasError) {
+                      return const Text('Error');
+                    } else if (snapshot.hasData) {
+                      return SingleChildScrollView(
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 18.0),
+                          child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: <Widget>[
+                                Text(
+                                  ' Analysis from ${FromDate.text} to ${ToDate.text}',
+                                  style: TextStyle(
+                                    fontFamily: 'Segoe UI',
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                  children: [
+                                    SocialInfoCard('assets/icons/FollowersEmoji.png',
+                                        '${SelectionSentimentdata['user_info']['USER_FOLLOWERS']}'),
+                                    SocialInfoCard('assets/icons/LikesEmoji.png',
+                                        '${SelectionSentimentdata['user_info']['LIKES']}'),
+                                    SocialInfoCard('assets/icons/RetweetEmoji.png',
+                                        '${SelectionSentimentdata['user_info']['RETWEETS_COUNT']}'),
+                                    SocialInfoCard('assets/icons/FollowersEmoji.png',
+                                        '${SelectionSentimentdata['user_info']['USER_MENTIONS']}'),
+                                    SocialInfoCard('assets/icons/HashTagsEmoji.png',
+                                        '${SelectionSentimentdata['user_info']['HASHTAG_COUNT']}'),
+                                    SocialInfoCard('assets/icons/TweetsEmoji.png',
+                                        '${SelectionSentimentdata['user_info']['TWEET_COUNT']}'),
+                                  ],
+                                ),
+                                Card(
+                                  elevation: 5,
+                                  child: SfCircularChart(
+                                    title:
+                                        ChartTitle(text: 'Tweet Sentiment Analysis'),
+                                    legend: Legend(isVisible: true),
+                                    series: <PieSeries<ChartSampleData, String>>[
+                                      PieSeries<ChartSampleData, String>(
+                                          explode: true,
+                                          explodeIndex: 0,
+                                          explodeOffset: '10%',
+                                          dataSource: TweetGraphData1,
+                                          xValueMapper: (ChartSampleData data, _) =>
+                                              data.x as String,
+                                          yValueMapper: (ChartSampleData data, _) =>
+                                              data.y,
+                                          dataLabelMapper:
+                                              (ChartSampleData data, _) => data.text,
+                                          startAngle: 90,
+                                          endAngle: 90,
+                                          dataLabelSettings: const DataLabelSettings(
+                                              isVisible: true)),
+                                    ],
+                                  ),
+                                ),
+                                Divider(
+                                  color: Colors.grey.shade300,
+                                  thickness: 1,
+                                ),
+                                Card(
+                                  elevation: 5,
+                                  child: SfCircularChart(
+                                    title: ChartTitle(
+                                        text: 'Comments Sentiment Analysis'),
+                                    legend: Legend(isVisible: true),
+                                    series: <PieSeries<ChartSampleData, String>>[
+                                      PieSeries<ChartSampleData, String>(
+                                          explode: true,
+                                          explodeIndex: 0,
+                                          explodeOffset: '10%',
+                                          dataSource: CommentsGraphData1,
+                                          xValueMapper: (ChartSampleData data, _) =>
+                                              data.x as String,
+                                          yValueMapper: (ChartSampleData data, _) =>
+                                              data.y,
+                                          dataLabelMapper:
+                                              (ChartSampleData data, _) => data.text,
+                                          startAngle: 90,
+                                          endAngle: 90,
+                                          dataLabelSettings: const DataLabelSettings(
+                                              isVisible: true)),
+                                    ],
+                                  ),
+                                ),
+                                 
+                              ]),
+                        ),
+                      );
+                    } else {
+                      return const Text('Empty data');
+                    }
+                  } else {
+                    return Text('State: ${snapshot.connectionState}');
+                  }
                 },
-                child: Text('Search'),
-                color: Colors.blueAccent,
-              )
-            ],
-          ),
-          FutureBuilder<dynamic>(
-            future: _value1,
-            builder: (
-              BuildContext context,
-              AsyncSnapshot<dynamic> snapshot,
-            ) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(
-                    child: SpinKitWave(
-                  color: Colors.blue,
-                  size: 18,
-                ));
-              } else if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasError) {
-                  return const Text('Error');
-                } else if (snapshot.hasData) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 18.0),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          Text(
-                            ' Analysis from ${FromDate.text} to ${ToDate.text}',
-                            style: TextStyle(
-                              fontFamily: 'Segoe UI',
-                              fontSize: 16,
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+              ),
+            ),
+           Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                         
+                            _pagecontroller.jumpToPage(0);
+                        });
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 30,
+                        color: Color(0xff00196b),
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              SocialInfoCard('assets/icons/FollowersEmoji.png',
-                                  '${SelectionSentimentdata['user_info']['USER_FOLLOWERS']}'),
-                              SocialInfoCard('assets/icons/LikesEmoji.png',
-                                  '${SelectionSentimentdata['user_info']['LIKES']}'),
-                              SocialInfoCard('assets/icons/RetweetEmoji.png',
-                                  '${SelectionSentimentdata['user_info']['RETWEETS_COUNT']}'),
-                              SocialInfoCard('assets/icons/FollowersEmoji.png',
-                                  '${SelectionSentimentdata['user_info']['USER_MENTIONS']}'),
-                              SocialInfoCard('assets/icons/HashTagsEmoji.png',
-                                  '${SelectionSentimentdata['user_info']['HASHTAG_COUNT']}'),
-                              SocialInfoCard('assets/icons/TweetsEmoji.png',
-                                  '${SelectionSentimentdata['user_info']['TWEET_COUNT']}'),
+                              Icon(
+                                  Icons.navigate_before,
+                                size: 25,
+                                color: Colors.white,
+                              ),
+                              Text(
+                                'Recent Analysis',
+                                style: TextStyle(
+                                    fontFamily: 'Segoe UI',
+                                    fontSize: 20,
+                                    color: Colors.white),
+                              ),
+                              
                             ],
                           ),
-                          Card(
-                            elevation: 5,
-                            child: SfCircularChart(
-                              title:
-                                  ChartTitle(text: 'Tweet Sentiment Analysis'),
-                              legend: Legend(isVisible: true),
-                              series: <PieSeries<ChartSampleData, String>>[
-                                PieSeries<ChartSampleData, String>(
-                                    explode: true,
-                                    explodeIndex: 0,
-                                    explodeOffset: '10%',
-                                    dataSource: TweetGraphData1,
-                                    xValueMapper: (ChartSampleData data, _) =>
-                                        data.x as String,
-                                    yValueMapper: (ChartSampleData data, _) =>
-                                        data.y,
-                                    dataLabelMapper:
-                                        (ChartSampleData data, _) => data.text,
-                                    startAngle: 90,
-                                    endAngle: 90,
-                                    dataLabelSettings: const DataLabelSettings(
-                                        isVisible: true)),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            color: Colors.grey.shade300,
-                            thickness: 1,
-                          ),
-                          Card(
-                            elevation: 5,
-                            child: SfCircularChart(
-                              title: ChartTitle(
-                                  text: 'Comments Sentiment Analysis'),
-                              legend: Legend(isVisible: true),
-                              series: <PieSeries<ChartSampleData, String>>[
-                                PieSeries<ChartSampleData, String>(
-                                    explode: true,
-                                    explodeIndex: 0,
-                                    explodeOffset: '10%',
-                                    dataSource: CommentsGraphData1,
-                                    xValueMapper: (ChartSampleData data, _) =>
-                                        data.x as String,
-                                    yValueMapper: (ChartSampleData data, _) =>
-                                        data.y,
-                                    dataLabelMapper:
-                                        (ChartSampleData data, _) => data.text,
-                                    startAngle: 90,
-                                    endAngle: 90,
-                                    dataLabelSettings: const DataLabelSettings(
-                                        isVisible: true)),
-                              ],
-                            ),
-                          ),
-                        ]),
-                  );
-                } else {
-                  return const Text('Empty data');
-                }
-              } else {
-                return Text('State: ${snapshot.connectionState}');
-              }
-            },
-          ),
-        ],
+                        ),
+                      ),
+                    ),
+                  ),
+          ],
+        ),
       ),
     );
   }
