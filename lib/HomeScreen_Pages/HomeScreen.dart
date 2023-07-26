@@ -2465,6 +2465,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),*/
   }
 
+
   Future<bool> _handleLocationPermission() async {
     bool serviceEnabled;
     LocationPermission permission;

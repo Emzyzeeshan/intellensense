@@ -53,7 +53,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
   late Future<dynamic> NewschannelOverviewfinaldata = NewschannelOverViewApi();
   late Future<dynamic> FaceBookfinaldata = FaceBookOverViewApi();
   late Future<dynamic> FaceBooktoppartydata = FaceBookTopPartylistApi();
-  late Future<dynamic> _TopCandidaitevalue=TopCandidatelistApi();
+  late Future<dynamic> _TopCandidaitevalue = TopCandidatelistApi();
   Widget _buildTest(String title) {
     return Container(
       //color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
@@ -64,9 +64,9 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
               child: FutureBuilder<dynamic>(
                 future: finaldata,
                 builder: (
-                    BuildContext context,
-                    AsyncSnapshot<dynamic> snapshot,
-                    ) {
+                  BuildContext context,
+                  AsyncSnapshot<dynamic> snapshot,
+                ) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return SkeletonParagraph(
                       style: SkeletonParagraphStyle(
@@ -97,14 +97,14 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                           items: StateNamedata['state_names']!
                               .map<DropdownMenuItem<String>>(
                                   (item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ))
                               .toList(),
 
                           value: selectedValue,
@@ -132,7 +132,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                               statedropdownvisible = false;
                               isFaceBookvisible = false;
                               TopCandidatequery.clear();
-                              _TopCandidaitevalue=TopCandidatelistApi();
+                              _TopCandidaitevalue = TopCandidatelistApi();
                             });
                           },
                           buttonStyleData: const ButtonStyleData(
@@ -237,7 +237,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                 unselectedBackgroundColor: Colors.grey[300],
                 unselectedLabelStyle: TextStyle(color: Colors.black),
                 labelStyle:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                 tabs: [
                   Tab(
                     icon: Image.asset(
@@ -283,62 +283,62 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                     statedropdownvisible == true
                         ? TwitterOverviewScreen()
                         : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                            style: SkeletonParagraphStyle(
+                                lines: 5,
+                                spacing: 6,
+                                lineStyle: SkeletonLineStyle(
+                                  randomLength: true,
+                                  height: 20,
+                                  borderRadius: BorderRadius.circular(8),
+                                  minLength:
+                                      MediaQuery.of(context).size.width / 2,
+                                )),
+                          ),
                     isytvisible == true
                         ? YoutubeOverviewScreen()
                         : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                            style: SkeletonParagraphStyle(
+                                lines: 5,
+                                spacing: 6,
+                                lineStyle: SkeletonLineStyle(
+                                  randomLength: true,
+                                  height: 20,
+                                  borderRadius: BorderRadius.circular(8),
+                                  minLength:
+                                      MediaQuery.of(context).size.width / 2,
+                                )),
+                          ),
                     Center(
                       child: NewsPaperOverviewScreen(),
                     ),
                     isnewschannelvisible == true
                         ? NewschannelOverviewScreen()
                         : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                            style: SkeletonParagraphStyle(
+                                lines: 5,
+                                spacing: 6,
+                                lineStyle: SkeletonLineStyle(
+                                  randomLength: true,
+                                  height: 20,
+                                  borderRadius: BorderRadius.circular(8),
+                                  minLength:
+                                      MediaQuery.of(context).size.width / 2,
+                                )),
+                          ),
                     isFaceBookvisible == true
                         ? FacebookOverviewScreen()
                         : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                            style: SkeletonParagraphStyle(
+                                lines: 5,
+                                spacing: 6,
+                                lineStyle: SkeletonLineStyle(
+                                  randomLength: true,
+                                  height: 20,
+                                  borderRadius: BorderRadius.circular(8),
+                                  minLength:
+                                      MediaQuery.of(context).size.width / 2,
+                                )),
+                          ),
                   ],
                 ),
               ),
@@ -417,351 +417,358 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
     return TopPartylistdata['top_parties'].isEmpty
         ? Image.asset('assets/Image/datanotfound.gif')
         : FutureBuilder<dynamic>(
-      future: finaldata1,
-      builder: (
-          BuildContext context,
-          AsyncSnapshot<dynamic> snapshot,
-          ) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
-        } else if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasError) {
-            return const Text('Error');
-          } else if (snapshot.hasData) {
-            // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
-            //
-            // }
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: DataTable(
-                          headingRowColor: MaterialStateColor.resolveWith(
-                                  (states) => Color(0xff00196b)),
-                          dataRowColor:
-                          MaterialStateColor.resolveWith((states) {
-                            return Color(0xffd2dfff);
-                          }),
-                          border: TableBorder.all(color: Colors.black),
-                          // Datatable widget that have the property columns and rows.
-                          columns: [
-                            // Set the name of the column
-                            DataColumn(
-                              label: Text(
-                                'PARTY NAME',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                  TwitterOverviewdata['party_data']
-                                  [partyt1][0]
-                                  ['CANDIDATE_PARTY_NAME'],
-                                  style: TextStyle(color: Colors.white)),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                  TwitterOverviewdata['party_data']
-                                  [partyt2][0]
-                                  ['CANDIDATE_PARTY_NAME'],
-                                  style: TextStyle(color: Colors.white)),
-                            ),
-                            DataColumn(
-                              label: Text(
-                                  TwitterOverviewdata['party_data']
-                                  [partyt3][0]
-                                  ['CANDIDATE_PARTY_NAME'],
-                                  style: TextStyle(color: Colors.white)),
-                            ),
-                          ],
-                          rows: [
-                            // Set the values to the columns
-
-                            DataRow(
-                              cells: [
-                                DataCell(Text(
-                                  "USER FOLLOWERS",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold),
-                                )),
-                                ...TwitterOverviewdata['party_data']
-                                    .keys
-                                    .map(
-                                      (p) => DataCell(Text(
-                                      TwitterOverviewdata[
-                                      'party_data'][p][0]
-                                      ['USER_FOLLOWERS']
-                                          .toString(),
-                                      style: highestCountStyle(
-                                          TwitterOverviewdata[
-                                          'party_data'],
-                                          p,
-                                          'USER_FOLLOWERS'))),
-                                )
-                              ],
-                            ),
-                            DataRow(cells: [
-                              DataCell(Text(
-                                "LIKES",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              )),
-                              ...TwitterOverviewdata['party_data']
-                                  .keys
-                                  .map(
-                                    (p) => DataCell(Text(
-                                    TwitterOverviewdata['party_data']
-                                    [p][0]['LIKES']
-                                        .toString(),
-                                    style: highestCountStyle(
-                                        TwitterOverviewdata[
-                                        'party_data'],
-                                        p,
-                                        'LIKES'))),
-                              ),
-                              /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
-                                  DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
-                                  DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
-                            ]),
-                            DataRow(cells: [
-                              DataCell(Text(
-                                "RETWEET COUNT",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              )),
-                              ...TwitterOverviewdata['party_data']
-                                  .keys
-                                  .map(
-                                    (p) => DataCell(Text(
-                                    TwitterOverviewdata['party_data']
-                                    [p][0]['RETWEET_COUNT']
-                                        .toString(),
-                                    style: highestCountStyle(
-                                        TwitterOverviewdata[
-                                        'party_data'],
-                                        p,
-                                        'RETWEET_COUNT'))),
-                              ),
-                              /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
-                                  DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
-                                  DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                            ]),
-                          ]),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Card(
-                    color: Color(0xffd2dfff),
-                    elevation: 5,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: RichText(
-                        text: new TextSpan(
-                          // Note: Styles for TextSpans must be explicitly defined.
-                          // Child text spans will inherit styles from parent
-                          style: new TextStyle(
-                            fontSize: 14.0,
-                            color: Colors.black,
-                          ),
-                          children: <TextSpan>[
-                            new TextSpan(
-                                text:
-                                'With Huge Difference In counts for Tweets and Re-Tweets reports says that '),
-                            new TextSpan(
-                                text: '${TwitterOverviewdata['lead'][0]}',
-                                style: new TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.green,
-                                    fontSize: 25)),
-                            new TextSpan(
-                                text:
-                                ' is relatively Dominant in Twitter Data'),
-                          ],
-                        ),
-                      ),
-
-                      //  Text(
-                      //         '""', style: TextStyle(
-                      //                   fontFamily: 'Segoe UI',
-                      //                   fontSize: 16,
-                      //                 ),),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  FutureBuilder<dynamic>(
-                    future: _TopCandidaitevalue,
-                    builder: (
-                        BuildContext context,
-                        AsyncSnapshot<dynamic> snapshot,
-                        ) {
-                      if (snapshot.connectionState ==
-                          ConnectionState.waiting) {
-                        return CircularProgressIndicator();
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.done) {
-                        if (snapshot.hasError) {
-                          return  Text('${snapshot.error}');
-                        } else if (snapshot.hasData) {
-                          return Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding:
-                                    const EdgeInsets.only(left: 15.0),
-                                    child: Text(
-                                      'TOP CANDIDATES',
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.bold),
+            future: finaldata1,
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<dynamic> snapshot,
+            ) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return SkeletonParagraph(
+                  style: SkeletonParagraphStyle(
+                      lines: 5,
+                      spacing: 6,
+                      lineStyle: SkeletonLineStyle(
+                        randomLength: true,
+                        height: 20,
+                        borderRadius: BorderRadius.circular(8),
+                        minLength: MediaQuery.of(context).size.width / 2,
+                      )),
+                );
+              } else if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else if (snapshot.hasData) {
+                  // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
+                  //
+                  // }
+                  return SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DataTable(
+                                headingRowColor: MaterialStateColor.resolveWith(
+                                    (states) => Color(0xff00196b)),
+                                dataRowColor:
+                                    MaterialStateColor.resolveWith((states) {
+                                  return Color(0xffd2dfff);
+                                }),
+                                border: TableBorder.all(color: Colors.black),
+                                // Datatable widget that have the property columns and rows.
+                                columns: [
+                                  // Set the name of the column
+                                  DataColumn(
+                                    label: Text(
+                                      'PARTY NAME',
+                                      style: TextStyle(color: Colors.white),
                                     ),
                                   ),
+                                  DataColumn(
+                                    label: Text(
+                                        TwitterOverviewdata['party_data']
+                                                [partyt1][0]
+                                            ['CANDIDATE_PARTY_NAME'],
+                                        style: TextStyle(color: Colors.white)),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                        TwitterOverviewdata['party_data']
+                                                [partyt2][0]
+                                            ['CANDIDATE_PARTY_NAME'],
+                                        style: TextStyle(color: Colors.white)),
+                                  ),
+                                  DataColumn(
+                                    label: Text(
+                                        TwitterOverviewdata['party_data']
+                                                [partyt3][0]
+                                            ['CANDIDATE_PARTY_NAME'],
+                                        style: TextStyle(color: Colors.white)),
+                                  ),
+                                ],
+                                rows: [
+                                  // Set the values to the columns
+
+                                  DataRow(
+                                    cells: [
+                                      DataCell(Text(
+                                        "USER FOLLOWERS",
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                                      ...TwitterOverviewdata['party_data']
+                                          .keys
+                                          .map(
+                                            (p) => DataCell(Text(
+                                                TwitterOverviewdata[
+                                                            'party_data'][p][0]
+                                                        ['USER_FOLLOWERS']
+                                                    .toString(),
+                                                style: highestCountStyle(
+                                                    TwitterOverviewdata[
+                                                        'party_data'],
+                                                    p,
+                                                    'USER_FOLLOWERS'))),
+                                          )
+                                    ],
+                                  ),
+                                  DataRow(cells: [
+                                    DataCell(Text(
+                                      "LIKES",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    ...TwitterOverviewdata['party_data']
+                                        .keys
+                                        .map(
+                                          (p) => DataCell(Text(
+                                              TwitterOverviewdata['party_data']
+                                                      [p][0]['LIKES']
+                                                  .toString(),
+                                              style: highestCountStyle(
+                                                  TwitterOverviewdata[
+                                                      'party_data'],
+                                                  p,
+                                                  'LIKES'))),
+                                        ),
+                                    /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+                                  DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
+                                  DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
+                                  ]),
+                                  DataRow(cells: [
+                                    DataCell(Text(
+                                      "RETWEET COUNT",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    )),
+                                    ...TwitterOverviewdata['party_data']
+                                        .keys
+                                        .map(
+                                          (p) => DataCell(Text(
+                                              TwitterOverviewdata['party_data']
+                                                      [p][0]['RETWEET_COUNT']
+                                                  .toString(),
+                                              style: highestCountStyle(
+                                                  TwitterOverviewdata[
+                                                      'party_data'],
+                                                  p,
+                                                  'RETWEET_COUNT'))),
+                                        ),
+                                    /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                  DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                                  DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                                  ]),
+                                ]),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Card(
+                          color: Color(0xffd2dfff),
+                          elevation: 5,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: RichText(
+                              text: new TextSpan(
+                                // Note: Styles for TextSpans must be explicitly defined.
+                                // Child text spans will inherit styles from parent
+                                style: new TextStyle(
+                                  fontSize: 14.0,
+                                  color: Colors.black,
+                                ),
+                                children: <TextSpan>[
+                                  new TextSpan(
+                                      text:
+                                          'With Huge Difference In counts for Tweets and Re-Tweets reports says that '),
+                                  new TextSpan(
+                                      text: '${TwitterOverviewdata['lead'][0]}',
+                                      style: new TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.green,
+                                          fontSize: 25)),
+                                  new TextSpan(
+                                      text:
+                                          ' is relatively Dominant in Twitter Data'),
                                 ],
                               ),
-                              Container(
-                                height: 145,
-                                child: ListView.builder(
-                                    scrollDirection: Axis.horizontal,
-                                    shrinkWrap: true,
-                                    itemCount: 4,
-                                    itemBuilder: ((context, index) {
-                                      return Padding(
-                                        padding:
-                                        const EdgeInsets.all(8.0),
-                                        child: Card(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius.circular(
-                                                  15)),
-                                          color: Color(0xffd2dfff),
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets.all(8.0),
-                                            child: Container(
-                                              height: 130,
-                                              width: 110,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceAround,
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment
-                                                    .center,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Icon(
-                                                        Icons.person_2,
-                                                        size: 17,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 2,
-                                                      ),
-                                                      TopCandidate['top_candidates'][index]['CANDIDATE_NAME'].toString().length>10?Text(
+                            ),
 
-                                                        '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}'.substring(0,12),
-                                                        style: _textStyle,
-
-                                                      ):
-                                                      Text(
-
-                                                        '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}',
-                                                        style: _textStyle,
-
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Icon(
-                                                          Icons
-                                                              .person_add_alt_1_rounded,
-                                                          size: 17),
-                                                      SizedBox(
-                                                        width: 2,
-                                                      ),
-                                                      Text(
-                                                        '${TopCandidate['top_candidates'][index]['USER_FOLLOWERS']}',
-                                                        style: _textStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Icon(
-                                                          Icons
-                                                              .person_pin_rounded,
-                                                          size: 17),
-                                                      SizedBox(
-                                                        width: 2,
-                                                      ),
-                                                      Text(
-                                                        '${TopCandidate['top_candidates'][index]['CANDIDATE_PARTY_NAME']}',
-                                                        style: _textStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        'Count : ${TopCandidate['top_candidates'][index]['COUNT']}',
-                                                        style: _textStyle,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
+                            //  Text(
+                            //         '""', style: TextStyle(
+                            //                   fontFamily: 'Segoe UI',
+                            //                   fontSize: 16,
+                            //                 ),),
+                          ),
+                        ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        FutureBuilder<dynamic>(
+                          future: _TopCandidaitevalue,
+                          builder: (
+                            BuildContext context,
+                            AsyncSnapshot<dynamic> snapshot,
+                          ) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return CircularProgressIndicator();
+                            } else if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot.hasError) {
+                                return Text('${snapshot.error}');
+                              } else if (snapshot.hasData) {
+                                return Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 15.0),
+                                          child: Text(
+                                            'TOP CANDIDATES',
+                                            style: TextStyle(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ),
-                                      );
-                                    })),
-                              ),
-                            ],
-                          );
-                        } else {
-                          return const Text('Empty data');
-                        }
-                      } else {
-                        return Text('State: ${snapshot.connectionState}');
-                      }
-                    },
-                  ),
-                  TwitterOverviewdata['lead'][0] == 'INC'
-                      ? Image.asset(
-                    'assets/new Updated images/twitter_001.gif',
-                    height: 220,
-                    width: MediaQuery.of(context).size.width,
-                  )
-                      : Container(),
-                ],
-              ),
-            );
-          } else {
-            return const Text('Empty data');
-          }
-        } else {
-          return Text('State: ${snapshot.connectionState}');
-        }
-      },
-    );
+                                      ],
+                                    ),
+                                    Container(
+                                      height: 145,
+                                      child: ListView.builder(
+                                          scrollDirection: Axis.horizontal,
+                                          shrinkWrap: true,
+                                          itemCount: 4,
+                                          itemBuilder: ((context, index) {
+                                            return Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Card(
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                color: Color(0xffd2dfff),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(8.0),
+                                                  child: Container(
+                                                    height: 130,
+                                                    width: 110,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceAround,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons.person_2,
+                                                              size: 17,
+                                                            ),
+                                                            SizedBox(
+                                                              width: 2,
+                                                            ),
+                                                            TopCandidate['top_candidates'][index]
+                                                                            [
+                                                                            'CANDIDATE_NAME']
+                                                                        .toString()
+                                                                        .length >
+                                                                    10
+                                                                ? Text(
+                                                                    '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}'
+                                                                        .substring(
+                                                                            0,
+                                                                            12),
+                                                                    style:
+                                                                        _textStyle,
+                                                                  )
+                                                                : Text(
+                                                                    '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}',
+                                                                    style:
+                                                                        _textStyle,
+                                                                  ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                                Icons
+                                                                    .person_add_alt_1_rounded,
+                                                                size: 17),
+                                                            SizedBox(
+                                                              width: 2,
+                                                            ),
+                                                            Text(
+                                                              '${TopCandidate['top_candidates'][index]['USER_FOLLOWERS']}',
+                                                              style: _textStyle,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Icon(
+                                                                Icons
+                                                                    .person_pin_rounded,
+                                                                size: 17),
+                                                            SizedBox(
+                                                              width: 2,
+                                                            ),
+                                                            Text(
+                                                              '${TopCandidate['top_candidates'][index]['CANDIDATE_PARTY_NAME']}',
+                                                              style: _textStyle,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              'Count : ${TopCandidate['top_candidates'][index]['COUNT']}',
+                                                              style: _textStyle,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          })),
+                                    ),
+                                  ],
+                                );
+                              } else {
+                                return const Text('Empty data');
+                              }
+                            } else {
+                              return Text('State: ${snapshot.connectionState}');
+                            }
+                          },
+                        ),
+                        TwitterOverviewdata['lead'][0] == 'INC'
+                            ? Image.asset(
+                                'assets/new Updated images/twitter_001.gif',
+                                height: 220,
+                                width: MediaQuery.of(context).size.width,
+                              )
+                            : Container(),
+                      ],
+                    ),
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
+          );
   }
 
   TextStyle _textStyle = TextStyle(fontSize: 12, fontWeight: FontWeight.w600);
@@ -772,182 +779,236 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
     return YoutubeTopPartylistdata['top_parties'].isEmpty
         ? Image.asset('assets/Image/datanotfound.gif')
         : FutureBuilder<dynamic>(
-      future: Youtubefinaldata,
-      builder: (
-          BuildContext context,
-          AsyncSnapshot<dynamic> snapshot,
-          ) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
-        } else if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasError) {
-            return const Text('Error');
-          } else if (snapshot.hasData) {
-            // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
-            //
-            // }
-            return Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: istablevisible == true
-                        ? DataTable(
-                        headingRowColor:
-                        MaterialStateColor.resolveWith(
-                                (states) => Color(0xff00196b)),
-                        dataRowColor:
-                        MaterialStateColor.resolveWith((states) {
-                          return Color(0xffd2dfff);
-                        }),
-                        border: TableBorder.all(color: Colors.black),
-                        // Datatable widget that have the property columns and rows.
-                        columns: [
-                          // Set the name of the column
-                          DataColumn(
-                            label: Text(
-                              'PARTY NAME',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          ...Youtubetablecolumn
-                          // DataColumn(
-                          //   label: Text(
-                          //       YoutubeOverviewdata['party_data'][partyt1][0]
-                          //           ['CANDIDATE_PARTY_NAME'],
-                          //       style: TextStyle(color: Colors.white)),
-                          // ),
-                          // DataColumn(
-                          //   label: Text(
-                          //       YoutubeOverviewdata['party_data'][partyt2][0]
-                          //           ['CANDIDATE_PARTY_NAME'],
-                          //       style: TextStyle(color: Colors.white)),
-                          // ),
-                          // DataColumn(
-                          //   label: Text(
-                          //       YoutubeOverviewdata['party_data'][partyt3][0]
-                          //           ['CANDIDATE_PARTY_NAME'],
-                          //       style: TextStyle(color: Colors.white)),
-                          // ),
-                        ],
-                        rows: [
-                          // Set the values to the columns
-                          DataRow(
-                            cells: [
-                              DataCell(Text(
-                                "LIKES",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              )),
-                              ...YoutubeOverviewdata['party_data']
-                                  .keys
-                                  .map(
-                                    (p) => DataCell(Text(
-                                  YoutubeOverviewdata[
-                                  'party_data'][p]
-                                  [0]['LIKES']
-                                      .toString(),
-                                  // style: highestCountStyle(
-                                  //     YoutubeOverviewdata['party_data'],
-                                  //     p,
-                                  //     'LIKES')
-                                )),
-                              )
-                            ],
-                          ),
-                          DataRow(cells: [
-                            DataCell(Text(
-                              "COMMENTS",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            ...YoutubeOverviewdata['party_data']
-                                .keys
-                                .map(
-                                  (p) => DataCell(Text(
-                                YoutubeOverviewdata[
-                                'party_data'][p][0]
-                                ['COMMENTS']
-                                    .toString(),
-                                // style: highestCountStyle(
-                                //     YoutubeOverviewdata['party_data'],
-                                //     p,
-                                //     'COMMENTS')
-                              )),
-                            ),
-                            /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+            future: Youtubefinaldata,
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<dynamic> snapshot,
+            ) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return SkeletonParagraph(
+                  style: SkeletonParagraphStyle(
+                      lines: 5,
+                      spacing: 6,
+                      lineStyle: SkeletonLineStyle(
+                        randomLength: true,
+                        height: 20,
+                        borderRadius: BorderRadius.circular(8),
+                        minLength: MediaQuery.of(context).size.width / 2,
+                      )),
+                );
+              } else if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else if (snapshot.hasData) {
+                  // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
+                  //
+                  // }
+                  return Column(
+                    children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: istablevisible == true
+                              ? DataTable(
+                                  headingRowColor:
+                                      MaterialStateColor.resolveWith(
+                                          (states) => Color(0xff00196b)),
+                                  dataRowColor:
+                                      MaterialStateColor.resolveWith((states) {
+                                    return Color(0xffd2dfff);
+                                  }),
+                                  border: TableBorder.all(color: Colors.black),
+                                  // Datatable widget that have the property columns and rows.
+                                  columns: [
+                                      // Set the name of the column
+                                      DataColumn(
+                                        label: Text(
+                                          'PARTY NAME',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                      ...Youtubetablecolumn
+                                      // DataColumn(
+                                      //   label: Text(
+                                      //       YoutubeOverviewdata['party_data'][partyt1][0]
+                                      //           ['CANDIDATE_PARTY_NAME'],
+                                      //       style: TextStyle(color: Colors.white)),
+                                      // ),
+                                      // DataColumn(
+                                      //   label: Text(
+                                      //       YoutubeOverviewdata['party_data'][partyt2][0]
+                                      //           ['CANDIDATE_PARTY_NAME'],
+                                      //       style: TextStyle(color: Colors.white)),
+                                      // ),
+                                      // DataColumn(
+                                      //   label: Text(
+                                      //       YoutubeOverviewdata['party_data'][partyt3][0]
+                                      //           ['CANDIDATE_PARTY_NAME'],
+                                      //       style: TextStyle(color: Colors.white)),
+                                      // ),
+                                    ],
+                                  rows: [
+                                      // Set the values to the columns
+                                      DataRow(
+                                        cells: [
+                                          DataCell(Text(
+                                            "LIKES",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          ...YoutubeOverviewdata['party_data']
+                                              .keys
+                                              .map(
+                                                (p) => DataCell(Text(
+                                                    YoutubeOverviewdata[
+                                                                'party_data'][p]
+                                                            [0]['LIKES']
+                                                        .toString(),
+                                                    style: highestCountStyle(
+                                                        YoutubeOverviewdata[
+                                                            'party_data'],
+                                                        p,
+                                                        'LIKES'))),
+                                              )
+                                        ],
+                                      ),
+                                      DataRow(cells: [
+                                        DataCell(Text(
+                                          "COMMENTS",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        ...YoutubeOverviewdata['party_data']
+                                            .keys
+                                            .map(
+                                              (p) => DataCell(Text(
+                                                  YoutubeOverviewdata[
+                                                              'party_data'][p]
+                                                          [0]['COMMENTS']
+                                                      .toString(),
+                                                  style: highestCountStyle(
+                                                      YoutubeOverviewdata[
+                                                          'party_data'],
+                                                      p,
+                                                      'COMMENTS'))),
+                                            ),
+                                        /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
-                          ]),
-                          DataRow(cells: [
-                            DataCell(Text(
-                              "VIEWS",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            ...YoutubeOverviewdata['party_data']
-                                .keys
-                                .map(
-                                  (p) => DataCell(Text(
-                                YoutubeOverviewdata[
-                                'party_data'][p][0]
-                                ['VIEWS']
-                                    .toString(),
-                                // style: highestCountStyle(
-                                //     YoutubeOverviewdata['party_data'],
-                                //     p,
-                                //     'VIEWS')
-                              )),
-                            ),
-                            /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      ]),
+                                      DataRow(cells: [
+                                        DataCell(Text(
+                                          "VIEWS",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        ...YoutubeOverviewdata['party_data']
+                                            .keys
+                                            .map(
+                                              (p) => DataCell(Text(
+                                                  YoutubeOverviewdata[
+                                                              'party_data'][p]
+                                                          [0]['VIEWS']
+                                                      .toString(),
+                                                  style: highestCountStyle(
+                                                      YoutubeOverviewdata[
+                                                          'party_data'],
+                                                      p,
+                                                      'VIEWS'))),
+                                            ),
+                                        /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          ]),
-                          // DataRow(cells: [
-                          //   DataCell(Text(
-                          //     "CANDIDATE_PARTY_NAME",
-                          //     style: TextStyle(fontWeight: FontWeight.bold),
-                          //   )),
-                          //   ...YoutubeOverviewdata['party_data'].keys.map(
-                          //         (p) => DataCell(Text(
-                          //             YoutubeOverviewdata['party_data'][p][0]
-                          //                     ['CANDIDATE_PARTY_NAME']
-                          //                 .toString(),
-                          //             // style: highestCountStyle(
-                          //             //     YoutubeOverviewdata['party_data'],
-                          //             //     p,
-                          //             //     'CANDIDATE_PARTY_NAME')
-                          //                 )),
-                          //       ),
-                          //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          // ]),
-                        ])
-                        : Container(),
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return const Text('Empty data');
-          }
-        } else {
-          return Text('State: ${snapshot.connectionState}');
-        }
-      },
-    );
+                                      ]),
+                                      // DataRow(cells: [
+                                      //   DataCell(Text(
+                                      //     "CANDIDATE_PARTY_NAME",
+                                      //     style: TextStyle(fontWeight: FontWeight.bold),
+                                      //   )),
+                                      //   ...YoutubeOverviewdata['party_data'].keys.map(
+                                      //         (p) => DataCell(Text(
+                                      //             YoutubeOverviewdata['party_data'][p][0]
+                                      //                     ['CANDIDATE_PARTY_NAME']
+                                      //                 .toString(),
+                                      //             // style: highestCountStyle(
+                                      //             //     YoutubeOverviewdata['party_data'],
+                                      //             //     p,
+                                      //             //     'CANDIDATE_PARTY_NAME')
+                                      //                 )),
+                                      //       ),
+                                      //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                                      // ]),
+                                    ])
+                              : Container(),
+                        ),
+                      ),
+                      Card(
+                        color: Color(0xffd2dfff),
+                        elevation: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RichText(
+                            text: new TextSpan(
+                              // Note: Styles for TextSpans must be explicitly defined.
+                              // Child text spans will inherit styles from parent
+                              style: new TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: YoutubeOverviewdata['lead'][0],
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green,
+                                        fontSize: 20,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text: ' is overpowering ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text: "BJP",
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red,
+                                        fontSize: 20,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text: ' in all aspects',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                              ],
+                            ),
+                          ),
+
+                          //  Text(
+                          //         '""', style: TextStyle(
+                          //                   fontFamily: 'Segoe UI',
+                          //                   fontSize: 16,
+                          //                 ),),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
+          );
   }
 
 //NewsPaperOverview Screen
@@ -955,9 +1016,9 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
     return FutureBuilder<dynamic>(
       future: NewsPaperOverviewFutureData,
       builder: (
-          BuildContext context,
-          AsyncSnapshot<dynamic> snapshot,
-          ) {
+        BuildContext context,
+        AsyncSnapshot<dynamic> snapshot,
+      ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SkeletonParagraph(
             style: SkeletonParagraphStyle(
@@ -983,60 +1044,58 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: isnull == false
-                      ? Column(
-                    children: [
-                      Table(
-                        border: TableBorder.all(),
-                        children: [
-                          TableRow(children: [
-                            Container(
-                                height: 30,
-                                color: Color(0xff00196b),
-                                child: Center(
-                                    child: Text(
+                      ? Column(children: [
+                          Table(
+                            border: TableBorder.all(),
+                            children: [
+                              TableRow(children: [
+                                Container(
+                                    height: 30,
+                                    color: Color(0xff00196b),
+                                    child: Center(
+                                        child: Text(
                                       'PARTY NAME',
                                       style: GoogleFonts.nunitoSans(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white),
                                     ))),
-                            Container(
-                                height: 30,
-                                color: Color(0xff00196b),
-                                child: Center(
-                                    child: Text(
+                                Container(
+                                    height: 30,
+                                    color: Color(0xff00196b),
+                                    child: Center(
+                                        child: Text(
                                       'COUNT',
                                       style: GoogleFonts.nunitoSans(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white),
                                     ))),
-                          ]),
-                          ..._NewspaperOverviewTabledata,
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '${NewspaperOverviewdata['party_data'][0]['PARTY_NAME']} is Relatively Dominant ',
-                            style: GoogleFonts.nunitoSans(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                              ]),
+                              ..._NewspaperOverviewTabledata,
+                            ],
                           ),
-                        ],
-                      ),
-                      Image.asset('assets/Image/celebrate.gif',
-                          height: 250, width: 150)
-                    ],
-                  )
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '${NewspaperOverviewdata['party_data'][0]['PARTY_NAME']} is Relatively Dominant ',
+                                style: GoogleFonts.nunitoSans(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                    Image.asset('assets/Image/celebrate.gif',
+                        height: 250, width: 150)
+                        ])
                       : Center(
-                    child: Image.asset('assets/Image/datanotfound.gif'),
-                  ),
+                          child: Image.asset('assets/Image/datanotfound.gif'),
+                        ),
                 ),
               ],
             );
@@ -1055,183 +1114,239 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
     return NewsChannelTopPartylistdata['top_parties'].isEmpty
         ? Image.asset('assets/Image/datanotfound.gif')
         : FutureBuilder<dynamic>(
-      future: NewschannelOverviewfinaldata,
-      builder: (
-          BuildContext context,
-          AsyncSnapshot<dynamic> snapshot,
-          ) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
-        } else if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasError) {
-            return const Text('Error');
-          } else if (snapshot.hasData) {
-            // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
-            //
-            // }
-            return Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: isNewsChannelvisible == true
-                        ? DataTable(
-                        headingRowColor:
-                        MaterialStateColor.resolveWith(
-                                (states) => Color(0xff00196b)),
-                        dataRowColor:
-                        MaterialStateColor.resolveWith((states) {
-                          return Color(0xffd2dfff);
-                        }),
-                        border: TableBorder.all(color: Colors.black),
-                        // Datatable widget that have the property columns and rows.
-                        columns: [
-                          // Set the name of the column
-                          DataColumn(
-                            label: Text(
-                              'PARTY NAME',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          ...NewsChanneltablecolumn
-                          // DataColumn(
-                          //   label: Text(
-                          //       YoutubeOverviewdata['party_data'][partyt1][0]
-                          //           ['CANDIDATE_PARTY_NAME'],
-                          //       style: TextStyle(color: Colors.white)),
-                          // ),
-                          // DataColumn(
-                          //   label: Text(
-                          //       YoutubeOverviewdata['party_data'][partyt2][0]
-                          //           ['CANDIDATE_PARTY_NAME'],
-                          //       style: TextStyle(color: Colors.white)),
-                          // ),
-                          // DataColumn(
-                          //   label: Text(
-                          //       YoutubeOverviewdata['party_data'][partyt3][0]
-                          //           ['CANDIDATE_PARTY_NAME'],
-                          //       style: TextStyle(color: Colors.white)),
-                          // ),
-                        ],
-                        rows: [
-                          // Set the values to the columns
-                          DataRow(
-                            cells: [
-                              DataCell(Text(
-                                "LIKES",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              )),
-                              ...NewschannelOverviewdata[
-                              'party_data']
-                                  .keys
-                                  .map(
-                                    (p) => DataCell(Text(
-                                    NewschannelOverviewdata[
-                                    'party_data'][p]
-                                    [0]['LIKES']
-                                        .toString(),
-                                    style: highestCountStyle(
-                                        NewschannelOverviewdata[
-                                        'party_data'],
-                                        p,
-                                        'LIKES'))),
-                              )
-                            ],
-                          ),
-                          DataRow(cells: [
-                            DataCell(Text(
-                              "COMMENTS",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            ...NewschannelOverviewdata['party_data']
-                                .keys
-                                .map(
-                                  (p) => DataCell(Text(
-                                  NewschannelOverviewdata[
-                                  'party_data'][p]
-                                  [0]['COMMENTS']
-                                      .toString(),
-                                  style: highestCountStyle(
-                                      NewschannelOverviewdata[
-                                      'party_data'],
-                                      p,
-                                      'COMMENTS'))),
-                            ),
-                            /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+            future: NewschannelOverviewfinaldata,
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<dynamic> snapshot,
+            ) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return SkeletonParagraph(
+                  style: SkeletonParagraphStyle(
+                      lines: 5,
+                      spacing: 6,
+                      lineStyle: SkeletonLineStyle(
+                        randomLength: true,
+                        height: 20,
+                        borderRadius: BorderRadius.circular(8),
+                        minLength: MediaQuery.of(context).size.width / 2,
+                      )),
+                );
+              } else if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else if (snapshot.hasData) {
+                  // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
+                  //
+                  // }
+                  return Column(
+                    children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: isNewsChannelvisible == true
+                              ? DataTable(
+                                  headingRowColor:
+                                      MaterialStateColor.resolveWith(
+                                          (states) => Color(0xff00196b)),
+                                  dataRowColor:
+                                      MaterialStateColor.resolveWith((states) {
+                                    return Color(0xffd2dfff);
+                                  }),
+                                  border: TableBorder.all(color: Colors.black),
+                                  // Datatable widget that have the property columns and rows.
+                                  columns: [
+                                      // Set the name of the column
+                                      DataColumn(
+                                        label: Text(
+                                          'PARTY NAME',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                      ...NewsChanneltablecolumn
+                                      // DataColumn(
+                                      //   label: Text(
+                                      //       YoutubeOverviewdata['party_data'][partyt1][0]
+                                      //           ['CANDIDATE_PARTY_NAME'],
+                                      //       style: TextStyle(color: Colors.white)),
+                                      // ),
+                                      // DataColumn(
+                                      //   label: Text(
+                                      //       YoutubeOverviewdata['party_data'][partyt2][0]
+                                      //           ['CANDIDATE_PARTY_NAME'],
+                                      //       style: TextStyle(color: Colors.white)),
+                                      // ),
+                                      // DataColumn(
+                                      //   label: Text(
+                                      //       YoutubeOverviewdata['party_data'][partyt3][0]
+                                      //           ['CANDIDATE_PARTY_NAME'],
+                                      //       style: TextStyle(color: Colors.white)),
+                                      // ),
+                                    ],
+                                  rows: [
+                                      // Set the values to the columns
+                                      DataRow(
+                                        cells: [
+                                          DataCell(Text(
+                                            "LIKES",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          ...NewschannelOverviewdata[
+                                                  'party_data']
+                                              .keys
+                                              .map(
+                                                (p) => DataCell(Text(
+                                                    NewschannelOverviewdata[
+                                                                'party_data'][p]
+                                                            [0]['LIKES']
+                                                        .toString(),
+                                                    style: highestCountStyle(
+                                                        NewschannelOverviewdata[
+                                                            'party_data'],
+                                                        p,
+                                                        'LIKES'))),
+                                              )
+                                        ],
+                                      ),
+                                      DataRow(cells: [
+                                        DataCell(Text(
+                                          "COMMENTS",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        ...NewschannelOverviewdata['party_data']
+                                            .keys
+                                            .map(
+                                              (p) => DataCell(Text(
+                                                  NewschannelOverviewdata[
+                                                              'party_data'][p]
+                                                          [0]['COMMENTS']
+                                                      .toString(),
+                                                  style: highestCountStyle(
+                                                      NewschannelOverviewdata[
+                                                          'party_data'],
+                                                      p,
+                                                      'COMMENTS'))),
+                                            ),
+                                        /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
-                          ]),
-                          DataRow(cells: [
-                            DataCell(Text(
-                              "VIEWS",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            ...NewschannelOverviewdata['party_data']
-                                .keys
-                                .map(
-                                  (p) => DataCell(Text(
-                                  NewschannelOverviewdata[
-                                  'party_data'][p]
-                                  [0]['VIEWS']
-                                      .toString(),
-                                  style: highestCountStyle(
-                                      NewschannelOverviewdata[
-                                      'party_data'],
-                                      p,
-                                      'VIEWS'))),
-                            ),
-                            /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      ]),
+                                      DataRow(cells: [
+                                        DataCell(Text(
+                                          "VIEWS",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        ...NewschannelOverviewdata['party_data']
+                                            .keys
+                                            .map(
+                                              (p) => DataCell(Text(
+                                                  NewschannelOverviewdata[
+                                                              'party_data'][p]
+                                                          [0]['VIEWS']
+                                                      .toString(),
+                                                  style: highestCountStyle(
+                                                      NewschannelOverviewdata[
+                                                          'party_data'],
+                                                      p,
+                                                      'VIEWS'))),
+                                            ),
+                                        /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          ]),
-                          // DataRow(cells: [
-                          //   DataCell(Text(
-                          //     "CANDIDATE_PARTY_NAME",
-                          //     style: TextStyle(fontWeight: FontWeight.bold),
-                          //   )),
-                          //   ...YoutubeOverviewdata['party_data'].keys.map(
-                          //         (p) => DataCell(Text(
-                          //             YoutubeOverviewdata['party_data'][p][0]
-                          //                     ['CANDIDATE_PARTY_NAME']
-                          //                 .toString(),
-                          //             // style: highestCountStyle(
-                          //             //     YoutubeOverviewdata['party_data'],
-                          //             //     p,
-                          //             //     'CANDIDATE_PARTY_NAME')
-                          //                 )),
-                          //       ),
-                          //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          // ]),
-                        ])
-                        : Container(),
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return const Text('Empty data');
-          }
-        } else {
-          return Text('State: ${snapshot.connectionState}');
-        }
-      },
-    );
+                                      ]),
+                                      // DataRow(cells: [
+                                      //   DataCell(Text(
+                                      //     "CANDIDATE_PARTY_NAME",
+                                      //     style: TextStyle(fontWeight: FontWeight.bold),
+                                      //   )),
+                                      //   ...YoutubeOverviewdata['party_data'].keys.map(
+                                      //         (p) => DataCell(Text(
+                                      //             YoutubeOverviewdata['party_data'][p][0]
+                                      //                     ['CANDIDATE_PARTY_NAME']
+                                      //                 .toString(),
+                                      //             // style: highestCountStyle(
+                                      //             //     YoutubeOverviewdata['party_data'],
+                                      //             //     p,
+                                      //             //     'CANDIDATE_PARTY_NAME')
+                                      //                 )),
+                                      //       ),
+                                      //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                                      // ]),
+                                    ])
+                              : Container(),
+                        ),
+                      ),
+                      Card(
+                        color: Color(0xffd2dfff),
+                        elevation: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RichText(
+                            text: new TextSpan(
+                              // Note: Styles for TextSpans must be explicitly defined.
+                              // Child text spans will inherit styles from parent
+                              style: new TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                new TextSpan(
+                                    text: NewschannelOverviewdata['lead'][0],
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green,
+                                        fontSize: 20,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text:
+                                    ' is overpowering ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text: "Multiple Parties",
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        //color: Colors.red,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text:
+                                    ' in all aspects.',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                              ],
+                            ),
+                          ),
+
+                          //  Text(
+                          //         '""', style: TextStyle(
+                          //                   fontFamily: 'Segoe UI',
+                          //                   fontSize: 16,
+                          //                 ),),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
+          );
   }
 
 //FaceBook Overview Screen
@@ -1240,185 +1355,230 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
     return FaceBookTopPartylistdata['top_parties'].isEmpty
         ? Image.asset('assets/Image/datanotfound.gif')
         : FutureBuilder<dynamic>(
-      future: FaceBookfinaldata,
-      builder: (
-          BuildContext context,
-          AsyncSnapshot<dynamic> snapshot,
-          ) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
-        } else if (snapshot.connectionState == ConnectionState.done) {
-          if (snapshot.hasError) {
-            return const Text('Error');
-          } else if (snapshot.hasData) {
-            // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
-            //
-            // }
-            return Column(
-              children: [
-                SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: isFacebookvisible == true
-                        ? DataTable(
-                        headingRowColor:
-                        MaterialStateColor.resolveWith(
-                                (states) => Color(0xff00196b)),
-                        dataRowColor:
-                        MaterialStateColor.resolveWith((states) {
-                          return Color(0xffd2dfff);
-                        }),
-                        border: TableBorder.all(color: Colors.black),
-                        // Datatable widget that have the property columns and rows.
-                        columns: [
-                          // Set the name of the column
-                          DataColumn(
-                            label: Text(
-                              'PARTY NAME',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                          ...FaceBooktablecolumn
-                          // DataColumn(
-                          //   label: Text(
-                          //       YoutubeOverviewdata['party_data'][partyt1][0]
-                          //           ['CANDIDATE_PARTY_NAME'],
-                          //       style: TextStyle(color: Colors.white)),
-                          // ),
-                          // DataColumn(
-                          //   label: Text(
-                          //       YoutubeOverviewdata['party_data'][partyt2][0]
-                          //           ['CANDIDATE_PARTY_NAME'],
-                          //       style: TextStyle(color: Colors.white)),
-                          // ),
-                          // DataColumn(
-                          //   label: Text(
-                          //       YoutubeOverviewdata['party_data'][partyt3][0]
-                          //           ['CANDIDATE_PARTY_NAME'],
-                          //       style: TextStyle(color: Colors.white)),
-                          // ),
-                        ],
-                        rows: [
-                          // Set the values to the columns
-                          DataRow(
-                            cells: [
-                              DataCell(Text(
-                                "LIKES",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold),
-                              )),
-                              ...FaceBookOverviewdata['party_data']
-                                  .keys
-                                  .map(
-                                    (p) => DataCell(Text(
-                                  FaceBookOverviewdata[
-                                  'party_data'][p]
-                                  [0]['LIKES']
-                                      .toString(),
-                                  // style: highestCountStyle(
-                                  //     YoutubeOverviewdata['party_data'],
-                                  //     p,
-                                  //     'LIKES')
-                                )),
-                              )
-                            ],
-                          ),
-                          DataRow(cells: [
-                            DataCell(Text(
-                              "COMMENTS",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            ...FaceBookOverviewdata['party_data']
-                                .keys
-                                .map(
-                                  (p) => DataCell(Text(
-                                FaceBookOverviewdata[
-                                'party_data'][p][0]
-                                ['COMMENTS']
-                                    .toString(),
-                                // style: highestCountStyle(
-                                //     YoutubeOverviewdata['party_data'],
-                                //     p,
-                                //     'COMMENTS')
-                              )),
-                            ),
-                            /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+            future: FaceBookfinaldata,
+            builder: (
+              BuildContext context,
+              AsyncSnapshot<dynamic> snapshot,
+            ) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return SkeletonParagraph(
+                  style: SkeletonParagraphStyle(
+                      lines: 5,
+                      spacing: 6,
+                      lineStyle: SkeletonLineStyle(
+                        randomLength: true,
+                        height: 20,
+                        borderRadius: BorderRadius.circular(8),
+                        minLength: MediaQuery.of(context).size.width / 2,
+                      )),
+                );
+              } else if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else if (snapshot.hasData) {
+                  // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
+                  //
+                  // }
+                  return Column(
+                    children: [
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: isFacebookvisible == true
+                              ? DataTable(
+                                  headingRowColor:
+                                      MaterialStateColor.resolveWith(
+                                          (states) => Color(0xff00196b)),
+                                  dataRowColor:
+                                      MaterialStateColor.resolveWith((states) {
+                                    return Color(0xffd2dfff);
+                                  }),
+                                  border: TableBorder.all(color: Colors.black),
+                                  // Datatable widget that have the property columns and rows.
+                                  columns: [
+                                      // Set the name of the column
+                                      DataColumn(
+                                        label: Text(
+                                          'PARTY NAME',
+                                          style: TextStyle(color: Colors.white),
+                                        ),
+                                      ),
+                                      ...FaceBooktablecolumn
+                                      // DataColumn(
+                                      //   label: Text(
+                                      //       YoutubeOverviewdata['party_data'][partyt1][0]
+                                      //           ['CANDIDATE_PARTY_NAME'],
+                                      //       style: TextStyle(color: Colors.white)),
+                                      // ),
+                                      // DataColumn(
+                                      //   label: Text(
+                                      //       YoutubeOverviewdata['party_data'][partyt2][0]
+                                      //           ['CANDIDATE_PARTY_NAME'],
+                                      //       style: TextStyle(color: Colors.white)),
+                                      // ),
+                                      // DataColumn(
+                                      //   label: Text(
+                                      //       YoutubeOverviewdata['party_data'][partyt3][0]
+                                      //           ['CANDIDATE_PARTY_NAME'],
+                                      //       style: TextStyle(color: Colors.white)),
+                                      // ),
+                                    ],
+                                  rows: [
+                                      // Set the values to the columns
+                                      DataRow(
+                                        cells: [
+                                          DataCell(Text(
+                                            "LIKES",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          )),
+                                          ...FaceBookOverviewdata['party_data']
+                                              .keys
+                                              .map(
+                                                (p) => DataCell(Text(
+                                                  FaceBookOverviewdata[
+                                                              'party_data'][p]
+                                                          [0]['LIKES']
+                                                      .toString(),
+                                                  // style: highestCountStyle(
+                                                  //     YoutubeOverviewdata['party_data'],
+                                                  //     p,
+                                                  //     'LIKES')
+                                                )),
+                                              )
+                                        ],
+                                      ),
+                                      DataRow(cells: [
+                                        DataCell(Text(
+                                          "COMMENTS",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        ...FaceBookOverviewdata['party_data']
+                                            .keys
+                                            .map(
+                                              (p) => DataCell(Text(
+                                                FaceBookOverviewdata[
+                                                            'party_data'][p][0]
+                                                        ['COMMENTS']
+                                                    .toString(),
+                                                // style: highestCountStyle(
+                                                //     YoutubeOverviewdata['party_data'],
+                                                //     p,
+                                                //     'COMMENTS')
+                                              )),
+                                            ),
+                                        /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
-                          ]),
-                          DataRow(cells: [
-                            DataCell(Text(
-                              "SHARES",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            ...FaceBookOverviewdata['party_data']
-                                .keys
-                                .map(
-                                  (p) => DataCell(Text(
-                                FaceBookOverviewdata[
-                                'party_data'][p][0]
-                                ['SHARES']
-                                    .toString(),
-                                // style: highestCountStyle(
-                                //     YoutubeOverviewdata['party_data'],
-                                //     p,
-                                //     'VIEWS')
-                              )),
-                            ),
-                            /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      ]),
+                                      DataRow(cells: [
+                                        DataCell(Text(
+                                          "SHARES",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        ...FaceBookOverviewdata['party_data']
+                                            .keys
+                                            .map(
+                                              (p) => DataCell(Text(
+                                                FaceBookOverviewdata[
+                                                            'party_data'][p][0]
+                                                        ['SHARES']
+                                                    .toString(),
+                                                // style: highestCountStyle(
+                                                //     YoutubeOverviewdata['party_data'],
+                                                //     p,
+                                                //     'VIEWS')
+                                              )),
+                                            ),
+                                        /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          ]),
-                          // DataRow(cells: [
-                          //   DataCell(Text(
-                          //     "CANDIDATE_PARTY_NAME",
-                          //     style: TextStyle(fontWeight: FontWeight.bold),
-                          //   )),
-                          //   ...YoutubeOverviewdata['party_data'].keys.map(
-                          //         (p) => DataCell(Text(
-                          //             YoutubeOverviewdata['party_data'][p][0]
-                          //                     ['CANDIDATE_PARTY_NAME']
-                          //                 .toString(),
-                          //             // style: highestCountStyle(
-                          //             //     YoutubeOverviewdata['party_data'],
-                          //             //     p,
-                          //             //     'CANDIDATE_PARTY_NAME')
-                          //                 )),
-                          //       ),
-                          //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          // ]),
-                        ])
-                        : Container(),
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return const Text('Empty data');
-          }
-        } else {
-          return Text('State: ${snapshot.connectionState}');
-        }
-      },
-    );
+                                      ]),
+                                      // DataRow(cells: [
+                                      //   DataCell(Text(
+                                      //     "CANDIDATE_PARTY_NAME",
+                                      //     style: TextStyle(fontWeight: FontWeight.bold),
+                                      //   )),
+                                      //   ...YoutubeOverviewdata['party_data'].keys.map(
+                                      //         (p) => DataCell(Text(
+                                      //             YoutubeOverviewdata['party_data'][p][0]
+                                      //                     ['CANDIDATE_PARTY_NAME']
+                                      //                 .toString(),
+                                      //             // style: highestCountStyle(
+                                      //             //     YoutubeOverviewdata['party_data'],
+                                      //             //     p,
+                                      //             //     'CANDIDATE_PARTY_NAME')
+                                      //                 )),
+                                      //       ),
+                                      //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                                      // ]),
+                                    ])
+                              : Container(),
+                        ),
+                      ),
+                      Card(
+                        color: Color(0xffd2dfff),
+                        elevation: 5,
+                        child: Padding(
+                          padding:  EdgeInsets.all(8.0),
+                          child: RichText(
+                            text:  TextSpan(
+                              style:  TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: 'From Posts to public response',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.normal ,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text: FaceBookOverviewdata['lead'][0],
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green,
+                                        fontSize: 20,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text:
+                                    ' is leading in all aspects',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                              ],
+                            ),
+                          ),
+
+                          //  Text(
+                          //         '""', style: TextStyle(
+                          //                   fontFamily: 'Segoe UI',
+                          //                   fontSize: 16,
+                          //                 ),),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
+          );
   }
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
+
   ///          API CALLS    / //////////////////////////////////
 
   ///twitteroverviewData API
@@ -1429,7 +1589,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
       Selectionquery1['type'] = 'party_data';
       Selectionquery1['STATE'] = selectedValue;
       Selectionquery1['party_list'] =
-      '${TopPartylistdata['top_parties'].join(",")}';
+          '${TopPartylistdata['top_parties'].join(",")}';
       //Selectionquery['channel'] = 'YOUTUBE';
     });
     var response = await post(
@@ -1591,8 +1751,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           istablevisible = true;
           statedropdownvisible = true;
           for (int i = 0;
-          i < YoutubeTopPartylistdata['top_parties'].length;
-          i++) {
+              i < YoutubeTopPartylistdata['top_parties'].length;
+              i++) {
             Youtubetablecolumn.add(
               DataColumn(
                 label: Text(
@@ -1632,26 +1792,26 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           _NewspaperOverviewTabledata.add(TableRow(children: [
             Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    '${NewspaperOverviewdata['party_data'][i]['PARTY_NAME']}',
-                    style: GoogleFonts.nunitoSans(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  ),
-                )),
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                '${NewspaperOverviewdata['party_data'][i]['PARTY_NAME']}',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+              ),
+            )),
             Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    '${NewspaperOverviewdata['party_data'][i]['COUNT']}',
-                    style: GoogleFonts.nunitoSans(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  ),
-                )),
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                '${NewspaperOverviewdata['party_data'][i]['COUNT']}',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+              ),
+            )),
           ]));
         }
       } catch (e) {
@@ -1729,8 +1889,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           isNewsChannelvisible = true;
           statedropdownvisible = true;
           for (int i = 0;
-          i < NewsChannelTopPartylistdata['top_parties'].length;
-          i++) {
+              i < NewsChannelTopPartylistdata['top_parties'].length;
+              i++) {
             NewsChanneltablecolumn.add(
               DataColumn(
                 label: Text(
@@ -1814,8 +1974,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           isFacebookvisible = true;
           statedropdownvisible = true;
           for (int i = 0;
-          i < FaceBookTopPartylistdata['top_parties'].length;
-          i++) {
+              i < FaceBookTopPartylistdata['top_parties'].length;
+              i++) {
             FaceBooktablecolumn.add(
               DataColumn(
                 label: Text(
@@ -1844,12 +2004,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
     TopCandidatequery['type'] = 'top_candidates';
     TopCandidatequery['STATE'] = selectedValue.toString();
 
-
-
-
     var response = await post(
         Uri.parse('http://idxp.pilogcloud.com:6659/social_media/'),
-
         body: TopCandidatequery);
 
     print(response.statusCode);
@@ -1859,8 +2015,6 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
         setState(() {
           TopCandidate = jsonDecode(utf8.decode(response.bodyBytes));
         });
-
-
       } catch (e) {
         print(TopCandidate);
       }
