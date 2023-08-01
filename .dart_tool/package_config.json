@@ -399,7 +399,7 @@
     },
     {
       "name": "firebase_core",
-      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-2.14.0",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/firebase_core-2.15.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -519,19 +519,19 @@
     },
     {
       "name": "flutter_local_notifications",
-      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_local_notifications-15.1.0+1",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_local_notifications-15.1.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_local_notifications_linux",
-      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_local_notifications_linux-4.0.0+1",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_local_notifications_linux-4.0.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "flutter_local_notifications_platform_interface",
-      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_local_notifications_platform_interface-7.0.0+1",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_local_notifications_platform_interface-7.0.0+1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -908,7 +908,6 @@
       "languageVersion": "2.12"
     },
     {
-
       "name": "just_audio",
       "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/just_audio-0.9.34",
       "packageUri": "lib/",
@@ -927,11 +926,16 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "liquid_swipe",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/liquid_swipe-3.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "logging",
       "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/logging-1.2.0",
       "packageUri": "lib/",
       "languageVersion": "2.19"
-
     },
     {
       "name": "lottie",
@@ -1018,6 +1022,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "overlay_support",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/overlay_support-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.14"
+    },
+    {
       "name": "package_config",
       "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/package_config-2.1.0",
       "packageUri": "lib/",
@@ -1034,12 +1044,6 @@
       "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/package_info_plus_platform_interface-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
-    },
-    {
-      "name": "overlay_support",
-      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/overlay_support-2.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.14"
     },
     {
       "name": "page_transition",
@@ -1481,7 +1485,7 @@
     },
     {
       "name": "timezone",
-      "rootUri": "file:///C:/Users/PiLog/AppData/Local/Pub/Cache/hosted/pub.dev/timezone-0.9.2",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/timezone-0.9.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -1732,7 +1736,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2023-07-20T11:59:25.400853Z",
+  "generated": "2023-08-01T04:51:17.598793Z",
   "generator": "pub",
   "generatorVersion": "3.0.5"
 }

@@ -462,23 +462,23 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           AsyncSnapshot<dynamic> snapshot,
           ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  top: 70.0),
-                                                          child: SizedBox(
-                                                            height: 150,
-                                                            width: 150,
-                                                            child: Center(
-                                                                child:
-                                                                    SpinKitWave(
-                                                              color:
-                                                                  Colors.blue,
-                                                              size: 18,
-                                                            )),
-                                                          ),
-                                                        );
+          return  Padding(
+            padding:
+            const EdgeInsets
+                .only(
+                top: 70.0),
+            child: SizedBox(
+              height: 150,
+              width: 150,
+              child: Center(
+                  child:
+                  SpinKitWave(
+                    color:
+                    Colors.blue,
+                    size: 18,
+                  )),
+            ),
+          );
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return const Text('Error');
@@ -495,7 +495,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: DataTable(
                           headingRowColor: MaterialStateColor.resolveWith(
-                                  (states) => Color(0xff86a8e7)),
+                                  (states) => Color(0xff00196b)),
                           dataRowColor:
                           MaterialStateColor.resolveWith((states) {
                             return Color(0xffd2dfff);
@@ -534,77 +534,109 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                           ],
                           rows: [
                             // Set the values to the columns
-                                  DataRow(
-                                    cells: [
-                                      DataCell(Text(
-                                        "USER FOLLOWERS",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                      ...TwitterOverviewdata['party_data']
-                                          .keys
-                                          .map(
-                                            (p) => DataCell(Text(
-                                                TwitterOverviewdata[
-                                                            'party_data'][p][0]
-                                                        ['USER_FOLLOWERS']
-                                                    .toString(),
-                                                style: highestCountStyle(
-                                                    TwitterOverviewdata[
-                                                        'party_data'],
-                                                    p,
-                                                    'USER_FOLLOWERS'))),
-                                          )
-                                    ],
-                                  ),
-                                  DataRow(cells: [
-                                    DataCell(Text(
-                                      "LIKES",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                    ...TwitterOverviewdata['party_data']
-                                        .keys
-                                        .map(
-                                          (p) => DataCell(Text(
-                                              TwitterOverviewdata['party_data']
-                                                      [p][0]['LIKES']
-                                                  .toString(),
-                                              style: highestCountStyle(
-                                                  TwitterOverviewdata[
-                                                      'party_data'],
-                                                  p,
-                                                  'LIKES'))),
-                                        ),
-                                    /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+
+                            DataRow(
+                              cells: [
+                                DataCell(Text(
+                                  "USER FOLLOWERS",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold),
+                                )),
+                                ...TwitterOverviewdata['party_data']
+                                    .keys
+                                    .map(
+                                      (p) => DataCell(Text(
+                                      TwitterOverviewdata[
+                                      'party_data'][p][0]
+                                      ['USER_FOLLOWERS']
+                                          .toString(),
+                                      style: highestCountStyle(
+                                          TwitterOverviewdata[
+                                          'party_data'],
+                                          p,
+                                          'USER_FOLLOWERS'))),
+                                )
+                              ],
+                            ),
+                            DataRow(cells: [
+                              DataCell(Text(
+                                "LIKES",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              )),
+                              ...TwitterOverviewdata['party_data']
+                                  .keys
+                                  .map(
+                                    (p) => DataCell(Text(
+                                    TwitterOverviewdata['party_data']
+                                    [p][0]['LIKES']
+                                        .toString(),
+                                    style: highestCountStyle(
+                                        TwitterOverviewdata[
+                                        'party_data'],
+                                        p,
+                                        'LIKES'))),
+                              ),
+                              /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
                                   DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
                                   DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
-                                  ]),
-                                  DataRow(cells: [
-                                    DataCell(Text(
-                                      "RETWEET COUNT",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                    ...TwitterOverviewdata['party_data']
-                                        .keys
-                                        .map(
-                                          (p) => DataCell(Text(
-                                              TwitterOverviewdata['party_data']
-                                                      [p][0]['RETWEET_COUNT']
-                                                  .toString(),
-                                              style: highestCountStyle(
-                                                  TwitterOverviewdata[
-                                                      'party_data'],
-                                                  p,
-                                                  'RETWEET_COUNT'))),
-                                        ),
-                                    /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                            ]),
+                            DataRow(cells: [
+                              DataCell(Text(
+                                "RETWEET COUNT",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold),
+                              )),
+                              ...TwitterOverviewdata['party_data']
+                                  .keys
+                                  .map(
+                                    (p) => DataCell(Text(
+                                    TwitterOverviewdata['party_data']
+                                    [p][0]['RETWEET_COUNT']
+                                        .toString(),
+                                    style: highestCountStyle(
+                                        TwitterOverviewdata[
+                                        'party_data'],
+                                        p,
+                                        'RETWEET_COUNT'))),
+                              ),
+                              /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
                                   DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
                                   DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                                  ]),
-                                ]),
+                            ]),
+                          ]),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Card(
+                    color: Color(0xffd2dfff),
+                    elevation: 5,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: RichText(
+                        text: new TextSpan(
+                          // Note: Styles for TextSpans must be explicitly defined.
+                          // Child text spans will inherit styles from parent
+                          style: new TextStyle(
+                            fontSize: 14.0,
+                            color: Colors.black,
                           ),
+                          children: <TextSpan>[
+                            new TextSpan(
+                                text:
+                                'With Huge Difference In counts for Tweets and Re-Tweets reports says that '),
+                            new TextSpan(
+                                text: '${TwitterOverviewdata['lead'][0]}',
+                                style: new TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green,
+                                    fontSize: 25)),
+                            new TextSpan(
+                                text:
+                                ' is relatively Dominant in Twitter Data'),
+                          ],
                         ),
                       ),
 
@@ -626,27 +658,11 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                         ) {
                       if (snapshot.connectionState ==
                           ConnectionState.waiting) {
-                        return Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  top: 70.0),
-                                                          child: SizedBox(
-                                                            height: 150,
-                                                            width: 150,
-                                                            child: Center(
-                                                                child:
-                                                                    SpinKitWave(
-                                                              color:
-                                                                  Colors.blue,
-                                                              size: 18,
-                                                            )),
-                                                          ),
-                                                        );
+                        return CircularProgressIndicator();
                       } else if (snapshot.connectionState ==
                           ConnectionState.done) {
                         if (snapshot.hasError) {
-                          return  Text('${snapshot.error}');
+                          return Text('${snapshot.error}');
                         } else if (snapshot.hasData) {
                           return Column(
                             children: [
@@ -662,214 +678,142 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
-
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Card(
-                          color: Color(0xffd2dfff),
-                          elevation: 5,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: RichText(
-                              text: new TextSpan(
-                                // Note: Styles for TextSpans must be explicitly defined.
-                                // Child text spans will inherit styles from parent
-                                style: new TextStyle(
-                                  fontSize: 14.0,
-                                  color: Colors.black,
-                                ),
-                                children: <TextSpan>[
-                                  new TextSpan(
-                                      text:
-                                          'With Huge Difference In counts for Tweets and Re-Tweets reports says that '),
-                                  new TextSpan(
-                                      text: '${TwitterOverviewdata['lead'][0]}',
-                                      style: new TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.green,
-                                          fontSize: 25)),
-                                  new TextSpan(
-                                      text:
-                                          ' is relatively Dominant in Twitter Data'),
                                 ],
                               ),
-                            ),
-
-                            //  Text(
-                            //         '""', style: TextStyle(
-                            //                   fontFamily: 'Segoe UI',
-                            //                   fontSize: 16,
-                            //                 ),),
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        FutureBuilder<dynamic>(
-                          future: _TopCandidaitevalue,
-                          builder: (
-                            BuildContext context,
-                            AsyncSnapshot<dynamic> snapshot,
-                          ) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return CircularProgressIndicator();
-                            } else if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              if (snapshot.hasError) {
-                                return Text('${snapshot.error}');
-                              } else if (snapshot.hasData) {
-                                return Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 15.0),
-                                          child: Text(
-                                            'TOP CANDIDATES',
-                                            style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold),
+                              Container(
+                                height: 145,
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    shrinkWrap: true,
+                                    itemCount: 4,
+                                    itemBuilder: ((context, index) {
+                                      return Padding(
+                                        padding:
+                                        const EdgeInsets.all(8.0),
+                                        child: Card(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  15)),
+                                          color: Color(0xffd2dfff),
+                                          child: Padding(
+                                            padding:
+                                            const EdgeInsets.all(8.0),
+                                            child: Container(
+                                              height: 130,
+                                              width: 110,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceAround,
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment
+                                                    .center,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.person_2,
+                                                        size: 17,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 2,
+                                                      ),
+                                                      TopCandidate['top_candidates'][index]
+                                                      [
+                                                      'CANDIDATE_NAME']
+                                                          .toString()
+                                                          .length >
+                                                          10
+                                                          ? Text(
+                                                        '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}'
+                                                            .substring(
+                                                            0,
+                                                            12),
+                                                        style:
+                                                        _textStyle,
+                                                      )
+                                                          : Text(
+                                                        '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}',
+                                                        style:
+                                                        _textStyle,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Icon(
+                                                          Icons
+                                                              .person_add_alt_1_rounded,
+                                                          size: 17),
+                                                      SizedBox(
+                                                        width: 2,
+                                                      ),
+                                                      Text(
+                                                        '${TopCandidate['top_candidates'][index]['USER_FOLLOWERS']}',
+                                                        style: _textStyle,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Icon(
+                                                          Icons
+                                                              .person_pin_rounded,
+                                                          size: 17),
+                                                      SizedBox(
+                                                        width: 2,
+                                                      ),
+                                                      Text(
+                                                        '${TopCandidate['top_candidates'][index]['CANDIDATE_PARTY_NAME']}',
+                                                        style: _textStyle,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        'Count : ${TopCandidate['top_candidates'][index]['COUNT']}',
+                                                        style: _textStyle,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Container(
-                                      height: 145,
-                                      child: ListView.builder(
-                                          scrollDirection: Axis.horizontal,
-                                          shrinkWrap: true,
-                                          itemCount: 4,
-                                          itemBuilder: ((context, index) {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: Card(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                color: Color(0xffd2dfff),
-                                                child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
-                                                  child: Container(
-                                                    height: 130,
-                                                    width: 110,
-                                                    child: Column(
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .spaceAround,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            Icon(
-                                                              Icons.person_2,
-                                                              size: 17,
-                                                            ),
-                                                            SizedBox(
-                                                              width: 2,
-                                                            ),
-                                                            TopCandidate['top_candidates'][index]
-                                                                            [
-                                                                            'CANDIDATE_NAME']
-                                                                        .toString()
-                                                                        .length >
-                                                                    10
-                                                                ? Text(
-                                                                    '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}'
-                                                                        .substring(
-                                                                            0,
-                                                                            12),
-                                                                    style:
-                                                                        _textStyle,
-                                                                  )
-                                                                : Text(
-                                                                    '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}',
-                                                                    style:
-                                                                        _textStyle,
-                                                                  ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Icon(
-                                                                Icons
-                                                                    .person_add_alt_1_rounded,
-                                                                size: 17),
-                                                            SizedBox(
-                                                              width: 2,
-                                                            ),
-                                                            Text(
-                                                              '${TopCandidate['top_candidates'][index]['USER_FOLLOWERS']}',
-                                                              style: _textStyle,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Icon(
-                                                                Icons
-                                                                    .person_pin_rounded,
-                                                                size: 17),
-                                                            SizedBox(
-                                                              width: 2,
-                                                            ),
-                                                            Text(
-                                                              '${TopCandidate['top_candidates'][index]['CANDIDATE_PARTY_NAME']}',
-                                                              style: _textStyle,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              'Count : ${TopCandidate['top_candidates'][index]['COUNT']}',
-                                                              style: _textStyle,
-                                                            ),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          })),
-                                    ),
-                                  ],
-                                );
-                              } else {
-                                return const Text('Empty data');
-                              }
-                            } else {
-                              return Text('State: ${snapshot.connectionState}');
-                            }
-                          },
-                        ),
-                        TwitterOverviewdata['lead'][0] == 'INC'
-                            ? Image.asset(
-                                'assets/new Updated images/twitter_001.gif',
-                                height: 220,
-                                width: MediaQuery.of(context).size.width,
-                              )
-                            : Container(),
-                      ],
-                    ),
-                  );
-                } else {
-                  return const Text('Empty data');
-                }
-              } else {
-                return Text('State: ${snapshot.connectionState}');
-              }
-            },
-          );
+                                      );
+                                    })),
+                              ),
+                            ],
+                          );
+                        } else {
+                          return const Text('Empty data');
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
+                    },
+                  ),
+                  TwitterOverviewdata['lead'][0] == 'INC'
+                      ? Image.asset(
+                    'assets/new Updated images/twitter_001.gif',
+                    height: 220,
+                    width: MediaQuery.of(context).size.width,
+                  )
+                      : Container(),
+                ],
+              ),
+            );
+          } else {
+            return const Text('Empty data');
+          }
+        } else {
+          return Text('State: ${snapshot.connectionState}');
+        }
+      },
+    );
   }
 
   TextStyle _textStyle = TextStyle(fontSize: 12, fontWeight: FontWeight.w600);
