@@ -5,6 +5,7 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
@@ -53,7 +54,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
   late Future<dynamic> NewschannelOverviewfinaldata = NewschannelOverViewApi();
   late Future<dynamic> FaceBookfinaldata = FaceBookOverViewApi();
   late Future<dynamic> FaceBooktoppartydata = FaceBookTopPartylistApi();
-  late Future<dynamic> _TopCandidaitevalue=TopCandidatelistApi();
+  late Future<dynamic> _TopCandidaitevalue = TopCandidatelistApi();
   Widget _buildTest(String title) {
     return Container(
       //color: Color((Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0),
@@ -64,22 +65,40 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
               child: FutureBuilder<dynamic>(
                 future: finaldata,
                 builder: (
-                    BuildContext context,
-                    AsyncSnapshot<dynamic> snapshot,
-                    ) {
+                  BuildContext context,
+                  AsyncSnapshot<dynamic> snapshot,
+                ) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 1,
-                          lineStyle: SkeletonLineStyle(
-                            height: 30,
-                            width: MediaQuery.of(context).size.width,
-                            borderRadius: BorderRadius.circular(8),
-                            // minLength: MediaQuery.of(context).size.width / 6,
-                            // maxLength: MediaQuery.of(context).size.width / 3,
-                          )),
-                    );
-                    ;
+                    return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
+                    
+                    //  SkeletonParagraph(
+                    //   style: SkeletonParagraphStyle(
+                    //       lines: 1,
+                    //       lineStyle: SkeletonLineStyle(
+                    //         height: 30,
+                    //         width: MediaQuery.of(context).size.width,
+                    //         borderRadius: BorderRadius.circular(8),
+                    //         // minLength: MediaQuery.of(context).size.width / 6,
+                    //         // maxLength: MediaQuery.of(context).size.width / 3,
+                    //       )),
+                    // );
+                    // ;
                   } else if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasError) {
                       return const Text('Error');
@@ -97,14 +116,14 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                           items: StateNamedata['state_names']!
                               .map<DropdownMenuItem<String>>(
                                   (item) => DropdownMenuItem<String>(
-                                value: item,
-                                child: Text(
-                                  item,
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              ))
+                                        value: item,
+                                        child: Text(
+                                          item,
+                                          style: TextStyle(
+                                            fontSize: 14,
+                                          ),
+                                        ),
+                                      ))
                               .toList(),
 
                           value: selectedValue,
@@ -132,7 +151,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                               statedropdownvisible = false;
                               isFaceBookvisible = false;
                               TopCandidatequery.clear();
-                              _TopCandidaitevalue=TopCandidatelistApi();
+                              _TopCandidaitevalue = TopCandidatelistApi();
                             });
                           },
                           buttonStyleData: const ButtonStyleData(
@@ -222,7 +241,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HomeColor,
+      // backgroundColor: HomeColor,
       // appBar: AppBar(),
       body: SafeArea(
         child: DefaultTabController(
@@ -237,7 +256,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                 unselectedBackgroundColor: Colors.grey[300],
                 unselectedLabelStyle: TextStyle(color: Colors.black),
                 labelStyle:
-                TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                 tabs: [
                   Tab(
                     icon: Image.asset(
@@ -282,63 +301,83 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                   children: <Widget>[
                     statedropdownvisible == true
                         ? TwitterOverviewScreen()
-                        : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                        : Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        ),
                     isytvisible == true
                         ? YoutubeOverviewScreen()
-                        : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                        : Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        ),
                     Center(
                       child: NewsPaperOverviewScreen(),
                     ),
                     isnewschannelvisible == true
                         ? NewschannelOverviewScreen()
-                        : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                        :Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        ),
                     isFaceBookvisible == true
                         ? FacebookOverviewScreen()
-                        : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                        : Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        ),
                   ],
                 ),
               ),
@@ -423,16 +462,22 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           AsyncSnapshot<dynamic> snapshot,
           ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
+          return  Padding(
+            padding:
+            const EdgeInsets
+                .only(
+                top: 70.0),
+            child: SizedBox(
+              height: 150,
+              width: 150,
+              child: Center(
+                  child:
+                  SpinKitWave(
+                    color:
+                    Colors.blue,
+                    size: 18,
+                  )),
+            ),
           );
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
@@ -617,7 +662,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                       } else if (snapshot.connectionState ==
                           ConnectionState.done) {
                         if (snapshot.hasError) {
-                          return  Text('${snapshot.error}');
+                          return Text('${snapshot.error}');
                         } else if (snapshot.hasData) {
                           return Column(
                             children: [
@@ -674,17 +719,24 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                                       SizedBox(
                                                         width: 2,
                                                       ),
-                                                      TopCandidate['top_candidates'][index]['CANDIDATE_NAME'].toString().length>10?Text(
-
-                                                        '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}'.substring(0,12),
-                                                        style: _textStyle,
-
-                                                      ):
-                                                      Text(
-
+                                                      TopCandidate['top_candidates'][index]
+                                                      [
+                                                      'CANDIDATE_NAME']
+                                                          .toString()
+                                                          .length >
+                                                          10
+                                                          ? Text(
+                                                        '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}'
+                                                            .substring(
+                                                            0,
+                                                            12),
+                                                        style:
+                                                        _textStyle,
+                                                      )
+                                                          : Text(
                                                         '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}',
-                                                        style: _textStyle,
-
+                                                        style:
+                                                        _textStyle,
                                                       ),
                                                     ],
                                                   ),
@@ -778,17 +830,23 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           AsyncSnapshot<dynamic> snapshot,
           ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
+          return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return const Text('Error');
@@ -806,7 +864,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                         ? DataTable(
                         headingRowColor:
                         MaterialStateColor.resolveWith(
-                                (states) => Color(0xff00196b)),
+                                (states) => Color(0xff86a8e7)),
                         dataRowColor:
                         MaterialStateColor.resolveWith((states) {
                           return Color(0xffd2dfff);
@@ -887,67 +945,122 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                               )),
                             ),
                             /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
-                          ]),
-                          DataRow(cells: [
-                            DataCell(Text(
-                              "VIEWS",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            ...YoutubeOverviewdata['party_data']
-                                .keys
-                                .map(
-                                  (p) => DataCell(Text(
-                                YoutubeOverviewdata[
-                                'party_data'][p][0]
-                                ['VIEWS']
-                                    .toString(),
-                                // style: highestCountStyle(
-                                //     YoutubeOverviewdata['party_data'],
-                                //     p,
-                                //     'VIEWS')
-                              )),
-                            ),
-                            /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      ]),
+                                      DataRow(cells: [
+                                        DataCell(Text(
+                                          "VIEWS",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        ...YoutubeOverviewdata['party_data']
+                                            .keys
+                                            .map(
+                                              (p) => DataCell(Text(
+                                                  YoutubeOverviewdata[
+                                                              'party_data'][p]
+                                                          [0]['VIEWS']
+                                                      .toString(),
+                                                  style: highestCountStyle(
+                                                      YoutubeOverviewdata[
+                                                          'party_data'],
+                                                      p,
+                                                      'VIEWS'))),
+                                            ),
+                                        /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          ]),
-                          // DataRow(cells: [
-                          //   DataCell(Text(
-                          //     "CANDIDATE_PARTY_NAME",
-                          //     style: TextStyle(fontWeight: FontWeight.bold),
-                          //   )),
-                          //   ...YoutubeOverviewdata['party_data'].keys.map(
-                          //         (p) => DataCell(Text(
-                          //             YoutubeOverviewdata['party_data'][p][0]
-                          //                     ['CANDIDATE_PARTY_NAME']
-                          //                 .toString(),
-                          //             // style: highestCountStyle(
-                          //             //     YoutubeOverviewdata['party_data'],
-                          //             //     p,
-                          //             //     'CANDIDATE_PARTY_NAME')
-                          //                 )),
-                          //       ),
-                          //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          // ]),
-                        ])
-                        : Container(),
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return const Text('Empty data');
-          }
-        } else {
-          return Text('State: ${snapshot.connectionState}');
-        }
-      },
-    );
+                                      ]),
+                                      // DataRow(cells: [
+                                      //   DataCell(Text(
+                                      //     "CANDIDATE_PARTY_NAME",
+                                      //     style: TextStyle(fontWeight: FontWeight.bold),
+                                      //   )),
+                                      //   ...YoutubeOverviewdata['party_data'].keys.map(
+                                      //         (p) => DataCell(Text(
+                                      //             YoutubeOverviewdata['party_data'][p][0]
+                                      //                     ['CANDIDATE_PARTY_NAME']
+                                      //                 .toString(),
+                                      //             // style: highestCountStyle(
+                                      //             //     YoutubeOverviewdata['party_data'],
+                                      //             //     p,
+                                      //             //     'CANDIDATE_PARTY_NAME')
+                                      //                 )),
+                                      //       ),
+                                      //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                                      // ]),
+                                    ])
+                              : Container(),
+                        ),
+                      ),
+                      Card(
+                        color: Color(0xffd2dfff),
+                        elevation: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RichText(
+                            text: new TextSpan(
+                              // Note: Styles for TextSpans must be explicitly defined.
+                              // Child text spans will inherit styles from parent
+                              style: new TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: YoutubeOverviewdata['lead'][0],
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green,
+                                        fontSize: 20,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text: ' is overpowering ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text: "BJP",
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.red,
+                                        fontSize: 20,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text: ' in all aspects',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                              ],
+                            ),
+                          ),
+
+                          //  Text(
+                          //         '""', style: TextStyle(
+                          //                   fontFamily: 'Segoe UI',
+                          //                   fontSize: 16,
+                          //                 ),),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
+          );
   }
 
 //NewsPaperOverview Screen
@@ -955,21 +1068,27 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
     return FutureBuilder<dynamic>(
       future: NewsPaperOverviewFutureData,
       builder: (
-          BuildContext context,
-          AsyncSnapshot<dynamic> snapshot,
-          ) {
+        BuildContext context,
+        AsyncSnapshot<dynamic> snapshot,
+      ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
+          return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return const Text('Error');
@@ -991,7 +1110,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                           TableRow(children: [
                             Container(
                                 height: 30,
-                                color: Color(0xff00196b),
+                                color: Color(0xff86a8e7),
                                 child: Center(
                                     child: Text(
                                       'PARTY NAME',
@@ -1002,7 +1121,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                     ))),
                             Container(
                                 height: 30,
-                                color: Color(0xff00196b),
+                                color: Color(0xff86a8e7),
                                 child: Center(
                                     child: Text(
                                       'COUNT',
@@ -1011,32 +1130,31 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white),
                                     ))),
-                          ]),
-                          ..._NewspaperOverviewTabledata,
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            '${NewspaperOverviewdata['party_data'][0]['PARTY_NAME']} is Relatively Dominant ',
-                            style: GoogleFonts.nunitoSans(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
+                              ]),
+                              ..._NewspaperOverviewTabledata,
+                            ],
                           ),
-                        ],
-                      ),
-                      Image.asset('assets/Image/celebrate.gif',
-                          height: 250, width: 150)
-                    ],
-                  )
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '${NewspaperOverviewdata['party_data'][0]['PARTY_NAME']} is Relatively Dominant ',
+                                style: GoogleFonts.nunitoSans(
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                    Image.asset('assets/Image/celebrate.gif',
+                        height: 250, width: 150)
+                        ])
                       : Center(
-                    child: Image.asset('assets/Image/datanotfound.gif'),
-                  ),
+                          child: Image.asset('assets/Image/datanotfound.gif'),
+                        ),
                 ),
               ],
             );
@@ -1061,17 +1179,23 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           AsyncSnapshot<dynamic> snapshot,
           ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
+          return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return const Text('Error');
@@ -1089,7 +1213,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                         ? DataTable(
                         headingRowColor:
                         MaterialStateColor.resolveWith(
-                                (states) => Color(0xff00196b)),
+                                (states) => Color(0xff86a8e7)),
                         dataRowColor:
                         MaterialStateColor.resolveWith((states) {
                           return Color(0xffd2dfff);
@@ -1171,67 +1295,124 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                       'COMMENTS'))),
                             ),
                             /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
+
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
-                          ]),
-                          DataRow(cells: [
-                            DataCell(Text(
-                              "VIEWS",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            ...NewschannelOverviewdata['party_data']
-                                .keys
-                                .map(
-                                  (p) => DataCell(Text(
-                                  NewschannelOverviewdata[
-                                  'party_data'][p]
-                                  [0]['VIEWS']
-                                      .toString(),
-                                  style: highestCountStyle(
-                                      NewschannelOverviewdata[
-                                      'party_data'],
-                                      p,
-                                      'VIEWS'))),
-                            ),
-                            /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      ]),
+                                      DataRow(cells: [
+                                        DataCell(Text(
+                                          "VIEWS",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        ...NewschannelOverviewdata['party_data']
+                                            .keys
+                                            .map(
+                                              (p) => DataCell(Text(
+                                                  NewschannelOverviewdata[
+                                                              'party_data'][p]
+                                                          [0]['VIEWS']
+                                                      .toString(),
+                                                  style: highestCountStyle(
+                                                      NewschannelOverviewdata[
+                                                          'party_data'],
+                                                      p,
+                                                      'VIEWS'))),
+                                            ),
+                                        /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          ]),
-                          // DataRow(cells: [
-                          //   DataCell(Text(
-                          //     "CANDIDATE_PARTY_NAME",
-                          //     style: TextStyle(fontWeight: FontWeight.bold),
-                          //   )),
-                          //   ...YoutubeOverviewdata['party_data'].keys.map(
-                          //         (p) => DataCell(Text(
-                          //             YoutubeOverviewdata['party_data'][p][0]
-                          //                     ['CANDIDATE_PARTY_NAME']
-                          //                 .toString(),
-                          //             // style: highestCountStyle(
-                          //             //     YoutubeOverviewdata['party_data'],
-                          //             //     p,
-                          //             //     'CANDIDATE_PARTY_NAME')
-                          //                 )),
-                          //       ),
-                          //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          // ]),
-                        ])
-                        : Container(),
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return const Text('Empty data');
-          }
-        } else {
-          return Text('State: ${snapshot.connectionState}');
-        }
-      },
-    );
+                                      ]),
+                                      // DataRow(cells: [
+                                      //   DataCell(Text(
+                                      //     "CANDIDATE_PARTY_NAME",
+                                      //     style: TextStyle(fontWeight: FontWeight.bold),
+                                      //   )),
+                                      //   ...YoutubeOverviewdata['party_data'].keys.map(
+                                      //         (p) => DataCell(Text(
+                                      //             YoutubeOverviewdata['party_data'][p][0]
+                                      //                     ['CANDIDATE_PARTY_NAME']
+                                      //                 .toString(),
+                                      //             // style: highestCountStyle(
+                                      //             //     YoutubeOverviewdata['party_data'],
+                                      //             //     p,
+                                      //             //     'CANDIDATE_PARTY_NAME')
+                                      //                 )),
+                                      //       ),
+                                      //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                                      // ]),
+                                    ])
+                              : Container(),
+                        ),
+                      ),
+                      Card(
+                        color: Color(0xffd2dfff),
+                        elevation: 5,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RichText(
+                            text: new TextSpan(
+                              // Note: Styles for TextSpans must be explicitly defined.
+                              // Child text spans will inherit styles from parent
+                              style: new TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                new TextSpan(
+                                    text: NewschannelOverviewdata['lead'][0],
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green,
+                                        fontSize: 20,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text:
+                                    ' is overpowering ',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text: "Multiple Parties",
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        //color: Colors.red,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text:
+                                    ' in all aspects.',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                              ],
+                            ),
+                          ),
+
+                          //  Text(
+                          //         '""', style: TextStyle(
+                          //                   fontFamily: 'Segoe UI',
+                          //                   fontSize: 16,
+                          //                 ),),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
+          );
   }
 
 //FaceBook Overview Screen
@@ -1246,17 +1427,23 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           AsyncSnapshot<dynamic> snapshot,
           ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
+          return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return const Text('Error');
@@ -1274,7 +1461,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                         ? DataTable(
                         headingRowColor:
                         MaterialStateColor.resolveWith(
-                                (states) => Color(0xff00196b)),
+                                (states) => Color(0xff86a8e7)),
                         dataRowColor:
                         MaterialStateColor.resolveWith((states) {
                           return Color(0xffd2dfff);
@@ -1357,68 +1544,113 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                             /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['LIKES'].toString())),*/
-                          ]),
-                          DataRow(cells: [
-                            DataCell(Text(
-                              "SHARES",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold),
-                            )),
-                            ...FaceBookOverviewdata['party_data']
-                                .keys
-                                .map(
-                                  (p) => DataCell(Text(
-                                FaceBookOverviewdata[
-                                'party_data'][p][0]
-                                ['SHARES']
-                                    .toString(),
-                                // style: highestCountStyle(
-                                //     YoutubeOverviewdata['party_data'],
-                                //     p,
-                                //     'VIEWS')
-                              )),
-                            ),
-                            /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      ]),
+                                      DataRow(cells: [
+                                        DataCell(Text(
+                                          "SHARES",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                        ...FaceBookOverviewdata['party_data']
+                                            .keys
+                                            .map(
+                                              (p) => DataCell(Text(
+                                                FaceBookOverviewdata[
+                                                            'party_data'][p][0]
+                                                        ['SHARES']
+                                                    .toString(),
+                                                // style: highestCountStyle(
+                                                //     YoutubeOverviewdata['party_data'],
+                                                //     p,
+                                                //     'VIEWS')
+                                              )),
+                                            ),
+                                        /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
                                 DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          ]),
-                          // DataRow(cells: [
-                          //   DataCell(Text(
-                          //     "CANDIDATE_PARTY_NAME",
-                          //     style: TextStyle(fontWeight: FontWeight.bold),
-                          //   )),
-                          //   ...YoutubeOverviewdata['party_data'].keys.map(
-                          //         (p) => DataCell(Text(
-                          //             YoutubeOverviewdata['party_data'][p][0]
-                          //                     ['CANDIDATE_PARTY_NAME']
-                          //                 .toString(),
-                          //             // style: highestCountStyle(
-                          //             //     YoutubeOverviewdata['party_data'],
-                          //             //     p,
-                          //             //     'CANDIDATE_PARTY_NAME')
-                          //                 )),
-                          //       ),
-                          //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
-                          //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
-                          // ]),
-                        ])
-                        : Container(),
-                  ),
-                ),
-              ],
-            );
-          } else {
-            return const Text('Empty data');
-          }
-        } else {
-          return Text('State: ${snapshot.connectionState}');
-        }
-      },
-    );
+                                      ]),
+                                      // DataRow(cells: [
+                                      //   DataCell(Text(
+                                      //     "CANDIDATE_PARTY_NAME",
+                                      //     style: TextStyle(fontWeight: FontWeight.bold),
+                                      //   )),
+                                      //   ...YoutubeOverviewdata['party_data'].keys.map(
+                                      //         (p) => DataCell(Text(
+                                      //             YoutubeOverviewdata['party_data'][p][0]
+                                      //                     ['CANDIDATE_PARTY_NAME']
+                                      //                 .toString(),
+                                      //             // style: highestCountStyle(
+                                      //             //     YoutubeOverviewdata['party_data'],
+                                      //             //     p,
+                                      //             //     'CANDIDATE_PARTY_NAME')
+                                      //                 )),
+                                      //       ),
+                                      //   /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
+                                      //       DataCell(Text(TwitterOverviewdata['party_data']['BJP'][0]['RETWEET_COUNT'].toString()),*/
+                                      // ]),
+                                    ])
+                              : Container(),
+                        ),
+                      ),
+                      Card(
+                        color: Color(0xffd2dfff),
+                        elevation: 5,
+                        child: Padding(
+                          padding:  EdgeInsets.all(8.0),
+                          child: RichText(
+                            text:  TextSpan(
+                              style:  TextStyle(
+                                fontSize: 14.0,
+                                color: Colors.black,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                    text: 'From Posts to public response',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.normal ,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text: FaceBookOverviewdata['lead'][0],
+                                    style: new TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.green,
+                                        fontSize: 20,
+                                        fontFamily: 'Segoe UI')),
+                                TextSpan(
+                                    text:
+                                    ' is leading in all aspects',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.normal,
+                                        fontSize: 18,
+                                        fontFamily: 'Segoe UI')),
+                              ],
+                            ),
+                          ),
+
+                          //  Text(
+                          //         '""', style: TextStyle(
+                          //                   fontFamily: 'Segoe UI',
+                          //                   fontSize: 16,
+                          //                 ),),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                    ],
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
+          );
   }
-//////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////
+
   ///          API CALLS    / //////////////////////////////////
 
   ///twitteroverviewData API
@@ -1429,7 +1661,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
       Selectionquery1['type'] = 'party_data';
       Selectionquery1['STATE'] = selectedValue;
       Selectionquery1['party_list'] =
-      '${TopPartylistdata['top_parties'].join(",")}';
+          '${TopPartylistdata['top_parties'].join(",")}';
       //Selectionquery['channel'] = 'YOUTUBE';
     });
     var response = await post(
@@ -1591,8 +1823,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           istablevisible = true;
           statedropdownvisible = true;
           for (int i = 0;
-          i < YoutubeTopPartylistdata['top_parties'].length;
-          i++) {
+              i < YoutubeTopPartylistdata['top_parties'].length;
+              i++) {
             Youtubetablecolumn.add(
               DataColumn(
                 label: Text(
@@ -1632,26 +1864,26 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           _NewspaperOverviewTabledata.add(TableRow(children: [
             Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    '${NewspaperOverviewdata['party_data'][i]['PARTY_NAME']}',
-                    style: GoogleFonts.nunitoSans(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  ),
-                )),
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                '${NewspaperOverviewdata['party_data'][i]['PARTY_NAME']}',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+              ),
+            )),
             Center(
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    '${NewspaperOverviewdata['party_data'][i]['COUNT']}',
-                    style: GoogleFonts.nunitoSans(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                  ),
-                )),
+              padding: const EdgeInsets.all(5.0),
+              child: Text(
+                '${NewspaperOverviewdata['party_data'][i]['COUNT']}',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 12.0,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.black),
+              ),
+            )),
           ]));
         }
       } catch (e) {
@@ -1729,8 +1961,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           isNewsChannelvisible = true;
           statedropdownvisible = true;
           for (int i = 0;
-          i < NewsChannelTopPartylistdata['top_parties'].length;
-          i++) {
+              i < NewsChannelTopPartylistdata['top_parties'].length;
+              i++) {
             NewsChanneltablecolumn.add(
               DataColumn(
                 label: Text(
@@ -1814,8 +2046,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           isFacebookvisible = true;
           statedropdownvisible = true;
           for (int i = 0;
-          i < FaceBookTopPartylistdata['top_parties'].length;
-          i++) {
+              i < FaceBookTopPartylistdata['top_parties'].length;
+              i++) {
             FaceBooktablecolumn.add(
               DataColumn(
                 label: Text(
@@ -1844,12 +2076,8 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
     TopCandidatequery['type'] = 'top_candidates';
     TopCandidatequery['STATE'] = selectedValue.toString();
 
-
-
-
     var response = await post(
         Uri.parse('http://idxp.pilogcloud.com:6659/social_media/'),
-
         body: TopCandidatequery);
 
     print(response.statusCode);
@@ -1859,8 +2087,6 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
         setState(() {
           TopCandidate = jsonDecode(utf8.decode(response.bodyBytes));
         });
-
-
       } catch (e) {
         print(TopCandidate);
       }

@@ -34,7 +34,7 @@ class _YoutubeHashTagInfoState extends State<YoutubeHashTagInfo> {
   late Future<dynamic> _value1 = DashboardApi();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: Color(0xffd2dfff),
+    return Scaffold(
       body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -58,6 +58,7 @@ class _YoutubeHashTagInfoState extends State<YoutubeHashTagInfo> {
                     return Card(
                       elevation: 7,
                       child:SfCartesianChart(
+                        backgroundColor: Color(0xff86a8e7).withOpacity(0.5),
                         plotAreaBorderWidth: 0,
                         title: ChartTitle(
                             text: '${widget.choosenhashtag} Analysis'),

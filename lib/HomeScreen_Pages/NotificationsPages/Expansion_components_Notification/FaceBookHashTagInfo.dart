@@ -39,7 +39,7 @@ class _FaceBookHashTagInfoState extends State<FaceBookHashTagInfo> {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);*/
-    return Scaffold(backgroundColor: Color(0xffd2dfff),
+    return Scaffold(
       body: Column(mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -67,7 +67,8 @@ class _FaceBookHashTagInfoState extends State<FaceBookHashTagInfo> {
                           quarterTurns: 1,
                           child: Card(
                             elevation: 7,
-                            child:SfCartesianChart(zoomPanBehavior: ZoomPanBehavior(enablePinching: true),
+                            child:SfCartesianChart(    backgroundColor: Color(0xff86a8e7).withOpacity(0.5),
+                              zoomPanBehavior: ZoomPanBehavior(enablePinching: true),
                               plotAreaBorderWidth: 0,
                               title: ChartTitle(
                                   text: '${widget.choosenhashtag} Analysis'),

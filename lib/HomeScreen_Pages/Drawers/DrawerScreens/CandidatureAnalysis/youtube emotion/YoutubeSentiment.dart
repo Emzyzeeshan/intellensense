@@ -43,42 +43,48 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 30,
-                color: Color(0xff00196b),
-                child: Center(
-                  child: Text(
-                    'Youtube Analysis',
-                    style: TextStyle(
-                        fontFamily: 'Segoe UI',
-                        fontSize: 20,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(onPressed: (){Navigator.pop(context);},icon: Icon(Icons.arrow_back_ios,color: Colors.black,),),
+        title: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 30,
+          color:Color(0xff86a8e7),
+          child: Center(
+            child: Text(
+              'Youtube Analysis',
+              style: TextStyle(
+                  fontFamily: 'Segoe UI',
+                  fontSize: 20,
+                  color: Colors.white),
             ),
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: PageView(
-                    controller: _pagecontroller,
-                    children: [
-                      LastSevenDaysAnalysis(),
-                      Selectdurationforanalysis(),
-                    ],
-                  ),
-                )),
-          ],
+          ),
+        ),
+              centerTitle: true,
+      ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
+          child: Column(
+            children: [
+             
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: PageView(physics: NeverScrollableScrollPhysics(),
+                      controller: _pagecontroller,
+                      children: [
+                        LastSevenDaysAnalysis(),
+                        Selectdurationforanalysis(),
+                      ],
+                    ),
+                  )),
+            ],
+          ),
         ),
       ),
     );
@@ -185,7 +191,7 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
                               ),
                               Card(
                                 elevation: 5,
-                                child: SfCircularChart(
+                                child: SfCircularChart(backgroundColor: Color(0xff86a8e7).withOpacity(0.4),
                                   title: ChartTitle(
                                       text: 'Youtube Sentiment Analysis'),
                                   legend: Legend(isVisible: true),
@@ -216,7 +222,7 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
                               ),
                               Card(
                                 elevation: 5,
-                                child: SfCircularChart(
+                                child: SfCircularChart(backgroundColor: Color(0xff86a8e7).withOpacity(0.4),
                                   title: ChartTitle(
                                       text: 'Comments Sentiment Analysis'),
                                   legend: Legend(isVisible: true),
@@ -252,6 +258,41 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
                 },
               ),
             ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                     
+                        _pagecontroller.jumpToPage(1);
+                    });
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 30,
+                    color:Color(0xff86a8e7),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Custom Analysis',
+                            style: TextStyle(
+                                fontFamily: 'Segoe UI',
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                          Icon(
+                              Icons.navigate_next_outlined,
+                            size: 25,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
           ],
         ),
       ),
@@ -261,259 +302,298 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
   //Select duration for analysis
   Selectdurationforanalysis() {
     return SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            'Select duration for analysis',
-            style: TextStyle(
-              fontFamily: 'Segoe UI',
-              fontSize: 16,
+      child: Padding(
+        padding: const EdgeInsets.only(top:100.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Select duration for analysis',
+              style: TextStyle(
+                fontFamily: 'Segoe UI',
+                fontSize: 16,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'From: ',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        DateTimeField(
+                          controller: FromDate,
+                          decoration: InputDecoration(
+                              filled: true,
+                              hintText: 'mm/dd/yyyy',
+                              isDense: true,
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(5)),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(5)),
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey),
+                          format: format,
+                          onShowPicker: (context, currentValue) {
+                            return showDatePicker(
+                                context: context,
+                                firstDate: DateTime(1900),
+                                initialDate: currentValue ?? DateTime.now(),
+                                lastDate: DateTime(2100));
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Flexible(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'To : ',
+                          style: TextStyle(color: Colors.black),
+                        ),
+                        DateTimeField(
+                          controller: ToDate,
+                          decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide.none,
+                                  borderRadius: BorderRadius.circular(5)),
+                              filled: true,
+                              hintText: 'mm/dd/yyyy',
+                              isDense: true,
+                              fillColor: Colors.white,
+                              focusColor: Colors.grey),
+                          format: format,
+                          onShowPicker: (context, currentValue) {
+                            return showDatePicker(
+                                context: context,
+                                firstDate: DateTime(1900),
+                                initialDate: currentValue ?? DateTime.now(),
+                                lastDate: DateTime(2100));
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Flexible(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'From: ',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      DateTimeField(
-                        controller: FromDate,
-                        decoration: InputDecoration(
-                            filled: true,
-                            hintText: 'mm/dd/yyyy',
-                            isDense: true,
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(5)),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(5)),
-                            fillColor: Colors.white,
-                            focusColor: Colors.grey),
-                        format: format,
-                        onShowPicker: (context, currentValue) {
-                          return showDatePicker(
-                              context: context,
-                              firstDate: DateTime(1900),
-                              initialDate: currentValue ?? DateTime.now(),
-                              lastDate: DateTime(2100));
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Flexible(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'To : ',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                      DateTimeField(
-                        controller: ToDate,
-                        decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(5)),
-                            filled: true,
-                            hintText: 'mm/dd/yyyy',
-                            isDense: true,
-                            fillColor: Colors.white,
-                            focusColor: Colors.grey),
-                        format: format,
-                        onShowPicker: (context, currentValue) {
-                          return showDatePicker(
-                              context: context,
-                              firstDate: DateTime(1900),
-                              initialDate: currentValue ?? DateTime.now(),
-                              lastDate: DateTime(2100));
-                        },
-                      ),
-                    ],
-                  ),
-                ),
+                MaterialButton(
+                  onPressed: () {
+                    setState(() {
+                      YoutubeGraphData1.clear();
+                      CommentsGraphData1.clear();
+      
+                      SelectionSentimentdata.clear();
+                      _value1 = SelectionSentimentAPI(
+                          'between', '${ToDate.text}', '${FromDate.text}');
+                    });
+                  },
+                  child: Text('Search'),
+                  color: Colors.blueAccent,
+                )
               ],
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              MaterialButton(
-                onPressed: () {
-                  setState(() {
-                    YoutubeGraphData1.clear();
-                    CommentsGraphData1.clear();
-
-                    SelectionSentimentdata.clear();
-                    _value1 = SelectionSentimentAPI(
-                        'between', '${ToDate.text}', '${FromDate.text}');
-                  });
-                },
-                child: Text('Search'),
-                color: Colors.blueAccent,
-              )
-            ],
-          ),
-          FutureBuilder<dynamic>(
-            future: _value1,
-            builder: (
-              BuildContext context,
-              AsyncSnapshot<dynamic> snapshot,
-            ) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SpinKitWave(
-                      color: Colors.blue,
-                      size: 18,
-                    ),
-                  ],
-                );
-              } else if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasError) {
-                  return const Text('Error');
-                } else if (snapshot.hasData) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 18.0),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: <Widget>[
-                          //todo:cards
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              SocialInfoCard(
-                                  'assets/icons/Video ViewsEmoji.png', '0'),
-                              SocialInfoCard(
-                                  'assets/icons/Video LikesEmoji.png', '1'),
-                              SocialInfoCard(
-                                  'assets/icons/Video DislikesEmoji.png', '2'),
-                              SocialInfoCard(
-                                  'assets/icons/Video CommentsEmoji.png', '3'),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: 30,
-                                      width: 30,
-                                      child: Image.asset(
-                                        'assets/icons/Video LikesEmoji.png',
-                                        height: 30,
-                                        width: 30,
-                                        color: Colors.green,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 2,
-                                    ),
-                                    Text('4')
-                                  ],
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      height: 30,
-                                      width: 30,
-                                      child: Image.asset(
-                                        'assets/icons/Video DislikesEmoji.png',
-                                        height: 30,
-                                        width: 30,
-                                        color: Colors.red,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 2,
-                                    ),
-                                    Text('5')
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Card(
-                            elevation: 5,
-                            child: SfCircularChart(
-                              title: ChartTitle(
-                                  text: 'Youtube Sentiment Analysis'),
-                              legend: Legend(isVisible: true),
-                              series: <PieSeries<ChartSampleData, String>>[
-                                PieSeries<ChartSampleData, String>(
-                                    explode: true,
-                                    explodeIndex: 0,
-                                    explodeOffset: '10%',
-                                    dataSource: YoutubeGraphData1,
-                                    xValueMapper: (ChartSampleData data, _) =>
-                                        data.x as String,
-                                    yValueMapper: (ChartSampleData data, _) =>
-                                        data.y,
-                                    dataLabelMapper:
-                                        (ChartSampleData data, _) => data.text,
-                                    startAngle: 90,
-                                    endAngle: 90,
-                                    dataLabelSettings: const DataLabelSettings(
-                                        isVisible: true)),
-                              ],
-                            ),
-                          ),
-                          Divider(
-                            color: Colors.grey.shade300,
-                            thickness: 1,
-                          ),
-                          Card(
-                            elevation: 5,
-                            child: SfCircularChart(
-                              title: ChartTitle(
-                                  text: 'Comments Sentiment Analysis'),
-                              legend: Legend(isVisible: true),
-                              series: <PieSeries<ChartSampleData, String>>[
-                                PieSeries<ChartSampleData, String>(
-                                    explode: true,
-                                    explodeIndex: 0,
-                                    explodeOffset: '10%',
-                                    dataSource: CommentsGraphData1,
-                                    xValueMapper: (ChartSampleData data, _) =>
-                                        data.x as String,
-                                    yValueMapper: (ChartSampleData data, _) =>
-                                        data.y,
-                                    dataLabelMapper:
-                                        (ChartSampleData data, _) => data.text,
-                                    startAngle: 90,
-                                    endAngle: 90,
-                                    dataLabelSettings: const DataLabelSettings(
-                                        isVisible: true)),
-                              ],
-                            ),
-                          ),
-                        ]),
+            FutureBuilder<dynamic>(
+              future: _value1,
+              builder: (
+                BuildContext context,
+                AsyncSnapshot<dynamic> snapshot,
+              ) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      SpinKitWave(
+                        color: Colors.blue,
+                        size: 18,
+                      ),
+                    ],
                   );
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return const Text('Error');
+                  } else if (snapshot.hasData) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 18.0),
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            //todo:cards
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                SocialInfoCard(
+                                    'assets/icons/Video ViewsEmoji.png', '0'),
+                                SocialInfoCard(
+                                    'assets/icons/Video LikesEmoji.png', '1'),
+                                SocialInfoCard(
+                                    'assets/icons/Video DislikesEmoji.png', '2'),
+                                SocialInfoCard(
+                                    'assets/icons/Video CommentsEmoji.png', '3'),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 30,
+                                        width: 30,
+                                        child: Image.asset(
+                                          'assets/icons/Video LikesEmoji.png',
+                                          height: 30,
+                                          width: 30,
+                                          color: Colors.green,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2,
+                                      ),
+                                      Text('4')
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        height: 30,
+                                        width: 30,
+                                        child: Image.asset(
+                                          'assets/icons/Video DislikesEmoji.png',
+                                          height: 30,
+                                          width: 30,
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2,
+                                      ),
+                                      Text('5')
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Card(
+                              elevation: 5,
+                              child: SfCircularChart(
+                                title: ChartTitle(
+                                    text: 'Youtube Sentiment Analysis'),
+                                legend: Legend(isVisible: true),
+                                series: <PieSeries<ChartSampleData, String>>[
+                                  PieSeries<ChartSampleData, String>(
+                                      explode: true,
+                                      explodeIndex: 0,
+                                      explodeOffset: '10%',
+                                      dataSource: YoutubeGraphData1,
+                                      xValueMapper: (ChartSampleData data, _) =>
+                                          data.x as String,
+                                      yValueMapper: (ChartSampleData data, _) =>
+                                          data.y,
+                                      dataLabelMapper:
+                                          (ChartSampleData data, _) => data.text,
+                                      startAngle: 90,
+                                      endAngle: 90,
+                                      dataLabelSettings: const DataLabelSettings(
+                                          isVisible: true)),
+                                ],
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.grey.shade300,
+                              thickness: 1,
+                            ),
+                            Card(
+                              elevation: 5,
+                              child: SfCircularChart(
+                                title: ChartTitle(
+                                    text: 'Comments Sentiment Analysis'),
+                                legend: Legend(isVisible: true),
+                                series: <PieSeries<ChartSampleData, String>>[
+                                  PieSeries<ChartSampleData, String>(
+                                      explode: true,
+                                      explodeIndex: 0,
+                                      explodeOffset: '10%',
+                                      dataSource: CommentsGraphData1,
+                                      xValueMapper: (ChartSampleData data, _) =>
+                                          data.x as String,
+                                      yValueMapper: (ChartSampleData data, _) =>
+                                          data.y,
+                                      dataLabelMapper:
+                                          (ChartSampleData data, _) => data.text,
+                                      startAngle: 90,
+                                      endAngle: 90,
+                                      dataLabelSettings: const DataLabelSettings(
+                                          isVisible: true)),
+                                ],
+                              ),
+                            ),
+                              Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                             
+                                _pagecontroller.jumpToPage(0);
+                            });
+                          },
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            height: 30,
+                            color:Color(0xff86a8e7),
+                            child: Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                      Icons.navigate_before,
+                                    size: 25,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    'Recent Analysis',
+                                    style: TextStyle(
+                                        fontFamily: 'Segoe UI',
+                                        fontSize: 20,
+                                        color: Colors.white),
+                                  ),
+                                  
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                          ]),
+                    );
+                  } else {
+                    return const Text('Empty data');
+                  }
                 } else {
-                  return const Text('Empty data');
+                  return Text('State: ${snapshot.connectionState}');
                 }
-              } else {
-                return Text('State: ${snapshot.connectionState}');
-              }
-            },
-          ),
-        ],
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

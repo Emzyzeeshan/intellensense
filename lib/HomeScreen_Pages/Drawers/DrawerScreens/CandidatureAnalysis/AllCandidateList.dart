@@ -23,12 +23,13 @@ class _AllCandidateListState extends State<AllCandidateList> {
   late Future<dynamic> finaldata = AllCandidateListAPI();
   TextEditingController textEditingController = TextEditingController();
 
+  var partycolor;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: PageView(
-          controller: pageController,
-          physics: NeverScrollableScrollPhysics(),
+      controller: pageController,
+      physics: NeverScrollableScrollPhysics(),
       children: [
         Padding(
           padding: const EdgeInsets.only(left: 8.0, right: 8, top: 35),
@@ -73,18 +74,18 @@ class _AllCandidateListState extends State<AllCandidateList> {
                   ],
                   iconSize: 30.0,
                   activeBgColors: [
-                    [Colors.green ],
-                    [ Colors.black26]
+                    [Colors.green],
+                    [Colors.black26]
                   ],
                   animate:
                       true, // with just animate set to true, default curve = Curves.easeIn
                   curve: Curves
                       .bounceInOut, // animate must be set to true when using custom curve
                   onToggle: (index) {
-                    if(index==0){
+                    if (index == 0) {
                       pageController.jumpToPage(0);
-                    }else if(index==1){
-pageController.jumpToPage(1);
+                    } else if (index == 1) {
+                      pageController.jumpToPage(1);
                     }
                     print('switched to: $index');
                   },
@@ -133,12 +134,38 @@ pageController.jumpToPage(1);
                                       openBuilder: (context, action) {
                                         return
                                             //  Container();
-                                            TrsMpDetails(Resultdata[index]);
+                                            TrsMpDetails(
+                                                Resultdata[index]);
                                       },
                                       closedBuilder: (context, action) {
+                                        PartytileColor(index, Resultdata);
+                                        // if(Resultdata[index]['party']=='TRS'){
+
+                                        //     partycolor=Color(0xfff57ec6);
+
+                                        // }else if(Resultdata[index]['party']=='AIMIM'){
+
+                                        // partycolor=Color.fromARGB(255, 13, 71, 15);
+                                        // }else if(Resultdata[index]['party']=='AIFB'){
+
+                                        //     partycolor=Colors.redAccent;
+
+                                        // }else if(Resultdata[index]['party']=='INC'){
+
+                                        //     partycolor=Color.fromARGB(255, 112, 169, 113);
+
+                                        // }else if(Resultdata[index]['party']=='TDP'){
+
+                                        //     partycolor=Colors.yellow;
+
+                                        // }else if(Resultdata[index]['party']=='BJP'){
+
+                                        //     partycolor=Colors.orangeAccent;
+
+                                        // }
                                         return ListTile(
                                           dense: true,
-                                          tileColor: Color(0xffd2dfff),
+                                          tileColor: partycolor,
 
                                           subtitle: Text(
                                               "Party: ${Resultdata[index]['party']}"),
@@ -152,13 +179,12 @@ pageController.jumpToPage(1);
                                             width: 50,
                                             child: CircleAvatar(
                                               minRadius: 30,
-                                              
                                               backgroundImage: MemoryImage(
                                                   base64Decode(Resultdata[index]
-                                                  ['content']
-                                                      .substring(22) ??
-                                                      ''),scale: 10
-                                              ),
+                                                              ['content']
+                                                          .substring(22) ??
+                                                      ''),
+                                                  scale: 10),
                                             ),
                                           ),
                                           title: Text(
@@ -183,6 +209,10 @@ pageController.jumpToPage(1);
                     child: ListView.builder(
                         itemCount: searchData.length,
                         itemBuilder: (context, index) {
+                          
+                             PartytileColor(index, searchData);
+                          
+                         
                           return Padding(
                             padding: const EdgeInsets.only(top: 5.0, bottom: 5),
                             child: OpenContainer(
@@ -206,7 +236,7 @@ pageController.jumpToPage(1);
                               closedBuilder: (context, action) {
                                 return ListTile(
                                   dense: true,
-                                  tileColor: Color(0xffd2dfff),
+                                  tileColor: partycolor,
 
                                   subtitle: Text(
                                       "Party: ${searchData[index]['party']}"),
@@ -218,7 +248,8 @@ pageController.jumpToPage(1);
                                     radius: 30,
                                     child: ClipOval(
                                       child: Image.memory(
-                                        base64Decode(searchData[index]['content']
+                                        base64Decode(searchData[index]
+                                                    ['content']
                                                 .substring(22) ??
                                             ''),
                                         width: 300,
@@ -266,7 +297,7 @@ pageController.jumpToPage(1);
   var Resultdata;
   Future<dynamic> AllCandidateListAPI() async {
     var response = await get(
-      Uri.parse(INSIGHTS+'/getallcandidates'),
+      Uri.parse(INSIGHTS + '/getallcandidates'),
     );
     print(response.toString());
     print(response.statusCode);
@@ -284,7 +315,27 @@ pageController.jumpToPage(1);
     return Resultdata;
   }
 
-
- 
-  
+  PartytileColor(index, DataType) {
+    if (DataType[index]['party'] == 'TRS') {
+      partycolor = Color(0xfff57ec6);
+    } else if (DataType[index]['party'] == 'AIMIM') {
+      partycolor = Color.fromARGB(255, 13, 71, 15);
+    } else if (DataType[index]['party'] == 'AIFB') {
+      partycolor = Colors.redAccent;
+    } else if (DataType[index]['party'] == 'INC') {
+      partycolor = Color.fromARGB(255, 112, 169, 113);
+    } else if (DataType[index]['party'] == 'TDP') {
+      partycolor = Colors.yellow;
+    } else if (DataType[index]['party'] == 'BJP') {
+      partycolor = Colors.orangeAccent;
+    } else if (DataType[index]['party'] == 'JSP') {
+      partycolor = Colors.red;
+    } else if (DataType[index]['party'] == 'SHIV SENA') {
+      partycolor = Colors.deepOrangeAccent;
+    }  else if (DataType[index]['party'] == 'YSRCP') {
+      partycolor = Colors.blue.shade500;
+    } else {
+      partycolor = Colors.cyan[50];
+    }
+  }
 }

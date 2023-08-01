@@ -21,6 +21,7 @@ import '../../../../../main.dart';
 
 class TrsMpDetails extends StatefulWidget {
   var Value;
+
   TrsMpDetails(this.Value);
 
   @override
@@ -38,9 +39,44 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
     target: LatLng(37.42796133580664, -122.085749655962),
     zoom: 14.4746,
   );
+  var partycolor;
   @override
   void initState() {
-    print(widget.Value);
+      if(widget.Value['party']=='TRS'){
+                                       
+                                            partycolor=Color(0xfff57ec6);
+                                       
+                                        }else if(widget.Value['party']=='AIMIM'){
+                                        
+                                        partycolor=Color.fromARGB(255, 13, 71, 15);
+                                        }else if(widget.Value['party']=='AIFB'){
+                                         
+                                            partycolor=Colors.redAccent;
+                                         
+                                        }else if(widget.Value['party']=='INC'){
+                                         
+                                            partycolor=Color.fromARGB(255, 112, 169, 113);
+                                         
+                                        }else if(widget.Value['party']=='TDP'){
+                                        
+                                            partycolor=Colors.yellow;
+                                        
+                                        }else if(widget.Value['party']=='BJP'){
+                                        
+                                            partycolor=Colors.orangeAccent;
+                                        
+                                        }else if(widget.Value['party']=='JSP'){
+                                        
+                                            partycolor=Colors.red;
+                                        
+                                        }else if(widget.Value['party']=='SHIV SENA'){
+                                        
+                                            partycolor=Colors.deepOrangeAccent;
+                                        
+                                        }else{
+                                            partycolor=Colors.cyan[50];
+                                        }
+    print(widget.Value['party']);
     PartyResultAPI();
     // TODO: implement initState
     super.initState();
@@ -56,7 +92,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HomeColor,
+      
       body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Padding(
@@ -130,7 +166,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                   height: 10,
                 ),
                 ExpansionTileCard(
-                  baseColor: Colors.cyan[50],
+                  baseColor:  partycolor,
                   expandedColor: Colors.white,
                   expandedTextColor: Colors.black,
                   title: Text('Profile'),
@@ -428,7 +464,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: ExpansionTileCard(
-                                    baseColor: Colors.cyan[50],
+                                    baseColor:  partycolor,
                                     expandedColor: Colors.white,
                                     leading: Text(
                                         '${Resultdata[index]['id']['year']}'),
@@ -785,7 +821,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                             height: 170,
                             width: MediaQuery.of(context).size.width,
                             child: Card(
-                              color: Colors.cyan[50],
+                              color:Color(0xff86a8e7),
                               child: Column(children: [
                                 SizedBox(
                                   height: 10,
@@ -795,7 +831,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                   style: GoogleFonts.nunitoSans(
                                       fontSize: 17.0,
                                       fontWeight: FontWeight.w700,
-                                      color: Colors.grey.shade600),
+                                  ),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -805,8 +841,8 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     OpenContainer(
-                                      closedColor: Color(0xffd2dfff),
-                                      openColor: Color(0xffd2dfff),
+                                      
+                                  
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -825,8 +861,8 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       },
                                     ),
                                     OpenContainer(
-                                      closedColor: Color(0xffd2dfff),
-                                      openColor: Color(0xffd2dfff),
+                                      
+                                     
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -845,8 +881,8 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       },
                                     ),
                                     OpenContainer(
-                                      closedColor: Color(0xffd2dfff),
-                                      openColor: Color(0xffd2dfff),
+                                      
+                                     
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -865,8 +901,8 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       },
                                     ),
                                     OpenContainer(
-                                      closedColor: Color(0xffd2dfff),
-                                      openColor: Color(0xffd2dfff),
+                                      
+                                     
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -894,8 +930,8 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
                                     OpenContainer(
-                                      closedColor: Color(0xffd2dfff),
-                                      openColor: Color(0xffd2dfff),
+                                      
+                                     
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -914,8 +950,8 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       },
                                     ),
                                     OpenContainer(
-                                      closedColor: Color(0xffd2dfff),
-                                      openColor: Color(0xffd2dfff),
+                                      
+                                     
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -934,8 +970,8 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       },
                                     ),
                                     OpenContainer(
-                                      closedColor: Color(0xffd2dfff),
-                                      openColor: Color(0xffd2dfff),
+                                      
+                                     
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(
@@ -954,8 +990,8 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                       },
                                     ),
                                     OpenContainer(
-                                      closedColor: Color(0xffd2dfff),
-                                      openColor: Color(0xffd2dfff),
+                                      
+                                     
                                       openElevation: 10.0,
                                       closedShape: const RoundedRectangleBorder(
                                         borderRadius: BorderRadius.all(

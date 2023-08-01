@@ -1,8 +1,12 @@
 import 'dart:async';
 import 'dart:convert';
 
+
+import 'package:flutter/services.dart';
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -12,7 +16,6 @@ import 'package:skeletons/skeletons.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class Political extends StatefulWidget {
-
   @override
   State<Political> createState() => _PoliticalState();
 }
@@ -49,7 +52,24 @@ class _PoliticalState extends State<Political> {
     }
     return true;
   }
-
+  List<LatLng> _items = [LatLng(0,0)];
+  Future<void> readJson() async {
+    try {
+      final String response = await rootBundle.loadString(
+          'assets/telangana_dist.json');
+      final data = await json.decode(response);
+      setState(() {
+        _items = data["features"]
+            .expand((feature) => List.from(feature['geometry']['type'].toLowerCase() == 'polygon'
+            ? feature['geometry']['coordinates'][0]
+            : feature['geometry']['coordinates'].expand((coords) => List.from(coords[0]))))
+            .map<LatLng>((coords) => LatLng(coords[1], coords[0])).toList();
+      });
+    } catch (e) {
+      print("caught error");
+      print(e);
+    }
+  }
   ///get location
   getCurrentLocation() async {
     bool serviceEnabled;
@@ -94,7 +114,7 @@ class _PoliticalState extends State<Political> {
       Completer<GoogleMapController>();
 
   static const CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
+    target: LatLng( 80.850649345000079, 17.615302891000056),
     zoom: 14.4746,
   );
   late Future<dynamic> finaldata = PoliticalAPI1();
@@ -105,9 +125,10 @@ class _PoliticalState extends State<Political> {
     _ElectoralTabledata.clear();
     // TODO: implement initState
     super.initState();
+    readJson();
   }
 
-  void Dispose() {
+  void dispose() {
     _ElectoralTabledata.clear();
     AssemblyConstituencyTabledata.clear();
     // TODO: implement initState
@@ -126,11 +147,30 @@ class _PoliticalState extends State<Political> {
               child: Container(
                 height: 300,
                 width: 400,
-                child: GoogleMap(
+                child: GoogleMap(zoomControlsEnabled: true,zoomGesturesEnabled: true,scrollGesturesEnabled: true,
                   mapType: MapType.normal,
                   initialCameraPosition: _kGooglePlex,
                   onMapCreated: (GoogleMapController controller) {
                     _controller.complete(controller);
+                  },
+                  polygons:
+                  {
+                    Polygon(
+                      polygonId: const PolygonId("1"),
+                        fillColor: Colors.green.withOpacity(0.3),visible: true,
+                      strokeWidth: 2,
+                      points: _items
+                      /*points: const [
+                        LatLng(32.3078, -64.7505),
+                        LatLng(15.9129, 79.7400),
+                        LatLng(15.9129, 79.7400),
+                        LatLng( 77.987007141113452, 15.04408073425293),
+                        LatLng(78.089401245117358, 14.71306037902832),
+                        LatLng(78.419197082519702, 14.146200180053825),
+                        LatLng( 76.974212646484375, 14.0577096939089198),
+                        LatLng(76.846916198730753, 14.802310943603459),
+                      ],*/
+                    ),
                   },
                 ),
               ),
@@ -148,18 +188,16 @@ class _PoliticalState extends State<Political> {
                             child: Card(
                                 color: Color(0xffd2dfff),
                                 elevation: 10,
-                                child: SkeletonParagraph(
-                                  style: SkeletonParagraphStyle(
-                                      lines: 5,
-                                      spacing: 6,
-                                      lineStyle: SkeletonLineStyle(
-                                        randomLength: true,
-                                        height: 13,
-                                        borderRadius: BorderRadius.circular(8),
-                                        minLength:
-                                            MediaQuery.of(context).size.width /
-                                                2,
-                                      )),
+                                child: SizedBox(
+                                  height: 150,
+                                  width: 150,
+                                  child: Center(
+                                      child:
+                                          SpinKitWave(
+                                    color:
+                                        Colors.blue,
+                                    size: 18,
+                                  )),
                                 )),
                           ),
                           SizedBox(
@@ -174,7 +212,7 @@ class _PoliticalState extends State<Political> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
-                        color: Color(0xffd2dfff),
+                        // color: Color(0xff86a8e7),
                         elevation: 10,
                         child: Column(
                           children: [
@@ -182,36 +220,36 @@ class _PoliticalState extends State<Political> {
                               TableRow(children: [
                                 Container(
                                     height: 30,
-                                    color: Color(0xff00196b),
+                                    color: Color(0xff86a8e7),
                                     child: Center(
                                         child: Text(
                                       'Party',
                                       style: GoogleFonts.nunitoSans(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w400,
-                                          color: Colors.white),
+                                          ),
                                     ))),
                                 Container(
                                     height: 30,
-                                    color: Color(0xff00196b),
+                                    color: Color(0xff86a8e7),
                                     child: Center(
                                         child: Text(
                                       'Seats',
                                       style: GoogleFonts.nunitoSans(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w400,
-                                          color: Colors.white),
+                                          ),
                                     ))),
                                 Container(
                                     height: 30,
-                                    color: Color(0xff00196b),
+                                    color: Color(0xff86a8e7),
                                     child: Center(
                                         child: Text(
                                       'Rank',
                                       style: GoogleFonts.nunitoSans(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w400,
-                                          color: Colors.white),
+                                          ),
                                     ))),
                               ]),
                               ..._tablerow,
@@ -270,18 +308,18 @@ class _PoliticalState extends State<Political> {
                         child: Card(
                             color: Color(0xffd2dfff),
                             elevation: 10,
-                            child: SkeletonParagraph(
-                              style: SkeletonParagraphStyle(
-                                  lines: 5,
-                                  spacing: 6,
-                                  lineStyle: SkeletonLineStyle(
-                                    randomLength: true,
-                                    height: 13,
-                                    borderRadius: BorderRadius.circular(8),
-                                    minLength:
-                                        MediaQuery.of(context).size.width / 2,
-                                  )),
-                            )),
+                            child: Center(
+                       
+                        child: SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Center(
+                              child: SpinKitWave(
+                            color: Colors.blue,
+                            size: 18,
+                          )),
+                        ),
+                      )),
                       ));
                 } else if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
@@ -290,7 +328,7 @@ class _PoliticalState extends State<Political> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
-                        color: Color(0xffd2dfff),
+                        // color: Color(0xffd2dfff),
                         elevation: 10,
                         child: Column(
                           children: [
@@ -298,36 +336,36 @@ class _PoliticalState extends State<Political> {
                               TableRow(children: [
                                 Container(
                                     height: 30,
-                                    color: Color(0xff00196b),
+                                    color: Color(0xff86a8e7),
                                     child: Center(
                                         child: Text(
                                       'Party',
                                       style: GoogleFonts.nunitoSans(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w400,
-                                          color: Colors.white),
+                                          ),
                                     ))),
                                 Container(
                                     height: 30,
-                                    color: Color(0xff00196b),
+                                    color: Color(0xff86a8e7),
                                     child: Center(
                                         child: Text(
                                       'Votes',
                                       style: GoogleFonts.nunitoSans(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w400,
-                                          color: Colors.white),
+                                          ),
                                     ))),
                                 Container(
                                     height: 30,
-                                    color: Color(0xff00196b),
+                                    color: Color(0xff86a8e7),
                                     child: Center(
                                         child: Text(
                                       'Rank',
                                       style: GoogleFonts.nunitoSans(
                                           fontSize: 12.0,
                                           fontWeight: FontWeight.w400,
-                                          color: Colors.white),
+                                          ),
                                     ))),
                               ]),
                               ..._votewisedata
@@ -383,18 +421,18 @@ class _PoliticalState extends State<Political> {
                       child: Card(
                           color: Color(0xffd2dfff),
                           elevation: 10,
-                          child: SkeletonParagraph(
-                            style: SkeletonParagraphStyle(
-                                lines: 12,
-                                spacing: 6,
-                                lineStyle: SkeletonLineStyle(
-                                  randomLength: true,
-                                  height: 13,
-                                  borderRadius: BorderRadius.circular(8),
-                                  minLength:
-                                      MediaQuery.of(context).size.width / 2,
-                                )),
-                          )));
+                          child: Center(
+                       
+                        child: SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Center(
+                              child: SpinKitWave(
+                            color: Colors.blue,
+                            size: 18,
+                          )),
+                        ),
+                      )));
                 } else if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return Center(child: const Text('Data Error'));
@@ -402,31 +440,31 @@ class _PoliticalState extends State<Political> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
-                        color: Color(0xffd2dfff),
+                        // color: Color(0xffd2dfff),
                         elevation: 10,
                         child: Table(children: [
                           TableRow(children: [
                             Container(
                                 height: 30,
-                                color: Color(0xff00196b),
+                                color: Color(0xff86a8e7),
                                 child: Center(
                                     child: Text(
                                   'Andhra Pradesh',
                                   style: GoogleFonts.nunitoSans(
                                       fontSize: 12.0,
                                       fontWeight: FontWeight.w400,
-                                      color: Colors.white),
+                                      ),
                                 ))),
                             Container(
                                 height: 30,
-                                color: Color(0xff00196b),
+                                color: Color(0xff86a8e7),
                                 child: Center(
                                     child: Text(
                                   'Electoral Data',
                                   style: GoogleFonts.nunitoSans(
                                       fontSize: 12.0,
                                       fontWeight: FontWeight.w400,
-                                      color: Colors.white),
+                                      ),
                                 ))),
                           ]),
                           ..._ElectoralTabledata
@@ -452,18 +490,18 @@ class _PoliticalState extends State<Political> {
                       child: Card(
                           color: Color(0xffd2dfff),
                           elevation: 10,
-                          child: SkeletonParagraph(
-                            style: SkeletonParagraphStyle(
-                                lines: 12,
-                                spacing: 6,
-                                lineStyle: SkeletonLineStyle(
-                                  randomLength: true,
-                                  height: 13,
-                                  borderRadius: BorderRadius.circular(8),
-                                  minLength:
-                                      MediaQuery.of(context).size.width / 2,
-                                )),
-                          )));
+                          child: Center(
+                       
+                        child: SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Center(
+                              child: SpinKitWave(
+                            color: Colors.blue,
+                            size: 18,
+                          )),
+                        ),
+                      )));
                 } else if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return Center(child: const Text('Data Error'));
@@ -471,7 +509,7 @@ class _PoliticalState extends State<Political> {
                     return Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Card(
-                        color: Color(0xffd2dfff),
+                        // color: Color(0xffd2dfff),
                         elevation: 10,
                         child: SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
@@ -486,102 +524,101 @@ class _PoliticalState extends State<Political> {
                                   style: GoogleFonts.nunitoSans(
                                       fontSize: 15.0,
                                       fontWeight: FontWeight.w700,
-                                      color: Colors.black),
+                                      ),
                                 ),
                               ),
-                              Table(border: TableBorder.all(color: Colors.grey),
+                              Table(
+                                  border: TableBorder.all(color: Colors.grey),
                                   defaultColumnWidth: FixedColumnWidth(130.0),
                                   children: [
-                                    TableRow(
-                                     
-                                      children: [
+                                    TableRow(children: [
                                       Container(
                                           height: 30,
-                                          color: Color(0xff00196b),
+                                          color: Color(0xff86a8e7),
                                           child: Center(
                                               child: Text(
                                             'Constituency',
                                             style: GoogleFonts.nunitoSans(
                                                 fontSize: 12.0,
                                                 fontWeight: FontWeight.w400,
-                                                color: Colors.white),
+                                                ),
                                           ))),
                                       Container(
                                           height: 30,
-                                          color: Color(0xff00196b),
+                                          color: Color(0xff86a8e7),
                                           child: Center(
                                               child: Text(
                                             'Winner',
                                             style: GoogleFonts.nunitoSans(
                                                 fontSize: 12.0,
                                                 fontWeight: FontWeight.w400,
-                                                color: Colors.white),
+                                                ),
                                           ))),
                                       Container(
                                           height: 30,
-                                          color: Color(0xff00196b),
+                                          color: Color(0xff86a8e7),
                                           child: Center(
                                               child: Text(
                                             'Winner Party',
                                             style: GoogleFonts.nunitoSans(
                                                 fontSize: 12.0,
                                                 fontWeight: FontWeight.w400,
-                                                color: Colors.white),
+                                                ),
                                           ))),
                                       Container(
                                           height: 30,
-                                          color: Color(0xff00196b),
+                                          color: Color(0xff86a8e7),
                                           child: Center(
                                               child: Text(
                                             'Winner Votes',
                                             style: GoogleFonts.nunitoSans(
                                                 fontSize: 12.0,
                                                 fontWeight: FontWeight.w400,
-                                                color: Colors.white),
+                                                ),
                                           ))),
                                       Container(
                                           height: 30,
-                                          color: Color(0xff00196b),
+                                          color: Color(0xff86a8e7),
                                           child: Center(
                                               child: Text(
                                             'Runner',
                                             style: GoogleFonts.nunitoSans(
                                                 fontSize: 12.0,
                                                 fontWeight: FontWeight.w400,
-                                                color: Colors.white),
+                                                ),
                                           ))),
                                       Container(
                                           height: 30,
-                                          color: Color(0xff00196b),
+                                          color: Color(0xff86a8e7),
                                           child: Center(
                                               child: Text(
                                             'Runner Party',
                                             style: GoogleFonts.nunitoSans(
                                                 fontSize: 12.0,
                                                 fontWeight: FontWeight.w400,
-                                                color: Colors.white),
+                                                ),
                                           ))),
                                       Container(
                                           height: 30,
-                                          color: Color(0xff00196b),
+                                          color: Color(0xff86a8e7),
                                           child: Center(
                                               child: Text(
                                             'Runner votes',
                                             style: GoogleFonts.nunitoSans(
                                                 fontSize: 12.0,
                                                 fontWeight: FontWeight.w400,
-                                                color: Colors.white),
+                                                ),
                                           ))),
                                       Container(
                                           height: 30,
-                                          color: Color(0xff00196b),
+                                          color:Color(0xff86a8e7),
                                           child: Center(
                                               child: Text(
                                             'Margin',
                                             style: GoogleFonts.nunitoSans(
                                                 fontSize: 12.0,
                                                 fontWeight: FontWeight.w400,
-                                                color: Colors.white),
+                                                ),
                                           ))),
                                     ]),
                                     ...AssemblyConstituencyTabledata
@@ -644,7 +681,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               )),
               Center(
@@ -655,7 +692,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               )),
               Center(
@@ -666,7 +703,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               ))
             ]),
@@ -716,7 +753,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               )),
               Center(
@@ -727,7 +764,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               )),
               Center(
@@ -738,7 +775,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               ))
             ]),
@@ -784,7 +821,7 @@ class _PoliticalState extends State<Political> {
                     style: GoogleFonts.nunitoSans(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w400,
-                        color: Colors.black),
+                        ),
                   ),
                 )),
                 Center(
@@ -795,7 +832,7 @@ class _PoliticalState extends State<Political> {
                     style: GoogleFonts.nunitoSans(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w400,
-                        color: Colors.black),
+                        ),
                   ),
                 )),
               ]),
@@ -831,9 +868,7 @@ class _PoliticalState extends State<Political> {
 
         for (int i = 0; i < AssemblyConstituencyData.length; i++) {
           AssemblyConstituencyTabledata.add(
-            TableRow(
-             
-              children: [
+            TableRow(children: [
               Center(
                   child: Padding(
                 padding: const EdgeInsets.all(5.0),
@@ -842,7 +877,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               )),
               Center(
@@ -853,7 +888,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               )),
               Center(
@@ -864,7 +899,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               )),
               Center(
@@ -875,7 +910,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               )),
               Center(
@@ -886,7 +921,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               )),
               Center(
@@ -897,7 +932,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               )),
               Center(
@@ -908,7 +943,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               )),
               Center(
@@ -919,7 +954,7 @@ class _PoliticalState extends State<Political> {
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
-                      color: Colors.black),
+                      ),
                 ),
               ))
             ]),

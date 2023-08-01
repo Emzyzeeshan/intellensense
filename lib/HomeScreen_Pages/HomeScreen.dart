@@ -18,10 +18,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/HomeScreen_Pages/Widgets/Socialmediatemplate.dart';
+import 'package:intellensense/LoginPages/widgets/ChartSampleData.dart';
 import 'package:intellensense/Services/ApiServices.dart';
+import 'package:liquid_swipe/liquid_swipe.dart';
 
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:simple_speed_dial/simple_speed_dial.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 import 'Banners.dart/FaceBookBanner.dart';
 import 'Banners.dart/NewsChannelBanner.dart';
@@ -48,15 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ScrollController? _scrollController;
   bool lastStatus = true;
   double height = 200;
-  List<Widget>? swipeimage = [
-    YoutubeBanner(),
-    NewsChannelBanner(),
-    FaceBookBanner(),
-    Twitterbanner(),
-    // 'assets/Image/Intellisense-banners-01.jpg',
-    // 'assets/Image/Intellisense-banners-02.jpg',
-    // 'assets/Image/Intellisense-banners-03.jpg'
-  ];
+
   void _scrollListener() {
     if (_isShrink != lastStatus) {
       setState(() {
@@ -77,12 +72,33 @@ class _HomeScreenState extends State<HomeScreen> {
         _scrollController!.hasClients &&
         _scrollController!.offset > (height - kToolbarHeight);
   }
-
+  late Future<dynamic> LineChartfuturecall = YoutubeBannerGraphApi();
+  TooltipBehavior? _tooltipBehavior;
+  TooltipBehavior? _tooltipBehavior1;
+  List<ChartSampleData>? chartData;
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController()..addListener(_scrollListener);
     _initBannerAd();
+      chartData = <ChartSampleData>[
+      ChartSampleData(
+          x: 'Jan', y: 43, secondSeriesYValue: 37, thirdSeriesYValue: 41),
+      ChartSampleData(
+          x: 'Feb', y: 45, secondSeriesYValue: 37, thirdSeriesYValue: 45),
+      ChartSampleData(
+          x: 'Mar', y: 50, secondSeriesYValue: 39, thirdSeriesYValue: 48),
+    ];
+    _tooltipBehavior = TooltipBehavior(
+        enable: true,
+        canShowMarker: false,
+        format: 'point.x : point.y',
+        header: '');
+    _tooltipBehavior1 = TooltipBehavior(
+        enable: true,
+        canShowMarker: false,
+        format: 'point.x : point.y',
+        header: '');
   }
 
   @override
@@ -148,7 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   ScrollController? scrollController = ScrollController();
   FlipCardController? flipCardController = FlipCardController();
-  Position? _currentPosition;
+
   var WeatherDataResult;
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -159,34 +175,39 @@ class _HomeScreenState extends State<HomeScreen> {
   double _width = 370;
   @override
   Widget build(BuildContext context) {
+      List<Widget>? swipeimage = [
+    YoutubeBanner(),
+    NewsChannelBanner(),
+    FaceBookBanner(),
+    Twitterbanner(),
+    // 'assets/Image/Intellisense-banners-01.jpg',
+    // 'assets/Image/Intellisense-banners-02.jpg',
+    // 'assets/Image/Intellisense-banners-03.jpg'
+  ];
     final TextTheme textTheme = Theme.of(context).textTheme;
 
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-        /*bottomNavigationBar: _isAdLoaded?Container(
+          // backgroundColor: Color(0xff5555555),
+          /*bottomNavigationBar: _isAdLoaded?Container(
         height: _bannerAd.size.height.toDouble(),
         width: _bannerAd.size.width.toDouble(),
         child: AdWidget(ad: _bannerAd),
       ):Text('Loading'),*/
-        key: _key,
-        drawer: drawer(),
-        // backgroundColor: HomeColor,
-        body: NestedScrollView(
-          controller: _scrollController,
-          headerSliverBuilder: (context, innerBoxIsScrolled) {
-            return [
-              SliverAppBar(
-                title: Image.asset(
-                  'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                  fit: BoxFit.contain,
-                  height: 40,
-                  width: 180,
-                ),
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.menu,
-                    color: Colors.black,
+          key: _key,
+          drawer: drawer(),
+          // backgroundColor: HomeColor,
+          body: NestedScrollView(
+            controller: _scrollController,
+            headerSliverBuilder: (context, innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
+                  title: Image.asset(
+                    'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
+                    fit: BoxFit.contain,
+                    height: 40,
+                    width: 180,
                   ),
                   onPressed: () {
                     _key.currentState!.openDrawer();
@@ -231,15 +252,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: EdgeInsets.all(2),
                                 color: Color(0xff38547C),
                               ),
+                              // Swiper(controller: SwiperController(),
+                              //   duration: 1500,
+                              //   itemBuilder: (BuildContext context, int index) {
+                              //     return swipeimage![index];
+                              //   },
+                              //   itemCount: 4,
+                              //   autoplay: false,
+                              //   pagination: SwiperPagination(
+                              //       builder: new DotSwiperPaginationBuilder(
+                              //           color: Colors.grey,
+                              //           activeColor: Color(0xff38547C))),
+                              //   control: new SwiperControl(
+                              //     size: 18,
+                              //     padding: EdgeInsets.all(2),
+                              //     color: Color(0xff38547C),
+                              //   ),
+                              // ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                actions: [
-                  /*Padding(
+                  actions: [
+                    /*Padding(
                         padding: EdgeInsets.only(bottom: 12.0, top: 10),
                         child: _isShrink == false
                             ? Container(
@@ -301,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             : null,
                       ),*/
 
-                  /*Padding(
+                    /*Padding(
                         padding:  EdgeInsets.only(bottom: 12.0, top: 10),
                         child: _isShrink==false? Container(
                           child: CarouselSlider(
@@ -342,7 +379,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           //color: Colors.white,
                         ):null,
                       ),*/
-                  /*Row(
+                    /*Row(
                         children: [
                           GestureDetector(
                             onTap: () {
@@ -447,267 +484,226 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                         ],
                       ),*/
-                  IconButton(
-                      color: Colors.black,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => StateOverviewScreen()));
-                      },
-                      icon: Image.asset(
-                        'assets/new Updated images/megaphone.png',
-                        height: 20,
-                      )),
-                  IconButton(
-                      color: Colors.black,
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Notifications()));
-                      },
-                      icon: Image.asset(
-                        'assets/new Updated images/Notifications.png',
-                        height: 20,
-                      )),
-                  IconButton(
-                      onPressed: () {
-                        showMaterialModalBottomSheet(
-                            backgroundColor: Color(0xffd2dfff),
-                            elevation: 10,
-                            bounce: true,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight:
-                                    Radius.circular(15))),
-                            context: context,
-                            builder: (context) {
-                              return SizedBox(
-                                height: MediaQuery.of(context)
-                                    .size
-                                    .height *
-                                    0.5,
-                                child: SingleChildScrollView(
-                                  child: Padding(
-                                    padding:
-                                    const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment
-                                          .center,
-                                      crossAxisAlignment:
-                                      CrossAxisAlignment
-                                          .center,
-                                      children: [
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text('PREFERENCES',
-                                            style: GoogleFonts
-                                                .bebasNeue(
-                                                fontWeight:
-                                                FontWeight
-                                                    .bold,
-                                                fontSize:
-                                                15)),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        ListTile(
+                    IconButton(
+                        color: Colors.black,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => StateOverviewScreen()));
+                        },
+                        icon: Image.asset(
+                          'assets/new Updated images/megaphone.png',
+                          height: 20,
+                        )),
+                    IconButton(
+                        color: Colors.black,
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Notifications()));
+                        },
+                        icon: Image.asset(
+                          'assets/new Updated images/Notifications.png',
+                          height: 20,
+                        )),
+                    IconButton(
+                        onPressed: () {
+                          showMaterialModalBottomSheet(
+                              backgroundColor: Color(0xffd2dfff),
+                              elevation: 10,
+                              bounce: true,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(15),
+                                      topRight: Radius.circular(15))),
+                              context: context,
+                              builder: (context) {
+                                return SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.5,
+                                  child: SingleChildScrollView(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text('PREFERENCES',
+                                              style: GoogleFonts.bebasNeue(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15)),
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          ListTile(
+                                              shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15)),
+                                              tileColor: Colors.blue.shade100,
+                                              onTap: () {
+                                                setState(() {
+                                                  carddirection =
+                                                      !carddirection;
+                                                });
+                                                Navigator.pop(context);
+                                              },
+                                              leading: Text(
+                                                'Scroll Direction',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                              trailing: carddirection == false
+                                                  ? Text('Vertical')
+                                                  : Text('Horizontal')),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          ExpansionTile(
+                                            collapsedShape:
+                                                RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                BorderRadius
-                                                    .circular(
-                                                    15)),
-                                            tileColor: Colors
-                                                .blue.shade100,
-                                            onTap: () {
-                                              setState(() {
-                                                carddirection =
-                                                !carddirection;
-                                              });
-                                              Navigator.pop(
-                                                  context);
-                                            },
-                                            leading: Text(
-                                              'Scroll Direction',
-                                              style: TextStyle(
-                                                  fontWeight:
-                                                  FontWeight
-                                                      .w600),
-                                            ),
-                                            trailing: carddirection ==
-                                                false
-                                                ? Text('Vertical')
-                                                : Text(
-                                                'Horizontal')),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        ExpansionTile(
-                                          collapsedShape:
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius
-                                                  .circular(
-                                                  15)),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius
-                                                  .circular(
-                                                  15)),
-                                          title: Text(''),
-                                          backgroundColor: Colors
-                                              .blue.shade100,
-                                          leading: Text(
-                                              'Custom Swipe'),
-                                          collapsedBackgroundColor:
-                                          Colors
-                                              .blue.shade100,
-                                          children: [
-                                            ListTile(
-                                              onTap: () {
-                                                setState(() {
-                                                  swiperlayout =
-                                                      SwiperLayout
-                                                          .STACK;
-                                                });
+                                                    BorderRadius.circular(15)),
+                                            title: Text(''),
+                                            backgroundColor:
+                                                Colors.blue.shade100,
+                                            leading: Text('Custom Swipe'),
+                                            collapsedBackgroundColor:
+                                                Colors.blue.shade100,
+                                            children: [
+                                              ListTile(
+                                                onTap: () {
+                                                  setState(() {
+                                                    swiperlayout =
+                                                        SwiperLayout.STACK;
+                                                  });
 
-                                                Navigator.pop(
-                                                    context);
-                                              },
-                                              leading: Text(
-                                                'STACKED',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .w600),
+                                                  Navigator.pop(context);
+                                                },
+                                                leading: Text(
+                                                  'STACKED',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
-                                            ),
-                                            ListTile(
-                                              onTap: () {
-                                                setState(() {
-                                                  swiperlayout =
-                                                      SwiperLayout
-                                                          .TINDER;
-                                                });
+                                              ListTile(
+                                                onTap: () {
+                                                  setState(() {
+                                                    swiperlayout =
+                                                        SwiperLayout.TINDER;
+                                                  });
 
-                                                Navigator.pop(
-                                                    context);
-                                              },
-                                              leading: Text(
-                                                'SHADOW VIEW',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .w600),
+                                                  Navigator.pop(context);
+                                                },
+                                                leading: Text(
+                                                  'SHADOW VIEW',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
-                                            ),
-                                            ListTile(
-                                              onTap: () {
-                                                setState(() {
-                                                  swiperlayout =
-                                                      SwiperLayout
-                                                          .DEFAULT;
-                                                });
+                                              ListTile(
+                                                onTap: () {
+                                                  setState(() {
+                                                    swiperlayout =
+                                                        SwiperLayout.DEFAULT;
+                                                  });
 
-                                                Navigator.pop(
-                                                    context);
-                                              },
-                                              leading: Text(
-                                                'DEFAULT VIEW',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .w600),
+                                                  Navigator.pop(context);
+                                                },
+                                                leading: Text(
+                                                  'DEFAULT VIEW',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        ExpansionTile(
-                                          collapsedShape:
-                                          RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius
-                                                  .circular(
-                                                  15)),
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius
-                                                  .circular(
-                                                  15)),
-                                          title: Text(''),
-                                          backgroundColor: Colors
-                                              .blue.shade100,
-                                          leading:
-                                          Text('Swipe Speed'),
-                                          collapsedBackgroundColor:
-                                          Colors
-                                              .blue.shade100,
-                                          children: [
-                                            ListTile(
-                                              onTap: () {
-                                                setState(() {
-                                                  duration = 2200;
-                                                });
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          ExpansionTile(
+                                            collapsedShape:
+                                                RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            title: Text(''),
+                                            backgroundColor:
+                                                Colors.blue.shade100,
+                                            leading: Text('Swipe Speed'),
+                                            collapsedBackgroundColor:
+                                                Colors.blue.shade100,
+                                            children: [
+                                              ListTile(
+                                                onTap: () {
+                                                  setState(() {
+                                                    duration = 2200;
+                                                  });
 
-                                                Navigator.pop(
-                                                    context);
-                                              },
-                                              leading: Text(
-                                                'SLOW',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .w600),
+                                                  Navigator.pop(context);
+                                                },
+                                                leading: Text(
+                                                  'SLOW',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
-                                            ),
-                                            ListTile(
-                                              onTap: () {
-                                                setState(() {
-                                                  duration = Duration
-                                                      .microsecondsPerMillisecond;
-                                                });
+                                              ListTile(
+                                                onTap: () {
+                                                  setState(() {
+                                                    duration = Duration
+                                                        .microsecondsPerMillisecond;
+                                                  });
 
-                                                Navigator.pop(
-                                                    context);
-                                              },
-                                              leading: Text(
-                                                'MEDIUM',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .w600),
+                                                  Navigator.pop(context);
+                                                },
+                                                leading: Text(
+                                                  'MEDIUM',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
-                                            ),
-                                            ListTile(
-                                              onTap: () {
-                                                setState(() {
-                                                  duration = 10;
-                                                });
+                                              ListTile(
+                                                onTap: () {
+                                                  setState(() {
+                                                    duration = 10;
+                                                  });
 
-                                                Navigator.pop(
-                                                    context);
-                                              },
-                                              leading: Text(
-                                                'FAST',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight
-                                                        .w600),
+                                                  Navigator.pop(context);
+                                                },
+                                                leading: Text(
+                                                  'FAST',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        /*ListTile(
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          /*ListTile(
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                               BorderRadius
@@ -729,7 +725,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         SizedBox(
                                           height: 10,
                                         ),*/
-                                        /*ListTile(
+                                          /*ListTile(
                                           shape: RoundedRectangleBorder(
                                               borderRadius:
                                               BorderRadius
@@ -799,15 +795,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 context);
                                           },
                                         ),*/
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            });
-                      },
-                      icon: Icon(Icons.settings,color: Colors.black,)),
-                  /*PopupMenuButton(onSelected: (value) {
+                                );
+                              });
+                        },
+                        icon: Icon(
+                          Icons.settings,
+                          color: Colors.black,
+                        )),
+                    /*PopupMenuButton(onSelected: (value) {
                         if (value == 'notifications') {
                           Navigator.push(
                               context,
@@ -855,18 +854,17 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ];
                       }),*/
-                ],
-              ),
-            ];
-          },
-          body: CustomScrollView(
-            slivers: [
+                  ],
+                ),
+              ];
+            },
+            body: CustomScrollView(slivers: [
               SliverList(
-                  delegate: SliverChildListDelegate([
-                Container(
-                  // color: Color(0xffd2dfff),
-                  child: SingleChildScrollView(
-                    child: Column(
+                delegate: SliverChildListDelegate([
+                  Container(
+                    // color: Color(0xffd2dfff),
+                    child: SingleChildScrollView(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -888,11 +886,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ),
                                 Spacer(),
                                 IconButton(
-
                                   onPressed: () {
                                     setState(() {
-                                      shownews =
-                                      !shownews;
+                                      shownews = !shownews;
                                     });
                                   },
                                   icon: shownews == true
@@ -975,13 +971,30 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
-                                                              showMaterialModalBottomSheet(context: context, 
-                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
-                                                              builder:(context){
-                                                                return   Container(
-                                                                 height: MediaQuery.of(context).size.height*0.6, 
-                                                                  child: NewsPaperScreen());
-                                                              });
+                                                              showMaterialModalBottomSheet(
+                                                                  context:
+                                                                      context,
+                                                                  duration:
+                                                                      Duration(
+                                                                          seconds:
+                                                                              1),
+                                                                  animationCurve:
+                                                                      Curves
+                                                                          .easeInQuad,
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius: BorderRadius.only(
+                                                                          topLeft: Radius.circular(
+                                                                              15),
+                                                                          topRight: Radius.circular(
+                                                                              15))),
+                                                                  builder:
+                                                                      (context) {
+                                                                    return Container(
+                                                                        height: MediaQuery.of(context).size.height *
+                                                                            0.6,
+                                                                        child:
+                                                                            NewsPaperScreen());
+                                                                  });
                                                               // setState(() {
                                                               //   viewnews = true;
                                                               //   newson = true;
@@ -1091,7 +1104,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 '${newchannelldata[1]['mediaChannelName']}',
                                                                 '${newchannelldata[1]['videoTitle']}',
                                                                 'assets/icons/newsdxps.png',
-                                                                '-${newchannelldata[1]['candidateName']}'),
+
+                                                                '${newchannelldata[1]['candidateName']}'
+                                                              .length >
+                                                          16
+                                                      ? '- ${newchannelldata[1]['candidateName'].substring(0, 10)}...'
+                                                      : '- ${newchannelldata[1]['candidateName']}'
+                                                                ),
                                                             NewsTemplate1(
                                                                 '${newchannelldata[2]['mediaChannelName']}',
                                                                 '${newchannelldata[2]['videoTitle']}',
@@ -1105,13 +1124,33 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
-                                                               showMaterialModalBottomSheet(context: context, 
-                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
-                                                              builder:(context){
-                                                                return   Container(
-                                                                 height: MediaQuery.of(context).size.height*0.6, 
-                                                                  child: NewsChannelScreen(),);
-                                                              });
+                                                              showMaterialModalBottomSheet(
+                                                                  context:
+                                                                      context,
+                                                                  duration:
+                                                                      Duration(
+                                                                          seconds:
+                                                                              1),
+                                                                  animationCurve:
+                                                                      Curves
+                                                                          .easeInQuad,
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius: BorderRadius.only(
+                                                                          topLeft: Radius.circular(
+                                                                              15),
+                                                                          topRight: Radius.circular(
+                                                                              15))),
+                                                                  builder:
+                                                                      (context) {
+                                                                    return Container(
+                                                                      height: MediaQuery.of(context)
+                                                                              .size
+                                                                              .height *
+                                                                          0.6,
+                                                                      child:
+                                                                          NewsChannelScreen(),
+                                                                    );
+                                                                  });
                                                               // setState(() {
                                                               //   viewnews = true;
                                                               //   newson = true;
@@ -1234,23 +1273,34 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
-                                                               showMaterialModalBottomSheet(context: context, 
-                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
-                                                              builder:(context){
-                                                                return   Container(
-                                                                 height: MediaQuery.of(context).size.height*0.6, 
-                                                                  child:  LiveUpdatesScreen(),);
-                                                              });
-                                                              // setState(() {
-                                                              //   viewnews = true;
-                                                              //   newson = true;
-                                                              //   NewsHeading =
-                                                              //       'Live Updates';
-                                                              //   _currIndex = 0;
-                                                              // });
-                                                              // PageCount
-                                                              //     .jumpToPage(
-                                                              //         2);
+                                                              showMaterialModalBottomSheet(
+                                                                  context:
+                                                                      context,
+                                                                  duration:
+                                                                      Duration(
+                                                                          seconds:
+                                                                              1),
+                                                                  animationCurve:
+                                                                      Curves
+                                                                          .easeInQuad,
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius: BorderRadius.only(
+                                                                          topLeft: Radius.circular(
+                                                                              15),
+                                                                          topRight: Radius.circular(
+                                                                              15))),
+                                                                  builder:
+                                                                      (context) {
+                                                                    return Container(
+                                                                      height: MediaQuery.of(context)
+                                                                              .size
+                                                                              .height *
+                                                                          0.6,
+                                                                      child:
+                                                                          LiveUpdatesScreen(),
+                                                                    );
+                                                                  });
+                                                              
                                                             },
                                                             child: SizedBox(
                                                               height: 130,
@@ -1365,22 +1415,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
-                                                               showMaterialModalBottomSheet(context: context, 
-                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
-                                                              builder:(context){
-                                                                return   Container(
-                                                                 height: MediaQuery.of(context).size.height*0.6, 
-                                                                  child: GoogleTrendsScreen());
-                                                              });
-                                                              // setState(() {
-                                                              //   viewnews = true;
-                                                              //   newson = true;
-                                                              //   NewsHeading =
-                                                              //       'Google Trends';
-                                                              // });
-                                                              // PageCount
-                                                              //     .jumpToPage(
-                                                              //         3);
+                                                              showMaterialModalBottomSheet(
+                                                                  context:
+                                                                      context,
+                                                                  duration:
+                                                                      Duration(
+                                                                          seconds:
+                                                                              1),
+                                                                  animationCurve:
+                                                                      Curves
+                                                                          .easeInQuad,
+                                                                  shape: RoundedRectangleBorder(
+                                                                      borderRadius: BorderRadius.only(
+                                                                          topLeft: Radius.circular(
+                                                                              15),
+                                                                          topRight: Radius.circular(
+                                                                              15))),
+                                                                  builder:
+                                                                      (context) {
+                                                                    return Container(
+                                                                        height: MediaQuery.of(context).size.height *
+                                                                            0.6,
+                                                                        child:
+                                                                            GoogleTrendsScreen());
+                                                                  });
+                                                       
                                                             },
                                                             child: SizedBox(
                                                               height: 130,
@@ -1441,9 +1500,49 @@ class _HomeScreenState extends State<HomeScreen> {
                           //todo:social media
 
                           Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: AnimatedContainer(
-                              duration: Duration(seconds: 2),
+                              padding: const EdgeInsets.only(left: 20),
+                              child: AnimatedContainer(
+                                  duration: Duration(seconds: 2),
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        'assets/new Updated images/social-media-icons-unscreen.gif',
+                                        height: 30,
+                                        width: 30,
+                                      ),
+                                      Text(
+                                        'SOCIAL MEDIA',
+                                        style: TextStyle(
+                                          fontFamily: 'Segoe UI',
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      IconButton(
+                                        onPressed: () {
+                                          setState(() {
+                                            showSocialnews = !showSocialnews;
+                                          });
+                                        },
+                                        icon: showSocialnews == true
+                                            ? Icon(Icons.arrow_drop_down)
+                                            : Icon(
+                                                Icons.arrow_drop_up_outlined),
+                                      ),
+                                    ],
+                                  )))
+                        ],
+                      ),
+                    ),
+                  ),
+                  showSocialnews == true
+                      ? SlideInDown(
+                          duration: Duration(seconds: 3),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0, right: 8),
+                            child: SingleChildScrollView(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: [
                                   Image.asset(
@@ -1471,1027 +1570,1423 @@ class _HomeScreenState extends State<HomeScreen> {
                                       : Icon(Icons.arrow_drop_up_outlined),
                                 ),
                               ],
+                                  FutureBuilder(
+                                      future: youtubedata,
+                                      builder: ((context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 70.0),
+                                            child: SizedBox(
+                                              height: 150,
+                                              width: 150,
+                                              child: Center(
+                                                  child: SpinKitWave(
+                                                color: Colors.blue,
+                                                size: 18,
+                                              )),
+                                            ),
+                                          );
+                                        } else if (snapshot.connectionState ==
+                                            ConnectionState.done) {
+                                          if (snapshot.hasError) {
+                                            return const Text('Data Error');
+                                          } else if (snapshot.hasData) {
+                                            List YoutubeList = [
+                                              SocialMediaTemplate1(
+                                                  '${Youtubedata[0]['mediaChannelName']}',
+                                                  '${Youtubedata[0]['videoTitle']}',
+                                                  'Views - ${Youtubedata[0]['videoViews']}    Likes - ${Youtubedata[0]['videoLikes']}'),
+                                              SocialMediaTemplate1(
+                                                  '${Youtubedata[1]['mediaChannelName']}',
+                                                  '${Youtubedata[1]['videoTitle']}',
+                                                  'Views - ${Youtubedata[1]['videoViews']}    Likes - ${Youtubedata[1]['videoLikes']}'),
+                                              SocialMediaTemplate1(
+                                                  '${Youtubedata[2]['mediaChannelName']}',
+                                                  '${Youtubedata[2]['videoTitle']}',
+                                                  'Views - ${Youtubedata[2]['videoViews']}    Likes - ${Youtubedata[2]['videoLikes']}'),
+                                              SocialMediaTemplate1(
+                                                  '${Youtubedata[3]['mediaChannelName']}',
+                                                  '${Youtubedata[3]['videoTitle']}',
+                                                  'Views - ${Youtubedata[3]['videoViews']}    Likes - ${Youtubedata[3]['videoLikes']}'),
+                                            ];
+                                            return SizedBox(
+                                              height: 130,
+                                              width: 150,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  showMaterialModalBottomSheet(
+                                                      context: context,
+                                                      duration:
+                                                          Duration(seconds: 1),
+                                                      animationCurve:
+                                                          Curves.easeInQuad,
+                                                      shape: RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          15),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          15))),
+                                                      builder: (context) {
+                                                        return Container(
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height *
+                                                              0.6,
+                                                          child:
+                                                              YouTubeScreen(),
+                                                        );
+                                                      });
+                                        
+                                                },
+                                                child: Swiper(
+                                                    itemWidth: 150,
+                                                    itemHeight: 130,
+                                                    duration: duration,
+                                                    layout: swiperlayout,
+                                                    scrollDirection:
+                                                        carddirection == false
+                                                            ? Axis.vertical
+                                                            : Axis.horizontal,
+                                                    autoplay: true,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return YoutubeList[index];
+                                                    },
+                                                    itemCount: 4,
+                                                    pagination:
+                                                        SwiperPagination(
+                                                            builder:
+                                                                DotSwiperPaginationBuilder(
+                                                      size: 7,
+                                                      color: Colors.grey,
+                                                      activeColor:
+                                                          Colors.blue.shade200,
+                                                    ))),
+                                              ),
+                                            );
+                                          } else {
+                                            return const Text('Server Error');
+                                          }
+                                        } else {
+                                          return Text(
+                                              'State: ${snapshot.connectionState}');
+                                        }
+                                      })),
 
-          )))],
+                                  //Twitter news
+                                  FutureBuilder(
+                                      future: twitterdata,
+                                      builder: ((context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 70.0),
+                                            child: SizedBox(
+                                              height: 150,
+                                              width: 150,
+                                              child: Center(
+                                                  child: SpinKitWave(
+                                                color: Colors.blue,
+                                                size: 18,
+                                              )),
+                                            ),
+                                          );
+                                        } else if (snapshot.connectionState ==
+                                            ConnectionState.done) {
+                                          if (snapshot.hasError) {
+                                            return const Text('Data Error');
+                                          } else if (snapshot.hasData) {
+                                            List TwitterList = [
+                                              SocialMediaTemplate2(
+                                                  '${TwitterData[0]['candidateName']}',
+                                                  '${TwitterData[0]['tweetContent']}',
+                                                  '- ${TwitterData[0]['candidatePartyName']}'),
+                                              SocialMediaTemplate2(
+                                                  '${TwitterData[1]['candidateName']}',
+                                                  '${TwitterData[1]['tweetContent']}',
+                                                  '- ${TwitterData[1]['candidatePartyName']}'),
+                                              SocialMediaTemplate2(
+                                                  '${TwitterData[2]['candidateName']}',
+                                                  '${TwitterData[2]['tweetContent']}',
+                                                  '- ${TwitterData[2]['candidatePartyName']}'),
+                                              SocialMediaTemplate2(
+                                                  '${TwitterData[3]['candidateName']}',
+                                                  '${TwitterData[3]['tweetContent']}',
+                                                  '- ${TwitterData[3]['candidatePartyName']}'),
+                                            ];
+                                            return SizedBox(
+                                              height: 130,
+                                              width: 150,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  showMaterialModalBottomSheet(
+                                                      context: context,
+                                                      duration:
+                                                          Duration(seconds: 1),
+                                                      animationCurve:
+                                                          Curves.easeInQuad,
+                                                      shape: RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          15),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          15))),
+                                                      builder: (context) {
+                                                        return Container(
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height *
+                                                              0.6,
+                                                          child:
+                                                              TwitterScreen(),
+                                                        );
+                                                      });
+                                                
+                                                },
+                                                child: Swiper(
+                                                    itemWidth: 150,
+                                                    itemHeight: 130,
+                                                    duration: duration,
+                                                    layout: swiperlayout,
+                                                    scrollDirection:
+                                                        carddirection == false
+                                                            ? Axis.vertical
+                                                            : Axis.horizontal,
+                                                    autoplay: true,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return TwitterList[index];
+                                                    },
+                                                    itemCount: 4,
+                                                    pagination:
+                                                        SwiperPagination(
+                                                            builder:
+                                                                DotSwiperPaginationBuilder(
+                                                      size: 7,
+                                                      color: Colors.grey,
+                                                      activeColor:
+                                                          Colors.blue.shade200,
+                                                    ))),
+                                              ),
+                                            );
+                                          } else {
+                                            return const Text('Server Error');
+                                          }
+                                        } else {
+                                          return Text(
+                                              'State: ${snapshot.connectionState}');
+                                        }
+                                      })),
+                                  //FaceBook News
+                                  FutureBuilder(
+                                      future: facebookdata,
+                                      builder: ((context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 70.0),
+                                            child: SizedBox(
+                                              height: 150,
+                                              width: 150,
+                                              child: Center(
+                                                  child: SpinKitWave(
+                                                color: Colors.blue,
+                                                size: 18,
+                                              )),
+                                            ),
+                                          );
+                                        } else if (snapshot.connectionState ==
+                                            ConnectionState.done) {
+                                          if (snapshot.hasError) {
+                                            return const Text('Data Error');
+                                          } else if (snapshot.hasData) {
+                                            List FaceBookList = [
+                                              SocialMediaTemplate3(
+                                                  '${Facebookdata[0]['keyWords']}',
+                                                  '${Facebookdata[0]['titleContent']}',
+                                                  '${Facebookdata[0]['candidateName']}'
+                                                              .length >
+                                                          16
+                                                      ? '- ${Facebookdata[0]['candidateName'].substring(0, 10)}...'
+                                                      : '- ${Facebookdata[0]['candidateName']}'
+
+                                                  // '${Facebookdata[0]['candidateName']}'
+                                                  ),
+                                              SocialMediaTemplate3(
+                                                  '${Facebookdata[1]['keyWords']}',
+                                                  '${Facebookdata[1]['titleContent']}',
+                                                  '${Facebookdata[1]['candidateName']}'
+                                                              .length >
+                                                          16
+                                                      ? '- ${Facebookdata[1]['candidateName'].substring(0, 10)}...'
+                                                      : '- ${Facebookdata[1]['candidateName']}'
+                                                  // ,'${Facebookdata[1]['candidateName']}'
+                                                  ),
+                                              SocialMediaTemplate3(
+                                                  '${Facebookdata[2]['keyWords']}',
+                                                  '${Facebookdata[2]['titleContent']}',
+                                                  '${Facebookdata[2]['candidateName']}'
+                                                              .length >
+                                                          16
+                                                      ? '- ${Facebookdata[2]['candidateName'].substring(0, 10)}...'
+                                                      : '- ${Facebookdata[2]['candidateName']}'
+
+                                                  // '${Facebookdata[2]['candidateName']}'
+                                                  ),
+                                              SocialMediaTemplate3(
+                                                  '${Facebookdata[3]['keyWords']}',
+                                                  '${Facebookdata[3]['titleContent']}',
+                                                  '${Facebookdata[3]['candidateName']}'
+                                                              .length >
+                                                          16
+                                                      ? '- ${Facebookdata[3]['candidateName'].substring(0, 10)}...'
+                                                      : '- ${Facebookdata[3]['candidateName']}'
+                                                  // '${Facebookdata[3]['candidateName']}'
+                                                  ),
+                                            ];
+                                            return SizedBox(
+                                              height: 130,
+                                              width: 150,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  showMaterialModalBottomSheet(
+                                                      context: context,
+                                                      duration:
+                                                          Duration(seconds: 1),
+                                                      animationCurve:
+                                                          Curves.easeInQuad,
+                                                      shape: RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          15),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          15))),
+                                                      builder: (context) {
+                                                        return Container(
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height *
+                                                              0.6,
+                                                          child:
+                                                              FaceBookScreen(),
+                                                        );
+                                                      });
+                                                  
+                                                },
+                                                child: Swiper(
+                                                    itemWidth: 150,
+                                                    itemHeight: 130,
+                                                    duration: duration,
+                                                    layout: swiperlayout,
+                                                    scrollDirection:
+                                                        carddirection == false
+                                                            ? Axis.vertical
+                                                            : Axis.horizontal,
+                                                    autoplay: true,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return FaceBookList[
+                                                          index];
+                                                    },
+                                                    itemCount: 4,
+                                                    pagination:
+                                                        SwiperPagination(
+                                                            builder:
+                                                                DotSwiperPaginationBuilder(
+                                                      size: 7,
+                                                      color: Colors.grey,
+                                                      activeColor:
+                                                          Colors.blue.shade200,
+                                                    ))),
+                                              ),
+                                            );
+                                          } else {
+                                            return const Text('Server Error');
+                                          }
+                                        } else {
+                                          return Text(
+                                              'State: ${snapshot.connectionState}');
+                                        }
+                                      })),
+                                  //Instagram news
+                                  FutureBuilder(
+                                      future: instagramdata,
+                                      builder: ((context, snapshot) {
+                                        if (snapshot.connectionState ==
+                                            ConnectionState.waiting) {
+                                          return Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 70.0),
+                                            child: SizedBox(
+                                              height: 150,
+                                              width: 150,
+                                              child: Center(
+                                                  child: SpinKitWave(
+                                                color: Colors.blue,
+                                                size: 18,
+                                              )),
+                                            ),
+                                          );
+                                        } else if (snapshot.connectionState ==
+                                            ConnectionState.done) {
+                                          if (snapshot.hasError) {
+                                            return const Text('Data Error');
+                                          } else if (snapshot.hasData) {
+                                            List InstagramList = [
+                                              SocialMediaTemplate4(
+                                                  '${Instagramdata[0]['candidateName']}',
+                                                  '${Instagramdata[0]['titleContent']}',
+                                                  'Likes- ${Instagramdata[0]['likesCount']}   Comments- ${Instagramdata[0]['commentsCount']}'),
+                                              SocialMediaTemplate4(
+                                                  '${Instagramdata[1]['candidateName']}',
+                                                  '${Instagramdata[1]['titleContent']}',
+                                                  'Likes- ${Instagramdata[1]['likesCount']}   Comments- ${Instagramdata[1]['commentsCount']}'),
+                                              SocialMediaTemplate4(
+                                                  '${Instagramdata[2]['candidateName']}',
+                                                  '${Instagramdata[2]['titleContent']}',
+                                                  'Likes- ${Instagramdata[2]['likesCount']}   Comments- ${Instagramdata[2]['commentsCount']}'),
+                                              SocialMediaTemplate4(
+                                                  '${Instagramdata[3]['candidateName']}',
+                                                  '${Instagramdata[3]['titleContent']}',
+                                                  'Likes- ${Instagramdata[3]['likesCount']}   Comments- ${Instagramdata[3]['commentsCount']}'),
+                                            ];
+                                            return SizedBox(
+                                              height: 130,
+                                              width: 150,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                  showMaterialModalBottomSheet(
+                                                      context: context,
+                                                      duration:
+                                                          Duration(seconds: 1),
+                                                      animationCurve:
+                                                          Curves.easeInQuad,
+                                                      shape: RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius.only(
+                                                                  topLeft: Radius
+                                                                      .circular(
+                                                                          15),
+                                                                  topRight: Radius
+                                                                      .circular(
+                                                                          15))),
+                                                      builder: (context) {
+                                                        return Container(
+                                                            height: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height *
+                                                                0.6,
+                                                            child:
+                                                                InstagramScreen());
+                                                      });
+                                                 
+                                                },
+                                                child: Swiper(
+                                                    itemWidth: 150,
+                                                    itemHeight: 130,
+                                                    duration: duration,
+                                                    layout: swiperlayout,
+                                                    scrollDirection:
+                                                        carddirection == false
+                                                            ? Axis.vertical
+                                                            : Axis.horizontal,
+                                                    autoplay: true,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      return InstagramList[
+                                                          index];
+                                                    },
+                                                    itemCount: 4,
+                                                    pagination:
+                                                        SwiperPagination(
+                                                            builder:
+                                                                DotSwiperPaginationBuilder(
+                                                      size: 7,
+                                                      color: Colors.grey,
+                                                      activeColor:
+                                                          Colors.blue.shade200,
+                                                    ))),
+                                              ),
+                                            );
+                                          } else {
+                                            return const Text('Server Error');
+                                          }
+                                        } else {
+                                          return Text(
+                                              'State: ${snapshot.connectionState}');
+                                        }
+                                      })),
+                                ],
                               ),
                             ),
                           ),
-                          showSocialnews == true
-                              ? SlideInDown(
-                                  duration: Duration(seconds: 3),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 8.0, right: 8),
-                                    child: SingleChildScrollView(
-                                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      scrollDirection: Axis.horizontal,
-                                      child: Row(
-                                        children: [
-                                          FutureBuilder(
-                                              future: youtubedata,
-                                              builder: ((context, snapshot) {
-                                                if (snapshot.connectionState ==
-                                                    ConnectionState.waiting) {
-                                                  return Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 70.0),
-                                                    child: SizedBox(
-                                                      height: 150,
-                                                      width: 150,
-                                                      child: Center(
-                                                          child: SpinKitWave(
-                                                        color: Colors.blue,
-                                                        size: 18,
-                                                      )),
-                                                    ),
-                                                  );
-                                                } else if (snapshot
-                                                        .connectionState ==
-                                                    ConnectionState.done) {
-                                                  if (snapshot.hasError) {
-                                                    return const Text(
-                                                        'Data Error');
-                                                  } else if (snapshot.hasData) {
-                                                    List YoutubeList = [
-                                                      SocialMediaTemplate1(
-                                                          '${Youtubedata[0]['mediaChannelName']}',
-                                                          '${Youtubedata[0]['videoTitle']}',
-                                                          'Views - ${Youtubedata[0]['videoViews']}    Likes - ${Youtubedata[0]['videoLikes']}'),
-                                                      SocialMediaTemplate1(
-                                                          '${Youtubedata[1]['mediaChannelName']}',
-                                                          '${Youtubedata[1]['videoTitle']}',
-                                                          'Views - ${Youtubedata[1]['videoViews']}    Likes - ${Youtubedata[1]['videoLikes']}'),
-                                                      SocialMediaTemplate1(
-                                                          '${Youtubedata[2]['mediaChannelName']}',
-                                                          '${Youtubedata[2]['videoTitle']}',
-                                                          'Views - ${Youtubedata[2]['videoViews']}    Likes - ${Youtubedata[2]['videoLikes']}'),
-                                                      SocialMediaTemplate1(
-                                                          '${Youtubedata[3]['mediaChannelName']}',
-                                                          '${Youtubedata[3]['videoTitle']}',
-                                                          'Views - ${Youtubedata[3]['videoViews']}    Likes - ${Youtubedata[3]['videoLikes']}'),
-                                                    ];
-                                                    return SizedBox(
-                                                      height: 130,
-                                                      width: 150,
-                                                      child: GestureDetector(
-                                                        onTap: () {
-                                                          showMaterialModalBottomSheet(context: context, 
-                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
-                                                              builder:(context){
-                                                                return   Container(
-                                                                 height: MediaQuery.of(context).size.height*0.6, 
-                                                                  child:YouTubeScreen(), );
-                                                              });
-                                                          // setState(() {
-                                                          //   viewnews = true;
-                                                          //   newson = true;
-                                                          //   NewsHeading =
-                                                          //       'Youtube';
-                                                          //   _currIndex = 0;
-                                                          // });
-                                                          // PageCount.jumpToPage(
-                                                          //     4);
-                                                        },
-                                                        child: Swiper(
-                                                            itemWidth: 150,
-                                                            itemHeight: 130,
-                                                            duration: duration,
-                                                            layout:
-                                                                swiperlayout,
-                                                            scrollDirection:
-                                                                carddirection ==
-                                                                        false
-                                                                    ? Axis
-                                                                        .vertical
-                                                                    : Axis
-                                                                        .horizontal,
-                                                            autoplay: true,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                                        context,
-                                                                    int index) {
-                                                              return YoutubeList[
-                                                                  index];
-                                                            },
-                                                            itemCount: 4,
-                                                            pagination:
-                                                                SwiperPagination(
-                                                                    builder:
-                                                                        DotSwiperPaginationBuilder(
-                                                              size: 7,
-                                                              color:
-                                                                  Colors.grey,
-                                                              activeColor:
-                                                                  Colors.blue
-                                                                      .shade200,
-                                                            ))),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    return const Text(
-                                                        'Server Error');
-                                                  }
-                                                } else {
-                                                  return Text(
-                                                      'State: ${snapshot.connectionState}');
-                                                }
-                                              })),
-                                      
-                                          //Twitter news
-                                          FutureBuilder(
-                                              future: twitterdata,
-                                              builder: ((context, snapshot) {
-                                                if (snapshot.connectionState ==
-                                                    ConnectionState.waiting) {
-                                                  return Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 70.0),
-                                                    child: SizedBox(
-                                                      height: 150,
-                                                      width: 150,
-                                                      child: Center(
-                                                          child: SpinKitWave(
-                                                        color: Colors.blue,
-                                                        size: 18,
-                                                      )),
-                                                    ),
-                                                  );
-                                                } else if (snapshot
-                                                        .connectionState ==
-                                                    ConnectionState.done) {
-                                                  if (snapshot.hasError) {
-                                                    return const Text(
-                                                        'Data Error');
-                                                  } else if (snapshot.hasData) {
-                                                    List TwitterList = [
-                                                      SocialMediaTemplate2(
-                                                          '${TwitterData[0]['candidateName']}',
-                                                          '${TwitterData[0]['tweetContent']}',
-                                                          '- ${TwitterData[0]['candidatePartyName']}'),
-                                                      SocialMediaTemplate2(
-                                                          '${TwitterData[1]['candidateName']}',
-                                                          '${TwitterData[1]['tweetContent']}','- ${TwitterData[1]['candidatePartyName']}'),
-                                                      SocialMediaTemplate2(
-                                                          '${TwitterData[2]['candidateName']}',
-                                                          '${TwitterData[2]['tweetContent']}','- ${TwitterData[2]['candidatePartyName']}'),
-                                                      SocialMediaTemplate2(
-                                                          '${TwitterData[3]['candidateName']}',
-                                                          '${TwitterData[3]['tweetContent']}','- ${TwitterData[3]['candidatePartyName']}'),
-                                                    ];
-                                                    return SizedBox(
-                                                      height: 130,
-                                                      width: 150,
-                                                      child: GestureDetector(
-                                                        onTap: () {
-                                                          showMaterialModalBottomSheet(context: context, 
-                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
-                                                              builder:(context){
-                                                                return   Container(
-                                                                 height: MediaQuery.of(context).size.height*0.6, 
-                                                                  child:TwitterScreen(), );
-                                                              });
-                                                          // setState(() {
-                                                          //   viewnews = true;
-                                                          //   newson = true;
-                                                          //   NewsHeading =
-                                                          //       'Twitter';
-                                                          //   _currIndex = 0;
-                                                          // });
-                                                          // PageCount.jumpToPage(
-                                                          //     5);
-                                                        },
-                                                        child: Swiper(
-                                                            itemWidth: 150,
-                                                            itemHeight: 130,
-                                                            duration: duration,
-                                                            layout:
-                                                                swiperlayout,
-                                                            scrollDirection:
-                                                                carddirection ==
-                                                                        false
-                                                                    ? Axis
-                                                                        .vertical
-                                                                    : Axis
-                                                                        .horizontal,
-                                                            autoplay: true,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                                        context,
-                                                                    int index) {
-                                                              return TwitterList[
-                                                                  index];
-                                                            },
-                                                            itemCount: 4,
-                                                            pagination:
-                                                                SwiperPagination(
-                                                                    builder:
-                                                                        DotSwiperPaginationBuilder(
-                                                              size: 7,
-                                                              color:
-                                                                  Colors.grey,
-                                                              activeColor:
-                                                                  Colors.blue
-                                                                      .shade200,
-                                                            ))),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    return const Text(
-                                                        'Server Error');
-                                                  }
-                                                } else {
-                                                  return Text(
-                                                      'State: ${snapshot.connectionState}');
-                                                }
-                                              })),
-                                          //FaceBook News
-                                          FutureBuilder(
-                                              future: facebookdata,
-                                              builder: ((context, snapshot) {
-                                                if (snapshot.connectionState ==
-                                                    ConnectionState.waiting) {
-                                                  return Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 70.0),
-                                                    child: SizedBox(
-                                                      height: 150,
-                                                      width: 150,
-                                                      child: Center(
-                                                          child: SpinKitWave(
-                                                        color: Colors.blue,
-                                                        size: 18,
-                                                      )),
-                                                    ),
-                                                  );
-                                                } else if (snapshot
-                                                        .connectionState ==
-                                                    ConnectionState.done) {
-                                                  if (snapshot.hasError) {
-                                                    return const Text(
-                                                        'Data Error');
-                                                  } else if (snapshot.hasData) {
-                                                    List FaceBookList = [
-                                                      SocialMediaTemplate3(
-                                                          '${Facebookdata[0]['keyWords']}',
-                                                          '${Facebookdata[0]['titleContent']}',
-                                                          '${Facebookdata[0]['candidateName']}'
-                                                                      .length >
-                                                                  16
-                                                              ? '- ${Facebookdata[0]['candidateName'].substring(0, 10)}...'
-                                                              : '- ${Facebookdata[0]['candidateName']}'
+                        )
+                      : Container(),
+                  SingleChildScrollView(
+                    physics: ScrollPhysics(),
+                    child: Column(
+                      children: [
+                        GridView.count(
+                          physics: NeverScrollableScrollPhysics(),
+                          crossAxisCount: 5,
+                          crossAxisSpacing: 0,
+                          shrinkWrap: true,
+                          children: [
+                            Column(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AllCandidateList()));
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/new Updated images/intellisensesolutions-Icons-62.png",
+                                      height: 30,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Candidature Analysis',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
+                                ),
+                              )
+                            ]),
+                            Column(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ConstituencyAnalysis()));
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/new Updated images/intellisensesolutions-Icons-73 (1).png",
+                                      height: 30,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                              Text(
+                                'Constituency Analysis',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 10),
+                              )
+                            ]),
+                            Column(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  PageCount.jumpToPage(7);
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/new Updated images/intellisensesolutions-Icons-78.png",
+                                      height: 30,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                              Text(
+                                'District Analysis',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 10),
+                              )
+                            ]),
+                            Column(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  PageCount.jumpToPage(7);
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/new Updated images/intellisensesolutions-Icons-74.png",
+                                      height: 30,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                              Text(
+                                'Communication Channel',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 10),
+                              )
+                            ]),
+                            Column(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  PageCount.jumpToPage(7);
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/new Updated images/intellisensesolutions-Icons-75.png",
+                                      height: 30,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                              Text(
+                                'Survey',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 10),
+                              )
+                            ]),
+                            Column(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ElectoralAnalysis()));
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/new Updated images/intellisensesolutions-Icons-79.png",
+                                      height: 30,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                              Text(
+                                'Electoral Analysis',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 10),
+                              )
+                            ]),
+                            Column(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  PageCount.jumpToPage(7);
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/new Updated images/news-71.png",
+                                      height: 30,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                              Text(
+                                'News Feed',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 10),
+                              )
+                            ]),
+                            Column(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  PageCount.jumpToPage(7);
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/new Updated images/intellisensesolutions-Icons-80.png",
+                                      height: 30,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                              Text(
+                                'Face Emotion Analysis',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 10),
+                              )
+                            ]),
+                            Column(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ScoreCardsScreen()));
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/new Updated images/intellisensesolutions-Icons-77.png",
+                                      height: 30,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                              Text(
+                                'Score Card',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 10),
+                              )
+                            ]),
+                            Column(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              ScoreCardsScreen()));
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/new Updated images/intellisensesolutions-Icons-81.png",
+                                      height: 30,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                              Text(
+                                'Chat Analysis',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 10),
+                              )
+                            ]),
+                            Column(children: [
+                              GestureDetector(
+                                onTap: () {
+                                  PageCount.jumpToPage(7);
+                                },
+                                child: Container(
+                                  height: 50,
+                                  width: 50,
+                                  child: Center(
+                                    child: Image.asset(
+                                      "assets/new Updated images/intellisensesolutions-Icons-76.png",
+                                      height: 30,
+                                    ),
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  padding: EdgeInsets.all(8),
+                                ),
+                              ),
+                              Text(
+                                'Sentiment Analysis',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 10),
+                              )
+                            ]),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ]),
+              ),
+            ]),
+          )),
+    );
+  
+  }
 
-                                                          // '${Facebookdata[0]['candidateName']}'
-                                                          ),
-                                                      SocialMediaTemplate3(
-                                                          '${Facebookdata[1]['keyWords']}',
-                                                          '${Facebookdata[1]['titleContent']}',
-                                                          '${Facebookdata[1]['candidateName']}'
-                                                                      .length >
-                                                                  16
-                                                              ? '- ${Facebookdata[1]['candidateName'].substring(0, 10)}...'
-                                                              : '- ${Facebookdata[1]['candidateName']}'
-                                                          // ,'${Facebookdata[1]['candidateName']}'
-                                                          ),
-                                                      SocialMediaTemplate3(
-                                                          '${Facebookdata[2]['keyWords']}',
-                                                          '${Facebookdata[2]['titleContent']}',
-                                                          '${Facebookdata[2]['candidateName']}'
-                                                                      .length >
-                                                                  16
-                                                              ? '- ${Facebookdata[2]['candidateName'].substring(0, 10)}...'
-                                                              : '- ${Facebookdata[2]['candidateName']}'
+ 
 
-                                                          // '${Facebookdata[2]['candidateName']}'
-                                                          ),
-                                                      SocialMediaTemplate3(
-                                                          '${Facebookdata[3]['keyWords']}',
-                                                          '${Facebookdata[3]['titleContent']}',
-                                                          '${Facebookdata[3]['candidateName']}'
-                                                                      .length >
-                                                                  16
-                                                              ? '- ${Facebookdata[3]['candidateName'].substring(0, 10)}...'
-                                                              : '- ${Facebookdata[3]['candidateName']}'
-                                                          // '${Facebookdata[3]['candidateName']}'
-                                                          ),
-                                                    ];
-                                                    return SizedBox(
-                                                      height: 130,
-                                                      width: 150,
-                                                      child: GestureDetector(
-                                                        onTap: () {
-                                                          showMaterialModalBottomSheet(context: context, 
-                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
-                                                              builder:(context){
-                                                                return   Container(
-                                                                 height: MediaQuery.of(context).size.height*0.6, 
-                                                                  child:   FaceBookScreen(), );
-                                                              });
-                                                          // setState(() {
-                                                          //   viewnews = true;
-                                                          //   newson = true;
-                                                          //   NewsHeading =
-                                                          //       'FaceBook';
-                                                          //   _currIndex = 0;
-                                                          // });
-                                                          // PageCount.jumpToPage(
-                                                          //     6);
-                                                        },
-                                                        child: Swiper(
-                                                            itemWidth: 150,
-                                                            itemHeight: 130,
-                                                            duration: duration,
-                                                            layout:
-                                                                swiperlayout,
-                                                            scrollDirection:
-                                                                carddirection ==
-                                                                        false
-                                                                    ? Axis
-                                                                        .vertical
-                                                                    : Axis
-                                                                        .horizontal,
-                                                            autoplay: true,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                                        context,
-                                                                    int index) {
-                                                              return FaceBookList[
-                                                                  index];
-                                                            },
-                                                            itemCount: 4,
-                                                            pagination:
-                                                                SwiperPagination(
-                                                                    builder:
-                                                                        DotSwiperPaginationBuilder(
-                                                              size: 7,
-                                                              color:
-                                                                  Colors.grey,
-                                                              activeColor:
-                                                                  Colors.blue
-                                                                      .shade200,
-                                                            ))),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    return const Text(
-                                                        'Server Error');
-                                                  }
-                                                } else {
-                                                  return Text(
-                                                      'State: ${snapshot.connectionState}');
-                                                }
-                                              })),
-                                          //Instagram news
-                                          FutureBuilder(
-                                              future: instagramdata,
-                                              builder: ((context, snapshot) {
-                                                if (snapshot.connectionState ==
-                                                    ConnectionState.waiting) {
-                                                  return Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 70.0),
-                                                    child: SizedBox(
-                                                      height: 150,
-                                                      width: 150,
-                                                      child: Center(
-                                                          child: SpinKitWave(
-                                                        color: Colors.blue,
-                                                        size: 18,
-                                                      )),
+  bool viewnews = true;
+
+
+  YoutubeBanner(){
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Center(
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              elevation: 5,
+              child: Container(
+                height: 250,
+                width: MediaQuery.of(context).size.width * 0.9,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                 
+                ),
+                child:   FutureBuilder<dynamic>(
+                          future: LineChartfuturecall,
+                          builder: (
+                              BuildContext context,
+                              AsyncSnapshot<dynamic> snapshot,
+                              ) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return SpinKitWave(
+                                color: Colors.blue,
+                                size: 18,
+                              );
+                            } else if (snapshot.connectionState ==
+                                ConnectionState.done) {
+                              if (snapshot.hasError) {
+                                return const Text('Error');
+                              } else if (snapshot.hasData) {
+                                return    Padding(
+                                  padding: const EdgeInsets.only(top:8.0),
+                                  child: Stack(
+                                                  children: [
+                                                   
+                                                    
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                                      children: [
+                                                        Column(
+                                                          children: [
+                                                            Container(decoration: BoxDecoration(border: Border.all(color: Colors.redAccent,),borderRadius: BorderRadius.circular(15)),
+                                                              height: 120,
+                                                              width: 120,
+                                                              child: SfCircularChart(
+                                    tooltipBehavior: _tooltipBehavior1,
+                                    palette: [
+                                      Color.fromRGBO(254, 1, 117,0),
+                                      Color.fromRGBO(19, 136, 8,0),
+                                      Color.fromRGBO(249, 125, 9,0),
+                                    ],
+                                    series: <PieSeries<ChartSampleData, String>>[
+                                      PieSeries<ChartSampleData, String>(
+                                          explode: true,
+                                          explodeIndex: 0,
+                                          explodeOffset: '10%',
+                                          dataSource: <ChartSampleData>[
+                                            ...PiegraphChartData
+                                          
+                                          ],
+                                          xValueMapper: (ChartSampleData data, _) =>
+                                          data.x as String,
+                                          yValueMapper: (ChartSampleData data, _) =>
+                                          data.y,
+                                          dataLabelMapper:
+                                              (ChartSampleData data, _) => data.text,
+                                          startAngle: 90,
+                                          endAngle: 90,
+                                          dataLabelSettings: const DataLabelSettings(
+                                              isVisible: true)),
+                                    ]),
+                                                            ),
+                                                            Text(
+                                                              'FOLLOWERS',
+                                                              style: TextStyle(fontSize: 10),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Padding(
+                                    padding: const EdgeInsets.only(top: 35.0),
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Text(BarGraphdata['lead'][0]),
+                                            Image.asset('assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',height: 30,)
+                                          ],
+                                        ),
+                                        Column(
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Image.asset('assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',height: 30,),
+                                                Text('BJP'),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                                      
+                                                        Column(
+                                                          children: [
+                                                           Container(decoration: BoxDecoration(border: Border.all(color: Colors.redAccent),borderRadius: BorderRadius.circular(15)),
+                                          height: 120,
+                                          width: 120,
+                                          child: SfFunnelChart(palette: [
+                                            Color.fromRGBO(254, 1, 117,0),
+                                            Color.fromRGBO(19, 136, 8,0),
+                                            Color.fromRGBO(249, 125, 9,0),
+                                          ],
+                                              //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
+                                              tooltipBehavior:
+                                              TooltipBehavior(enable: true),
+                                              series: FunnelSeries<ChartSampleData,
+                                                  String>(
+                                                  dataSource: <ChartSampleData>[
+                                                    ...FunnelgraphChartData,
+                                                  ],
+                                                  xValueMapper:
+                                                      (ChartSampleData data, _) =>
+                                                  data.x as String,
+                                                  yValueMapper:
+                                                      (ChartSampleData data, _) =>
+                                                  data.y,
+                                                  /*  explode: isCardView ? false : explode,
+                                    gapRatio: isCardView ? 0 : gapRatio,*/
+                                                  neckHeight: /*isCardView ? */
+                                                  '20%' /*: neckHeight.toString()*/ +
+                                                      '%',
+                                                  neckWidth: /*isCardView ?*/
+                                                  '25%' /*: neckWidth.toString()*/ +
+                                                      '%',
+                                                  dataLabelSettings:
+                                                  const DataLabelSettings(textStyle: TextStyle(fontSize: 8 ),
+                                                      isVisible: true)))),
+                                                            Text(
+                                                              'Re-Tweet',
+                                                              style: TextStyle(fontSize: 10),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
                                                     ),
-                                                  );
-                                                } else if (snapshot
-                                                        .connectionState ==
-                                                    ConnectionState.done) {
-                                                  if (snapshot.hasError) {
-                                                    return const Text(
-                                                        'Data Error');
-                                                  } else if (snapshot.hasData) {
-                                                    List InstagramList = [
-                                                      SocialMediaTemplate4(
-                                                          '${Instagramdata[0]['candidateName']}',
-                                                          '${Instagramdata[0]['titleContent']}',
-                                                          'Likes- ${Instagramdata[0]['likesCount']}   Comments- ${Instagramdata[0]['commentsCount']}'),
-                                                      SocialMediaTemplate4(
-                                                          '${Instagramdata[1]['candidateName']}',
-                                                          '${Instagramdata[1]['titleContent']}',
-                                                          'Likes- ${Instagramdata[1]['likesCount']}   Comments- ${Instagramdata[1]['commentsCount']}'),
-                                                      SocialMediaTemplate4(
-                                                          '${Instagramdata[2]['candidateName']}',
-                                                          '${Instagramdata[2]['titleContent']}',
-                                                          'Likes- ${Instagramdata[2]['likesCount']}   Comments- ${Instagramdata[2]['commentsCount']}'),
-                                                      SocialMediaTemplate4(
-                                                          '${Instagramdata[3]['candidateName']}',
-                                                          '${Instagramdata[3]['titleContent']}',
-                                                          'Likes- ${Instagramdata[3]['likesCount']}   Comments- ${Instagramdata[3]['commentsCount']}'),
-                                                    ];
-                                                    return SizedBox(
-                                                      height: 130,
-                                                      width: 150,
-                                                      child: GestureDetector(
-                                                        onTap: () {
-                                                          showMaterialModalBottomSheet(context: context, 
-                                                              duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
-                                                              builder:(context){
-                                                                return   Container(
-                                                                 height: MediaQuery.of(context).size.height*0.6, 
-                                                                  child: InstagramScreen());
-                                                              });
-                                                          // setState(() {
-                                                          //   viewnews = true;
-                                                          //   newson = true;
-                                                          //   NewsHeading =
-                                                          //       'Instagram';
-                                                          //   _currIndex = 0;
-                                                          // });
-                                                          // PageCount.jumpToPage(
-                                                          //     7);
-                                                        },
-                                                        child: Swiper(
-                                                            itemWidth: 150,
-                                                            itemHeight: 130,
-                                                            duration: duration,
-                                                            layout:
-                                                                swiperlayout,
-                                                            scrollDirection:
-                                                                carddirection ==
-                                                                        false
-                                                                    ? Axis
-                                                                        .vertical
-                                                                    : Axis
-                                                                        .horizontal,
-                                                            autoplay: true,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                                        context,
-                                                                    int index) {
-                                                              return InstagramList[
-                                                                  index];
-                                                            },
-                                                            itemCount: 4,
-                                                            pagination:
-                                                                SwiperPagination(
-                                                                    builder:
-                                                                        DotSwiperPaginationBuilder(
-                                                              size: 7,
-                                                              color:
-                                                                  Colors.grey,
-                                                              activeColor:
-                                                                  Colors.blue
-                                                                      .shade200,
-                                                            ))),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    return const Text(
-                                                        'Server Error');
-                                                  }
-                                                } else {
-                                                  return Text(
-                                                      'State: ${snapshot.connectionState}');
-                                                }
-                                              })),
-                                        ],
+                                                   
+                                                   Row(
+                                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                              crossAxisAlignment: CrossAxisAlignment.center,
+                                                              children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 1.0,top: 60),
+                                    child: Image.asset(
+                                      'assets/icons/Social-Media-Icons-IS-10.png',
+                                      height: 18,
+                                      width: 18,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 140.0,left: 5),
+                                    child: Container(
+                                      height: 150,
+                                      width: 150,
+                                      child: RichText(
+                                        text: new TextSpan(
+                                          // Note: Styles for TextSpans must be explicitly defined.
+                                          // Child text spans will inherit styles from parent
+                                          style: new TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.black,
+                                          ),
+                                          children: <TextSpan>[
+                                            TextSpan(
+                                                text: BarGraphdata['lead'][0],
+                                                style: new TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.green,
+                                                    fontSize: 20,
+                                                    fontFamily: 'Segoe UI')),
+                                            TextSpan(
+                                                text:
+                                                ' is overpowering ',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18,
+                                                    fontFamily: 'Segoe UI')),
+                                            TextSpan(
+                                                text: "BJP",
+                                                style: new TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.red,
+                                                    fontSize: 20,
+                                                    fontFamily: 'Segoe UI')),
+                                            TextSpan(
+                                                text:
+                                                ' in all aspects',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 18,
+                                                    fontFamily: 'Segoe UI')),
+                                
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
-                                )
-                              : Container(),
-
-                          // Card(
-                          //   shape: RoundedRectangleBorder(
-                          //       borderRadius: BorderRadius.circular(15)),
-                          //   // color: Color(0xffa3bdea),
-                          //   elevation: 7,
-                          //   child: Column(
-                          //     children: [
-                          //       Row(
-                          //         mainAxisAlignment: MainAxisAlignment.center,
-                          //         children: [
-                          //           Flexible(child: Divider(thickness: 1)),
-                          //           Text(
-                          //             '$NewsHeading',
-                          //             style: TextStyle(
-                          //               fontFamily: 'Segoe UI',
-                          //               fontSize: 16,
-                          //             ),
-                          //           ),
-                          //           IconButton(
-                          //             icon: newson == true
-                          //                 ? Icon(Icons.arrow_drop_down)
-                          //                 : Icon(Icons.arrow_drop_up_outlined),
-
-
-                          //             //  AnimatedSwitcher(
-                          //             //     duration:
-                          //             //         const Duration(milliseconds: 300),
-                          //             //     transitionBuilder: (child, anim) =>
-                          //             //         RotationTransition(
-                          //             //           turns: child.key ==
-                          //             //                   ValueKey('icon1')
-                          //             //               ? Tween<double>(
-                          //             //                       begin: 1, end: 0.75)
-                          //             //                   .animate(anim)
-                          //             //               : Tween<double>(
-                          //             //                       begin: 0.75, end: 1)
-                          //             //                   .animate(anim),
-                          //             //           child: FadeTransition(
-                          //             //               opacity: anim,
-                          //             //               child: child),
-                          //             //         ),
-                          //             //     child: _currIndex == 0
-                          //             //         ? Icon(
-                          //             //             Icons
-                          //             //                 .arrow_circle_left_outlined,
-                          //             //             size: 30,
-                          //             //             key: const ValueKey('icon1'))
-                          //             //         : Icon(
-                          //             //             Icons.arrow_circle_up_sharp,
-                          //             //             size: 30,
-                          //             //             key: const ValueKey('icon2'),
-                          //             //           )),
-                          //             onPressed: () {
-                          //               setState(() {
-                          //                 newson = !newson;
-                          //               });
-                          //             },
-                          //           ),
-                          //           Flexible(
-                          //               child: Divider(
-                          //             thickness: 1,
-                          //           ))
-                          //         ],
-                          //       ),
-                          //       Row(
-                          //         mainAxisAlignment: MainAxisAlignment.center,
-                          //         children: [
-                          //           newson == true
-                          //               ? Container(
-                          //                   height: 450,
-                          //                   width: 400,
-                          //                   // curve: Curves.linear,
-                          //                   // height: _height,
-                          //                   // width: _width,
-                          //                   // alignment: Alignment.center,
-                          //                   // duration: Duration(seconds: 2),
-                          //                   child: PageView.builder(
-                          //                       // physics: NeverScrollableScrollPhysics(),
-                          //                       controller: PageCount,
-                          //                       itemCount:
-                          //                           DailyNewsPages.length,
-                          //                       itemBuilder:
-                          //                           (BuildContext, index) {
-                          //                         return DailyNewsPages[index];
-                          //                       }),
-                          //                   decoration: BoxDecoration())
-                          //               : Container(),
-                          //         ],
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
-
-                          // viewnews == true
-                          //     ? SizedBox(
-                          //         height: 450,
-                          //         child: PageView.builder(
-                          //             // physics: NeverScrollableScrollPhysics(),
-                          //             controller: PageCount,
-                          //             itemCount: DailyNewsPages.length,
-                          //             itemBuilder: (BuildContext, index) {
-                          //               return DailyNewsPages[index];
-                          //             }))
-                          //     : Container(),
-                          SingleChildScrollView(
-                            physics: ScrollPhysics(),
-                            child: Column(
-                              children: [
-                                GridView.count(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  crossAxisCount: 5,
-                                  crossAxisSpacing: 0,
-                                  shrinkWrap: true,
-                                  children: [
-                                    Column(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      AllCandidateList()));
-
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                            child: Image.asset(
-                                              "assets/new Updated images/intellisensesolutions-Icons-62.png",
-                                              height: 30,
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding: EdgeInsets.all(8),
-                                        ),
-                                      ),
-                                      Expanded(
-                                        child: Text(
-                                          'Candidature Analysis',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 10),
-                                        ),
-                                      )
-                                    ]),
-                                    Column(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ConstituencyAnalysis()));
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                            child: Image.asset(
-                                              "assets/new Updated images/intellisensesolutions-Icons-73 (1).png",
-                                              height: 30,
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding: EdgeInsets.all(8),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 100.0),
+                                        child: FutureBuilder<dynamic>(
+                                          future: LineChartfuturecall,
+                                          builder: (
+                                              BuildContext context,
+                                              AsyncSnapshot<dynamic> snapshot,
+                                              ) {
+                                            if (snapshot.connectionState ==
+                                                ConnectionState.waiting) {
+                                              return SpinKitWave(
+                                                color: Colors.blue,
+                                                size: 18,
+                                              );
+                                            } else if (snapshot.connectionState ==
+                                                ConnectionState.done) {
+                                              if (snapshot.hasError) {
+                                                return const Text('Error');
+                                              } else if (snapshot.hasData) {
+                                                return Container(
+                                                  decoration: BoxDecoration(border: Border.all(color: Colors.redAccent),borderRadius: BorderRadius.circular(15)),
+                                                  height: 100,
+                                                  width: 135,
+                                                  child: SfCartesianChart(
+                                                    palette: <Color>[
+                                                      Color(0xffff7f50),
+                                                      Color(0xfff0ead6),
+                                                      Color(0xffffd700),
+                                                      Color(0xff264348),
+                                                    ],
+                                                    plotAreaBorderWidth: 0,
+                                                    primaryXAxis: CategoryAxis(
+                                                      labelStyle: const TextStyle(
+                                                          color: Colors.black, fontSize: 8),
+                                                      axisLine: const AxisLine(width: 0),
+                                                      labelPosition:
+                                                      ChartDataLabelPosition.outside,
+                                                      majorTickLines:
+                                                      const MajorTickLines(width: 0),
+                                                      majorGridLines:
+                                                      const MajorGridLines(width: 0),
+                                                    ),
+                                                    primaryYAxis: NumericAxis(
+                                                        labelStyle: const TextStyle(
+                                                            color: Colors.black, fontSize: 8),
+                                                        labelPosition:
+                                                        ChartDataLabelPosition.outside,
+                                                        isVisible: false,
+                                                        minimum: 0,
+                                                        maximum: 2000),
+                                                    series: <ColumnSeries<ChartSampleData,
+                                                        String>>[
+                                                      ColumnSeries<ChartSampleData, String>(
+                                                        width: 0.9,
+                                                        dataLabelSettings:
+                                                        const DataLabelSettings(
+                                                            isVisible: false,
+                                                            labelAlignment:
+                                                            ChartDataLabelAlignment.top),
+                                                        dataSource: <ChartSampleData>[
+                                                          ...BargraphChartdata
+                                                        ],
+                                                        borderRadius: BorderRadius.circular(10),
+                                                        xValueMapper:
+                                                            (ChartSampleData sales, _) =>
+                                                        sales.x as String,
+                                                        yValueMapper:
+                                                            (ChartSampleData sales, _) => sales.y,
+                                                      ),
+                                                    ],
+                                                    tooltipBehavior: _tooltipBehavior,
+                                                  ),
+                                                );
+                                              } else {
+                                                return const Text('Empty data');
+                                              }
+                                            } else {
+                                              return Text('State: ${snapshot.connectionState}');
+                                            }
+                                          },
                                         ),
                                       ),
                                       Text(
-                                        'Constituency Analysis',
-                                        textAlign: TextAlign.center,
+                                        'Likes',
+                                        style: TextStyle(fontSize: 10),
+                                      )
+                                    ],
+                                  ),
+                                                              ],
+                                                            ),
+                                                    /* Positioned(
+                                                        top: 140,
+                                                        left: 2,
+                                                        child: Image.asset(
+                                                          'assets/icons/Social-Media-Icons-IS-08.png',
+                                                          height: 18,
+                                                          width: 18,
+                                                        )),
+                                                    Row(
+                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Padding(
+                                                          padding: const EdgeInsets.only(top: 140.0,left: 20),
+                                                          child: Container(
+                                                            height: 160,
+                                                            width: 160,
+                                                            child: RichText(
+                                                              text: new TextSpan(
+                                  // Note: Styles for TextSpans must be explicitly defined.
+                                  // Child text spans will inherit styles from parent
+                                  style: new TextStyle(
+                                    fontSize: 12.0,
+                                    color: Colors.black,
+                                  ),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                        text:
+                                            'With Huge Difference In counts for Tweets and Re-Tweets reports says that ',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 10),
-                                      )
-                                    ]),
-                                    Column(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          PageCount.jumpToPage(7);
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                            child: Image.asset(
-                                              "assets/new Updated images/intellisensesolutions-Icons-78.png",
-                                              height: 30,
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding: EdgeInsets.all(8),
-                                        ),
-                                      ),
-                                      Text(
-                                        'District Analysis',
-                                        textAlign: TextAlign.center,
+                                            fontFamily: 'Segoe UI')),
+                                    TextSpan(
+                                        text: BarGraphdata['lead'][0],
+                                        style: new TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green,
+                                            fontSize: 20,
+                                            fontFamily: 'Segoe UI')),
+                                    TextSpan(
+                                        text:
+                                            ' is relatively Dominant in Twitter Data.',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
-                                            fontSize: 10),
-                                      )
-                                    ]),
-                                    Column(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          PageCount.jumpToPage(7);
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                            child: Image.asset(
-                                              "assets/new Updated images/intellisensesolutions-Icons-74.png",
-                                              height: 30,
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding: EdgeInsets.all(8),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Communication Channel',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10),
-                                      )
-                                    ]),
-                                    Column(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          PageCount.jumpToPage(7);
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                            child: Image.asset(
-                                              "assets/new Updated images/intellisensesolutions-Icons-75.png",
-                                              height: 30,
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding: EdgeInsets.all(8),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Survey',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10),
-                                      )
-                                    ]),
-                                    Column(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ElectoralAnalysis()));
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                            child: Image.asset(
-                                              "assets/new Updated images/intellisensesolutions-Icons-79.png",
-                                              height: 30,
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding: EdgeInsets.all(8),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Electoral Analysis',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10),
-                                      )
-                                    ]),
-                                    Column(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          PageCount.jumpToPage(7);
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                            child: Image.asset(
-                                              "assets/new Updated images/news-71.png",
-                                              height: 30,
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding: EdgeInsets.all(8),
-                                        ),
-                                      ),
-                                      Text(
-                                        'News Feed',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10),
-                                      )
-                                    ]),
-                                    Column(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          PageCount.jumpToPage(7);
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                            child: Image.asset(
-                                              "assets/new Updated images/intellisensesolutions-Icons-80.png",
-                                              height: 30,
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding: EdgeInsets.all(8),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Face Emotion Analysis',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10),
-                                      )
-                                    ]),
-                                    Column(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ScoreCardsScreen()));
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                            child: Image.asset(
-                                              "assets/new Updated images/intellisensesolutions-Icons-77.png",
-                                              height: 30,
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding: EdgeInsets.all(8),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Score Card',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10),
-                                      )
-                                    ]),
-                                    Column(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ScoreCardsScreen()));
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                            child: Image.asset(
-                                              "assets/new Updated images/intellisensesolutions-Icons-81.png",
-                                              height: 30,
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding: EdgeInsets.all(8),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Chat Analysis',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10),
-                                      )
-                                    ]),
-                                    Column(children: [
-                                      GestureDetector(
-                                        onTap: () {
-                                          PageCount.jumpToPage(7);
-                                        },
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          child: Center(
-                                            child: Image.asset(
-                                              "assets/new Updated images/intellisensesolutions-Icons-76.png",
-                                              height: 30,
-                                            ),
-                                          ),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                          ),
-                                          padding: EdgeInsets.all(8),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Sentiment Analysis',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 10),
-                                      )
-                                    ]),
+                                            fontFamily: 'Segoe UI')),
                                   ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ]),
-                  ),
-                ]),
-              )),
-
-          );
-        /*floatingActionButton: SpeedDial(
-          child: Icon(Icons.add),
-          closedForegroundColor: Colors.black,
-          openForegroundColor: Colors.grey,
-          closedBackgroundColor: Colors.grey,
-          openBackgroundColor: Colors.black,
-          speedDialChildren: <SpeedDialChild>[
-            SpeedDialChild(
-              child: Image.asset('assets/icons/News-Icon-3D.png',width: 30),
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.grey,
-              label: 'Hide News',
-              onPressed: () {
-                setState(() {
-                  viewnews = false;
-                });
-              },
-              closeSpeedDialOnPressed: false,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        Column(
+                                                          children: [
+                                                            Padding(
+                                                              padding: const EdgeInsets.only(top: 100.0),
+                                                              child: FutureBuilder<dynamic>(
+                                  future: LineChartfuturecall,
+                                  builder: (
+                                      BuildContext context,
+                                      AsyncSnapshot<dynamic> snapshot,
+                                      ) {
+                                    if (snapshot.connectionState ==
+                                        ConnectionState.waiting) {
+                                      return CircularProgressIndicator();
+                                    } else if (snapshot.connectionState ==
+                                        ConnectionState.done) {
+                                      if (snapshot.hasError) {
+                                        return const Text('Error');
+                                      } else if (snapshot.hasData) {
+                                        return Container(
+                                          height: 135,
+                                          width: 135,
+                                          child: SfCartesianChart(
+                                            palette: <Color>[
+                                              Color(0xffff7f50),
+                                              Color(0xfff0ead6),
+                                              Color(0xffffd700),
+                                              Color(0xff264348),
+                                            ],
+                                            plotAreaBorderWidth: 0,
+                                            primaryXAxis: CategoryAxis(
+                                              labelStyle: const TextStyle(
+                                                  color: Colors.black, fontSize: 8),
+                                              axisLine: const AxisLine(width: 0),
+                                              labelPosition:
+                                              ChartDataLabelPosition.outside,
+                                              majorTickLines:
+                                              const MajorTickLines(width: 0),
+                                              majorGridLines:
+                                              const MajorGridLines(width: 0),
+                                            ),
+                                            primaryYAxis: NumericAxis(
+                                                labelStyle: const TextStyle(
+                                                    color: Colors.black, fontSize: 8),
+                                                labelPosition:
+                                                ChartDataLabelPosition.outside,
+                                                isVisible: false,
+                                                minimum: 0,
+                                                maximum: 2000),
+                                            series: <ColumnSeries<ChartSampleData,
+                                                String>>[
+                                              ColumnSeries<ChartSampleData, String>(
+                                                width: 0.9,
+                                                dataLabelSettings:
+                                                const DataLabelSettings(
+                                                    isVisible: false,
+                                                    labelAlignment:
+                                                    ChartDataLabelAlignment.top),
+                                                dataSource: <ChartSampleData>[
+                                                  ...BargraphChartdata
+                                                ],
+                                                borderRadius: BorderRadius.circular(10),
+                                                xValueMapper:
+                                                    (ChartSampleData sales, _) =>
+                                                sales.x as String,
+                                                yValueMapper:
+                                                    (ChartSampleData sales, _) => sales.y,
+                                              ),
+                                            ],
+                                            tooltipBehavior: _tooltipBehavior,
+                                          ),
+                                        );
+                                      } else {
+                                        return const Text('Empty data');
+                                      }
+                                    } else {
+                                      return Text('State: ${snapshot.connectionState}');
+                                    }
+                                  },
+                                                              ),
+                                                            ),
+                                                            Text(
+                                                              'Likes',
+                                                              style: TextStyle(fontSize: 10),
+                                                            )
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),*/
+                                                    /*Positioned(
+                                                      top: 0,
+                                                      left: 20,
+                                                      child: FutureBuilder<dynamic>(
+                                                        future: LineChartfuturecall,
+                                                        builder: (
+                                                          BuildContext context,
+                                                          AsyncSnapshot<dynamic> snapshot,
+                                                        ) {
+                                                          if (snapshot.connectionState ==
+                                                              ConnectionState.waiting) {
+                                                            return CircularProgressIndicator();
+                                                          } else if (snapshot.connectionState ==
+                                                              ConnectionState.done) {
+                                                            if (snapshot.hasError) {
+                                                              return const Text('Error');
+                                                            } else if (snapshot.hasData) {
+                                                              return Container(
+                                  height: 135,
+                                  width: 135,
+                                  child: SfCartesianChart(
+                                    palette: <Color>[
+                                      Color(0xffff7f50),
+                                      Color(0xfff0ead6),
+                                      Color(0xffffd700),
+                                      Color(0xff264348),
+                                    ],
+                                    plotAreaBorderWidth: 0,
+                                    primaryXAxis: CategoryAxis(
+                                      labelStyle: const TextStyle(
+                                          color: Colors.black, fontSize: 8),
+                                      axisLine: const AxisLine(width: 0),
+                                      labelPosition:
+                                          ChartDataLabelPosition.outside,
+                                      majorTickLines:
+                                          const MajorTickLines(width: 0),
+                                      majorGridLines:
+                                          const MajorGridLines(width: 0),
+                                    ),
+                                    primaryYAxis: NumericAxis(
+                                        labelStyle: const TextStyle(
+                                            color: Colors.black, fontSize: 8),
+                                        labelPosition:
+                                            ChartDataLabelPosition.outside,
+                                        isVisible: false,
+                                        minimum: 0,
+                                        maximum: 2000),
+                                    series: <ColumnSeries<ChartSampleData,
+                                        String>>[
+                                      ColumnSeries<ChartSampleData, String>(
+                                        width: 0.9,
+                                        dataLabelSettings:
+                                            const DataLabelSettings(
+                                                isVisible: false,
+                                                labelAlignment:
+                                                    ChartDataLabelAlignment.top),
+                                        dataSource: <ChartSampleData>[
+                                          ...BargraphChartdata
+                                        ],
+                                        borderRadius: BorderRadius.circular(10),
+                                        xValueMapper:
+                                            (ChartSampleData sales, _) =>
+                                                sales.x as String,
+                                        yValueMapper:
+                                            (ChartSampleData sales, _) => sales.y,
+                                      ),
+                                    ],
+                                    tooltipBehavior: _tooltipBehavior,
+                                  ),
+                                                              );
+                                                            } else {
+                                                              return const Text('Empty data');
+                                                            }
+                                                          } else {
+                                                            return Text('State: ${snapshot.connectionState}');
+                                                          }
+                                                        },
+                                                      ),
+                                                    ),*/
+                                                  ],
+                                                ),
+                                );
+                              } else {
+                                return const Text('Empty data');
+                              }
+                            } else {
+                              return Text('State: ${snapshot.connectionState}');
+                            }
+                          },
+                        ),
+                
+              
+              ),
             ),
-            SpeedDialChild(
-              child: Image.asset('assets/Image/logo.png',width: 30),
-              //foregroundColor: Colors.black,
-              backgroundColor: Colors.grey,
-              label: 'Weather',
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => WeatherScreen()));
-              },
-            ),
-
-          ],
-        ),*/
+          )
+        ]);
   }
+  //Bar Graph data
+  var BarGraphdata;
+  Map Selectionquery1 = new Map<String, dynamic>();
+  List<ChartSampleData> BargraphChartdata = [];
+  List<ChartSampleData> PiegraphChartData = [];
+  List<ChartSampleData> FunnelgraphChartData = [];
+  Future<dynamic> YoutubeBannerGraphApi() async {
+    var body = json.encode({
+      "type": "party_data",
+      "STATE": 'TELANGANA',
+      "party_list": 'TRS, BRS',
+      "social_handle": "YOUTUBE"
+    });
+    var headers = {'Content-Type': 'application/json'};
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6659/social_media_YT/'),
+        headers: headers,
+        body: body);
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      print('inside loop');
+      try {
+        print('inside try');
+        BarGraphdata = jsonDecode(utf8.decode(response.bodyBytes));
+        setState(() {
+          BarGraphdata['party_data'].forEach((key, value) {
+            print(key);
 
-  Future<bool> _handleLocationPermission() async {
-    bool serviceEnabled;
-    LocationPermission permission;
+            BargraphChartdata.add(
+              ChartSampleData(
+                  x: '$key', y: BarGraphdata['party_data'][key][0]['LIKES']),
+            );
+            PiegraphChartData.add(
+              ChartSampleData(
+                  x: '$key',
+                  y: BarGraphdata['party_data'][key][0]['COMMENTS'],
+                  text: '$key'),
+            );
+            FunnelgraphChartData.add(
+              ChartSampleData(
+                  x: '$key',
+                  y: BarGraphdata['party_data'][key][0]['VIEWS'],
+                  text: '$key'),
+            );
+          });
 
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-              'Location services are disabled. Please enable the services')));
-      return false;
-    }
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Location permissions are denied')));
-        return false;
+          // for(int i=0;i<BarGraphdata['party_data'])
+          // BargraphChartdata.add(ChartSampleData(x: 'TDP', y: 8683),);
+        });
+        print('data here');
+        print(BarGraphdata);
+      } catch (e) {
+        print(BarGraphdata);
       }
+    } else {
+      print(response.reasonPhrase);
     }
-    if (permission == LocationPermission.deniedForever) {
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text(
-              'Location permissions are permanently denied, we cannot request permissions.')));
-      return false;
-    }
-    return true;
+    return BarGraphdata;
   }
-
-  bool viewnews = true;
 }

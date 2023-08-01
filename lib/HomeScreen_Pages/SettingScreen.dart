@@ -11,6 +11,7 @@ import 'package:intellensense/Constants/constants.dart';
 import 'package:intellensense/LoginPages/login.dart';
 import 'package:intellensense/main.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 import '../LoginPages/mainLoginScreen.dart';
 
@@ -31,14 +32,16 @@ class _SettingScreenState extends State<SettingScreen> {
     setState(() => HomeColor = color);
     print(pickerColor);
   }
-
+  
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          backgroundColor: Color(0xffd2dfff),
-          body: Padding(
-            padding:  EdgeInsets.all(8.0),
+     final themeMode = Provider.of<DarkMode>(context);
+    return Scaffold(
+        // backgroundColor: Color(0xffd2dfff),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+
             child: Column(children: [
               Image.asset(
                 'assets/icons/IntelliSense-Logo-Finall.gif',
@@ -56,7 +59,7 @@ class _SettingScreenState extends State<SettingScreen> {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: ListTile(
-                  tileColor: Colors.grey.shade200,
+                  tileColor:Color(0xff86a8e7),
                   leading: Icon(Icons.logout_outlined),
                   title: const Text('LogOut'),
                   onTap: () {
@@ -73,7 +76,7 @@ class _SettingScreenState extends State<SettingScreen> {
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: ListTile(
-                  tileColor: Colors.grey.shade200,
+                  tileColor: Color(0xff86a8e7),
                   leading: Icon(Icons.format_color_fill_rounded),
                   title: const Text('Change Background Color'),
                   onTap: () async {
@@ -93,9 +96,27 @@ class _SettingScreenState extends State<SettingScreen> {
                   },
                 ),
               ),
+        
+               Padding(
+                 padding: const EdgeInsets.all(4.0),
+                 child: ListTile(
+                  tileColor: Color(0xff86a8e7),
+                    leading: const Icon(Icons.dark_mode, size: 35),
+                    title: const Text("Dark Mode"),
+                    subtitle: const Text("Here you can change you're theme."),
+                    trailing: Switch(
+                      value: themeMode.darkMode,
+                      activeTrackColor: const Color.fromARGB(255, 89, 216, 255),
+                      activeColor: const Color.fromARGB(255, 78, 76, 175),
+                      onChanged: (value) {
+                        themeMode.changeMode();
+                      },
+                    ),
+                  ),
+               ),
             ]),
-          )),
-    );
+          ),
+        ));
   }
 
   LogoutAPI(BuildContext context) async {
