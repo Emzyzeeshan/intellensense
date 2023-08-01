@@ -26,9 +26,7 @@ void main() async {
   Firebase.initializeApp();
 
   FirebaseMessaging.onBackgroundMessage(_firebadeMessagingBackgroundHandler);
-  runApp(MaterialApp(
-    home: MyApp(),
-  ));
+  runApp(ChangeNotifierProvider(create: (context) => DarkMode(), child: MyApp()));
 }
 
 late SharedPreferences logindata;
@@ -66,7 +64,9 @@ class _MyAppState extends State<MyApp> {
       DeviceOrientation.portraitDown,
     ]);
     final screenHeight = MediaQuery.of(context).size.height;
-
+  final themeMode = Provider.of<DarkMode>(context);
+  var mainTheme = ThemeData.light();
+  var darkTheme = ThemeData.dark();
     return ChangeNotifierProvider(create: (_) {
       return themeChangeProvider;
     }, child: Consumer<DarkThemeProvider>(
@@ -76,15 +76,16 @@ class _MyAppState extends State<MyApp> {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: MaterialApp(
-          theme: ThemeData(
-        brightness: Brightness.light,
-        /* light theme settings */
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.light,
-        /* dark theme settings */
-      ),
-      themeMode: ThemeMode.light, 
+           theme: themeMode.darkMode ? darkTheme : mainTheme,
+      //     theme: ThemeData(
+      //   brightness: Brightness.light,
+      //   /* light theme settings */
+      // ),
+      // darkTheme: ThemeData(
+      //   brightness: Brightness.dark,
+      //   /* dark theme settings */
+      // ),
+      // themeMode: ThemeMode.dark, 
           // theme: Styles.themeData(themeChangeProvider.darkTheme, context),
           debugShowCheckedModeBanner: false,
           title: 'TRS Party',
@@ -108,3 +109,12 @@ const rootUrl1 = 'https://ifar.pilogcloud.com/';
 
 ///{{INSIGHTS-URL}}
 const INSIGHTS = 'http://apimobile.pilogcloud.com:8080/insights/3.67.0';
+
+class DarkMode with ChangeNotifier {
+  bool darkMode = true; ///by default it is true
+  ///made a method which will execute while switching
+  changeMode() {
+    darkMode = !darkMode;
+    notifyListeners(); ///notify the value or update the widget value
+  }
+}

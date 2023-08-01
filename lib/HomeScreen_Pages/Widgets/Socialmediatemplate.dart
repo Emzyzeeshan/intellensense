@@ -24,7 +24,7 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
               colors: [
-                Color(0xFFE57373),
+             Color(0xFFE57373),
                 Color(0xffe4e0f8),
               ],
               begin: Alignment.topLeft,
@@ -187,7 +187,7 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
               colors: [
-                Colors.blue.shade500,
+               Colors.blue.shade500,
                 Color(0xffe4e0f8),
               ],
               begin: Alignment.topLeft,
@@ -270,7 +270,7 @@ class _SocialMediaTemplate4State extends State<SocialMediaTemplate4> {
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
               colors: const [
-                Colors.pinkAccent,
+    Colors.pinkAccent,
                 Color(0xffe4e0f8),
               ],
               begin: Alignment.topLeft,

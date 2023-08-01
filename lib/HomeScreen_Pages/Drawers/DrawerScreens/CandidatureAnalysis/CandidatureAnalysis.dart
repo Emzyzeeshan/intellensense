@@ -34,6 +34,7 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
   Uint8List? myImage;
   List fullData = [];
   List searchData = [];
+  var partycolor;
   TextEditingController textEditingController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -182,6 +183,9 @@ pageController.jumpToPage(1);
                       child: ListView.builder(
                           itemCount: partydata.length,
                           itemBuilder: (context, index) {
+                                                        
+                                         PartytileColor(index,partydata);
+
                             return Padding(
                               padding: const EdgeInsets.only(
                                   top: 5.0, bottom: 5),
@@ -204,7 +208,7 @@ pageController.jumpToPage(1);
                                 closedBuilder: (context, action) {
                                   return ListTile(
                                     dense: true,
-                                    tileColor: Color(0xffd2dfff),
+                                    tileColor: partycolor,
 
                                     subtitle: Text(
                                         "Party: ${partydata[index]['party']}"),
@@ -245,6 +249,7 @@ pageController.jumpToPage(1);
               child: ListView.builder(
                   itemCount: searchData.length,
                   itemBuilder: (context, index) {
+                       PartytileColor(index,searchData);
                     return Padding(
                       padding: const EdgeInsets.only(top: 5.0, bottom: 5),
                       child: OpenContainer(
@@ -260,12 +265,13 @@ pageController.jumpToPage(1);
                         transitionDuration:
                         const Duration(milliseconds: 1200),
                         openBuilder: (context, action) {
+                           PartytileColor(index,searchData);
                           return TrsMpDetails(searchData[index]);
                         },
                         closedBuilder: (context, action) {
                           return ListTile(
                             dense: true,
-                            tileColor: Color(0xffd2dfff),
+                            tileColor: partycolor,
 
                             subtitle: Text(
                                 "Party: ${searchData[index]['party']}"),
@@ -297,7 +303,45 @@ pageController.jumpToPage(1);
             )
           ]),
         ));
+        
   }
+
+PartytileColor(index,DataType){
+      if(DataType[index]['party']=='TRS'){
+                                       
+                                            partycolor=Color(0xfff57ec6);
+                                       
+                                        }else if(DataType[index]['party']=='AIMIM'){
+                                        
+                                        partycolor=Color.fromARGB(255, 13, 71, 15);
+                                        }else if(DataType[index]['party']=='AIFB'){
+                                         
+                                            partycolor=Colors.redAccent;
+                                         
+                                        }else if(DataType[index]['party']=='INC'){
+                                         
+                                            partycolor=Color.fromARGB(255, 112, 169, 113);
+                                         
+                                        }else if(DataType[index]['party']=='TDP'){
+                                        
+                                            partycolor=Colors.yellow;
+                                        
+                                        }else if(DataType[index]['party']=='BJP'){
+                                        
+                                            partycolor=Colors.orangeAccent;
+                                        
+                                        }else if(DataType[index]['party']=='JSP'){
+                                        
+                                            partycolor=Colors.red;
+                                        
+                                        }else if(DataType[index]['party']=='SHIV SENA'){
+                                        
+                                            partycolor=Colors.deepOrangeAccent;
+                                        
+                                        }else{
+                                            partycolor=Colors.cyan[50];
+                                        }
+ }
 
   var partydata;
   Future<dynamic> PartyDataApi(Input) async {
@@ -340,6 +384,8 @@ pageController.jumpToPage(1);
 
     setState(() {});
   }
+
+  
 }
 
 SocialInfoCard(String imagepath, String info) {
@@ -363,4 +409,6 @@ SocialInfoCard(String imagepath, String info) {
       ],
     ),
   );
+
+  
 }

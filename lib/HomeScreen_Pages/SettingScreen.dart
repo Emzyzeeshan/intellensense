@@ -11,6 +11,7 @@ import 'package:intellensense/Constants/constants.dart';
 import 'package:intellensense/LoginPages/login.dart';
 import 'package:intellensense/main.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 import '../LoginPages/mainLoginScreen.dart';
 
@@ -31,68 +32,89 @@ class _SettingScreenState extends State<SettingScreen> {
     setState(() => HomeColor = color);
     print(pickerColor);
   }
-
+  
   @override
   Widget build(BuildContext context) {
+     final themeMode = Provider.of<DarkMode>(context);
     return Scaffold(
-        backgroundColor: Color(0xffd2dfff),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(children: [
-            Image.asset(
-              'assets/icons/IntelliSense-Logo-Finall.gif',
-              height: 55,
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Settings',
-              style: GoogleFonts.nunitoSans(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: ListTile(
-                tileColor: Colors.grey.shade200,
-                leading: Icon(Icons.logout_outlined),
-                title: const Text('LogOut'),
-                onTap: () {
-                  CoolAlert.show(
-                    confirmBtnColor: Color(0xff00186a),
-                    backgroundColor: Color(0xff001969),
-                    context: context,
-                    type: CoolAlertType.confirm,
-                    onConfirmBtnTap: () => LogoutAPI(context),
-                  );
-                },
+        // backgroundColor: Color(0xffd2dfff),
+        body: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(children: [
+              Image.asset(
+                'assets/icons/IntelliSense-Logo-Finall.gif',
+                height: 55,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: ListTile(
-                tileColor: Colors.grey.shade200,
-                leading: Icon(Icons.format_color_fill_rounded),
-                title: const Text('Change Background Color'),
-                onTap: () async {
-                  await showDialog(
+              SizedBox(height: 10),
+              Text(
+                'Settings',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ListTile(
+                  tileColor:Color(0xff86a8e7),
+                  leading: Icon(Icons.logout_outlined),
+                  title: const Text('LogOut'),
+                  onTap: () {
+                    CoolAlert.show(
+                      confirmBtnColor: Color(0xff00186a),
+                      backgroundColor: Color(0xff001969),
                       context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                            title: const Text('Pick a color!'),
-                            content: SingleChildScrollView(
-                              child: ColorPicker(
-                                showLabel: true,
-                                pickerColor: HomeColor,
-                                onColorChanged: changeColor,
-                              ),
-                            ));
-                      });
-                },
+                      type: CoolAlertType.confirm,
+                      onConfirmBtnTap: () => LogoutAPI(context),
+                    );
+                  },
+                ),
               ),
-            ),
-          ]),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ListTile(
+                  tileColor: Color(0xff86a8e7),
+                  leading: Icon(Icons.format_color_fill_rounded),
+                  title: const Text('Change Background Color'),
+                  onTap: () async {
+                    await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                              title: const Text('Pick a color!'),
+                              content: SingleChildScrollView(
+                                child: ColorPicker(
+                                  showLabel: true,
+                                  pickerColor: HomeColor,
+                                  onColorChanged: changeColor,
+                                ),
+                              ));
+                        });
+                  },
+                ),
+              ),
+        
+               Padding(
+                 padding: const EdgeInsets.all(4.0),
+                 child: ListTile(
+                  tileColor: Color(0xff86a8e7),
+                    leading: const Icon(Icons.dark_mode, size: 35),
+                    title: const Text("Dark Mode"),
+                    subtitle: const Text("Here you can change you're theme."),
+                    trailing: Switch(
+                      value: themeMode.darkMode,
+                      activeTrackColor: const Color.fromARGB(255, 89, 216, 255),
+                      activeColor: const Color.fromARGB(255, 78, 76, 175),
+                      onChanged: (value) {
+                        themeMode.changeMode();
+                      },
+                    ),
+                  ),
+               ),
+            ]),
+          ),
         ));
   }
 
