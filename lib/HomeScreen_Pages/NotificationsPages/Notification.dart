@@ -19,12 +19,11 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffd2dfff),
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 40,
         centerTitle: true,
-        backgroundColor: Color(0xffd2dfff),
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -40,7 +39,7 @@ class _NotificationsState extends State<Notifications> {
         ),
       ),
       bottomNavigationBar: BottomNavyBar(
-        backgroundColor: Colors.blue.shade100,
+        backgroundColor: Colors.white,
         selectedIndex: _selectedIndex,
         showElevation: true, // use this to remove appBar's elevation
         onItemSelected: (index) => setState(() {

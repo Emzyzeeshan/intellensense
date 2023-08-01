@@ -216,16 +216,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             height: 260,
                             width: MediaQuery.of(context).size.width,
                             child: Swiper(
-                              duration: 1500,
+                              duration: 20,
                               itemBuilder: (BuildContext context, int index) {
                                 return swipeimage![index];
                               },
                               itemCount: 4,
                               autoplay: false,
-                              pagination: SwiperPagination(
+                             /* pagination: SwiperPagination(
                                   builder: new DotSwiperPaginationBuilder(
                                       color: Colors.grey,
-                                      activeColor: Color(0xff38547C))),
+                                      activeColor: Color(0xff38547C))),*/
                               control: new SwiperControl(
                                 size: 18,
                                 padding: EdgeInsets.all(2),
@@ -875,9 +875,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Row(
                               children: [
                                 Image.asset(
-                                  'assets/icons/newspaperhead.gif',
-                                  height: 25,
-                                  width: 25,
+                                  'assets/NotificationIcons/News-Paper.png',
+                                  height: 30,
+                                  width: 30,
                                 ),
                                 Text(
                                   'NEWS',
@@ -1451,7 +1451,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                     height: 30,
                                     width: 30,
                                   ),
-
                               Text(
                                 'SOCIAL MEDIA',
                                 style: TextStyle(

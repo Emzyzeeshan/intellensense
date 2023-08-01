@@ -34,66 +34,68 @@ class _SettingScreenState extends State<SettingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xffd2dfff),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(children: [
-            Image.asset(
-              'assets/icons/IntelliSense-Logo-Finall.gif',
-              height: 55,
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Settings',
-              style: GoogleFonts.nunitoSans(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black),
-            ),
-            SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: ListTile(
-                tileColor: Colors.grey.shade200,
-                leading: Icon(Icons.logout_outlined),
-                title: const Text('LogOut'),
-                onTap: () {
-                  CoolAlert.show(
-                    confirmBtnColor: Color(0xff00186a),
-                    backgroundColor: Color(0xff001969),
-                    context: context,
-                    type: CoolAlertType.confirm,
-                    onConfirmBtnTap: () => LogoutAPI(context),
-                  );
-                },
+    return SafeArea(
+      child: Scaffold(
+          backgroundColor: Color(0xffd2dfff),
+          body: Padding(
+            padding:  EdgeInsets.all(8.0),
+            child: Column(children: [
+              Image.asset(
+                'assets/icons/IntelliSense-Logo-Finall.gif',
+                height: 55,
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(4.0),
-              child: ListTile(
-                tileColor: Colors.grey.shade200,
-                leading: Icon(Icons.format_color_fill_rounded),
-                title: const Text('Change Background Color'),
-                onTap: () async {
-                  await showDialog(
+              SizedBox(height: 10),
+              Text(
+                'Settings',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.black),
+              ),
+              SizedBox(height: 10),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ListTile(
+                  tileColor: Colors.grey.shade200,
+                  leading: Icon(Icons.logout_outlined),
+                  title: const Text('LogOut'),
+                  onTap: () {
+                    CoolAlert.show(
+                      confirmBtnColor: Color(0xff00186a),
+                      backgroundColor: Color(0xff001969),
                       context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                            title: const Text('Pick a color!'),
-                            content: SingleChildScrollView(
-                              child: ColorPicker(
-                                showLabel: true,
-                                pickerColor: HomeColor,
-                                onColorChanged: changeColor,
-                              ),
-                            ));
-                      });
-                },
+                      type: CoolAlertType.confirm,
+                      onConfirmBtnTap: () => LogoutAPI(context),
+                    );
+                  },
+                ),
               ),
-            ),
-          ]),
-        ));
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ListTile(
+                  tileColor: Colors.grey.shade200,
+                  leading: Icon(Icons.format_color_fill_rounded),
+                  title: const Text('Change Background Color'),
+                  onTap: () async {
+                    await showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                              title: const Text('Pick a color!'),
+                              content: SingleChildScrollView(
+                                child: ColorPicker(
+                                  showLabel: true,
+                                  pickerColor: HomeColor,
+                                  onColorChanged: changeColor,
+                                ),
+                              ));
+                        });
+                  },
+                ),
+              ),
+            ]),
+          )),
+    );
   }
 
   LogoutAPI(BuildContext context) async {
