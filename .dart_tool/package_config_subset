@@ -626,10 +626,12 @@ mime
 2.18
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.4/
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/mime-1.0.4/lib/
+
 mockito
 2.19
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/mockito-5.4.2/
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/mockito-5.4.2/lib/
+
 modal_bottom_sheet
 2.17
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/modal_bottom_sheet-2.1.2/
@@ -646,6 +648,7 @@ node_preamble
 2.12
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/node_preamble-2.0.2/
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/node_preamble-2.0.2/lib/
+
 octo_image
 2.12
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/octo_image-1.0.2/
@@ -942,6 +945,7 @@ test
 2.18
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/test-1.24.1/
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/test-1.24.1/lib/
+
 test_api
 2.18
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/test_api-0.5.1/
@@ -1026,6 +1030,7 @@ vector_math
 2.14
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4/
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4/lib/
+
 video_player
 2.18
 file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/video_player-2.7.0/
@@ -1150,6 +1155,7 @@ integration_test
 3.0
 file:///D:/flutter/packages/integration_test/
 file:///D:/flutter/packages/integration_test/lib/
+
 intellensense
 2.12
 file:///D:/zeeshan/intellensense/

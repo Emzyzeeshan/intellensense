@@ -209,47 +209,48 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 40,
                     width: 180,
                   ),
-                  leading: IconButton(
-                    icon: Icon(
-                      Icons.menu,
-                      color: Colors.black,
-                    ),
-                    onPressed: () {
-                      _key.currentState!.openDrawer();
-                    },
-                  ),
-                  elevation: 0,
-               backgroundColor: Colors.white,
-                  pinned: true,
-                  expandedHeight: 310,
-                  
-                  flexibleSpace: FlexibleSpaceBar(
-                    collapseMode: CollapseMode.parallax,
-                    // title: _isShrink == true
-                    //     ? Image.asset(
-                    //
-                    //       'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                    //       fit: BoxFit.cover,
-                    //       height: 50,
-                    //   width: 180,
-                    //     )
-                    //     : null,
-                    background: SafeArea(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 50),
-                            child: Container(
-                              height: 260,
-                              width: MediaQuery.of(context).size.width,
-                              child: LiquidSwipe(
-                                
-                                enableLoop: false,enableSideReveal: true,waveType: WaveType.liquidReveal,
-                                pages: [...swipeimage!],
-                                // controller: PageController(
-                                //     viewportFraction: 0.9,
-                                //     initialPage: 0,
-                                // )
+                  onPressed: () {
+                    _key.currentState!.openDrawer();
+                  },
+                ),
+                elevation: 0,
+                backgroundColor: Colors.white,
+                pinned: true,
+                expandedHeight: 310,
+                flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.parallax,
+                  // title: _isShrink == true
+                  //     ? Image.asset(
+                  //
+                  //       'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
+                  //       fit: BoxFit.cover,
+                  //       height: 50,
+                  //   width: 180,
+                  //     )
+                  //     : null,
+                  background: SafeArea(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 50),
+                          child: Container(
+                            height: 260,
+                            width: MediaQuery.of(context).size.width,
+                            child: Swiper(
+                              duration: 20,
+                              itemBuilder: (BuildContext context, int index) {
+                                return swipeimage![index];
+                              },
+                              itemCount: 4,
+                              autoplay: false,
+                             /* pagination: SwiperPagination(
+                                  builder: new DotSwiperPaginationBuilder(
+                                      color: Colors.grey,
+                                      activeColor: Color(0xff38547C))),*/
+                              control: new SwiperControl(
+                                size: 18,
+                                padding: EdgeInsets.all(2),
+                                color: Color(0xff38547C),
                               ),
                               // Swiper(controller: SwiperController(),
                               //   duration: 1500,
@@ -872,9 +873,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Row(
                               children: [
                                 Image.asset(
-                                  'assets/icons/newspaperhead.gif',
-                                  height: 25,
-                                  width: 25,
+                                  'assets/NotificationIcons/News-Paper.png',
+                                  height: 30,
+                                  width: 30,
                                 ),
                                 Text(
                                   'NEWS',
@@ -1544,6 +1545,31 @@ class _HomeScreenState extends State<HomeScreen> {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: [
+                                  Image.asset(
+                                    'assets/new Updated images/social-media-icons-unscreen.gif',
+                                    height: 30,
+                                    width: 30,
+                                  ),
+                              Text(
+                                'SOCIAL MEDIA',
+                                style: TextStyle(
+                                  fontFamily: 'Segoe UI',
+                                  fontSize: 16,
+                                ),
+                              ),
+                                Spacer(),
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      showSocialnews =
+                                      !showSocialnews;
+                                    });
+                                  },
+                                  icon: showSocialnews == true
+                                      ? Icon(Icons.arrow_drop_down)
+                                      : Icon(Icons.arrow_drop_up_outlined),
+                                ),
+                              ],
                                   FutureBuilder(
                                       future: youtubedata,
                                       builder: ((context, snapshot) {

@@ -992,6 +992,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "multi_select_flutter",
+      "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/multi_select_flutter-4.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "nested",
       "rootUri": "file:///C:/Users/Zeeshan.M/AppData/Local/Pub/Cache/hosted/pub.dev/nested-1.0.0",
       "packageUri": "lib/",
@@ -1737,6 +1743,7 @@
     }
   ],
   "generated": "2023-08-01T04:51:17.598793Z",
+
   "generator": "pub",
   "generatorVersion": "3.0.5"
 }

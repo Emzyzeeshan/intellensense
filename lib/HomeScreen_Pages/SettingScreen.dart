@@ -41,6 +41,7 @@ class _SettingScreenState extends State<SettingScreen> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
+
             child: Column(children: [
               Image.asset(
                 'assets/icons/IntelliSense-Logo-Finall.gif',
