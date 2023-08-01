@@ -35,42 +35,49 @@ class _NewsPaperSentimentState extends State<NewsPaperSentiment> {
   PageController _pagecontroller = PageController();
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 30,
-                color: Color(0xff00196b),
-                child: Center(
-                  child: Text(
-                    'NewsPaper Analysis',
-                    style: TextStyle(
-                        fontFamily: 'Segoe UI',
-                        fontSize: 20,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: PageView(
-                    controller: _pagecontroller,
-                    children: [
-                      LastSevenDaysAnalysis(),
-                      Selectdurationforanalysis(),
-                    ],
-                  ),
-                )),
-          ],
+    return Scaffold(
+      appBar: AppBar(
+      elevation: 0,
+      backgroundColor: Colors.white,
+      leading: IconButton(onPressed: (){Navigator.pop(context);},icon: Icon(Icons.arrow_back_ios,color: Colors.black,),),
+      title: Container(
+        width: MediaQuery.of(context).size.width,
+        height: 30,
+        color:Color(0xff86a8e7),
+        child: Center(
+          child: Text(
+            'NewsPaper Analysis',
+            style: TextStyle(
+                fontFamily: 'Segoe UI',
+                fontSize: 20,
+                color: Colors.white),
+          ),
+        ),
+      ),
+            centerTitle: true,
+    ),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
+          child: Column(
+            children: [
+              
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height,
+                    width: MediaQuery.of(context).size.width,
+                    child: PageView(
+                      physics: NeverScrollableScrollPhysics(),
+                      controller: _pagecontroller,
+                      children: [
+                        LastSevenDaysAnalysis(),
+                        Selectdurationforanalysis(),
+                      ],
+                    ),
+                  )),
+            ],
+          ),
         ),
       ),
     );
@@ -125,7 +132,7 @@ class _NewsPaperSentimentState extends State<NewsPaperSentiment> {
                                       TableRow(children: [
                                         Container(
                                             height: 30,
-                                            color: Color(0xff00196b),
+                                            color:Color(0xff86a8e7),
                                             child: Center(
                                                 child: Text(
                                               'News Titles',
@@ -136,7 +143,7 @@ class _NewsPaperSentimentState extends State<NewsPaperSentiment> {
                                             ))),
                                         Container(
                                             height: 30,
-                                            color: Color(0xff00196b),
+                                            color:Color(0xff86a8e7),
                                             child: Center(
                                                 child: Text(
                                               'News Media Name',
@@ -203,6 +210,41 @@ class _NewsPaperSentimentState extends State<NewsPaperSentiment> {
                 }
               },
             ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                     
+                        _pagecontroller.jumpToPage(1);
+                    });
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 30,
+                    color:Color(0xff86a8e7),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Custom Analysis',
+                            style: TextStyle(
+                                fontFamily: 'Segoe UI',
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                          Icon(
+                              Icons.navigate_next_outlined,
+                            size: 25,
+                            color: Colors.white,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              ),
           ])),
     );
   }
@@ -309,7 +351,7 @@ class _NewsPaperSentimentState extends State<NewsPaperSentiment> {
               'Search',
               style: TextStyle(color: Colors.white),
             ),
-            color: Colors.blueAccent,
+            color: Color(0xff86a8e7),
           )
         ],
       ),
@@ -360,7 +402,7 @@ class _NewsPaperSentimentState extends State<NewsPaperSentiment> {
                                       TableRow(children: [
                                         Container(
                                             height: 30,
-                                            color: Color(0xff00196b),
+                                            color:Color(0xff86a8e7),
                                             child: Center(
                                                 child: Text(
                                               'News Titles',
@@ -371,7 +413,7 @@ class _NewsPaperSentimentState extends State<NewsPaperSentiment> {
                                             ))),
                                         Container(
                                             height: 30,
-                                            color: Color(0xff00196b),
+                                            color:Color(0xff86a8e7),
                                             child: Center(
                                                 child: Text(
                                               'News Media Name',
@@ -439,6 +481,42 @@ class _NewsPaperSentimentState extends State<NewsPaperSentiment> {
               },
             ),
           ])),
+          Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                           
+                              _pagecontroller.jumpToPage(0);
+                          });
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 30,
+                          color:Color(0xff86a8e7),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                    Icons.navigate_before,
+                                  size: 25,
+                                  color: Colors.white,
+                                ),
+                                Text(
+                                  'Recent Analysis',
+                                  style: TextStyle(
+                                      fontFamily: 'Segoe UI',
+                                      fontSize: 20,
+                                      color: Colors.white),
+                                ),
+                                
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
     ]));
   }
 

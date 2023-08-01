@@ -19,12 +19,12 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffd2dfff),
+      // backgroundColor: Color(0xffd2dfff),
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 40,
         centerTitle: true,
-        backgroundColor: Color(0xffd2dfff),
+        backgroundColor: Color(0xff86a8e7),
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,
@@ -40,7 +40,7 @@ class _NotificationsState extends State<Notifications> {
         ),
       ),
       bottomNavigationBar: BottomNavyBar(
-        backgroundColor: Colors.blue.shade100,
+        backgroundColor: Color(0xff86a8e7),
         selectedIndex: _selectedIndex,
         showElevation: true, // use this to remove appBar's elevation
         onItemSelected: (index) => setState(() {
@@ -55,7 +55,7 @@ class _NotificationsState extends State<Notifications> {
                 height: 25,
               ),
               title: Text('YouTube'),
-              activeColor: Colors.blue),
+              activeColor: Colors.blueAccent.shade700),
           BottomNavyBarItem(
               icon: Image.asset(
                 'assets/icons/Social-Media-Icons-IS-06.png',

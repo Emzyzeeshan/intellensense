@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
 
@@ -68,7 +69,7 @@ class _CensusState extends State<Census> {
 
   late Future<dynamic> _value1 = StateoverviewAPI();
   late Future<dynamic> _value2 = DistrictoverviewAPI();
-    late Future<dynamic> _value3 = SubDistrictoverviewAPI();
+  late Future<dynamic> _value3 = SubDistrictoverviewAPI();
   late Future<dynamic> statenamedata = CensusStateNamesAPI();
   late Future<dynamic> Districtnamedata = CensusDistrictNamesAPI();
   late Future<dynamic> SubDistrictnamedata = CensusSubDistrictNamesAPI();
@@ -101,18 +102,18 @@ class _CensusState extends State<Census> {
                     AsyncSnapshot<dynamic> snapshot,
                   ) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SingleChildScrollView(
-                          child: SkeletonParagraph(
-                        style: SkeletonParagraphStyle(
-                            lines: 1,
-                            lineStyle: SkeletonLineStyle(
-                              height: 30,
-                              width: MediaQuery.of(context).size.width * 0.4,
-                              borderRadius: BorderRadius.circular(8),
-                              // minLength: MediaQuery.of(context).size.width / 6,
-                              // maxLength: MediaQuery.of(context).size.width / 3,
-                            )),
-                      ));
+                      return Center(
+                       
+                        child: SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Center(
+                              child: SpinKitWave(
+                            color: Colors.blue,
+                            size: 18,
+                          )),
+                        ),
+                      );
                     } else if (snapshot.connectionState ==
                         ConnectionState.done) {
                       if (snapshot.hasError) {
@@ -143,7 +144,7 @@ class _CensusState extends State<Census> {
                               value: input1,
                               onChanged: (value) {
                                 setState(() {
-                                  Subdistrictdataloaded=false;
+                                  Subdistrictdataloaded = false;
                                   districtdataloaded = false;
                                   input1 = value as String;
                                   Districtlist.clear();
@@ -199,17 +200,18 @@ class _CensusState extends State<Census> {
                       AsyncSnapshot<dynamic> snapshot,
                     ) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return SkeletonParagraph(
-                          style: SkeletonParagraphStyle(
-                              lines: 1,
-                              lineStyle: SkeletonLineStyle(
-                                height: 30,
-                                width: MediaQuery.of(context).size.width * 0.42,
-                                borderRadius: BorderRadius.circular(8),
-                                // minLength: MediaQuery.of(context).size.width / 6,
-                                // maxLength: MediaQuery.of(context).size.width / 3,
-                              )),
-                        );
+                        return Center(
+                       
+                        child: SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Center(
+                              child: SpinKitWave(
+                            color: Colors.blue,
+                            size: 18,
+                          )),
+                        ),
+                      );
                       } else if (snapshot.connectionState ==
                           ConnectionState.done) {
                         if (snapshot.hasError) {
@@ -236,7 +238,7 @@ class _CensusState extends State<Census> {
                               value: input2,
                               onChanged: (value) {
                                 setState(() {
-                                  Subdistrictdataloaded=false;
+                                  Subdistrictdataloaded = false;
                                   _DistrictTabledata.clear();
                                   districtdataloaded = true;
                                   input2 = value as String;
@@ -298,17 +300,18 @@ class _CensusState extends State<Census> {
                       AsyncSnapshot<dynamic> snapshot,
                     ) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return SkeletonParagraph(
-                          style: SkeletonParagraphStyle(
-                              lines: 1,
-                              lineStyle: SkeletonLineStyle(
-                                height: 30,
-                                width: MediaQuery.of(context).size.width * 0.42,
-                                borderRadius: BorderRadius.circular(8),
-                                // minLength: MediaQuery.of(context).size.width / 6,
-                                // maxLength: MediaQuery.of(context).size.width / 3,
-                              )),
-                        );
+                        return Center(
+                       
+                        child: SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Center(
+                              child: SpinKitWave(
+                            color: Colors.blue,
+                            size: 18,
+                          )),
+                        ),
+                      );
                       } else if (snapshot.connectionState ==
                           ConnectionState.done) {
                         if (snapshot.hasError) {
@@ -336,8 +339,8 @@ class _CensusState extends State<Census> {
                               value: SUB_DISTRICT,
                               onChanged: (value) {
                                 setState(() {
-                                  Subdistrictdataloaded=true;
-                                  districtdataloaded=false;
+                                  Subdistrictdataloaded = true;
+                                  districtdataloaded = false;
                                   _SubDistrictTabledata.clear();
                                   SUB_DISTRICT = value as String;
                                   print(SUB_DISTRICT);
@@ -345,7 +348,7 @@ class _CensusState extends State<Census> {
                                   //     ? villagenamedata =
                                   //         CensusVillageNamesAPI()
                                   //     : null;
-                                  _value3=SubDistrictoverviewAPI();
+                                  _value3 = SubDistrictoverviewAPI();
                                 });
                               },
                               buttonStyleData: const ButtonStyleData(
@@ -465,195 +468,208 @@ class _CensusState extends State<Census> {
               height: 20,
             ),
 
-            districtdataloaded==false&&Subdistrictdataloaded==false?
-            FutureBuilder<dynamic>(
-              future: _value1,
-              builder: (
-                BuildContext context,
-                AsyncSnapshot<dynamic> snapshot,
-              ) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Column(
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                              color: Color(0xffd2dfff),
-                              elevation: 10,
-                              child: SkeletonParagraph(
-                                style: SkeletonParagraphStyle(
-                                    lines: 12,
-                                    spacing: 6,
-                                    lineStyle: SkeletonLineStyle(
-                                      randomLength: true,
-                                      height: 13,
-                                      borderRadius: BorderRadius.circular(8),
-                                      minLength:
-                                          MediaQuery.of(context).size.width / 2,
-                                    )),
-                              ))),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                              color: Color(0xffd2dfff),
-                              elevation: 10,
-                              child: SkeletonParagraph(
-                                style: SkeletonParagraphStyle(
-                                    lines: 12,
-                                    spacing: 6,
-                                    lineStyle: SkeletonLineStyle(
-                                      randomLength: true,
-                                      height: 13,
-                                      borderRadius: BorderRadius.circular(8),
-                                      minLength:
-                                          MediaQuery.of(context).size.width / 2,
-                                    )),
-                              )))
-                    ],
-                  );
-                } else if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    return const Text('Error');
-                  } else if (snapshot.hasData) {
-                    return GridDate();
-                        
-                  } else {
-                    return const Text('Empty data');
-                  }
-                } else {
-                  return Text('State: ${snapshot.connectionState}');
-                }
-              },
-            ):Container(),
+            districtdataloaded == false && Subdistrictdataloaded == false
+                ? FutureBuilder<dynamic>(
+                    future: _value1,
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<dynamic> snapshot,
+                    ) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Column(
+                          children: [
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                    color: Color(0xffd2dfff),
+                                    elevation: 10,
+                                    child: Center(
+                       
+                        child: SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Center(
+                              child: SpinKitWave(
+                            color: Colors.blue,
+                            size: 18,
+                          )),
+                        ),
+                      ))),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                    color: Color(0xffd2dfff),
+                                    elevation: 10,
+                                    child: SkeletonParagraph(
+                                      style: SkeletonParagraphStyle(
+                                          lines: 12,
+                                          spacing: 6,
+                                          lineStyle: SkeletonLineStyle(
+                                            randomLength: true,
+                                            height: 13,
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            minLength: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2,
+                                          )),
+                                    )))
+                          ],
+                        );
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return const Text('Error');
+                        } else if (snapshot.hasData) {
+                          return GridDate();
+                        } else {
+                          return const Text('Empty data');
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
+                    },
+                  )
+                : Container(),
 
-districtdataloaded==true? FutureBuilder<dynamic>(
-              future: _value2,
-              builder: (
-                BuildContext context,
-                AsyncSnapshot<dynamic> snapshot,
-              ) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Column(
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                              color: Color(0xffd2dfff),
-                              elevation: 10,
-                              child: SkeletonParagraph(
-                                style: SkeletonParagraphStyle(
-                                    lines: 12,
-                                    spacing: 6,
-                                    lineStyle: SkeletonLineStyle(
-                                      randomLength: true,
-                                      height: 13,
-                                      borderRadius: BorderRadius.circular(8),
-                                      minLength:
-                                          MediaQuery.of(context).size.width / 2,
-                                    )),
-                              ))),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                              color: Color(0xffd2dfff),
-                              elevation: 10,
-                              child: SkeletonParagraph(
-                                style: SkeletonParagraphStyle(
-                                    lines: 12,
-                                    spacing: 6,
-                                    lineStyle: SkeletonLineStyle(
-                                      randomLength: true,
-                                      height: 13,
-                                      borderRadius: BorderRadius.circular(8),
-                                      minLength:
-                                          MediaQuery.of(context).size.width / 2,
-                                    )),
-                              )))
-                    ],
-                  );
-                } else if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    return const Text('Error');
-                  } else if (snapshot.hasData) {
-                    return   DistrictData();
-                        
-                  } else {
-                    return const Text('Empty data');
-                  }
-                } else {
-                  return Text('State: ${snapshot.connectionState}');
-                }
-              },
-            ):Container(),
-            Subdistrictdataloaded==true?FutureBuilder<dynamic>(
-              future: _value3,
-              builder: (
-                BuildContext context,
-                AsyncSnapshot<dynamic> snapshot,
-              ) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Column(
-                    children: [
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                              color: Color(0xffd2dfff),
-                              elevation: 10,
-                              child: SkeletonParagraph(
-                                style: SkeletonParagraphStyle(
-                                    lines: 12,
-                                    spacing: 6,
-                                    lineStyle: SkeletonLineStyle(
-                                      randomLength: true,
-                                      height: 13,
-                                      borderRadius: BorderRadius.circular(8),
-                                      minLength:
-                                          MediaQuery.of(context).size.width / 2,
-                                    )),
-                              ))),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Card(
-                              color: Color(0xffd2dfff),
-                              elevation: 10,
-                              child: SkeletonParagraph(
-                                style: SkeletonParagraphStyle(
-                                    lines: 12,
-                                    spacing: 6,
-                                    lineStyle: SkeletonLineStyle(
-                                      randomLength: true,
-                                      height: 13,
-                                      borderRadius: BorderRadius.circular(8),
-                                      minLength:
-                                          MediaQuery.of(context).size.width / 2,
-                                    )),
-                              )))
-                    ],
-                  );
-                } else if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.hasError) {
-                    return const Text('Error');
-                  } else if (snapshot.hasData) {
-                    return   SubDistrictData();
-                        
-                  } else {
-                    return const Text('Empty data');
-                  }
-                } else {
-                  return Text('State: ${snapshot.connectionState}');
-                }
-              },
-            ):Container(),
-              
+            districtdataloaded == true
+                ? FutureBuilder<dynamic>(
+                    future: _value2,
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<dynamic> snapshot,
+                    ) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Column(
+                          children: [
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                    color: Color(0xffd2dfff),
+                                    elevation: 10,
+                                    child: Center(
+                       
+                        child: SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Center(
+                              child: SpinKitWave(
+                            color: Colors.blue,
+                            size: 18,
+                          )),
+                        ),
+                      ))),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                    color: Color(0xffd2dfff),
+                                    elevation: 10,
+                                    child: SkeletonParagraph(
+                                      style: SkeletonParagraphStyle(
+                                          lines: 12,
+                                          spacing: 6,
+                                          lineStyle: SkeletonLineStyle(
+                                            randomLength: true,
+                                            height: 13,
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            minLength: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2,
+                                          )),
+                                    )))
+                          ],
+                        );
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return const Text('Error');
+                        } else if (snapshot.hasData) {
+                          return DistrictData();
+                        } else {
+                          return const Text('Empty data');
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
+                    },
+                  )
+                : Container(),
+            Subdistrictdataloaded == true
+                ? FutureBuilder<dynamic>(
+                    future: _value3,
+                    builder: (
+                      BuildContext context,
+                      AsyncSnapshot<dynamic> snapshot,
+                    ) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return Column(
+                          children: [
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                    color: Color(0xffd2dfff),
+                                    elevation: 10,
+                                    child: Center(
+                       
+                        child: SizedBox(
+                          height: 150,
+                          width: 150,
+                          child: Center(
+                              child: SpinKitWave(
+                            color: Colors.blue,
+                            size: 18,
+                          )),
+                        ),
+                      ))),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Card(
+                                    color: Color(0xffd2dfff),
+                                    elevation: 10,
+                                    child: SkeletonParagraph(
+                                      style: SkeletonParagraphStyle(
+                                          lines: 12,
+                                          spacing: 6,
+                                          lineStyle: SkeletonLineStyle(
+                                            randomLength: true,
+                                            height: 13,
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            minLength: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2,
+                                          )),
+                                    )))
+                          ],
+                        );
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.done) {
+                        if (snapshot.hasError) {
+                          return const Text('Error');
+                        } else if (snapshot.hasData) {
+                          return SubDistrictData();
+                        } else {
+                          return const Text('Empty data');
+                        }
+                      } else {
+                        return Text('State: ${snapshot.connectionState}');
+                      }
+                    },
+                  )
+                : Container(),
           ],
         ),
       ),
@@ -665,8 +681,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
       return Container(height: 0, width: 0);
 
     List<PlutoColumn> columns = [
-    PlutoColumn( textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'DISTRICT',
         titleSpan: TextSpan(
@@ -675,7 +692,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'DISTRICT',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -684,8 +701,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'DISTRICT',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL HOUSEHOLDS',
         titleSpan: TextSpan(
@@ -694,7 +712,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL HOUSEHOLDS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -703,8 +721,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_HOUSEHOLDS',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POPULATION',
         titleSpan: TextSpan(
@@ -713,7 +732,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL POPULATION',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -722,8 +741,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POPULATION',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POP MALE',
         titleSpan: TextSpan(
@@ -732,7 +752,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL POP MALE',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -741,8 +761,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_MALE',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POP FEMALE',
         titleSpan: TextSpan(
@@ -751,7 +772,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL POP FEMALE',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -760,8 +781,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_FEMALE',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'SC POPULATION',
         titleSpan: TextSpan(
@@ -770,7 +792,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'SC POPULATION',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -779,8 +801,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'SC_POPULATION',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'ST POPULATION',
         titleSpan: TextSpan(
@@ -789,7 +812,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'ST POPULATION',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -798,8 +821,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ST_POPULATION',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'LITERATES',
         titleSpan: TextSpan(
@@ -808,7 +832,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'LITERATES',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -817,8 +841,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'LITERATES',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'ILLITERATES',
         titleSpan: TextSpan(
@@ -827,7 +852,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'ILLITERATES',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -836,8 +861,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ILLITERATES',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL WORKERS',
         titleSpan: TextSpan(
@@ -846,7 +872,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL WORKERS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -855,8 +881,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_WORKERS',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'CULTIVATORS',
         titleSpan: TextSpan(
@@ -865,7 +892,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'CULTIVATORS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -874,8 +901,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'CULTIVATORS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'AGRICULTURAL LABOURS',
         titleSpan: TextSpan(
@@ -884,7 +912,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'AGRICULTURAL LABOURS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -917,31 +945,31 @@ districtdataloaded==true? FutureBuilder<dynamic>(
     return Column(
       children: [
         Card(
-            color: Color(0xffd2dfff),
+            // color: Color(0xffd2dfff),
             elevation: 10,
             child: Table(children: [
               TableRow(children: [
                 Container(
                     height: 30,
-                    color: Color(0xff00196b),
+                    color: Color(0xff86a8e7),
                     child: Center(
                         child: Text(
                       '$input1 ',
                       style: GoogleFonts.nunitoSans(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ))),
                 Container(
                     height: 30,
-                    color: Color(0xff00196b),
+                    color: Color(0xff86a8e7),
                     child: Center(
                         child: Text(
                       'Census Data',
                       style: GoogleFonts.nunitoSans(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ))),
               ]),
               ..._CensusTabledata
@@ -1008,12 +1036,14 @@ districtdataloaded==true? FutureBuilder<dynamic>(
   }
 
   DistrictData() {
-     if (DistrictOverviewdata == null || DistrictOverviewdata['DISTRICT_AGG_DATA'] == null)
+    if (DistrictOverviewdata == null ||
+        DistrictOverviewdata['DISTRICT_AGG_DATA'] == null)
       return Container(height: 0, width: 0);
 
     List<PlutoColumn> columns2 = [
-     PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'SUB-DISTRICT',
         titleSpan: TextSpan(
@@ -1022,7 +1052,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'SUB-DISTRICT',
-                  style: TextStyle(color: Colors.white,),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1031,8 +1061,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'SUB-DISTRICT',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL HOUSEHOLDS',
         titleSpan: TextSpan(
@@ -1041,7 +1072,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL HOUSEHOLDS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1050,8 +1081,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_HOUSEHOLDS',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POPULATION',
         titleSpan: TextSpan(
@@ -1060,7 +1092,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL POPULATION',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1069,8 +1101,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POPULATION',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POP MALE',
         titleSpan: TextSpan(
@@ -1079,7 +1112,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL POP MALE',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1088,8 +1121,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_MALE',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POP FEMALE',
         titleSpan: TextSpan(
@@ -1098,7 +1132,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL POP FEMALE',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1107,8 +1141,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_FEMALE',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'SC POPULATION',
         titleSpan: TextSpan(
@@ -1117,7 +1152,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'SC POPULATION',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1126,8 +1161,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'SC_POPULATION',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'ST POPULATION',
         titleSpan: TextSpan(
@@ -1136,7 +1172,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'ST POPULATION',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1145,8 +1181,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ST_POPULATION',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'LITERATES',
         titleSpan: TextSpan(
@@ -1155,7 +1192,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'LITERATES',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1164,8 +1201,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'LITERATES',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'ILLITERATES',
         titleSpan: TextSpan(
@@ -1174,7 +1212,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'ILLITERATES',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1183,8 +1221,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ILLITERATES',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL WORKERS',
         titleSpan: TextSpan(
@@ -1193,7 +1232,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL WORKERS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1202,8 +1241,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_WORKERS',
         type: PlutoColumnType.text(),
       ),
-    PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'CULTIVATORS',
         titleSpan: TextSpan(
@@ -1212,7 +1252,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'CULTIVATORS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1221,8 +1261,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'CULTIVATORS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'AGRICULTURAL LABOURS',
         titleSpan: TextSpan(
@@ -1231,7 +1272,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'AGRICULTURAL LABOURS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1244,8 +1285,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
     List<PlutoRow> rows2 = DistrictOverviewdata['DISTRICT_AGG_DATA']
         .map<PlutoRow>((item) => PlutoRow(cells: {
               'SUB-DISTRICT': PlutoCell(value: item['SUB_DISTRICT'] ?? ''),
-              'TOTAL_HOUSEHOLDS':
-                  PlutoCell(value: item['TOTAL_HOUSEHOLDS'] ?? '',),
+              'TOTAL_HOUSEHOLDS': PlutoCell(
+                value: item['TOTAL_HOUSEHOLDS'] ?? '',
+              ),
               'TOTAL_POPULATION':
                   PlutoCell(value: item['TOTAL_POPULATION'] ?? ''),
               'TOTAL_POP_MALE': PlutoCell(value: item['TOTAL_POP_MALE'] ?? ''),
@@ -1264,40 +1306,40 @@ districtdataloaded==true? FutureBuilder<dynamic>(
     return Column(
       children: [
         Card(
-            color: Color(0xffd2dfff),
+            // color: Color(0xffd2dfff),
             elevation: 10,
             child: Table(children: [
               TableRow(children: [
                 Container(
                     height: 30,
-                    color: Color(0xff00196b),
+                    color: Color(0xff86a8e7),
                     child: Center(
                         child: Text(
                       '$input2 ',
                       style: GoogleFonts.nunitoSans(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ))),
                 Container(
                     height: 30,
-                    color: Color(0xff00196b),
+                    color: Color(0xff86a8e7),
                     child: Center(
                         child: Text(
                       'Census Data',
                       style: GoogleFonts.nunitoSans(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ))),
               ]),
               ..._DistrictTabledata
             ])),
-              SizedBox(
+        SizedBox(
           height: 20,
         ),
         Container(
-          color: Color(0xffd2dfff),
+          // color: Color(0xffd2dfff),
           height: 450,
           width: 400,
           child: PlutoGrid(
@@ -1312,9 +1354,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
             },
             configuration: const PlutoGridConfiguration(
                 style: PlutoGridStyleConfig(
-              rowColor: Color(0xffd2dfff),
+              // rowColor: Color(0xffd2dfff),
               borderColor: Colors.grey,
-              gridBackgroundColor: Color(0xffd2dfff),
+              // gridBackgroundColor: Color(0xffd2dfff),
             )),
             createFooter: (stateManager) {
               stateManager.setPageSize(100, notify: false); // default 40
@@ -1354,12 +1396,14 @@ districtdataloaded==true? FutureBuilder<dynamic>(
     );
   }
 
-  SubDistrictData(){  if (
-    SubDistrictOverviewdata == null || SubDistrictOverviewdata['SUB_DISTRICT_AGG_DATA'] == null)
+  SubDistrictData() {
+    if (SubDistrictOverviewdata == null ||
+        SubDistrictOverviewdata['SUB_DISTRICT_AGG_DATA'] == null)
       return Container(height: 0, width: 0);
-     List<PlutoColumn> columns3 = [
-  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+    List<PlutoColumn> columns3 = [
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'VILLAGE',
         titleSpan: TextSpan(
@@ -1368,7 +1412,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'VILLAGE',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1377,8 +1421,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'VILLAGE',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL HOUSEHOLDS',
         titleSpan: TextSpan(
@@ -1387,7 +1432,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL HOUSEHOLDS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1396,8 +1441,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_HOUSEHOLDS',
         type: PlutoColumnType.text(),
       ),
-  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POPULATION',
         titleSpan: TextSpan(
@@ -1406,7 +1452,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL POPULATION',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1415,8 +1461,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POPULATION',
         type: PlutoColumnType.text(),
       ),
-  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POP MALE',
         titleSpan: TextSpan(
@@ -1425,7 +1472,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL POP MALE',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1434,8 +1481,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_MALE',
         type: PlutoColumnType.text(),
       ),
-  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POP FEMALE',
         titleSpan: TextSpan(
@@ -1444,7 +1492,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL POP FEMALE',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1453,8 +1501,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_POP_FEMALE',
         type: PlutoColumnType.text(),
       ),
-  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'SC POPULATION',
         titleSpan: TextSpan(
@@ -1463,7 +1512,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'SC POPULATION',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1472,8 +1521,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'SC_POPULATION',
         type: PlutoColumnType.text(),
       ),
-  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'ST POPULATION',
         titleSpan: TextSpan(
@@ -1482,7 +1532,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'ST POPULATION',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1491,8 +1541,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ST_POPULATION',
         type: PlutoColumnType.text(),
       ),
-  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'LITERATES',
         titleSpan: TextSpan(
@@ -1501,7 +1552,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'LITERATES',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1510,8 +1561,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'LITERATES',
         type: PlutoColumnType.text(),
       ),
-  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'ILLITERATES',
         titleSpan: TextSpan(
@@ -1520,7 +1572,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'ILLITERATES',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1529,8 +1581,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'ILLITERATES',
         type: PlutoColumnType.text(),
       ),
-  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL WORKERS',
         titleSpan: TextSpan(
@@ -1539,7 +1592,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'TOTAL WORKERS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1548,8 +1601,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'TOTAL_WORKERS',
         type: PlutoColumnType.text(),
       ),
-  PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'CULTIVATORS',
         titleSpan: TextSpan(
@@ -1558,7 +1612,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'CULTIVATORS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1567,8 +1621,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
         field: 'CULTIVATORS',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(textAlign: PlutoColumnTextAlign.center,
-        backgroundColor: Color(0xff00196b),
+      PlutoColumn(
+        textAlign: PlutoColumnTextAlign.center,
+        backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'AGRICULTURAL LABOURS',
         titleSpan: TextSpan(
@@ -1577,7 +1632,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Center(
                 child: Text(
                   'AGRICULTURAL LABOURS',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             ),
@@ -1607,66 +1662,65 @@ districtdataloaded==true? FutureBuilder<dynamic>(
                   PlutoCell(value: item['AGRICULTURAL_LABOURS'] ?? ''),
             }))
         .toList();
-    return Column(
-      children: [
-        Card(
-            color: Color(0xffd2dfff),
-            elevation: 10,
-            child: Table(children: [
-              TableRow(children: [
-                Container(
-                    height: 30,
-                    color: Color(0xff00196b),
-                    child: Center(
-                        child: Text(
-                      '$SUB_DISTRICT',
-                      style: GoogleFonts.nunitoSans(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
-                    ))),
-                Container(
-                    height: 30,
-                    color: Color(0xff00196b),
-                    child: Center(
-                        child: Text(
-                      'Census Data',
-                      style: GoogleFonts.nunitoSans(
-                          fontSize: 12.0,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white),
-                    ))),
-              ]),
-              ..._SubDistrictTabledata
-            ])),
-              SizedBox(
-          height: 20,
-        ),
-        Container(
-          color: Color(0xffd2dfff),
-          height: 450,
-          width: 400,
-          child: PlutoGrid(
-            columns: columns3,
-            rows: rows3,
-            onLoaded: (PlutoGridOnLoadedEvent event) {
-              setState(() {
-                stateManager = event.stateManager;
-                stateManager!.setShowColumnFilter(true);
-              });
-              print(event);
-            },
-            configuration: const PlutoGridConfiguration(
-                style: PlutoGridStyleConfig(
-              rowColor: Color(0xffd2dfff),
-              borderColor: Colors.grey,
-              gridBackgroundColor: Color(0xffd2dfff),
-            )),
-            createFooter: (stateManager) {
-              stateManager.setPageSize(100, notify: false); // default 40
-              return PlutoPagination(stateManager);
-            },
-            /*createFooter: (stateManager) {
+    return Column(children: [
+      Card(
+          // color: Color(0xffd2dfff),
+          elevation: 10,
+          child: Table(children: [
+            TableRow(children: [
+              Container(
+                  height: 30,
+                  color: Color(0xff86a8e7),
+                  child: Center(
+                      child: Text(
+                    '$SUB_DISTRICT',
+                    style: GoogleFonts.nunitoSans(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ))),
+              Container(
+                  height: 30,
+                  color: Color(0xff86a8e7),
+                  child: Center(
+                      child: Text(
+                    'Census Data',
+                    style: GoogleFonts.nunitoSans(
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ))),
+            ]),
+            ..._SubDistrictTabledata
+          ])),
+      SizedBox(
+        height: 20,
+      ),
+      Container(
+        // color: Color(0xffd2dfff),
+        height: 450,
+        width: 400,
+        child: PlutoGrid(
+          columns: columns3,
+          rows: rows3,
+          onLoaded: (PlutoGridOnLoadedEvent event) {
+            setState(() {
+              stateManager = event.stateManager;
+              stateManager!.setShowColumnFilter(true);
+            });
+            print(event);
+          },
+          configuration: const PlutoGridConfiguration(
+              style: PlutoGridStyleConfig(
+            // rowColor: Color(0xffd2dfff),
+            borderColor: Colors.grey,
+            // gridBackgroundColor: Color(0xffd2dfff),
+          )),
+          createFooter: (stateManager) {
+            stateManager.setPageSize(100, notify: false); // default 40
+            return PlutoPagination(stateManager);
+          },
+          /*createFooter: (stateManager) {
               return PlutoLazyPagination(
                 // Determine the first page.
                 // Default is 1.
@@ -1694,8 +1748,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
                 stateManager: stateManager,
               );
             },*/
-          ),
-        ),]);
+        ),
+      ),
+    ]);
   }
 
   var CensusStateNamesdata;
@@ -1873,9 +1928,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Text(
                 '${key}',
                 style: GoogleFonts.nunitoSans(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             )),
             Center(
@@ -1884,9 +1939,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Text(
                 '${DistrictOverviewdata['DISTRICT_OVERVIEW'][0]['${key}']}',
                 style: GoogleFonts.nunitoSans(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             )),
           ]));
@@ -1902,7 +1957,6 @@ districtdataloaded==true? FutureBuilder<dynamic>(
     return DistrictOverviewdata;
   }
 
-
 //sub district overview API
   bool Subdistrictdataloaded = false;
   var SubDistrictOverviewdata;
@@ -1913,7 +1967,7 @@ districtdataloaded==true? FutureBuilder<dynamic>(
       Selectionquery6['type'] = 'SUB_DISTRICT_OVERVIEW';
       Selectionquery6['STATE'] = input1.toString();
       Selectionquery6['DISTRICT'] = input2.toString();
-         Selectionquery6['SUB_DISTRICT'] = SUB_DISTRICT.toString();
+      Selectionquery6['SUB_DISTRICT'] = SUB_DISTRICT.toString();
     });
     var response = await post(
         Uri.parse('http://idxp.pilogcloud.com:6652/electoral_analysis_census/'),
@@ -1933,9 +1987,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Text(
                 '${key}',
                 style: GoogleFonts.nunitoSans(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             )),
             Center(
@@ -1944,9 +1998,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
               child: Text(
                 '${SubDistrictOverviewdata['SUB_DISTRICT_OVERVIEW'][0]['${key}']}',
                 style: GoogleFonts.nunitoSans(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             )),
           ]));
@@ -1991,9 +2045,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
                   child: Text(
                     '${key}',
                     style: GoogleFonts.nunitoSans(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 )),
                 Center(
@@ -2002,9 +2056,9 @@ districtdataloaded==true? FutureBuilder<dynamic>(
                   child: Text(
                     '${SateOverviewdata['STATE_OVERVIEW'][0]['${key}']}',
                     style: GoogleFonts.nunitoSans(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
+                      fontSize: 12.0,
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 )),
               ]),

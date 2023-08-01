@@ -5,6 +5,7 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart';
@@ -68,18 +69,36 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                     AsyncSnapshot<dynamic> snapshot,
                     ) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 1,
-                          lineStyle: SkeletonLineStyle(
-                            height: 30,
-                            width: MediaQuery.of(context).size.width,
-                            borderRadius: BorderRadius.circular(8),
-                            // minLength: MediaQuery.of(context).size.width / 6,
-                            // maxLength: MediaQuery.of(context).size.width / 3,
-                          )),
-                    );
-                    ;
+                    return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
+                    
+                    //  SkeletonParagraph(
+                    //   style: SkeletonParagraphStyle(
+                    //       lines: 1,
+                    //       lineStyle: SkeletonLineStyle(
+                    //         height: 30,
+                    //         width: MediaQuery.of(context).size.width,
+                    //         borderRadius: BorderRadius.circular(8),
+                    //         // minLength: MediaQuery.of(context).size.width / 6,
+                    //         // maxLength: MediaQuery.of(context).size.width / 3,
+                    //       )),
+                    // );
+                    // ;
                   } else if (snapshot.connectionState == ConnectionState.done) {
                     if (snapshot.hasError) {
                       return const Text('Error');
@@ -222,7 +241,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HomeColor,
+      // backgroundColor: HomeColor,
       // appBar: AppBar(),
       body: SafeArea(
         child: DefaultTabController(
@@ -282,63 +301,83 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                   children: <Widget>[
                     statedropdownvisible == true
                         ? TwitterOverviewScreen()
-                        : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                        : Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        ),
                     isytvisible == true
                         ? YoutubeOverviewScreen()
-                        : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                        : Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        ),
                     Center(
                       child: NewsPaperOverviewScreen(),
                     ),
                     isnewschannelvisible == true
                         ? NewschannelOverviewScreen()
-                        : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                        :Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        ),
                     isFaceBookvisible == true
                         ? FacebookOverviewScreen()
-                        : SkeletonParagraph(
-                      style: SkeletonParagraphStyle(
-                          lines: 5,
-                          spacing: 6,
-                          lineStyle: SkeletonLineStyle(
-                            randomLength: true,
-                            height: 20,
-                            borderRadius: BorderRadius.circular(8),
-                            minLength:
-                            MediaQuery.of(context).size.width / 2,
-                          )),
-                    ),
+                        : Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        ),
                   ],
                 ),
               ),
@@ -423,17 +462,23 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           AsyncSnapshot<dynamic> snapshot,
           ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
+          return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return const Text('Error');
@@ -450,7 +495,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: DataTable(
                           headingRowColor: MaterialStateColor.resolveWith(
-                                  (states) => Color(0xff00196b)),
+                                  (states) => Color(0xff86a8e7)),
                           dataRowColor:
                           MaterialStateColor.resolveWith((states) {
                             return Color(0xffd2dfff);
@@ -613,7 +658,23 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                         ) {
                       if (snapshot.connectionState ==
                           ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
                       } else if (snapshot.connectionState ==
                           ConnectionState.done) {
                         if (snapshot.hasError) {
@@ -778,17 +839,23 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           AsyncSnapshot<dynamic> snapshot,
           ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
+          return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return const Text('Error');
@@ -806,7 +873,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                         ? DataTable(
                         headingRowColor:
                         MaterialStateColor.resolveWith(
-                                (states) => Color(0xff00196b)),
+                                (states) => Color(0xff86a8e7)),
                         dataRowColor:
                         MaterialStateColor.resolveWith((states) {
                           return Color(0xffd2dfff);
@@ -959,17 +1026,23 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           AsyncSnapshot<dynamic> snapshot,
           ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
+          return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return const Text('Error');
@@ -991,7 +1064,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                           TableRow(children: [
                             Container(
                                 height: 30,
-                                color: Color(0xff00196b),
+                                color: Color(0xff86a8e7),
                                 child: Center(
                                     child: Text(
                                       'PARTY NAME',
@@ -1002,7 +1075,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                     ))),
                             Container(
                                 height: 30,
-                                color: Color(0xff00196b),
+                                color: Color(0xff86a8e7),
                                 child: Center(
                                     child: Text(
                                       'COUNT',
@@ -1061,17 +1134,23 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           AsyncSnapshot<dynamic> snapshot,
           ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
+          return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return const Text('Error');
@@ -1089,7 +1168,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                         ? DataTable(
                         headingRowColor:
                         MaterialStateColor.resolveWith(
-                                (states) => Color(0xff00196b)),
+                                (states) => Color(0xff86a8e7)),
                         dataRowColor:
                         MaterialStateColor.resolveWith((states) {
                           return Color(0xffd2dfff);
@@ -1246,17 +1325,23 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           AsyncSnapshot<dynamic> snapshot,
           ) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SkeletonParagraph(
-            style: SkeletonParagraphStyle(
-                lines: 5,
-                spacing: 6,
-                lineStyle: SkeletonLineStyle(
-                  randomLength: true,
-                  height: 20,
-                  borderRadius: BorderRadius.circular(8),
-                  minLength: MediaQuery.of(context).size.width / 2,
-                )),
-          );
+          return Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  top: 70.0),
+                                                          child: SizedBox(
+                                                            height: 150,
+                                                            width: 150,
+                                                            child: Center(
+                                                                child:
+                                                                    SpinKitWave(
+                                                              color:
+                                                                  Colors.blue,
+                                                              size: 18,
+                                                            )),
+                                                          ),
+                                                        );
         } else if (snapshot.connectionState == ConnectionState.done) {
           if (snapshot.hasError) {
             return const Text('Error');
@@ -1274,7 +1359,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                         ? DataTable(
                         headingRowColor:
                         MaterialStateColor.resolveWith(
-                                (states) => Color(0xff00196b)),
+                                (states) => Color(0xff86a8e7)),
                         dataRowColor:
                         MaterialStateColor.resolveWith((states) {
                           return Color(0xffd2dfff);

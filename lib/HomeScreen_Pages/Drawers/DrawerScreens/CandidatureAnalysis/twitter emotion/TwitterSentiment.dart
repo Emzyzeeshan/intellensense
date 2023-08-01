@@ -45,44 +45,53 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                height: 30,
-                color: Color(0xff00196b),
-                child: Center(
-                  child: Text(
-                    'Twitter Analysis',
-                    style: TextStyle(
-                        fontFamily: 'Segoe UI',
-                        fontSize: 20,
-                        color: Colors.white),
-                  ),
-                ),
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(onPressed: (){Navigator.pop(context);},icon: Icon(Icons.arrow_back_ios,color: Colors.black,),),
+        title: Container(
+          width: MediaQuery.of(context).size.width,
+          height: 30,
+          color:Color(0xff86a8e7),
+          child: Center(
+            child: Text(
+              'Twitter Analysis',
+              style: TextStyle(
+                  fontFamily: 'Segoe UI',
+                  fontSize: 20,
+                  color: Colors.white),
             ),
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  height: MediaQuery.of(context).size.height,
-                  width: MediaQuery.of(context).size.width,
-                  child: PageView(
-                    physics: NeverScrollableScrollPhysics(),
-                    controller: _pagecontroller,
-                    children: [
-                      LastSevenDaysAnalysis(),
-                      Selectdurationforanalysis(),
-                    ],
-                  ),
-                )),
-           
-          ],
+          ),
+        ),
+              centerTitle: true,
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
+            child: Column(
+              children: [
+                
+                
+                Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height,
+                      width: MediaQuery.of(context).size.width,
+                      child: PageView(
+                        physics: NeverScrollableScrollPhysics(),
+                        controller: _pagecontroller,
+                        children: [
+                          LastSevenDaysAnalysis(),
+                          Selectdurationforanalysis(),
+                        ],
+                      ),
+                    )),
+               
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -147,7 +156,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                               ),
                               Card(
                                 elevation: 5,
-                                child: SfCircularChart(
+                                child: SfCircularChart(backgroundColor: Color(0xff86a8e7).withOpacity(0.4),
                                   title: ChartTitle(
                                       text: 'Tweet Sentiment Analysis'),
                                   legend: Legend(isVisible: true),
@@ -179,7 +188,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                               ),
                               Card(
                                 elevation: 5,
-                                child: SfCircularChart(
+                                child: SfCircularChart(backgroundColor: Color(0xff86a8e7).withOpacity(0.4),
                                   title: ChartTitle(
                                       text: 'Comments Sentiment Analysis'),
                                   legend: Legend(isVisible: true),
@@ -217,7 +226,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: 30,
-                    color: Color(0xff00196b),
+                    color:Color(0xff86a8e7),
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -262,261 +271,264 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
   Selectdurationforanalysis() {
     return SafeArea(
       child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Text(
-              'Select duration for analysis',
-              style: TextStyle(
-                fontFamily: 'Segoe UI',
-                fontSize: 16,
+        child: Padding(
+          padding: const EdgeInsets.only(top:100.0),
+          child: Column(
+            children: [
+              Text(
+                'Select duration for analysis',
+                style: TextStyle(
+                  fontFamily: 'Segoe UI',
+                  fontSize: 16,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'From: ',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          DateTimeField(
+                            controller: FromDate,
+                            decoration: InputDecoration(
+                                filled: true,
+                                hintText: 'mm/dd/yyyy',
+                                isDense: true,
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(5)),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(5)),
+                                fillColor: Colors.white,
+                                focusColor: Colors.grey),
+                            format: format,
+                            onShowPicker: (context, currentValue) {
+                              return showDatePicker(
+                                  context: context,
+                                  firstDate: DateTime(1900),
+                                  initialDate: currentValue ?? DateTime.now(),
+                                  lastDate: DateTime(2100));
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Flexible(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'To : ',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                          DateTimeField(
+                            controller: ToDate,
+                            decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide.none,
+                                    borderRadius: BorderRadius.circular(5)),
+                                filled: true,
+                                hintText: 'mm/dd/yyyy',
+                                isDense: true,
+                                fillColor: Colors.white,
+                                focusColor: Colors.grey),
+                            format: format,
+                            onShowPicker: (context, currentValue) {
+                              return showDatePicker(
+                                  context: context,
+                                  firstDate: DateTime(1900),
+                                  initialDate: currentValue ?? DateTime.now(),
+                                  lastDate: DateTime(2100));
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Flexible(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'From: ',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        DateTimeField(
-                          controller: FromDate,
-                          decoration: InputDecoration(
-                              filled: true,
-                              hintText: 'mm/dd/yyyy',
-                              isDense: true,
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(5)),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(5)),
-                              fillColor: Colors.white,
-                              focusColor: Colors.grey),
-                          format: format,
-                          onShowPicker: (context, currentValue) {
-                            return showDatePicker(
-                                context: context,
-                                firstDate: DateTime(1900),
-                                initialDate: currentValue ?? DateTime.now(),
-                                lastDate: DateTime(2100));
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Flexible(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'To : ',
-                          style: TextStyle(color: Colors.black),
-                        ),
-                        DateTimeField(
-                          controller: ToDate,
-                          decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                  borderSide: BorderSide.none,
-                                  borderRadius: BorderRadius.circular(5)),
-                              filled: true,
-                              hintText: 'mm/dd/yyyy',
-                              isDense: true,
-                              fillColor: Colors.white,
-                              focusColor: Colors.grey),
-                          format: format,
-                          onShowPicker: (context, currentValue) {
-                            return showDatePicker(
-                                context: context,
-                                firstDate: DateTime(1900),
-                                initialDate: currentValue ?? DateTime.now(),
-                                lastDate: DateTime(2100));
-                          },
-                        ),
-                      ],
-                    ),
-                  ),
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        TweetGraphData1.clear();
+                        CommentsGraphData1.clear();
+              
+                        SelectionSentimentdata.clear();
+                        _value1 = SelectionSentimentAPI(
+                            'between', '${ToDate.text}', '${FromDate.text}');
+                      });
+                    },
+                    child: Text('Search'),
+                    color: Color(0xff86a8e7),
+                  )
                 ],
               ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                MaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      TweetGraphData1.clear();
-                      CommentsGraphData1.clear();
-    
-                      SelectionSentimentdata.clear();
-                      _value1 = SelectionSentimentAPI(
-                          'between', '${ToDate.text}', '${FromDate.text}');
-                    });
-                  },
-                  child: Text('Search'),
-                  color: Colors.blueAccent,
-                )
-              ],
-            ),
-            SafeArea(
-              child: FutureBuilder<dynamic>(
-                future: _value1,
-                builder: (
-                  BuildContext context,
-                  AsyncSnapshot<dynamic> snapshot,
-                ) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(
-                        child: SpinKitWave(
-                      color: Colors.blue,
-                      size: 18,
-                    ));
-                  } else if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasError) {
-                      return const Text('Error');
-                    } else if (snapshot.hasData) {
-                      return SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 18.0),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Text(
-                                  ' Analysis from ${FromDate.text} to ${ToDate.text}',
-                                  style: TextStyle(
-                                    fontFamily: 'Segoe UI',
-                                    fontSize: 16,
+              SafeArea(
+                child: FutureBuilder<dynamic>(
+                  future: _value1,
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<dynamic> snapshot,
+                  ) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(
+                          child: SpinKitWave(
+                        color: Colors.blue,
+                        size: 18,
+                      ));
+                    } else if (snapshot.connectionState == ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        return const Text('Error');
+                      } else if (snapshot.hasData) {
+                        return SingleChildScrollView(
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 18.0),
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Text(
+                                    ' Analysis from ${FromDate.text} to ${ToDate.text}',
+                                    style: TextStyle(
+                                      fontFamily: 'Segoe UI',
+                                      fontSize: 16,
+                                    ),
                                   ),
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                  children: [
-                                    SocialInfoCard('assets/icons/FollowersEmoji.png',
-                                        '${SelectionSentimentdata['user_info']['USER_FOLLOWERS']}'),
-                                    SocialInfoCard('assets/icons/LikesEmoji.png',
-                                        '${SelectionSentimentdata['user_info']['LIKES']}'),
-                                    SocialInfoCard('assets/icons/RetweetEmoji.png',
-                                        '${SelectionSentimentdata['user_info']['RETWEETS_COUNT']}'),
-                                    SocialInfoCard('assets/icons/FollowersEmoji.png',
-                                        '${SelectionSentimentdata['user_info']['USER_MENTIONS']}'),
-                                    SocialInfoCard('assets/icons/HashTagsEmoji.png',
-                                        '${SelectionSentimentdata['user_info']['HASHTAG_COUNT']}'),
-                                    SocialInfoCard('assets/icons/TweetsEmoji.png',
-                                        '${SelectionSentimentdata['user_info']['TWEET_COUNT']}'),
-                                  ],
-                                ),
-                                Card(
-                                  elevation: 5,
-                                  child: SfCircularChart(
-                                    title:
-                                        ChartTitle(text: 'Tweet Sentiment Analysis'),
-                                    legend: Legend(isVisible: true),
-                                    series: <PieSeries<ChartSampleData, String>>[
-                                      PieSeries<ChartSampleData, String>(
-                                          explode: true,
-                                          explodeIndex: 0,
-                                          explodeOffset: '10%',
-                                          dataSource: TweetGraphData1,
-                                          xValueMapper: (ChartSampleData data, _) =>
-                                              data.x as String,
-                                          yValueMapper: (ChartSampleData data, _) =>
-                                              data.y,
-                                          dataLabelMapper:
-                                              (ChartSampleData data, _) => data.text,
-                                          startAngle: 90,
-                                          endAngle: 90,
-                                          dataLabelSettings: const DataLabelSettings(
-                                              isVisible: true)),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    children: [
+                                      SocialInfoCard('assets/icons/FollowersEmoji.png',
+                                          '${SelectionSentimentdata['user_info']['USER_FOLLOWERS']}'),
+                                      SocialInfoCard('assets/icons/LikesEmoji.png',
+                                          '${SelectionSentimentdata['user_info']['LIKES']}'),
+                                      SocialInfoCard('assets/icons/RetweetEmoji.png',
+                                          '${SelectionSentimentdata['user_info']['RETWEETS_COUNT']}'),
+                                      SocialInfoCard('assets/icons/FollowersEmoji.png',
+                                          '${SelectionSentimentdata['user_info']['USER_MENTIONS']}'),
+                                      SocialInfoCard('assets/icons/HashTagsEmoji.png',
+                                          '${SelectionSentimentdata['user_info']['HASHTAG_COUNT']}'),
+                                      SocialInfoCard('assets/icons/TweetsEmoji.png',
+                                          '${SelectionSentimentdata['user_info']['TWEET_COUNT']}'),
                                     ],
                                   ),
-                                ),
-                                Divider(
-                                  color: Colors.grey.shade300,
-                                  thickness: 1,
-                                ),
-                                Card(
-                                  elevation: 5,
-                                  child: SfCircularChart(
-                                    title: ChartTitle(
-                                        text: 'Comments Sentiment Analysis'),
-                                    legend: Legend(isVisible: true),
-                                    series: <PieSeries<ChartSampleData, String>>[
-                                      PieSeries<ChartSampleData, String>(
-                                          explode: true,
-                                          explodeIndex: 0,
-                                          explodeOffset: '10%',
-                                          dataSource: CommentsGraphData1,
-                                          xValueMapper: (ChartSampleData data, _) =>
-                                              data.x as String,
-                                          yValueMapper: (ChartSampleData data, _) =>
-                                              data.y,
-                                          dataLabelMapper:
-                                              (ChartSampleData data, _) => data.text,
-                                          startAngle: 90,
-                                          endAngle: 90,
-                                          dataLabelSettings: const DataLabelSettings(
-                                              isVisible: true)),
-                                    ],
+                                  Card(
+                                    elevation: 5,
+                                    child: SfCircularChart(backgroundColor: Color(0xff86a8e7).withOpacity(0.4),
+                                      title:
+                                          ChartTitle(text: 'Tweet Sentiment Analysis'),
+                                      legend: Legend(isVisible: true),
+                                      series: <PieSeries<ChartSampleData, String>>[
+                                        PieSeries<ChartSampleData, String>(
+                                            explode: true,
+                                            explodeIndex: 0,
+                                            explodeOffset: '10%',
+                                            dataSource: TweetGraphData1,
+                                            xValueMapper: (ChartSampleData data, _) =>
+                                                data.x as String,
+                                            yValueMapper: (ChartSampleData data, _) =>
+                                                data.y,
+                                            dataLabelMapper:
+                                                (ChartSampleData data, _) => data.text,
+                                            startAngle: 90,
+                                            endAngle: 90,
+                                            dataLabelSettings: const DataLabelSettings(
+                                                isVisible: true)),
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                 
-                              ]),
-                        ),
-                      );
+                                  Divider(
+                                    color: Colors.grey.shade300,
+                                    thickness: 1,
+                                  ),
+                                  Card(
+                                    elevation: 5,
+                                    child: SfCircularChart(backgroundColor: Color(0xff86a8e7).withOpacity(0.4),
+                                      title: ChartTitle(
+                                          text: 'Comments Sentiment Analysis'),
+                                      legend: Legend(isVisible: true),
+                                      series: <PieSeries<ChartSampleData, String>>[
+                                        PieSeries<ChartSampleData, String>(
+                                            explode: true,
+                                            explodeIndex: 0,
+                                            explodeOffset: '10%',
+                                            dataSource: CommentsGraphData1,
+                                            xValueMapper: (ChartSampleData data, _) =>
+                                                data.x as String,
+                                            yValueMapper: (ChartSampleData data, _) =>
+                                                data.y,
+                                            dataLabelMapper:
+                                                (ChartSampleData data, _) => data.text,
+                                            startAngle: 90,
+                                            endAngle: 90,
+                                            dataLabelSettings: const DataLabelSettings(
+                                                isVisible: true)),
+                                      ],
+                                    ),
+                                  ),
+                                   
+                                ]),
+                          ),
+                        );
+                      } else {
+                        return const Text('Empty data');
+                      }
                     } else {
-                      return const Text('Empty data');
+                      return Text('State: ${snapshot.connectionState}');
                     }
-                  } else {
-                    return Text('State: ${snapshot.connectionState}');
-                  }
-                },
+                  },
+                ),
               ),
-            ),
-           Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        setState(() {
-                         
-                            _pagecontroller.jumpToPage(0);
-                        });
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 30,
-                        color: Color(0xff00196b),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                  Icons.navigate_before,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              Text(
-                                'Recent Analysis',
-                                style: TextStyle(
-                                    fontFamily: 'Segoe UI',
-                                    fontSize: 20,
-                                    color: Colors.white),
-                              ),
-                              
-                            ],
+             Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                           
+                              _pagecontroller.jumpToPage(0);
+                          });
+                        },
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          height: 30,
+                          color:Color(0xff86a8e7),
+                          child: Center(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                    Icons.navigate_before,
+                                  size: 25,
+                                  color: Colors.white,
+                                ),
+                                Text(
+                                  'Recent Analysis',
+                                  style: TextStyle(
+                                      fontFamily: 'Segoe UI',
+                                      fontSize: 20,
+                                      color: Colors.white),
+                                ),
+                                
+                              ],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-          ],
+            ],
+          ),
         ),
       ),
     );

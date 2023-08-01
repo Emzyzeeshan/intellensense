@@ -23,8 +23,9 @@ class _NewsTemplate1State extends State<NewsTemplate1> {
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
               colors: const [
-                Color.fromARGB(255, 98, 113, 145),
-                Color(0xffe4e0f8),
+            Color(0xff86a8e7),
+           Color(0xff86a8e7),
+                
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -102,8 +103,8 @@ class _NewsTemplate2State extends State<NewsTemplate2> {
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
               colors: const [
-                Color.fromARGB(255, 176, 193, 232),
-                Color(0xffe4e0f8),
+            Color(0xff86a8e7),
+           Color(0xff86a8e7),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -187,8 +188,8 @@ class _NewsTemplate3State extends State<NewsTemplate3> {
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
               colors: const [
-                Color.fromARGB(255, 77, 107, 173),
-                Color(0xffe4e0f8),
+        Color(0xff86a8e7),
+           Color(0xff86a8e7),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
@@ -266,8 +267,8 @@ class _NewsTemplate4State extends State<NewsTemplate4> {
             borderRadius: BorderRadius.circular(20),
             gradient: LinearGradient(
               colors: const [
-                Color.fromARGB(255, 81, 99, 140),
-                Color(0xffe4e0f8),
+             Color(0xff86a8e7),
+           Color(0xff86a8e7),
               ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
