@@ -2906,7 +2906,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
   //Bar Graph data
   var BarGraphdata;
-
   Map Selectionquery1 = new Map<String, dynamic>();
   List<ChartSampleData> BargraphChartdata = [];
   List<ChartSampleData> PiegraphChartData = [];
@@ -2923,7 +2922,6 @@ class _HomeScreenState extends State<HomeScreen> {
         Uri.parse('http://idxp.pilogcloud.com:6659/social_media_YT/'),
         headers: headers,
         body: body);
-
     print(response.statusCode);
     if (response.statusCode == 200) {
       print('inside loop');

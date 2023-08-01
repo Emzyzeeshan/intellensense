@@ -288,16 +288,15 @@ class _TwitterScreenState extends State<TwitterScreen> {
     var headers = {'Content-Type': 'application/json'};
     var response = await get(
       Uri.parse(
-          INSIGHTS+'/twitter/partyName/TDP?page=0,11'),
+          INSIGHTS+'/twitter'),
       headers: headers,
     );
     print(response.toString());
     if (response.statusCode == 200) {
       print(response.body);
-      print('ajhdsjhjfjiafnjafhaof');
       try {
         setState(() =>
-            TwitterListResult = jsonDecode(utf8.decode(response.bodyBytes)));
+            TwitterListResult = json.decode(utf8.decode(response.bodyBytes)));
       } catch (e) {
         print(TwitterListResult);
         TwitterListResult = [];
