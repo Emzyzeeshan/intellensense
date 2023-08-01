@@ -89,6 +89,7 @@ dependencies:
   marquee_text: ^2.5.0+1
   mockito: ^5.4.2
   modal_bottom_sheet: ^2.1.2
+  multi_select_flutter: ^4.1.3
   otp_text_field: ^1.1.3
   overlay_support: ^2.1.0
   page_transition: ^2.0.9
@@ -189,11 +190,31 @@ flutter:
     - assets/Image/wind.png
     - assets/Image/celebrate.gif
     - assets/Image/logo.png
-    - assets/new Updated images/img.png
     - assets/new Updated images/megaphone.png
     - assets/new Updated images/social-media-icons-unscreen.gif
     - assets/new Updated images/image_2023_07_12T10_18_25_781Z.png
     - assets/new Updated images/image_2023_07_12T10_18_35_331Z.png
+    - assets/FB.jpg
+    - assets/News.jpg
+    - assets/Twitter.jpg
+    - assets/YouTube.jpg
+    - assets/FB (1).jpg
+    - assets/News (1).jpg
+    - assets/Twitter (1).jpg
+    - assets/YouTube (1).jpg
+    - assets/NotificationIcons/Tree-01.png
+    - assets/NotificationIcons/Pivot-Unpivot_Icon-01.png
+    - assets/NotificationIcons/Open_Docs_Icon-01.png
+    - assets/NotificationIcons/GridDB-01.png
+    - assets/NotificationIcons/Pivot-Unpivot_Icon (1).png
+    - assets/NotificationIcons/GridDB2-01.png
+    - assets/NotificationIcons/analyticsShowCard-01.png
+    - assets/NotificationIcons/GridDB-04.png
+    - assets/NotificationIcons/News-Paper.png
+    - assets/NotificationIcons/analyticsShowCard-01-removebg-preview.png
+    - assets/NotificationIcons/Open_Docs_Icon-01 (1).png
+    - assets/NotificationIcons/Pivot-Unpivot_Icon-02.png
+    - assets/NotificationIcons/Tree-03.png
     - assets/telangana_dist.json
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -9,6 +9,7 @@ import 'package:intellensense/main.dart';
 import '../../../Constants/constants.dart';
 import '../Expansion_components_Notification/YoutubeGridDb.dart';
 import '../Expansion_components_Notification/YoutubeHashTagInfo.dart';
+import '../Expansion_components_Notification/YoutubePivot.dart';
 
 
 class Youtube extends StatefulWidget {
@@ -24,22 +25,25 @@ class _YoutubeState extends State<Youtube> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextField(
-          onChanged: onSearchTextChanged,
-          controller: textEditingController,
-          cursorColor: Colors.grey,
-          decoration: InputDecoration(
-              isDense: true,
-              fillColor: TextfieldColor,
-              filled: true,
-              border: OutlineInputBorder(borderSide: BorderSide.none),
-              hintText: 'Search',
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
-              prefixIcon: Container(
-                padding: EdgeInsets.all(15),
-                child: Icon(Icons.search_rounded),
-                width: 18,
-              )),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0,left: 8,right: 8),
+          child: TextField(
+            onChanged: onSearchTextChanged,
+            controller: textEditingController,
+            cursorColor: Colors.grey,
+            decoration: InputDecoration(
+                isDense: true,
+                fillColor: TextfieldColor,
+                filled: true,
+                border: OutlineInputBorder(borderSide: BorderSide.none),
+                hintText: 'Search',
+                hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
+                prefixIcon: Container(
+                  padding: EdgeInsets.all(15),
+                  child: Icon(Icons.search_rounded),
+                  width: 18,
+                )),
+          ),
         ),
         SizedBox(
           height: 10,
@@ -78,6 +82,8 @@ class _YoutubeState extends State<Youtube> {
                             [index]),
                               GridTap: YoutubeGridDb(
                                   Youtubedata['candidate_names'][index]),
+                              PivotTap: YoutubePivot(
+                                  Youtubedata['candidate_names'][index]),
                             );
                           },
                         ),
@@ -101,6 +107,8 @@ class _YoutubeState extends State<Youtube> {
                       dashboadTap: YoutubeHashTagInfo(
                           searchData[index]),
                       GridTap: YoutubeGridDb(
+                          searchData[index]),
+                      PivotTap: YoutubePivot(
                           searchData[index]),
                     );
                   },
@@ -164,8 +172,9 @@ class YoutubeNotificationtile extends StatefulWidget {
   String Hashtag;
   Widget? dashboadTap;
   Widget? GridTap;
+  Widget? PivotTap;
   YoutubeNotificationtile({
-    required this.Hashtag, this.dashboadTap,this.GridTap});
+    required this.Hashtag, this.dashboadTap,this.GridTap, this.PivotTap});
 
   @override
   State<YoutubeNotificationtile> createState() =>
@@ -176,30 +185,31 @@ class _YoutubeNotificationtileState extends State<YoutubeNotificationtile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(3.0),
-      child: ExpansionTile(
-        collapsedBackgroundColor: Colors.grey.shade200,
-        backgroundColor: Colors.grey.shade100,
-        childrenPadding: EdgeInsets.all(5),
+      padding: const EdgeInsets.all(5.0),
+      child: ExpansionTile(collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        collapsedBackgroundColor: Color(0xffc8d1e7),
+        backgroundColor: Color(0xffbdcade),
+
+        //childrenPadding: EdgeInsets.all(5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         leading: Image.asset(
           'assets/icons/Social-Media-Icons-IS-10.png',
           height: 25,
           width: 25,
         ),
-        title: Text(widget.Hashtag),
+        title: Text(widget.Hashtag,style: TextStyle(
+          height: 0,
+          // color: Colors.white,
+        )),
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               OpenContainer(
-                closedColor: Color(0xffd2dfff),
-                openColor: Color(0xffd2dfff),
+                closedColor: Color(0xffc8d1e7),
+                openColor: Color(0xffc8d1e7),
 
-                openElevation: 10.0,
-                closedShape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                ),
+                //openElevation: 10.0,
                 transitionType: ContainerTransitionType.fade,
                 transitionDuration: const Duration(milliseconds: 1200),
                 openBuilder: (context, action) {
@@ -207,20 +217,17 @@ class _YoutubeNotificationtileState extends State<YoutubeNotificationtile> {
                 },
                 closedBuilder: (context, action) {
                   return Image.asset(
-                    'assets/NotificationIcons/analyticsShowCard.png',
-                    height: 25,
-                    width: 25,
+                    'assets/NotificationIcons/analyticsShowCard-01-removebg-preview.png',
+                    height: 20,
+                    width: 20,
                   );
                 },
               ),
               OpenContainer(
-                closedColor: Color(0xffd2dfff),
-                openColor: Color(0xffd2dfff),
+                closedColor: Color(0xffc8d1e7),
+                openColor: Color(0xffc8d1e7),
 
-                openElevation: 10.0,
-                closedShape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(0.0)),
-                ),
+                //openElevation: 10.0,
                 transitionType: ContainerTransitionType.fade,
                 transitionDuration: const Duration(milliseconds: 1200),
                 openBuilder: (context, action) {
@@ -228,26 +235,39 @@ class _YoutubeNotificationtileState extends State<YoutubeNotificationtile> {
                 },
                 closedBuilder: (context, action) {
                   return Image.asset(
-                    'assets/NotificationIcons/GridDB.png',
-                    height: 25,
-                    width: 25,
+                    'assets/NotificationIcons/GridDB-04.png',
+                    height: 20,
+                    width: 20,
                   );
                 },
               ),
               Image.asset(
-                'assets/NotificationIcons/Open_Docs_Icon.png',
-                height: 25,
-                width: 25,
+                'assets/NotificationIcons/Open_Docs_Icon-01 (1).png',
+                height: 20,
+                width: 20,
+              ),
+              OpenContainer(
+                closedColor: Color(0xffc8d1e7),
+                openColor: Color(0xffc8d1e7),
+
+                //openElevation: 10.0,
+                transitionType: ContainerTransitionType.fade,
+                transitionDuration: const Duration(milliseconds: 1200),
+                openBuilder: (context, action) {
+                  return widget.PivotTap!;
+                },
+                closedBuilder: (context, action) {
+                  return Image.asset(
+                    'assets/NotificationIcons/Pivot-Unpivot_Icon-02.png',
+                    height: 20,
+                    width: 20,
+                  );
+                },
               ),
               Image.asset(
-                'assets/NotificationIcons/Pivot-Unpivot_Icon.png',
-                height: 25,
-                width: 25,
-              ),
-              Image.asset(
-                'assets/NotificationIcons/Tree.png',
-                height: 25,
-                width: 25,
+                'assets/NotificationIcons/Tree-03.png',
+                height: 20,
+                width: 20,
               ),
             ],
           )

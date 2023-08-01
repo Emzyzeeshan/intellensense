@@ -19,11 +19,11 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Color(0xffd2dfff),
       appBar: AppBar(
         elevation: 0,
         toolbarHeight: 40,
         centerTitle: true,
+
         backgroundColor: Color(0xff86a8e7),
         leading: IconButton(
           icon: Icon(
