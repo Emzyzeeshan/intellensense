@@ -190,7 +190,7 @@ class _YoutubeNotificationtileState extends State<YoutubeNotificationtile> {
         collapsedBackgroundColor: Color(0xffc8d1e7),
         backgroundColor: Color(0xffbdcade),
 
-        //childrenPadding: EdgeInsets.all(5),
+        childrenPadding: EdgeInsets.all(5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         leading: Image.asset(
           'assets/icons/Social-Media-Icons-IS-10.png',
@@ -209,7 +209,7 @@ class _YoutubeNotificationtileState extends State<YoutubeNotificationtile> {
                 closedColor: Color(0xffc8d1e7),
                 openColor: Color(0xffc8d1e7),
 
-                //openElevation: 10.0,
+                openElevation: 10.0,
                 transitionType: ContainerTransitionType.fade,
                 transitionDuration: const Duration(milliseconds: 1200),
                 openBuilder: (context, action) {

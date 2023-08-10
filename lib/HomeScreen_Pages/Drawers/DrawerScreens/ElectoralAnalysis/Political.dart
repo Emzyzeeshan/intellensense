@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/services.dart';
 
 import 'package:cool_alert/cool_alert.dart';
@@ -673,8 +674,8 @@ class _PoliticalState extends State<Political> {
           );
           _tablerow.add(
             TableRow(children: [
-              Center(
-                  child: Padding(
+              Row(
+                  children:[ Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Text(
                   '${PoliticaData[i]['WINNER_PARTY']}',
@@ -683,29 +684,37 @@ class _PoliticalState extends State<Political> {
                       fontWeight: FontWeight.w400,
                       ),
                 ),
-              )),
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
+              )]),
+              Row(mainAxisAlignment: MainAxisAlignment.end,
+
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
                   '${PoliticaData[i]['COUNT_NUM']}',
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
                       ),
-                ),
-              )),
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
                   '${PoliticaData[i]['ROWNUM']}',
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
                       ),
-                ),
-              ))
+                    ),
+                  ),
+                ],
+              )
             ]),
           );
         }
@@ -745,39 +754,50 @@ class _PoliticalState extends State<Political> {
           );
           _votewisedata.add(
             TableRow(children: [
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
                   '${Votewisedata[i]['WINNER_PARTY']}',
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
                       ),
-                ),
-              )),
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
                   '${Votewisedata[i]['WINNER_VOTES']}',
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
                       ),
-                ),
-              )),
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
                   '${Votewisedata[i]['ROWNUM']}',
                   style: GoogleFonts.nunitoSans(
                       fontSize: 12.0,
                       fontWeight: FontWeight.w400,
                       ),
-                ),
-              ))
+                    ),
+                  ),
+                ],
+              )
             ]),
           );
         }
@@ -813,28 +833,35 @@ class _PoliticalState extends State<Political> {
           setState(() {
             _ElectoralTabledata.add(
               TableRow(children: [
-                Center(
-                    child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
                     '${key}',
                     style: GoogleFonts.nunitoSans(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w400,
                         ),
-                  ),
-                )),
-                Center(
-                    child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
                     '${ElectoralData['${key}']}',
                     style: GoogleFonts.nunitoSans(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w400,
                         ),
-                  ),
-                )),
+                      ),
+                    ),
+                  ],
+                ),
               ]),
             );
           });
@@ -869,94 +896,116 @@ class _PoliticalState extends State<Political> {
         for (int i = 0; i < AssemblyConstituencyData.length; i++) {
           AssemblyConstituencyTabledata.add(
             TableRow(children: [
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
                   '${AssemblyConstituencyData[i]['ASSEMBLY_CONSTITUENCY']}',
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 12.0,
+                      fontSize: 10.0,
                       fontWeight: FontWeight.w400,
                       ),
-                ),
-              )),
+                    ),
+                  ),
+                ],
+              ),
               Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  '${AssemblyConstituencyData[i]['WINNER_CANDIDATE']}',
-                  style: GoogleFonts.nunitoSans(
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.w400,
-                      ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                '${AssemblyConstituencyData[i]['WINNER_CANDIDATE']}',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 10.0,
+                    fontWeight: FontWeight.w400,
+                    ),
+                  ),
                 ),
-              )),
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
                   '${AssemblyConstituencyData[i]['WINNER_PARTY']}',
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 12.0,
+                      fontSize: 10.0,
                       fontWeight: FontWeight.w400,
                       ),
-                ),
-              )),
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
                   '${AssemblyConstituencyData[i]['WINNER_VOTES']}',
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 12.0,
+                      fontSize: 10.0,
                       fontWeight: FontWeight.w400,
                       ),
-                ),
-              )),
+                    ),
+                  ),
+                ],
+              ),
               Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
-                  '${AssemblyConstituencyData[i]['RUNNER_CANDIDATE']}',
-                  style: GoogleFonts.nunitoSans(
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.w400,
-                      ),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Text(
+                '${AssemblyConstituencyData[i]['RUNNER_CANDIDATE']}',
+                style: GoogleFonts.nunitoSans(
+                    fontSize: 10.0,
+                    fontWeight: FontWeight.w400,
+                    ),
+                  ),
                 ),
-              )),
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
                   '${AssemblyConstituencyData[i]['RUNNER_PARTY']}',
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 12.0,
+                      fontSize: 10.0,
                       fontWeight: FontWeight.w400,
                       ),
-                ),
-              )),
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
+                    ),
+                  ),
+                ],
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
                   '${AssemblyConstituencyData[i]['RUNNER_VOTES']}',
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 12.0,
+                      fontSize: 10.0,
                       fontWeight: FontWeight.w400,
                       ),
-                ),
-              )),
-              Center(
-                  child: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: Text(
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Text(
                   '${AssemblyConstituencyData[i]['MARGIN']}',
                   style: GoogleFonts.nunitoSans(
-                      fontSize: 12.0,
+                      fontSize: 10.0,
                       fontWeight: FontWeight.w400,
                       ),
-                ),
-              ))
+                    ),
+                  ),
+                ],
+              )
             ]),
           );
         }

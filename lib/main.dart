@@ -76,7 +76,7 @@ class _MyAppState extends State<MyApp> {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: MaterialApp(
-           theme: themeMode.darkMode ? darkTheme : mainTheme,
+           theme: themeMode.darkMode ? mainTheme : darkTheme,
       //     theme: ThemeData(
       //   brightness: Brightness.light,
       //   /* light theme settings */

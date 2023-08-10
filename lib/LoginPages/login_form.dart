@@ -254,13 +254,13 @@ LoginAPI()async{
 if(result==true){
    var headers = {'Content-Type': 'application/json'};
   var body=json.encode({
-    "userName": "${userNameText.text}",
+    "username": "${userNameText.text}",
     "password": "${passWordText.text}"
   });
   print('hi2');
   var response = await post(
     Uri.parse(
-        rootURL1 + '/login'),
+        rootURL1 + '/auth/login'),
     headers: headers,
     body:body,
   );
@@ -271,9 +271,9 @@ print(response.body);
     print(response.statusCode);
     try {
       setState(() {
-        loginData = response.body.toString();
+        loginData =json.decode(response.body);
       });
-      if(loginData.toString()=='success'){
+      if(loginData['message'].toString()=='Success'){
         logindata.setBool('login', false);
 
         Navigator.push(
@@ -283,7 +283,7 @@ print(response.body);
                   HomeScreen(),
             ));
         popup.value=false;
-      }else if(loginData.toString()=='failed'){
+      }else if(loginData['message'].toString()=='failed'){
 
         setState(() {
           passError=true; 

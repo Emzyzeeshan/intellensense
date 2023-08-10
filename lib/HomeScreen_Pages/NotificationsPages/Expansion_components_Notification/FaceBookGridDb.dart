@@ -118,13 +118,13 @@ class _FaceBookGridDbState extends State<FaceBookGridDb> {
         field: 'Grid_ID',
         type: PlutoColumnType.text(),
       ),*/
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Published Date',
         field: 'Grid_Published_Date',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Published Time',
         field: 'Grid_Published_Time',
@@ -142,25 +142,25 @@ class _FaceBookGridDbState extends State<FaceBookGridDb> {
         field: 'Grid_Handler_Name',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Likes Count',
         field: 'Grid_Likes',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Views Count',
         field: 'Grid_Views',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Dislikes Count',
         field: 'Grid_DisLikes',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Comments Count',
         field: 'Grid_Comments',
@@ -178,19 +178,19 @@ class _FaceBookGridDbState extends State<FaceBookGridDb> {
         field: 'Grid_Title_Sentiment',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Positive Sentiment',
         field: 'Grid_Positive_Sentiment',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Negative Sentiment',
         field: 'Grid_Negative_Sentiment',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Neutral Sentiment',
         field: 'Grid_Neutral_Sentiment',

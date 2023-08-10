@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:animations/animations.dart';
 import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -25,6 +26,7 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
   List<ChartSampleData> CommentsGraphData1 = [];
   late Future<dynamic> _value = SentimentAPI('', '', '');
   late Future<dynamic> _value1 = SelectionSentimentAPI('', '', '');
+  late Future<dynamic> cloud = YouTubewordcloudApi();
   final format = DateFormat("MM/dd/yyyy");
   TextEditingController FromDate = TextEditingController();
   TextEditingController ToDate = TextEditingController();
@@ -48,19 +50,75 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
         elevation: 0,
         backgroundColor: Colors.white,
         leading: IconButton(onPressed: (){Navigator.pop(context);},icon: Icon(Icons.arrow_back_ios,color: Colors.black,),),
-        title: Container(
-          width: MediaQuery.of(context).size.width,
-          height: 30,
-          color:Color(0xff86a8e7),
-          child: Center(
-            child: Text(
-              'Youtube Analysis',
-              style: TextStyle(
-                  fontFamily: 'Segoe UI',
-                  fontSize: 20,
-                  color: Colors.white),
+        title: Row(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 30,
+              color:Color(0xff86a8e7),
+              child: Center(
+                child: Text(
+                  'Youtube Analysis',
+                  style: TextStyle(
+                      fontFamily: 'Segoe UI',
+                      fontSize: 20,
+                      color: Colors.white),
+                ),
+              ),
             ),
-          ),
+            Spacer(),
+            FutureBuilder<dynamic>(
+              future: cloud,
+              builder: (
+                  BuildContext context,
+                  AsyncSnapshot<dynamic> snapshot,
+                  ) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Center(
+                      child: SpinKitWave(
+                        color: Colors.blue,
+                        size: 18,
+                      ));
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return const Text('Error');
+                  } else if (snapshot.hasData) {
+                    return OpenContainer(
+                      closedColor: Color(0xffd2dfff),
+                      openColor: Color(0xffd2dfff),
+                      /*closedElevation: 10.0,*/
+                      /*    openElevation: 10.0,*/
+                      closedShape: const RoundedRectangleBorder(
+                        borderRadius:
+                        BorderRadius.all(Radius.circular(10.0)),
+                      ),
+                      transitionType: ContainerTransitionType.fade,
+                      transitionDuration:
+                      const Duration(milliseconds: 1200),
+                      openBuilder: (context, action) {
+                        return Container(
+                            decoration: BoxDecoration(image: DecorationImage(
+                                image: MemoryImage(
+                                    base64Decode(YouTubewordcloud[0]
+                                        .replaceAll(RegExp(r'\s+'), ''
+                                    ),
+                                    )
+                                )),
+                            ));
+                      },
+                      closedBuilder: (context, action) {
+                        return Image.asset('assets/new Updated images/WordCloud.png',height: 40,);
+                      },
+                    );
+                  } else {
+                    return const Text('Empty data');
+                  }
+                } else {
+                  return Text('State: ${snapshot.connectionState}');
+                }
+              },
+            ),
+          ],
         ),
               centerTitle: true,
       ),
@@ -597,7 +655,56 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
       ),
     );
   }
+//YouTube Cloud
 
+  var YouTubewordcloud;
+  Future<dynamic> YouTubewordcloudApi() async {
+    // String partylist=locallist.join(",");
+    print('in');
+    setState(() {
+      query['social_handle'] = 'YOUTUBE_LEADER';
+      query['name'] = '${widget.Value['name']}';
+      query['start_date'] = '2023-01-20';
+      query['end_date'] = '2023-01-23';
+    });
+
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6649/word_cloud/'),
+        body: query);
+
+
+    if (response.statusCode == 200) {
+      print(response.statusCode);
+      try {
+        YouTubewordcloud = jsonDecode(utf8.decode(response.bodyBytes));
+        print(YouTubewordcloud.toString());
+        /*setState(() {
+          istablevisible = true;
+          statedropdownvisible = true;
+          for (int i = 0;
+          i < YoutubeTopPartylistdata['top_parties'].length;
+          i++) {
+            Youtubetablecolumn.add(
+              DataColumn(
+                label: Text(
+                  '${YoutubeTopPartylistdata['top_parties'][i]}',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+            );
+          }
+        }*/
+      } catch (e) {
+        print(YouTubewordcloud.toString());
+        print('error');
+        print(YouTubewordcloud);
+      }
+    } else {
+      print('success');
+      print(response.reasonPhrase);
+    }
+    return YouTubewordcloud;
+  }
   // Last Seven sentiment APi
   var Sentimentdata;
   Map query = new Map<String, dynamic>();

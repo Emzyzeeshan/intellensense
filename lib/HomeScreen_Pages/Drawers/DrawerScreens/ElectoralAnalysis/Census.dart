@@ -103,7 +103,6 @@ class _CensusState extends State<Census> {
                   ) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return Center(
-                       
                         child: SizedBox(
                           height: 150,
                           width: 150,
@@ -201,17 +200,16 @@ class _CensusState extends State<Census> {
                     ) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(
-                       
-                        child: SizedBox(
-                          height: 150,
-                          width: 150,
-                          child: Center(
-                              child: SpinKitWave(
-                            color: Colors.blue,
-                            size: 18,
-                          )),
-                        ),
-                      );
+                          child: SizedBox(
+                            height: 150,
+                            width: 150,
+                            child: Center(
+                                child: SpinKitWave(
+                              color: Colors.blue,
+                              size: 18,
+                            )),
+                          ),
+                        );
                       } else if (snapshot.connectionState ==
                           ConnectionState.done) {
                         if (snapshot.hasError) {
@@ -301,17 +299,16 @@ class _CensusState extends State<Census> {
                     ) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(
-                       
-                        child: SizedBox(
-                          height: 150,
-                          width: 150,
-                          child: Center(
-                              child: SpinKitWave(
-                            color: Colors.blue,
-                            size: 18,
-                          )),
-                        ),
-                      );
+                          child: SizedBox(
+                            height: 150,
+                            width: 150,
+                            child: Center(
+                                child: SpinKitWave(
+                              color: Colors.blue,
+                              size: 18,
+                            )),
+                          ),
+                        );
                       } else if (snapshot.connectionState ==
                           ConnectionState.done) {
                         if (snapshot.hasError) {
@@ -484,40 +481,31 @@ class _CensusState extends State<Census> {
                                     color: Color(0xffd2dfff),
                                     elevation: 10,
                                     child: Center(
-                       
-                        child: SizedBox(
-                          height: 150,
-                          width: 150,
-                          child: Center(
-                              child: SpinKitWave(
-                            color: Colors.blue,
-                            size: 18,
-                          )),
-                        ),
-                      ))),
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: 150,
+                                        child: Center(
+                                            child: SpinKitWave(
+                                          color: Colors.blue,
+                                          size: 18,
+                                        )),
+                                      ),
+                                    ))),
                             SizedBox(
                               height: 20,
                             ),
                             Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Card(
-                                    color: Color(0xffd2dfff),
-                                    elevation: 10,
-                                    child: SkeletonParagraph(
-                                      style: SkeletonParagraphStyle(
-                                          lines: 12,
-                                          spacing: 6,
-                                          lineStyle: SkeletonLineStyle(
-                                            randomLength: true,
-                                            height: 13,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            minLength: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2,
-                                          )),
-                                    )))
+                              padding: const EdgeInsets.all(8.0),
+                              child: Card(
+                                color: Color(0xffd2dfff),
+                                elevation: 10,
+                                child: Center(
+                                    child: SpinKitWave(
+                                  color: Colors.blue,
+                                  size: 18,
+                                )),
+                              ),
+                            )
                           ],
                         );
                       } else if (snapshot.connectionState ==
@@ -552,40 +540,31 @@ class _CensusState extends State<Census> {
                                     color: Color(0xffd2dfff),
                                     elevation: 10,
                                     child: Center(
-                       
-                        child: SizedBox(
-                          height: 150,
-                          width: 150,
-                          child: Center(
-                              child: SpinKitWave(
-                            color: Colors.blue,
-                            size: 18,
-                          )),
-                        ),
-                      ))),
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: 150,
+                                        child: Center(
+                                            child: SpinKitWave(
+                                          color: Colors.blue,
+                                          size: 18,
+                                        )),
+                                      ),
+                                    ))),
                             SizedBox(
                               height: 20,
                             ),
                             Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Card(
-                                    color: Color(0xffd2dfff),
-                                    elevation: 10,
-                                    child: SkeletonParagraph(
-                                      style: SkeletonParagraphStyle(
-                                          lines: 12,
-                                          spacing: 6,
-                                          lineStyle: SkeletonLineStyle(
-                                            randomLength: true,
-                                            height: 13,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            minLength: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2,
-                                          )),
-                                    )))
+                              padding: const EdgeInsets.all(8.0),
+                              child: Card(
+                                color: Color(0xffd2dfff),
+                                elevation: 10,
+                                child: Center(
+                                    child: SpinKitWave(
+                                  color: Colors.blue,
+                                  size: 18,
+                                )),
+                              ),
+                            )
                           ],
                         );
                       } else if (snapshot.connectionState ==
@@ -619,40 +598,31 @@ class _CensusState extends State<Census> {
                                     color: Color(0xffd2dfff),
                                     elevation: 10,
                                     child: Center(
-                       
-                        child: SizedBox(
-                          height: 150,
-                          width: 150,
-                          child: Center(
-                              child: SpinKitWave(
-                            color: Colors.blue,
-                            size: 18,
-                          )),
-                        ),
-                      ))),
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: 150,
+                                        child: Center(
+                                            child: SpinKitWave(
+                                          color: Colors.blue,
+                                          size: 18,
+                                        )),
+                                      ),
+                                    ))),
                             SizedBox(
                               height: 20,
                             ),
                             Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Card(
-                                    color: Color(0xffd2dfff),
-                                    elevation: 10,
-                                    child: SkeletonParagraph(
-                                      style: SkeletonParagraphStyle(
-                                          lines: 12,
-                                          spacing: 6,
-                                          lineStyle: SkeletonLineStyle(
-                                            randomLength: true,
-                                            height: 13,
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            minLength: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                2,
-                                          )),
-                                    )))
+                              padding: const EdgeInsets.all(8.0),
+                              child: Card(
+                                color: Color(0xffd2dfff),
+                                elevation: 10,
+                                child: Center(
+                                    child: SpinKitWave(
+                                  color: Colors.blue,
+                                  size: 18,
+                                )),
+                              ),
+                            )
                           ],
                         );
                       } else if (snapshot.connectionState ==
@@ -682,7 +652,7 @@ class _CensusState extends State<Census> {
 
     List<PlutoColumn> columns = [
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.left,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'DISTRICT',
@@ -702,7 +672,7 @@ class _CensusState extends State<Census> {
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.right,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL HOUSEHOLDS',
@@ -722,7 +692,7 @@ class _CensusState extends State<Census> {
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.right,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POPULATION',
@@ -742,7 +712,7 @@ class _CensusState extends State<Census> {
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.right,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POP MALE',
@@ -762,7 +732,7 @@ class _CensusState extends State<Census> {
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.right,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL POP FEMALE',
@@ -782,7 +752,7 @@ class _CensusState extends State<Census> {
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.right,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'SC POPULATION',
@@ -802,7 +772,7 @@ class _CensusState extends State<Census> {
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.right,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'ST POPULATION',
@@ -822,7 +792,7 @@ class _CensusState extends State<Census> {
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.right,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'LITERATES',
@@ -842,7 +812,7 @@ class _CensusState extends State<Census> {
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.right,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'ILLITERATES',
@@ -862,7 +832,7 @@ class _CensusState extends State<Census> {
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.right,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'TOTAL WORKERS',
@@ -882,7 +852,7 @@ class _CensusState extends State<Census> {
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.right,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'CULTIVATORS',
@@ -902,7 +872,7 @@ class _CensusState extends State<Census> {
         type: PlutoColumnType.text(),
       ),
       PlutoColumn(
-        textAlign: PlutoColumnTextAlign.center,
+        textAlign: PlutoColumnTextAlign.right,
         backgroundColor: Color(0xff86a8e7),
         enableEditingMode: false,
         title: 'AGRICULTURAL LABOURS',
@@ -923,7 +893,9 @@ class _CensusState extends State<Census> {
       ),
     ];
     List<PlutoRow> rows = SateOverviewdata['STATE_AGG_DATA']
-        .map<PlutoRow>((item) => PlutoRow(cells: {
+        .map<PlutoRow>((item) => PlutoRow(
+        
+        cells: {
               'DISTRICT': PlutoCell(value: item['DISTRICT'] ?? ''),
               'TOTAL_HOUSEHOLDS':
                   PlutoCell(value: item['TOTAL_HOUSEHOLDS'] ?? ''),
@@ -1313,14 +1285,17 @@ class _CensusState extends State<Census> {
                 Container(
                     height: 30,
                     color: Color(0xff86a8e7),
-                    child: Center(
-                        child: Text(
-                      '$input2 ',
-                      style: GoogleFonts.nunitoSans(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ))),
+                    child: Row(
+                      children: [
+                        Text(
+                          '$input2 ',
+                          style: GoogleFonts.nunitoSans(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                    )),
                 Container(
                     height: 30,
                     color: Color(0xff86a8e7),
@@ -1367,21 +1342,21 @@ class _CensusState extends State<Census> {
                 // Determine the first page.
                 // Default is 1.
                 initialPage: 1,
-    
+
                 // First call the fetch function to determine whether to load the page.
                 // Default is true.
                 initialFetch: false,
-    
+
                 // Decide whether sorting will be handled by the server.
                 // If false, handle sorting on the client side.
                 // Default is true.
                 fetchWithSorting: true,
-    
+
                 // Decide whether filtering is handled by the server.
                 // If false, handle filtering on the client side.
                 // Default is true.
                 fetchWithFiltering: true,
-    
+
                 // Determines the page size to move to the previous and next page buttons.
                 // Default value is null. In this case,
                 // it moves as many as the number of page buttons visible on the screen.
@@ -1725,21 +1700,21 @@ class _CensusState extends State<Census> {
                 // Determine the first page.
                 // Default is 1.
                 initialPage: 1,
-    
+
                 // First call the fetch function to determine whether to load the page.
                 // Default is true.
                 initialFetch: false,
-    
+
                 // Decide whether sorting will be handled by the server.
                 // If false, handle sorting on the client side.
                 // Default is true.
                 fetchWithSorting: true,
-    
+
                 // Decide whether filtering is handled by the server.
                 // If false, handle filtering on the client side.
                 // Default is true.
                 fetchWithFiltering: true,
-    
+
                 // Determines the page size to move to the previous and next page buttons.
                 // Default value is null. In this case,
                 // it moves as many as the number of page buttons visible on the screen.
@@ -2039,28 +2014,35 @@ class _CensusState extends State<Census> {
           setState(() {
             _CensusTabledata.add(
               TableRow(children: [
-                Center(
-                    child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    '${key}',
-                    style: GoogleFonts.nunitoSans(
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.w400,
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        '${key}',
+                        style: GoogleFonts.nunitoSans(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
                     ),
-                  ),
-                )),
-                Center(
-                    child: Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: Text(
-                    '${SateOverviewdata['STATE_OVERVIEW'][0]['${key}']}',
-                    style: GoogleFonts.nunitoSans(
-                      fontSize: 12.0,
-                      fontWeight: FontWeight.w400,
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Text(
+                        '${SateOverviewdata['STATE_OVERVIEW'][0]['${key}']}',
+                        style: GoogleFonts.nunitoSans(
+                          fontSize: 12.0,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
                     ),
-                  ),
-                )),
+                  ],
+                ),
               ]),
             );
           });
