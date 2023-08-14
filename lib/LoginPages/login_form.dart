@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -9,9 +8,6 @@ import 'package:http/http.dart';
 import 'package:intellensense/HomeScreen_Pages/HomeScreen.dart';
 import 'package:intellensense/LoginPages/widgets/fade_slide_transition.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:quickalert/models/quickalert_animtype.dart';
-import 'package:quickalert/models/quickalert_type.dart';
-import 'package:quickalert/widgets/quickalert_dialog.dart';
 import '../main.dart';
 import '../Constants/constants.dart';
 
@@ -113,7 +109,7 @@ border: InputBorder.none,
                   obscureText: _visible,
                   controller: passWordText,
                   decoration: InputDecoration(border: InputBorder.none,
-                    errorText: passError==true?'Invalid Password':'',
+                    errorText: passError==true?'Invid Username Or Password':'',
                     fillColor: Color.fromARGB(166, 240, 237, 237),
                     filled: true,
                     contentPadding: const EdgeInsets.all(kPaddingM),
@@ -254,13 +250,13 @@ LoginAPI()async{
 if(result==true){
    var headers = {'Content-Type': 'application/json'};
   var body=json.encode({
-    "userName": "${userNameText.text}",
+    "username": "${userNameText.text}",
     "password": "${passWordText.text}"
   });
   print('hi2');
   var response = await post(
     Uri.parse(
-        rootURL1 + '/login'),
+        rootURL1 + '/auth/login'),
     headers: headers,
     body:body,
   );
@@ -271,9 +267,9 @@ print(response.body);
     print(response.statusCode);
     try {
       setState(() {
-        loginData = response.body.toString();
+        loginData =json.decode(response.body) ;
       });
-      if(loginData.toString()=='success'){
+      if(loginData['message'].toString()=='Success'){
         logindata.setBool('login', false);
 
         Navigator.push(
@@ -283,7 +279,7 @@ print(response.body);
                   HomeScreen(),
             ));
         popup.value=false;
-      }else if(loginData.toString()=='failed'){
+      }else if(loginData['message'].toString()=='Error: Invid Username Or Passwordal.'){
 
         setState(() {
           passError=true; 

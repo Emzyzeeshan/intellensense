@@ -20,9 +20,11 @@ import 'package:http/http.dart';
 import 'package:intellensense/HomeScreen_Pages/Widgets/Socialmediatemplate.dart';
 import 'package:intellensense/LoginPages/widgets/ChartSampleData.dart';
 import 'package:intellensense/Services/ApiServices.dart';
+import 'package:intellensense/main.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_speed_dial/simple_speed_dial.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -72,6 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _scrollController!.hasClients &&
         _scrollController!.offset > (height - kToolbarHeight);
   }
+
   late Future<dynamic> LineChartfuturecall = YoutubeBannerGraphApi();
   TooltipBehavior? _tooltipBehavior;
   TooltipBehavior? _tooltipBehavior1;
@@ -81,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
     _scrollController = ScrollController()..addListener(_scrollListener);
     _initBannerAd();
-      chartData = <ChartSampleData>[
+    chartData = <ChartSampleData>[
       ChartSampleData(
           x: 'Jan', y: 43, secondSeriesYValue: 37, thirdSeriesYValue: 41),
       ChartSampleData(
@@ -99,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
         canShowMarker: false,
         format: 'point.x : point.y',
         header: '');
-            _TwittertooltipBehavior = TooltipBehavior(
+    _TwittertooltipBehavior = TooltipBehavior(
         enable: true,
         canShowMarker: false,
         format: 'point.x : point.y',
@@ -109,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> {
         canShowMarker: false,
         format: 'point.x : point.y',
         header: '');
-           _FacebooktooltipBehavior = TooltipBehavior(
+    _FacebooktooltipBehavior = TooltipBehavior(
         enable: true,
         canShowMarker: false,
         format: 'point.x : point.y',
@@ -119,7 +122,7 @@ class _HomeScreenState extends State<HomeScreen> {
         canShowMarker: false,
         format: 'point.x : point.y',
         header: '');
-         _NewsChanneltooltipBehavior = TooltipBehavior(
+    _NewsChanneltooltipBehavior = TooltipBehavior(
         enable: true,
         canShowMarker: false,
         format: 'point.x : point.y',
@@ -205,16 +208,16 @@ class _HomeScreenState extends State<HomeScreen> {
   double _width = 370;
   @override
   Widget build(BuildContext context) {
-      List<Widget>? swipeimage = [
-    YoutubeBanner(),
-    NewsChannelBanner(),
-    FaceBookBanner(),
-    TwitterBanner(),
-    // 'assets/Image/Intellisense-banners-01.jpg',
-    // 'assets/Image/Intellisense-banners-02.jpg',
-    // 'assets/Image/Intellisense-banners-03.jpg'
-  ];
-    final TextTheme textTheme = Theme.of(context).textTheme;
+    List<Widget>? swipeimage = [
+      YoutubeBanner(),
+      NewsChannelBanner(),
+      FaceBookBanner(),
+      TwitterBanner(),
+      // 'assets/Image/Intellisense-banners-01.jpg',
+      // 'assets/Image/Intellisense-banners-02.jpg',
+      // 'assets/Image/Intellisense-banners-03.jpg'
+    ];
+    final themeMode = Provider.of<DarkMode>(context);
 
     return WillPopScope(
       onWillPop: () async => false,
@@ -239,66 +242,73 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: 40,
                     width: 180,
                   ),
-                  onPressed: () {
-                    _key.currentState!.openDrawer();
-                  },
-                ),
-                elevation: 0,
-                backgroundColor: Colors.white,
-                pinned: true,
-                expandedHeight: 310,
-                flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.parallax,
-                  // title: _isShrink == true
-                  //     ? Image.asset(
-                  //
-                  //       'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                  //       fit: BoxFit.cover,
-                  //       height: 50,
-                  //   width: 180,
-                  //     )
-                  //     : null,
-                  background: SafeArea(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 50),
-                          child: Container(
-                            height: 260,
-                            width: MediaQuery.of(context).size.width,
-                            child: Swiper(
-                              duration: 20,
-                              itemBuilder: (BuildContext context, int index) {
-                                return swipeimage![index];
-                              },
-                              itemCount: 4,
-                              autoplay: false,
-                             /* pagination: SwiperPagination(
+                  leading: IconButton(
+                    icon: Icon(
+                      Icons.menu,
+                      color: Colors.black,
+                    ),
+                    onPressed: () {
+                      _key.currentState!.openDrawer();
+                    },
+                  ),
+                  elevation: 0,
+                  backgroundColor:
+                      themeMode.darkMode ? Color(0xff333333) : Colors.white,
+                  pinned: true,
+                  expandedHeight: 310,
+                  flexibleSpace: FlexibleSpaceBar(
+                    collapseMode: CollapseMode.parallax,
+                    // title: _isShrink == true
+                    //     ? Image.asset(
+                    //
+                    //       'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
+                    //       fit: BoxFit.cover,
+                    //       height: 50,
+                    //   width: 180,
+                    //     )
+                    //     : null,
+                    background: SafeArea(
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 50),
+                            child: Container(
+                              height: 260,
+                              width: MediaQuery.of(context).size.width,
+                              child: Swiper(
+                                duration: 20,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return swipeimage[index];
+                                },
+                                itemCount: 4,
+                                autoplay: false,
+                                /* pagination: SwiperPagination(
                                   builder: new DotSwiperPaginationBuilder(
                                       color: Colors.grey,
                                       activeColor: Color(0xff38547C))),*/
-                              control: new SwiperControl(
-                                size: 18,
-                                padding: EdgeInsets.all(2),
-                                color: Color(0xff38547C),
+                                control: new SwiperControl(
+                                  size: 18,
+                                  padding: EdgeInsets.all(2),
+                                  color: Color(0xff38547C),
+                                ),
+                                // Swiper(controller: SwiperController(),
+                                //   duration: 1500,
+                                //   itemBuilder: (BuildContext context, int index) {
+                                //     return swipeimage![index];
+                                //   },
+                                //   itemCount: 4,
+                                //   autoplay: false,
+                                //   pagination: SwiperPagination(
+                                //       builder: new DotSwiperPaginationBuilder(
+                                //           color: Colors.grey,
+                                //           activeColor: Color(0xff38547C))),
+                                //   control: new SwiperControl(
+                                //     size: 18,
+                                //     padding: EdgeInsets.all(2),
+                                //     color: Color(0xff38547C),
+                                //   ),
+                                // ),
                               ),
-                              // Swiper(controller: SwiperController(),
-                              //   duration: 1500,
-                              //   itemBuilder: (BuildContext context, int index) {
-                              //     return swipeimage![index];
-                              //   },
-                              //   itemCount: 4,
-                              //   autoplay: false,
-                              //   pagination: SwiperPagination(
-                              //       builder: new DotSwiperPaginationBuilder(
-                              //           color: Colors.grey,
-                              //           activeColor: Color(0xff38547C))),
-                              //   control: new SwiperControl(
-                              //     size: 18,
-                              //     padding: EdgeInsets.all(2),
-                              //     color: Color(0xff38547C),
-                              //   ),
-                              // ),
                             ),
                           ),
                         ],
@@ -541,7 +551,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     IconButton(
                         onPressed: () {
                           showMaterialModalBottomSheet(
-                              backgroundColor: Color(0xffd2dfff),
+                              // backgroundColor: Color(0xffd2dfff),
                               elevation: 10,
                               bounce: true,
                               shape: RoundedRectangleBorder(
@@ -903,9 +913,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Row(
                               children: [
                                 Image.asset(
-                                  'assets/NotificationIcons/News-Paper.png',
-                                  height: 30,
-                                  width: 30,
+                                  'assets/icons/newspaperhead.gif',
+                                  height: 25,
+                                  width: 25,
                                 ),
                                 Text(
                                   'NEWS',
@@ -982,22 +992,38 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 "${newsdata[0]['mediaName']}",
                                                                 '${newsdata[0]['headLine']}',
                                                                 'assets/icons/newspaperdxp.png',
-                                                                '- ${newsdata[0]['candidateName']}'),
+                                                                '${newsdata[0]['candidateName']}'
+                                                                            .length >
+                                                                        16
+                                                                    ? '- ${newsdata[0]['candidateName'].substring(0, 10)}...'
+                                                                    : '- ${newsdata[0]['candidateName']}'),
                                                             NewsTemplate3(
                                                                 '${newsdata[1]['mediaName']}',
                                                                 '${newsdata[1]['headLine']}',
                                                                 'assets/icons/newspaperdxp.png',
-                                                                '- ${newsdata[1]['candidateName']}'),
+                                                              '${newsdata[1]['candidateName']}'
+                                                                            .length >
+                                                                        16
+                                                                    ? '- ${newsdata[1]['candidateName'].substring(0, 10)}...'
+                                                                    : '- ${newsdata[1]['candidateName']}'),
                                                             NewsTemplate1(
                                                                 '${newsdata[2]['mediaName']}',
                                                                 '${newsdata[2]['headLine']}',
                                                                 'assets/icons/newspaperdxp.png',
-                                                                '- ${newsdata[2]['candidateName']}'),
+                                                               '${newsdata[2]['candidateName']}'
+                                                                            .length >
+                                                                        16
+                                                                    ? '- ${newsdata[2]['candidateName'].substring(0, 10)}...'
+                                                                    : '- ${newsdata[2]['candidateName']}'),
                                                             NewsTemplate4(
                                                                 '${newsdata[3]['mediaName']}',
                                                                 '${newsdata[3]['headLine']}',
                                                                 'assets/icons/newspaperdxp.png',
-                                                                '- ${newsdata[3]['candidateName']}'),
+                                                                '${newsdata[3]['candidateName']}'
+                                                                            .length >
+                                                                        16
+                                                                    ? '- ${newsdata[3]['candidateName'].substring(0, 10)}...'
+                                                                    : '- ${newsdata[3]['candidateName']}'),
                                                           ];
                                                           return GestureDetector(
                                                             onTap: () {
@@ -1030,7 +1056,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               //   newson = true;
                                                               //   NewsHeading =
                                                               //       'NewsPaper';
-                                                              //   _currIndex = 0;
+                                                              //   _currIndex = 0;P
                                                               // });
                                                               // PageCount
                                                               //     .jumpToPage(
@@ -1134,13 +1160,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                 '${newchannelldata[1]['mediaChannelName']}',
                                                                 '${newchannelldata[1]['videoTitle']}',
                                                                 'assets/icons/newsdxps.png',
-
                                                                 '${newchannelldata[1]['candidateName']}'
-                                                              .length >
-                                                          16
-                                                      ? '- ${newchannelldata[1]['candidateName'].substring(0, 10)}...'
-                                                      : '- ${newchannelldata[1]['candidateName']}'
-                                                                ),
+                                                                            .length >
+                                                                        16
+                                                                    ? '- ${newchannelldata[1]['candidateName'].substring(0, 10)}...'
+                                                                    : '- ${newchannelldata[1]['candidateName']}'),
                                                             NewsTemplate1(
                                                                 '${newchannelldata[2]['mediaChannelName']}',
                                                                 '${newchannelldata[2]['videoTitle']}',
@@ -1330,7 +1354,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                           LiveUpdatesScreen(),
                                                                     );
                                                                   });
-                                                              
                                                             },
                                                             child: SizedBox(
                                                               height: 130,
@@ -1469,7 +1492,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                                         child:
                                                                             GoogleTrendsScreen());
                                                                   });
-                                                       
                                                             },
                                                             child: SizedBox(
                                                               height: 130,
@@ -1575,31 +1597,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               scrollDirection: Axis.horizontal,
                               child: Row(
                                 children: [
-                                  Image.asset(
-                                    'assets/new Updated images/social-media-icons-unscreen.gif',
-                                    height: 30,
-                                    width: 30,
-                                  ),
-                              Text(
-                                'SOCIAL MEDIA',
-                                style: TextStyle(
-                                  fontFamily: 'Segoe UI',
-                                  fontSize: 16,
-                                ),
-                              ),
-                                Spacer(),
-                                IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      showSocialnews =
-                                      !showSocialnews;
-                                    });
-                                  },
-                                  icon: showSocialnews == true
-                                      ? Icon(Icons.arrow_drop_down)
-                                      : Icon(Icons.arrow_drop_up_outlined),
-                                ),
-                              ],
                                   FutureBuilder(
                                       future: youtubedata,
                                       builder: ((context, snapshot) {
@@ -1672,7 +1669,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               YouTubeScreen(),
                                                         );
                                                       });
-                                        
                                                 },
                                                 child: Swiper(
                                                     itemWidth: 150,
@@ -1783,7 +1779,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               TwitterScreen(),
                                                         );
                                                       });
-                                                
                                                 },
                                                 child: Swiper(
                                                     itemWidth: 150,
@@ -1919,7 +1914,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               FaceBookScreen(),
                                                         );
                                                       });
-                                                  
                                                 },
                                                 child: Swiper(
                                                     itemWidth: 150,
@@ -2029,7 +2023,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             child:
                                                                 InstagramScreen());
                                                       });
-                                                 
                                                 },
                                                 child: Swiper(
                                                     itemWidth: 150,
@@ -2413,15 +2406,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ]),
           )),
     );
-  
   }
-
- 
 
   bool viewnews = true;
 
-
-  YoutubeBanner(){
+  final List<String> imageList = [
+    "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2017/12/13/00/23/christmas-3015776_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2019/12/19/10/55/christmas-market-4705877_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg",
+    "https://cdn.pixabay.com/photo/2019/12/22/04/18/x-mas-4711785__340.jpg",
+    "https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg"
+  ];
+  YoutubeBanner() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -2436,89 +2433,106 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                 
                 ),
-                child:   FutureBuilder<dynamic>(
-                          future: LineChartfuturecall,
-                          builder: (
-                              BuildContext context,
-                              AsyncSnapshot<dynamic> snapshot,
-                              ) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return SpinKitWave(
-                                color: Colors.blue,
-                                size: 18,
-                              );
-                            } else if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              if (snapshot.hasError) {
-                                return const Text('Error');
-                              } else if (snapshot.hasData) {
-                                return    Padding(
-                                  padding: const EdgeInsets.only(top:8.0),
-                                  child: Stack(
-                                                  children: [
-                                                   
-                                                    
-                                                    Row(
-                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                                      children: [
-                                                        Column(
-                                                          children: [
-                                                            Container(decoration: BoxDecoration(border: Border.all(color: Colors.redAccent,),borderRadius: BorderRadius.circular(15)),
-                                                              height: 120,
-                                                              width: 120,
-                                                              child: SfCircularChart(
-                                    tooltipBehavior: _tooltipBehavior1,
-                                    palette: [
-                                      Color.fromRGBO(254, 1, 117,0),
-                                      Color.fromRGBO(19, 136, 8,0),
-                                      Color.fromRGBO(249, 125, 9,0),
+                child: FutureBuilder<dynamic>(
+                  future: LineChartfuturecall,
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<dynamic> snapshot,
+                  ) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return SpinKitWave(
+                        color: Colors.blue,
+                        size: 18,
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        return const Text('Error');
+                      } else if (snapshot.hasData) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Stack(
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Colors.redAccent,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        height: 120,
+                                        width: 120,
+                                        child: SfCircularChart(
+                                            tooltipBehavior: _tooltipBehavior1,
+                                            palette: [
+                                              Color.fromRGBO(254, 1, 117, 0),
+                                              Color.fromRGBO(19, 136, 8, 0),
+                                              Color.fromRGBO(249, 125, 9, 0),
+                                            ],
+                                            series: <PieSeries<ChartSampleData,
+                                                String>>[
+                                              PieSeries<ChartSampleData,
+                                                      String>(
+                                                  explode: true,
+                                                  explodeIndex: 0,
+                                                  explodeOffset: '10%',
+                                                  dataSource: <ChartSampleData>[
+                                                    ...PiegraphChartData
+                                                  ],
+                                                  xValueMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.x as String,
+                                                  yValueMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.y,
+                                                  dataLabelMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.text,
+                                                  startAngle: 90,
+                                                  endAngle: 90,
+                                                  dataLabelSettings:
+                                                      const DataLabelSettings(
+                                                          isVisible: true)),
+                                            ]),
+                                      ),
+                                      Text(
+                                        'FOLLOWERS',
+                                        style: TextStyle(fontSize: 10),
+                                      ),
                                     ],
-                                    series: <PieSeries<ChartSampleData, String>>[
-                                      PieSeries<ChartSampleData, String>(
-                                          explode: true,
-                                          explodeIndex: 0,
-                                          explodeOffset: '10%',
-                                          dataSource: <ChartSampleData>[
-                                            ...PiegraphChartData
-                                          
-                                          ],
-                                          xValueMapper: (ChartSampleData data, _) =>
-                                          data.x as String,
-                                          yValueMapper: (ChartSampleData data, _) =>
-                                          data.y,
-                                          dataLabelMapper:
-                                              (ChartSampleData data, _) => data.text,
-                                          startAngle: 90,
-                                          endAngle: 90,
-                                          dataLabelSettings: const DataLabelSettings(
-                                              isVisible: true)),
-                                    ]),
-                                                            ),
-                                                            Text(
-                                                              'FOLLOWERS',
-                                                              style: TextStyle(fontSize: 10),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Padding(
+                                  ),
+                                  Padding(
                                     padding: const EdgeInsets.only(top: 35.0),
                                     child: Column(
                                       children: [
                                         Row(
                                           children: [
                                             Text(BarGraphdata['lead'][0]),
-                                            Image.asset('assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',height: 30,)
+                                            Image.asset(
+                                              'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
+                                              height: 30,
+                                            )
                                           ],
                                         ),
                                         Column(
                                           children: [
                                             Row(
                                               children: [
-                                                Image.asset('assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',height: 30,),
+                                                Image.asset(
+                                                  'assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',
+                                                  height: 30,
+                                                ),
                                                 Text('BJP'),
                                               ],
                                             ),
@@ -2527,57 +2541,65 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                   ),
-                                                      
-                                                        Column(
-                                                          children: [
-                                                           Container(decoration: BoxDecoration(border: Border.all(color: Colors.redAccent),borderRadius: BorderRadius.circular(15)),
+                                  Column(
+                                    children: [
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.redAccent),
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
                                           height: 120,
                                           width: 120,
-                                          child: SfFunnelChart(palette: [
-                                            Color.fromRGBO(254, 1, 117,0),
-                                            Color.fromRGBO(19, 136, 8,0),
-                                            Color.fromRGBO(249, 125, 9,0),
-                                          ],
+                                          child: SfFunnelChart(
+                                              palette: [
+                                                Color.fromRGBO(254, 1, 117, 0),
+                                                Color.fromRGBO(19, 136, 8, 0),
+                                                Color.fromRGBO(249, 125, 9, 0),
+                                              ],
                                               //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
                                               tooltipBehavior:
-                                              TooltipBehavior(enable: true),
-                                              series: FunnelSeries<ChartSampleData,
-                                                  String>(
+                                                  TooltipBehavior(enable: true),
+                                              series: FunnelSeries<
+                                                      ChartSampleData, String>(
                                                   dataSource: <ChartSampleData>[
                                                     ...FunnelgraphChartData,
                                                   ],
                                                   xValueMapper:
                                                       (ChartSampleData data, _) =>
-                                                  data.x as String,
+                                                          data.x as String,
                                                   yValueMapper:
                                                       (ChartSampleData data, _) =>
-                                                  data.y,
+                                                          data.y,
                                                   /*  explode: isCardView ? false : explode,
                                     gapRatio: isCardView ? 0 : gapRatio,*/
                                                   neckHeight: /*isCardView ? */
-                                                  '20%' /*: neckHeight.toString()*/ +
-                                                      '%',
+                                                      '20%' /*: neckHeight.toString()*/ +
+                                                          '%',
                                                   neckWidth: /*isCardView ?*/
-                                                  '25%' /*: neckWidth.toString()*/ +
-                                                      '%',
+                                                      '25%' /*: neckWidth.toString()*/ +
+                                                          '%',
                                                   dataLabelSettings:
-                                                  const DataLabelSettings(textStyle: TextStyle(fontSize: 8 ),
-                                                      isVisible: true)))),
-                                                            Text(
-                                                              'Re-Tweet',
-                                                              style: TextStyle(fontSize: 10),
-                                                            )
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    ),
-                                                   
-                                                   Row(
-                                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                                              crossAxisAlignment: CrossAxisAlignment.center,
-                                                              children: [
+                                                      const DataLabelSettings(
+                                                          textStyle:
+                                                              TextStyle(fontSize: 8),
+                                                          isVisible: true)))),
+                                      Text(
+                                        'Re-Tweet',
+                                        style: TextStyle(fontSize: 10),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 1.0,top: 60),
+                                    padding: const EdgeInsets.only(
+                                        left: 1.0, top: 60),
                                     child: Image.asset(
                                       'assets/icons/Social-Media-Icons-IS-10.png',
                                       height: 18,
@@ -2585,17 +2607,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 140.0,left: 5),
+                                    padding: const EdgeInsets.only(
+                                        top: 140.0, left: 5),
                                     child: Container(
                                       height: 150,
                                       width: 150,
                                       child: RichText(
                                         text: new TextSpan(
-                                          // Note: Styles for TextSpans must be explicitly defined.
-                                          // Child text spans will inherit styles from parent
                                           style: new TextStyle(
                                             fontSize: 12.0,
-                                            color: Colors.black,
                                           ),
                                           children: <TextSpan>[
                                             TextSpan(
@@ -2606,8 +2626,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fontSize: 20,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
-                                                text:
-                                                ' is overpowering ',
+                                                text: ' is overpowering ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 18,
@@ -2620,13 +2639,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fontSize: 20,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
-                                                text:
-                                                ' in all aspects',
+                                                text: ' in all aspects',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
-                                
                                           ],
                                         ),
                                       ),
@@ -2636,61 +2653,79 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 100.0),
+                                        padding:
+                                            const EdgeInsets.only(top: 100.0),
                                         child: Container(
-                                                  decoration: BoxDecoration(border: Border.all(color: Colors.redAccent),borderRadius: BorderRadius.circular(15)),
-                                                  height: 100,
-                                                  width: 135,
-                                                  child: SfCartesianChart(
-                                                    palette: <Color>[
-                                                      Color(0xffff7f50),
-                                                      Color(0xfff0ead6),
-                                                      Color(0xffffd700),
-                                                      Color(0xff264348),
-                                                    ],
-                                                    plotAreaBorderWidth: 0,
-                                                    primaryXAxis: CategoryAxis(
-                                                      labelStyle: const TextStyle(
-                                                          color: Colors.black, fontSize: 8),
-                                                      axisLine: const AxisLine(width: 0),
-                                                      labelPosition:
-                                                      ChartDataLabelPosition.outside,
-                                                      majorTickLines:
-                                                      const MajorTickLines(width: 0),
-                                                      majorGridLines:
-                                                      const MajorGridLines(width: 0),
-                                                    ),
-                                                    primaryYAxis: NumericAxis(
-                                                        labelStyle: const TextStyle(
-                                                            color: Colors.black, fontSize: 8),
-                                                        labelPosition:
-                                                        ChartDataLabelPosition.outside,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.redAccent),
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          height: 100,
+                                          width: 135,
+                                          child: SfCartesianChart(
+                                            palette: <Color>[
+                                              Color(0xffff7f50),
+                                              Color(0xfff0ead6),
+                                              Color(0xffffd700),
+                                              Color(0xff264348),
+                                            ],
+                                            plotAreaBorderWidth: 0,
+                                            primaryXAxis: CategoryAxis(
+                                              labelStyle: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 8),
+                                              axisLine:
+                                                  const AxisLine(width: 0),
+                                              labelPosition:
+                                                  ChartDataLabelPosition
+                                                      .outside,
+                                              majorTickLines:
+                                                  const MajorTickLines(
+                                                      width: 0),
+                                              majorGridLines:
+                                                  const MajorGridLines(
+                                                      width: 0),
+                                            ),
+                                            primaryYAxis: NumericAxis(
+                                                labelStyle: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 8),
+                                                labelPosition:
+                                                    ChartDataLabelPosition
+                                                        .outside,
+                                                isVisible: false,
+                                                minimum: 0,
+                                                maximum: 2000),
+                                            series: <ColumnSeries<
+                                                ChartSampleData, String>>[
+                                              ColumnSeries<ChartSampleData,
+                                                  String>(
+                                                width: 0.9,
+                                                dataLabelSettings:
+                                                    const DataLabelSettings(
                                                         isVisible: false,
-                                                        minimum: 0,
-                                                        maximum: 2000),
-                                                    series: <ColumnSeries<ChartSampleData,
-                                                        String>>[
-                                                      ColumnSeries<ChartSampleData, String>(
-                                                        width: 0.9,
-                                                        dataLabelSettings:
-                                                        const DataLabelSettings(
-                                                            isVisible: false,
-                                                            labelAlignment:
-                                                            ChartDataLabelAlignment.top),
-                                                        dataSource: <ChartSampleData>[
-                                                          ...BargraphChartdata
-                                                        ],
-                                                        borderRadius: BorderRadius.circular(10),
-                                                        xValueMapper:
-                                                            (ChartSampleData sales, _) =>
+                                                        labelAlignment:
+                                                            ChartDataLabelAlignment
+                                                                .top),
+                                                dataSource: <ChartSampleData>[
+                                                  ...BargraphChartdata
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                xValueMapper:
+                                                    (ChartSampleData sales,
+                                                            _) =>
                                                         sales.x as String,
-                                                        yValueMapper:
-                                                            (ChartSampleData sales, _) => sales.y,
-                                                      ),
-                                                    ],
-                                                    tooltipBehavior: _tooltipBehavior,
-                                                  ),
-                                                ),
+                                                yValueMapper:
+                                                    (ChartSampleData sales,
+                                                            _) =>
+                                                        sales.y,
+                                              ),
+                                            ],
+                                            tooltipBehavior: _tooltipBehavior,
+                                          ),
+                                        ),
                                       ),
                                       Text(
                                         'Likes',
@@ -2698,27 +2733,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                       )
                                     ],
                                   ),
-                                                              ],
-                                                            ),
-                                                   
-                                                  ],
-                                                ),
-                                );
-                              } else {
-                                return const Text('Empty data');
-                              }
-                            } else {
-                              return Text('State: ${snapshot.connectionState}');
-                            }
-                          },
-                        ),
-                
-              
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      } else {
+                        return const Text('Empty data');
+                      }
+                    } else {
+                      return Text('State: ${snapshot.connectionState}');
+                    }
+                  },
+                ),
               ),
             ),
           )
         ]);
   }
+
   //Bar Graph data
   var BarGraphdata;
   Map Selectionquery1 = new Map<String, dynamic>();
@@ -2729,7 +2762,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var body = json.encode({
       "type": "party_data",
       "STATE": 'TELANGANA',
-      "party_list": 'TRS, BRS',
+      "party_list": 'INC',
       "social_handle": "YOUTUBE"
     });
     var headers = {'Content-Type': 'application/json'};
@@ -2743,31 +2776,31 @@ class _HomeScreenState extends State<HomeScreen> {
       try {
         print('inside try');
         BarGraphdata = jsonDecode(utf8.decode(response.bodyBytes));
-       
-          BarGraphdata['party_data'].forEach((key, value) {
-            print(key);
 
-            BargraphChartdata.add(
-              ChartSampleData(
-                  x: '$key', y: BarGraphdata['party_data'][key][0]['LIKES']),
-            );
-            PiegraphChartData.add(
-              ChartSampleData(
-                  x: '$key',
-                  y: BarGraphdata['party_data'][key][0]['COMMENTS'],
-                  text: '$key'),
-            );
-            FunnelgraphChartData.add(
-              ChartSampleData(
-                  x: '$key',
-                  y: BarGraphdata['party_data'][key][0]['VIEWS'],
-                  text: '$key'),
-            );
-          });
+        BarGraphdata['party_data'].forEach((key, value) {
+          print(key);
 
-          // for(int i=0;i<BarGraphdata['party_data'])
-          // BargraphChartdata.add(ChartSampleData(x: 'TDP', y: 8683),);
-        
+          BargraphChartdata.add(
+            ChartSampleData(
+                x: '$key', y: BarGraphdata['party_data'][key][0]['LIKES']),
+          );
+          PiegraphChartData.add(
+            ChartSampleData(
+                x: '$key',
+                y: BarGraphdata['party_data'][key][0]['COMMENTS'],
+                text: '$key'),
+          );
+          FunnelgraphChartData.add(
+            ChartSampleData(
+                x: '$key',
+                y: BarGraphdata['party_data'][key][0]['VIEWS'],
+                text: '$key'),
+          );
+        });
+
+        // for(int i=0;i<BarGraphdata['party_data'])
+        // BargraphChartdata.add(ChartSampleData(x: 'TDP', y: 8683),);
+
         print('data here');
         print(BarGraphdata);
       } catch (e) {
@@ -2779,12 +2812,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return BarGraphdata;
   }
 
-
-  //Twitter Banner 
-    late Future<dynamic> TwitterLineChartfuturecall = TwitterBannerGraphApi();
+  //Twitter Banner
+  late Future<dynamic> TwitterLineChartfuturecall = TwitterBannerGraphApi();
   TooltipBehavior? _TwittertooltipBehavior;
   TooltipBehavior? _TwittertooltipBehavior1;
-  TwitterBanner(){
+  TwitterBanner() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -2799,97 +2831,106 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                 
                 ),
-                child:FutureBuilder<dynamic>(
-                          future: TwitterLineChartfuturecall,
-                          builder: (
-                              BuildContext context,
-                              AsyncSnapshot<dynamic> snapshot,
-                              ) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return SpinKitWave(
-                                color: Colors.blue,
-                                size: 18,
-                              );
-                            } else if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              if (snapshot.hasError) {
-                                return const Text('Error');
-                              } else if (snapshot.hasData) {
-                                return     Padding(
-                  padding: const EdgeInsets.only(top:8.0),
-                  child: Stack(
-                    children: [
-                      
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
+                child: FutureBuilder<dynamic>(
+                  future: TwitterLineChartfuturecall,
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<dynamic> snapshot,
+                  ) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return SpinKitWave(
+                        color: Colors.blue,
+                        size: 18,
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        return const Text('Error');
+                      } else if (snapshot.hasData) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Stack(
                             children: [
-                              Container(decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors
-                                                              .blue.shade600),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15)),
-                                height: 120,
-                                width: 120,
-                                child: SfCircularChart(
-                                    tooltipBehavior: _TwittertooltipBehavior1,
-                                    palette: [
-                                      Color.fromRGBO(19, 136, 8, 0),
-                                      Color.fromRGBO(254, 1, 117, 0),
-                                      Color.fromRGBO(249, 125, 9, 0),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.blue.shade600),
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        height: 120,
+                                        width: 120,
+                                        child: SfCircularChart(
+                                            tooltipBehavior:
+                                                _TwittertooltipBehavior1,
+                                            palette: [
+                                              Color.fromRGBO(19, 136, 8, 0),
+                                              Color.fromRGBO(254, 1, 117, 0),
+                                              Color.fromRGBO(249, 125, 9, 0),
+                                            ],
+                                            series: <PieSeries<ChartSampleData,
+                                                String>>[
+                                              PieSeries<ChartSampleData,
+                                                      String>(
+                                                  explode: true,
+                                                  explodeIndex: 0,
+                                                  explodeOffset: '10%',
+                                                  dataSource: <ChartSampleData>[
+                                                    ...TwitterPiegraphChartData
+                                                  ],
+                                                  xValueMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.x as String,
+                                                  yValueMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.y,
+                                                  dataLabelMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.text,
+                                                  startAngle: 90,
+                                                  endAngle: 90,
+                                                  dataLabelSettings:
+                                                      const DataLabelSettings(
+                                                          isVisible: true)),
+                                            ]),
+                                      ),
+                                      Text(
+                                        'FOLLOWERS',
+                                        style: TextStyle(fontSize: 10),
+                                      ),
                                     ],
-                                    series: <PieSeries<ChartSampleData, String>>[
-                                      PieSeries<ChartSampleData, String>(
-                                          explode: true,
-                                          explodeIndex: 0,
-                                          explodeOffset: '10%',
-                                          dataSource: <ChartSampleData>[
-                                            ...TwitterPiegraphChartData
-                                            
-                                          ],
-                                          xValueMapper:
-                                              (ChartSampleData data, _) =>
-                                                  data.x as String,
-                                          yValueMapper:
-                                              (ChartSampleData data, _) => data.y,
-                                          dataLabelMapper:
-                                              (ChartSampleData data, _) =>
-                                                  data.text,
-                                          startAngle: 90,
-                                          endAngle: 90,
-                                          dataLabelSettings:
-                                              const DataLabelSettings(
-                                                  isVisible: true)),
-                                    ]),
-                              ),
-                              Text(
-                                'FOLLOWERS',
-                                style: TextStyle(fontSize: 10),
-                              ),
-                            ],
-                          ),
-                           Padding(
+                                  ),
+                                  Padding(
                                     padding: const EdgeInsets.only(top: 35.0),
                                     child: Column(
                                       children: [
                                         Row(
                                           children: [
                                             Text(TwiterBarGraphdata['lead'][0]),
-                                            Image.asset('assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',height: 30,)
+                                            Image.asset(
+                                              'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
+                                              height: 30,
+                                            )
                                           ],
                                         ),
                                         Column(
                                           children: [
                                             Row(
                                               children: [
-                                                Image.asset('assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',height: 30,),
+                                                Image.asset(
+                                                  'assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',
+                                                  height: 30,
+                                                ),
                                                 Text('TRS'),
                                               ],
                                             ),
@@ -2898,40 +2939,42 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                   ),
-                          Column(
-                            children: [
-                              Padding(
-                                        padding: const EdgeInsets.only(right: 8.0),
-                                        child: Container(decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors
-                                                              .blue.shade600),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15)),
+                                  Column(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 8.0),
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    color:
+                                                        Colors.blue.shade600),
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
                                             height: 120,
                                             width: 120,
                                             child: SfFunnelChart(
                                                 palette: [
                                                   Color.fromRGBO(19, 136, 8, 0),
-                                                  Color.fromRGBO(254, 1, 117, 0),
-                                                  Color.fromRGBO(249, 125, 9, 0),
+                                                  Color.fromRGBO(
+                                                      254, 1, 117, 0),
+                                                  Color.fromRGBO(
+                                                      249, 125, 9, 0),
                                                 ],
                                                 //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
-                                                tooltipBehavior:
-                                                    TooltipBehavior(enable: true),
+                                                tooltipBehavior: TooltipBehavior(
+                                                    enable: true),
                                                 series: FunnelSeries<
-                                                        ChartSampleData, String>(
+                                                        ChartSampleData,
+                                                        String>(
                                                     dataSource: <ChartSampleData>[
                                                       ...TwitterFunnelgraphChartData,
                                                     ],
                                                     xValueMapper:
-                                                        (ChartSampleData data,
-                                                                _) =>
+                                                        (ChartSampleData data, _) =>
                                                             data.x as String,
                                                     yValueMapper:
-                                                        (ChartSampleData data,
-                                                                _) =>
+                                                        (ChartSampleData data, _) =>
                                                             data.y,
                                                     /*  explode: isCardView ? false : explode,
                     gapRatio: isCardView ? 0 : gapRatio,*/
@@ -2943,26 +2986,25 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             '%',
                                                     dataLabelSettings:
                                                         const DataLabelSettings(
-                                                            textStyle: TextStyle(
-                                                                fontSize: 8),
+                                                            textStyle: TextStyle(fontSize: 8),
                                                             isVisible: true)))),
                                       ),
-                              Text(
-                                'Re-Tweet',
-                                style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-           
-                     Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      Text(
+                                        'Re-Tweet',
+                                        style: TextStyle(fontSize: 10),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding:
-                                        const EdgeInsets.only(left: 1.0, top: 50),
+                                    padding: const EdgeInsets.only(
+                                        left: 1.0, top: 50),
                                     child: Image.asset(
                                       'assets/icons/Social-Media-Icons-IS-08.png',
                                       height: 18,
@@ -2981,7 +3023,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           // Child text spans will inherit styles from parent
                                           style: new TextStyle(
                                             fontSize: 12.0,
-                                            color: Colors.black,
+                                            // color: Colors.black,
                                           ),
                                           children: <TextSpan>[
                                             TextSpan(
@@ -2991,7 +3033,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fontWeight: FontWeight.bold,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
-                                                text: TwiterBarGraphdata['lead'][0],
+                                                text: TwiterBarGraphdata['lead']
+                                                    [0],
                                                 style: new TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.green,
@@ -3008,90 +3051,84 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ),
                                     ),
                                   ),
-                                  Column(mainAxisAlignment: MainAxisAlignment.end,
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Padding(
                                         padding:
                                             const EdgeInsets.only(top: 100.0),
-                                        child: Container(decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors
-                                                              .blue.shade600),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15)),
-                                                  height: 100,
-                                                  width: 135,
-                                                  child: SfCartesianChart(
-                                                    palette: <Color>[
-                                                      Color(0xffff7f50),
-                                                      Color(0xfff0ead6),
-                                                      Color(0xffffd700),
-                                                      Color(0xff264348),
-                                                    ],
-                                                    plotAreaBorderWidth: 0,
-                                                    primaryXAxis: CategoryAxis(
-                                                      labelStyle: const TextStyle(
-                                                          color: Colors.black,
-                                                          fontSize: 8),
-                                                      axisLine: const AxisLine(
-                                                          width: 0),
-                                                      labelPosition:
-                                                          ChartDataLabelPosition
-                                                              .outside,
-                                                      majorTickLines:
-                                                          const MajorTickLines(
-                                                              width: 0),
-                                                      majorGridLines:
-                                                          const MajorGridLines(
-                                                              width: 0),
-                                                    ),
-                                                    primaryYAxis: NumericAxis(
-                                                        labelStyle:
-                                                            const TextStyle(
-                                                                color:
-                                                                    Colors.black,
-                                                                fontSize: 8),
-                                                        labelPosition:
-                                                            ChartDataLabelPosition
-                                                                .outside,
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.blue.shade600),
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          height: 100,
+                                          width: 135,
+                                          child: SfCartesianChart(
+                                            palette: <Color>[
+                                              Color(0xffff7f50),
+                                              Color(0xfff0ead6),
+                                              Color(0xffffd700),
+                                              Color(0xff264348),
+                                            ],
+                                            plotAreaBorderWidth: 0,
+                                            primaryXAxis: CategoryAxis(
+                                              labelStyle: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 8),
+                                              axisLine:
+                                                  const AxisLine(width: 0),
+                                              labelPosition:
+                                                  ChartDataLabelPosition
+                                                      .outside,
+                                              majorTickLines:
+                                                  const MajorTickLines(
+                                                      width: 0),
+                                              majorGridLines:
+                                                  const MajorGridLines(
+                                                      width: 0),
+                                            ),
+                                            primaryYAxis: NumericAxis(
+                                                labelStyle: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 8),
+                                                labelPosition:
+                                                    ChartDataLabelPosition
+                                                        .outside,
+                                                isVisible: false,
+                                                minimum: 0,
+                                                maximum: 3000),
+                                            series: <ColumnSeries<
+                                                ChartSampleData, String>>[
+                                              ColumnSeries<ChartSampleData,
+                                                  String>(
+                                                width: 0.9,
+                                                dataLabelSettings:
+                                                    const DataLabelSettings(
                                                         isVisible: false,
-                                                        minimum: 0,
-                                                        maximum: 3000),
-                                                    series: <ColumnSeries<
-                                                        ChartSampleData, String>>[
-                                                      ColumnSeries<
-                                                          ChartSampleData,
-                                                          String>(
-                                                        width: 0.9,
-                                                        dataLabelSettings:
-                                                            const DataLabelSettings(
-                                                                isVisible: false,
-                                                                labelAlignment:
-                                                                    ChartDataLabelAlignment
-                                                                        .top),
-                                                        dataSource: <ChartSampleData>[
-                                                          ...TwitterBargraphChartdata
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius.circular(
-                                                                10),
-                                                        xValueMapper:
-                                                            (ChartSampleData
-                                                                        sales,
-                                                                    _) =>
-                                                                sales.x as String,
-                                                        yValueMapper:
-                                                            (ChartSampleData
-                                                                        sales,
-                                                                    _) =>
-                                                                sales.y,
-                                                      ),
-                                                    ],
-                                                    tooltipBehavior:
-                                                        _TwittertooltipBehavior,
-                                                  ),
-                                                ),
+                                                        labelAlignment:
+                                                            ChartDataLabelAlignment
+                                                                .top),
+                                                dataSource: <ChartSampleData>[
+                                                  ...TwitterBargraphChartdata
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                xValueMapper:
+                                                    (ChartSampleData sales,
+                                                            _) =>
+                                                        sales.x as String,
+                                                yValueMapper:
+                                                    (ChartSampleData sales,
+                                                            _) =>
+                                                        sales.y,
+                                              ),
+                                            ],
+                                            tooltipBehavior:
+                                                _TwittertooltipBehavior,
+                                          ),
+                                        ),
                                       ),
                                       Text(
                                         'Likes',
@@ -3101,26 +3138,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ],
                               ),
-                      
-                    ],
-                  ),
-                );
-                              } else {
-                                return const Text('Empty data');
-                              }
-                            } else {
-                              return Text('State: ${snapshot.connectionState}');
-                            }
-                          },
-                        ),
-                
-                
-                
+                            ],
+                          ),
+                        );
+                      } else {
+                        return const Text('Empty data');
+                      }
+                    } else {
+                      return Text('State: ${snapshot.connectionState}');
+                    }
+                  },
+                ),
               ),
             ),
           )
         ]);
   }
+
   //Bar Graph data
   var TwiterBarGraphdata;
 
@@ -3129,12 +3163,11 @@ class _HomeScreenState extends State<HomeScreen> {
   List<ChartSampleData> TwitterPiegraphChartData = [];
   List<ChartSampleData> TwitterFunnelgraphChartData = [];
   Future<dynamic> TwitterBannerGraphApi() async {
-   
-      TwitterSelectionquery1['type'] = 'party_data';
-      TwitterSelectionquery1['STATE'] = 'TELANGANA';
-      TwitterSelectionquery1['party_list'] = 'INC,TRS,BJP';
-      //Selectionquery['channel'] = 'YOUTUBE';
-  
+    TwitterSelectionquery1['type'] = 'party_data';
+    TwitterSelectionquery1['STATE'] = 'TELANGANA';
+    TwitterSelectionquery1['party_list'] = 'INC,TRS,BJP';
+    //Selectionquery['channel'] = 'YOUTUBE';
+
     var response = await post(
         Uri.parse('http://idxp.pilogcloud.com:6659/social_media/'),
         body: TwitterSelectionquery1);
@@ -3145,31 +3178,32 @@ class _HomeScreenState extends State<HomeScreen> {
       try {
         print('inside try');
         TwiterBarGraphdata = jsonDecode(utf8.decode(response.bodyBytes));
-       
-          TwiterBarGraphdata['party_data'].forEach((key, value) {
-            print(key);
 
-            TwitterBargraphChartdata.add(
-              ChartSampleData(
-                  x: '$key', y: TwiterBarGraphdata['party_data'][key][0]['LIKES']),
-            );
-            TwitterPiegraphChartData.add(
-              ChartSampleData(
-                  x: '$key',
-                  y: TwiterBarGraphdata['party_data'][key][0]['USER_FOLLOWERS'],
-                  text: '$key'),
-            );
-            TwitterFunnelgraphChartData.add(
-              ChartSampleData(
-                  x: '$key',
-                  y: TwiterBarGraphdata['party_data'][key][0]['RETWEET_COUNT'],
-                  text: '$key'),
-            );
-          });
+        TwiterBarGraphdata['party_data'].forEach((key, value) {
+          print(key);
 
-          // for(int i=0;i<TwiterBarGraphdata['party_data'])
-          // TwitterBargraphChartdata.add(ChartSampleData(x: 'TDP', y: 8683),);
-       
+          TwitterBargraphChartdata.add(
+            ChartSampleData(
+                x: '$key',
+                y: TwiterBarGraphdata['party_data'][key][0]['LIKES']),
+          );
+          TwitterPiegraphChartData.add(
+            ChartSampleData(
+                x: '$key',
+                y: TwiterBarGraphdata['party_data'][key][0]['USER_FOLLOWERS'],
+                text: '$key'),
+          );
+          TwitterFunnelgraphChartData.add(
+            ChartSampleData(
+                x: '$key',
+                y: TwiterBarGraphdata['party_data'][key][0]['RETWEET_COUNT'],
+                text: '$key'),
+          );
+        });
+
+        // for(int i=0;i<TwiterBarGraphdata['party_data'])
+        // TwitterBargraphChartdata.add(ChartSampleData(x: 'TDP', y: 8683),);
+
         print('data here');
         print(TwiterBarGraphdata);
       } catch (e) {
@@ -3181,12 +3215,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return TwiterBarGraphdata;
   }
 
-
 //FaceBookBanners
   late Future<dynamic> FacebookLineChartfuturecall = FaceBookBannerGraphApi();
   TooltipBehavior? _FacebooktooltipBehavior;
   TooltipBehavior? _FacebooktooltipBehavior1;
-  FaceBookBanner(){
+  FaceBookBanner() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -3201,96 +3234,101 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-            
                 ),
-                child:FutureBuilder<dynamic>(
-                          future: FacebookLineChartfuturecall,
-                          builder: (
-                              BuildContext context,
-                              AsyncSnapshot<dynamic> snapshot,
-                              ) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return SpinKitWave(
-                                color: Colors.blue,
-                                size: 18,
-                              );
-                            } else if (snapshot.connectionState ==
-                                ConnectionState.done) {
-                              if (snapshot.hasError) {
-                                return const Text('Error');
-                              } else if (snapshot.hasData) {
-                                return    Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Stack(
-                    children: [
-                     
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
+                child: FutureBuilder<dynamic>(
+                  future: FacebookLineChartfuturecall,
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<dynamic> snapshot,
+                  ) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return SpinKitWave(
+                        color: Colors.blue,
+                        size: 18,
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        return const Text('Error');
+                      } else if (snapshot.hasData) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Stack(
                             children: [
-                              Container(
-                                decoration: BoxDecoration(
-                                    border:
-                                        Border.all(color: Colors.blueAccent),
-                                    borderRadius: BorderRadius.circular(15)),
-                                height: 120,
-                                width: 120,
-                                child: SfCircularChart(
-                                    tooltipBehavior: _FacebooktooltipBehavior1,
-                                    palette: [
-                                      Color.fromRGBO(254, 1, 117, 0),
-                                      Color.fromRGBO(19, 136, 8, 0),
-                                      Color.fromRGBO(249, 125, 9, 0),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.blueAccent),
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        height: 120,
+                                        width: 120,
+                                        child: SfCircularChart(
+                                            tooltipBehavior:
+                                                _FacebooktooltipBehavior1,
+                                            palette: [
+                                              Color.fromRGBO(254, 1, 117, 0),
+                                              Color.fromRGBO(19, 136, 8, 0),
+                                              Color.fromRGBO(249, 125, 9, 0),
+                                            ],
+                                            series: <PieSeries<ChartSampleData,
+                                                String>>[
+                                              PieSeries<ChartSampleData,
+                                                      String>(
+                                                  explode: true,
+                                                  explodeIndex: 0,
+                                                  explodeOffset: '10%',
+                                                  dataSource: <ChartSampleData>[
+                                                    ...FaceBookPiegraphChartData
+                                                    // ChartSampleData(
+                                                    //     x: 'David', y: 13, text: 'Dav \n 13%'),
+                                                    // ChartSampleData(
+                                                    //     x: 'Steve', y: 24, text: 'Ste\n 24%'),
+                                                    // ChartSampleData(
+                                                    //     x: 'Jack', y: 25, text: 'Jack \n 25%'),
+                                                    // ChartSampleData(
+                                                    //     x: 'Others', y: 38, text: 'Other \n 38%'),
+                                                  ],
+                                                  xValueMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.x as String,
+                                                  yValueMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.y,
+                                                  dataLabelMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.text,
+                                                  startAngle: 90,
+                                                  endAngle: 90,
+                                                  dataLabelSettings:
+                                                      const DataLabelSettings(
+                                                          isVisible: true)),
+                                            ]),
+                                      ),
+                                      Text(
+                                        'Likes',
+                                        style: TextStyle(fontSize: 10),
+                                      ),
                                     ],
-                                    series: <PieSeries<ChartSampleData,
-                                        String>>[
-                                      PieSeries<ChartSampleData, String>(
-                                          explode: true,
-                                          explodeIndex: 0,
-                                          explodeOffset: '10%',
-                                          dataSource: <ChartSampleData>[
-                                            ...FaceBookPiegraphChartData
-                                            // ChartSampleData(
-                                            //     x: 'David', y: 13, text: 'Dav \n 13%'),
-                                            // ChartSampleData(
-                                            //     x: 'Steve', y: 24, text: 'Ste\n 24%'),
-                                            // ChartSampleData(
-                                            //     x: 'Jack', y: 25, text: 'Jack \n 25%'),
-                                            // ChartSampleData(
-                                            //     x: 'Others', y: 38, text: 'Other \n 38%'),
-                                          ],
-                                          xValueMapper:
-                                              (ChartSampleData data, _) =>
-                                                  data.x as String,
-                                          yValueMapper:
-                                              (ChartSampleData data, _) =>
-                                                  data.y,
-                                          dataLabelMapper:
-                                              (ChartSampleData data, _) =>
-                                                  data.text,
-                                          startAngle: 90,
-                                          endAngle: 90,
-                                          dataLabelSettings:
-                                              const DataLabelSettings(
-                                                  isVisible: true)),
-                                    ]),
-                              ),
-                              Text(
-                                'Likes',
-                                style: TextStyle(fontSize: 10),
-                              ),
-                            ],
-                          ),
-                          Padding(
+                                  ),
+                                  Padding(
                                     padding: const EdgeInsets.only(top: 35.0),
                                     child: Column(
                                       children: [
                                         Row(
                                           children: [
-                                            Text(FaceBookBarGraphdata['lead'][0]),
+                                            Text(FaceBookBarGraphdata['lead']
+                                                [0]),
                                             Image.asset(
                                               'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
                                               height: 30,
@@ -3313,9 +3351,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                   ),
-                          Column(
-                            children: [
-                            Container(
+                                  Column(
+                                    children: [
+                                      Container(
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: Colors.blueAccent),
@@ -3356,16 +3394,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                                           textStyle:
                                                               TextStyle(fontSize: 8),
                                                           isVisible: true)))),
-                              Text(
-                                'Comments',
-                                style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                      
-                       Row(
+                                      Text(
+                                        'Comments',
+                                        style: TextStyle(fontSize: 10),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -3391,7 +3428,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           // Child text spans will inherit styles from parent
                                           style: new TextStyle(
                                             fontSize: 12.0,
-                                            color: Colors.black,
+                                            // color: Colors.black,
                                           ),
                                           children: <TextSpan>[
                                             TextSpan(
@@ -3402,7 +3439,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
-                                                text: FaceBookBarGraphdata['lead'][0],
+                                                text:
+                                                    FaceBookBarGraphdata['lead']
+                                                        [0],
                                                 style: new TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.green,
@@ -3427,90 +3466,77 @@ class _HomeScreenState extends State<HomeScreen> {
                                         padding:
                                             const EdgeInsets.only(top: 100.0),
                                         child: Container(
-                                                  decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors
-                                                              .blueAccent),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15)),
-                                                  height: 100,
-                                                  width: 135,
-                                                  child: SfCartesianChart(
-                                                    palette: <Color>[
-                                                      Color(0xffff7f50),
-                                                      Color(0xfff0ead6),
-                                                      Color(0xffffd700),
-                                                      Color(0xff264348),
-                                                    ],
-                                                    plotAreaBorderWidth: 0,
-                                                    primaryXAxis: CategoryAxis(
-                                                      labelStyle:
-                                                          const TextStyle(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 8),
-                                                      axisLine: const AxisLine(
-                                                          width: 0),
-                                                      labelPosition:
-                                                          ChartDataLabelPosition
-                                                              .outside,
-                                                      majorTickLines:
-                                                          const MajorTickLines(
-                                                              width: 0),
-                                                      majorGridLines:
-                                                          const MajorGridLines(
-                                                              width: 0),
-                                                    ),
-                                                    primaryYAxis: NumericAxis(
-                                                        labelStyle:
-                                                            const TextStyle(
-                                                                color: Colors
-                                                                    .black,
-                                                                fontSize: 8),
-                                                        labelPosition:
-                                                            ChartDataLabelPosition
-                                                                .outside,
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.blueAccent),
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          height: 100,
+                                          width: 135,
+                                          child: SfCartesianChart(
+                                            palette: <Color>[
+                                              Color(0xffff7f50),
+                                              Color(0xfff0ead6),
+                                              Color(0xffffd700),
+                                              Color(0xff264348),
+                                            ],
+                                            plotAreaBorderWidth: 0,
+                                            primaryXAxis: CategoryAxis(
+                                              labelStyle: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 8),
+                                              axisLine:
+                                                  const AxisLine(width: 0),
+                                              labelPosition:
+                                                  ChartDataLabelPosition
+                                                      .outside,
+                                              majorTickLines:
+                                                  const MajorTickLines(
+                                                      width: 0),
+                                              majorGridLines:
+                                                  const MajorGridLines(
+                                                      width: 0),
+                                            ),
+                                            primaryYAxis: NumericAxis(
+                                                labelStyle: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 8),
+                                                labelPosition:
+                                                    ChartDataLabelPosition
+                                                        .outside,
+                                                isVisible: false,
+                                                minimum: 0,
+                                                maximum: 2000),
+                                            series: <ColumnSeries<
+                                                ChartSampleData, String>>[
+                                              ColumnSeries<ChartSampleData,
+                                                  String>(
+                                                width: 0.9,
+                                                dataLabelSettings:
+                                                    const DataLabelSettings(
                                                         isVisible: false,
-                                                        minimum: 0,
-                                                        maximum: 2000),
-                                                    series: <ColumnSeries<
-                                                        ChartSampleData,
-                                                        String>>[
-                                                      ColumnSeries<
-                                                          ChartSampleData,
-                                                          String>(
-                                                        width: 0.9,
-                                                        dataLabelSettings:
-                                                            const DataLabelSettings(
-                                                                isVisible:
-                                                                    false,
-                                                                labelAlignment:
-                                                                    ChartDataLabelAlignment
-                                                                        .top),
-                                                        dataSource: <ChartSampleData>[
-                                                          ...FaceBookBargraphChartdata
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        xValueMapper:
-                                                            (ChartSampleData
-                                                                        sales,
-                                                                    _) =>
-                                                                sales.x
-                                                                    as String,
-                                                        yValueMapper:
-                                                            (ChartSampleData
-                                                                        sales,
-                                                                    _) =>
-                                                                sales.y,
-                                                      ),
-                                                    ],
-                                                    tooltipBehavior:
-                                                        _FacebooktooltipBehavior,
-                                                  ),
-                                                ),
+                                                        labelAlignment:
+                                                            ChartDataLabelAlignment
+                                                                .top),
+                                                dataSource: <ChartSampleData>[
+                                                  ...FaceBookBargraphChartdata
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                xValueMapper:
+                                                    (ChartSampleData sales,
+                                                            _) =>
+                                                        sales.x as String,
+                                                yValueMapper:
+                                                    (ChartSampleData sales,
+                                                            _) =>
+                                                        sales.y,
+                                              ),
+                                            ],
+                                            tooltipBehavior:
+                                                _FacebooktooltipBehavior,
+                                          ),
+                                        ),
                                       ),
                                       Text(
                                         'Views',
@@ -3520,25 +3546,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ],
                               ),
-                     
-                    ],
-                  ),
-                ); 
-                              } else {
-                                return const Text('Empty data');
-                              }
-                            } else {
-                              return Text('State: ${snapshot.connectionState}');
-                            }
-                          },
-                        ),
-                
-                 
+                            ],
+                          ),
+                        );
+                      } else {
+                        return const Text('Empty data');
+                      }
+                    } else {
+                      return Text('State: ${snapshot.connectionState}');
+                    }
+                  },
+                ),
               ),
             ),
           )
         ]);
   }
+
   //Bar Graph data
   var FaceBookBarGraphdata;
 
@@ -3571,7 +3595,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
             FaceBookBargraphChartdata.add(
               ChartSampleData(
-                  x: '$key', y: FaceBookBarGraphdata['party_data'][key][0]['LIKES']),
+                  x: '$key',
+                  y: FaceBookBarGraphdata['party_data'][key][0]['LIKES']),
             );
             FaceBookPiegraphChartData.add(
               ChartSampleData(
@@ -3601,13 +3626,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return FaceBookBarGraphdata;
   }
 
-
-
   //NewsChannel Banner
-    late Future<dynamic> NewschannelLineChartfuturecall = NewsChannelBannerGraphApi();
+  late Future<dynamic> NewschannelLineChartfuturecall =
+      NewsChannelBannerGraphApi();
   TooltipBehavior? _NewsChanneltooltipBehavior;
   TooltipBehavior? _NewsChanneltooltipBehavior1;
-  NewsChannelBanner(){
+  NewsChannelBanner() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -3622,101 +3646,115 @@ class _HomeScreenState extends State<HomeScreen> {
                 width: MediaQuery.of(context).size.width * 0.9,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-                 
                 ),
                 child: FutureBuilder<dynamic>(
-                                          future: NewschannelLineChartfuturecall,
-                                          builder: (
-                                              BuildContext context,
-                                              AsyncSnapshot<dynamic> snapshot,
-                                              ) {
-                                            if (snapshot.connectionState ==
-                                                ConnectionState.waiting) {
-                                              return SpinKitWave(
-                                                color: Colors.blue,
-                                                size: 18,
-                                              );
-                                            } else if (snapshot.connectionState ==
-                                                ConnectionState.done) {
-                                              if (snapshot.hasError) {
-                                                return const Text('Error');
-                                              } else if (snapshot.hasData) {
-                                                return    Padding(
-                  padding: const EdgeInsets.only(top:8.0),
-                  child: Stack(
-                    children: [
-                     
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Column(
+                  future: NewschannelLineChartfuturecall,
+                  builder: (
+                    BuildContext context,
+                    AsyncSnapshot<dynamic> snapshot,
+                  ) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return SpinKitWave(
+                        color: Colors.blue,
+                        size: 18,
+                      );
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.done) {
+                      if (snapshot.hasError) {
+                        return const Text('Error');
+                      } else if (snapshot.hasData) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: Stack(
                             children: [
-                              Container( decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors
-                                                              .greenAccent),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15)),
-                                height: 120,
-                                width: 120,
-                                child: SfCircularChart(
-                                    tooltipBehavior: _NewsChanneltooltipBehavior1,
-                                    palette: [
-                                      Color.fromRGBO(0, 142, 70,0),
-                                      Color.fromRGBO(255, 255, 0,0),
-                                      Color.fromRGBO(236, 13, 195,0),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.greenAccent),
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        height: 120,
+                                        width: 120,
+                                        child: SfCircularChart(
+                                            tooltipBehavior:
+                                                _NewsChanneltooltipBehavior1,
+                                            palette: [
+                                              Color.fromRGBO(0, 142, 70, 0),
+                                              Color.fromRGBO(255, 255, 0, 0),
+                                              Color.fromRGBO(236, 13, 195, 0),
+                                            ],
+                                            series: <PieSeries<ChartSampleData,
+                                                String>>[
+                                              PieSeries<ChartSampleData,
+                                                      String>(
+                                                  explode: true,
+                                                  explodeIndex: 0,
+                                                  explodeOffset: '10%',
+                                                  dataSource: <ChartSampleData>[
+                                                    ...NewsChannelPiegraphChartData
+                                                    // ChartSampleData(
+                                                    //     x: 'David', y: 13, text: 'Dav \n 13%'),
+                                                    // ChartSampleData(
+                                                    //     x: 'Steve', y: 24, text: 'Ste\n 24%'),
+                                                    // ChartSampleData(
+                                                    //     x: 'Jack', y: 25, text: 'Jack \n 25%'),
+                                                    // ChartSampleData(
+                                                    //     x: 'Others', y: 38, text: 'Other \n 38%'),
+                                                  ],
+                                                  xValueMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.x as String,
+                                                  yValueMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.y,
+                                                  dataLabelMapper:
+                                                      (ChartSampleData data,
+                                                              _) =>
+                                                          data.text,
+                                                  startAngle: 90,
+                                                  endAngle: 90,
+                                                  dataLabelSettings:
+                                                      const DataLabelSettings(
+                                                          isVisible: true)),
+                                            ]),
+                                      ),
+                                      Text(
+                                        'Likes',
+                                        style: TextStyle(fontSize: 10),
+                                      ),
                                     ],
-                                    series: <PieSeries<ChartSampleData, String>>[
-                                      PieSeries<ChartSampleData, String>(
-                                          explode: true,
-                                          explodeIndex: 0,
-                                          explodeOffset: '10%',
-                                          dataSource: <ChartSampleData>[
-                                            ...NewsChannelPiegraphChartData
-                                            // ChartSampleData(
-                                            //     x: 'David', y: 13, text: 'Dav \n 13%'),
-                                            // ChartSampleData(
-                                            //     x: 'Steve', y: 24, text: 'Ste\n 24%'),
-                                            // ChartSampleData(
-                                            //     x: 'Jack', y: 25, text: 'Jack \n 25%'),
-                                            // ChartSampleData(
-                                            //     x: 'Others', y: 38, text: 'Other \n 38%'),
-                                          ],
-                                          xValueMapper: (ChartSampleData data, _) =>
-                                          data.x as String,
-                                          yValueMapper: (ChartSampleData data, _) =>
-                                          data.y,
-                                          dataLabelMapper:
-                                              (ChartSampleData data, _) => data.text,
-                                          startAngle: 90,
-                                          endAngle: 90,
-                                          dataLabelSettings: const DataLabelSettings(
-                                              isVisible: true)),
-                                    ]),
-                              ),
-                              Text(
-                                'Likes',
-                                style: TextStyle(fontSize: 10),
-                              ),
-                            ],
-                          ),
-                         Padding(
+                                  ),
+                                  Padding(
                                     padding: const EdgeInsets.only(top: 35.0),
                                     child: Column(
                                       children: [
                                         Row(
                                           children: [
-                                            Text(NewsChannelBarGraphdata['lead'][0]),
-                                            Image.asset('assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',height: 30,)
+                                            Text(NewsChannelBarGraphdata['lead']
+                                                [0]),
+                                            Image.asset(
+                                              'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
+                                              height: 30,
+                                            )
                                           ],
                                         ),
                                         Column(
                                           children: [
                                             Row(
                                               children: [
-                                                Image.asset('assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',height: 30,),
+                                                Image.asset(
+                                                  'assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',
+                                                  height: 30,
+                                                ),
                                                 Text('TDP'),
                                               ],
                                             ),
@@ -3725,70 +3763,74 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                   ),
-                          Column(
-                            children: [
-                             Container(decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors
-                                                              .greenAccent),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15)),
+                                  Column(
+                                    children: [
+                                      Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.greenAccent),
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
                                           height: 120,
                                           width: 120,
-                                          child: SfFunnelChart(palette: [
-                                            Color.fromRGBO(0, 142, 70,0),
-                                            Color.fromRGBO(255, 255, 0,0),
-                                            Color.fromRGBO(236, 13, 195,0),
-                                          ],
+                                          child: SfFunnelChart(
+                                              palette: [
+                                                Color.fromRGBO(0, 142, 70, 0),
+                                                Color.fromRGBO(255, 255, 0, 0),
+                                                Color.fromRGBO(236, 13, 195, 0),
+                                              ],
                                               //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
                                               tooltipBehavior:
-                                              TooltipBehavior(enable: true),
-                                              series: FunnelSeries<ChartSampleData,
-                                                  String>(
+                                                  TooltipBehavior(enable: true),
+                                              series: FunnelSeries<
+                                                      ChartSampleData, String>(
                                                   dataSource: <ChartSampleData>[
                                                     ...NewsChannelFunnelgraphChartData,
                                                   ],
                                                   xValueMapper:
                                                       (ChartSampleData data, _) =>
-                                                  data.x as String,
+                                                          data.x as String,
                                                   yValueMapper:
                                                       (ChartSampleData data, _) =>
-                                                  data.y,
+                                                          data.y,
                                                   /*  explode: isCardView ? false : explode,
                     gapRatio: isCardView ? 0 : gapRatio,*/
                                                   neckHeight: /*isCardView ? */
-                                                  '20%' /*: neckHeight.toString()*/ +
-                                                      '%',
+                                                      '20%' /*: neckHeight.toString()*/ +
+                                                          '%',
                                                   neckWidth: /*isCardView ?*/
-                                                  '25%' /*: neckWidth.toString()*/ +
-                                                      '%',
+                                                      '25%' /*: neckWidth.toString()*/ +
+                                                          '%',
                                                   dataLabelSettings:
-                                                  const DataLabelSettings(textStyle: TextStyle(fontSize: 8 ),
-                                                      isVisible: true)))),
-                              Text(
-                                'Comments',
-                                style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                 
-                      Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                      const DataLabelSettings(
+                                                          textStyle:
+                                                              TextStyle(fontSize: 8),
+                                                          isVisible: true)))),
+                                      Text(
+                                        'Comments',
+                                        style: TextStyle(fontSize: 10),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 5.0,top: 60),
+                                    padding: const EdgeInsets.only(
+                                        left: 5.0, top: 60),
                                     child: Image.asset(
-                                      'assets/new Updated images/img.png',
+                                      'assets/NotificationIcons/News-Paper.png',
                                       height: 29,
                                       width: 29,
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(top: 140.0,left: 5),
+                                    padding: const EdgeInsets.only(
+                                        top: 140.0, left: 5),
                                     child: Container(
                                       height: 100,
                                       width: 150,
@@ -3798,19 +3840,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                           // Child text spans will inherit styles from parent
                                           style: new TextStyle(
                                             fontSize: 12.0,
-                                            color: Colors.black,
+                                            // color: Colors.black,
                                           ),
                                           children: <TextSpan>[
                                             TextSpan(
-                                                text: NewsChannelBarGraphdata['lead'][0],
+                                                text: NewsChannelBarGraphdata[
+                                                    'lead'][0],
                                                 style: new TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.green,
                                                     fontSize: 20,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
-                                                text:
-                                                ' is overpowering ',
+                                                text: ' is overpowering ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 18,
@@ -3823,13 +3865,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
-                                                text:
-                                                ' in all aspects.',
+                                                text: ' in all aspects.',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
-                
                                           ],
                                         ),
                                       ),
@@ -3839,66 +3879,80 @@ class _HomeScreenState extends State<HomeScreen> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 100.0),
-                                        child:Container(decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          color: Colors
-                                                              .greenAccent),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15)),
-                                                  height: 100,
-                                                  width: 135,
-                                                  child: SfCartesianChart(
-                                                    palette: <Color>[
-                                                      Color(0xffff7f50),
-                                                      Color(0xfff0ead6),
-                                                      Color(0xffffd700),
-                                                      Color(0xff264348),
-                                                    ],
-                                                    plotAreaBorderWidth: 0,
-                                                    primaryXAxis: CategoryAxis(
-                                                      labelStyle: const TextStyle(
-                                                          color: Colors.black, fontSize: 8),
-                                                      axisLine: const AxisLine(width: 0),
-                                                      labelPosition:
-                                                      ChartDataLabelPosition.outside,
-                                                      majorTickLines:
-                                                      const MajorTickLines(width: 0),
-                                                      majorGridLines:
-                                                      const MajorGridLines(width: 0),
-                                                    ),
-                                                    primaryYAxis: NumericAxis(
-                                                        labelStyle: const TextStyle(
-                                                            color: Colors.black, fontSize: 8),
-                                                        labelPosition:
-                                                        ChartDataLabelPosition.outside,
+                                        padding:
+                                            const EdgeInsets.only(top: 100.0),
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                              border: Border.all(
+                                                  color: Colors.greenAccent),
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          height: 100,
+                                          width: 135,
+                                          child: SfCartesianChart(
+                                            palette: <Color>[
+                                              Color(0xffff7f50),
+                                              Color(0xfff0ead6),
+                                              Color(0xffffd700),
+                                              Color(0xff264348),
+                                            ],
+                                            plotAreaBorderWidth: 0,
+                                            primaryXAxis: CategoryAxis(
+                                              labelStyle: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 8),
+                                              axisLine:
+                                                  const AxisLine(width: 0),
+                                              labelPosition:
+                                                  ChartDataLabelPosition
+                                                      .outside,
+                                              majorTickLines:
+                                                  const MajorTickLines(
+                                                      width: 0),
+                                              majorGridLines:
+                                                  const MajorGridLines(
+                                                      width: 0),
+                                            ),
+                                            primaryYAxis: NumericAxis(
+                                                labelStyle: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 8),
+                                                labelPosition:
+                                                    ChartDataLabelPosition
+                                                        .outside,
+                                                isVisible: false,
+                                                minimum: 0,
+                                                maximum: 800),
+                                            series: <ColumnSeries<
+                                                ChartSampleData, String>>[
+                                              ColumnSeries<ChartSampleData,
+                                                  String>(
+                                                width: 0.9,
+                                                dataLabelSettings:
+                                                    const DataLabelSettings(
                                                         isVisible: false,
-                                                        minimum: 0,
-                                                        maximum: 800),
-                                                    series: <ColumnSeries<ChartSampleData,
-                                                        String>>[
-                                                      ColumnSeries<ChartSampleData, String>(
-                                                        width: 0.9,
-                                                        dataLabelSettings:
-                                                        const DataLabelSettings(
-                                                            isVisible: false,
-                                                            labelAlignment:
-                                                            ChartDataLabelAlignment.top),
-                                                        dataSource: <ChartSampleData>[
-                                                          ...NewsChannelBargraphChartdata
-                                                        ],
-                                                        borderRadius: BorderRadius.circular(10),
-                                                        xValueMapper:
-                                                            (ChartSampleData sales, _) =>
+                                                        labelAlignment:
+                                                            ChartDataLabelAlignment
+                                                                .top),
+                                                dataSource: <ChartSampleData>[
+                                                  ...NewsChannelBargraphChartdata
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                xValueMapper:
+                                                    (ChartSampleData sales,
+                                                            _) =>
                                                         sales.x as String,
-                                                        yValueMapper:
-                                                            (ChartSampleData sales, _) => sales.y,
-                                                      ),
-                                                    ],
-                                                    tooltipBehavior: _NewsChanneltooltipBehavior,
-                                                  ),
-                                                ),
+                                                yValueMapper:
+                                                    (ChartSampleData sales,
+                                                            _) =>
+                                                        sales.y,
+                                              ),
+                                            ],
+                                            tooltipBehavior:
+                                                _NewsChanneltooltipBehavior,
+                                          ),
+                                        ),
                                       ),
                                       Text(
                                         'Views',
@@ -3908,28 +3962,23 @@ class _HomeScreenState extends State<HomeScreen> {
                                   ),
                                 ],
                               ),
-                      
-                    ],
-                  ),
-                );
-                                              } else {
-                                                return const Text('Empty data');
-                                              }
-                                            } else {
-                                              return Text('State: ${snapshot.connectionState}');
-                                            }
-                                          },
-                                        ),
-                
-                
-              
+                            ],
+                          ),
+                        );
+                      } else {
+                        return const Text('Empty data');
+                      }
+                    } else {
+                      return Text('State: ${snapshot.connectionState}');
+                    }
+                  },
+                ),
               ),
             ),
           )
         ]);
   }
 
-  
   //Bar Graph data
   var NewsChannelBarGraphdata;
 
@@ -3939,10 +3988,10 @@ class _HomeScreenState extends State<HomeScreen> {
   List<ChartSampleData> NewsChannelFunnelgraphChartData = [];
   Future<dynamic> NewsChannelBannerGraphApi() async {
     var body = json.encode({
-    "type": "party_data",
-    "STATE": 'ANDHRA PRADESH',
-    "party_list": 'TDP, YSRCP, TRS',
-    "social_handle": "NEWS_CHANNEL"
+      "type": "party_data",
+      "STATE": 'ANDHRA PRADESH',
+      "party_list": 'TDP, YSRCP',
+      "social_handle": "NEWS_CHANNEL"
     });
     var headers = {'Content-Type': 'application/json'};
     var response = await post(
@@ -3962,7 +4011,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
             NewsChannelBargraphChartdata.add(
               ChartSampleData(
-                  x: '$key', y: NewsChannelBarGraphdata['party_data'][key][0]['LIKES']),
+                  x: '$key',
+                  y: NewsChannelBarGraphdata['party_data'][key][0]['LIKES']),
             );
             NewsChannelPiegraphChartData.add(
               ChartSampleData(
@@ -3992,14 +4042,3 @@ class _HomeScreenState extends State<HomeScreen> {
     return NewsChannelBarGraphdata;
   }
 }
-
-
-
-
-
-
-
-
-
-
-

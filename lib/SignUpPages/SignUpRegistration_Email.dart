@@ -425,10 +425,10 @@ class _SignUpEmailState extends State<SignUpEmail> {
     });*/
     print(body);
     var response = await post(
-      Uri.parse(INSIGHTS + '/register'),
+      Uri.parse(INSIGHTS + 'auth/register'),
       headers: headers,
       body: json.encode({
-        "userName": "${username.text.toString()}",
+        "username": "${username.text.toString()}",
         "email": "${widget.data.toString()}",
         "password": "${_pass.text}",
         "role": "${input}",

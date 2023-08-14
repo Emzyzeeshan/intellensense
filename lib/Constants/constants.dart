@@ -50,4 +50,20 @@ List<String> ConstituencyAnalysisList = [
   'Challenges and Recommendations',
 ];
 //Home Color
-Color HomeColor=Colors.white;
+Color HomeColor = Colors.white;
+
+//light theme setup image
+List<String> lightModeImages = [
+  'https://media.istockphoto.com/id/166079243/vector/technology-network-background.jpg?s=612x612&w=0&k=20&c=dqJqURVdnWkQ0P8y1pHo2eURNf_6UQZALPWKIWODdN4=',
+  'https://previews.123rf.com/images/cherezoff/cherezoff1312/cherezoff131200663/24768121-social-media-dark-background-of-the-white-icons.jpg',
+  'https://media.istockphoto.com/id/1063758830/video/4k-social-media-social-network.jpg?s=640x640&k=20&c=sAdJ2599D_10TDhcpCbo98xU_grwHkLLCohv_NLIXS0=',
+  'https://previews.123rf.com/images/klss/klss1707/klss170700064/81952720-3d-illustration-of-cloud-of-flying-friends-symbols-on-a-dark-background-social-media-concept.jpg'
+];
+
+//dark theme setup image
+List<String> DarkModeImages = [
+  'assets/DarkmodeImages/Dark1.jpg',
+  'assets/DarkmodeImages/Dark2.jpg',
+  'assets/DarkmodeImages/Dark3.jpg',
+  'assets/DarkmodeImages/Dark4.jpg'
+];

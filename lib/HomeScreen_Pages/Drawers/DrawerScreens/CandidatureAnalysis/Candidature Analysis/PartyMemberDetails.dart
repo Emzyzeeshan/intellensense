@@ -167,8 +167,8 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                 ),
                 ExpansionTileCard(
                   baseColor:  partycolor,
-                  expandedColor: Colors.white,
-                  expandedTextColor: Colors.black,
+                  // expandedColor: Colors.white,
+                  // expandedTextColor: Colors.black,
                   title: Text('Profile'),
                   children: [
                     Column(
@@ -465,7 +465,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: ExpansionTileCard(
                                     baseColor:  partycolor,
-                                    expandedColor: Colors.white,
+                                    // expandedColor: Colors.white,
                                     leading: Text(
                                         '${Resultdata[index]['id']['year']}'),
                                     title: Container(),

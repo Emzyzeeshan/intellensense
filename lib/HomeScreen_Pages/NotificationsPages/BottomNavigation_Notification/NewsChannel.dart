@@ -60,7 +60,8 @@ class _NewsChannelPageState extends State<NewsChannelPage> {
                       return const Text('Error');
                     } else if (snapshot.hasData) {
                       return Flexible(
-                        child: ListView.builder(
+                        child:
+                         ListView.builder(
                           itemCount: NewsChanneldata['candidate_names'].length,
                           itemBuilder: (context, index) {
                             return NewsChannelNotificationtile(
@@ -172,8 +173,8 @@ class _NewsChannelNotificationtileState
     return Padding(
       padding: const EdgeInsets.all(3.0),
       child: ExpansionTile(
-        collapsedBackgroundColor: Colors.grey.shade200,
-        backgroundColor: Colors.grey.shade100,
+        collapsedBackgroundColor:  Color(0xffc8d1e7),
+        backgroundColor: Color(0xffc8d1e7),
         childrenPadding: EdgeInsets.all(5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         leading: Image.asset(

@@ -425,10 +425,10 @@ class _SignUpPhoneState extends State<SignUpPhone> {
     });*/
     print(body);
     var response = await post(
-      Uri.parse(INSIGHTS + '/register'),
+      Uri.parse(INSIGHTS + 'auth/register'),
       headers: headers,
       body: json.encode({
-        "userName": "${username.text}",
+        "username": "${username.text}",
         "email": "Byphone@piloggroup.com",
         "password": "${_pass.text}",
         "role": "${input}",

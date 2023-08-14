@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -7,6 +9,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intellensense/HomeScreen_Pages/HomeScreen.dart';
 import 'package:intellensense/LoginPages/login.dart';
 import 'package:intellensense/SplashScreen/splashanimation.dart';
+import 'package:local_auth/local_auth.dart';
 
 
 import 'package:provider/provider.dart';
@@ -45,7 +48,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
- 
+ authb();
     getCurrentAppTheme();
     // TODO: implement initState
     super.initState();
@@ -56,17 +59,70 @@ class _MyAppState extends State<MyApp> {
     themeChangeProvider.darkTheme =
         await themeChangeProvider.darkThemePreference.getTheme();
   }
+  authb() async {
+    logindata = await SharedPreferences.getInstance();
+    if (logindata.getBool('auth') == true) {
+      print('ok');
+      _authenticate();
+    } else {
+      logindata.setBool('auth', false);
+    }
+  }
+bool authenticated = false;
+  final LocalAuthentication auth = LocalAuthentication();
+  Future<bool> _authenticate() async {
+    String _authorized = 'Not Authorized';
+    bool _isAuthenticating = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason: 'Let OS determine authentication method',
+        options: const AuthenticationOptions(sensitiveTransaction: true,
+          useErrorDialogs: true,
+          stickyAuth: true,
+        ),
+        
+      );
 
+      setState(() {
+        _isAuthenticating = false;
+      });
+      print('auth');
+    } on PlatformException catch (e) {
+      print(e);
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+    }
+
+    setState(
+        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+    if (!mounted) {}
+    if (_authorized == 'Not Authorized') {
+      setState(() {
+        exit(0);
+      });
+    }
+  
+    return authenticated;
+  }
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
     final screenHeight = MediaQuery.of(context).size.height;
   final themeMode = Provider.of<DarkMode>(context);
   var mainTheme = ThemeData.light();
   var darkTheme = ThemeData.dark();
+ 
+
     return ChangeNotifierProvider(create: (_) {
       return themeChangeProvider;
     }, child: Consumer<DarkThemeProvider>(
@@ -76,7 +132,7 @@ class _MyAppState extends State<MyApp> {
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: MaterialApp(
-           theme: themeMode.darkMode ? darkTheme : mainTheme,
+           theme: themeMode.darkMode ?darkTheme: mainTheme  ,
       //     theme: ThemeData(
       //   brightness: Brightness.light,
       //   /* light theme settings */
@@ -111,7 +167,7 @@ const rootUrl1 = 'https://ifar.pilogcloud.com/';
 const INSIGHTS = 'http://apimobile.pilogcloud.com:8080/insights/3.67.0';
 
 class DarkMode with ChangeNotifier {
-  bool darkMode = true; ///by default it is true
+  bool darkMode = false; ///by default it is true
   ///made a method which will execute while switching
   changeMode() {
     darkMode = !darkMode;
