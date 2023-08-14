@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'package:animate_do/animate_do.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:intellensense/HomeScreen_Pages/Banners.dart/YoutubeExpScreen.dart';
-import 'package:intellensense/HomeScreen_Pages/Banners.dart/twitterExpScreen.dart';
+//import 'package:google_mobile_ads/google_mobile_ads.dart';
+//import 'package:intellensense/HomeScreen_Pages/Banners.dart/YoutubeBanner.dart';
+//import 'package:intellensense/HomeScreen_Pages/Banners.dart/twitterbanner.dart';
 import 'package:intellensense/HomeScreen_Pages/NewsWIdget/FaceBookScreen.dart';
 import 'package:intellensense/HomeScreen_Pages/NewsWIdget/NewsPaperScreen.dart';
 import 'package:intellensense/HomeScreen_Pages/Widgets/Newstemplate.dart';
@@ -28,8 +28,8 @@ import 'package:provider/provider.dart';
 import 'package:simple_speed_dial/simple_speed_dial.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import 'Banners.dart/FaceBookExpScreen.dart';
-import 'Banners.dart/NewsChannelExpScreen.dart';
+//import 'Banners.dart/FaceBookBanner.dart';
+//import 'Banners.dart/NewsChannelBanner.dart';
 import 'Drawers/DrawerScreens/CandidatureAnalysis/AllCandidateList.dart';
 import 'Drawers/DrawerScreens/CandidatureAnalysis/CandidatureAnalysis.dart';
 import 'Drawers/DrawerScreens/Constituency Analysis/ConstituencyAnalysis.dart';
@@ -40,7 +40,6 @@ import 'NewsWIdget/LiveUpdatesScreen.dart';
 import 'NewsWIdget/NewsChannelScreen.dart';
 import 'NewsWIdget/TwitterScreen.dart';
 import 'NewsWIdget/YouTubeScreen.dart';
-import 'NotificationsPages/BottomNavigation_Notification/Youtube.dart';
 import 'StateOverViewScreens/StateOverview.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -84,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _scrollController = ScrollController()..addListener(_scrollListener);
-    _initBannerAd();
+    //_initBannerAd();
     chartData = <ChartSampleData>[
       ChartSampleData(
           x: 'Jan', y: 43, secondSeriesYValue: 37, thirdSeriesYValue: 41),
@@ -142,7 +141,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  late BannerAd _bannerAd;
+  /*late BannerAd _bannerAd;
   bool _isAdLoaded = false;
   _initBannerAd() {
     _bannerAd = BannerAd(
@@ -161,7 +160,7 @@ class _HomeScreenState extends State<HomeScreen> {
       request: AdRequest(),
     ); // BannerAd
     _bannerAd.load();
-  }
+  }*/
 
   bool tempbool = false;
   List<Widget> DailyNewsPages = [
@@ -223,8 +222,8 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
-          // backgroundColor: Color(0xff5555555),
-          /*bottomNavigationBar: _isAdLoaded?Container(
+        // backgroundColor: Color(0xff5555555),
+        /*bottomNavigationBar: _isAdLoaded?Container(
         height: _bannerAd.size.height.toDouble(),
         width: _bannerAd.size.width.toDouble(),
         child: AdWidget(ad: _bannerAd),
@@ -254,7 +253,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   elevation: 0,
                   backgroundColor:
-                      themeMode.darkMode ? Color(0xff333333) : Colors.white,
+                  themeMode.darkMode ? Color(0xff333333) : Colors.white,
                   pinned: true,
                   expandedHeight: 310,
                   flexibleSpace: FlexibleSpaceBar(
@@ -312,7 +311,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                        )],
+                        ],
                       ),
                     ),
                   ),
@@ -552,7 +551,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     IconButton(
                         onPressed: () {
                           showMaterialModalBottomSheet(
-                              // backgroundColor: Color(0xffd2dfff),
+                            // backgroundColor: Color(0xffd2dfff),
                               elevation: 10,
                               bounce: true,
                               shape: RoundedRectangleBorder(
@@ -563,15 +562,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               builder: (context) {
                                 return SizedBox(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.5,
+                                  MediaQuery.of(context).size.height * 0.5,
                                   child: SingleChildScrollView(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Column(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                        MainAxisAlignment.center,
                                         crossAxisAlignment:
-                                            CrossAxisAlignment.center,
+                                        CrossAxisAlignment.center,
                                         children: [
                                           SizedBox(
                                             height: 10,
@@ -586,13 +585,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ListTile(
                                               shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
+                                                  BorderRadius.circular(
+                                                      15)),
                                               tileColor: Colors.blue.shade100,
                                               onTap: () {
                                                 setState(() {
                                                   carddirection =
-                                                      !carddirection;
+                                                  !carddirection;
                                                 });
                                                 Navigator.pop(context);
                                               },
@@ -600,7 +599,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 'Scroll Direction',
                                                 style: TextStyle(
                                                     fontWeight:
-                                                        FontWeight.w600),
+                                                    FontWeight.w600),
                                               ),
                                               trailing: carddirection == false
                                                   ? Text('Vertical')
@@ -610,19 +609,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           ExpansionTile(
                                             collapsedShape:
-                                                RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    15)),
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(15)),
+                                                BorderRadius.circular(15)),
                                             title: Text(''),
                                             backgroundColor:
-                                                Colors.blue.shade100,
+                                            Colors.blue.shade100,
                                             leading: Text('Custom Swipe'),
                                             collapsedBackgroundColor:
-                                                Colors.blue.shade100,
+                                            Colors.blue.shade100,
                                             children: [
                                               ListTile(
                                                 onTap: () {
@@ -637,7 +636,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   'STACKED',
                                                   style: TextStyle(
                                                       fontWeight:
-                                                          FontWeight.w600),
+                                                      FontWeight.w600),
                                                 ),
                                               ),
                                               ListTile(
@@ -653,7 +652,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   'SHADOW VIEW',
                                                   style: TextStyle(
                                                       fontWeight:
-                                                          FontWeight.w600),
+                                                      FontWeight.w600),
                                                 ),
                                               ),
                                               ListTile(
@@ -669,7 +668,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   'DEFAULT VIEW',
                                                   style: TextStyle(
                                                       fontWeight:
-                                                          FontWeight.w600),
+                                                      FontWeight.w600),
                                                 ),
                                               ),
                                             ],
@@ -679,19 +678,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                           ),
                                           ExpansionTile(
                                             collapsedShape:
-                                                RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
+                                            RoundedRectangleBorder(
+                                                borderRadius:
+                                                BorderRadius.circular(
+                                                    15)),
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(15)),
+                                                BorderRadius.circular(15)),
                                             title: Text(''),
                                             backgroundColor:
-                                                Colors.blue.shade100,
+                                            Colors.blue.shade100,
                                             leading: Text('Swipe Speed'),
                                             collapsedBackgroundColor:
-                                                Colors.blue.shade100,
+                                            Colors.blue.shade100,
                                             children: [
                                               ListTile(
                                                 onTap: () {
@@ -705,7 +704,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   'SLOW',
                                                   style: TextStyle(
                                                       fontWeight:
-                                                          FontWeight.w600),
+                                                      FontWeight.w600),
                                                 ),
                                               ),
                                               ListTile(
@@ -721,7 +720,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   'MEDIUM',
                                                   style: TextStyle(
                                                       fontWeight:
-                                                          FontWeight.w600),
+                                                      FontWeight.w600),
                                                 ),
                                               ),
                                               ListTile(
@@ -736,7 +735,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   'FAST',
                                                   style: TextStyle(
                                                       fontWeight:
-                                                          FontWeight.w600),
+                                                      FontWeight.w600),
                                                 ),
                                               ),
                                             ],
@@ -942,614 +941,616 @@ class _HomeScreenState extends State<HomeScreen> {
                           //main card
                           Padding(
                               padding:
-                                  const EdgeInsets.only(left: 8.0, right: 8),
+                              const EdgeInsets.only(left: 8.0, right: 8),
                               child: shownews == true
                                   ? SlideInUp(
-                                      duration: Duration(seconds: 3),
-                                      child: SingleChildScrollView(
-                                          scrollDirection: Axis.horizontal,
-                                          child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              children: [
-                                                FutureBuilder(
-                                                    future: finaldata,
-                                                    builder:
-                                                        ((context, snapshot) {
-                                                      if (snapshot
-                                                              .connectionState ==
-                                                          ConnectionState
-                                                              .waiting) {
-                                                        return Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  top: 70.0),
-                                                          child: SizedBox(
-                                                            height: 150,
-                                                            width: 150,
-                                                            child: Center(
-                                                                child:
-                                                                    SpinKitWave(
-                                                              color:
-                                                                  Colors.blue,
-                                                              size: 18,
-                                                            )),
-                                                          ),
-                                                        );
-                                                      } else if (snapshot
-                                                              .connectionState ==
-                                                          ConnectionState
-                                                              .done) {
-                                                        if (snapshot.hasError) {
-                                                          return const Text(
-                                                              'Data Error');
-                                                        } else if (snapshot
-                                                            .hasData) {
-                                                          List Newpaperlist = [
-                                                            NewsTemplate2(
-                                                                "${newsdata[0]['mediaName']}",
-                                                                '${newsdata[0]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png',
-                                                                '${newsdata[0]['candidateName']}'
-                                                                            .length >
-                                                                        16
-                                                                    ? '- ${newsdata[0]['candidateName'].substring(0, 10)}...'
-                                                                    : '- ${newsdata[0]['candidateName']}'),
-                                                            NewsTemplate3(
-                                                                '${newsdata[1]['mediaName']}',
-                                                                '${newsdata[1]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png',
-                                                              '${newsdata[1]['candidateName']}'
-                                                                            .length >
-                                                                        16
-                                                                    ? '- ${newsdata[1]['candidateName'].substring(0, 10)}...'
-                                                                    : '- ${newsdata[1]['candidateName']}'),
-                                                            NewsTemplate1(
-                                                                '${newsdata[2]['mediaName']}',
-                                                                '${newsdata[2]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png',
-                                                               '${newsdata[2]['candidateName']}'
-                                                                            .length >
-                                                                        16
-                                                                    ? '- ${newsdata[2]['candidateName'].substring(0, 10)}...'
-                                                                    : '- ${newsdata[2]['candidateName']}'),
-                                                            NewsTemplate4(
-                                                                '${newsdata[3]['mediaName']}',
-                                                                '${newsdata[3]['headLine']}',
-                                                                'assets/icons/newspaperdxp.png',
-                                                                '${newsdata[3]['candidateName']}'
-                                                                            .length >
-                                                                        16
-                                                                    ? '- ${newsdata[3]['candidateName'].substring(0, 10)}...'
-                                                                    : '- ${newsdata[3]['candidateName']}'),
-                                                          ];
-                                                          return GestureDetector(
-                                                            onTap: () {
-                                                              showMaterialModalBottomSheet(
-                                                                  context:
-                                                                      context,
-                                                                  duration:
-                                                                      Duration(
-                                                                          seconds:
-                                                                              1),
-                                                                  animationCurve:
-                                                                      Curves
-                                                                          .easeInQuad,
-                                                                  shape: RoundedRectangleBorder(
-                                                                      borderRadius: BorderRadius.only(
-                                                                          topLeft: Radius.circular(
-                                                                              15),
-                                                                          topRight: Radius.circular(
-                                                                              15))),
-                                                                  builder:
-                                                                      (context) {
-                                                                    return Container(
-                                                                        height: MediaQuery.of(context).size.height *
-                                                                            0.6,
-                                                                        child:
-                                                                            NewsPaperScreen());
-                                                                  });
-                                                              // setState(() {
-                                                              //   viewnews = true;
-                                                              //   newson = true;
-                                                              //   NewsHeading =
-                                                              //       'NewsPaper';
-                                                              //   _currIndex = 0;P
-                                                              // });
-                                                              // PageCount
-                                                              //     .jumpToPage(
-                                                              //         0);
+                                duration: Duration(seconds: 3),
+                                child: SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                        mainAxisAlignment:
+                                        MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                        children: [
+                                          FutureBuilder(
+                                              future: finaldata,
+                                              builder:
+                                              ((context, snapshot) {
+                                                if (snapshot
+                                                    .connectionState ==
+                                                    ConnectionState
+                                                        .waiting) {
+                                                  return Padding(
+                                                    padding:
+                                                    const EdgeInsets
+                                                        .only(
+                                                        top: 70.0),
+                                                    child: SizedBox(
+                                                      height: 150,
+                                                      width: 150,
+                                                      child: Center(
+                                                          child:
+                                                          SpinKitWave(
+                                                            color:
+                                                            Colors.blue,
+                                                            size: 18,
+                                                          )),
+                                                    ),
+                                                  );
+                                                } else if (snapshot
+                                                    .connectionState ==
+                                                    ConnectionState
+                                                        .done) {
+                                                  if (snapshot.hasError) {
+                                                    return const Text(
+                                                        'Data Error');
+                                                  } else if (snapshot
+                                                      .hasData) {
+                                                    List Newpaperlist = [
+                                                      NewsTemplate2(
+                                                          "${newsdata[0]['mediaName']}",
+                                                          '${newsdata[0]['headLine']}',
+                                                          'assets/icons/newspaperdxp.png',
+                                                          '${newsdata[0]['candidateName']}'
+                                                              .length >
+                                                              16
+                                                              ? '- ${newsdata[0]['candidateName'].substring(0, 10)}...'
+                                                              : '- ${newsdata[0]['candidateName']}'),
+                                                      NewsTemplate3(
+                                                          '${newsdata[1]['mediaName']}',
+                                                          '${newsdata[1]['headLine']}',
+                                                          'assets/icons/newspaperdxp.png',
+                                                          '${newsdata[1]['candidateName']}'
+                                                              .length >
+                                                              16
+                                                              ? '- ${newsdata[1]['candidateName'].substring(0, 10)}...'
+                                                              : '- ${newsdata[1]['candidateName']}'),
+                                                      NewsTemplate1(
+                                                          '${newsdata[2]['mediaName']}',
+                                                          '${newsdata[2]['headLine']}',
+                                                          'assets/icons/newspaperdxp.png',
+                                                          '${newsdata[2]['candidateName']}'
+                                                              .length >
+                                                              16
+                                                              ? '- ${newsdata[2]['candidateName'].substring(0, 10)}...'
+                                                              : '- ${newsdata[2]['candidateName']}'),
+                                                      NewsTemplate4(
+                                                          '${newsdata[3]['mediaName']}',
+                                                          '${newsdata[3]['headLine']}',
+                                                          'assets/icons/newspaperdxp.png',
+                                                          '${newsdata[3]['candidateName']}'
+                                                              .length >
+                                                              16
+                                                              ? '- ${newsdata[3]['candidateName'].substring(0, 10)}...'
+                                                              : '- ${newsdata[3]['candidateName']}'),
+                                                    ];
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        showMaterialModalBottomSheet(
+                                                            context:
+                                                            context,
+                                                            duration:
+                                                            Duration(
+                                                                seconds:
+                                                                1),
+                                                            animationCurve:
+                                                            Curves
+                                                                .easeInQuad,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topLeft: Radius.circular(
+                                                                        15),
+                                                                    topRight: Radius.circular(
+                                                                        15))),
+                                                            builder:
+                                                                (context) {
+                                                              return Container(
+                                                                  height: MediaQuery.of(context).size.height *
+                                                                      0.6,
+                                                                  child:
+                                                                  NewsPaperScreen());
+                                                            });
+                                                        // setState(() {
+                                                        //   viewnews = true;
+                                                        //   newson = true;
+                                                        //   NewsHeading =
+                                                        //       'NewsPaper';
+                                                        //   _currIndex = 0;P
+                                                        // });
+                                                        // PageCount
+                                                        //     .jumpToPage(
+                                                        //         0);
+                                                      },
+                                                      child: SizedBox(
+                                                        height: 130,
+                                                        width: 150,
+                                                        child: Swiper(
+                                                            itemWidth:
+                                                            150,
+                                                            itemHeight:
+                                                            130,
+                                                            duration:
+                                                            duration,
+                                                            layout:
+                                                            swiperlayout,
+                                                            scrollDirection: carddirection ==
+                                                                false
+                                                                ? Axis
+                                                                .vertical
+                                                                : Axis
+                                                                .horizontal,
+                                                            autoplay:
+                                                            true,
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                            context,
+                                                                int
+                                                                index) {
+                                                              return Newpaperlist[
+                                                              index];
                                                             },
-                                                            child: SizedBox(
-                                                              height: 130,
-                                                              width: 150,
-                                                              child: Swiper(
-                                                                  itemWidth:
-                                                                      150,
-                                                                  itemHeight:
-                                                                      130,
-                                                                  duration:
-                                                                      duration,
-                                                                  layout:
-                                                                      swiperlayout,
-                                                                  scrollDirection: carddirection ==
-                                                                          false
-                                                                      ? Axis
-                                                                          .vertical
-                                                                      : Axis
-                                                                          .horizontal,
-                                                                  autoplay:
-                                                                      true,
-                                                                  itemBuilder:
-                                                                      (BuildContext
-                                                                              context,
-                                                                          int
-                                                                              index) {
-                                                                    return Newpaperlist[
-                                                                        index];
-                                                                  },
-                                                                  itemCount: 4,
-                                                                  pagination:
-                                                                      SwiperPagination(
-                                                                          builder:
-                                                                              DotSwiperPaginationBuilder(
-                                                                    size: 7,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .blue
-                                                                            .shade200,
-                                                                  ))),
-                                                            ),
-                                                          );
-                                                        } else {
-                                                          return const Text(
-                                                              'Server Error');
-                                                        }
-                                                      } else {
-                                                        return Text(
-                                                            'State: ${snapshot.connectionState}');
-                                                      }
-                                                    })),
-                                                //Newschannel
-                                                FutureBuilder(
-                                                    future: Newschanneldata,
-                                                    builder:
-                                                        ((context, snapshot) {
-                                                      if (snapshot
-                                                              .connectionState ==
-                                                          ConnectionState
-                                                              .waiting) {
-                                                        return Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  top: 70.0),
-                                                          child: SizedBox(
-                                                            height: 150,
-                                                            width: 150,
-                                                            child: Center(
+                                                            itemCount: 4,
+                                                            pagination:
+                                                            SwiperPagination(
+                                                                builder:
+                                                                DotSwiperPaginationBuilder(
+                                                                  size: 7,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  activeColor:
+                                                                  Colors
+                                                                      .blue
+                                                                      .shade200,
+                                                                ))),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    return const Text(
+                                                        'Server Error');
+                                                  }
+                                                } else {
+                                                  return Text(
+                                                      'State: ${snapshot.connectionState}');
+                                                }
+                                              })),
+                                          //Newschannel
+                                          FutureBuilder(
+                                              future: Newschanneldata,
+                                              builder:
+                                              ((context, snapshot) {
+                                                if (snapshot
+                                                    .connectionState ==
+                                                    ConnectionState
+                                                        .waiting) {
+                                                  return Padding(
+                                                    padding:
+                                                    const EdgeInsets
+                                                        .only(
+                                                        top: 70.0),
+                                                    child: SizedBox(
+                                                      height: 150,
+                                                      width: 150,
+                                                      child: Center(
+                                                          child:
+                                                          SpinKitWave(
+                                                            color:
+                                                            Colors.blue,
+                                                            size: 18,
+                                                          )),
+                                                    ),
+                                                  );
+                                                } else if (snapshot
+                                                    .connectionState ==
+                                                    ConnectionState
+                                                        .done) {
+                                                  if (snapshot.hasError) {
+                                                    return const Text(
+                                                        'Data Error');
+                                                  } else if (snapshot
+                                                      .hasData) {
+                                                    List NewschannelList =
+                                                    [
+                                                      NewsTemplate2(
+                                                          "${newchannelldata[0]['mediaChannelName']}",
+                                                          '${newchannelldata[0]['videoTitle']}',
+                                                          'assets/icons/newsdxps.png',
+                                                          '- ${newchannelldata[0]['candidateName']}'),
+                                                      NewsTemplate3(
+                                                          '${newchannelldata[1]['mediaChannelName']}',
+                                                          '${newchannelldata[1]['videoTitle']}',
+                                                          'assets/icons/newsdxps.png',
+                                                          '${newchannelldata[1]['candidateName']}'
+                                                              .length >
+                                                              16
+                                                              ? '- ${newchannelldata[1]['candidateName'].substring(0, 10)}...'
+                                                              : '- ${newchannelldata[1]['candidateName']}'),
+                                                      NewsTemplate1(
+                                                          '${newchannelldata[2]['mediaChannelName']}',
+                                                          '${newchannelldata[2]['videoTitle']}',
+                                                          'assets/icons/newsdxps.png',
+                                                          '- ${newsdata[2]['candidateName']}'),
+                                                      NewsTemplate4(
+                                                          '${newchannelldata[3]['mediaChannelName']}',
+                                                          '${newchannelldata[3]['videoTitle']}',
+                                                          'assets/icons/newsdxps.png',
+                                                          '- ${newchannelldata[3]['candidateName']}'),
+                                                    ];
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        showMaterialModalBottomSheet(
+                                                            context:
+                                                            context,
+                                                            duration:
+                                                            Duration(
+                                                                seconds:
+                                                                1),
+                                                            animationCurve:
+                                                            Curves
+                                                                .easeInQuad,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topLeft: Radius.circular(
+                                                                        15),
+                                                                    topRight: Radius.circular(
+                                                                        15))),
+                                                            builder:
+                                                                (context) {
+                                                              return Container(
+                                                                height: MediaQuery.of(context)
+                                                                    .size
+                                                                    .height *
+                                                                    0.6,
                                                                 child:
-                                                                    SpinKitWave(
-                                                              color:
-                                                                  Colors.blue,
-                                                              size: 18,
-                                                            )),
-                                                          ),
-                                                        );
-                                                      } else if (snapshot
-                                                              .connectionState ==
-                                                          ConnectionState
-                                                              .done) {
-                                                        if (snapshot.hasError) {
-                                                          return const Text(
-                                                              'Data Error');
-                                                        } else if (snapshot
-                                                            .hasData) {
-                                                          List NewschannelList =
-                                                              [
-                                                            NewsTemplate2(
-                                                                "${newchannelldata[0]['mediaChannelName']}",
-                                                                '${newchannelldata[0]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png',
-                                                                '- ${newchannelldata[0]['candidateName']}'),
-                                                            NewsTemplate3(
-                                                                '${newchannelldata[1]['mediaChannelName']}',
-                                                                '${newchannelldata[1]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png',
-                                                                '${newchannelldata[1]['candidateName']}'
-                                                                            .length >
-                                                                        16
-                                                                    ? '- ${newchannelldata[1]['candidateName'].substring(0, 10)}...'
-                                                                    : '- ${newchannelldata[1]['candidateName']}'),
-                                                            NewsTemplate1(
-                                                                '${newchannelldata[2]['mediaChannelName']}',
-                                                                '${newchannelldata[2]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png',
-                                                                '- ${newsdata[2]['candidateName']}'),
-                                                            NewsTemplate4(
-                                                                '${newchannelldata[3]['mediaChannelName']}',
-                                                                '${newchannelldata[3]['videoTitle']}',
-                                                                'assets/icons/newsdxps.png',
-                                                                '- ${newchannelldata[3]['candidateName']}'),
-                                                          ];
-                                                          return GestureDetector(
-                                                            onTap: () {
-                                                              showMaterialModalBottomSheet(
-                                                                  context:
-                                                                      context,
-                                                                  duration:
-                                                                      Duration(
-                                                                          seconds:
-                                                                              1),
-                                                                  animationCurve:
-                                                                      Curves
-                                                                          .easeInQuad,
-                                                                  shape: RoundedRectangleBorder(
-                                                                      borderRadius: BorderRadius.only(
-                                                                          topLeft: Radius.circular(
-                                                                              15),
-                                                                          topRight: Radius.circular(
-                                                                              15))),
-                                                                  builder:
-                                                                      (context) {
-                                                                    return Container(
-                                                                      height: MediaQuery.of(context)
-                                                                              .size
-                                                                              .height *
-                                                                          0.6,
-                                                                      child:
-                                                                          NewsChannelScreen(),
-                                                                    );
-                                                                  });
-                                                              // setState(() {
-                                                              //   viewnews = true;
-                                                              //   newson = true;
-                                                              //   NewsHeading =
-                                                              //       'NewsChannel';
-                                                              //   _currIndex = 0;
-                                                              // });
-                                                              // PageCount
-                                                              //     .jumpToPage(
-                                                              //         1);
+                                                                NewsChannelScreen(),
+                                                              );
+                                                            });
+                                                        // setState(() {
+                                                        //   viewnews = true;
+                                                        //   newson = true;
+                                                        //   NewsHeading =
+                                                        //       'NewsChannel';
+                                                        //   _currIndex = 0;
+                                                        // });
+                                                        // PageCount
+                                                        //     .jumpToPage(
+                                                        //         1);
+                                                      },
+                                                      child: SizedBox(
+                                                        height: 130,
+                                                        width: 150,
+                                                        child: Swiper(
+                                                            itemWidth:
+                                                            150,
+                                                            itemHeight:
+                                                            130,
+                                                            duration:
+                                                            duration,
+                                                            layout:
+                                                            swiperlayout,
+                                                            scrollDirection: carddirection ==
+                                                                false
+                                                                ? Axis
+                                                                .vertical
+                                                                : Axis
+                                                                .horizontal,
+                                                            autoplay:
+                                                            true,
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                            context,
+                                                                int
+                                                                index) {
+                                                              return NewschannelList[
+                                                              index];
                                                             },
-                                                            child: SizedBox(
-                                                              height: 130,
-                                                              width: 150,
-                                                              child: Swiper(
-                                                                  itemWidth:
-                                                                      150,
-                                                                  itemHeight:
-                                                                      130,
-                                                                  duration:
-                                                                      duration,
-                                                                  layout:
-                                                                      swiperlayout,
-                                                                  scrollDirection: carddirection ==
-                                                                          false
-                                                                      ? Axis
-                                                                          .vertical
-                                                                      : Axis
-                                                                          .horizontal,
-                                                                  autoplay:
-                                                                      true,
-                                                                  itemBuilder:
-                                                                      (BuildContext
-                                                                              context,
-                                                                          int
-                                                                              index) {
-                                                                    return NewschannelList[
-                                                                        index];
-                                                                  },
-                                                                  itemCount: 4,
-                                                                  pagination:
-                                                                      SwiperPagination(
-                                                                          builder:
-                                                                              DotSwiperPaginationBuilder(
-                                                                    size: 7,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .blue
-                                                                            .shade200,
-                                                                  ))),
-                                                            ),
-                                                          );
-                                                        } else {
-                                                          return const Text(
-                                                              'Server Error');
-                                                        }
-                                                      } else {
-                                                        return Text(
-                                                            'State: ${snapshot.connectionState}');
-                                                      }
-                                                    })),
-                                                //Live News
-                                                FutureBuilder(
-                                                    future: liveNewsdata,
-                                                    builder:
-                                                        ((context, snapshot) {
-                                                      if (snapshot
-                                                              .connectionState ==
-                                                          ConnectionState
-                                                              .waiting) {
-                                                        return Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  top: 70.0),
-                                                          child: SizedBox(
-                                                            height: 150,
-                                                            width: 150,
-                                                            child: Center(
+                                                            itemCount: 4,
+                                                            pagination:
+                                                            SwiperPagination(
+                                                                builder:
+                                                                DotSwiperPaginationBuilder(
+                                                                  size: 7,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  activeColor:
+                                                                  Colors
+                                                                      .blue
+                                                                      .shade200,
+                                                                ))),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    return const Text(
+                                                        'Server Error');
+                                                  }
+                                                } else {
+                                                  return Text(
+                                                      'State: ${snapshot.connectionState}');
+                                                }
+                                              })),
+                                          //Live News
+                                          FutureBuilder(
+                                              future: liveNewsdata,
+                                              builder:
+                                              ((context, snapshot) {
+                                                if (snapshot
+                                                    .connectionState ==
+                                                    ConnectionState
+                                                        .waiting) {
+                                                  return Padding(
+                                                    padding:
+                                                    const EdgeInsets
+                                                        .only(
+                                                        top: 70.0),
+                                                    child: SizedBox(
+                                                      height: 150,
+                                                      width: 150,
+                                                      child: Center(
+                                                          child:
+                                                          SpinKitWave(
+                                                            color:
+                                                            Colors.blue,
+                                                            size: 18,
+                                                          )),
+                                                    ),
+                                                  );
+                                                } else if (snapshot
+                                                    .connectionState ==
+                                                    ConnectionState
+                                                        .done) {
+                                                  if (snapshot.hasError) {
+                                                    return const Text(
+                                                        'Data Error');
+                                                  } else if (snapshot
+                                                      .hasData) {
+                                                    List LiveNewsList = [
+                                                      NewsTemplate2(
+                                                          "${Livenewsdata[0]['mediaName']}",
+                                                          '${Livenewsdata[0]['headLine']}',
+                                                          'assets/icons/live.gif',
+                                                          '${Livenewsdata[0]['publishedDate']}'),
+                                                      NewsTemplate3(
+                                                          '${Livenewsdata[1]['mediaName']}',
+                                                          '${Livenewsdata[1]['headLine']}',
+                                                          'assets/icons/live.gif',
+                                                          '${Livenewsdata[1]['publishedDate']}'),
+                                                      NewsTemplate1(
+                                                          '${Livenewsdata[2]['mediaName']}',
+                                                          '${Livenewsdata[2]['headLine']}',
+                                                          'assets/icons/live.gif',
+                                                          '${Livenewsdata[2]['publishedDate']}'),
+                                                      NewsTemplate4(
+                                                          '${Livenewsdata[3]['mediaName']}',
+                                                          '${Livenewsdata[3]['headLine']}',
+                                                          'assets/icons/live.gif',
+                                                          '${Livenewsdata[3]['publishedDate']}'),
+                                                    ];
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        showMaterialModalBottomSheet(
+                                                            context:
+                                                            context,
+                                                            duration:
+                                                            Duration(
+                                                                seconds:
+                                                                1),
+                                                            animationCurve:
+                                                            Curves
+                                                                .easeInQuad,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topLeft: Radius.circular(
+                                                                        15),
+                                                                    topRight: Radius.circular(
+                                                                        15))),
+                                                            builder:
+                                                                (context) {
+                                                              return Container(
+                                                                height: MediaQuery.of(context)
+                                                                    .size
+                                                                    .height *
+                                                                    0.6,
                                                                 child:
-                                                                    SpinKitWave(
-                                                              color:
-                                                                  Colors.blue,
-                                                              size: 18,
-                                                            )),
-                                                          ),
-                                                        );
-                                                      } else if (snapshot
-                                                              .connectionState ==
-                                                          ConnectionState
-                                                              .done) {
-                                                        if (snapshot.hasError) {
-                                                          return const Text(
-                                                              'Data Error');
-                                                        } else if (snapshot
-                                                            .hasData) {
-                                                          List LiveNewsList = [
-                                                            NewsTemplate2(
-                                                                "${Livenewsdata[0]['mediaName']}",
-                                                                '${Livenewsdata[0]['headLine']}',
-                                                                'assets/icons/live.gif',
-                                                                '${Livenewsdata[0]['publishedDate']}'),
-                                                            NewsTemplate3(
-                                                                '${Livenewsdata[1]['mediaName']}',
-                                                                '${Livenewsdata[1]['headLine']}',
-                                                                'assets/icons/live.gif',
-                                                                '${Livenewsdata[1]['publishedDate']}'),
-                                                            NewsTemplate1(
-                                                                '${Livenewsdata[2]['mediaName']}',
-                                                                '${Livenewsdata[2]['headLine']}',
-                                                                'assets/icons/live.gif',
-                                                                '${Livenewsdata[2]['publishedDate']}'),
-                                                            NewsTemplate4(
-                                                                '${Livenewsdata[3]['mediaName']}',
-                                                                '${Livenewsdata[3]['headLine']}',
-                                                                'assets/icons/live.gif',
-                                                                '${Livenewsdata[3]['publishedDate']}'),
-                                                          ];
-                                                          return GestureDetector(
-                                                            onTap: () {
-                                                              showMaterialModalBottomSheet(
-                                                                  context:
-                                                                      context,
-                                                                  duration:
-                                                                      Duration(
-                                                                          seconds:
-                                                                              1),
-                                                                  animationCurve:
-                                                                      Curves
-                                                                          .easeInQuad,
-                                                                  shape: RoundedRectangleBorder(
-                                                                      borderRadius: BorderRadius.only(
-                                                                          topLeft: Radius.circular(
-                                                                              15),
-                                                                          topRight: Radius.circular(
-                                                                              15))),
-                                                                  builder:
-                                                                      (context) {
-                                                                    return Container(
-                                                                      height: MediaQuery.of(context)
-                                                                              .size
-                                                                              .height *
-                                                                          0.6,
-                                                                      child:
-                                                                          LiveUpdatesScreen(),
-                                                                    );
-                                                                  });
+                                                                LiveUpdatesScreen(),
+                                                              );
+                                                            });
+                                                      },
+                                                      child: SizedBox(
+                                                        height: 130,
+                                                        width: 150,
+                                                        child: Swiper(
+                                                            itemWidth:
+                                                            150,
+                                                            itemHeight:
+                                                            130,
+                                                            duration:
+                                                            duration,
+                                                            layout:
+                                                            swiperlayout,
+                                                            scrollDirection: carddirection ==
+                                                                false
+                                                                ? Axis
+                                                                .vertical
+                                                                : Axis
+                                                                .horizontal,
+                                                            autoplay:
+                                                            true,
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                            context,
+                                                                int
+                                                                index) {
+                                                              return LiveNewsList[
+                                                              index];
                                                             },
-                                                            child: SizedBox(
-                                                              height: 130,
-                                                              width: 150,
-                                                              child: Swiper(
-                                                                  itemWidth:
-                                                                      150,
-                                                                  itemHeight:
-                                                                      130,
-                                                                  duration:
-                                                                      duration,
-                                                                  layout:
-                                                                      swiperlayout,
-                                                                  scrollDirection: carddirection ==
-                                                                          false
-                                                                      ? Axis
-                                                                          .vertical
-                                                                      : Axis
-                                                                          .horizontal,
-                                                                  autoplay:
-                                                                      true,
-                                                                  itemBuilder:
-                                                                      (BuildContext
-                                                                              context,
-                                                                          int
-                                                                              index) {
-                                                                    return LiveNewsList[
-                                                                        index];
-                                                                  },
-                                                                  itemCount: 4,
-                                                                  pagination:
-                                                                      SwiperPagination(
-                                                                          builder:
-                                                                              DotSwiperPaginationBuilder(
-                                                                    size: 7,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .blue
-                                                                            .shade200,
-                                                                  ))),
-                                                            ),
-                                                          );
-                                                        } else {
-                                                          return const Text(
-                                                              'Server Error');
-                                                        }
-                                                      } else {
-                                                        return Text(
-                                                            'State: ${snapshot.connectionState}');
-                                                      }
-                                                    })),
-                                                //Google Trends
-                                                FutureBuilder(
-                                                    future: googletrendsdata,
-                                                    builder:
-                                                        ((context, snapshot) {
-                                                      if (snapshot
-                                                              .connectionState ==
-                                                          ConnectionState
-                                                              .waiting) {
-                                                        return Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  top: 70.0),
-                                                          child: SizedBox(
-                                                            height: 150,
-                                                            width: 150,
-                                                            child: Center(
-                                                                child:
-                                                                    SpinKitWave(
-                                                              color:
-                                                                  Colors.blue,
-                                                              size: 18,
-                                                            )),
-                                                          ),
-                                                        );
-                                                      } else if (snapshot
-                                                              .connectionState ==
-                                                          ConnectionState
-                                                              .done) {
-                                                        if (snapshot.hasError) {
-                                                          return const Text(
-                                                              'Data Error');
-                                                        } else if (snapshot
-                                                            .hasData) {
-                                                          List
-                                                              GoogleTrendsList =
-                                                              [
-                                                            NewsTemplate2(
-                                                                "${GoogleTrendsdata[0]['partyName']}",
-                                                                '${GoogleTrendsdata[0]['id']['region']}',
-                                                                'assets/icons/googleTrends.png',
-                                                                '- ${GoogleTrendsdata[0]['id']['candidateName']}'),
-                                                            NewsTemplate3(
-                                                                '${GoogleTrendsdata[1]['partyName']}',
-                                                                '${GoogleTrendsdata[1]['id']['region']}',
-                                                                'assets/icons/googleTrends.png',
-                                                                '- ${GoogleTrendsdata[1]['id']['candidateName']}'),
-                                                            NewsTemplate1(
-                                                                '${GoogleTrendsdata[2]['partyName']}',
-                                                                '${GoogleTrendsdata[2]['id']['region']}',
-                                                                'assets/icons/googleTrends.png',
-                                                                '- ${GoogleTrendsdata[2]['id']['candidateName']}'),
-                                                            NewsTemplate4(
-                                                                '${GoogleTrendsdata[3]['partyName']}',
-                                                                '${GoogleTrendsdata[3]['id']['region']}',
-                                                                'assets/icons/googleTrends.png',
-                                                                '- ${GoogleTrendsdata[3]['id']['candidateName']}'),
-                                                          ];
-                                                          return GestureDetector(
-                                                            onTap: () {
-                                                              showMaterialModalBottomSheet(
-                                                                  context:
-                                                                      context,
-                                                                  duration:
-                                                                      Duration(
-                                                                          seconds:
-                                                                              1),
-                                                                  animationCurve:
-                                                                      Curves
-                                                                          .easeInQuad,
-                                                                  shape: RoundedRectangleBorder(
-                                                                      borderRadius: BorderRadius.only(
-                                                                          topLeft: Radius.circular(
-                                                                              15),
-                                                                          topRight: Radius.circular(
-                                                                              15))),
-                                                                  builder:
-                                                                      (context) {
-                                                                    return Container(
-                                                                        height: MediaQuery.of(context).size.height *
-                                                                            0.6,
-                                                                        child:
-                                                                            GoogleTrendsScreen());
-                                                                  });
+                                                            itemCount: 4,
+                                                            pagination:
+                                                            SwiperPagination(
+                                                                builder:
+                                                                DotSwiperPaginationBuilder(
+                                                                  size: 7,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  activeColor:
+                                                                  Colors
+                                                                      .blue
+                                                                      .shade200,
+                                                                ))),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    return const Text(
+                                                        'Server Error');
+                                                  }
+                                                } else {
+                                                  return Text(
+                                                      'State: ${snapshot.connectionState}');
+                                                }
+                                              })),
+                                          //Google Trends
+                                          FutureBuilder(
+                                              future: googletrendsdata,
+                                              builder:
+                                              ((context, snapshot) {
+                                                if (snapshot
+                                                    .connectionState ==
+                                                    ConnectionState
+                                                        .waiting) {
+                                                  return Padding(
+                                                    padding:
+                                                    const EdgeInsets
+                                                        .only(
+                                                        top: 70.0),
+                                                    child: SizedBox(
+                                                      height: 150,
+                                                      width: 150,
+                                                      child: Center(
+                                                          child:
+                                                          SpinKitWave(
+                                                            color:
+                                                            Colors.blue,
+                                                            size: 18,
+                                                          )),
+                                                    ),
+                                                  );
+                                                } else if (snapshot
+                                                    .connectionState ==
+                                                    ConnectionState
+                                                        .done) {
+                                                  if (snapshot.hasError) {
+                                                    return const Text(
+                                                        'Data Error');
+                                                  } else if (snapshot
+                                                      .hasData) {
+                                                    List
+                                                    GoogleTrendsList =
+                                                    [
+                                                      NewsTemplate2(
+                                                          "${GoogleTrendsdata[0]['partyName']}",
+                                                          '${GoogleTrendsdata[0]['id']['region']}',
+                                                          'assets/icons/googleTrends.png',
+                                                          '- ${GoogleTrendsdata[0]['id']['candidateName']}'),
+                                                      NewsTemplate3(
+                                                          '${GoogleTrendsdata[1]['partyName']}',
+                                                          '${GoogleTrendsdata[1]['id']['region']}',
+                                                          'assets/icons/googleTrends.png',
+                                                          '- ${GoogleTrendsdata[1]['id']['candidateName']}'),
+                                                      NewsTemplate1(
+                                                          '${GoogleTrendsdata[2]['partyName']}',
+                                                          '${GoogleTrendsdata[2]['id']['region']}',
+                                                          'assets/icons/googleTrends.png',
+                                                          '- ${GoogleTrendsdata[2]['id']['candidateName']}'),
+                                                      NewsTemplate4(
+                                                          '${GoogleTrendsdata[3]['partyName']}',
+                                                          '${GoogleTrendsdata[3]['id']['region']}',
+                                                          'assets/icons/googleTrends.png',
+                                                          '- ${GoogleTrendsdata[3]['id']['candidateName']}'),
+                                                    ];
+                                                    return GestureDetector(
+                                                      onTap: () {
+                                                        showMaterialModalBottomSheet(
+                                                            context:
+                                                            context,
+                                                            duration:
+                                                            Duration(
+                                                                seconds:
+                                                                1),
+                                                            animationCurve:
+                                                            Curves
+                                                                .easeInQuad,
+                                                            shape: RoundedRectangleBorder(
+                                                                borderRadius: BorderRadius.only(
+                                                                    topLeft: Radius.circular(
+                                                                        15),
+                                                                    topRight: Radius.circular(
+                                                                        15))),
+                                                            builder:
+                                                                (context) {
+                                                              return Container(
+                                                                  height: MediaQuery.of(context).size.height *
+                                                                      0.6,
+                                                                  child:
+                                                                  GoogleTrendsScreen());
+                                                            });
+                                                      },
+                                                      child: SizedBox(
+                                                        height: 130,
+                                                        width: 150,
+                                                        child: Swiper(
+                                                            itemWidth:
+                                                            150,
+                                                            itemHeight:
+                                                            130,
+                                                            duration:
+                                                            duration,
+                                                            layout:
+                                                            swiperlayout,
+                                                            scrollDirection: carddirection ==
+                                                                false
+                                                                ? Axis
+                                                                .vertical
+                                                                : Axis
+                                                                .horizontal,
+                                                            autoplay:
+                                                            true,
+                                                            itemBuilder:
+                                                                (BuildContext
+                                                            context,
+                                                                int
+                                                                index) {
+                                                              return GoogleTrendsList[
+                                                              index];
                                                             },
-                                                            child: SizedBox(
-                                                              height: 130,
-                                                              width: 150,
-                                                              child: Swiper(
-                                                                  itemWidth:
-                                                                      150,
-                                                                  itemHeight:
-                                                                      130,
-                                                                  duration:
-                                                                      duration,
-                                                                  layout:
-                                                                      swiperlayout,
-                                                                  scrollDirection: carddirection ==
-                                                                          false
-                                                                      ? Axis
-                                                                          .vertical
-                                                                      : Axis
-                                                                          .horizontal,
-                                                                  autoplay:
-                                                                      true,
-                                                                  itemBuilder:
-                                                                      (BuildContext
-                                                                              context,
-                                                                          int
-                                                                              index) {
-                                                                    return GoogleTrendsList[
-                                                                        index];
-                                                                  },
-                                                                  itemCount: 4,
-                                                                  pagination:
-                                                                      SwiperPagination(
-                                                                          builder:
-                                                                              DotSwiperPaginationBuilder(
-                                                                    size: 7,
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    activeColor:
-                                                                        Colors
-                                                                            .blue
-                                                                            .shade200,
-                                                                  ))),
-                                                            ),
-                                                          );
-                                                        } else {
-                                                          return const Text(
-                                                              'Server Error');
-                                                        }
-                                                      } else {
-                                                        return Text(
-                                                            'State: ${snapshot.connectionState}');
-                                                      }
-                                                    })),
-
-                                              ])),
-                                    )
+                                                            itemCount: 4,
+                                                            pagination:
+                                                            SwiperPagination(
+                                                                builder:
+                                                                DotSwiperPaginationBuilder(
+                                                                  size: 7,
+                                                                  color: Colors
+                                                                      .grey,
+                                                                  activeColor:
+                                                                  Colors
+                                                                      .blue
+                                                                      .shade200,
+                                                                ))),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    return const Text(
+                                                        'Server Error');
+                                                  }
+                                                } else {
+                                                  return Text(
+                                                      'State: ${snapshot.connectionState}');
+                                                }
+                                              })),
+                                        ])),
+                              )
                                   : Container()),
+
+                          //todo:social media
+
                           Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: AnimatedContainer(
@@ -1561,7 +1562,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: 30,
                                         width: 30,
                                       ),
-
                                       Text(
                                         'SOCIAL MEDIA',
                                         style: TextStyle(
@@ -1573,13 +1573,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       IconButton(
                                         onPressed: () {
                                           setState(() {
-                                            showSocialnews =
-                                            !showSocialnews;
+                                            showSocialnews = !showSocialnews;
                                           });
                                         },
                                         icon: showSocialnews == true
                                             ? Icon(Icons.arrow_drop_down)
-                                            : Icon(Icons.arrow_drop_up_outlined),
+                                            : Icon(
+                                            Icons.arrow_drop_up_outlined),
                                       ),
                                     ],
                                   )))
@@ -1589,852 +1589,483 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                   showSocialnews == true
                       ? SlideInDown(
-                          duration: Duration(seconds: 3),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 8.0, right: 8),
-                            child: SingleChildScrollView(
-                              clipBehavior: Clip.antiAliasWithSaveLayer,
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  FutureBuilder(
-                                      future: youtubedata,
-                                      builder: ((context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 70.0),
-                                            child: SizedBox(
-                                              height: 150,
-                                              width: 150,
-                                              child: Center(
-                                                  child: SpinKitWave(
-                                                color: Colors.blue,
-                                                size: 18,
-                                              )),
-                                            ),
-                                          );
-                                        } else if (snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                          if (snapshot.hasError) {
-                                            return const Text('Data Error');
-                                          } else if (snapshot.hasData) {
-                                            List YoutubeList = [
-                                              SocialMediaTemplate1(
-                                                  '${Youtubedata[0]['mediaChannelName']}',
-                                                  '${Youtubedata[0]['videoTitle']}',
-                                                  'Views - ${Youtubedata[0]['videoViews']}    Likes - ${Youtubedata[0]['videoLikes']}'),
-                                              SocialMediaTemplate1(
-                                                  '${Youtubedata[1]['mediaChannelName']}',
-                                                  '${Youtubedata[1]['videoTitle']}',
-                                                  'Views - ${Youtubedata[1]['videoViews']}    Likes - ${Youtubedata[1]['videoLikes']}'),
-                                              SocialMediaTemplate1(
-                                                  '${Youtubedata[2]['mediaChannelName']}',
-                                                  '${Youtubedata[2]['videoTitle']}',
-                                                  'Views - ${Youtubedata[2]['videoViews']}    Likes - ${Youtubedata[2]['videoLikes']}'),
-                                              SocialMediaTemplate1(
-                                                  '${Youtubedata[3]['mediaChannelName']}',
-                                                  '${Youtubedata[3]['videoTitle']}',
-                                                  'Views - ${Youtubedata[3]['videoViews']}    Likes - ${Youtubedata[3]['videoLikes']}'),
-                                            ];
-                                            return SizedBox(
-                                              height: 130,
-                                              width: 150,
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  showMaterialModalBottomSheet(
-                                                      context: context,
-                                                      duration:
-                                                          Duration(seconds: 1),
-                                                      animationCurve:
-                                                          Curves.easeInQuad,
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          15),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          15))),
-                                                      builder: (context) {
-                                                        return Container(
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.6,
-                                                          child:
-                                                              YouTubeScreen(),
-                                                        );
-                                                      });
-                                                },
-                                                child: Swiper(
-                                                    itemWidth: 150,
-                                                    itemHeight: 130,
-                                                    duration: duration,
-                                                    layout: swiperlayout,
-                                                    scrollDirection:
-                                                        carddirection == false
-                                                            ? Axis.vertical
-                                                            : Axis.horizontal,
-                                                    autoplay: true,
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index) {
-                                                      return YoutubeList[index];
-                                                    },
-                                                    itemCount: 4,
-                                                    pagination:
-                                                        SwiperPagination(
-                                                            builder:
-                                                                DotSwiperPaginationBuilder(
-                                                      size: 7,
-                                                      color: Colors.grey,
-                                                      activeColor:
-                                                          Colors.blue.shade200,
-                                                    ))),
-                                              ),
-                                            );
-                                          } else {
-                                            return const Text('Server Error');
-                                          }
-                                        } else {
-                                          return Text(
-                                              'State: ${snapshot.connectionState}');
-                                        }
-                                      })),
+                    duration: Duration(seconds: 3),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0, right: 8),
+                      child: SingleChildScrollView(
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            FutureBuilder(
+                                future: youtubedata,
+                                builder: ((context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 70.0),
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: 150,
+                                        child: Center(
+                                            child: SpinKitWave(
+                                              color: Colors.blue,
+                                              size: 18,
+                                            )),
+                                      ),
+                                    );
+                                  } else if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return const Text('Data Error');
+                                    } else if (snapshot.hasData) {
+                                      List YoutubeList = [
+                                        SocialMediaTemplate1(
+                                            '${Youtubedata[0]['mediaChannelName']}',
+                                            '${Youtubedata[0]['videoTitle']}',
+                                            'Views - ${Youtubedata[0]['videoViews']}    Likes - ${Youtubedata[0]['videoLikes']}'),
+                                        SocialMediaTemplate1(
+                                            '${Youtubedata[1]['mediaChannelName']}',
+                                            '${Youtubedata[1]['videoTitle']}',
+                                            'Views - ${Youtubedata[1]['videoViews']}    Likes - ${Youtubedata[1]['videoLikes']}'),
+                                        SocialMediaTemplate1(
+                                            '${Youtubedata[2]['mediaChannelName']}',
+                                            '${Youtubedata[2]['videoTitle']}',
+                                            'Views - ${Youtubedata[2]['videoViews']}    Likes - ${Youtubedata[2]['videoLikes']}'),
+                                        SocialMediaTemplate1(
+                                            '${Youtubedata[3]['mediaChannelName']}',
+                                            '${Youtubedata[3]['videoTitle']}',
+                                            'Views - ${Youtubedata[3]['videoViews']}    Likes - ${Youtubedata[3]['videoLikes']}'),
+                                      ];
+                                      return SizedBox(
+                                        height: 130,
+                                        width: 150,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            showMaterialModalBottomSheet(
+                                                context: context,
+                                                duration:
+                                                Duration(seconds: 1),
+                                                animationCurve:
+                                                Curves.easeInQuad,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.only(
+                                                        topLeft: Radius
+                                                            .circular(
+                                                            15),
+                                                        topRight: Radius
+                                                            .circular(
+                                                            15))),
+                                                builder: (context) {
+                                                  return Container(
+                                                    height: MediaQuery.of(
+                                                        context)
+                                                        .size
+                                                        .height *
+                                                        0.6,
+                                                    child:
+                                                    YouTubeScreen(),
+                                                  );
+                                                });
+                                          },
+                                          child: Swiper(
+                                              itemWidth: 150,
+                                              itemHeight: 130,
+                                              duration: duration,
+                                              layout: swiperlayout,
+                                              scrollDirection:
+                                              carddirection == false
+                                                  ? Axis.vertical
+                                                  : Axis.horizontal,
+                                              autoplay: true,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                  int index) {
+                                                return YoutubeList[index];
+                                              },
+                                              itemCount: 4,
+                                              pagination:
+                                              SwiperPagination(
+                                                  builder:
+                                                  DotSwiperPaginationBuilder(
+                                                    size: 7,
+                                                    color: Colors.grey,
+                                                    activeColor:
+                                                    Colors.blue.shade200,
+                                                  ))),
+                                        ),
+                                      );
+                                    } else {
+                                      return const Text('Server Error');
+                                    }
+                                  } else {
+                                    return Text(
+                                        'State: ${snapshot.connectionState}');
+                                  }
+                                })),
 
-                                  //Twitter news
-                                  FutureBuilder(
-                                      future: twitterdata,
-                                      builder: ((context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 70.0),
-                                            child: SizedBox(
-                                              height: 150,
-                                              width: 150,
-                                              child: Center(
-                                                  child: SpinKitWave(
-                                                color: Colors.blue,
-                                                size: 18,
-                                              )),
-                                            ),
-                                          );
-                                        } else if (snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                          if (snapshot.hasError) {
-                                            return const Text('Data Error');
-                                          } else if (snapshot.hasData) {
-                                            List TwitterList = [
-                                              SocialMediaTemplate2(
-                                                  '${TwitterData[0]['candidateName']}',
-                                                  '${TwitterData[0]['tweetContent']}',
-                                                  '- ${TwitterData[0]['candidatePartyName']}'),
-                                              SocialMediaTemplate2(
-                                                  '${TwitterData[1]['candidateName']}',
-                                                  '${TwitterData[1]['tweetContent']}',
-                                                  '- ${TwitterData[1]['candidatePartyName']}'),
-                                              SocialMediaTemplate2(
-                                                  '${TwitterData[2]['candidateName']}',
-                                                  '${TwitterData[2]['tweetContent']}',
-                                                  '- ${TwitterData[2]['candidatePartyName']}'),
-                                              SocialMediaTemplate2(
-                                                  '${TwitterData[3]['candidateName']}',
-                                                  '${TwitterData[3]['tweetContent']}',
-                                                  '- ${TwitterData[3]['candidatePartyName']}'),
-                                            ];
-                                            return SizedBox(
-                                              height: 130,
-                                              width: 150,
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  showMaterialModalBottomSheet(
-                                                      context: context,
-                                                      duration:
-                                                          Duration(seconds: 1),
-                                                      animationCurve:
-                                                          Curves.easeInQuad,
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          15),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          15))),
-                                                      builder: (context) {
-                                                        return Container(
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.6,
-                                                          child:
-                                                              TwitterScreen(),
-                                                        );
-                                                      });
-                                                },
-                                                child: Swiper(
-                                                    itemWidth: 150,
-                                                    itemHeight: 130,
-                                                    duration: duration,
-                                                    layout: swiperlayout,
-                                                    scrollDirection:
-                                                        carddirection == false
-                                                            ? Axis.vertical
-                                                            : Axis.horizontal,
-                                                    autoplay: true,
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index) {
-                                                      return TwitterList[index];
-                                                    },
-                                                    itemCount: 4,
-                                                    pagination:
-                                                        SwiperPagination(
-                                                            builder:
-                                                                DotSwiperPaginationBuilder(
-                                                      size: 7,
-                                                      color: Colors.grey,
-                                                      activeColor:
-                                                          Colors.blue.shade200,
-                                                    ))),
-                                              ),
-                                            );
-                                          } else {
-                                            return const Text('Server Error');
-                                          }
-                                        } else {
-                                          return Text(
-                                              'State: ${snapshot.connectionState}');
-                                        }
-                                      })),
-                                  //FaceBook News
-                                  FutureBuilder(
-                                      future: facebookdata,
-                                      builder: ((context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 70.0),
-                                            child: SizedBox(
-                                              height: 150,
-                                              width: 150,
-                                              child: Center(
-                                                  child: SpinKitWave(
-                                                color: Colors.blue,
-                                                size: 18,
-                                              )),
-                                            ),
-                                          );
-                                        } else if (snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                          if (snapshot.hasError) {
-                                            return const Text('Data Error');
-                                          } else if (snapshot.hasData) {
-                                            List FaceBookList = [
-                                              SocialMediaTemplate3(
-                                                  '${Facebookdata[0]['keyWords']}',
-                                                  '${Facebookdata[0]['titleContent']}',
-                                                  '${Facebookdata[0]['candidateName']}'
-                                                              .length >
-                                                          16
-                                                      ? '- ${Facebookdata[0]['candidateName'].substring(0, 10)}...'
-                                                      : '- ${Facebookdata[0]['candidateName']}'
+                            //Twitter news
+                            FutureBuilder(
+                                future: twitterdata,
+                                builder: ((context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 70.0),
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: 150,
+                                        child: Center(
+                                            child: SpinKitWave(
+                                              color: Colors.blue,
+                                              size: 18,
+                                            )),
+                                      ),
+                                    );
+                                  } else if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return const Text('Data Error');
+                                    } else if (snapshot.hasData) {
+                                      List TwitterList = [
+                                        SocialMediaTemplate2(
+                                            '${TwitterData[0]['candidateName']}',
+                                            '${TwitterData[0]['tweetContent']}',
+                                            '- ${TwitterData[0]['candidatePartyName']}'),
+                                        SocialMediaTemplate2(
+                                            '${TwitterData[1]['candidateName']}',
+                                            '${TwitterData[1]['tweetContent']}',
+                                            '- ${TwitterData[1]['candidatePartyName']}'),
+                                        SocialMediaTemplate2(
+                                            '${TwitterData[2]['candidateName']}',
+                                            '${TwitterData[2]['tweetContent']}',
+                                            '- ${TwitterData[2]['candidatePartyName']}'),
+                                        SocialMediaTemplate2(
+                                            '${TwitterData[3]['candidateName']}',
+                                            '${TwitterData[3]['tweetContent']}',
+                                            '- ${TwitterData[3]['candidatePartyName']}'),
+                                      ];
+                                      return SizedBox(
+                                        height: 130,
+                                        width: 150,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            showMaterialModalBottomSheet(
+                                                context: context,
+                                                duration:
+                                                Duration(seconds: 1),
+                                                animationCurve:
+                                                Curves.easeInQuad,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.only(
+                                                        topLeft: Radius
+                                                            .circular(
+                                                            15),
+                                                        topRight: Radius
+                                                            .circular(
+                                                            15))),
+                                                builder: (context) {
+                                                  return Container(
+                                                    height: MediaQuery.of(
+                                                        context)
+                                                        .size
+                                                        .height *
+                                                        0.6,
+                                                    child:
+                                                    TwitterScreen(),
+                                                  );
+                                                });
+                                          },
+                                          child: Swiper(
+                                              itemWidth: 150,
+                                              itemHeight: 130,
+                                              duration: duration,
+                                              layout: swiperlayout,
+                                              scrollDirection:
+                                              carddirection == false
+                                                  ? Axis.vertical
+                                                  : Axis.horizontal,
+                                              autoplay: true,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                  int index) {
+                                                return TwitterList[index];
+                                              },
+                                              itemCount: 4,
+                                              pagination:
+                                              SwiperPagination(
+                                                  builder:
+                                                  DotSwiperPaginationBuilder(
+                                                    size: 7,
+                                                    color: Colors.grey,
+                                                    activeColor:
+                                                    Colors.blue.shade200,
+                                                  ))),
+                                        ),
+                                      );
+                                    } else {
+                                      return const Text('Server Error');
+                                    }
+                                  } else {
+                                    return Text(
+                                        'State: ${snapshot.connectionState}');
+                                  }
+                                })),
+                            //FaceBook News
+                            FutureBuilder(
+                                future: facebookdata,
+                                builder: ((context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 70.0),
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: 150,
+                                        child: Center(
+                                            child: SpinKitWave(
+                                              color: Colors.blue,
+                                              size: 18,
+                                            )),
+                                      ),
+                                    );
+                                  } else if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return const Text('Data Error');
+                                    } else if (snapshot.hasData) {
+                                      List FaceBookList = [
+                                        SocialMediaTemplate3(
+                                            '${Facebookdata[0]['keyWords']}',
+                                            '${Facebookdata[0]['titleContent']}',
+                                            '${Facebookdata[0]['candidateName']}'
+                                                .length >
+                                                16
+                                                ? '- ${Facebookdata[0]['candidateName'].substring(0, 10)}...'
+                                                : '- ${Facebookdata[0]['candidateName']}'
 
-                                                  // '${Facebookdata[0]['candidateName']}'
-                                                  ),
-                                              SocialMediaTemplate3(
-                                                  '${Facebookdata[1]['keyWords']}',
-                                                  '${Facebookdata[1]['titleContent']}',
-                                                  '${Facebookdata[1]['candidateName']}'
-                                                              .length >
-                                                          16
-                                                      ? '- ${Facebookdata[1]['candidateName'].substring(0, 10)}...'
-                                                      : '- ${Facebookdata[1]['candidateName']}'
-                                                  // ,'${Facebookdata[1]['candidateName']}'
-                                                  ),
-                                              SocialMediaTemplate3(
-                                                  '${Facebookdata[2]['keyWords']}',
-                                                  '${Facebookdata[2]['titleContent']}',
-                                                  '${Facebookdata[2]['candidateName']}'
-                                                              .length >
-                                                          16
-                                                      ? '- ${Facebookdata[2]['candidateName'].substring(0, 10)}...'
-                                                      : '- ${Facebookdata[2]['candidateName']}'
+                                          // '${Facebookdata[0]['candidateName']}'
+                                        ),
+                                        SocialMediaTemplate3(
+                                            '${Facebookdata[1]['keyWords']}',
+                                            '${Facebookdata[1]['titleContent']}',
+                                            '${Facebookdata[1]['candidateName']}'
+                                                .length >
+                                                16
+                                                ? '- ${Facebookdata[1]['candidateName'].substring(0, 10)}...'
+                                                : '- ${Facebookdata[1]['candidateName']}'
+                                          // ,'${Facebookdata[1]['candidateName']}'
+                                        ),
+                                        SocialMediaTemplate3(
+                                            '${Facebookdata[2]['keyWords']}',
+                                            '${Facebookdata[2]['titleContent']}',
+                                            '${Facebookdata[2]['candidateName']}'
+                                                .length >
+                                                16
+                                                ? '- ${Facebookdata[2]['candidateName'].substring(0, 10)}...'
+                                                : '- ${Facebookdata[2]['candidateName']}'
 
-                                                  // '${Facebookdata[2]['candidateName']}'
-                                                  ),
-                                              SocialMediaTemplate3(
-                                                  '${Facebookdata[3]['keyWords']}',
-                                                  '${Facebookdata[3]['titleContent']}',
-                                                  '${Facebookdata[3]['candidateName']}'
-                                                              .length >
-                                                          16
-                                                      ? '- ${Facebookdata[3]['candidateName'].substring(0, 10)}...'
-                                                      : '- ${Facebookdata[3]['candidateName']}'
-                                                  // '${Facebookdata[3]['candidateName']}'
-                                                  ),
-                                            ];
-                                            return SizedBox(
-                                              height: 130,
-                                              width: 150,
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  showMaterialModalBottomSheet(
-                                                      context: context,
-                                                      duration:
-                                                          Duration(seconds: 1),
-                                                      animationCurve:
-                                                          Curves.easeInQuad,
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          15),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          15))),
-                                                      builder: (context) {
-                                                        return Container(
-                                                          height: MediaQuery.of(
-                                                                      context)
-                                                                  .size
-                                                                  .height *
-                                                              0.6,
-                                                          child:
-                                                              FaceBookScreen(),
-                                                        );
-                                                      });
-                                                },
-                                                child: Swiper(
-                                                    itemWidth: 150,
-                                                    itemHeight: 130,
-                                                    duration: duration,
-                                                    layout: swiperlayout,
-                                                    scrollDirection:
-                                                        carddirection == false
-                                                            ? Axis.vertical
-                                                            : Axis.horizontal,
-                                                    autoplay: true,
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index) {
-                                                      return FaceBookList[
-                                                          index];
-                                                    },
-                                                    itemCount: 4,
-                                                    pagination:
-                                                        SwiperPagination(
-                                                            builder:
-                                                                DotSwiperPaginationBuilder(
-                                                      size: 7,
-                                                      color: Colors.grey,
-                                                      activeColor:
-                                                          Colors.blue.shade200,
-                                                    ))),
-                                              ),
-                                            );
-                                          } else {
-                                            return const Text('Server Error');
-                                          }
-                                        } else {
-                                          return Text(
-                                              'State: ${snapshot.connectionState}');
-                                        }
-                                      })),
-                                  //Instagram news
-                                  FutureBuilder(
-                                      future: instagramdata,
-                                      builder: ((context, snapshot) {
-                                        if (snapshot.connectionState ==
-                                            ConnectionState.waiting) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 70.0),
-                                            child: SizedBox(
-                                              height: 150,
-                                              width: 150,
-                                              child: Center(
-                                                  child: SpinKitWave(
-                                                color: Colors.blue,
-                                                size: 18,
-                                              )),
-                                            ),
-                                          );
-                                        } else if (snapshot.connectionState ==
-                                            ConnectionState.done) {
-                                          if (snapshot.hasError) {
-                                            return const Text('Data Error');
-                                          } else if (snapshot.hasData) {
-                                            List InstagramList = [
-                                              SocialMediaTemplate4(
-                                                  '${Instagramdata[0]['candidateName']}',
-                                                  '${Instagramdata[0]['titleContent']}',
-                                                  'Likes- ${Instagramdata[0]['likesCount']}   Comments- ${Instagramdata[0]['commentsCount']}'),
-                                              SocialMediaTemplate4(
-                                                  '${Instagramdata[1]['candidateName']}',
-                                                  '${Instagramdata[1]['titleContent']}',
-                                                  'Likes- ${Instagramdata[1]['likesCount']}   Comments- ${Instagramdata[1]['commentsCount']}'),
-                                              SocialMediaTemplate4(
-                                                  '${Instagramdata[2]['candidateName']}',
-                                                  '${Instagramdata[2]['titleContent']}',
-                                                  'Likes- ${Instagramdata[2]['likesCount']}   Comments- ${Instagramdata[2]['commentsCount']}'),
-                                              SocialMediaTemplate4(
-                                                  '${Instagramdata[3]['candidateName']}',
-                                                  '${Instagramdata[3]['titleContent']}',
-                                                  'Likes- ${Instagramdata[3]['likesCount']}   Comments- ${Instagramdata[3]['commentsCount']}'),
-                                            ];
-                                            return SizedBox(
-                                              height: 130,
-                                              width: 150,
-                                              child: GestureDetector(
-                                                onTap: () {
-                                                  showMaterialModalBottomSheet(
-                                                      context: context,
-                                                      duration:
-                                                          Duration(seconds: 1),
-                                                      animationCurve:
-                                                          Curves.easeInQuad,
-                                                      shape: RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius.only(
-                                                                  topLeft: Radius
-                                                                      .circular(
-                                                                          15),
-                                                                  topRight: Radius
-                                                                      .circular(
-                                                                          15))),
-                                                      builder: (context) {
-                                                        return Container(
-                                                            height: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .height *
-                                                                0.6,
-                                                            child:
-                                                                InstagramScreen());
-                                                      });
-                                                },
-                                                child: Swiper(
-                                                    itemWidth: 150,
-                                                    itemHeight: 130,
-                                                    duration: duration,
-                                                    layout: swiperlayout,
-                                                    scrollDirection:
-                                                        carddirection == false
-                                                            ? Axis.vertical
-                                                            : Axis.horizontal,
-                                                    autoplay: true,
-                                                    itemBuilder:
-                                                        (BuildContext context,
-                                                            int index) {
-                                                      return InstagramList[
-                                                          index];
-                                                    },
-                                                    itemCount: 4,
-                                                    pagination:
-                                                        SwiperPagination(
-                                                            builder:
-                                                                DotSwiperPaginationBuilder(
-                                                      size: 7,
-                                                      color: Colors.grey,
-                                                      activeColor:
-                                                          Colors.blue.shade200,
-                                                    ))),
-                                              ),
-                                            );
-                                          } else {
-                                            return const Text('Server Error');
-                                          }
-                                        } else {
-                                          return Text(
-                                              'State: ${snapshot.connectionState}');
-                                        }
-                                      })),
-                                ],
-                              ),
-                            );
-                          } else {
-                            return const Text(
-                                'Server Error');
-                          }
-                        } else {
-                          return Text(
-                              'State: ${snapshot.connectionState}');
-                        }
-                      })),
-
-                  //Twitter news
-                  FutureBuilder(
-                      future: twitterdata,
-                      builder: ((context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Padding(
-                            padding:
-                            const EdgeInsets.only(
-                                top: 70.0),
-                            child: SizedBox(
-                              height: 150,
-                              width: 150,
-                              child: Center(
-                                  child: SpinKitWave(
-                                    color: Colors.blue,
-                                    size: 18,
-                                  )),
-                            ),
-                          );
-                        } else if (snapshot
-                            .connectionState ==
-                            ConnectionState.done) {
-                          if (snapshot.hasError) {
-                            return const Text(
-                                'Data Error');
-                          } else if (snapshot.hasData) {
-                            List TwitterList = [
-                              SocialMediaTemplate2(
-                                  '${TwitterData[0]['candidateName']}',
-                                  '${TwitterData[0]['tweetContent']}',
-                                  '- ${TwitterData[0]['candidatePartyName']}'),
-                              SocialMediaTemplate2(
-                                  '${TwitterData[1]['candidateName']}',
-                                  '${TwitterData[1]['tweetContent']}','- ${TwitterData[1]['candidatePartyName']}'),
-                              SocialMediaTemplate2(
-                                  '${TwitterData[2]['candidateName']}',
-                                  '${TwitterData[2]['tweetContent']}','- ${TwitterData[2]['candidatePartyName']}'),
-                              SocialMediaTemplate2(
-                                  '${TwitterData[3]['candidateName']}',
-                                  '${TwitterData[3]['tweetContent']}','- ${TwitterData[3]['candidatePartyName']}'),
-                            ];
-                            return SizedBox(
-                              height: 130,
-                              width: 150,
-                              child: GestureDetector(
-                                onTap: () {
-                                  showMaterialModalBottomSheet(context: context,
-                                      duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
-                                      builder:(context){
-                                        return   Container(
-                                          height: MediaQuery.of(context).size.height*0.6,
-                                          child:TwitterScreen(), );
-                                      });
-                                  // setState(() {
-                                  //   viewnews = true;
-                                  //   newson = true;
-                                  //   NewsHeading =
-                                  //       'Twitter';
-                                  //   _currIndex = 0;
-                                  // });
-                                  // PageCount.jumpToPage(
-                                  //     5);
-                                },
-                                child: Swiper(
-                                    itemWidth: 150,
-                                    itemHeight: 130,
-                                    duration: duration,
-                                    layout:
-                                    swiperlayout,
-                                    scrollDirection:
-                                    carddirection ==
-                                        false
-                                        ? Axis
-                                        .vertical
-                                        : Axis
-                                        .horizontal,
-                                    autoplay: true,
-                                    itemBuilder:
-                                        (BuildContext
-                                    context,
-                                        int index) {
-                                      return TwitterList[
-                                      index];
-                                    },
-                                    itemCount: 4,
-                                    pagination:
-                                    SwiperPagination(
-                                        builder:
-                                        DotSwiperPaginationBuilder(
-                                          size: 7,
-                                          color:
-                                          Colors.grey,
-                                          activeColor:
-                                          Colors.blue
-                                              .shade200,
-                                        ))),
-                              ),
-                            );
-                          } else {
-                            return const Text(
-                                'Server Error');
-                          }
-                        } else {
-                          return Text(
-                              'State: ${snapshot.connectionState}');
-                        }
-                      })),
-                  //FaceBook News
-                  FutureBuilder(
-                      future: facebookdata,
-                      builder: ((context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Padding(
-                            padding:
-                            const EdgeInsets.only(
-                                top: 70.0),
-                            child: SizedBox(
-                              height: 150,
-                              width: 150,
-                              child: Center(
-                                  child: SpinKitWave(
-                                    color: Colors.blue,
-                                    size: 18,
-                                  )),
-                            ),
-                          );
-                        } else if (snapshot
-                            .connectionState ==
-                            ConnectionState.done) {
-                          if (snapshot.hasError) {
-                            return const Text(
-                                'Data Error');
-                          } else if (snapshot.hasData) {
-                            List FaceBookList = [
-                              SocialMediaTemplate3(
-                                  '${Facebookdata[0]['keyWords']}',
-                                  '${Facebookdata[0]['titleContent']}',
-                                  '${Facebookdata[0]['candidateName']}'
-                                      .length >
-                                      16
-                                      ? '- ${Facebookdata[0]['candidateName'].substring(0, 10)}...'
-                                      : '- ${Facebookdata[0]['candidateName']}'
-
-                                // '${Facebookdata[0]['candidateName']}'
-                              ),
-                              SocialMediaTemplate3(
-                                  '${Facebookdata[1]['keyWords']}',
-                                  '${Facebookdata[1]['titleContent']}',
-                                  '${Facebookdata[1]['candidateName']}'
-                                      .length >
-                                      16
-                                      ? '- ${Facebookdata[1]['candidateName'].substring(0, 10)}...'
-                                      : '- ${Facebookdata[1]['candidateName']}'
-                                // ,'${Facebookdata[1]['candidateName']}'
-                              ),
-                              SocialMediaTemplate3(
-                                  '${Facebookdata[2]['keyWords']}',
-                                  '${Facebookdata[2]['titleContent']}',
-                                  '${Facebookdata[2]['candidateName']}'
-                                      .length >
-                                      16
-                                      ? '- ${Facebookdata[2]['candidateName'].substring(0, 10)}...'
-                                      : '- ${Facebookdata[2]['candidateName']}'
-
-                                // '${Facebookdata[2]['candidateName']}'
-                              ),
-                              SocialMediaTemplate3(
-                                  '${Facebookdata[3]['keyWords']}',
-                                  '${Facebookdata[3]['titleContent']}',
-                                  '${Facebookdata[3]['candidateName']}'
-                                      .length >
-                                      16
-                                      ? '- ${Facebookdata[3]['candidateName'].substring(0, 10)}...'
-                                      : '- ${Facebookdata[3]['candidateName']}'
-                                // '${Facebookdata[3]['candidateName']}'
-                              ),
-                            ];
-                            return SizedBox(
-                              height: 130,
-                              width: 150,
-                              child: GestureDetector(
-                                onTap: () {
-                                  showMaterialModalBottomSheet(context: context,
-                                      duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
-                                      builder:(context){
-                                        return   Container(
-                                          height: MediaQuery.of(context).size.height*0.6,
-                                          child:   FaceBookScreen(), );
-                                      });
-                                  // setState(() {
-                                  //   viewnews = true;
-                                  //   newson = true;
-                                  //   NewsHeading =
-                                  //       'FaceBook';
-                                  //   _currIndex = 0;
-                                  // });
-                                  // PageCount.jumpToPage(
-                                  //     6);
-                                },
-                                child: Swiper(
-                                    itemWidth: 150,
-                                    itemHeight: 130,
-                                    duration: duration,
-                                    layout:
-                                    swiperlayout,
-                                    scrollDirection:
-                                    carddirection ==
-                                        false
-                                        ? Axis
-                                        .vertical
-                                        : Axis
-                                        .horizontal,
-                                    autoplay: true,
-                                    itemBuilder:
-                                        (BuildContext
-                                    context,
-                                        int index) {
-                                      return FaceBookList[
-                                      index];
-                                    },
-                                    itemCount: 4,
-                                    pagination:
-                                    SwiperPagination(
-                                        builder:
-                                        DotSwiperPaginationBuilder(
-                                          size: 7,
-                                          color:
-                                          Colors.grey,
-                                          activeColor:
-                                          Colors.blue
-                                              .shade200,
-                                        ))),
-                              ),
-                            );
-                          } else {
-                            return const Text(
-                                'Server Error');
-                          }
-                        } else {
-                          return Text(
-                              'State: ${snapshot.connectionState}');
-                        }
-                      })),
-                  //Instagram news
-                  FutureBuilder(
-                      future: instagramdata,
-                      builder: ((context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return Padding(
-                            padding:
-                            const EdgeInsets.only(
-                                top: 70.0),
-                            child: SizedBox(
-                              height: 150,
-                              width: 150,
-                              child: Center(
-                                  child: SpinKitWave(
-                                    color: Colors.blue,
-                                    size: 18,
-                                  )),
-                            ),
-                          );
-                        } else if (snapshot
-                            .connectionState ==
-                            ConnectionState.done) {
-                          if (snapshot.hasError) {
-                            return const Text(
-                                'Data Error');
-                          } else if (snapshot.hasData) {
-                            List InstagramList = [
-                              SocialMediaTemplate4(
-                                  '${Instagramdata[0]['candidateName']}',
-                                  '${Instagramdata[0]['titleContent']}',
-                                  'Likes- ${Instagramdata[0]['likesCount']}   Comments- ${Instagramdata[0]['commentsCount']}'),
-                              SocialMediaTemplate4(
-                                  '${Instagramdata[1]['candidateName']}',
-                                  '${Instagramdata[1]['titleContent']}',
-                                  'Likes- ${Instagramdata[1]['likesCount']}   Comments- ${Instagramdata[1]['commentsCount']}'),
-                              SocialMediaTemplate4(
-                                  '${Instagramdata[2]['candidateName']}',
-                                  '${Instagramdata[2]['titleContent']}',
-                                  'Likes- ${Instagramdata[2]['likesCount']}   Comments- ${Instagramdata[2]['commentsCount']}'),
-                              SocialMediaTemplate4(
-                                  '${Instagramdata[3]['candidateName']}',
-                                  '${Instagramdata[3]['titleContent']}',
-                                  'Likes- ${Instagramdata[3]['likesCount']}   Comments- ${Instagramdata[3]['commentsCount']}'),
-                            ];
-                            return SizedBox(
-                              height: 130,
-                              width: 150,
-                              child: GestureDetector(
-                                onTap: () {
-                                  showMaterialModalBottomSheet(context: context,
-                                      duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
-                                      builder:(context){
-                                        return   Container(
-                                            height: MediaQuery.of(context).size.height*0.6,
-                                            child: InstagramScreen());
-                                      });
-                                  // setState(() {
-                                  //   viewnews = true;
-                                  //   newson = true;
-                                  //   NewsHeading =
-                                  //       'Instagram';
-                                  //   _currIndex = 0;
-                                  // });
-                                  // PageCount.jumpToPage(
-                                  //     7);
-                                },
-                                child: Swiper(
-                                    itemWidth: 150,
-                                    itemHeight: 130,
-                                    duration: duration,
-                                    layout:
-                                    swiperlayout,
-                                    scrollDirection:
-                                    carddirection ==
-                                        false
-                                        ? Axis
-                                        .vertical
-                                        : Axis
-                                        .horizontal,
-                                    autoplay: true,
-                                    itemBuilder:
-                                        (BuildContext
-                                    context,
-                                        int index) {
-                                      return InstagramList[
-                                      index];
-                                    },
-                                    itemCount: 4,
-                                    pagination:
-                                    SwiperPagination(
-                                        builder:
-                                        DotSwiperPaginationBuilder(
-                                          size: 7,
-                                          color:
-                                          Colors.grey,
-                                          activeColor:
-                                          Colors.blue
-                                              .shade200,
-                                        ))),
-                              ),
-                            );
-                          } else {
-                            return const Text(
-                                'Server Error');
-                          }
-                        } else {
-                          return Text(
-                              'State: ${snapshot.connectionState}');
-                        }
-                      })),
-                ],
-              ),
-            ),
-          ),
-        )
-            : Container(),
+                                          // '${Facebookdata[2]['candidateName']}'
+                                        ),
+                                        SocialMediaTemplate3(
+                                            '${Facebookdata[3]['keyWords']}',
+                                            '${Facebookdata[3]['titleContent']}',
+                                            '${Facebookdata[3]['candidateName']}'
+                                                .length >
+                                                16
+                                                ? '- ${Facebookdata[3]['candidateName'].substring(0, 10)}...'
+                                                : '- ${Facebookdata[3]['candidateName']}'
+                                          // '${Facebookdata[3]['candidateName']}'
+                                        ),
+                                      ];
+                                      return SizedBox(
+                                        height: 130,
+                                        width: 150,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            showMaterialModalBottomSheet(
+                                                context: context,
+                                                duration:
+                                                Duration(seconds: 1),
+                                                animationCurve:
+                                                Curves.easeInQuad,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.only(
+                                                        topLeft: Radius
+                                                            .circular(
+                                                            15),
+                                                        topRight: Radius
+                                                            .circular(
+                                                            15))),
+                                                builder: (context) {
+                                                  return Container(
+                                                    height: MediaQuery.of(
+                                                        context)
+                                                        .size
+                                                        .height *
+                                                        0.6,
+                                                    child:
+                                                    FaceBookScreen(),
+                                                  );
+                                                });
+                                          },
+                                          child: Swiper(
+                                              itemWidth: 150,
+                                              itemHeight: 130,
+                                              duration: duration,
+                                              layout: swiperlayout,
+                                              scrollDirection:
+                                              carddirection == false
+                                                  ? Axis.vertical
+                                                  : Axis.horizontal,
+                                              autoplay: true,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                  int index) {
+                                                return FaceBookList[
+                                                index];
+                                              },
+                                              itemCount: 4,
+                                              pagination:
+                                              SwiperPagination(
+                                                  builder:
+                                                  DotSwiperPaginationBuilder(
+                                                    size: 7,
+                                                    color: Colors.grey,
+                                                    activeColor:
+                                                    Colors.blue.shade200,
+                                                  ))),
+                                        ),
+                                      );
+                                    } else {
+                                      return const Text('Server Error');
+                                    }
+                                  } else {
+                                    return Text(
+                                        'State: ${snapshot.connectionState}');
+                                  }
+                                })),
+                            //Instagram news
+                            FutureBuilder(
+                                future: instagramdata,
+                                builder: ((context, snapshot) {
+                                  if (snapshot.connectionState ==
+                                      ConnectionState.waiting) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 70.0),
+                                      child: SizedBox(
+                                        height: 150,
+                                        width: 150,
+                                        child: Center(
+                                            child: SpinKitWave(
+                                              color: Colors.blue,
+                                              size: 18,
+                                            )),
+                                      ),
+                                    );
+                                  } else if (snapshot.connectionState ==
+                                      ConnectionState.done) {
+                                    if (snapshot.hasError) {
+                                      return const Text('Data Error');
+                                    } else if (snapshot.hasData) {
+                                      List InstagramList = [
+                                        SocialMediaTemplate4(
+                                            '${Instagramdata[0]['candidateName']}',
+                                            '${Instagramdata[0]['titleContent']}',
+                                            'Likes- ${Instagramdata[0]['likesCount']}   Comments- ${Instagramdata[0]['commentsCount']}'),
+                                        SocialMediaTemplate4(
+                                            '${Instagramdata[1]['candidateName']}',
+                                            '${Instagramdata[1]['titleContent']}',
+                                            'Likes- ${Instagramdata[1]['likesCount']}   Comments- ${Instagramdata[1]['commentsCount']}'),
+                                        SocialMediaTemplate4(
+                                            '${Instagramdata[2]['candidateName']}',
+                                            '${Instagramdata[2]['titleContent']}',
+                                            'Likes- ${Instagramdata[2]['likesCount']}   Comments- ${Instagramdata[2]['commentsCount']}'),
+                                        SocialMediaTemplate4(
+                                            '${Instagramdata[3]['candidateName']}',
+                                            '${Instagramdata[3]['titleContent']}',
+                                            'Likes- ${Instagramdata[3]['likesCount']}   Comments- ${Instagramdata[3]['commentsCount']}'),
+                                      ];
+                                      return SizedBox(
+                                        height: 130,
+                                        width: 150,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            showMaterialModalBottomSheet(
+                                                context: context,
+                                                duration:
+                                                Duration(seconds: 1),
+                                                animationCurve:
+                                                Curves.easeInQuad,
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                    BorderRadius.only(
+                                                        topLeft: Radius
+                                                            .circular(
+                                                            15),
+                                                        topRight: Radius
+                                                            .circular(
+                                                            15))),
+                                                builder: (context) {
+                                                  return Container(
+                                                      height: MediaQuery.of(
+                                                          context)
+                                                          .size
+                                                          .height *
+                                                          0.6,
+                                                      child:
+                                                      InstagramScreen());
+                                                });
+                                          },
+                                          child: Swiper(
+                                              itemWidth: 150,
+                                              itemHeight: 130,
+                                              duration: duration,
+                                              layout: swiperlayout,
+                                              scrollDirection:
+                                              carddirection == false
+                                                  ? Axis.vertical
+                                                  : Axis.horizontal,
+                                              autoplay: true,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                  int index) {
+                                                return InstagramList[
+                                                index];
+                                              },
+                                              itemCount: 4,
+                                              pagination:
+                                              SwiperPagination(
+                                                  builder:
+                                                  DotSwiperPaginationBuilder(
+                                                    size: 7,
+                                                    color: Colors.grey,
+                                                    activeColor:
+                                                    Colors.blue.shade200,
+                                                  ))),
+                                        ),
+                                      );
+                                    } else {
+                                      return const Text('Server Error');
+                                    }
+                                  } else {
+                                    return Text(
+                                        'State: ${snapshot.connectionState}');
+                                  }
+                                })),
+                          ],
+                        ),
+                      ),
+                    ),
+                  )
+                      : Container(),
                   SingleChildScrollView(
                     physics: ScrollPhysics(),
                     child: Column(
@@ -2772,13 +2403,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ]),
               ),
-                  ]),
+            ]),
           )),
     );
   }
 
   bool viewnews = true;
-
 
   final List<String> imageList = [
     "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
@@ -2807,9 +2437,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: FutureBuilder<dynamic>(
                   future: LineChartfuturecall,
                   builder: (
-                    BuildContext context,
-                    AsyncSnapshot<dynamic> snapshot,
-                  ) {
+                      BuildContext context,
+                      AsyncSnapshot<dynamic> snapshot,
+                      ) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return SpinKitWave(
                         color: Colors.blue,
@@ -2826,7 +2456,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
@@ -2837,7 +2467,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               color: Colors.redAccent,
                                             ),
                                             borderRadius:
-                                                BorderRadius.circular(15)),
+                                            BorderRadius.circular(15)),
                                         height: 120,
                                         width: 120,
                                         child: SfCircularChart(
@@ -2850,7 +2480,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             series: <PieSeries<ChartSampleData,
                                                 String>>[
                                               PieSeries<ChartSampleData,
-                                                      String>(
+                                                  String>(
                                                   explode: true,
                                                   explodeIndex: 0,
                                                   explodeOffset: '10%',
@@ -2859,21 +2489,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ],
                                                   xValueMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.x as String,
+                                                      _) =>
+                                                  data.x as String,
                                                   yValueMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.y,
+                                                      _) =>
+                                                  data.y,
                                                   dataLabelMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.text,
+                                                      _) =>
+                                                  data.text,
                                                   startAngle: 90,
                                                   endAngle: 90,
                                                   dataLabelSettings:
-                                                      const DataLabelSettings(
-                                                          isVisible: true)),
+                                                  const DataLabelSettings(
+                                                      isVisible: true)),
                                             ]),
                                       ),
                                       Text(
@@ -2908,59 +2538,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ],
                                         ),
-
                                       ],
-                                      series: <PieSeries<ChartSampleData, String>>[
-                                        PieSeries<ChartSampleData, String>(
-                                            explode: true,
-                                            explodeIndex: 0,
-                                            explodeOffset: '10%',
-                                            dataSource: <ChartSampleData>[
-                                              ...PiegraphChartData
-                                            
-                                            ],
-                                            xValueMapper: (ChartSampleData data, _) =>
-                                            data.x as String,
-                                            yValueMapper: (ChartSampleData data, _) =>
-                                            data.y,
-                                            dataLabelMapper:
-                                                (ChartSampleData data, _) => data.text,
-                                            startAngle: 90,
-                                            endAngle: 90,
-                                            dataLabelSettings: const DataLabelSettings(
-                                                isVisible: true)),
-                                      ]),
-                                                              ),
-                                                              Text(
-                                                                'Comments',
-                                                                style: TextStyle(fontSize: 10),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                          Padding(
-                                      padding: const EdgeInsets.only(top: 35.0),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(BarGraphdata['lead'][0]),
-                                              Image.asset('assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',height: 30,)
-                                            ],
-                                          ),
-                                          Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Image.asset('assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',height: 30,),
-                                                  Text('BJP'),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
                                     ),
-
                                   ),
                                   Column(
                                     children: [
@@ -2969,7 +2548,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               border: Border.all(
                                                   color: Colors.redAccent),
                                               borderRadius:
-                                                  BorderRadius.circular(15)),
+                                              BorderRadius.circular(15)),
                                           height: 120,
                                           width: 120,
                                           child: SfFunnelChart(
@@ -2980,31 +2559,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ],
                                               //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
                                               tooltipBehavior:
-                                                  TooltipBehavior(enable: true),
+                                              TooltipBehavior(enable: true),
                                               series: FunnelSeries<
-                                                      ChartSampleData, String>(
+                                                  ChartSampleData, String>(
                                                   dataSource: <ChartSampleData>[
                                                     ...FunnelgraphChartData,
                                                   ],
                                                   xValueMapper:
                                                       (ChartSampleData data, _) =>
-                                                          data.x as String,
+                                                  data.x as String,
                                                   yValueMapper:
                                                       (ChartSampleData data, _) =>
-                                                          data.y,
+                                                  data.y,
                                                   /*  explode: isCardView ? false : explode,
                                     gapRatio: isCardView ? 0 : gapRatio,*/
                                                   neckHeight: /*isCardView ? */
-                                                      '20%' /*: neckHeight.toString()*/ +
-                                                          '%',
+                                                  '20%' /*: neckHeight.toString()*/ +
+                                                      '%',
                                                   neckWidth: /*isCardView ?*/
-                                                      '25%' /*: neckWidth.toString()*/ +
-                                                          '%',
+                                                  '25%' /*: neckWidth.toString()*/ +
+                                                      '%',
                                                   dataLabelSettings:
-                                                      const DataLabelSettings(
-                                                          textStyle:
-                                                              TextStyle(fontSize: 8),
-                                                          isVisible: true)))),
+                                                  const DataLabelSettings(
+                                                      textStyle:
+                                                      TextStyle(fontSize: 8),
+                                                      isVisible: true)))),
                                       Text(
                                         'Re-Tweet',
                                         style: TextStyle(fontSize: 10),
@@ -3015,7 +2594,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
@@ -3075,13 +2654,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(top: 100.0),
+                                        const EdgeInsets.only(top: 100.0),
                                         child: Container(
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: Colors.redAccent),
                                               borderRadius:
-                                                  BorderRadius.circular(15)),
+                                              BorderRadius.circular(15)),
                                           height: 100,
                                           width: 135,
                                           child: SfCartesianChart(
@@ -3097,24 +2676,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   color: Colors.black,
                                                   fontSize: 8),
                                               axisLine:
-                                                  const AxisLine(width: 0),
+                                              const AxisLine(width: 0),
                                               labelPosition:
-                                                  ChartDataLabelPosition
-                                                      .outside,
+                                              ChartDataLabelPosition
+                                                  .outside,
                                               majorTickLines:
-                                                  const MajorTickLines(
-                                                      width: 0),
+                                              const MajorTickLines(
+                                                  width: 0),
                                               majorGridLines:
-                                                  const MajorGridLines(
-                                                      width: 0),
+                                              const MajorGridLines(
+                                                  width: 0),
                                             ),
                                             primaryYAxis: NumericAxis(
                                                 labelStyle: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 8),
                                                 labelPosition:
-                                                    ChartDataLabelPosition
-                                                        .outside,
+                                                ChartDataLabelPosition
+                                                    .outside,
                                                 isVisible: false,
                                                 minimum: 0,
                                                 maximum: 2000),
@@ -3124,24 +2703,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   String>(
                                                 width: 0.9,
                                                 dataLabelSettings:
-                                                    const DataLabelSettings(
-                                                        isVisible: false,
-                                                        labelAlignment:
-                                                            ChartDataLabelAlignment
-                                                                .top),
+                                                const DataLabelSettings(
+                                                    isVisible: false,
+                                                    labelAlignment:
+                                                    ChartDataLabelAlignment
+                                                        .top),
                                                 dataSource: <ChartSampleData>[
                                                   ...BargraphChartdata
                                                 ],
                                                 borderRadius:
-                                                    BorderRadius.circular(10),
+                                                BorderRadius.circular(10),
                                                 xValueMapper:
                                                     (ChartSampleData sales,
-                                                            _) =>
-                                                        sales.x as String,
+                                                    _) =>
+                                                sales.x as String,
                                                 yValueMapper:
                                                     (ChartSampleData sales,
-                                                            _) =>
-                                                        sales.y,
+                                                    _) =>
+                                                sales.y,
                                               ),
                                             ],
                                             tooltipBehavior: _tooltipBehavior,
@@ -3166,12 +2745,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Text('State: ${snapshot.connectionState}');
                     }
                   },
-
                 ),
               ),
-            )
-          ]),
-    );
+            ),
+          )
+        ]);
   }
 
   //Bar Graph data
@@ -3238,7 +2816,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<dynamic> TwitterLineChartfuturecall = TwitterBannerGraphApi();
   TooltipBehavior? _TwittertooltipBehavior;
   TooltipBehavior? _TwittertooltipBehavior1;
-
   TwitterBanner() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -3258,9 +2835,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: FutureBuilder<dynamic>(
                   future: TwitterLineChartfuturecall,
                   builder: (
-                    BuildContext context,
-                    AsyncSnapshot<dynamic> snapshot,
-                  ) {
+                      BuildContext context,
+                      AsyncSnapshot<dynamic> snapshot,
+                      ) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return SpinKitWave(
                         color: Colors.blue,
@@ -3277,7 +2854,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
@@ -3287,12 +2864,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             border: Border.all(
                                                 color: Colors.blue.shade600),
                                             borderRadius:
-                                                BorderRadius.circular(15)),
+                                            BorderRadius.circular(15)),
                                         height: 120,
                                         width: 120,
                                         child: SfCircularChart(
                                             tooltipBehavior:
-                                                _TwittertooltipBehavior1,
+                                            _TwittertooltipBehavior1,
                                             palette: [
                                               Color.fromRGBO(19, 136, 8, 0),
                                               Color.fromRGBO(254, 1, 117, 0),
@@ -3301,7 +2878,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             series: <PieSeries<ChartSampleData,
                                                 String>>[
                                               PieSeries<ChartSampleData,
-                                                      String>(
+                                                  String>(
                                                   explode: true,
                                                   explodeIndex: 0,
                                                   explodeOffset: '10%',
@@ -3310,21 +2887,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ],
                                                   xValueMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.x as String,
+                                                      _) =>
+                                                  data.x as String,
                                                   yValueMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.y,
+                                                      _) =>
+                                                  data.y,
                                                   dataLabelMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.text,
+                                                      _) =>
+                                                  data.text,
                                                   startAngle: 90,
                                                   endAngle: 90,
                                                   dataLabelSettings:
-                                                      const DataLabelSettings(
-                                                          isVisible: true)),
+                                                  const DataLabelSettings(
+                                                      isVisible: true)),
                                             ]),
                                       ),
                                       Text(
@@ -3356,47 +2933,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 ),
                                                 Text('TRS'),
                                               ],
-
                                             ),
-                                            children: <TextSpan>[
-                                              TextSpan(
-                                                  text:
-                                                      'With Huge Difference In counts for Tweets and Re-Tweets reports says that ',
-                                                  style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      fontFamily: 'Segoe UI')),
-                                              TextSpan(
-                                                  text: TwiterBarGraphdata['lead'][0],
-                                                  style: new TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      color: Colors.green,
-                                                      fontSize: 20,
-                                                      fontFamily: 'Segoe UI')),
-                                              TextSpan(
-                                                  text:
-                                                      ' is relatively Dominant in Twitter Data.',
-                                                  style: TextStyle(
-                                                      fontWeight: FontWeight.bold,
-                                                      fontFamily: 'Segoe UI')),
-                                            ],
-                                          ),
+                                          ],
                                         ),
-                                      ),
+                                      ],
                                     ),
-
                                   ),
                                   Column(
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(right: 8.0),
+                                        const EdgeInsets.only(right: 8.0),
                                         child: Container(
                                             decoration: BoxDecoration(
                                                 border: Border.all(
                                                     color:
-                                                        Colors.blue.shade600),
+                                                    Colors.blue.shade600),
                                                 borderRadius:
-                                                    BorderRadius.circular(15)),
+                                                BorderRadius.circular(15)),
                                             height: 120,
                                             width: 120,
                                             child: SfFunnelChart(
@@ -3411,29 +2965,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 tooltipBehavior: TooltipBehavior(
                                                     enable: true),
                                                 series: FunnelSeries<
-                                                        ChartSampleData,
-                                                        String>(
+                                                    ChartSampleData,
+                                                    String>(
                                                     dataSource: <ChartSampleData>[
                                                       ...TwitterFunnelgraphChartData,
                                                     ],
                                                     xValueMapper:
                                                         (ChartSampleData data, _) =>
-                                                            data.x as String,
+                                                    data.x as String,
                                                     yValueMapper:
                                                         (ChartSampleData data, _) =>
-                                                            data.y,
+                                                    data.y,
                                                     /*  explode: isCardView ? false : explode,
                     gapRatio: isCardView ? 0 : gapRatio,*/
                                                     neckHeight: /*isCardView ? */
-                                                        '20%' /*: neckHeight.toString()*/ +
-                                                            '%',
+                                                    '20%' /*: neckHeight.toString()*/ +
+                                                        '%',
                                                     neckWidth: /*isCardView ?*/
-                                                        '25%' /*: neckWidth.toString()*/ +
-                                                            '%',
+                                                    '25%' /*: neckWidth.toString()*/ +
+                                                        '%',
                                                     dataLabelSettings:
-                                                        const DataLabelSettings(
-                                                            textStyle: TextStyle(fontSize: 8),
-                                                            isVisible: true)))),
+                                                    const DataLabelSettings(
+                                                        textStyle: TextStyle(fontSize: 8),
+                                                        isVisible: true)))),
                                       ),
                                       Text(
                                         'Re-Tweet',
@@ -3445,7 +2999,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
@@ -3474,13 +3028,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                           children: <TextSpan>[
                                             TextSpan(
                                                 text:
-                                                    'With Huge Difference In counts for Tweets and Re-Tweets reports says that ',
+                                                'With Huge Difference In counts for Tweets and Re-Tweets reports says that ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
                                                 text: TwiterBarGraphdata['lead']
-                                                    [0],
+                                                [0],
                                                 style: new TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.green,
@@ -3488,7 +3042,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
                                                 text:
-                                                    ' is relatively Dominant in Twitter Data.',
+                                                ' is relatively Dominant in Twitter Data.',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontFamily: 'Segoe UI')),
@@ -3502,13 +3056,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(top: 100.0),
+                                        const EdgeInsets.only(top: 100.0),
                                         child: Container(
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: Colors.blue.shade600),
                                               borderRadius:
-                                                  BorderRadius.circular(15)),
+                                              BorderRadius.circular(15)),
                                           height: 100,
                                           width: 135,
                                           child: SfCartesianChart(
@@ -3524,24 +3078,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   color: Colors.black,
                                                   fontSize: 8),
                                               axisLine:
-                                                  const AxisLine(width: 0),
+                                              const AxisLine(width: 0),
                                               labelPosition:
-                                                  ChartDataLabelPosition
-                                                      .outside,
+                                              ChartDataLabelPosition
+                                                  .outside,
                                               majorTickLines:
-                                                  const MajorTickLines(
-                                                      width: 0),
+                                              const MajorTickLines(
+                                                  width: 0),
                                               majorGridLines:
-                                                  const MajorGridLines(
-                                                      width: 0),
+                                              const MajorGridLines(
+                                                  width: 0),
                                             ),
                                             primaryYAxis: NumericAxis(
                                                 labelStyle: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 8),
                                                 labelPosition:
-                                                    ChartDataLabelPosition
-                                                        .outside,
+                                                ChartDataLabelPosition
+                                                    .outside,
                                                 isVisible: false,
                                                 minimum: 0,
                                                 maximum: 3000),
@@ -3551,28 +3105,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   String>(
                                                 width: 0.9,
                                                 dataLabelSettings:
-                                                    const DataLabelSettings(
-                                                        isVisible: false,
-                                                        labelAlignment:
-                                                            ChartDataLabelAlignment
-                                                                .top),
+                                                const DataLabelSettings(
+                                                    isVisible: false,
+                                                    labelAlignment:
+                                                    ChartDataLabelAlignment
+                                                        .top),
                                                 dataSource: <ChartSampleData>[
                                                   ...TwitterBargraphChartdata
                                                 ],
                                                 borderRadius:
-                                                    BorderRadius.circular(10),
+                                                BorderRadius.circular(10),
                                                 xValueMapper:
                                                     (ChartSampleData sales,
-                                                            _) =>
-                                                        sales.x as String,
+                                                    _) =>
+                                                sales.x as String,
                                                 yValueMapper:
                                                     (ChartSampleData sales,
-                                                            _) =>
-                                                        sales.y,
+                                                    _) =>
+                                                sales.y,
                                               ),
                                             ],
                                             tooltipBehavior:
-                                                _TwittertooltipBehavior,
+                                            _TwittertooltipBehavior,
                                           ),
                                         ),
                                       ),
@@ -3594,12 +3148,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Text('State: ${snapshot.connectionState}');
                     }
                   },
-
                 ),
               ),
-            )
-          ]),
-    );
+            ),
+          )
+        ]);
   }
 
   //Bar Graph data
@@ -3666,7 +3219,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<dynamic> FacebookLineChartfuturecall = FaceBookBannerGraphApi();
   TooltipBehavior? _FacebooktooltipBehavior;
   TooltipBehavior? _FacebooktooltipBehavior1;
-
   FaceBookBanner() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -3686,9 +3238,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: FutureBuilder<dynamic>(
                   future: FacebookLineChartfuturecall,
                   builder: (
-                    BuildContext context,
-                    AsyncSnapshot<dynamic> snapshot,
-                  ) {
+                      BuildContext context,
+                      AsyncSnapshot<dynamic> snapshot,
+                      ) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return SpinKitWave(
                         color: Colors.blue,
@@ -3705,7 +3257,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
@@ -3715,12 +3267,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             border: Border.all(
                                                 color: Colors.blueAccent),
                                             borderRadius:
-                                                BorderRadius.circular(15)),
+                                            BorderRadius.circular(15)),
                                         height: 120,
                                         width: 120,
                                         child: SfCircularChart(
                                             tooltipBehavior:
-                                                _FacebooktooltipBehavior1,
+                                            _FacebooktooltipBehavior1,
                                             palette: [
                                               Color.fromRGBO(254, 1, 117, 0),
                                               Color.fromRGBO(19, 136, 8, 0),
@@ -3729,7 +3281,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             series: <PieSeries<ChartSampleData,
                                                 String>>[
                                               PieSeries<ChartSampleData,
-                                                      String>(
+                                                  String>(
                                                   explode: true,
                                                   explodeIndex: 0,
                                                   explodeOffset: '10%',
@@ -3746,21 +3298,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ],
                                                   xValueMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.x as String,
+                                                      _) =>
+                                                  data.x as String,
                                                   yValueMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.y,
+                                                      _) =>
+                                                  data.y,
                                                   dataLabelMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.text,
+                                                      _) =>
+                                                  data.text,
                                                   startAngle: 90,
                                                   endAngle: 90,
                                                   dataLabelSettings:
-                                                      const DataLabelSettings(
-                                                          isVisible: true)),
+                                                  const DataLabelSettings(
+                                                      isVisible: true)),
                                             ]),
                                       ),
                                       Text(
@@ -3776,7 +3328,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Row(
                                           children: [
                                             Text(FaceBookBarGraphdata['lead']
-                                                [0]),
+                                            [0]),
                                             Image.asset(
                                               'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
                                               height: 30,
@@ -3796,77 +3348,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ],
                                         ),
-
                                       ],
-                                      series: <PieSeries<ChartSampleData,
-                                          String>>[
-                                        PieSeries<ChartSampleData, String>(
-                                            explode: true,
-                                            explodeIndex: 0,
-                                            explodeOffset: '10%',
-                                            dataSource: <ChartSampleData>[
-                                              ...FaceBookPiegraphChartData
-                                              // ChartSampleData(
-                                              //     x: 'David', y: 13, text: 'Dav \n 13%'),
-                                              // ChartSampleData(
-                                              //     x: 'Steve', y: 24, text: 'Ste\n 24%'),
-                                              // ChartSampleData(
-                                              //     x: 'Jack', y: 25, text: 'Jack \n 25%'),
-                                              // ChartSampleData(
-                                              //     x: 'Others', y: 38, text: 'Other \n 38%'),
-                                            ],
-                                            xValueMapper:
-                                                (ChartSampleData data, _) =>
-                                                    data.x as String,
-                                            yValueMapper:
-                                                (ChartSampleData data, _) =>
-                                                    data.y,
-                                            dataLabelMapper:
-                                                (ChartSampleData data, _) =>
-                                                    data.text,
-                                            startAngle: 90,
-                                            endAngle: 90,
-                                            dataLabelSettings:
-                                                const DataLabelSettings(
-                                                    isVisible: true)),
-                                      ]),
-                                ),
-                                Text(
-                                  'Likes',
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                              ],
-                            ),
-                            Padding(
-                                      padding: const EdgeInsets.only(top: 35.0),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(FaceBookBarGraphdata['lead'][0]),
-                                              Image.asset(
-                                                'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
-                                                height: 30,
-                                              )
-                                            ],
-                                          ),
-                                          Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Image.asset(
-                                                    'assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',
-                                                    height: 30,
-                                                  ),
-                                                  Text('YSRCP'),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
                                     ),
-
                                   ),
                                   Column(
                                     children: [
@@ -3875,7 +3358,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               border: Border.all(
                                                   color: Colors.blueAccent),
                                               borderRadius:
-                                                  BorderRadius.circular(15)),
+                                              BorderRadius.circular(15)),
                                           height: 120,
                                           width: 120,
                                           child: SfFunnelChart(
@@ -3886,31 +3369,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ],
                                               //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
                                               tooltipBehavior:
-                                                  TooltipBehavior(enable: true),
+                                              TooltipBehavior(enable: true),
                                               series: FunnelSeries<
-                                                      ChartSampleData, String>(
+                                                  ChartSampleData, String>(
                                                   dataSource: <ChartSampleData>[
                                                     ...FaceBookFunnelgraphChartData,
                                                   ],
                                                   xValueMapper:
                                                       (ChartSampleData data, _) =>
-                                                          data.x as String,
+                                                  data.x as String,
                                                   yValueMapper:
                                                       (ChartSampleData data, _) =>
-                                                          data.y,
+                                                  data.y,
                                                   /*  explode: isCardView ? false : explode,
                     gapRatio: isCardView ? 0 : gapRatio,*/
                                                   neckHeight: /*isCardView ? */
-                                                      '20%' /*: neckHeight.toString()*/ +
-                                                          '%',
+                                                  '20%' /*: neckHeight.toString()*/ +
+                                                      '%',
                                                   neckWidth: /*isCardView ?*/
-                                                      '25%' /*: neckWidth.toString()*/ +
-                                                          '%',
+                                                  '25%' /*: neckWidth.toString()*/ +
+                                                      '%',
                                                   dataLabelSettings:
-                                                      const DataLabelSettings(
-                                                          textStyle:
-                                                              TextStyle(fontSize: 8),
-                                                          isVisible: true)))),
+                                                  const DataLabelSettings(
+                                                      textStyle:
+                                                      TextStyle(fontSize: 8),
+                                                      isVisible: true)))),
                                       Text(
                                         'Comments',
                                         style: TextStyle(fontSize: 10),
@@ -3921,7 +3404,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
@@ -3950,15 +3433,15 @@ class _HomeScreenState extends State<HomeScreen> {
                                           children: <TextSpan>[
                                             TextSpan(
                                                 text:
-                                                    ' From Posts to public response ',
+                                                ' From Posts to public response ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
                                                 text:
-                                                    FaceBookBarGraphdata['lead']
-                                                        [0],
+                                                FaceBookBarGraphdata['lead']
+                                                [0],
                                                 style: new TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.green,
@@ -3966,7 +3449,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
                                                 text:
-                                                    ' is leading in all aspects',
+                                                ' is leading in all aspects',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 18,
@@ -3981,13 +3464,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(top: 100.0),
+                                        const EdgeInsets.only(top: 100.0),
                                         child: Container(
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: Colors.blueAccent),
                                               borderRadius:
-                                                  BorderRadius.circular(15)),
+                                              BorderRadius.circular(15)),
                                           height: 100,
                                           width: 135,
                                           child: SfCartesianChart(
@@ -4003,24 +3486,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   color: Colors.black,
                                                   fontSize: 8),
                                               axisLine:
-                                                  const AxisLine(width: 0),
+                                              const AxisLine(width: 0),
                                               labelPosition:
-                                                  ChartDataLabelPosition
-                                                      .outside,
+                                              ChartDataLabelPosition
+                                                  .outside,
                                               majorTickLines:
-                                                  const MajorTickLines(
-                                                      width: 0),
+                                              const MajorTickLines(
+                                                  width: 0),
                                               majorGridLines:
-                                                  const MajorGridLines(
-                                                      width: 0),
+                                              const MajorGridLines(
+                                                  width: 0),
                                             ),
                                             primaryYAxis: NumericAxis(
                                                 labelStyle: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 8),
                                                 labelPosition:
-                                                    ChartDataLabelPosition
-                                                        .outside,
+                                                ChartDataLabelPosition
+                                                    .outside,
                                                 isVisible: false,
                                                 minimum: 0,
                                                 maximum: 2000),
@@ -4030,28 +3513,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   String>(
                                                 width: 0.9,
                                                 dataLabelSettings:
-                                                    const DataLabelSettings(
-                                                        isVisible: false,
-                                                        labelAlignment:
-                                                            ChartDataLabelAlignment
-                                                                .top),
+                                                const DataLabelSettings(
+                                                    isVisible: false,
+                                                    labelAlignment:
+                                                    ChartDataLabelAlignment
+                                                        .top),
                                                 dataSource: <ChartSampleData>[
                                                   ...FaceBookBargraphChartdata
                                                 ],
                                                 borderRadius:
-                                                    BorderRadius.circular(10),
+                                                BorderRadius.circular(10),
                                                 xValueMapper:
                                                     (ChartSampleData sales,
-                                                            _) =>
-                                                        sales.x as String,
+                                                    _) =>
+                                                sales.x as String,
                                                 yValueMapper:
                                                     (ChartSampleData sales,
-                                                            _) =>
-                                                        sales.y,
+                                                    _) =>
+                                                sales.y,
                                               ),
                                             ],
                                             tooltipBehavior:
-                                                _FacebooktooltipBehavior,
+                                            _FacebooktooltipBehavior,
                                           ),
                                         ),
                                       ),
@@ -4073,12 +3556,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Text('State: ${snapshot.connectionState}');
                     }
                   },
-
                 ),
               ),
-            )
-          ]),
-    );
+            ),
+          )
+        ]);
   }
 
   //Bar Graph data
@@ -4146,10 +3628,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   //NewsChannel Banner
   late Future<dynamic> NewschannelLineChartfuturecall =
-      NewsChannelBannerGraphApi();
+  NewsChannelBannerGraphApi();
   TooltipBehavior? _NewsChanneltooltipBehavior;
   TooltipBehavior? _NewsChanneltooltipBehavior1;
-
   NewsChannelBanner() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -4169,9 +3650,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: FutureBuilder<dynamic>(
                   future: NewschannelLineChartfuturecall,
                   builder: (
-                    BuildContext context,
-                    AsyncSnapshot<dynamic> snapshot,
-                  ) {
+                      BuildContext context,
+                      AsyncSnapshot<dynamic> snapshot,
+                      ) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return SpinKitWave(
                         color: Colors.blue,
@@ -4188,7 +3669,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Column(
@@ -4198,12 +3679,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                             border: Border.all(
                                                 color: Colors.greenAccent),
                                             borderRadius:
-                                                BorderRadius.circular(15)),
+                                            BorderRadius.circular(15)),
                                         height: 120,
                                         width: 120,
                                         child: SfCircularChart(
                                             tooltipBehavior:
-                                                _NewsChanneltooltipBehavior1,
+                                            _NewsChanneltooltipBehavior1,
                                             palette: [
                                               Color.fromRGBO(0, 142, 70, 0),
                                               Color.fromRGBO(255, 255, 0, 0),
@@ -4212,7 +3693,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             series: <PieSeries<ChartSampleData,
                                                 String>>[
                                               PieSeries<ChartSampleData,
-                                                      String>(
+                                                  String>(
                                                   explode: true,
                                                   explodeIndex: 0,
                                                   explodeOffset: '10%',
@@ -4229,21 +3710,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ],
                                                   xValueMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.x as String,
+                                                      _) =>
+                                                  data.x as String,
                                                   yValueMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.y,
+                                                      _) =>
+                                                  data.y,
                                                   dataLabelMapper:
                                                       (ChartSampleData data,
-                                                              _) =>
-                                                          data.text,
+                                                      _) =>
+                                                  data.text,
                                                   startAngle: 90,
                                                   endAngle: 90,
                                                   dataLabelSettings:
-                                                      const DataLabelSettings(
-                                                          isVisible: true)),
+                                                  const DataLabelSettings(
+                                                      isVisible: true)),
                                             ]),
                                       ),
                                       Text(
@@ -4259,7 +3740,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Row(
                                           children: [
                                             Text(NewsChannelBarGraphdata['lead']
-                                                [0]),
+                                            [0]),
                                             Image.asset(
                                               'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
                                               height: 30,
@@ -4279,66 +3760,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ],
                                         ),
-
                                       ],
-                                      series: <PieSeries<ChartSampleData, String>>[
-                                        PieSeries<ChartSampleData, String>(
-                                            explode: true,
-                                            explodeIndex: 0,
-                                            explodeOffset: '10%',
-                                            dataSource: <ChartSampleData>[
-                                              ...NewsChannelPiegraphChartData
-                                              // ChartSampleData(
-                                              //     x: 'David', y: 13, text: 'Dav \n 13%'),
-                                              // ChartSampleData(
-                                              //     x: 'Steve', y: 24, text: 'Ste\n 24%'),
-                                              // ChartSampleData(
-                                              //     x: 'Jack', y: 25, text: 'Jack \n 25%'),
-                                              // ChartSampleData(
-                                              //     x: 'Others', y: 38, text: 'Other \n 38%'),
-                                            ],
-                                            xValueMapper: (ChartSampleData data, _) =>
-                                            data.x as String,
-                                            yValueMapper: (ChartSampleData data, _) =>
-                                            data.y,
-                                            dataLabelMapper:
-                                                (ChartSampleData data, _) => data.text,
-                                            startAngle: 90,
-                                            endAngle: 90,
-                                            dataLabelSettings: const DataLabelSettings(
-                                                isVisible: true)),
-                                      ]),
-                                ),
-                                Text(
-                                  'Likes',
-                                  style: TextStyle(fontSize: 10),
-                                ),
-                              ],
-                            ),
-                           Padding(
-                                      padding: const EdgeInsets.only(top: 35.0),
-                                      child: Column(
-                                        children: [
-                                          Row(
-                                            children: [
-                                              Text(NewsChannelBarGraphdata['lead'][0]),
-                                              Image.asset('assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',height: 30,)
-                                            ],
-                                          ),
-                                          Column(
-                                            children: [
-                                              Row(
-                                                children: [
-                                                  Image.asset('assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',height: 30,),
-                                                  Text('TDP'),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
                                     ),
-
                                   ),
                                   Column(
                                     children: [
@@ -4347,7 +3770,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               border: Border.all(
                                                   color: Colors.greenAccent),
                                               borderRadius:
-                                                  BorderRadius.circular(15)),
+                                              BorderRadius.circular(15)),
                                           height: 120,
                                           width: 120,
                                           child: SfFunnelChart(
@@ -4358,31 +3781,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                               ],
                                               //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
                                               tooltipBehavior:
-                                                  TooltipBehavior(enable: true),
+                                              TooltipBehavior(enable: true),
                                               series: FunnelSeries<
-                                                      ChartSampleData, String>(
+                                                  ChartSampleData, String>(
                                                   dataSource: <ChartSampleData>[
                                                     ...NewsChannelFunnelgraphChartData,
                                                   ],
                                                   xValueMapper:
                                                       (ChartSampleData data, _) =>
-                                                          data.x as String,
+                                                  data.x as String,
                                                   yValueMapper:
                                                       (ChartSampleData data, _) =>
-                                                          data.y,
+                                                  data.y,
                                                   /*  explode: isCardView ? false : explode,
                     gapRatio: isCardView ? 0 : gapRatio,*/
                                                   neckHeight: /*isCardView ? */
-                                                      '20%' /*: neckHeight.toString()*/ +
-                                                          '%',
+                                                  '20%' /*: neckHeight.toString()*/ +
+                                                      '%',
                                                   neckWidth: /*isCardView ?*/
-                                                      '25%' /*: neckWidth.toString()*/ +
-                                                          '%',
+                                                  '25%' /*: neckWidth.toString()*/ +
+                                                      '%',
                                                   dataLabelSettings:
-                                                      const DataLabelSettings(
-                                                          textStyle:
-                                                              TextStyle(fontSize: 8),
-                                                          isVisible: true)))),
+                                                  const DataLabelSettings(
+                                                      textStyle:
+                                                      TextStyle(fontSize: 8),
+                                                      isVisible: true)))),
                                       Text(
                                         'Comments',
                                         style: TextStyle(fontSize: 10),
@@ -4393,7 +3816,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Row(
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
+                                MainAxisAlignment.spaceEvenly,
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Padding(
@@ -4422,7 +3845,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                           children: <TextSpan>[
                                             TextSpan(
                                                 text: NewsChannelBarGraphdata[
-                                                    'lead'][0],
+                                                'lead'][0],
                                                 style: new TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     color: Colors.green,
@@ -4457,13 +3880,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(top: 100.0),
+                                        const EdgeInsets.only(top: 100.0),
                                         child: Container(
                                           decoration: BoxDecoration(
                                               border: Border.all(
                                                   color: Colors.greenAccent),
                                               borderRadius:
-                                                  BorderRadius.circular(15)),
+                                              BorderRadius.circular(15)),
                                           height: 100,
                                           width: 135,
                                           child: SfCartesianChart(
@@ -4479,24 +3902,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   color: Colors.black,
                                                   fontSize: 8),
                                               axisLine:
-                                                  const AxisLine(width: 0),
+                                              const AxisLine(width: 0),
                                               labelPosition:
-                                                  ChartDataLabelPosition
-                                                      .outside,
+                                              ChartDataLabelPosition
+                                                  .outside,
                                               majorTickLines:
-                                                  const MajorTickLines(
-                                                      width: 0),
+                                              const MajorTickLines(
+                                                  width: 0),
                                               majorGridLines:
-                                                  const MajorGridLines(
-                                                      width: 0),
+                                              const MajorGridLines(
+                                                  width: 0),
                                             ),
                                             primaryYAxis: NumericAxis(
                                                 labelStyle: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 8),
                                                 labelPosition:
-                                                    ChartDataLabelPosition
-                                                        .outside,
+                                                ChartDataLabelPosition
+                                                    .outside,
                                                 isVisible: false,
                                                 minimum: 0,
                                                 maximum: 800),
@@ -4506,28 +3929,28 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   String>(
                                                 width: 0.9,
                                                 dataLabelSettings:
-                                                    const DataLabelSettings(
-                                                        isVisible: false,
-                                                        labelAlignment:
-                                                            ChartDataLabelAlignment
-                                                                .top),
+                                                const DataLabelSettings(
+                                                    isVisible: false,
+                                                    labelAlignment:
+                                                    ChartDataLabelAlignment
+                                                        .top),
                                                 dataSource: <ChartSampleData>[
                                                   ...NewsChannelBargraphChartdata
                                                 ],
                                                 borderRadius:
-                                                    BorderRadius.circular(10),
+                                                BorderRadius.circular(10),
                                                 xValueMapper:
                                                     (ChartSampleData sales,
-                                                            _) =>
-                                                        sales.x as String,
+                                                    _) =>
+                                                sales.x as String,
                                                 yValueMapper:
                                                     (ChartSampleData sales,
-                                                            _) =>
-                                                        sales.y,
+                                                    _) =>
+                                                sales.y,
                                               ),
                                             ],
                                             tooltipBehavior:
-                                                _NewsChanneltooltipBehavior,
+                                            _NewsChanneltooltipBehavior,
                                           ),
                                         ),
                                       ),
@@ -4549,12 +3972,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Text('State: ${snapshot.connectionState}');
                     }
                   },
-
                 ),
               ),
-            )
-          ]),
-    );
+            ),
+          )
+        ]);
   }
 
   //Bar Graph data
@@ -4566,12 +3988,10 @@ class _HomeScreenState extends State<HomeScreen> {
   List<ChartSampleData> NewsChannelFunnelgraphChartData = [];
   Future<dynamic> NewsChannelBannerGraphApi() async {
     var body = json.encode({
-
       "type": "party_data",
       "STATE": 'ANDHRA PRADESH',
       "party_list": 'TDP, YSRCP',
       "social_handle": "NEWS_CHANNEL"
-
     });
     var headers = {'Content-Type': 'application/json'};
     var response = await post(

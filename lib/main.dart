@@ -5,11 +5,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+// import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intellensense/HomeScreen_Pages/HomeScreen.dart';
 import 'package:intellensense/LoginPages/login.dart';
 import 'package:intellensense/SplashScreen/splashanimation.dart';
-import 'package:local_auth/local_auth.dart';
+// import 'package:local_auth/local_auth.dart';
 
 
 import 'package:provider/provider.dart';
@@ -25,7 +25,7 @@ Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
+  // MobileAds.instance.initialize();
   Firebase.initializeApp();
 
   FirebaseMessaging.onBackgroundMessage(_firebadeMessagingBackgroundHandler);
@@ -63,53 +63,53 @@ class _MyAppState extends State<MyApp> {
     logindata = await SharedPreferences.getInstance();
     if (logindata.getBool('auth') == true) {
       print('ok');
-      _authenticate();
+      // _authenticate();
     } else {
       logindata.setBool('auth', false);
     }
   }
 bool authenticated = false;
-  final LocalAuthentication auth = LocalAuthentication();
-  Future<bool> _authenticate() async {
-    String _authorized = 'Not Authorized';
-    bool _isAuthenticating = false;
-    try {
-      setState(() {
-        _isAuthenticating = true;
-        _authorized = 'Authenticating';
-      });
-      authenticated = await auth.authenticate(
-        localizedReason: 'Let OS determine authentication method',
-        options: const AuthenticationOptions(sensitiveTransaction: true,
-          useErrorDialogs: true,
-          stickyAuth: true,
-        ),
-        
-      );
-
-      setState(() {
-        _isAuthenticating = false;
-      });
-      print('auth');
-    } on PlatformException catch (e) {
-      print(e);
-      setState(() {
-        _isAuthenticating = false;
-        _authorized = 'Error - ${e.message}';
-      });
-    }
-
-    setState(
-        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
-    if (!mounted) {}
-    if (_authorized == 'Not Authorized') {
-      setState(() {
-        exit(0);
-      });
-    }
-  
-    return authenticated;
-  }
+  // final LocalAuthentication auth = LocalAuthentication();
+  // Future<bool> _authenticate() async {
+  //   String _authorized = 'Not Authorized';
+  //   bool _isAuthenticating = false;
+  //   try {
+  //     setState(() {
+  //       _isAuthenticating = true;
+  //       _authorized = 'Authenticating';
+  //     });
+  //     authenticated = await auth.authenticate(
+  //       localizedReason: 'Let OS determine authentication method',
+  //       options: const AuthenticationOptions(sensitiveTransaction: true,
+  //         useErrorDialogs: true,
+  //         stickyAuth: true,
+  //       ),
+  //
+  //     );
+  //
+  //     setState(() {
+  //       _isAuthenticating = false;
+  //     });
+  //     print('auth');
+  //   } on PlatformException catch (e) {
+  //     print(e);
+  //     setState(() {
+  //       _isAuthenticating = false;
+  //       _authorized = 'Error - ${e.message}';
+  //     });
+  //   }
+  //
+  //   setState(
+  //       () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+  //   if (!mounted) {}
+  //   if (_authorized == 'Not Authorized') {
+  //     setState(() {
+  //       exit(0);
+  //     });
+  //   }
+  //
+  //   return authenticated;
+  // }
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
