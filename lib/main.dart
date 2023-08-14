@@ -1,9 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+//import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intellensense/HomeScreen_Pages/HomeScreen.dart';
 import 'package:intellensense/LoginPages/login.dart';
 import 'package:intellensense/SplashScreen/splashanimation.dart';
@@ -15,17 +15,17 @@ import 'Constants/themesetup/DarkThemeProvider.dart';
 import 'Constants/themesetup/styles.dart';
 import 'LoginPages/mainLoginScreen.dart';
 
-Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {
-  Firebase.initializeApp(); // options: DefaultFirebaseConfig.platformOptions
-  print('Handling a background message ${message.messageId}');
-}
+// Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {
+//   Firebase.initializeApp(); // options: DefaultFirebaseConfig.platformOptions
+//   print('Handling a background message ${message.messageId}');
+// }
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
-  Firebase.initializeApp();
+  //MobileAds.instance.initialize();
+  // Firebase.initializeApp();
 
-  FirebaseMessaging.onBackgroundMessage(_firebadeMessagingBackgroundHandler);
+  // FirebaseMessaging.onBackgroundMessage(_firebadeMessagingBackgroundHandler);
   runApp(ChangeNotifierProvider(create: (context) => DarkMode(), child: MyApp()));
 }
 

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:animate_do/animate_do.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+//import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:intellensense/HomeScreen_Pages/Banners.dart/YoutubeExpScreen.dart';
 import 'package:intellensense/HomeScreen_Pages/Banners.dart/twitterExpScreen.dart';
 import 'package:intellensense/HomeScreen_Pages/NewsWIdget/FaceBookScreen.dart';
@@ -15,7 +15,7 @@ import 'package:intellensense/HomeScreen_Pages/Drawers/Drawer.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:geolocator/geolocator.dart';
+//import 'package:geolocator/geolocator.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/HomeScreen_Pages/Widgets/Socialmediatemplate.dart';
 import 'package:intellensense/LoginPages/widgets/ChartSampleData.dart';
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _scrollController = ScrollController()..addListener(_scrollListener);
-    _initBannerAd();
+    //_initBannerAd();
       chartData = <ChartSampleData>[
       ChartSampleData(
           x: 'Jan', y: 43, secondSeriesYValue: 37, thirdSeriesYValue: 41),
@@ -139,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  late BannerAd _bannerAd;
+ /* late BannerAd _bannerAd;
   bool _isAdLoaded = false;
   _initBannerAd() {
     _bannerAd = BannerAd(
@@ -158,7 +158,7 @@ class _HomeScreenState extends State<HomeScreen> {
       request: AdRequest(),
     ); // BannerAd
     _bannerAd.load();
-  }
+  }*/
 
   bool tempbool = false;
   List<Widget> DailyNewsPages = [

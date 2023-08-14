@@ -43,6 +43,7 @@ class _SettingScreenState extends State<SettingScreen> {
             padding: const EdgeInsets.all(8.0),
 
             child: Column(children: [
+              Row(children: [IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.arrow_back))],),
               Image.asset(
                 'assets/icons/IntelliSense-Logo-Finall.gif',
                 height: 55,

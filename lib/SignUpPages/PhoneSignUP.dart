@@ -1,4 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -23,81 +23,81 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
   String? verificationIDFromFirebase;
   bool spinnerLoading = false;
 
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  // FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   _verifyPhoneButton() async {
-    print("Phone Number:" '+91' + "${phoneController.text}");
-    setState(() {
-      spinnerLoading = true;
-    });
-    await _firebaseAuth.verifyPhoneNumber(
-        phoneNumber: '+91' + phoneController.text,
-        verificationCompleted: (phoneAuthCredential) async {
-          setState(() {
-            spinnerLoading = false;
-          });
-          //TODO: Auto Complete Function
-          //signInWithPhoneAuthCredential(phoneAuthCredential);
-        },
-        verificationFailed: (verificationFailed) async {
-          setState(() {
-            spinnerLoading = true;
-          });
-          var snackBar = SnackBar(
-              content: Text(
-                  "Verification Code Failed: ${verificationFailed.message}"));
-          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        },
-        codeSent: (verificationId, resendingToken) async {
-          setState(() {
-            spinnerLoading = false;
-            currentState = PhoneVerificationState.SHOW_OTP_FORM_STATE;
-            this.verificationIDFromFirebase = verificationId;
-          });
-        },
-        codeAutoRetrievalTimeout: (verificationId) async {});
+    // print("Phone Number:" '+91' + "${phoneController.text}");
+    // setState(() {
+    //   spinnerLoading = true;
+    // });
+    // await _firebaseAuth.verifyPhoneNumber(
+    //     phoneNumber: '+91' + phoneController.text,
+    //     verificationCompleted: (phoneAuthCredential) async {
+    //       setState(() {
+    //         spinnerLoading = false;
+    //       });
+    //       //TODO: Auto Complete Function
+    //       //signInWithPhoneAuthCredential(phoneAuthCredential);
+    //     },
+    //     verificationFailed: (verificationFailed) async {
+    //       setState(() {
+    //         spinnerLoading = true;
+    //       });
+    //       var snackBar = SnackBar(
+    //           content: Text(
+    //               "Verification Code Failed: ${verificationFailed.message}"));
+    //       ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    //     },
+    //     codeSent: (verificationId, resendingToken) async {
+    //       setState(() {
+    //         spinnerLoading = false;
+    //         currentState = PhoneVerificationState.SHOW_OTP_FORM_STATE;
+    //         this.verificationIDFromFirebase = verificationId;
+    //       });
+    //     },
+    //     codeAutoRetrievalTimeout: (verificationId) async {});
   }
 
-  _verifyOTPButton() async {
-    if (phoneController.text.length == 10) {
-      // SendDatatoSheet();
-    } else {
-      print('Enter 10 digit mobile');
-    }
-    PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
-        verificationId: verificationIDFromFirebase!, smsCode: OTp);
-    signInWithPhoneAuthCredential(phoneAuthCredential);
-  }
-
-  void signInWithPhoneAuthCredential(
-      PhoneAuthCredential phoneAuthCredential) async {
-    setState(() {
-      spinnerLoading = true;
-    });
-    try {
-      final authCredential =
-          await _firebaseAuth.signInWithCredential(phoneAuthCredential);
-      setState(() {
-        spinnerLoading = false;
-      });
-      if (authCredential.user != null) {
-       
-              
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SignUpPhone(phoneController.text)));
-   
-      }
-    } on FirebaseAuthException catch (e) {
-      setState(() {
-        spinnerLoading = false;
-      });
-      var snackBar = SnackBar(content: Text(e.message.toString()));
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-  }
+  // _verifyOTPButton() async {
+  //   if (phoneController.text.length == 10) {
+  //     // SendDatatoSheet();
+  //   } else {
+  //     print('Enter 10 digit mobile');
+  //   }
+  //   PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
+  //       verificationId: verificationIDFromFirebase!, smsCode: OTp);
+  //   signInWithPhoneAuthCredential(phoneAuthCredential);
+  // }
+  //
+  // void signInWithPhoneAuthCredential(
+  //     PhoneAuthCredential phoneAuthCredential) async {
+  //   setState(() {
+  //     spinnerLoading = true;
+  //   });
+  //   try {
+  //     final authCredential =
+  //         await _firebaseAuth.signInWithCredential(phoneAuthCredential);
+  //     setState(() {
+  //       spinnerLoading = false;
+  //     });
+  //     if (authCredential.user != null) {
+  //
+  //
+  //                                 Navigator.push(
+  //                                     context,
+  //                                     MaterialPageRoute(
+  //                                         builder: (context) =>
+  //                                             SignUpPhone(phoneController.text)));
+  //
+  //     }
+  //   } on FirebaseAuthException catch (e) {
+  //     setState(() {
+  //       spinnerLoading = false;
+  //     });
+  //     var snackBar = SnackBar(content: Text(e.message.toString()));
+  //     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  //   }
+  // }
 
   getPhoneFormWidget(context) {
     return Column(
@@ -180,7 +180,8 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
           height: 20.0,
         ),
         ElevatedButton(
-          onPressed: () => _verifyOTPButton(),
+          onPressed: () => null,
+              // _verifyOTPButton(),
           style: ElevatedButton.styleFrom(
             foregroundColor: Colors.white, backgroundColor: Colors.grey.shade900, // foreground
           ),
