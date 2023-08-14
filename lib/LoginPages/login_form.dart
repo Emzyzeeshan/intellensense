@@ -267,7 +267,9 @@ print(response.body);
     print(response.statusCode);
     try {
       setState(() {
-        loginData =json.decode(response.body) ;
+
+        loginData =json.decode(response.body);
+
       });
       if(loginData['message'].toString()=='Success'){
         logindata.setBool('login', false);
@@ -279,7 +281,9 @@ print(response.body);
                   HomeScreen(),
             ));
         popup.value=false;
+
       }else if(loginData['message'].toString()=='Error: Invid Username Or Passwordal.'){
+
 
         setState(() {
           passError=true; 

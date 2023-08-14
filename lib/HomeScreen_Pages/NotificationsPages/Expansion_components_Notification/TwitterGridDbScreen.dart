@@ -112,7 +112,7 @@ class _TwitterGridDbState extends State<TwitterGridDb> {
       return Container(height: 0, width: 0);
 
     List<PlutoColumn> columns = [
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Twitter Id',
         field: 'Grid_ID',
@@ -131,13 +131,13 @@ class _TwitterGridDbState extends State<TwitterGridDb> {
         type: PlutoColumnType.text(),
       ),
 
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Publish Date',
         field: 'Grid_Date',
         type: PlutoColumnType.date(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Published Time',
         field: 'Grid_Time',
@@ -155,13 +155,13 @@ class _TwitterGridDbState extends State<TwitterGridDb> {
         field: 'Grid_UserLocation',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Likes',
         field: 'Grid_Likes',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Retweets',
         field: 'Grid_Retweets',
@@ -173,7 +173,7 @@ class _TwitterGridDbState extends State<TwitterGridDb> {
         field: 'Grid_Location',
         type: PlutoColumnType.text(),
       ),
-      PlutoColumn(
+      PlutoColumn(textAlign: PlutoColumnTextAlign.right,
         enableEditingMode: false,
         title: 'Geo Coordination',
         field: 'Grid_Coordinates',

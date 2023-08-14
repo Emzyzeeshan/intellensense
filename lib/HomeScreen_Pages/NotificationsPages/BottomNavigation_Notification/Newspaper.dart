@@ -207,7 +207,7 @@ class _NewspaperNotificationtileState extends State<NewspaperNotificationtile> {
                 },
                 closedBuilder: (context, action) {
                   return Image.asset(
-                    'assets/NotificationIcons/analyticsShowCard.png',
+                    'assets/NotificationIcons/analyticsShowCard-01-removebg-preview.png',
                     height: 25,
                     width: 25,
                   );
@@ -227,24 +227,24 @@ class _NewspaperNotificationtileState extends State<NewspaperNotificationtile> {
                 },
                 closedBuilder: (context, action) {
                   return Image.asset(
-                    'assets/NotificationIcons/GridDB.png',
+                    'assets/NotificationIcons/GridDB-04.png',
                     height: 25,
                     width: 25,
                   );
                 },
               ),
               Image.asset(
-                'assets/NotificationIcons/Open_Docs_Icon.png',
+                'assets/NotificationIcons/Open_Docs_Icon-01 (1).png',
                 height: 25,
                 width: 25,
               ),
               Image.asset(
-                'assets/NotificationIcons/Pivot-Unpivot_Icon.png',
+                'assets/NotificationIcons/Pivot-Unpivot_Icon-02.png',
                 height: 25,
                 width: 25,
               ),
               Image.asset(
-                'assets/NotificationIcons/Tree.png',
+                'assets/NotificationIcons/Tree-03.png',
                 height: 25,
                 width: 25,
               ),

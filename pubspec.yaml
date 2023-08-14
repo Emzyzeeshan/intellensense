@@ -217,6 +217,7 @@ flutter:
     - assets/NotificationIcons/Pivot-Unpivot_Icon-02.png
     - assets/NotificationIcons/Tree-03.png
     - assets/telangana_dist.json
+
     - 'assets/DarkmodeImages/Dark1.jpg'
     - 'assets/DarkmodeImages/Dark2.jpg'
     - 'assets/DarkmodeImages/Dark3.jpg'
@@ -224,6 +225,9 @@ flutter:
     - 'assets/transparent.jpg'
     - 'assets/white.jpg'
     - 'assets/DarkmodeImages/dot.png'
+
+    - assets/new Updated images/WordCloud.png
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

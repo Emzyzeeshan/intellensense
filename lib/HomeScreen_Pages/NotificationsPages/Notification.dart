@@ -24,7 +24,7 @@ class _NotificationsState extends State<Notifications> {
         toolbarHeight: 40,
         centerTitle: true,
 
-        backgroundColor: Color(0xff86a8e7),
+        backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back,

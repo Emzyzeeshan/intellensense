@@ -3,8 +3,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:intellensense/HomeScreen_Pages/Banners.dart/YoutubeBanner.dart';
-import 'package:intellensense/HomeScreen_Pages/Banners.dart/twitterbanner.dart';
+import 'package:intellensense/HomeScreen_Pages/Banners.dart/YoutubeExpScreen.dart';
+import 'package:intellensense/HomeScreen_Pages/Banners.dart/twitterExpScreen.dart';
 import 'package:intellensense/HomeScreen_Pages/NewsWIdget/FaceBookScreen.dart';
 import 'package:intellensense/HomeScreen_Pages/NewsWIdget/NewsPaperScreen.dart';
 import 'package:intellensense/HomeScreen_Pages/Widgets/Newstemplate.dart';
@@ -28,8 +28,8 @@ import 'package:provider/provider.dart';
 import 'package:simple_speed_dial/simple_speed_dial.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import 'Banners.dart/FaceBookBanner.dart';
-import 'Banners.dart/NewsChannelBanner.dart';
+import 'Banners.dart/FaceBookExpScreen.dart';
+import 'Banners.dart/NewsChannelExpScreen.dart';
 import 'Drawers/DrawerScreens/CandidatureAnalysis/AllCandidateList.dart';
 import 'Drawers/DrawerScreens/CandidatureAnalysis/CandidatureAnalysis.dart';
 import 'Drawers/DrawerScreens/Constituency Analysis/ConstituencyAnalysis.dart';
@@ -40,6 +40,7 @@ import 'NewsWIdget/LiveUpdatesScreen.dart';
 import 'NewsWIdget/NewsChannelScreen.dart';
 import 'NewsWIdget/TwitterScreen.dart';
 import 'NewsWIdget/YouTubeScreen.dart';
+import 'NotificationsPages/BottomNavigation_Notification/Youtube.dart';
 import 'StateOverViewScreens/StateOverview.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -311,7 +312,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                             ),
                           ),
-                        ],
+                        )],
                       ),
                     ),
                   ),
@@ -1545,12 +1546,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                             'State: ${snapshot.connectionState}');
                                                       }
                                                     })),
+
                                               ])),
                                     )
                                   : Container()),
-
-                          //todo:social media
-
                           Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: AnimatedContainer(
@@ -1562,6 +1561,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         height: 30,
                                         width: 30,
                                       ),
+
                                       Text(
                                         'SOCIAL MEDIA',
                                         style: TextStyle(
@@ -1573,13 +1573,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                       IconButton(
                                         onPressed: () {
                                           setState(() {
-                                            showSocialnews = !showSocialnews;
+                                            showSocialnews =
+                                            !showSocialnews;
                                           });
                                         },
                                         icon: showSocialnews == true
                                             ? Icon(Icons.arrow_drop_down)
-                                            : Icon(
-                                                Icons.arrow_drop_up_outlined),
+                                            : Icon(Icons.arrow_drop_up_outlined),
                                       ),
                                     ],
                                   )))
@@ -2062,10 +2062,379 @@ class _HomeScreenState extends State<HomeScreen> {
                                       })),
                                 ],
                               ),
+                            );
+                          } else {
+                            return const Text(
+                                'Server Error');
+                          }
+                        } else {
+                          return Text(
+                              'State: ${snapshot.connectionState}');
+                        }
+                      })),
+
+                  //Twitter news
+                  FutureBuilder(
+                      future: twitterdata,
+                      builder: ((context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Padding(
+                            padding:
+                            const EdgeInsets.only(
+                                top: 70.0),
+                            child: SizedBox(
+                              height: 150,
+                              width: 150,
+                              child: Center(
+                                  child: SpinKitWave(
+                                    color: Colors.blue,
+                                    size: 18,
+                                  )),
                             ),
-                          ),
-                        )
-                      : Container(),
+                          );
+                        } else if (snapshot
+                            .connectionState ==
+                            ConnectionState.done) {
+                          if (snapshot.hasError) {
+                            return const Text(
+                                'Data Error');
+                          } else if (snapshot.hasData) {
+                            List TwitterList = [
+                              SocialMediaTemplate2(
+                                  '${TwitterData[0]['candidateName']}',
+                                  '${TwitterData[0]['tweetContent']}',
+                                  '- ${TwitterData[0]['candidatePartyName']}'),
+                              SocialMediaTemplate2(
+                                  '${TwitterData[1]['candidateName']}',
+                                  '${TwitterData[1]['tweetContent']}','- ${TwitterData[1]['candidatePartyName']}'),
+                              SocialMediaTemplate2(
+                                  '${TwitterData[2]['candidateName']}',
+                                  '${TwitterData[2]['tweetContent']}','- ${TwitterData[2]['candidatePartyName']}'),
+                              SocialMediaTemplate2(
+                                  '${TwitterData[3]['candidateName']}',
+                                  '${TwitterData[3]['tweetContent']}','- ${TwitterData[3]['candidatePartyName']}'),
+                            ];
+                            return SizedBox(
+                              height: 130,
+                              width: 150,
+                              child: GestureDetector(
+                                onTap: () {
+                                  showMaterialModalBottomSheet(context: context,
+                                      duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
+                                      builder:(context){
+                                        return   Container(
+                                          height: MediaQuery.of(context).size.height*0.6,
+                                          child:TwitterScreen(), );
+                                      });
+                                  // setState(() {
+                                  //   viewnews = true;
+                                  //   newson = true;
+                                  //   NewsHeading =
+                                  //       'Twitter';
+                                  //   _currIndex = 0;
+                                  // });
+                                  // PageCount.jumpToPage(
+                                  //     5);
+                                },
+                                child: Swiper(
+                                    itemWidth: 150,
+                                    itemHeight: 130,
+                                    duration: duration,
+                                    layout:
+                                    swiperlayout,
+                                    scrollDirection:
+                                    carddirection ==
+                                        false
+                                        ? Axis
+                                        .vertical
+                                        : Axis
+                                        .horizontal,
+                                    autoplay: true,
+                                    itemBuilder:
+                                        (BuildContext
+                                    context,
+                                        int index) {
+                                      return TwitterList[
+                                      index];
+                                    },
+                                    itemCount: 4,
+                                    pagination:
+                                    SwiperPagination(
+                                        builder:
+                                        DotSwiperPaginationBuilder(
+                                          size: 7,
+                                          color:
+                                          Colors.grey,
+                                          activeColor:
+                                          Colors.blue
+                                              .shade200,
+                                        ))),
+                              ),
+                            );
+                          } else {
+                            return const Text(
+                                'Server Error');
+                          }
+                        } else {
+                          return Text(
+                              'State: ${snapshot.connectionState}');
+                        }
+                      })),
+                  //FaceBook News
+                  FutureBuilder(
+                      future: facebookdata,
+                      builder: ((context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Padding(
+                            padding:
+                            const EdgeInsets.only(
+                                top: 70.0),
+                            child: SizedBox(
+                              height: 150,
+                              width: 150,
+                              child: Center(
+                                  child: SpinKitWave(
+                                    color: Colors.blue,
+                                    size: 18,
+                                  )),
+                            ),
+                          );
+                        } else if (snapshot
+                            .connectionState ==
+                            ConnectionState.done) {
+                          if (snapshot.hasError) {
+                            return const Text(
+                                'Data Error');
+                          } else if (snapshot.hasData) {
+                            List FaceBookList = [
+                              SocialMediaTemplate3(
+                                  '${Facebookdata[0]['keyWords']}',
+                                  '${Facebookdata[0]['titleContent']}',
+                                  '${Facebookdata[0]['candidateName']}'
+                                      .length >
+                                      16
+                                      ? '- ${Facebookdata[0]['candidateName'].substring(0, 10)}...'
+                                      : '- ${Facebookdata[0]['candidateName']}'
+
+                                // '${Facebookdata[0]['candidateName']}'
+                              ),
+                              SocialMediaTemplate3(
+                                  '${Facebookdata[1]['keyWords']}',
+                                  '${Facebookdata[1]['titleContent']}',
+                                  '${Facebookdata[1]['candidateName']}'
+                                      .length >
+                                      16
+                                      ? '- ${Facebookdata[1]['candidateName'].substring(0, 10)}...'
+                                      : '- ${Facebookdata[1]['candidateName']}'
+                                // ,'${Facebookdata[1]['candidateName']}'
+                              ),
+                              SocialMediaTemplate3(
+                                  '${Facebookdata[2]['keyWords']}',
+                                  '${Facebookdata[2]['titleContent']}',
+                                  '${Facebookdata[2]['candidateName']}'
+                                      .length >
+                                      16
+                                      ? '- ${Facebookdata[2]['candidateName'].substring(0, 10)}...'
+                                      : '- ${Facebookdata[2]['candidateName']}'
+
+                                // '${Facebookdata[2]['candidateName']}'
+                              ),
+                              SocialMediaTemplate3(
+                                  '${Facebookdata[3]['keyWords']}',
+                                  '${Facebookdata[3]['titleContent']}',
+                                  '${Facebookdata[3]['candidateName']}'
+                                      .length >
+                                      16
+                                      ? '- ${Facebookdata[3]['candidateName'].substring(0, 10)}...'
+                                      : '- ${Facebookdata[3]['candidateName']}'
+                                // '${Facebookdata[3]['candidateName']}'
+                              ),
+                            ];
+                            return SizedBox(
+                              height: 130,
+                              width: 150,
+                              child: GestureDetector(
+                                onTap: () {
+                                  showMaterialModalBottomSheet(context: context,
+                                      duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
+                                      builder:(context){
+                                        return   Container(
+                                          height: MediaQuery.of(context).size.height*0.6,
+                                          child:   FaceBookScreen(), );
+                                      });
+                                  // setState(() {
+                                  //   viewnews = true;
+                                  //   newson = true;
+                                  //   NewsHeading =
+                                  //       'FaceBook';
+                                  //   _currIndex = 0;
+                                  // });
+                                  // PageCount.jumpToPage(
+                                  //     6);
+                                },
+                                child: Swiper(
+                                    itemWidth: 150,
+                                    itemHeight: 130,
+                                    duration: duration,
+                                    layout:
+                                    swiperlayout,
+                                    scrollDirection:
+                                    carddirection ==
+                                        false
+                                        ? Axis
+                                        .vertical
+                                        : Axis
+                                        .horizontal,
+                                    autoplay: true,
+                                    itemBuilder:
+                                        (BuildContext
+                                    context,
+                                        int index) {
+                                      return FaceBookList[
+                                      index];
+                                    },
+                                    itemCount: 4,
+                                    pagination:
+                                    SwiperPagination(
+                                        builder:
+                                        DotSwiperPaginationBuilder(
+                                          size: 7,
+                                          color:
+                                          Colors.grey,
+                                          activeColor:
+                                          Colors.blue
+                                              .shade200,
+                                        ))),
+                              ),
+                            );
+                          } else {
+                            return const Text(
+                                'Server Error');
+                          }
+                        } else {
+                          return Text(
+                              'State: ${snapshot.connectionState}');
+                        }
+                      })),
+                  //Instagram news
+                  FutureBuilder(
+                      future: instagramdata,
+                      builder: ((context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Padding(
+                            padding:
+                            const EdgeInsets.only(
+                                top: 70.0),
+                            child: SizedBox(
+                              height: 150,
+                              width: 150,
+                              child: Center(
+                                  child: SpinKitWave(
+                                    color: Colors.blue,
+                                    size: 18,
+                                  )),
+                            ),
+                          );
+                        } else if (snapshot
+                            .connectionState ==
+                            ConnectionState.done) {
+                          if (snapshot.hasError) {
+                            return const Text(
+                                'Data Error');
+                          } else if (snapshot.hasData) {
+                            List InstagramList = [
+                              SocialMediaTemplate4(
+                                  '${Instagramdata[0]['candidateName']}',
+                                  '${Instagramdata[0]['titleContent']}',
+                                  'Likes- ${Instagramdata[0]['likesCount']}   Comments- ${Instagramdata[0]['commentsCount']}'),
+                              SocialMediaTemplate4(
+                                  '${Instagramdata[1]['candidateName']}',
+                                  '${Instagramdata[1]['titleContent']}',
+                                  'Likes- ${Instagramdata[1]['likesCount']}   Comments- ${Instagramdata[1]['commentsCount']}'),
+                              SocialMediaTemplate4(
+                                  '${Instagramdata[2]['candidateName']}',
+                                  '${Instagramdata[2]['titleContent']}',
+                                  'Likes- ${Instagramdata[2]['likesCount']}   Comments- ${Instagramdata[2]['commentsCount']}'),
+                              SocialMediaTemplate4(
+                                  '${Instagramdata[3]['candidateName']}',
+                                  '${Instagramdata[3]['titleContent']}',
+                                  'Likes- ${Instagramdata[3]['likesCount']}   Comments- ${Instagramdata[3]['commentsCount']}'),
+                            ];
+                            return SizedBox(
+                              height: 130,
+                              width: 150,
+                              child: GestureDetector(
+                                onTap: () {
+                                  showMaterialModalBottomSheet(context: context,
+                                      duration: Duration(seconds: 1),animationCurve: Curves.easeInQuad,shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15))),
+                                      builder:(context){
+                                        return   Container(
+                                            height: MediaQuery.of(context).size.height*0.6,
+                                            child: InstagramScreen());
+                                      });
+                                  // setState(() {
+                                  //   viewnews = true;
+                                  //   newson = true;
+                                  //   NewsHeading =
+                                  //       'Instagram';
+                                  //   _currIndex = 0;
+                                  // });
+                                  // PageCount.jumpToPage(
+                                  //     7);
+                                },
+                                child: Swiper(
+                                    itemWidth: 150,
+                                    itemHeight: 130,
+                                    duration: duration,
+                                    layout:
+                                    swiperlayout,
+                                    scrollDirection:
+                                    carddirection ==
+                                        false
+                                        ? Axis
+                                        .vertical
+                                        : Axis
+                                        .horizontal,
+                                    autoplay: true,
+                                    itemBuilder:
+                                        (BuildContext
+                                    context,
+                                        int index) {
+                                      return InstagramList[
+                                      index];
+                                    },
+                                    itemCount: 4,
+                                    pagination:
+                                    SwiperPagination(
+                                        builder:
+                                        DotSwiperPaginationBuilder(
+                                          size: 7,
+                                          color:
+                                          Colors.grey,
+                                          activeColor:
+                                          Colors.blue
+                                              .shade200,
+                                        ))),
+                              ),
+                            );
+                          } else {
+                            return const Text(
+                                'Server Error');
+                          }
+                        } else {
+                          return Text(
+                              'State: ${snapshot.connectionState}');
+                        }
+                      })),
+                ],
+              ),
+            ),
+          ),
+        )
+            : Container(),
                   SingleChildScrollView(
                     physics: ScrollPhysics(),
                     child: Column(
@@ -2403,12 +2772,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ]),
               ),
-            ]),
+                  ]),
           )),
     );
   }
 
   bool viewnews = true;
+
 
   final List<String> imageList = [
     "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg",
@@ -2538,8 +2908,59 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ],
                                         ),
+
                                       ],
+                                      series: <PieSeries<ChartSampleData, String>>[
+                                        PieSeries<ChartSampleData, String>(
+                                            explode: true,
+                                            explodeIndex: 0,
+                                            explodeOffset: '10%',
+                                            dataSource: <ChartSampleData>[
+                                              ...PiegraphChartData
+                                            
+                                            ],
+                                            xValueMapper: (ChartSampleData data, _) =>
+                                            data.x as String,
+                                            yValueMapper: (ChartSampleData data, _) =>
+                                            data.y,
+                                            dataLabelMapper:
+                                                (ChartSampleData data, _) => data.text,
+                                            startAngle: 90,
+                                            endAngle: 90,
+                                            dataLabelSettings: const DataLabelSettings(
+                                                isVisible: true)),
+                                      ]),
+                                                              ),
+                                                              Text(
+                                                                'Comments',
+                                                                style: TextStyle(fontSize: 10),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          Padding(
+                                      padding: const EdgeInsets.only(top: 35.0),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(BarGraphdata['lead'][0]),
+                                              Image.asset('assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',height: 30,)
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Image.asset('assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',height: 30,),
+                                                  Text('BJP'),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
+
                                   ),
                                   Column(
                                     children: [
@@ -2745,11 +3166,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Text('State: ${snapshot.connectionState}');
                     }
                   },
+
                 ),
               ),
-            ),
-          )
-        ]);
+            )
+          ]),
+    );
   }
 
   //Bar Graph data
@@ -2816,6 +3238,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<dynamic> TwitterLineChartfuturecall = TwitterBannerGraphApi();
   TooltipBehavior? _TwittertooltipBehavior;
   TooltipBehavior? _TwittertooltipBehavior1;
+
   TwitterBanner() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -2933,11 +3356,34 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 ),
                                                 Text('TRS'),
                                               ],
+
                                             ),
-                                          ],
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                  text:
+                                                      'With Huge Difference In counts for Tweets and Re-Tweets reports says that ',
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontFamily: 'Segoe UI')),
+                                              TextSpan(
+                                                  text: TwiterBarGraphdata['lead'][0],
+                                                  style: new TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      color: Colors.green,
+                                                      fontSize: 20,
+                                                      fontFamily: 'Segoe UI')),
+                                              TextSpan(
+                                                  text:
+                                                      ' is relatively Dominant in Twitter Data.',
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.bold,
+                                                      fontFamily: 'Segoe UI')),
+                                            ],
+                                          ),
                                         ),
-                                      ],
+                                      ),
                                     ),
+
                                   ),
                                   Column(
                                     children: [
@@ -3148,11 +3594,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Text('State: ${snapshot.connectionState}');
                     }
                   },
+
                 ),
               ),
-            ),
-          )
-        ]);
+            )
+          ]),
+    );
   }
 
   //Bar Graph data
@@ -3219,6 +3666,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late Future<dynamic> FacebookLineChartfuturecall = FaceBookBannerGraphApi();
   TooltipBehavior? _FacebooktooltipBehavior;
   TooltipBehavior? _FacebooktooltipBehavior1;
+
   FaceBookBanner() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -3348,8 +3796,77 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ],
                                         ),
+
                                       ],
+                                      series: <PieSeries<ChartSampleData,
+                                          String>>[
+                                        PieSeries<ChartSampleData, String>(
+                                            explode: true,
+                                            explodeIndex: 0,
+                                            explodeOffset: '10%',
+                                            dataSource: <ChartSampleData>[
+                                              ...FaceBookPiegraphChartData
+                                              // ChartSampleData(
+                                              //     x: 'David', y: 13, text: 'Dav \n 13%'),
+                                              // ChartSampleData(
+                                              //     x: 'Steve', y: 24, text: 'Ste\n 24%'),
+                                              // ChartSampleData(
+                                              //     x: 'Jack', y: 25, text: 'Jack \n 25%'),
+                                              // ChartSampleData(
+                                              //     x: 'Others', y: 38, text: 'Other \n 38%'),
+                                            ],
+                                            xValueMapper:
+                                                (ChartSampleData data, _) =>
+                                                    data.x as String,
+                                            yValueMapper:
+                                                (ChartSampleData data, _) =>
+                                                    data.y,
+                                            dataLabelMapper:
+                                                (ChartSampleData data, _) =>
+                                                    data.text,
+                                            startAngle: 90,
+                                            endAngle: 90,
+                                            dataLabelSettings:
+                                                const DataLabelSettings(
+                                                    isVisible: true)),
+                                      ]),
+                                ),
+                                Text(
+                                  'Likes',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ],
+                            ),
+                            Padding(
+                                      padding: const EdgeInsets.only(top: 35.0),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(FaceBookBarGraphdata['lead'][0]),
+                                              Image.asset(
+                                                'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
+                                                height: 30,
+                                              )
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                    'assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',
+                                                    height: 30,
+                                                  ),
+                                                  Text('YSRCP'),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
+
                                   ),
                                   Column(
                                     children: [
@@ -3556,11 +4073,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Text('State: ${snapshot.connectionState}');
                     }
                   },
+
                 ),
               ),
-            ),
-          )
-        ]);
+            )
+          ]),
+    );
   }
 
   //Bar Graph data
@@ -3631,6 +4149,7 @@ class _HomeScreenState extends State<HomeScreen> {
       NewsChannelBannerGraphApi();
   TooltipBehavior? _NewsChanneltooltipBehavior;
   TooltipBehavior? _NewsChanneltooltipBehavior1;
+
   NewsChannelBanner() {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -3760,8 +4279,66 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ),
                                           ],
                                         ),
+
                                       ],
+                                      series: <PieSeries<ChartSampleData, String>>[
+                                        PieSeries<ChartSampleData, String>(
+                                            explode: true,
+                                            explodeIndex: 0,
+                                            explodeOffset: '10%',
+                                            dataSource: <ChartSampleData>[
+                                              ...NewsChannelPiegraphChartData
+                                              // ChartSampleData(
+                                              //     x: 'David', y: 13, text: 'Dav \n 13%'),
+                                              // ChartSampleData(
+                                              //     x: 'Steve', y: 24, text: 'Ste\n 24%'),
+                                              // ChartSampleData(
+                                              //     x: 'Jack', y: 25, text: 'Jack \n 25%'),
+                                              // ChartSampleData(
+                                              //     x: 'Others', y: 38, text: 'Other \n 38%'),
+                                            ],
+                                            xValueMapper: (ChartSampleData data, _) =>
+                                            data.x as String,
+                                            yValueMapper: (ChartSampleData data, _) =>
+                                            data.y,
+                                            dataLabelMapper:
+                                                (ChartSampleData data, _) => data.text,
+                                            startAngle: 90,
+                                            endAngle: 90,
+                                            dataLabelSettings: const DataLabelSettings(
+                                                isVisible: true)),
+                                      ]),
+                                ),
+                                Text(
+                                  'Likes',
+                                  style: TextStyle(fontSize: 10),
+                                ),
+                              ],
+                            ),
+                           Padding(
+                                      padding: const EdgeInsets.only(top: 35.0),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Text(NewsChannelBarGraphdata['lead'][0]),
+                                              Image.asset('assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',height: 30,)
+                                            ],
+                                          ),
+                                          Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Image.asset('assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',height: 30,),
+                                                  Text('TDP'),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
+
                                   ),
                                   Column(
                                     children: [
@@ -3972,11 +4549,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       return Text('State: ${snapshot.connectionState}');
                     }
                   },
+
                 ),
               ),
-            ),
-          )
-        ]);
+            )
+          ]),
+    );
   }
 
   //Bar Graph data
@@ -3988,10 +4566,12 @@ class _HomeScreenState extends State<HomeScreen> {
   List<ChartSampleData> NewsChannelFunnelgraphChartData = [];
   Future<dynamic> NewsChannelBannerGraphApi() async {
     var body = json.encode({
+
       "type": "party_data",
       "STATE": 'ANDHRA PRADESH',
       "party_list": 'TDP, YSRCP',
       "social_handle": "NEWS_CHANNEL"
+
     });
     var headers = {'Content-Type': 'application/json'};
     var response = await post(

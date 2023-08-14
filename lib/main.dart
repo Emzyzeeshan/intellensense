@@ -132,7 +132,9 @@ bool authenticated = false;
           FocusManager.instance.primaryFocus?.unfocus();
         },
         child: MaterialApp(
+
            theme: themeMode.darkMode ?darkTheme: mainTheme  ,
+
       //     theme: ThemeData(
       //   brightness: Brightness.light,
       //   /* light theme settings */
