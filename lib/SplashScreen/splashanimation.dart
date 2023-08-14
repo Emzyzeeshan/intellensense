@@ -10,6 +10,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashAnimation extends StatefulWidget {
+  
   @override
   State<SplashAnimation> createState() => _SplashAnimationState();
 }
@@ -35,7 +36,8 @@ class _SplashAnimationState extends State<SplashAnimation>
                     -_animationController.value, _animationController.value),
                 duration: Duration(seconds: 6),
                 type: PageTransitionType.scale,
-                child: HomeScreen()
+                child:
+                 HomeScreen()
                 // mainLoginScreen(
                 //   screenHeight: MediaQuery.of(context).size.height,
                 // )
@@ -106,7 +108,11 @@ class _SplashAnimationState extends State<SplashAnimation>
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Colors.white,
-      body: AnimatedContainer(
+      body:
+      
+      
+      
+       AnimatedContainer(
         duration: Duration(milliseconds: 700),
         child: Center(
             child: Stack(

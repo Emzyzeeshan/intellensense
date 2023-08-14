@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:animations/animations.dart';
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:intellensense/HomeScreen_Pages/Drawers/DrawerScreens/CandidatureAnalysis/Candidature%20Analysis/PartyMemberDetails.dart';
 import 'package:intellensense/HomeScreen_Pages/Drawers/DrawerScreens/CandidatureAnalysis/CandidatureAnalysis.dart';
 import 'package:intellensense/main.dart';
+import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class AllCandidateList extends StatefulWidget {
@@ -25,8 +25,9 @@ class _AllCandidateListState extends State<AllCandidateList> {
 
   var partycolor;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {final themeMode = Provider.of<DarkMode>(context);
     return Scaffold(
+      
         body: PageView(
       controller: pageController,
       physics: NeverScrollableScrollPhysics(),
@@ -41,7 +42,7 @@ class _AllCandidateListState extends State<AllCandidateList> {
                 Flexible(
                   child: TextField(
                     decoration: InputDecoration(
-                        hintText: 'Search....',
+                        hintText: 'Search....',hintStyle: TextStyle(color: Colors.black),
                         isDense: true,
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(15),

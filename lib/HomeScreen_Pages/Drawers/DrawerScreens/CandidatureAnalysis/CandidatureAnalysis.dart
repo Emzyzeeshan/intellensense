@@ -41,12 +41,17 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
     DeviceSizeConfig().init(context);
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        backgroundColor: HomeColor,
-        appBar: AppBar(
-          leading: Container(),
-          toolbarHeight: 55,
-          elevation: 0,
-          flexibleSpace: Padding(
+
+        // appBar: AppBar(
+        //   leading: Container(),
+        //   toolbarHeight: 100,
+        //   elevation: 0,
+        //   flexibleSpace:
+        //   // backgroundColor: HomeColor,
+        // ),
+        body: Padding(
+          padding: const EdgeInsets.only(left: 8.0,right: 8),
+          child: Column(children: [ Padding(
             padding: const EdgeInsets.only( top: 35, left: 8, right: 8),
             child: Row(
               children: [
@@ -55,7 +60,7 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
                 //     height: 35),
                 Flexible(
                   child: TextField(
-                    decoration: InputDecoration(
+                    decoration: InputDecoration(hintStyle: TextStyle(color: Colors.black),
                         hintText: 'Search....',
                         isDense: true,
                         enabledBorder: OutlineInputBorder(
@@ -106,21 +111,16 @@ pageController.jumpToPage(1);
               ],
             ),
           ),
-          backgroundColor: HomeColor,
-        ),
-        body: Padding(
-          padding: const EdgeInsets.only(left: 8.0,right: 8),
-          child: Column(children: [
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: DropdownButtonHideUnderline(
-                child: DropdownButton2(
+                child: DropdownButton2(style: TextStyle(color: Colors.black),
                   key: DashboardDropdownkey,
                   hint: Text(
                     '${input}',
                     style: TextStyle(
                       fontSize: 14,
-                      color: Theme.of(context).hintColor,
+                      color: Colors.black,
                     ),
                   ),
                   items: PartyName.map<DropdownMenuItem<String>>(

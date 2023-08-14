@@ -179,8 +179,8 @@ class _NewspaperNotificationtileState extends State<NewspaperNotificationtile> {
     return Padding(
       padding: const EdgeInsets.all(3.0),
       child: ExpansionTile(
-        collapsedBackgroundColor: Colors.grey.shade200,
-        backgroundColor: Colors.grey.shade100,
+          collapsedBackgroundColor:  Color(0xffc8d1e7),
+        backgroundColor: Color(0xffc8d1e7),
         childrenPadding: EdgeInsets.all(5),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         leading: Image.asset(

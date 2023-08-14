@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intellensense/Constants/constants.dart';
+import 'package:intellensense/main.dart';
+import 'package:provider/provider.dart';
 
 class SocialMediaTemplate1 extends StatefulWidget {
   String? header;
   String? newsdescription;
-String ? CandidateName;
+  String? CandidateName;
   SocialMediaTemplate1(this.header, this.newsdescription, this.CandidateName);
 
   @override
@@ -14,6 +17,7 @@ String ? CandidateName;
 class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
   @override
   Widget build(BuildContext context) {
+    final themeMode = Provider.of<DarkMode>(context);
     return Card(
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -21,18 +25,26 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
           height: 90,
           width: 110,
           decoration: BoxDecoration(
+            image: DecorationImage(
+                image: !themeMode.darkMode
+                    ? AssetImage('assets/DarkmodeImages/dot.png')
+                    : AssetImage(DarkModeImages[0]),
+                fit: BoxFit.fill,
+                opacity: 0.6),
             borderRadius: BorderRadius.circular(20),
-            gradient: LinearGradient(
-              colors: [
-             Color(0xFFE57373),
-                Color(0xffe4e0f8),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: !themeMode.darkMode
+                ? LinearGradient(
+                    colors: [
+                      Color(0xFFE57373),
+                      Color(0xffe4e0f8),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
           ),
           child: Padding(
-                    padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
+            padding: const EdgeInsets.only(top: 8.0, left: 8, right: 15),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -56,26 +68,24 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
                     height: 3,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right:8.0),
-                    child: Text(
-                        '${widget.newsdescription}',
-                        maxLines: 3,
-                  
-                     style: GoogleFonts.raleway(fontSize: 9)),
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Text('${widget.newsdescription}',
+                        maxLines: 3, style: GoogleFonts.raleway(fontSize: 9)),
                   ),
-         Spacer(),
-                  Row(  mainAxisAlignment: MainAxisAlignment.end,
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                padding: const EdgeInsets.only(right:8.0,bottom: 8),
-                        child: Text(
-                            '${widget.CandidateName}',
+                        padding: const EdgeInsets.only(right: 8.0, bottom: 8),
+                        child: Text('${widget.CandidateName}',
                             maxLines: 4,
-                      
-                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                            style: GoogleFonts.raleway(
+                                fontSize: 8, fontWeight: FontWeight.w600)),
                       ),
                     ],
-                  ),              ]),
+                  ),
+                ]),
           ),
         ));
   }
@@ -83,8 +93,9 @@ class _SocialMediaTemplate1State extends State<SocialMediaTemplate1> {
 
 class SocialMediaTemplate2 extends StatefulWidget {
   String? header;
-  String? newsdescription;String ? CandidateName;
-  SocialMediaTemplate2(this.header, this.newsdescription,this.CandidateName);
+  String? newsdescription;
+  String? CandidateName;
+  SocialMediaTemplate2(this.header, this.newsdescription, this.CandidateName);
 
   @override
   State<SocialMediaTemplate2> createState() => _SocialMediaTemplate2State();
@@ -93,6 +104,7 @@ class SocialMediaTemplate2 extends StatefulWidget {
 class _SocialMediaTemplate2State extends State<SocialMediaTemplate2> {
   @override
   Widget build(BuildContext context) {
+    final themeMode = Provider.of<DarkMode>(context);
     return Card(
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -100,18 +112,26 @@ class _SocialMediaTemplate2State extends State<SocialMediaTemplate2> {
           height: 90,
           width: 110,
           decoration: BoxDecoration(
+            image: DecorationImage(
+                image: !themeMode.darkMode
+                    ? AssetImage('assets/DarkmodeImages/dot.png')
+                    : AssetImage(DarkModeImages[1]),
+                fit: BoxFit.fill,
+                opacity: 0.6), 
             borderRadius: BorderRadius.circular(20),
-            gradient: LinearGradient(
-              colors: const [
-                Colors.blueAccent,
-                Color(0xffe4e0f8),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: !themeMode.darkMode
+                ? LinearGradient(
+                    colors: const [
+                      Colors.blueAccent,
+                      Color(0xffe4e0f8),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
           ),
           child: Padding(
-                 padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
+            padding: const EdgeInsets.only(top: 8.0, left: 8, right: 15),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -138,22 +158,20 @@ class _SocialMediaTemplate2State extends State<SocialMediaTemplate2> {
                     height: 3,
                   ),
                   Padding(
-               padding: const EdgeInsets.only(right:8.0),
-                    child: Text(
-                      '${widget.newsdescription}',
-                      maxLines: 3,
-                     style: GoogleFonts.raleway(fontSize: 9)),
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Text('${widget.newsdescription}',
+                        maxLines: 3, style: GoogleFonts.raleway(fontSize: 9)),
                   ),
-                   Spacer(),
-                  Row(  mainAxisAlignment: MainAxisAlignment.end,
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                padding: const EdgeInsets.only(right:8.0,bottom: 8),
-                        child: Text(
-                            '${widget.CandidateName}',
+                        padding: const EdgeInsets.only(right: 8.0, bottom: 8),
+                        child: Text('${widget.CandidateName}',
                             maxLines: 4,
-                      
-                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                            style: GoogleFonts.raleway(
+                                fontSize: 8, fontWeight: FontWeight.w600)),
                       ),
                     ],
                   ),
@@ -167,16 +185,16 @@ class _SocialMediaTemplate2State extends State<SocialMediaTemplate2> {
 
 class SocialMediaTemplate3 extends StatefulWidget {
   String? header;
-  String? newsdescription;String ? CandidateName;
+  String? newsdescription;
+  String? CandidateName;
   SocialMediaTemplate3(this.header, this.newsdescription, this.CandidateName);
-
   @override
   State<SocialMediaTemplate3> createState() => _SocialMediaTemplate3State();
 }
-
 class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
   @override
   Widget build(BuildContext context) {
+    final themeMode = Provider.of<DarkMode>(context);
     return Card(
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -184,18 +202,26 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
           height: 90,
           width: 110,
           decoration: BoxDecoration(
+            image: DecorationImage(
+                image: !themeMode.darkMode
+                    ? AssetImage('assets/DarkmodeImages/dot.png')
+                    : AssetImage(DarkModeImages[2]),
+                fit: BoxFit.fill,
+                opacity: 0.6),
             borderRadius: BorderRadius.circular(20),
-            gradient: LinearGradient(
-              colors: [
-               Colors.blue.shade500,
-                Color(0xffe4e0f8),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: !themeMode.darkMode
+                ? LinearGradient(
+                    colors: [
+                      Colors.blue.shade500,
+                      Color(0xffe4e0f8),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
           ),
           child: Padding(
-                    padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
+            padding: const EdgeInsets.only(top: 8.0, left: 8, right: 15),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -220,23 +246,20 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
                     height: 3,
                   ),
                   Padding(
-                     padding: const EdgeInsets.only(right:8.0),
-                    child: Text(
-                        '${widget.newsdescription}',
-                        maxLines: 3,
-                  
-                          style: GoogleFonts.raleway(fontSize: 9)),
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Text('${widget.newsdescription}',
+                        maxLines: 3, style: GoogleFonts.raleway(fontSize: 9)),
                   ),
-                   Spacer(),
-                  Row(  mainAxisAlignment: MainAxisAlignment.end,
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                padding: const EdgeInsets.only(right:8.0,bottom: 8),
-                        child: Text(
-                            '${widget.CandidateName}',
+                        padding: const EdgeInsets.only(right: 8.0, bottom: 8),
+                        child: Text('${widget.CandidateName}',
                             maxLines: 4,
-                      
-                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                            style: GoogleFonts.raleway(
+                                fontSize: 8, fontWeight: FontWeight.w600)),
                       ),
                     ],
                   ),
@@ -250,8 +273,9 @@ class _SocialMediaTemplate3State extends State<SocialMediaTemplate3> {
 
 class SocialMediaTemplate4 extends StatefulWidget {
   String? header;
-  String? newsdescription;String ? CandidateName;
-  SocialMediaTemplate4(this.header, this.newsdescription,this.CandidateName );
+  String? newsdescription;
+  String? CandidateName;
+  SocialMediaTemplate4(this.header, this.newsdescription, this.CandidateName);
 
   @override
   State<SocialMediaTemplate4> createState() => _SocialMediaTemplate4State();
@@ -260,6 +284,7 @@ class SocialMediaTemplate4 extends StatefulWidget {
 class _SocialMediaTemplate4State extends State<SocialMediaTemplate4> {
   @override
   Widget build(BuildContext context) {
+    final themeMode = Provider.of<DarkMode>(context);
     return Card(
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
@@ -267,18 +292,27 @@ class _SocialMediaTemplate4State extends State<SocialMediaTemplate4> {
           height: 90,
           width: 110,
           decoration: BoxDecoration(
+            image: DecorationImage(
+                image: !themeMode.darkMode
+                    ? AssetImage('assets/DarkmodeImages/dot.png')
+                    : AssetImage(DarkModeImages[3]),
+                fit: BoxFit.fill,
+                opacity: 0.6),
             borderRadius: BorderRadius.circular(20),
-            gradient: LinearGradient(
-              colors: const [
-    Colors.pinkAccent,
-                Color(0xffe4e0f8),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
+            gradient: !themeMode.darkMode
+                ?
+                 LinearGradient(
+                    colors: const [
+                      Colors.pinkAccent,
+                      Color(0xffe4e0f8),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
           ),
           child: Padding(
-                   padding: const EdgeInsets.only(top:8.0,left: 8,right: 15),
+            padding: const EdgeInsets.only(top: 8.0, left: 8, right: 15),
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -306,23 +340,20 @@ class _SocialMediaTemplate4State extends State<SocialMediaTemplate4> {
                     height: 3,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right:8.0),
-                    child: Text(
-                        '${widget.newsdescription}',
-                        maxLines: 3,
-                  
-                       style: GoogleFonts.raleway(fontSize: 9)),
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Text('${widget.newsdescription}',
+                        maxLines: 3, style: GoogleFonts.raleway(fontSize: 9)),
                   ),
-                   Spacer(),
-                  Row(  mainAxisAlignment: MainAxisAlignment.end,
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                padding: const EdgeInsets.only(right:8.0,bottom: 8),
-                        child: Text(
-                            '${widget.CandidateName}',
+                        padding: const EdgeInsets.only(right: 8.0, bottom: 8),
+                        child: Text('${widget.CandidateName}',
                             maxLines: 4,
-                      
-                            style: GoogleFonts.raleway(fontSize: 8,fontWeight: FontWeight.w600)),
+                            style: GoogleFonts.raleway(
+                                fontSize: 8, fontWeight: FontWeight.w600)),
                       ),
                     ],
                   ),

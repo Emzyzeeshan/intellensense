@@ -243,8 +243,18 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           length: 5,
           child: Column(
             children: <Widget>[
+              Container(
+                height: 50,
+                width: 150,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        filterQuality: FilterQuality.high,
+                        image: AssetImage(
+                            'assets/icons/IntelliSense-Logo-Finall.gif'),
+                        fit: BoxFit.fill)),
+              ),
               SizedBox(
-                height: 20,
+                height: 4,
               ),
               ButtonsTabBar(
                 backgroundColor: Colors.blue.shade100,
@@ -438,7 +448,9 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
             ) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return Padding(
-                  padding:  EdgeInsets.only(top: 70.0),
+
+                  padding: const EdgeInsets.only(top: 70.0),
+
                   child: SizedBox(
                     height: 150,
                     width: 150,
@@ -451,7 +463,9 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                 );
               } else if (snapshot.connectionState == ConnectionState.done) {
                 if (snapshot.hasError) {
-                  return  Text('Error');
+
+                  return const Text('Error');
+
                 } else if (snapshot.hasData) {
                   // for(int i=0;i<TwitterOverviewdata['party_data']['INC'][i];i++){
                   //
@@ -462,14 +476,16 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Padding(
-                            padding:  EdgeInsets.all(8.0),
+
+                            padding: const EdgeInsets.all(8.0),
                             child: DataTable(
                                 headingRowColor: MaterialStateColor.resolveWith(
                                     (states) => Color(0xff86a8e7)),
-                                dataRowColor:
-                                    MaterialStateColor.resolveWith((states) {
-                                  return Colors.white;
-                                }),
+                                // dataRowColor:
+                                // MaterialStateColor.resolveWith((states) {
+                                //   return Color(0xffd2dfff);
+                                // }),
+
                                 border: TableBorder.all(color: Colors.black),
                                 // Datatable widget that have the property columns and rows.
                                 columns: [
@@ -477,8 +493,12 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                   DataColumn(
                                     label: Text(
                                       'PARTY NAME',
+
+                                      
+
                                       style: TextStyle(color: Colors.white,),
                                         textAlign:TextAlign.left
+
                                     ),
                                   ),
                                   DataColumn(
@@ -507,10 +527,14 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                 rows: [
                                   // Set the values to the columns
 
+
                                   DataRow(
                                     cells: [
                                       DataCell(Text(
                                         "USER FOLLOWERS",
+
+                                        textAlign: TextAlign.start,
+
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold),
                                       )),
@@ -530,10 +554,10 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                           )
                                     ],
                                   ),
-                                  DataRow(
-                                      cells: [
-                                    DataCell(
-                                        Text(
+
+                                  DataRow(cells: [
+                                    DataCell(Text(
+
                                       "LIKES",
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold),
@@ -549,7 +573,9 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                                   TwitterOverviewdata[
                                                       'party_data'],
                                                   p,
+
                                                   'LIKES'),textAlign:TextAlign.left)),
+
                                         ),
                                     /* DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['LIKES'].toString())),
                                   DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['LIKES'].toString())),
@@ -572,7 +598,9 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                                   TwitterOverviewdata[
                                                       'party_data'],
                                                   p,
+
                                                   'RETWEET_COUNT'),textAlign:TextAlign.right)),
+
                                         ),
                                     /*DataCell(Text(TwitterOverviewdata['party_data']['INC'][0]['RETWEET_COUNT'].toString())),
                                   DataCell(Text(TwitterOverviewdata['party_data']['TRS'][0]['RETWEET_COUNT'].toString())),
@@ -585,17 +613,20 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                           height: 20,
                         ),
                         Card(
+
                           color: Color(0xff86a8e7),
                           elevation: 5,
                           child: Padding(
                             padding: EdgeInsets.all(8.0),
+
                             child: RichText(
                               text: new TextSpan(
                                 // Note: Styles for TextSpans must be explicitly defined.
                                 // Child text spans will inherit styles from parent
                                 style: new TextStyle(
                                   fontSize: 14.0,
-                                  color: Colors.black,
+
+
                                 ),
                                 children: <TextSpan>[
                                   new TextSpan(
@@ -659,7 +690,9 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                       child: ListView.builder(
                                           scrollDirection: Axis.horizontal,
                                           shrinkWrap: true,
+
                                           itemCount: TopCandidate['top_candidates'].length >=5?5:TopCandidate['top_candidates'].length,
+
                                           itemBuilder: ((context, index) {
                                             return Padding(
                                               padding:
@@ -669,7 +702,9 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15)),
+
                                                 color: Color(0xff86a8e7),
+
                                                 child: Padding(
                                                   padding:
                                                       const EdgeInsets.all(8.0),
@@ -703,7 +738,10 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                                                     '${TopCandidate['top_candidates'][index]['CANDIDATE_NAME']}'
                                                                         .substring(
                                                                             0,
-                                                                            11),
+
+                                                                            10),
+
+
                                                                     style:
                                                                         _textStyle,
                                                                   )
@@ -719,7 +757,10 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                                             Icon(
                                                                 Icons
                                                                     .person_add_alt_1_rounded,
+
+
                                                                 size: 16),
+
                                                             SizedBox(
                                                               width: 2,
                                                             ),
@@ -834,10 +875,13 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                   headingRowColor:
                                       MaterialStateColor.resolveWith(
                                           (states) => Color(0xff86a8e7)),
-                                  dataRowColor:
-                                      MaterialStateColor.resolveWith((states) {
-                                    return Color(0xffd2dfff);
-                                  }),
+
+                                  // dataRowColor:
+                                  // MaterialStateColor.resolveWith((states) {
+                                  //   return Color(0xffd2dfff);
+                                  // }),
+
+
                                   border: TableBorder.all(color: Colors.black),
                                   // Datatable widget that have the property columns and rows.
                                   columns: [
@@ -849,6 +893,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                         ),
                                       ),
                                       ...Youtubetablecolumn
+
                                       // DataColumn(
                                       //   label: Text(
                                       //       YoutubeOverviewdata['party_data'][partyt1][0]
@@ -867,6 +912,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                       //           ['CANDIDATE_PARTY_NAME'],
                                       //       style: TextStyle(color: Colors.white)),
                                       // ),
+
                                     ],
                                   rows: [
                                       // Set the values to the columns
@@ -885,10 +931,12 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
                                                               'party_data'][p]
                                                           [0]['LIKES']
                                                       .toString(),
+
                                                   // style: highestCountStyle(
                                                   //     YoutubeOverviewdata['party_data'],
                                                   //     p,
                                                   //     'LIKES')
+
                                                 )),
                                               )
                                         ],
@@ -1779,7 +1827,7 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
               DataColumn(
                 label: Text(
                   '${YoutubeTopPartylistdata['top_parties'][i]}',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(),
                 ),
               ),
             );
@@ -1818,9 +1866,9 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
               child: Text(
                 '${NewspaperOverviewdata['party_data'][i]['PARTY_NAME']}',
                 style: GoogleFonts.nunitoSans(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             )),
             Center(
@@ -1829,9 +1877,9 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
               child: Text(
                 '${NewspaperOverviewdata['party_data'][i]['COUNT']}',
                 style: GoogleFonts.nunitoSans(
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.black),
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             )),
           ]));

@@ -24,14 +24,14 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   // create some values
-  Color pickerColor = Color(0xff443a49);
-  Color currentColor = Color(0xffd2dfff);
+  // Color pickerColor = Color(0xff443a49);
+  // Color currentColor = Color(0xffd2dfff);
 
 // ValueChanged<Color> callback
-  void changeColor(Color color) {
-    setState(() => HomeColor = color);
-    print(pickerColor);
-  }
+  // void changeColor(Color color) {
+  //   setState(() => HomeColor = color);
+  //   print(pickerColor);
+  // }
   
   @override
   Widget build(BuildContext context) {
@@ -53,49 +53,33 @@ class _SettingScreenState extends State<SettingScreen> {
                 style: GoogleFonts.nunitoSans(
                     fontSize: 18.0,
                     fontWeight: FontWeight.w700,
-                    color: Colors.black),
+                    ),
               ),
               SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: ListTile(
-                  tileColor:Color(0xff86a8e7),
-                  leading: Icon(Icons.logout_outlined),
-                  title: const Text('LogOut'),
-                  onTap: () {
-                    CoolAlert.show(
-                      confirmBtnColor: Color(0xff00186a),
-                      backgroundColor: Color(0xff001969),
-                      context: context,
-                      type: CoolAlertType.confirm,
-                      onConfirmBtnTap: () => LogoutAPI(context),
-                    );
-                  },
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: ListTile(
-                  tileColor: Color(0xff86a8e7),
-                  leading: Icon(Icons.format_color_fill_rounded),
-                  title: const Text('Change Background Color'),
-                  onTap: () async {
-                    await showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                              title: const Text('Pick a color!'),
-                              content: SingleChildScrollView(
-                                child: ColorPicker(
-                                  showLabel: true,
-                                  pickerColor: HomeColor,
-                                  onColorChanged: changeColor,
-                                ),
-                              ));
-                        });
-                  },
-                ),
-              ),
+             
+              // Padding(
+              //   padding: const EdgeInsets.all(4.0),
+              //   child: ListTile(
+              //     tileColor: Color(0xff86a8e7),
+              //     leading: Icon(Icons.format_color_fill_rounded),
+              //     title: const Text('Change Background Color'),
+              //     onTap: () async {
+              //       await showDialog(
+              //           context: context,
+              //           builder: (context) {
+              //             return AlertDialog(
+              //                 title: const Text('Pick a color!'),
+              //                 content: SingleChildScrollView(
+              //                   child: ColorPicker(
+              //                     showLabel: true,
+              //                     pickerColor: HomeColor,
+              //                     onColorChanged: changeColor,
+              //                   ),
+              //                 ));
+              //           });
+              //     },
+              //   ),
+              // ),
         
                Padding(
                  padding: const EdgeInsets.all(4.0),
@@ -114,6 +98,45 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ),
                ),
+                 Padding(
+                 padding: const EdgeInsets.all(4.0),
+                 child: ListTile(
+                  tileColor: Color(0xff86a8e7),
+                    leading: const Icon(Icons.lock, size: 35),
+                    title: const Text("App Lock"),
+                    subtitle: const Text("Secure using Biometric"),
+                    trailing: Switch(
+                      value:logindata.getBool('auth') == null
+                          ? false
+                          : logindata.getBool('auth')!,
+                      activeTrackColor: const Color.fromARGB(255, 89, 216, 255),
+                      activeColor: const Color.fromARGB(255, 78, 76, 175),
+                      onChanged: (value) {
+                       setState(() {
+                          logindata.setBool('auth', value);
+                        });
+                        print(logindata.getBool('auth'));
+                      },
+                    ),
+                  ),
+               ),
+                Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ListTile(
+                  tileColor:Color(0xff86a8e7),
+                  leading: Icon(Icons.logout_outlined),
+                  title: const Text('LogOut'),
+                  onTap: () {
+                    CoolAlert.show(
+                      confirmBtnColor: Color(0xff00186a),
+                      backgroundColor: Color(0xff001969),
+                      context: context,
+                      type: CoolAlertType.confirm,
+                      onConfirmBtnTap: () => LogoutAPI(context),
+                    );
+                  },
+                ),
+              ),
             ]),
           ),
         ));

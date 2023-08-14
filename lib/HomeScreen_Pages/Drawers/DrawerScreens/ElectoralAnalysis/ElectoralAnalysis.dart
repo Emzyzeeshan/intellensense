@@ -17,7 +17,7 @@ class _ElectoralAnalysisState extends State<ElectoralAnalysis> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: HomeColor,
+      // backgroundColor: HomeColor,
       key: _key,
       appBar: AppBar(elevation: 0,
         leading: IconButton(
@@ -95,6 +95,7 @@ class _ElectoralAnalysisState extends State<ElectoralAnalysis> {
                           fontWeight: FontWeight.w400,
                           color: Colors.black),
                     ),
+                    
                     tileColor: Colors.white,
                   ),
                 ],
