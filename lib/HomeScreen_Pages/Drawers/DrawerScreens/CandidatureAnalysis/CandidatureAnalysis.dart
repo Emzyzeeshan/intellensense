@@ -55,7 +55,9 @@ class _CandidatureAnalysisState extends State<CandidatureAnalysis> {
             padding: const EdgeInsets.only( top: 35, left: 8, right: 8),
             child: Row(
               children: [
-
+                IconButton(onPressed: (){
+                  Navigator.pop(context);
+                }, icon: Icon(Icons.arrow_back_ios)),
                 // Image.asset('assets/icons/IntelliSense-Logo-Finall.gif',
                 //     height: 35),
                 Flexible(

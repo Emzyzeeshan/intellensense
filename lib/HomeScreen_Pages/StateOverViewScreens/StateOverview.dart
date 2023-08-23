@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:animated_rail/animated_rail.dart';
+
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -243,15 +243,25 @@ class _StateOverviewScreenState extends State<StateOverviewScreen> {
           length: 5,
           child: Column(
             children: <Widget>[
-              Container(
-                height: 50,
-                width: 150,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        filterQuality: FilterQuality.high,
-                        image: AssetImage(
-                            'assets/icons/IntelliSense-Logo-Finall.gif'),
-                        fit: BoxFit.fill)),
+              Row(
+                children: [
+                  IconButton(onPressed: (){
+                    Navigator.pop(context);
+                  }, icon: Icon(Icons.arrow_back_ios)),
+                  SizedBox(width: 60,),
+                  Image.asset('assets/icons/IntelliSense-Logo-Finall.gif',height: 50,)
+                  
+                  // Container( 
+                  //   height: 50,
+                  //   width: 150,
+                  //   decoration: BoxDecoration(
+                  //       image: DecorationImage(
+                  //           filterQuality: FilterQuality.high,
+                  //           image: AssetImage(
+                  //               'assets/icons/IntelliSense-Logo-Finall.gif'),
+                  //           fit: BoxFit.fill)),
+                  // ),
+                ],
               ),
               SizedBox(
                 height: 4,

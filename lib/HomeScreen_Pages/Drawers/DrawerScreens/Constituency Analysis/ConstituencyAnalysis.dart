@@ -54,11 +54,20 @@ class _ConstituencyAnalysisState extends State<ConstituencyAnalysis> {
       appBar: AppBar(
         leading: IconButton(
           color: Colors.grey.shade700,
-          icon: Icon(Icons.search),
+          icon: Icon(Icons.arrow_back_ios),
           onPressed: () {
-            _key.currentState!.openDrawer();
+            Navigator.pop(context);
           },
         ),
+        actions: [
+          IconButton(
+            color: Colors.grey.shade700,
+            icon: Icon(Icons.search),
+            onPressed: () {
+              _key.currentState!.openDrawer();
+            },
+          ),
+        ],
         centerTitle: true,
         backgroundColor: Color(0xffd2dfff),
         title: Image.asset(

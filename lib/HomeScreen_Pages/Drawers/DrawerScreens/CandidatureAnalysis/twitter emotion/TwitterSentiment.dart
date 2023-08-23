@@ -103,15 +103,33 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                       transitionDuration:
                       const Duration(milliseconds: 1200),
                       openBuilder: (context, action) {
-                        return Container(
-                            decoration: BoxDecoration(image: DecorationImage(
-                                image: MemoryImage(
-                                    base64Decode(Twitterwordcloud[0]
-                                        .replaceAll(RegExp(r'\s+'), ''
-                                    ),
-                                    )
-                                )),
-                            ));
+                        return SafeArea(
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  IconButton(
+                                    color: Colors.grey.shade700,
+                                    icon: Icon(Icons.arrow_back_ios),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                  ),
+                                ],
+                              ),
+                              Container(
+                                height: 500,
+                                  decoration: BoxDecoration(image: DecorationImage(
+                                      image: MemoryImage(
+                                          base64Decode(Twitterwordcloud[0]
+                                              .replaceAll(RegExp(r'\s+'), ''
+                                          ),
+                                          )
+                                      )),
+                                  )),
+                            ],
+                          ),
+                        );
                       },
                       closedBuilder: (context, action) {
                         return Image.asset('assets/new Updated images/WordCloud.png',height: 40,);

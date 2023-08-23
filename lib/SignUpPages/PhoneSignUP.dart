@@ -5,6 +5,9 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intellensense/SignUpPages/SIgnUpRegister_Phone.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
+import 'package:provider/provider.dart';
+
+import '../main.dart';
 
 enum PhoneVerificationState { SHOW_PHONE_FORM_STATE, SHOW_OTP_FORM_STATE }
 
@@ -14,6 +17,7 @@ class PhoneAuthPage extends StatefulWidget {
 }
 
 class _PhoneAuthPageState extends State<PhoneAuthPage> {
+
   final GlobalKey<ScaffoldState> _scaffoldKeyForSnackBar =
       GlobalKey<ScaffoldState>();
   PhoneVerificationState currentState =
@@ -192,10 +196,18 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeMode = Provider.of<DarkMode>(context);
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Color(0xffd2dfff),
+      backgroundColor: Colors.white,
       key: _scaffoldKeyForSnackBar,
+      appBar: AppBar(
+        iconTheme: IconThemeData(
+          color: themeMode.darkMode ? Colors.white:Colors.black, //change your color here
+        ),
+        elevation: 0,
+        backgroundColor: themeMode.darkMode ? Colors.black:Colors.white,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),

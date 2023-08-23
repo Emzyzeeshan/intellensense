@@ -34,6 +34,9 @@ class _AudioEmotionState extends State<AudioEmotion> {
             const EdgeInsets.only(left: 8.0, right: 8, top: 40, bottom: 10),
         child: SingleChildScrollView(
           child: Column(children: [
+            IconButton(onPressed: (){
+              Navigator.pop(context);
+            }, icon: Icon(Icons.arrow_back_ios)),
           
             Text(
                       'RESULTS',

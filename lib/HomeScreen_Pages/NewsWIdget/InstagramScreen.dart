@@ -206,7 +206,7 @@ class _InstagramScreenState extends State<InstagramScreen> {
                   ),
                   Text(
                     Value['publishedDate'] ?? '',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 12),
                   ),
                 ],
               ),

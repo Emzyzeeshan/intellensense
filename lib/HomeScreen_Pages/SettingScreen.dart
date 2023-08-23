@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cool_alert/cool_alert.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -43,6 +44,10 @@ class _SettingScreenState extends State<SettingScreen> {
             padding: const EdgeInsets.all(8.0),
 
             child: Column(children: [
+              Row(children: [IconButton(onPressed: (){
+
+                Navigator.pop(context);
+              }, icon: Icon(Icons.arrow_back_ios))],),
               Image.asset(
                 'assets/icons/IntelliSense-Logo-Finall.gif',
                 height: 55,
@@ -88,10 +93,11 @@ class _SettingScreenState extends State<SettingScreen> {
                     leading: const Icon(Icons.dark_mode, size: 35),
                     title: const Text("Dark Mode"),
                     subtitle: const Text("Here you can change you're theme."),
-                    trailing: Switch(
+                    trailing: CupertinoSwitch(
+                      focusColor: Color.fromARGB(255, 89, 216, 255),
                       value: themeMode.darkMode,
-                      activeTrackColor: const Color.fromARGB(255, 89, 216, 255),
-                      activeColor: const Color.fromARGB(255, 78, 76, 175),
+                      //activeTrackColor: const Color.fromARGB(255, 89, 216, 255),
+                      activeColor: Colors.green,
                       onChanged: (value) {
                         themeMode.changeMode();
                       },
@@ -105,12 +111,13 @@ class _SettingScreenState extends State<SettingScreen> {
                     leading: const Icon(Icons.lock, size: 35),
                     title: const Text("App Lock"),
                     subtitle: const Text("Secure using Biometric"),
-                    trailing: Switch(
+                    trailing: CupertinoSwitch(applyTheme: true,
                       value:logindata.getBool('auth') == null
                           ? false
                           : logindata.getBool('auth')!,
-                      activeTrackColor: const Color.fromARGB(255, 89, 216, 255),
-                      activeColor: const Color.fromARGB(255, 78, 76, 175),
+                      focusColor: Color.fromARGB(255, 89, 216, 255),
+                      //activeTrackColor: const Color.fromARGB(255, 89, 216, 255),
+                      activeColor: Colors.green,
                       onChanged: (value) {
                        setState(() {
                           logindata.setBool('auth', value);

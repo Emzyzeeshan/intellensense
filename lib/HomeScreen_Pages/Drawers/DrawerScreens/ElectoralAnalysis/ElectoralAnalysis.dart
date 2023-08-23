@@ -20,13 +20,26 @@ class _ElectoralAnalysisState extends State<ElectoralAnalysis> {
       // backgroundColor: HomeColor,
       key: _key,
       appBar: AppBar(elevation: 0,
-        leading: IconButton(
-          color: Colors.grey.shade700,
-          icon: Icon(Icons.bar_chart),
-          onPressed: () {
-            _key.currentState!.openDrawer();
-          },
+        leading: Row(
+          children: [
+            IconButton(
+              color: Colors.grey.shade700,
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ],
         ),
+        actions: [
+          IconButton(
+            color: Colors.grey.shade700,
+            icon: Icon(Icons.bar_chart),
+            onPressed: () {
+              _key.currentState!.openDrawer();
+            },
+          ),
+        ],
         centerTitle: true,
         backgroundColor: HomeColor,
         title: Image.asset(

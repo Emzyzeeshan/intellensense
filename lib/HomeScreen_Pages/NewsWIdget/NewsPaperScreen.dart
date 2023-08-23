@@ -31,14 +31,14 @@ class _NewsPaperScreenState extends State<NewsPaperScreen> {
     return Padding(
         padding: EdgeInsets.all(8),
         child: Card(
-            color: Colors.grey[300],
+            // color: Colors.grey[300],
             shape: RoundedRectangleBorder(
                 side: BorderSide(color: Colors.blueAccent, width: 2),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
-                  bottomLeft: Radius.circular(15),
-                  bottomRight: Radius.circular(15),
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                  bottomRight: Radius.circular(10),
                 )),
             child: Padding(
                 padding: EdgeInsets.all(6),

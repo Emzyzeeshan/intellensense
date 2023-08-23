@@ -425,10 +425,10 @@ class _SignUpEmailState extends State<SignUpEmail> {
     });*/
     print(body);
     var response = await post(
-      Uri.parse(INSIGHTS + 'auth/register'),
+      Uri.parse(INSIGHTS + '/auth/register'),
       headers: headers,
       body: json.encode({
-        "username": "${username.text.toString()}",
+        "userName": "${username.text.toString()}",
         "email": "${widget.data.toString()}",
         "password": "${_pass.text}",
         "role": "${input}",
@@ -441,13 +441,37 @@ class _SignUpEmailState extends State<SignUpEmail> {
     print(response.statusCode);
     print(response.body);
     if (response.statusCode == 201) {
-      formdata = response.body;
-      if (formdata.toString() == 'Successfully registered ${username.text}') {
+      formdata = json.decode(response.body);
+          response.body;
+      if (formdata['message']== 'Success') {
         setState(() {
           registered = true;
 
         });
-      } else {
+      }
+
+else if(response.statusCode==400){
+  if(formdata['message']=='username already exists: ${username.text.toString()}'){
+    Fluttertoast.showToast(
+        msg: "User Already Exists",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.SNACKBAR,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }else if(formdata['message']=='userName or Email not set'){
+    Fluttertoast.showToast(
+        msg: "Username or Password Empty",
+        toastLength: Toast.LENGTH_SHORT,
+        gravity: ToastGravity.SNACKBAR,
+        backgroundColor: Colors.red,
+        textColor: Colors.white,
+        fontSize: 16.0);
+  }
+  }
+
+
+      else {
         Fluttertoast.showToast(
             msg: "Error",
             toastLength: Toast.LENGTH_SHORT,
@@ -460,15 +484,8 @@ class _SignUpEmailState extends State<SignUpEmail> {
       print(response.body);
 
       print(formdata);
-    } else if (response.statusCode == 400) {
-      Fluttertoast.showToast(
-          msg: "username already exists: ${username.text}",
-          toastLength: Toast.LENGTH_SHORT,
-          gravity: ToastGravity.SNACKBAR,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0);
-    } else {
+    }
+    else {
       print(response.reasonPhrase);
     }
     return formdata;

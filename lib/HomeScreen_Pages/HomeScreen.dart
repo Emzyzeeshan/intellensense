@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:animate_do/animate_do.dart';
+import 'package:animations/animations.dart';
 import 'package:flip_card/flip_card_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 //import 'package:google_mobile_ads/google_mobile_ads.dart';
 //import 'package:intellensense/HomeScreen_Pages/Banners.dart/YoutubeBanner.dart';
@@ -30,6 +32,10 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 //import 'Banners.dart/FaceBookBanner.dart';
 //import 'Banners.dart/NewsChannelBanner.dart';
+import 'Banners.dart/FaceBookExpScreen.dart';
+import 'Banners.dart/NewsChannelExpScreen.dart';
+import 'Banners.dart/YoutubeExpScreen.dart';
+import 'Banners.dart/twitterExpScreen.dart';
 import 'Drawers/DrawerScreens/CandidatureAnalysis/AllCandidateList.dart';
 import 'Drawers/DrawerScreens/CandidatureAnalysis/CandidatureAnalysis.dart';
 import 'Drawers/DrawerScreens/Constituency Analysis/ConstituencyAnalysis.dart';
@@ -217,6 +223,13 @@ class _HomeScreenState extends State<HomeScreen> {
       // 'assets/Image/Intellisense-banners-02.jpg',
       // 'assets/Image/Intellisense-banners-03.jpg'
     ];
+    List<Widget>? ExpSwipeImage = [
+      YoutubeExpBanner(),
+      NewsChannelExpBanner(),
+      FacebookExpBanner(),
+      TwitterExpBanner(),
+    ];
+
     final themeMode = Provider.of<DarkMode>(context);
 
     return WillPopScope(
@@ -229,6 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: AdWidget(ad: _bannerAd),
       ):Text('Loading'),*/
           key: _key,
+
           drawer: drawer(),
           // backgroundColor: HomeColor,
           body: NestedScrollView(
@@ -245,7 +259,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   leading: IconButton(
                     icon: Icon(
                       Icons.menu,
-                      color: Colors.black,
+                      color: themeMode.darkMode ? Colors.white:Colors.black,
                     ),
                     onPressed: () {
                       _key.currentState!.openDrawer();
@@ -267,51 +281,73 @@ class _HomeScreenState extends State<HomeScreen> {
                     //   width: 180,
                     //     )
                     //     : null,
-                    background: SafeArea(
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 50),
-                            child: Container(
-                              height: 260,
-                              width: MediaQuery.of(context).size.width,
-                              child: Swiper(
-                                duration: 20,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return swipeimage[index];
-                                },
-                                itemCount: 4,
-                                autoplay: false,
-                                /* pagination: SwiperPagination(
-                                  builder: new DotSwiperPaginationBuilder(
-                                      color: Colors.grey,
-                                      activeColor: Color(0xff38547C))),*/
-                                control: new SwiperControl(
-                                  size: 18,
-                                  padding: EdgeInsets.all(2),
-                                  color: Color(0xff38547C),
+                    background: Container(
+
+                      child: SafeArea(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 50),
+                              child: Container(
+
+                                height: 260,
+                                width: MediaQuery.of(context).size.width,
+                                child: Swiper(
+                                  duration: 20,
+                                  itemBuilder: (BuildContext context, int index) {
+                                    return OpenContainer(
+                                      closedColor:     themeMode.darkMode ? Color(0xff333333) : Colors.white,
+                                      closedElevation: 0,
+                                      closedShape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10.0)),
+                                      ),
+                                      transitionType:
+                                      ContainerTransitionType.fade,
+                                      transitionDuration:
+                                      const Duration(milliseconds: 1200),
+                                      openBuilder: (context, action) {
+                                        return ExpSwipeImage[index];
+                                      },
+                                      closedBuilder: (context, action) {
+                                        return swipeimage[index];
+                                      },
+                                    );
+
+                                  },
+                                  itemCount: 4,
+                                  autoplay: false,
+                                  /* pagination: SwiperPagination(
+                                    builder: new DotSwiperPaginationBuilder(
+                                        color: Colors.grey,
+                                        activeColor: Color(0xff38547C))),*/
+                                  control: new SwiperControl(
+                                    size: 18,
+                                    padding: EdgeInsets.all(2),
+                                    color: themeMode.darkMode ? Colors.white:Colors.black,
+                                  ),
+                                  // Swiper(controller: SwiperController(),
+                                  //   duration: 1500,
+                                  //   itemBuilder: (BuildContext context, int index) {
+                                  //     return swipeimage![index];
+                                  //   },
+                                  //   itemCount: 4,
+                                  //   autoplay: false,
+                                  //   pagination: SwiperPagination(
+                                  //       builder: new DotSwiperPaginationBuilder(
+                                  //           color: Colors.grey,
+                                  //           activeColor: Color(0xff38547C))),
+                                  //   control: new SwiperControl(
+                                  //     size: 18,
+                                  //     padding: EdgeInsets.all(2),
+                                  //     color: Color(0xff38547C),
+                                  //   ),
+                                  // ),
                                 ),
-                                // Swiper(controller: SwiperController(),
-                                //   duration: 1500,
-                                //   itemBuilder: (BuildContext context, int index) {
-                                //     return swipeimage![index];
-                                //   },
-                                //   itemCount: 4,
-                                //   autoplay: false,
-                                //   pagination: SwiperPagination(
-                                //       builder: new DotSwiperPaginationBuilder(
-                                //           color: Colors.grey,
-                                //           activeColor: Color(0xff38547C))),
-                                //   control: new SwiperControl(
-                                //     size: 18,
-                                //     padding: EdgeInsets.all(2),
-                                //     color: Color(0xff38547C),
-                                //   ),
-                                // ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -525,7 +561,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ],
                       ),*/
                     IconButton(
-                        color: Colors.black,
+
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -535,9 +571,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         icon: Image.asset(
                           'assets/new Updated images/megaphone.png',
                           height: 20,
+                          color: themeMode.darkMode ? Colors.white:null,
                         )),
                     IconButton(
-                        color: Colors.black,
+
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -547,6 +584,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         icon: Image.asset(
                           'assets/new Updated images/Notifications.png',
                           height: 20,
+                          color: themeMode.darkMode ? Colors.white:null,
                         )),
                     IconButton(
                         onPressed: () {
@@ -562,7 +600,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               builder: (context) {
                                 return SizedBox(
                                   height:
-                                  MediaQuery.of(context).size.height * 0.5,
+                                  MediaQuery.of(context).size.height * 0.32,
                                   child: SingleChildScrollView(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -844,7 +882,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         icon: Icon(
                           Icons.settings,
-                          color: Colors.black,
+                          color: themeMode.darkMode ? Colors.white:Colors.black,
                         )),
                     /*PopupMenuButton(onSelected: (value) {
                         if (value == 'notifications') {
@@ -989,7 +1027,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .hasData) {
                                                     List Newpaperlist = [
                                                       NewsTemplate2(
-                                                          "${newsdata[0]['mediaName']}",
+                                                          "${newsdata[0]['mediaName']}".length >
+                                                              16
+                                                              ? ' ${newsdata[0]['mediaName'].substring(0, 10)}...'
+                                                              : ' ${newsdata[0]['mediaName']}',
                                                           '${newsdata[0]['headLine']}',
                                                           'assets/icons/newspaperdxp.png',
                                                           '${newsdata[0]['candidateName']}'
@@ -998,7 +1039,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               ? '- ${newsdata[0]['candidateName'].substring(0, 10)}...'
                                                               : '- ${newsdata[0]['candidateName']}'),
                                                       NewsTemplate3(
-                                                          '${newsdata[1]['mediaName']}',
+                                                          "${newsdata[1]['mediaName']}".length >
+                                                              16
+                                                              ? ' ${newsdata[1]['mediaName'].substring(0, 10)}...'
+                                                              : ' ${newsdata[1]['mediaName']}',
+                                                          '${newsdata[0]['headLine']}'
                                                           '${newsdata[1]['headLine']}',
                                                           'assets/icons/newspaperdxp.png',
                                                           '${newsdata[1]['candidateName']}'
@@ -1007,7 +1052,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               ? '- ${newsdata[1]['candidateName'].substring(0, 10)}...'
                                                               : '- ${newsdata[1]['candidateName']}'),
                                                       NewsTemplate1(
-                                                          '${newsdata[2]['mediaName']}',
+                                                          "${newsdata[2]['mediaName']}".length >
+                                                              16
+                                                              ? ' ${newsdata[2]['mediaName'].substring(0, 10)}...'
+                                                              : ' ${newsdata[2]['mediaName']}',
+                                                          '${newsdata[0]['headLine']}'
                                                           '${newsdata[2]['headLine']}',
                                                           'assets/icons/newspaperdxp.png',
                                                           '${newsdata[2]['candidateName']}'
@@ -1016,7 +1065,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               ? '- ${newsdata[2]['candidateName'].substring(0, 10)}...'
                                                               : '- ${newsdata[2]['candidateName']}'),
                                                       NewsTemplate4(
-                                                          '${newsdata[3]['mediaName']}',
+                                                          "${newsdata[3]['mediaName']}".length >
+                                                              16
+                                                              ? ' ${newsdata[3]['mediaName'].substring(0, 10)}...'
+                                                              : ' ${newsdata[3]['mediaName']}',
+                                                          '${newsdata[0]['headLine']}'
                                                           '${newsdata[3]['headLine']}',
                                                           'assets/icons/newspaperdxp.png',
                                                           '${newsdata[3]['candidateName']}'
@@ -1027,27 +1080,29 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     ];
                                                     return GestureDetector(
                                                       onTap: () {
-                                                        showMaterialModalBottomSheet(
+                                                        showCupertinoModalPopup(
+
                                                             context:
                                                             context,
-                                                            duration:
-                                                            Duration(
-                                                                seconds:
-                                                                1),
-                                                            animationCurve:
-                                                            Curves
-                                                                .easeInQuad,
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.only(
-                                                                    topLeft: Radius.circular(
-                                                                        15),
-                                                                    topRight: Radius.circular(
-                                                                        15))),
+                                                            barrierColor:Colors.grey.withOpacity(0.8) ,
+                                                            // duration:
+                                                            // Duration(
+                                                            //     seconds:
+                                                            //     1),
+                                                            // animationCurve:
+                                                            // Curves
+                                                            //     .easeInQuad,
+                                                            // shape: RoundedRectangleBorder(
+                                                            //     borderRadius: BorderRadius.only(
+                                                            //         topLeft: Radius.circular(
+                                                            //             15),
+                                                            //         topRight: Radius.circular(
+                                                            //             15))),
                                                             builder:
                                                                 (context) {
                                                               return Container(
                                                                   height: MediaQuery.of(context).size.height *
-                                                                      0.6,
+                                                                      0.65,
                                                                   child:
                                                                   NewsPaperScreen());
                                                             });
@@ -1152,12 +1207,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     List NewschannelList =
                                                     [
                                                       NewsTemplate2(
-                                                          "${newchannelldata[0]['mediaChannelName']}",
+                                                          "${newchannelldata[0]['mediaChannelName']}".length >
+                                                              16
+                                                              ? ' ${newchannelldata[0]['mediaChannelName'].substring(0, 10)}...'
+                                                              : ' ${newchannelldata[0]['mediaChannelName']}',
+                                                          '${newsdata[0]['headLine']}'
                                                           '${newchannelldata[0]['videoTitle']}',
                                                           'assets/icons/newsdxps.png',
                                                           '- ${newchannelldata[0]['candidateName']}'),
                                                       NewsTemplate3(
-                                                          '${newchannelldata[1]['mediaChannelName']}',
+                                                          "${newchannelldata[1]['mediaChannelName']}".length >
+                                                              16
+                                                              ? ' ${newchannelldata[1]['mediaChannelName'].substring(0, 10)}...'
+                                                              : ' ${newchannelldata[1]['mediaChannelName']}',
                                                           '${newchannelldata[1]['videoTitle']}',
                                                           'assets/icons/newsdxps.png',
                                                           '${newchannelldata[1]['candidateName']}'
@@ -1166,12 +1228,18 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               ? '- ${newchannelldata[1]['candidateName'].substring(0, 10)}...'
                                                               : '- ${newchannelldata[1]['candidateName']}'),
                                                       NewsTemplate1(
-                                                          '${newchannelldata[2]['mediaChannelName']}',
+                                                          "${newchannelldata[2]['mediaChannelName']}".length >
+                                                              16
+                                                              ? ' ${newchannelldata[2]['mediaChannelName'].substring(0, 10)}...'
+                                                              : ' ${newchannelldata[2]['mediaChannelName']}',
                                                           '${newchannelldata[2]['videoTitle']}',
                                                           'assets/icons/newsdxps.png',
                                                           '- ${newsdata[2]['candidateName']}'),
                                                       NewsTemplate4(
-                                                          '${newchannelldata[3]['mediaChannelName']}',
+                                                          "${newchannelldata[3]['mediaChannelName']}".length >
+                                                              16
+                                                              ? ' ${newchannelldata[3]['mediaChannelName'].substring(0, 10)}...'
+                                                              : ' ${newchannelldata[3]['mediaChannelName']}',
                                                           '${newchannelldata[3]['videoTitle']}',
                                                           'assets/icons/newsdxps.png',
                                                           '- ${newchannelldata[3]['candidateName']}'),
@@ -1305,22 +1373,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                                       .hasData) {
                                                     List LiveNewsList = [
                                                       NewsTemplate2(
-                                                          "${Livenewsdata[0]['mediaName']}",
+                                                          "${Livenewsdata[0]['mediaName']}".length >
+                                                              14
+                                                              ? ' ${Livenewsdata[0]['mediaName'].substring(0, 10)}...'
+                                                              : ' ${Livenewsdata[0]['mediaName']}',
                                                           '${Livenewsdata[0]['headLine']}',
                                                           'assets/icons/live.gif',
                                                           '${Livenewsdata[0]['publishedDate']}'),
                                                       NewsTemplate3(
-                                                          '${Livenewsdata[1]['mediaName']}',
+                                                          "${Livenewsdata[1]['mediaName']}".length >
+                                                              16
+                                                              ? ' ${Livenewsdata[1]['mediaName'].substring(0, 10)}...'
+                                                              : ' ${Livenewsdata[1]['mediaName']}',
                                                           '${Livenewsdata[1]['headLine']}',
                                                           'assets/icons/live.gif',
                                                           '${Livenewsdata[1]['publishedDate']}'),
                                                       NewsTemplate1(
-                                                          '${Livenewsdata[2]['mediaName']}',
+                                                          "${Livenewsdata[2]['mediaName']}".length >
+                                                              16
+                                                              ? ' ${Livenewsdata[2]['mediaName'].substring(0, 10)}...'
+                                                              : ' ${Livenewsdata[2]['mediaName']}',
                                                           '${Livenewsdata[2]['headLine']}',
                                                           'assets/icons/live.gif',
                                                           '${Livenewsdata[2]['publishedDate']}'),
                                                       NewsTemplate4(
-                                                          '${Livenewsdata[3]['mediaName']}',
+                                                          "${Livenewsdata[3]['mediaName']}".length >
+                                                              14
+                                                              ? ' ${Livenewsdata[3]['mediaName'].substring(0, 10)}...'
+                                                              : ' ${Livenewsdata[3]['mediaName']}',
+
                                                           '${Livenewsdata[3]['headLine']}',
                                                           'assets/icons/live.gif',
                                                           '${Livenewsdata[3]['publishedDate']}'),
@@ -1446,22 +1527,35 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     GoogleTrendsList =
                                                     [
                                                       NewsTemplate2(
-                                                          "${GoogleTrendsdata[0]['partyName']}",
+                                                          "${GoogleTrendsdata[0]['partyName']}".length >
+                                                              16
+                                                              ? ' ${GoogleTrendsdata[0]['partyName'].substring(0, 10)}...'
+                                                              : ' ${GoogleTrendsdata[0]['partyName']}',
+
                                                           '${GoogleTrendsdata[0]['id']['region']}',
                                                           'assets/icons/googleTrends.png',
                                                           '- ${GoogleTrendsdata[0]['id']['candidateName']}'),
                                                       NewsTemplate3(
-                                                          '${GoogleTrendsdata[1]['partyName']}',
+                                                          "${GoogleTrendsdata[1]['partyName']}".length >
+                                                              16
+                                                              ? ' ${GoogleTrendsdata[1]['partyName'].substring(0, 10)}...'
+                                                              : ' ${GoogleTrendsdata[1]['partyName']}',
                                                           '${GoogleTrendsdata[1]['id']['region']}',
                                                           'assets/icons/googleTrends.png',
                                                           '- ${GoogleTrendsdata[1]['id']['candidateName']}'),
                                                       NewsTemplate1(
-                                                          '${GoogleTrendsdata[2]['partyName']}',
+                                                          "${GoogleTrendsdata[2]['partyName']}".length >
+                                                              16
+                                                              ? ' ${GoogleTrendsdata[2]['partyName'].substring(0, 10)}...'
+                                                              : ' ${GoogleTrendsdata[2]['partyName']}',
                                                           '${GoogleTrendsdata[2]['id']['region']}',
                                                           'assets/icons/googleTrends.png',
                                                           '- ${GoogleTrendsdata[2]['id']['candidateName']}'),
                                                       NewsTemplate4(
-                                                          '${GoogleTrendsdata[3]['partyName']}',
+                                                          "${GoogleTrendsdata[3]['partyName']}".length >
+                                                              16
+                                                              ? ' ${GoogleTrendsdata[3]['partyName'].substring(0, 10)}...'
+                                                              : ' ${GoogleTrendsdata[3]['partyName']}',
                                                           '${GoogleTrendsdata[3]['id']['region']}',
                                                           'assets/icons/googleTrends.png',
                                                           '- ${GoogleTrendsdata[3]['id']['candidateName']}'),
@@ -2629,6 +2723,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 text: ' is overpowering ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
@@ -2642,6 +2737,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 text: ' in all aspects',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
                                           ],
@@ -3031,6 +3127,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 'With Huge Difference In counts for Tweets and Re-Tweets reports says that ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
                                                 text: TwiterBarGraphdata['lead']
@@ -3045,6 +3142,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 ' is relatively Dominant in Twitter Data.',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
                                                     fontFamily: 'Segoe UI')),
                                           ],
                                         ),
@@ -3274,9 +3372,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                             tooltipBehavior:
                                             _FacebooktooltipBehavior1,
                                             palette: [
-                                              Color.fromRGBO(254, 1, 117, 0),
-                                              Color.fromRGBO(19, 136, 8, 0),
-                                              Color.fromRGBO(249, 125, 9, 0),
+                                              Colors.yellow,
+                                              Colors.yellowAccent,
                                             ],
                                             series: <PieSeries<ChartSampleData,
                                                 String>>[
@@ -3363,9 +3460,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           width: 120,
                                           child: SfFunnelChart(
                                               palette: [
-                                                Color.fromRGBO(254, 1, 117, 0),
-                                                Color.fromRGBO(19, 136, 8, 0),
-                                                Color.fromRGBO(249, 125, 9, 0),
+                                                Colors.yellow,
+                                                Colors.yellowAccent,
                                               ],
                                               //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
                                               tooltipBehavior:
@@ -3435,7 +3531,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 text:
                                                 ' From Posts to public response ',
                                                 style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
+                                                    fontWeight: FontWeight.bold,color: Colors.black,
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
@@ -3452,6 +3548,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 ' is leading in all aspects',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
                                           ],
@@ -3855,12 +3952,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 text: ' is overpowering ',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
                                             TextSpan(
                                                 text: "Multiple Parties",
                                                 style: new TextStyle(
                                                     fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
                                                     //color: Colors.red,
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
@@ -3868,6 +3967,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                 text: ' in all aspects.',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
+                                                    color: Colors.black,
                                                     fontSize: 18,
                                                     fontFamily: 'Segoe UI')),
                                           ],
@@ -3990,7 +4090,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var body = json.encode({
       "type": "party_data",
       "STATE": 'ANDHRA PRADESH',
-      "party_list": 'TDP, YSRCP',
+      "party_list": 'TDP',
       "social_handle": "NEWS_CHANNEL"
     });
     var headers = {'Content-Type': 'application/json'};

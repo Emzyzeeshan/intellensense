@@ -113,6 +113,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
               if (constraints.maxHeight > 640.0) {
                 return Stack(
                   children: <Widget>[
+
                     AnimatedBuilder(
                       animation: _whiteTopClipperAnimation,
                       builder: (_, Widget? child) {
@@ -506,6 +507,7 @@ currentState=SignUpVerificationState.BYEMAIL;
                       padding: const EdgeInsets.symmetric(vertical: kPaddingL),
                       child: Column(
                         children: <Widget>[
+
                           Header(animation: _headerTextAnimation),
                           SizedBox(
                             height: 90,

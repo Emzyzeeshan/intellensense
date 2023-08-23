@@ -33,11 +33,14 @@ class _ContentCardScreenState extends State<ContentCardScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 15,
+                  height: 25,
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    IconButton(onPressed: (){
+                      Navigator.pop(context);
+                    }, icon: Icon(Icons.arrow_back_ios)),
+                    SizedBox(width: 60,),
                     Image.asset(
                       'assets/icons/voice_to_text.png',
                       height: 50,

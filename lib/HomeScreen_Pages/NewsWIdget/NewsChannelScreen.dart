@@ -89,7 +89,7 @@ class _NewsChannelScreenState extends State<NewsChannelScreen> {
                               padding: EdgeInsets.zero,
                               child: Icon(Icons.pin_invoke,
                                   color: Color.fromRGBO(58, 129, 233, 1),
-                                  size: 30),
+                                  size: 28),
                               onPressed: () {},
                             )),
                         Tooltip(
@@ -99,7 +99,7 @@ class _NewsChannelScreenState extends State<NewsChannelScreen> {
                               padding: EdgeInsets.zero,
                               child: Icon(Icons.refresh,
                                   color: Color.fromRGBO(58, 129, 233, 1),
-                                  size: 30),
+                                  size: 28),
                               onPressed: () {},
                             )),
                         Tooltip(
@@ -109,7 +109,7 @@ class _NewsChannelScreenState extends State<NewsChannelScreen> {
                               padding: EdgeInsets.zero,
                               child: Icon(Icons.sort,
                                   color: Color.fromRGBO(58, 129, 233, 1),
-                                  size: 30),
+                                  size: 28),
                               onPressed: () {},
                             )),
                         Tooltip(
@@ -119,7 +119,7 @@ class _NewsChannelScreenState extends State<NewsChannelScreen> {
                               padding: EdgeInsets.zero,
                               child: Icon(Icons.calendar_today,
                                   color: Color.fromRGBO(58, 129, 233, 1),
-                                  size: 30),
+                                  size: 28),
                               onPressed: () {},
                             )),
                         Tooltip(
@@ -129,7 +129,7 @@ class _NewsChannelScreenState extends State<NewsChannelScreen> {
                               padding: EdgeInsets.zero,
                               child: Icon(Icons.filter_alt_outlined,
                                   color: Color.fromRGBO(58, 129, 233, 1),
-                                  size: 30),
+                                  size: 28),
                               onPressed: () {},
                             )),
                         Tooltip(
@@ -139,7 +139,7 @@ class _NewsChannelScreenState extends State<NewsChannelScreen> {
                               padding: EdgeInsets.zero,
                               child: Icon(Icons.more_vert,
                                   color: Color.fromRGBO(58, 129, 233, 1),
-                                  size: 30),
+                                  size: 28),
                               onPressed: () {},
                             )),
                       ],

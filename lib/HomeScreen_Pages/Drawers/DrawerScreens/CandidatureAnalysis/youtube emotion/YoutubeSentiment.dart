@@ -53,7 +53,7 @@ class _YoutubeSentimentState extends State<YoutubeSentiment> {
         title: Row(
           children: [
             Container(
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery.of(context).size.width*0.6,
               height: 30,
               color:Color(0xff86a8e7),
               child: Center(

@@ -37,6 +37,9 @@ class _AllCandidateListState extends State<AllCandidateList> {
           child: Column(children: [
             Row(
               children: [
+                IconButton(onPressed: (){
+                  Navigator.pop(context);
+                }, icon: Icon(Icons.arrow_back_ios)),
                 // Image.asset('assets/icons/IntelliSense-Logo-Finall.gif',
                 //     height: 35,width: 35,),
                 Flexible(
@@ -103,7 +106,7 @@ class _AllCandidateListState extends State<AllCandidateList> {
                           padding: EdgeInsets.only(
                               top: MediaQuery.of(context).size.height * 0.35),
                           child: SpinKitWave(
-                            size: 30,
+                            size: 20,
                             color: Colors.blueAccent,
                           ),
                         );
@@ -114,11 +117,12 @@ class _AllCandidateListState extends State<AllCandidateList> {
                         } else if (snapshot.hasData) {
                           return Expanded(
                             child: ListView.builder(
+                              shrinkWrap: true,
                                 itemCount: Resultdata.length,
                                 itemBuilder: (context, index) {
                                   return Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 5.0, bottom: 5),
+                                         bottom: 5),
                                     child: OpenContainer(
                                       closedColor: Color(0xffd2dfff),
                                       openColor: Color(0xffd2dfff),

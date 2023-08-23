@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:intellensense/HomeScreen_Pages/HomeScreen.dart';
 import 'package:intellensense/LoginPages/login.dart';
 import 'package:intellensense/SplashScreen/splashanimation.dart';
-// import 'package:local_auth/local_auth.dart';
+import 'package:local_auth/local_auth.dart';
 
 
 import 'package:provider/provider.dart';
@@ -17,6 +17,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'Constants/themesetup/DarkThemeProvider.dart';
 import 'Constants/themesetup/styles.dart';
 import 'LoginPages/mainLoginScreen.dart';
+import 'firebase_options.dart';
 
 Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {
   Firebase.initializeApp(); // options: DefaultFirebaseConfig.platformOptions
@@ -26,9 +27,9 @@ Future<void> _firebadeMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // MobileAds.instance.initialize();
-  Firebase.initializeApp();
-
-  FirebaseMessaging.onBackgroundMessage(_firebadeMessagingBackgroundHandler);
+  Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform,);
+  //
+   FirebaseMessaging.onBackgroundMessage(_firebadeMessagingBackgroundHandler);
   runApp(ChangeNotifierProvider(create: (context) => DarkMode(), child: MyApp()));
 }
 
@@ -49,6 +50,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
  authb();
+
     getCurrentAppTheme();
     // TODO: implement initState
     super.initState();
@@ -63,53 +65,53 @@ class _MyAppState extends State<MyApp> {
     logindata = await SharedPreferences.getInstance();
     if (logindata.getBool('auth') == true) {
       print('ok');
-      // _authenticate();
+      _authenticate();
     } else {
       logindata.setBool('auth', false);
     }
   }
 bool authenticated = false;
-  // final LocalAuthentication auth = LocalAuthentication();
-  // Future<bool> _authenticate() async {
-  //   String _authorized = 'Not Authorized';
-  //   bool _isAuthenticating = false;
-  //   try {
-  //     setState(() {
-  //       _isAuthenticating = true;
-  //       _authorized = 'Authenticating';
-  //     });
-  //     authenticated = await auth.authenticate(
-  //       localizedReason: 'Let OS determine authentication method',
-  //       options: const AuthenticationOptions(sensitiveTransaction: true,
-  //         useErrorDialogs: true,
-  //         stickyAuth: true,
-  //       ),
-  //
-  //     );
-  //
-  //     setState(() {
-  //       _isAuthenticating = false;
-  //     });
-  //     print('auth');
-  //   } on PlatformException catch (e) {
-  //     print(e);
-  //     setState(() {
-  //       _isAuthenticating = false;
-  //       _authorized = 'Error - ${e.message}';
-  //     });
-  //   }
-  //
-  //   setState(
-  //       () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
-  //   if (!mounted) {}
-  //   if (_authorized == 'Not Authorized') {
-  //     setState(() {
-  //       exit(0);
-  //     });
-  //   }
-  //
-  //   return authenticated;
-  // }
+  final LocalAuthentication auth = LocalAuthentication();
+  Future<bool> _authenticate() async {
+    String _authorized = 'Not Authorized';
+    bool _isAuthenticating = false;
+    try {
+      setState(() {
+        _isAuthenticating = true;
+        _authorized = 'Authenticating';
+      });
+      authenticated = await auth.authenticate(
+        localizedReason: 'Let OS determine authentication method',
+        options: const AuthenticationOptions(sensitiveTransaction: true,
+          useErrorDialogs: true,
+          stickyAuth: true,
+        ),
+
+      );
+
+      setState(() {
+        _isAuthenticating = false;
+      });
+      print('auth');
+    } on PlatformException catch (e) {
+      print(e);
+      setState(() {
+        _isAuthenticating = false;
+        _authorized = 'Error - ${e.message}';
+      });
+    }
+
+    setState(
+        () => _authorized = authenticated ? 'Authorized' : 'Not Authorized');
+    if (!mounted) {}
+    if (_authorized == 'Not Authorized') {
+      setState(() {
+        exit(0);
+      });
+    }
+
+    return authenticated;
+  }
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -169,6 +171,7 @@ const rootUrl1 = 'https://ifar.pilogcloud.com/';
 const INSIGHTS = 'http://apimobile.pilogcloud.com:8080/insights/3.67.0';
 
 class DarkMode with ChangeNotifier {
+
   bool darkMode = false; ///by default it is true
   ///made a method which will execute while switching
   changeMode() {

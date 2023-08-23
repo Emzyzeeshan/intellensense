@@ -27,7 +27,7 @@ class _NotificationsState extends State<Notifications> {
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back,
+            Icons.arrow_back_ios,
             color: Colors.black,
           ),
           onPressed: () {

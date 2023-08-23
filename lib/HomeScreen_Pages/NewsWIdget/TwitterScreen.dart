@@ -183,7 +183,7 @@ class _TwitterScreenState extends State<TwitterScreen> {
                 ),
                 Text(
                   Value['publishedDate'] ?? '',
-                  style: TextStyle(fontSize: 12),
+                  style: TextStyle(fontSize: 10),
                 ),
               ],
             ),

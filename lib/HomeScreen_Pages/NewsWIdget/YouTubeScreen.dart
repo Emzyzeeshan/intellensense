@@ -203,11 +203,11 @@ class _YouTubeScreenState extends State<YouTubeScreen> {
                         fontWeight: FontWeight.bold, color: Colors.grey),
                   ),
                   SizedBox(
-                    width: 80,
+                    width: 60,
                   ),
                   Text(
                     Value['publishedDate'] ?? '',
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 12),
                   ),
                 ],
               ),

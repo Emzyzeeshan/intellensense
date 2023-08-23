@@ -224,7 +224,7 @@ class _NewsChannelExpBannerState extends State<NewsChannelExpBanner> {
     var body = json.encode({
       "type": "party_data",
       "STATE": 'ANDHRA PRADESH',
-      "party_list": 'TDP, YSRCP',
+      "party_list": 'TDP',
       "social_handle": "NEWS_CHANNEL"
     });
     var headers = {'Content-Type': 'application/json'};
