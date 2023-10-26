@@ -26,7 +26,7 @@ class _ConstituencyAnalysisState extends State<ConstituencyAnalysis> {
   List searchData = <String>[];
   late Future<dynamic> finaldata = ConstituencyAnalysiAPI();
   late Future<dynamic> finaldata2 =
-      ConstituencyAnalysisDataDetailsAPI('ACHAMPET');
+  ConstituencyAnalysisDataDetailsAPI('ACHAMPET');
   var xmldata;
   var Details;
   var jsondata;
@@ -54,20 +54,11 @@ class _ConstituencyAnalysisState extends State<ConstituencyAnalysis> {
       appBar: AppBar(
         leading: IconButton(
           color: Colors.grey.shade700,
-          icon: Icon(Icons.arrow_back_ios),
+          icon: Icon(Icons.search),
           onPressed: () {
-            Navigator.pop(context);
+            _key.currentState!.openDrawer();
           },
         ),
-        actions: [
-          IconButton(
-            color: Colors.grey.shade700,
-            icon: Icon(Icons.search),
-            onPressed: () {
-              _key.currentState!.openDrawer();
-            },
-          ),
-        ],
         centerTitle: true,
         backgroundColor: Color(0xffd2dfff),
         title: Image.asset(
@@ -110,182 +101,182 @@ class _ConstituencyAnalysisState extends State<ConstituencyAnalysis> {
               ),
             ),
             searchData.length ==
-                    0 // Check SearchData list is empty or not if empty then show full data else show search data
+                0 // Check SearchData list is empty or not if empty then show full data else show search data
                 ? FutureBuilder(
-                    future: finaldata,
-                    builder: ((context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Padding(
-                          padding: EdgeInsets.only(
-                              top: MediaQuery.of(context).size.height * 0.35),
-                          child: SpinKitWave(
-                            size: 30,
-                            color: Colors.blueAccent,
-                          ),
-                        );
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.done) {
-                        if (snapshot.hasError) {
-                          return Center(child: const Text('Data Error'));
-                        } else if (snapshot.hasData) {
-                          return Expanded(
-                            child: ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: fullData.length,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: const EdgeInsets.all(4.0),
-                                  child: ListTile(
-                                    onTap: () {
-                                      setState(() {
-                                        finaldata2 =
-                                            ConstituencyAnalysisDataDetailsAPI(
-                                                fullData[index].toString());
-                                      });
+              future: finaldata,
+              builder: ((context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Padding(
+                    padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.35),
+                    child: SpinKitWave(
+                      size: 30,
+                      color: Colors.blueAccent,
+                    ),
+                  );
+                } else if (snapshot.connectionState ==
+                    ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return Center(child: const Text('Data Error'));
+                  } else if (snapshot.hasData) {
+                    return Expanded(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: fullData.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: ListTile(
+                              onTap: () {
+                                setState(() {
+                                  finaldata2 =
+                                      ConstituencyAnalysisDataDetailsAPI(
+                                          fullData[index].toString());
+                                });
 
-                                      print(fullData[index]);
-                                    },
-                                    tileColor: Colors.white,
-                                    leading: Icon(Icons.location_on_sharp),
-                                    title:
-                                        Text('${fullData[index]}'.toString()),
-                                  ),
-                                );
+                                print(fullData[index]);
                               },
+                              tileColor: Colors.white,
+                              leading: Icon(Icons.location_on_sharp),
+                              title:
+                              Text('${fullData[index]}'.toString()),
                             ),
                           );
-                        } else {
-                          return Center(child: const Text('Server Error'));
-                        }
-                      } else {
-                        return Center(
-                            child: Text('State: ${snapshot.connectionState}'));
-                      }
-                    }),
-                  )
+                        },
+                      ),
+                    );
+                  } else {
+                    return Center(child: const Text('Server Error'));
+                  }
+                } else {
+                  return Center(
+                      child: Text('State: ${snapshot.connectionState}'));
+                }
+              }),
+            )
                 : Flexible(
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: searchData.length,
-                      itemBuilder: (context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: ListTile(
-                            onTap: () {
-                              setState(() {
-                                finaldata2 = ConstituencyAnalysisDataDetailsAPI(
-                                    searchData[index].toString());
-                              });
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: searchData.length,
+                itemBuilder: (context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: ListTile(
+                      onTap: () {
+                        setState(() {
+                          finaldata2 = ConstituencyAnalysisDataDetailsAPI(
+                              searchData[index].toString());
+                        });
 
-                              print(searchData[index]);
-                            },
-                            tileColor: Colors.white,
-                            title: Text('${searchData[index]}'.toString()),
-                            trailing: Text('Sample'),
-                          ),
-                        );
+                        print(searchData[index]);
                       },
+                      tileColor: Colors.white,
+                      title: Text('${searchData[index]}'.toString()),
+                      trailing: Text('Sample'),
                     ),
-                  ),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
-    body: FutureBuilder(
-       future: finaldata2,
-       builder: ((context, snapshot) {
-         if (snapshot.connectionState == ConnectionState.waiting) {
-           return Padding(
-             padding: EdgeInsets.only(
-                 top: MediaQuery.of(context).size.height * 0.35),
-             child: SpinKitWave(
-               size: 30,
-               color: Colors.blueAccent,
-             ),
-           );
-         } else if (snapshot.connectionState == ConnectionState.done) {
-           if (snapshot.hasError) {
-             return Center(child: const Text('Data Error'));
-           } else if (snapshot.hasData) {
-             xmldata =
-                 ConstituencyAnalysisDataDetailsData['OVERVIEW_DESCRIPTION']
-                     .toString();
-             print('its XML');
-             print(xmldata);
-             myTransformer.parse(xmldata);
-             jsondata = myTransformer.toGData();
-             Details = json.decode(jsondata);
-             print(jsondata);
+      body:
+      FutureBuilder(
+        future: finaldata2,
+        builder: ((context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Padding(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.35),
+              child: SpinKitWave(
+                size: 30,
+                color: Colors.blueAccent,
+              ),
+            );
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasError) {
+              return Center(child: const Text('Data Error'));
+            } else if (snapshot.hasData) {
+              xmldata =
+                  ConstituencyAnalysisDataDetailsData['OVERVIEW_DESCRIPTION']
+                      .toString();
+              print('its XML');
+              print(xmldata);
+              myTransformer.parse(xmldata);
+              jsondata = myTransformer.toGData();
+              Details = json.decode(jsondata);
+              print(jsondata);
 
-             return ListView.builder(
-
-               itemCount: ConstituencyAnalysisList.length,
-               itemBuilder: (context, index) {
-                 return Padding(
-                   padding: const EdgeInsets.all(4.0),
-                   child: ListTile(
-                     onTap: () {
-                       switch (index) {
-                         case 0:
-                           showMaterialModalBottomSheet(
-                               shape: RoundedRectangleBorder(
-                                   side: BorderSide(
-                                       width: 3, color: Color(0xffd2dfff)),
-                                   borderRadius: BorderRadius.only(
-                                       topLeft: Radius.circular(15),
-                                       topRight: Radius.circular(15))),
-                               enableDrag: false,
-                               elevation: 5,
-                               context: context,
-                               builder: (context) {
-                                 return Container(
-                                   height: MediaQuery.of(context).size.height *
-                                       0.7,
-                                   child: Padding(
-                                     padding: const EdgeInsets.all(8.0),
-                                     child: SingleChildScrollView(
-                                       child: Column(
-                                         children: [
-                                           Text(
-                                               ConstituencyAnalysisDataDetailsData[
-                                                   'ASSEMBLY_CONSTITUTION']),
-                                         ],
-                                       ),
-                                     ),
-                                   ),
-                                 );
-                               });
-                           break;
-                         case 1:
-                           showMaterialModalBottomSheet(
-                               shape: RoundedRectangleBorder(
-                                   side: BorderSide(
-                                       width: 3, color: Color(0xffd2dfff)),
-                                   borderRadius: BorderRadius.only(
-                                       topLeft: Radius.circular(15),
-                                       topRight: Radius.circular(15))),
-                               enableDrag: false,
-                               elevation: 5,
-                               context: context,
-                               builder: (context) {
-                                 return Container(
-                                   height: MediaQuery.of(context).size.height *
-                                       0.7,
-                                   child: Padding(
-                                     padding: const EdgeInsets.all(8.0),
-                                     child: SingleChildScrollView(
-                                       child: Column(
-                                         children: [
-                                           Text(
-                                             ConstituencyAnalysisList[index],
-                                             style: GoogleFonts.nunitoSans(
-                                                 fontSize: 17.0,
-                                                 fontWeight: FontWeight.w700,
-                                                 color: Colors.black),
-                                           ),
-                                           SizedBox(
-                                             height: 50,
-                                           ),
-                                           /*Padding(
+              return ListView.builder(
+                itemCount: ConstituencyAnalysisList.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: ListTile(
+                      onTap: () {
+                        switch (index) {
+                          case 0:
+                            showMaterialModalBottomSheet(
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        width: 3, color: Color(0xffd2dfff)),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15))),
+                                enableDrag: false,
+                                elevation: 5,
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.7,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                                ConstituencyAnalysisDataDetailsData[
+                                                'ASSEMBLY_CONSTITUTION']),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                });
+                            break;
+                          case 1:
+                            showMaterialModalBottomSheet(
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        width: 3, color: Color(0xffd2dfff)),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15))),
+                                enableDrag: false,
+                                elevation: 5,
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.7,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              ConstituencyAnalysisList[index],
+                                              style: GoogleFonts.nunitoSans(
+                                                  fontSize: 17.0,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.black),
+                                            ),
+                                            SizedBox(
+                                              height: 50,
+                                            ),
+                                            /*Padding(
                                              padding:
                                                  const EdgeInsets.all(8.0),
                                              child: HtmlWidget(
@@ -297,56 +288,56 @@ class _ConstituencyAnalysisState extends State<ConstituencyAnalysis> {
                                                ),
                                              ),
                                            )*/
-                                         ],
-                                       ),
-                                     ),
-                                   ),
-                                 );
-                               });
-                           break;
-                         default:
-                           showMaterialModalBottomSheet(
-                               shape: RoundedRectangleBorder(
-                                   side: BorderSide(
-                                       width: 3, color: Color(0xffd2dfff)),
-                                   borderRadius: BorderRadius.only(
-                                       topLeft: Radius.circular(15),
-                                       topRight: Radius.circular(15))),
-                               enableDrag: false,
-                               elevation: 5,
-                               context: context,
-                               builder: (context) {
-                                 return Container(
-                                   height: MediaQuery.of(context).size.height *
-                                       0.7,
-                                   child: Padding(
-                                     padding: const EdgeInsets.all(8.0),
-                                     child: SingleChildScrollView(
-                                       child: Column(
-                                         children: [
-                                           Text('Default Mode'),
-                                         ],
-                                       ),
-                                     ),
-                                   ),
-                                 );
-                               });
-                       }
-                     },
-                     leading: Text(ConstituencyAnalysisList[index]),
-                     tileColor: Color(0xffd2dfff),
-                   ),
-                 );
-               },
-             );
-           } else {
-             return Center(child: const Text('Server Error'));
-           }
-         } else {
-           return Center(child: Text('State: ${snapshot.connectionState}'));
-         }
-       }),
-     ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                });
+                            break;
+                          default:
+                            showMaterialModalBottomSheet(
+                                shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        width: 3, color: Color(0xffd2dfff)),
+                                    borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(15),
+                                        topRight: Radius.circular(15))),
+                                enableDrag: false,
+                                elevation: 5,
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.7,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: SingleChildScrollView(
+                                        child: Column(
+                                          children: [
+                                            Text('Default Mode'),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                });
+                        }
+                      },
+                      leading: Text(ConstituencyAnalysisList[index]),
+                      tileColor: Color(0xffd2dfff),
+                    ),
+                  );
+                },
+              );
+            } else {
+              return Center(child: const Text('Server Error'));
+            }
+          } else {
+            return Center(child: Text('State: ${snapshot.connectionState}'));
+          }
+        }),
+      ),
     );
   }
 

@@ -111,6 +111,13 @@ class _LoginState extends State<Login> with SingleTickerProviderStateMixin {
               if (constraints.maxHeight > 640.0) {
                 return Stack(
                   children: <Widget>[
+                    Row(
+                      children: [
+                        IconButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, icon: Icon(Icons.arrow_back_ios)),
+                      ],
+                    ),
                     AnimatedBuilder(
                       animation: _whiteTopClipperAnimation,
                       builder: (_, Widget? child) {

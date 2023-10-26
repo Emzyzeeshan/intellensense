@@ -9,7 +9,9 @@ import 'package:intellensense/LoginPages/widgets/ChartSampleData.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../CandidatureAnalysis.dart';
+import '../AllCandidateList.dart';
+
+
 
 class NewsChannel extends StatefulWidget {
   var Value;

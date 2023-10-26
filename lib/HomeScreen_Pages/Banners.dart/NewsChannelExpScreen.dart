@@ -49,8 +49,8 @@ class _NewsChannelExpBannerState extends State<NewsChannelExpBanner> {
           backgroundColor: Colors.white,
           centerTitle: true,
           title: Image.asset(
-            'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-            width: 160,
+            'assets/new Updated images/AppIcon.gif',
+            width: 60,
           ),
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios_new, color: Colors.black),
@@ -87,6 +87,7 @@ class _NewsChannelExpBannerState extends State<NewsChannelExpBanner> {
                                   borderColor: Colors.blue,
                                   tooltipBehavior: _tooltipBehavior1,
                                   palette: [
+                                    Colors.yellow,
                                     Color.fromRGBO(0, 142, 70,0),
                                     Color.fromRGBO(255, 255, 0,0),
                                     Color.fromRGBO(236, 13, 195,0),
@@ -126,6 +127,7 @@ class _NewsChannelExpBannerState extends State<NewsChannelExpBanner> {
                                   legend: Legend(isVisible: true),
                                   borderColor: Colors.blue,
                                   palette: [
+                                    Colors.yellow,
                                     Color.fromRGBO(0, 142, 70,0),
                                     Color.fromRGBO(255, 255, 0,0),
                                     Color.fromRGBO(236, 13, 195,0),

@@ -10,7 +10,7 @@ import 'package:intellensense/LoginPages/login.dart';
 
 import '../../main.dart';
 import '../../LoginPages/mainLoginScreen.dart';
-import 'DrawerScreens/CandidatureAnalysis/CandidatureAnalysis.dart';
+
 import 'DrawerScreens/Constituency Analysis/ConstituencyAnalysis.dart';
 import 'DrawerScreens/ElectoralAnalysis/ElectoralAnalysis.dart';
 
@@ -31,7 +31,7 @@ class _drawerState extends State<drawer> {
             
             ),
             child: Image.asset(
-                'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif'),
+                'assets/new Updated images/AppIcon.gif'),
           ),
           ListTile(
             leading: Image(
@@ -76,11 +76,11 @@ class _drawerState extends State<drawer> {
                   ),
                   title: Text('Constituency Analysis'),
                   onTap: () {
-                    Navigator.push(
+                    /*Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) => ConstituencyAnalysis(),
-                        ));
+                        ));*/
                   },
                 ),
                 ListTile(

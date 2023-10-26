@@ -23,7 +23,6 @@ class _NotificationsState extends State<Notifications> {
         elevation: 0,
         toolbarHeight: 40,
         centerTitle: true,
-
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(
@@ -35,7 +34,7 @@ class _NotificationsState extends State<Notifications> {
           },
         ),
         title: Image.asset(
-          'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
+          'assets/new Updated images/AppIcon.gif',
           height: 50,
         ),
       ),

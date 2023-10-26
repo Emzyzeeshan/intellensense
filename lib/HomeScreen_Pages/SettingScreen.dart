@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:cool_alert/cool_alert.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -14,6 +13,7 @@ import 'package:intellensense/main.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
+import '../AboutSectionPage.dart';
 import '../LoginPages/mainLoginScreen.dart';
 
 class SettingScreen extends StatefulWidget {
@@ -44,24 +44,20 @@ class _SettingScreenState extends State<SettingScreen> {
             padding: const EdgeInsets.all(8.0),
 
             child: Column(children: [
-              Row(children: [IconButton(onPressed: (){
-
-                Navigator.pop(context);
-              }, icon: Icon(Icons.arrow_back_ios))],),
               Image.asset(
-                'assets/icons/IntelliSense-Logo-Finall.gif',
+                'assets/new Updated images/AppIcon.gif',
                 height: 55,
               ),
               SizedBox(height: 10),
-              Text(
+             /* Text(
                 'Settings',
                 style: GoogleFonts.nunitoSans(
                     fontSize: 18.0,
                     fontWeight: FontWeight.w700,
                     ),
-              ),
+              ),*/
               SizedBox(height: 10),
-             
+
               // Padding(
               //   padding: const EdgeInsets.all(4.0),
               //   child: ListTile(
@@ -85,19 +81,19 @@ class _SettingScreenState extends State<SettingScreen> {
               //     },
               //   ),
               // ),
-        
+
                Padding(
                  padding: const EdgeInsets.all(4.0),
                  child: ListTile(
-                  tileColor: Color(0xff86a8e7),
+                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  tileColor: Color(0xffd2dfff),
                     leading: const Icon(Icons.dark_mode, size: 35),
                     title: const Text("Dark Mode"),
                     subtitle: const Text("Here you can change you're theme."),
-                    trailing: CupertinoSwitch(
-                      focusColor: Color.fromARGB(255, 89, 216, 255),
+                    trailing: Switch(
                       value: themeMode.darkMode,
-                      //activeTrackColor: const Color.fromARGB(255, 89, 216, 255),
-                      activeColor: Colors.green,
+                      activeTrackColor: const Color.fromARGB(255, 89, 216, 255),
+                      activeColor: const Color.fromARGB(255, 78, 76, 175),
                       onChanged: (value) {
                         themeMode.changeMode();
                       },
@@ -107,17 +103,18 @@ class _SettingScreenState extends State<SettingScreen> {
                  Padding(
                  padding: const EdgeInsets.all(4.0),
                  child: ListTile(
-                  tileColor: Color(0xff86a8e7),
+                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                   tileColor: Color(0xffd2dfff),
+                  //tileColor: Color(0xff86a8e7),
                     leading: const Icon(Icons.lock, size: 35),
                     title: const Text("App Lock"),
                     subtitle: const Text("Secure using Biometric"),
-                    trailing: CupertinoSwitch(applyTheme: true,
+                    trailing: Switch(
                       value:logindata.getBool('auth') == null
                           ? false
                           : logindata.getBool('auth')!,
-                      focusColor: Color.fromARGB(255, 89, 216, 255),
-                      //activeTrackColor: const Color.fromARGB(255, 89, 216, 255),
-                      activeColor: Colors.green,
+                      activeTrackColor: const Color.fromARGB(255, 89, 216, 255),
+                      activeColor: const Color.fromARGB(255, 78, 76, 175),
                       onChanged: (value) {
                        setState(() {
                           logindata.setBool('auth', value);
@@ -127,11 +124,27 @@ class _SettingScreenState extends State<SettingScreen> {
                     ),
                   ),
                ),
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ListTile(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  tileColor: Color(0xffd2dfff),
+                  //tileColor:Color(0xff86a8e7),
+                  leading: Icon(Icons.info,size: 35),
+                  title: const Text('About'),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AboutSectionPage())
+                    );
+                  },
+                ),
+              ),
                 Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: ListTile(
-                  tileColor:Color(0xff86a8e7),
-                  leading: Icon(Icons.logout_outlined),
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                  tileColor: Color(0xffd2dfff),
+                  //tileColor:Color(0xff86a8e7),
+                  leading: Icon(Icons.logout_outlined,size: 35),
                   title: const Text('LogOut'),
                   onTap: () {
                     CoolAlert.show(
@@ -144,6 +157,11 @@ class _SettingScreenState extends State<SettingScreen> {
                   },
                 ),
               ),
+              Spacer(),
+              Text(
+                '© 2023 Intellisense Solutions. All Rights Reserved.',
+                style: Theme.of(context).textTheme.bodyText2,
+              )
             ]),
           ),
         ));

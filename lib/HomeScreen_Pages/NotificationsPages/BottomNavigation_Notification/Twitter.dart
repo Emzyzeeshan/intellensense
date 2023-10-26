@@ -25,21 +25,24 @@ class _TwitterState extends State<Twitter> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        TextField(
-          onChanged: onSearchTextChanged,
-          cursorColor: Colors.grey,
-          decoration: InputDecoration(
-              isDense: true,
-              fillColor: TextfieldColor,
-              filled: true,
-              border: OutlineInputBorder(borderSide: BorderSide.none),
-              hintText: 'Search',
-              hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
-              prefixIcon: Container(
-                padding: EdgeInsets.all(15),
-                child: Icon(Icons.search_rounded),
-                width: 18,
-              )),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0,left: 8,right: 8),
+          child: TextField(
+            onChanged: onSearchTextChanged,
+            cursorColor: Colors.grey,
+            decoration: InputDecoration(
+                isDense: true,
+                fillColor: TextfieldColor,
+                filled: true,
+                border: OutlineInputBorder(borderSide: BorderSide.none),
+                hintText: 'Search',
+                hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
+                prefixIcon: Container(
+                  padding: EdgeInsets.all(15),
+                  child: Icon(Icons.search_rounded),
+                  width: 18,
+                )),
+          ),
         ),
         SizedBox(
           height: 10,
@@ -174,6 +177,7 @@ class _TwittterNotificationtileState extends State<TwittterNotificationtile> {
         collapsedBackgroundColor:  Color(0xffc8d1e7),
         backgroundColor: Color(0xffc8d1e7),
         childrenPadding: EdgeInsets.all(5),
+        collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         leading: Image.asset(
           'assets/icons/Social-Media-Icons-IS-08.png',

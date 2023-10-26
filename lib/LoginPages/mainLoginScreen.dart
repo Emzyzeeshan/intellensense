@@ -158,18 +158,19 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                     SafeArea(
                       child: Padding(
                         padding:
-                            const EdgeInsets.symmetric(vertical: kPaddingL),
+                             EdgeInsets.symmetric(vertical: kPaddingL),
                         child: Column(
                           children: <Widget>[
                             Header(animation: _headerTextAnimation),
                             SizedBox(
-                              height: 90,
+                              height: 120,
                             ),
                             Flexible(
                               child: Image.asset(
-                                'assets/icons/output-onlinegiftools_OUT.gif',
+                                'assets/new Updated images/New map Home.gif',
                               ),
                             ),
+                            SizedBox(height: 20,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -267,11 +268,12 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                             ),
 
                             SizedBox(
-                              height: 60,
+                              height: 120,
                             ),
                             Image.asset(
-                                'assets/icons/output-onlinegiftools_OUT.gif',
+                                'assets/new Updated images/New map Home.gif',
                                 height: 250),
+                            SizedBox(height: 20,),
                             ElevatedButton(
                                 onPressed: () {
                                   Navigator.push(
@@ -367,10 +369,10 @@ class _mainLoginScreenState extends State<mainLoginScreen>
                         children: <Widget>[
                           Header(animation: _headerTextAnimation),
                           SizedBox(
-                            height: 90,
+                            height: 120,
                           ),
                           Image.asset(
-                              'assets/icons/output-onlinegiftools_OUT.gif',
+                              'assets/new Updated images/New map Home.gif',
                               height: 400),
                           //LoginForm(animation: _formElementAnimation),
                           ElevatedButton(

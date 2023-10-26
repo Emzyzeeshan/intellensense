@@ -33,14 +33,11 @@ class _ContentCardScreenState extends State<ContentCardScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 25,
+                  height: 15,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(onPressed: (){
-                      Navigator.pop(context);
-                    }, icon: Icon(Icons.arrow_back_ios)),
-                    SizedBox(width: 60,),
                     Image.asset(
                       'assets/icons/voice_to_text.png',
                       height: 50,
@@ -159,7 +156,7 @@ class _ContentCardScreenState extends State<ContentCardScreen> {
 
     var response = await post(
         Uri.parse(
-            'http://apihub.pilogcloud.com:6663/VoiceTranslator_mobile_urls/'),
+            'http://apihub.pilogcloud.com:6663/VoiceTranslator_mobile_urls'),
         body: query);
     print(response.statusCode);
     if (response.statusCode == 200) {

@@ -50,6 +50,9 @@ class _TwitterScreenState extends State<TwitterScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        IconButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, icon: Icon(Icons.arrow_back_ios)),
                         SizedBox(
                           width: 10,
                         ),
@@ -95,16 +98,7 @@ class _TwitterScreenState extends State<TwitterScreen> {
                                   size: 30),
                               onPressed: () {},
                             )),
-                        Tooltip(
-                            message: 'Calender',
-                            child: CupertinoButton(
-                              minSize: double.minPositive,
-                              padding: EdgeInsets.zero,
-                              child: Icon(Icons.calendar_today,
-                                  color: Color.fromRGBO(58, 129, 233, 1),
-                                  size: 30),
-                              onPressed: () {},
-                            )),
+
                         Tooltip(
                             message: 'Multi-Filter',
                             child: CupertinoButton(
@@ -115,16 +109,7 @@ class _TwitterScreenState extends State<TwitterScreen> {
                                   size: 30),
                               onPressed: () {},
                             )),
-                        Tooltip(
-                            message: 'More',
-                            child: CupertinoButton(
-                              minSize: double.minPositive,
-                              padding: EdgeInsets.zero,
-                              child: Icon(Icons.more_vert,
-                                  color: Color.fromRGBO(58, 129, 233, 1),
-                                  size: 30),
-                              onPressed: () {},
-                            )),
+
                       ],
                     ),
                   ),
@@ -183,7 +168,7 @@ class _TwitterScreenState extends State<TwitterScreen> {
                 ),
                 Text(
                   Value['publishedDate'] ?? '',
-                  style: TextStyle(fontSize: 10),
+                  style: TextStyle(fontSize: 12),
                 ),
               ],
             ),

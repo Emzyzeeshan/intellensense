@@ -7,7 +7,6 @@ import 'package:intellensense/SignUpPages/SIgnUpRegister_Phone.dart';
 import 'package:intellensense/main.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
-import 'package:provider/provider.dart';
 
 import 'SignUpRegistration_Email.dart';
 
@@ -28,26 +27,25 @@ class _EmailSignUpState extends State<EmailSignUp> {
   bool spinnerLoading = false;
   @override
   Widget build(BuildContext context) {
-    final themeMode = Provider.of<DarkMode>(context);
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(0xffd2dfff),
       key: _scaffoldKeyForSnackBar,
-          appBar: AppBar(
-            iconTheme: IconThemeData(
-              color: themeMode.darkMode ? Colors.white:Colors.black, //change your color here
-            ),
-            elevation: 0,
-            backgroundColor: themeMode.darkMode ? Colors.black:Colors.white,
-          ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Row(
+                children: [
+                  IconButton(onPressed: (){
+                    Navigator.pop(context);
+                  }, icon: Icon(Icons.arrow_back_ios)),
+                ],
+              ),
               Image.asset(
-                'assets/icons/IntelliSense-Logo-Finall.gif',
+                'assets/new Updated images/AppIcon.gif',
                 height: 200,
                 width: 200,
               ),

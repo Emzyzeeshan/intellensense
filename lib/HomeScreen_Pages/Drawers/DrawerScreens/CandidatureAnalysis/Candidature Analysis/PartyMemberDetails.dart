@@ -6,7 +6,7 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
+//import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
 import 'package:intellensense/Constants/constants.dart';
 import 'package:intellensense/main.dart';
@@ -32,13 +32,13 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
   late Future<dynamic> Detailsofpartydata = PartyResultAPI();
 
   var isExpandedValues = [false, false];
-  // final Completer<GoogleMapController> _controller =
-  // Completer<GoogleMapController>();
-  //
-  // static const CameraPosition _kGooglePlex = CameraPosition(
-  //   target: LatLng(37.42796133580664, -122.085749655962),
-  //   zoom: 14.4746,
-  // );
+  /*final Completer<GoogleMapController> _controller =
+  Completer<GoogleMapController>();
+
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );*/
   var partycolor;
   @override
   void initState() {
@@ -92,18 +92,25 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,backgroundColor: Colors.transparent,
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon: Icon(Icons.arrow_back_ios,color: Colors.black,)),
-      ),
+
       body: SingleChildScrollView(
           scrollDirection: Axis.vertical,
           child: Padding(
             padding: const EdgeInsets.only(top: 28.0, left: 8, right: 8),
             child: Column(
               children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Row(
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          icon: Icon(Icons.arrow_back_ios)),
+                    ],
+                  ),
+                ),
                 Align(
                   alignment: Alignment.topCenter,
                   child: Padding(
@@ -821,6 +828,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                               ]),
                         );
                       }),
+
                   // ListTile(
                   //   leading: Text('Sentiment Analysis'),
                   //   tileColor: Colors.cyan[50],
@@ -881,8 +889,6 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                               },
                             ),
                             OpenContainer(
-
-
                               openElevation: 10.0,
                               closedShape: const RoundedRectangleBorder(
                                 borderRadius: BorderRadius.all(
@@ -1035,6 +1041,7 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
                     )),
               ],
             ),
+
           )),
     );
   }
@@ -1052,7 +1059,6 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
         setState(() {
           loaded = true;
         });
-
         print(Resultdata);
       } catch (e) {
         print(Resultdata);
@@ -1083,3 +1089,4 @@ class _TrsMpDetailsState extends State<TrsMpDetails> {
     );
   }
 }
+

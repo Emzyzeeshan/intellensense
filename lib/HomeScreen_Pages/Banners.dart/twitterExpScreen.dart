@@ -49,8 +49,8 @@ class _TwitterExpBannerState extends State<TwitterExpBanner> {
           backgroundColor: Colors.white,
           centerTitle: true,
           title: Image.asset(
-            'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-            width: 160,
+            'assets/new Updated images/AppIcon.gif',
+            width: 60,
           ),
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios_new, color: Colors.black),
@@ -87,9 +87,10 @@ class _TwitterExpBannerState extends State<TwitterExpBanner> {
                                   borderColor: Colors.blue,
                                   tooltipBehavior: _tooltipBehavior1,
                                   palette: [
-                                    Color.fromRGBO(254, 1, 117, 0),
-                                    Color.fromRGBO(19, 136, 8, 0),
-                                    Color.fromRGBO(249, 125, 9, 0),
+                                    Colors.yellow,
+                                    Colors.yellowAccent,
+                                    Color.fromRGBO(
+                                        218, 40, 36, 0),
                                   ],
                                   series: <PieSeries<ChartSampleData, String>>[
                                     PieSeries<ChartSampleData, String>(
@@ -126,9 +127,10 @@ class _TwitterExpBannerState extends State<TwitterExpBanner> {
                                   legend: Legend(isVisible: true),
                                   borderColor: Colors.blue,
                                   palette: [
-                                    Color.fromRGBO(254, 1, 117, 0),
-                                    Color.fromRGBO(19, 136, 8, 0),
-                                    Color.fromRGBO(249, 125, 9, 0),
+                                    Colors.yellow,
+                                    Colors.yellowAccent,
+                                    Color.fromRGBO(
+                                        218, 40, 36, 0),
                                   ],
                                   title: ChartTitle(text:'Views Data In Twitter'),
                                   tooltipBehavior: TooltipBehavior(enable: true),
@@ -223,8 +225,8 @@ class _TwitterExpBannerState extends State<TwitterExpBanner> {
   Future<dynamic> TwitterBannerGraphApi() async {
 
     TwitterSelectionquery1['type'] = 'party_data';
-    TwitterSelectionquery1['STATE'] = 'TELANGANA';
-    TwitterSelectionquery1['party_list'] = 'INC,TRS,BJP';
+    TwitterSelectionquery1['STATE'] = 'ANDHRA PRADESH';
+    TwitterSelectionquery1['party_list'] = 'TDP,YSRCP,JSP';
     //Selectionquery['channel'] = 'YOUTUBE';
 
     var response = await post(

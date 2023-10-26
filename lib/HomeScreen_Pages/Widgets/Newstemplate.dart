@@ -19,73 +19,75 @@ class NewsTemplate1 extends StatefulWidget {
 class _NewsTemplate1State extends State<NewsTemplate1> {
   @override
   Widget build(BuildContext context) {
-      final themeMode = Provider.of<DarkMode>(context);
+    final themeMode = Provider.of<DarkMode>(context);
     return Card(
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Container(
-          child: Container(
-            
-            decoration: BoxDecoration( image: DecorationImage(
-                  image:  !themeMode.darkMode?
-                  AssetImage(
-                  
-                      'assets/DarkmodeImages/dot.png'):AssetImage(DarkModeImages[0],),
-                  fit: BoxFit.fill,opacity: 0.6),
-              borderRadius: BorderRadius.circular(20),
-            gradient:  !themeMode.darkMode?  LinearGradient(
-                colors: const [
-                  Color(0xff86a8e7),
-                  Color(0xff86a8e7),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ):null,
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(top: 8.0, left: 8, right: 15),
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Image.asset(
-                          '${widget.logolink}',
-                          height: 20,
-                          width: 20,
-                        ),
-                        Text(
-                            widget.header!.length > 16
-                                ? '${widget.header!.substring(0, 10)}...'
-                                : widget.header!,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 10)),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Text('${widget.newsdescription}',
-                          maxLines: 4, style: GoogleFonts.raleway(fontSize: 9)),
-                    ),
-                    Spacer(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8.0, bottom: 8),
-                          child: Text('${widget.CandidateName}',
-                              maxLines: 4,
-                              style: GoogleFonts.raleway(
-                                  fontSize: 8, fontWeight: FontWeight.w600)),
-                        ),
-                      ],
-                    ),
-                  ]),
-            ),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: !themeMode.darkMode
+                    ? AssetImage('assets/DarkmodeImages/dot.png')
+                    : AssetImage(
+                        DarkModeImages[0],
+                      ),
+                fit: BoxFit.fill,
+                opacity: 0.6),
+            borderRadius: BorderRadius.circular(20),
+            gradient: !themeMode.darkMode
+                ? LinearGradient(
+                    colors: const [
+                      Color.fromARGB(255, 79, 136, 239),
+                      Color.fromARGB(255, 81, 122, 198),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0, left: 8, right: 15),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Image.asset(
+                        '${widget.logolink}',
+                        height: 20,
+                        width: 20,
+                      ),
+                      Text(
+                          widget.header!.length > 16
+                              ? '${widget.header!.substring(0, 10)}...'
+                              : widget.header!,
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 10)),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 3,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: Text('${widget.newsdescription}',
+                        maxLines: 4, style: GoogleFonts.raleway(fontSize: 9)),
+                  ),
+                  Spacer(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0, bottom: 8),
+                        child: Text('${widget.CandidateName}',
+                            maxLines: 4,
+                            style: GoogleFonts.raleway(
+                                fontSize: 8, fontWeight: FontWeight.w600)),
+                      ),
+                    ],
+                  ),
+                ]),
           ),
         ));
   }
@@ -106,26 +108,29 @@ class NewsTemplate2 extends StatefulWidget {
 class _NewsTemplate2State extends State<NewsTemplate2> {
   @override
   Widget build(BuildContext context) {
-      final themeMode = Provider.of<DarkMode>(context);
+    final themeMode = Provider.of<DarkMode>(context);
     return Card(
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Container(
-          decoration: BoxDecoration( image: DecorationImage(
-                image:  !themeMode.darkMode?
-                AssetImage(
-                
-                    'assets/DarkmodeImages/dot.png'):AssetImage(DarkModeImages[1]),
-                fit: BoxFit.fill,opacity: 0.6),
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: !themeMode.darkMode
+                    ? AssetImage('assets/DarkmodeImages/dot.png')
+                    : AssetImage(DarkModeImages[1]),
+                fit: BoxFit.fill,
+                opacity: 0.6),
             borderRadius: BorderRadius.circular(20),
-            gradient:  !themeMode.darkMode?  LinearGradient(
-              colors: const [
-                Color(0xff86a8e7),
-                Color(0xff86a8e7),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ):null,
+            gradient: !themeMode.darkMode
+                ? LinearGradient(
+                    colors: const [
+                      Color.fromARGB(255, 79, 136, 239),
+                      Color.fromARGB(255, 81, 122, 198),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
           ),
           child: Padding(
             padding: const EdgeInsets.only(top: 8.0, left: 8, right: 15),
@@ -197,27 +202,29 @@ class NewsTemplate3 extends StatefulWidget {
 class _NewsTemplate3State extends State<NewsTemplate3> {
   @override
   Widget build(BuildContext context) {
-     final themeMode = Provider.of<DarkMode>(context);
+    final themeMode = Provider.of<DarkMode>(context);
     return Card(
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-                image:  !themeMode.darkMode?
-                AssetImage(
-                
-                    'assets/DarkmodeImages/dot.png'):AssetImage(DarkModeImages[2]),
-                fit: BoxFit.fill,opacity: 0.6),
+                image: !themeMode.darkMode
+                    ? AssetImage('assets/DarkmodeImages/dot.png')
+                    : AssetImage(DarkModeImages[2]),
+                fit: BoxFit.fill,
+                opacity: 0.6),
             borderRadius: BorderRadius.circular(20),
-          gradient:  !themeMode.darkMode?  LinearGradient(
-              colors: const [
-                Color(0xff86a8e7),
-                Color(0xff86a8e7),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ):null,
+            gradient: !themeMode.darkMode
+                ? LinearGradient(
+                    colors: const [
+                      Color.fromARGB(255, 79, 136, 239),
+                      Color.fromARGB(255, 81, 122, 198),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
           ),
           child: Padding(
             padding: const EdgeInsets.only(top: 8.0, left: 8, right: 15),
@@ -284,26 +291,29 @@ class NewsTemplate4 extends StatefulWidget {
 class _NewsTemplate4State extends State<NewsTemplate4> {
   @override
   Widget build(BuildContext context) {
-      final themeMode = Provider.of<DarkMode>(context);
+    final themeMode = Provider.of<DarkMode>(context);
     return Card(
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Container(
           decoration: BoxDecoration(
-             image: DecorationImage(
-                image:  !themeMode.darkMode?
-                AssetImage(
-                    'assets/DarkmodeImages/dot.png'):AssetImage(DarkModeImages[3]),
-                fit: BoxFit.fill,opacity: 0.6),
+            image: DecorationImage(
+                image: !themeMode.darkMode
+                    ? AssetImage('assets/DarkmodeImages/dot.png')
+                    : AssetImage(DarkModeImages[3]),
+                fit: BoxFit.fill,
+                opacity: 0.6),
             borderRadius: BorderRadius.circular(20),
-           gradient:  !themeMode.darkMode?  LinearGradient(
-              colors: const [
-                Color(0xff86a8e7),
-                Color(0xff86a8e7),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ):null,
+            gradient: !themeMode.darkMode
+                ? LinearGradient(
+                    colors: const [
+                      Color.fromARGB(255, 79, 136, 239),
+                      Color.fromARGB(255, 125, 151, 194),
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
           ),
           child: Padding(
             padding: const EdgeInsets.only(top: 8.0, left: 8, right: 15),

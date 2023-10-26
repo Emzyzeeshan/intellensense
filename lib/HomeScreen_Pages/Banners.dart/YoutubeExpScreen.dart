@@ -49,8 +49,8 @@ class _YoutubeExpBannerState extends State<YoutubeExpBanner> {
           backgroundColor: Colors.white,
           centerTitle: true,
           title: Image.asset(
-            'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-            width: 160,
+            'assets/new Updated images/AppIcon.gif',
+            width: 60,
           ),
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios_new, color: Colors.black),

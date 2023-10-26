@@ -18,36 +18,24 @@ class YoutubePivot extends StatefulWidget {
 
 class _YoutubePivotState extends State<YoutubePivot> {
 
-  static List<Animal> _animals = [
-    Animal(id: 1, name: "Lion"),
-    Animal(id: 2, name: "Flamingo"),
-    Animal(id: 3, name: "Hippo"),
-    Animal(id: 4, name: "Horse"),
-    Animal(id: 5, name: "Tiger"),
-    Animal(id: 6, name: "Penguin"),
-    Animal(id: 7, name: "Spider"),
-    Animal(id: 8, name: "Snake"),
-    Animal(id: 9, name: "Bear"),
-    Animal(id: 10, name: "Beaver"),
-    Animal(id: 11, name: "Cat"),
-    Animal(id: 12, name: "Fish"),
-    Animal(id: 13, name: "Rabbit"),
-    Animal(id: 14, name: "Mouse"),
-    Animal(id: 15, name: "Dog"),
-    Animal(id: 16, name: "Zebra"),
-    Animal(id: 17, name: "Cow"),
-    Animal(id: 18, name: "Frog"),
-    Animal(id: 19, name: "Blue Jay"),
-    Animal(id: 20, name: "Moose"),
-    Animal(id: 21, name: "Gecko"),
-    Animal(id: 22, name: "Kangaroo"),
-    Animal(id: 23, name: "Shark"),
-    Animal(id: 24, name: "Crocodile"),
-    Animal(id: 25, name: "Owl"),
-    Animal(id: 26, name: "Dragonfly"),
-    Animal(id: 27, name: "Dolphin"),
+  static List<Animal> Columns = [
+    Animal(id: 1, name: "publishedDate"),
+    Animal(id: 2, name: "keyWords"),
+    Animal(id: 3, name: "likesCount"),
+    Animal(id: 4, name: "handlerName"),
+    Animal(id: 5, name: "translatedSentimentResult"),
+    Animal(id: 6, name: "postiveSentimentCount"),
+    Animal(id: 7, name: "dislikesCount"),
+    Animal(id: 8, name: "negativeSentimentCount"),
+    Animal(id: 9, name: "publishedTime"),
+    Animal(id: 10, name: "viewsCount"),
+    Animal(id: 11, name: "commentsCount"),
+    Animal(id: 12, name: "candidatePartyName"),
+    Animal(id: 13, name: "titleContent"),
+    Animal(id: 14, name: "contentType"),
+    Animal(id: 15, name: "neutralSentimentCount"),
   ];
-  final _items = _animals
+  final _items = Columns
       .map((animal) => MultiSelectItem<Animal>(animal, animal.name))
       .toList();
   //List<Animal> _selectedAnimals = [];
@@ -59,7 +47,7 @@ class _YoutubePivotState extends State<YoutubePivot> {
 
   @override
   void initState() {
-    _selectedAnimals5 = _animals;
+    _selectedAnimals5 = Columns;
     super.initState();
   }
 
@@ -75,28 +63,24 @@ class _YoutubePivotState extends State<YoutubePivot> {
           padding: EdgeInsets.all(20),
           child: Column(
             children: <Widget>[
-              SizedBox(height: 40),
-              //################################################################################################
-              // Rounded blue MultiSelectDialogField
-              //################################################################################################
               MultiSelectDialogField(
                 items: _items,
                 title: Text("Animals"),
                 selectedColor: Colors.blue,
                 decoration: BoxDecoration(
                   color: Colors.blue.withOpacity(0.1),
-                  borderRadius: BorderRadius.all(Radius.circular(40)),
+                  borderRadius: BorderRadius.all(Radius.circular(25)),
                   border: Border.all(
                     color: Colors.blue,
                     width: 2,
                   ),
                 ),
                 buttonIcon: Icon(
-                  Icons.pets,
+                  Icons.arrow_downward,
                   color: Colors.blue,
                 ),
                 buttonText: Text(
-                  "Favorite Animals",
+                  "Select Column",
                   style: TextStyle(
                     color: Colors.blue[800],
                     fontSize: 16,
@@ -105,119 +89,6 @@ class _YoutubePivotState extends State<YoutubePivot> {
                 onConfirm: (results) {
                   //_selectedAnimals = results;
                 },
-              ),
-              SizedBox(height: 50),
-              //################################################################################################
-              // This MultiSelectBottomSheetField has no decoration, but is instead wrapped in a Container that has
-              // decoration applied. This allows the ChipDisplay to render inside the same Container.
-              //################################################################################################
-              Container(
-                decoration: BoxDecoration(
-                  color: Theme.of(context).primaryColor.withOpacity(.4),
-                  border: Border.all(
-                    color: Theme.of(context).primaryColor,
-                    width: 2,
-                  ),
-                ),
-                child: Column(
-                  children: <Widget>[
-                    MultiSelectBottomSheetField(
-                      initialChildSize: 0.4,
-                      listType: MultiSelectListType.CHIP,
-                      searchable: true,
-                      buttonText: Text("Favorite Animals"),
-                      title: Text("Animals"),
-                      items: _items,
-                      onConfirm: (values) {
-                        _selectedAnimals2;
-                      },
-                      chipDisplay: MultiSelectChipDisplay(
-                        onTap: (value) {
-                          setState(() {
-                            _selectedAnimals2.remove(value);
-                          });
-                        },
-                      ),
-                    ),
-                    _selectedAnimals2.isEmpty
-                        ? Container(
-                        padding: EdgeInsets.all(10),
-                        alignment: Alignment.centerLeft,
-                        child: Text(
-                          "None selected",
-                          style: TextStyle(color: Colors.black54),
-                        ))
-                        : Container(),
-                  ],
-                ),
-              ),
-              SizedBox(height: 40),
-              //################################################################################################
-              // MultiSelectBottomSheetField with validators
-              //################################################################################################
-              MultiSelectBottomSheetField<Animal>(
-                key: _multiSelectKey,
-                initialChildSize: 0.7,
-                maxChildSize: 0.95,
-                title: Text("Animals"),
-                buttonText: Text("Favorite Animals"),
-                items: _items,
-                searchable: true,
-                validator: (values) {
-                  if (values == null || values.isEmpty) {
-                    return "Required";
-                  }
-                  List<String> names = values.map((e) => e.name).toList();
-                  if (names.contains("Frog")) {
-                    return "Frogs are weird!";
-                  }
-                  return null;
-                },
-                onConfirm: (values) {
-                  setState(() {
-                    _selectedAnimals3 = values;
-                  });
-                  _multiSelectKey.currentState?.validate();
-                },
-                chipDisplay: MultiSelectChipDisplay(
-                  onTap: (item) {
-                    setState(() {
-                      _selectedAnimals3.remove(item);
-                    });
-                    _multiSelectKey.currentState?.validate();
-                  },
-                ),
-              ),
-              SizedBox(height: 40),
-              //################################################################################################
-              // MultiSelectChipField
-              //################################################################################################
-              MultiSelectChipField(
-                items: _items,
-                initialValue: [_animals[4], _animals[7], _animals[9]],
-                title: Text("Animals"),
-                headerColor: Colors.blue.withOpacity(0.5),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blue, width: 1.8),
-                ),
-                selectedChipColor: Colors.blue.withOpacity(0.5),
-                selectedTextStyle: TextStyle(color: Colors.blue[800]),
-                onTap: (values) {
-                  //_selectedAnimals4 = values;
-                },
-              ),
-              SizedBox(height: 40),
-              //################################################################################################
-              // MultiSelectDialogField with initial values
-              //################################################################################################
-              MultiSelectDialogField(
-                onConfirm: (val) {
-                  _selectedAnimals5;
-                },
-                dialogWidth: MediaQuery.of(context).size.width * 0.7,
-                items: _items,
-                initialValue:
-                _selectedAnimals5, // setting the value of this in initState() to pre-select values.
               ),
             ],
           ),

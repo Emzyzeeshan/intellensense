@@ -31,14 +31,14 @@ class _NewsPaperScreenState extends State<NewsPaperScreen> {
     return Padding(
         padding: EdgeInsets.all(8),
         child: Card(
-            // color: Colors.grey[300],
+            color: Colors.grey[300],
             shape: RoundedRectangleBorder(
                 side: BorderSide(color: Colors.blueAccent, width: 2),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
+                  topLeft: Radius.circular(15),
+                  topRight: Radius.circular(15),
+                  bottomLeft: Radius.circular(15),
+                  bottomRight: Radius.circular(15),
                 )),
             child: Padding(
                 padding: EdgeInsets.all(6),
@@ -50,6 +50,9 @@ class _NewsPaperScreenState extends State<NewsPaperScreen> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        IconButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, icon: Icon(Icons.arrow_back_ios)),
                         SizedBox(
                           width: 10,
                         ),
@@ -95,16 +98,7 @@ class _NewsPaperScreenState extends State<NewsPaperScreen> {
                                   size: 30),
                               onPressed: () {},
                             )),
-                        Tooltip(
-                            message: 'Calender',
-                            child: CupertinoButton(
-                              minSize: double.minPositive,
-                              padding: EdgeInsets.zero,
-                              child: Icon(Icons.calendar_today,
-                                  color: Color.fromRGBO(58, 129, 233, 1),
-                                  size: 30),
-                              onPressed: () {},
-                            )),
+
                         Tooltip(
                             message: 'Multi-Filter',
                             child: CupertinoButton(
@@ -115,16 +109,7 @@ class _NewsPaperScreenState extends State<NewsPaperScreen> {
                                   size: 30),
                               onPressed: () {},
                             )),
-                        Tooltip(
-                            message: 'More',
-                            child: CupertinoButton(
-                              minSize: double.minPositive,
-                              padding: EdgeInsets.zero,
-                              child: Icon(Icons.more_vert,
-                                  color: Color.fromRGBO(58, 129, 233, 1),
-                                  size: 30),
-                              onPressed: () {},
-                            )),
+
                       ],
                     ),
                   ),

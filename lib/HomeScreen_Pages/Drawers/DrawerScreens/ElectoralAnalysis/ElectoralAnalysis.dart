@@ -20,30 +20,17 @@ class _ElectoralAnalysisState extends State<ElectoralAnalysis> {
       // backgroundColor: HomeColor,
       key: _key,
       appBar: AppBar(elevation: 0,
-        leading: Row(
-          children: [
-            IconButton(
-              color: Colors.grey.shade700,
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ],
+        leading: IconButton(
+          color: Colors.grey.shade700,
+          icon: Icon(Icons.bar_chart),
+          onPressed: () {
+            _key.currentState!.openDrawer();
+          },
         ),
-        actions: [
-          IconButton(
-            color: Colors.grey.shade700,
-            icon: Icon(Icons.bar_chart),
-            onPressed: () {
-              _key.currentState!.openDrawer();
-            },
-          ),
-        ],
         centerTitle: true,
         backgroundColor: HomeColor,
         title: Image.asset(
-          'assets/icons/IntelliSense-Logo-Finall.gif',
+          'assets/new Updated images/AppIcon.gif',
           fit: BoxFit.cover,
           height: 40,
         ),
@@ -54,7 +41,7 @@ class _ElectoralAnalysisState extends State<ElectoralAnalysis> {
             Padding(
               padding: const EdgeInsets.only(top: 18.0),
               child: Image.asset(
-                'assets/icons/IntelliSense-Logo-Finall.gif',
+                'assets/new Updated images/AppIcon.gif',
                 fit: BoxFit.cover,
                 height: 40,
               ),

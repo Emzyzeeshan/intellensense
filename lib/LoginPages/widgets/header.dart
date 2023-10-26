@@ -11,31 +11,18 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            IconButton(onPressed: (){
-              Navigator.pop(context);
-
-            },icon: Icon(Icons.arrow_back_ios),color: Colors.black,),
-          ],
-        ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: kPaddingL),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-
-              Image.asset(
-                'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                height: 90,
-              ),
-              const SizedBox(height: kSpaceM),
-            ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: kPaddingL),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Image.asset(
+            'assets/new Updated images/AppIcon.gif',
+            height: 90,
           ),
-        ),
-      ],
+          const SizedBox(height: kSpaceM),
+        ],
+      ),
     );
   }
 }

@@ -57,12 +57,20 @@ class _SignUpEmailState extends State<SignUpEmail> {
           key: _formKey,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SafeArea(
+                  child: Row(
+                    children: [
+                      IconButton(onPressed: (){
+                        Navigator.pop(context);
+                      }, icon: Icon(Icons.arrow_back_ios)),
+                    ],
+                  ),
+                ),
                 Image.asset(
-                  'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                  height: 200,
-                  width: 200,
+                  'assets/new Updated images/AppIcon.gif',
+                  height: 150,
+                  width: 150,
                 ),
                 Text(
                   'Create your own digital account',
@@ -92,8 +100,7 @@ class _SignUpEmailState extends State<SignUpEmail> {
                                   color: Theme.of(context).hintColor,
                                 ),
                               ),
-                              items:
-                              Requestor.map<DropdownMenuItem<String>>(
+                              items: Requestor.map<DropdownMenuItem<String>>(
                                       (item) => DropdownMenuItem<String>(
                                     value: item,
                                     child: Text(
@@ -139,12 +146,10 @@ class _SignUpEmailState extends State<SignUpEmail> {
                                 hintText: 'Username',
                                 isDense: true,
                                 enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(15),
                                     borderSide: BorderSide.none),
                                 focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(15),
                                     borderSide: BorderSide.none),
                                 fillColor: Colors.grey.shade200,
                                 filled: true,
@@ -167,12 +172,10 @@ class _SignUpEmailState extends State<SignUpEmail> {
                                 hintText: 'Password',
                                 isDense: true,
                                 enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(15),
                                     borderSide: BorderSide.none),
                                 focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(15),
                                     borderSide: BorderSide.none),
                                 fillColor: Colors.grey.shade200,
                                 filled: true,
@@ -185,8 +188,8 @@ class _SignUpEmailState extends State<SignUpEmail> {
                             },
                             strengthIndicatorBuilder: (strength) {
                               return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 4),
+                                padding:
+                                const EdgeInsets.symmetric(vertical: 4),
                                 child: StepProgressIndicator(
                                   totalSteps: 6,
                                   currentStep: getStep(strength),
@@ -218,10 +221,8 @@ class _SignUpEmailState extends State<SignUpEmail> {
                                             rule.name,
                                             style: TextStyle(
                                               color: ruleValidated
-                                                  ? const Color(
-                                                  0xFF0A9471)
-                                                  : const Color(
-                                                  0xFF9A9FAF),
+                                                  ? const Color(0xFF0A9471)
+                                                  : const Color(0xFF9A9FAF),
                                             ),
                                           ),
                                         ],
@@ -238,7 +239,7 @@ class _SignUpEmailState extends State<SignUpEmail> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: TextFormField(
+                          child: FancyPasswordField(
                             validator: (val) {
                               if (val!.isEmpty)
                                 return 'please enter password';
@@ -247,27 +248,76 @@ class _SignUpEmailState extends State<SignUpEmail> {
                               return null;
                             },
                             decoration: InputDecoration(
-                                prefixIcon: Icon(Icons.password_outlined),
+                                prefixIcon: Icon(Icons.key),
                                 hintText: 'Confirm Password',
                                 isDense: true,
                                 enabledBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(15),
                                     borderSide: BorderSide.none),
                                 focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.circular(15),
+                                    borderRadius: BorderRadius.circular(15),
                                     borderSide: BorderSide.none),
                                 fillColor: Colors.grey.shade200,
                                 filled: true,
                                 focusColor: Colors.grey),
+
+                            strengthIndicatorBuilder: (strength) {
+                              return Padding(
+                                padding:
+                                const EdgeInsets.symmetric(vertical: 4),
+                                child: StepProgressIndicator(
+                                  totalSteps: 6,
+                                  currentStep: getStep(strength),
+                                  selectedColor: getColor(strength)!,
+                                  unselectedColor: Colors.grey[300]!,
+                                ),
+                              );
+                            },
+                            validationRuleBuilder: (rules, value) {
+                              return Wrap(
+                                runSpacing: 1,
+                                spacing: 1,
+                                children: rules.map(
+                                      (rule) {
+                                    final ruleValidated =
+                                    rule.validate(value);
+                                    return Chip(
+                                      label: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          if (ruleValidated) ...[
+                                            const Icon(
+                                              Icons.check,
+                                              color: Color(0xFF0A9471),
+                                            ),
+                                            const SizedBox(width: 8),
+                                          ],
+                                          Text(
+                                            rule.name,
+                                            style: TextStyle(
+                                              color: ruleValidated
+                                                  ? const Color(0xFF0A9471)
+                                                  : const Color(0xFF9A9FAF),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      backgroundColor: ruleValidated
+                                          ? const Color(0xFFD0F7ED)
+                                          : const Color(0xFFF4F5F6),
+                                    );
+                                  },
+                                ).toList(),
+                              );
+                            },
                           ),
                         ),
+
                         Padding(
                           padding: const EdgeInsets.all(4.0),
                           child: CheckboxListTile(
-                            title: Text(
-                                "I read and accept terms & conditions"),
+                            title:
+                            Text("I read and accept terms & conditions"),
                             value: checkedValue,
                             onChanged: (newValue) {
                               setState(() {
@@ -281,14 +331,14 @@ class _SignUpEmailState extends State<SignUpEmail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: MaterialButton(
-                            onPressed: () {
+                            onPressed: checkedValue&&_formKey.currentState!.validate()?() {
                               if (_formKey.currentState!.validate()) {
                                 setState(() {
                                   SignUpEmailAPI();
                                 });
-
                               }
-                            },
+                            }:null,
+                            disabledColor: Colors.grey,
                             child: Text(
                               'Register',
                               style: TextStyle(color: Colors.white),
@@ -320,7 +370,10 @@ class _SignUpEmailState extends State<SignUpEmail> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => Login(
-                                            screenHeight: MediaQuery.of(context).size.height,
+                                            screenHeight:
+                                            MediaQuery.of(context)
+                                                .size
+                                                .height,
                                           )));
                                 },
                                 child: Text('Login'),
@@ -442,36 +495,12 @@ class _SignUpEmailState extends State<SignUpEmail> {
     print(response.body);
     if (response.statusCode == 201) {
       formdata = json.decode(response.body);
-          response.body;
-      if (formdata['message']== 'Success') {
+      if (formdata['message'].toString() == 'Success') {
         setState(() {
           registered = true;
 
         });
-      }
-
-else if(response.statusCode==400){
-  if(formdata['message']=='username already exists: ${username.text.toString()}'){
-    Fluttertoast.showToast(
-        msg: "User Already Exists",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.SNACKBAR,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-  }else if(formdata['message']=='userName or Email not set'){
-    Fluttertoast.showToast(
-        msg: "Username or Password Empty",
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.SNACKBAR,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 16.0);
-  }
-  }
-
-
-      else {
+      } else {
         Fluttertoast.showToast(
             msg: "Error",
             toastLength: Toast.LENGTH_SHORT,
@@ -484,8 +513,15 @@ else if(response.statusCode==400){
       print(response.body);
 
       print(formdata);
-    }
-    else {
+    } else if (response.statusCode == 400) {
+      Fluttertoast.showToast(
+          msg: "username already exists: ${username.text}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.SNACKBAR,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else {
       print(response.reasonPhrase);
     }
     return formdata;

@@ -49,6 +49,9 @@ class _GoogleTrendsScreenState extends State<GoogleTrendsScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      IconButton(onPressed: (){
+                        Navigator.pop(context);
+                      }, icon: Icon(Icons.arrow_back_ios)),
                       SizedBox(
                         width: 10,
                       ),
@@ -74,16 +77,7 @@ class _GoogleTrendsScreenState extends State<GoogleTrendsScreen> {
                                 size: 30),
                             onPressed: () {},
                           )),
-                      Tooltip(
-                          message: 'More',
-                          child: CupertinoButton(
-                            minSize: double.minPositive,
-                            padding: EdgeInsets.zero,
-                            child: Icon(Icons.more_vert,
-                                color: Color.fromRGBO(58, 129, 233, 1),
-                                size: 30),
-                            onPressed: () {},
-                          )),
+
                     ],
                   ),
                 ),

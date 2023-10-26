@@ -33,13 +33,11 @@ class _AudioEmotionlistState extends State<AudioEmotionlist> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  height: 25  ,
+                  height: 15,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    IconButton(onPressed: (){
-                      Navigator.pop(context);
-                    }, icon: Icon(Icons.arrow_back_ios)),
                     Image.asset(
                       'assets/icons/voicedxps.png',
                       height: 50,

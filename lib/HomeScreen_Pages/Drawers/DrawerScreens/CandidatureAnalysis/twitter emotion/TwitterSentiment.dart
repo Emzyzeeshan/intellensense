@@ -9,8 +9,8 @@ import 'package:intellensense/LoginPages/widgets/ChartSampleData.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../AllCandidateList.dart';
 import '../Candidature Analysis/PartyMemberDetails.dart';
-import '../CandidatureAnalysis.dart';
 
 class TwitterSentiment extends StatefulWidget {
   var Value;
@@ -35,9 +35,10 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
   TextEditingController ToDate = TextEditingController();
   PageController _pagecontroller = PageController();
   @override
-  void initState(){
+  void initState() {
     super.initState();
   }
+
   @override
   void dispose() {
     TweetGraphData.clear();
@@ -56,13 +57,21 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        leading: IconButton(onPressed: (){Navigator.pop(context);},icon: Icon(Icons.arrow_back_ios,color: Colors.black,),),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+        ),
         title: Row(
           children: [
             Container(
-              width: MediaQuery.of(context).size.width*0.6,
+              width: MediaQuery.of(context).size.width * 0.6,
               height: 30,
-              color:Color(0xff86a8e7),
+              color: Color(0xff86a8e7),
               child: Center(
                 child: Text(
                   'Twitter Analysis',
@@ -73,19 +82,19 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                 ),
               ),
             ),
-        Spacer(),
+            Spacer(),
             FutureBuilder<dynamic>(
               future: cloud,
               builder: (
-                  BuildContext context,
-                  AsyncSnapshot<dynamic> snapshot,
-                  ) {
+                BuildContext context,
+                AsyncSnapshot<dynamic> snapshot,
+              ) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
                       child: SpinKitWave(
-                        color: Colors.blue,
-                        size: 18,
-                      ));
+                    color: Colors.blue,
+                    size: 18,
+                  ));
                 } else if (snapshot.connectionState == ConnectionState.done) {
                   if (snapshot.hasError) {
                     return const Text('Error');
@@ -96,43 +105,24 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                       /*closedElevation: 10.0,*/
                       /*    openElevation: 10.0,*/
                       closedShape: const RoundedRectangleBorder(
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(10.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       ),
                       transitionType: ContainerTransitionType.fade,
-                      transitionDuration:
-                      const Duration(milliseconds: 1200),
+                      transitionDuration: const Duration(milliseconds: 1200),
                       openBuilder: (context, action) {
-                        return SafeArea(
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  IconButton(
-                                    color: Colors.grey.shade700,
-                                    icon: Icon(Icons.arrow_back_ios),
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                height: 500,
-                                  decoration: BoxDecoration(image: DecorationImage(
-                                      image: MemoryImage(
-                                          base64Decode(Twitterwordcloud[0]
-                                              .replaceAll(RegExp(r'\s+'), ''
-                                          ),
-                                          )
-                                      )),
-                                  )),
-                            ],
-                          ),
-                        );
+                        return Container(
+                            decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: MemoryImage(base64Decode(
+                            Twitterwordcloud[0].replaceAll(RegExp(r'\s+'), ''),
+                          ))),
+                        ));
                       },
                       closedBuilder: (context, action) {
-                        return Image.asset('assets/new Updated images/WordCloud.png',height: 40,);
+                        return Image.asset(
+                          'assets/new Updated images/WordCloud.png',
+                          height: 40,
+                        );
                       },
                     );
                   } else {
@@ -143,10 +133,10 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                 }
               },
             ),
-                //icon: Image.asset('assets/new Updated images/WordCloud.png'))
+            //icon: Image.asset('assets/new Updated images/WordCloud.png'))
           ],
         ),
-              centerTitle: true,
+        centerTitle: true,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -154,8 +144,6 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
             padding: const EdgeInsets.only(top: 18.0, left: 8, right: 8),
             child: Column(
               children: [
-                
-                
                 Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -170,7 +158,6 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                         ],
                       ),
                     )),
-               
               ],
             ),
           ),
@@ -238,7 +225,9 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                               ),
                               Card(
                                 elevation: 5,
-                                child: SfCircularChart(backgroundColor: Color(0xff86a8e7).withOpacity(0.4),
+                                child: SfCircularChart(
+                                  backgroundColor:
+                                      Color(0xff86a8e7).withOpacity(0.4),
                                   title: ChartTitle(
                                       text: 'Tweet Sentiment Analysis'),
                                   legend: Legend(isVisible: true),
@@ -270,7 +259,9 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                               ),
                               Card(
                                 elevation: 5,
-                                child: SfCircularChart(backgroundColor: Color(0xff86a8e7).withOpacity(0.4),
+                                child: SfCircularChart(
+                                  backgroundColor:
+                                      Color(0xff86a8e7).withOpacity(0.4),
                                   title: ChartTitle(
                                       text: 'Comments Sentiment Analysis'),
                                   legend: Legend(isVisible: true),
@@ -297,40 +288,40 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                                 ),
                               ),
                               Padding(
-                padding: EdgeInsets.all(8.0),
-                child: GestureDetector(
-                  onTap: () {
-                    setState(() {
-                     
-                        _pagecontroller.jumpToPage(1);
-                    });
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 30,
-                    color:Color(0xff86a8e7),
-                    child: Center(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Custom Analysis',
-                            style: TextStyle(
-                                fontFamily: 'Segoe UI',
-                                fontSize: 20,
-                                color: Colors.white),
-                          ),
-                          Icon(
-                              Icons.navigate_next_outlined,
-                            size: 25,
-                            color: Colors.white,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
+                                padding: EdgeInsets.all(8.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _pagecontroller.jumpToPage(1);
+                                    });
+                                  },
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width,
+                                    height: 30,
+                                    color: Color(0xff86a8e7),
+                                    child: Center(
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            'Custom Analysis',
+                                            style: TextStyle(
+                                                fontFamily: 'Segoe UI',
+                                                fontSize: 20,
+                                                color: Colors.white),
+                                          ),
+                                          Icon(
+                                            Icons.navigate_next_outlined,
+                                            size: 25,
+                                            color: Colors.white,
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ]),
                       );
                     } else {
@@ -342,7 +333,6 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                 },
               ),
             ),
-             
           ],
         ),
       ),
@@ -354,7 +344,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
     return SafeArea(
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top:100.0),
+          padding: const EdgeInsets.only(top: 100.0),
           child: Column(
             children: [
               Text(
@@ -448,7 +438,7 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                       setState(() {
                         TweetGraphData1.clear();
                         CommentsGraphData1.clear();
-              
+
                         SelectionSentimentdata.clear();
                         _value1 = SelectionSentimentAPI(
                             'between', '${ToDate.text}', '${FromDate.text}');
@@ -472,7 +462,8 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                         color: Colors.blue,
                         size: 18,
                       ));
-                    } else if (snapshot.connectionState == ConnectionState.done) {
+                    } else if (snapshot.connectionState ==
+                        ConnectionState.done) {
                       if (snapshot.hasError) {
                         return const Text('Error');
                       } else if (snapshot.hasData) {
@@ -490,44 +481,58 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                                     ),
                                   ),
                                   Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
                                     children: [
-                                      SocialInfoCard('assets/icons/FollowersEmoji.png',
+                                      SocialInfoCard(
+                                          'assets/icons/FollowersEmoji.png',
                                           '${SelectionSentimentdata['user_info']['USER_FOLLOWERS']}'),
-                                      SocialInfoCard('assets/icons/LikesEmoji.png',
+                                      SocialInfoCard(
+                                          'assets/icons/LikesEmoji.png',
                                           '${SelectionSentimentdata['user_info']['LIKES']}'),
-                                      SocialInfoCard('assets/icons/RetweetEmoji.png',
+                                      SocialInfoCard(
+                                          'assets/icons/RetweetEmoji.png',
                                           '${SelectionSentimentdata['user_info']['RETWEETS_COUNT']}'),
-                                      SocialInfoCard('assets/icons/FollowersEmoji.png',
+                                      SocialInfoCard(
+                                          'assets/icons/FollowersEmoji.png',
                                           '${SelectionSentimentdata['user_info']['USER_MENTIONS']}'),
-                                      SocialInfoCard('assets/icons/HashTagsEmoji.png',
+                                      SocialInfoCard(
+                                          'assets/icons/HashTagsEmoji.png',
                                           '${SelectionSentimentdata['user_info']['HASHTAG_COUNT']}'),
-                                      SocialInfoCard('assets/icons/TweetsEmoji.png',
+                                      SocialInfoCard(
+                                          'assets/icons/TweetsEmoji.png',
                                           '${SelectionSentimentdata['user_info']['TWEET_COUNT']}'),
                                     ],
                                   ),
                                   Card(
                                     elevation: 5,
-                                    child: SfCircularChart(backgroundColor: Color(0xff86a8e7).withOpacity(0.4),
-                                      title:
-                                          ChartTitle(text: 'Tweet Sentiment Analysis'),
+                                    child: SfCircularChart(
+                                      backgroundColor:
+                                          Color(0xff86a8e7).withOpacity(0.4),
+                                      title: ChartTitle(
+                                          text: 'Tweet Sentiment Analysis'),
                                       legend: Legend(isVisible: true),
-                                      series: <PieSeries<ChartSampleData, String>>[
+                                      series: <PieSeries<ChartSampleData,
+                                          String>>[
                                         PieSeries<ChartSampleData, String>(
                                             explode: true,
                                             explodeIndex: 0,
                                             explodeOffset: '10%',
                                             dataSource: TweetGraphData1,
-                                            xValueMapper: (ChartSampleData data, _) =>
-                                                data.x as String,
-                                            yValueMapper: (ChartSampleData data, _) =>
-                                                data.y,
+                                            xValueMapper:
+                                                (ChartSampleData data, _) =>
+                                                    data.x as String,
+                                            yValueMapper:
+                                                (ChartSampleData data, _) =>
+                                                    data.y,
                                             dataLabelMapper:
-                                                (ChartSampleData data, _) => data.text,
+                                                (ChartSampleData data, _) =>
+                                                    data.text,
                                             startAngle: 90,
                                             endAngle: 90,
-                                            dataLabelSettings: const DataLabelSettings(
-                                                isVisible: true)),
+                                            dataLabelSettings:
+                                                const DataLabelSettings(
+                                                    isVisible: true)),
                                       ],
                                     ),
                                   ),
@@ -537,30 +542,36 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                                   ),
                                   Card(
                                     elevation: 5,
-                                    child: SfCircularChart(backgroundColor: Color(0xff86a8e7).withOpacity(0.4),
+                                    child: SfCircularChart(
+                                      backgroundColor:
+                                          Color(0xff86a8e7).withOpacity(0.4),
                                       title: ChartTitle(
                                           text: 'Comments Sentiment Analysis'),
                                       legend: Legend(isVisible: true),
-                                      series: <PieSeries<ChartSampleData, String>>[
+                                      series: <PieSeries<ChartSampleData,
+                                          String>>[
                                         PieSeries<ChartSampleData, String>(
                                             explode: true,
                                             explodeIndex: 0,
                                             explodeOffset: '10%',
                                             dataSource: CommentsGraphData1,
-                                            xValueMapper: (ChartSampleData data, _) =>
-                                                data.x as String,
-                                            yValueMapper: (ChartSampleData data, _) =>
-                                                data.y,
+                                            xValueMapper:
+                                                (ChartSampleData data, _) =>
+                                                    data.x as String,
+                                            yValueMapper:
+                                                (ChartSampleData data, _) =>
+                                                    data.y,
                                             dataLabelMapper:
-                                                (ChartSampleData data, _) => data.text,
+                                                (ChartSampleData data, _) =>
+                                                    data.text,
                                             startAngle: 90,
                                             endAngle: 90,
-                                            dataLabelSettings: const DataLabelSettings(
-                                                isVisible: true)),
+                                            dataLabelSettings:
+                                                const DataLabelSettings(
+                                                    isVisible: true)),
                                       ],
                                     ),
                                   ),
-                                   
                                 ]),
                           ),
                         );
@@ -573,52 +584,51 @@ class _TwitterSentimentState extends State<TwitterSentiment> {
                   },
                 ),
               ),
-             Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                           
-                              _pagecontroller.jumpToPage(0);
-                          });
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          height: 30,
-                          color:Color(0xff86a8e7),
-                          child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                    Icons.navigate_before,
-                                  size: 25,
-                                  color: Colors.white,
-                                ),
-                                Text(
-                                  'Recent Analysis',
-                                  style: TextStyle(
-                                      fontFamily: 'Segoe UI',
-                                      fontSize: 20,
-                                      color: Colors.white),
-                                ),
-                                
-                              ],
-                            ),
+              Padding(
+                padding: EdgeInsets.all(8.0),
+                child: GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _pagecontroller.jumpToPage(0);
+                    });
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 30,
+                    color: Color(0xff86a8e7),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.navigate_before,
+                            size: 25,
+                            color: Colors.white,
                           ),
-                        ),
+                          Text(
+                            'Recent Analysis',
+                            style: TextStyle(
+                                fontFamily: 'Segoe UI',
+                                fontSize: 20,
+                                color: Colors.white),
+                          ),
+                        ],
                       ),
                     ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
   var Twitterwordcloud;
   Future<dynamic> TwitterwordcloudApi() async {
     // String partylist=locallist.join(",");
-print('in');
+    print('in');
     setState(() {
       query['social_handle'] = 'TWITTER_LEADER';
       query['name'] = '${widget.Value['name']}';
@@ -629,7 +639,6 @@ print('in');
     var response = await post(
         Uri.parse('http://idxp.pilogcloud.com:6649/word_cloud/'),
         body: query);
-
 
     if (response.statusCode == 200) {
       print(response.statusCode);
@@ -663,6 +672,7 @@ print('in');
     }
     return Twitterwordcloud;
   }
+
   // Last Seven sentiment APi
   var Sentimentdata;
   Map query = new Map<String, dynamic>();

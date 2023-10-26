@@ -106,6 +106,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
       builder: (context, orientation) {
         if (orientation == Orientation.portrait) {
           return Scaffold(
+
             // backgroundColor: Color(0xffd2dfff),
             body: LayoutBuilder(
                 builder: (BuildContext ctx, BoxConstraints constraints) {
@@ -158,7 +159,7 @@ class _SignUpState extends State<SignUp> with SingleTickerProviderStateMixin {
                           children: <Widget>[
                             Header(animation: _headerTextAnimation),
                             SizedBox(
-                              height: 20,
+                              height: 120,
                             ),
                             Text(
                               "Register",
@@ -199,6 +200,7 @@ currentState=SignUpVerificationState.BYEMAIL;
                             
                                               },
                                 child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(('SignUp with E-mail'),
                                         style: GoogleFonts.nunitoSans(
@@ -507,7 +509,6 @@ currentState=SignUpVerificationState.BYEMAIL;
                       padding: const EdgeInsets.symmetric(vertical: kPaddingL),
                       child: Column(
                         children: <Widget>[
-
                           Header(animation: _headerTextAnimation),
                           SizedBox(
                             height: 90,

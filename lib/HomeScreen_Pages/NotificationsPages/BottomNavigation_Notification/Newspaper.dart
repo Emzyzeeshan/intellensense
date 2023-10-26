@@ -24,22 +24,25 @@ class _NewspaperState extends State<Newspaper> {
   Widget build(BuildContext context) {
     return  Column(
         children: [
-            TextField(
-              onChanged: onSearchTextChanged,
-                    cursorColor: Colors.grey,
-                    decoration: InputDecoration(
-                        isDense: true,
-                        fillColor: TextfieldColor,
-                        filled: true,
-                        border: OutlineInputBorder(borderSide: BorderSide.none),
-                        hintText: 'Search',
-                        hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
-                        prefixIcon: Container(
-                          padding: EdgeInsets.all(15),
-                          child: Icon(Icons.search_rounded),
-                          width: 18,
-                        )),
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0,left: 8,right: 8),
+              child: TextField(
+                onChanged: onSearchTextChanged,
+                      cursorColor: Colors.grey,
+                      decoration: InputDecoration(
+                          isDense: true,
+                          fillColor: TextfieldColor,
+                          filled: true,
+                          border: OutlineInputBorder(borderSide: BorderSide.none),
+                          hintText: 'Search',
+                          hintStyle: TextStyle(color: Colors.grey, fontSize: 18),
+                          prefixIcon: Container(
+                            padding: EdgeInsets.all(15),
+                            child: Icon(Icons.search_rounded),
+                            width: 18,
+                          )),
+                    ),
+            ),
                    SizedBox(
           height: 10,
         ),
@@ -177,11 +180,12 @@ class _NewspaperNotificationtileState extends State<NewspaperNotificationtile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(3.0),
+      padding: const EdgeInsets.all(5.0),
       child: ExpansionTile(
           collapsedBackgroundColor:  Color(0xffc8d1e7),
         backgroundColor: Color(0xffc8d1e7),
         childrenPadding: EdgeInsets.all(5),
+        collapsedShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         leading: Image.asset(
           'assets/new Updated images/intellisensesolutions-Icons-83.png',

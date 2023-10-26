@@ -12,7 +12,9 @@ import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 class SignUpPhone extends StatefulWidget {
   var data;
-  SignUpPhone(this.data,);
+  SignUpPhone(
+    this.data,
+  );
 
   @override
   State<SignUpPhone> createState() => _SignUpPhoneState();
@@ -30,13 +32,15 @@ class _SignUpPhoneState extends State<SignUpPhone> {
     // TODO: implement initState
     super.initState();
   }
-@override
+
+  @override
   void dispose() {
     username.dispose();
     _pass.dispose();
     // TODO: implement dispose
     super.dispose();
   }
+
   List Requestor = [
     'MM_REQUESTOR',
     'MM_APPROVER',
@@ -55,283 +59,336 @@ class _SignUpPhoneState extends State<SignUpPhone> {
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image.asset(
-                  'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                  height: 200,
-                  width: 200,
-                ),
-                Text(
-                  'Create your own digital account',
-                  style: GoogleFonts.nunitoSans(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.w700,
-                      color: Colors.black),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    elevation: 7,
-                    child: SingleChildScrollView(
-                      child: registered == false
-                          ? Column(children: [
-                              SizedBox(
-                                height: 20,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: DropdownButtonHideUnderline(
-                                  child: DropdownButton2(
-                                    hint: Text(
-                                      '${input}',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Theme.of(context).hintColor,
-                                      ),
-                                    ),
-                                    items:
-                                        Requestor.map<DropdownMenuItem<String>>(
-                                            (item) => DropdownMenuItem<String>(
-                                                  value: item,
-                                                  child: Text(
-                                                    item.toString(),
-                                                    style: const TextStyle(
-                                                      fontSize: 14,
-                                                    ),
-                                                  ),
-                                                )).toList(),
-                                    value: input,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        input = value as String;
-                                        print(input);
-                                      });
-                                    },
-                                    buttonStyleData: const ButtonStyleData(
-                                      height: 40,
-                                      width: 200,
-                                    ),
-                                    dropdownStyleData: const DropdownStyleData(
-                                      maxHeight: 200,
-                                    ),
-                                    menuItemStyleData: const MenuItemStyleData(
-                                      height: 40,
-                                    ),
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            SafeArea(
+              child: Row(
+                children: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_back_ios)),
+                ],
+              ),
+            ),
+            Image.asset(
+              'assets/new Updated images/AppIcon.gif',
+              height: 120,
+              width: 200,
+            ),
+            Text(
+              'Create your own digital account',
+              style: GoogleFonts.nunitoSans(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                elevation: 7,
+                child: SingleChildScrollView(
+                  child: registered == false
+                      ? Column(children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton2(
+                                hint: Text(
+                                  '${input}',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Theme.of(context).hintColor,
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  controller: username,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Pls enter Username';
-                                    }
-                                    ;
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.person),
-                                      hintText: 'Username',
-                                      isDense: true,
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          borderSide: BorderSide.none),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          borderSide: BorderSide.none),
-                                      fillColor: Colors.grey.shade200,
-                                      filled: true,
-                                      focusColor: Colors.grey),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: FancyPasswordField(
-                                  controller: _pass,
-                                  validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return 'Pls enter Password';
-                                    }
-                                    ;
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.key),
-                                      hintText: 'Password',
-                                      isDense: true,
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          borderSide: BorderSide.none),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          borderSide: BorderSide.none),
-                                      fillColor: Colors.grey.shade200,
-                                      filled: true,
-                                      focusColor: Colors.grey),
-                                  validationRules: {
-                                    UppercaseValidationRule(),
-                                    LowercaseValidationRule(),
-                                    DigitValidationRule(),
-                                    SpecialCharacterValidationRule(),
-                                  },
-                                  strengthIndicatorBuilder: (strength) {
-                                    return Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 4),
-                                      child: StepProgressIndicator(
-                                        totalSteps: 6,
-                                        currentStep: getStep(strength),
-                                        selectedColor: getColor(strength)!,
-                                        unselectedColor: Colors.grey[300]!,
-                                      ),
-                                    );
-                                  },
-                                  validationRuleBuilder: (rules, value) {
-                                    return Wrap(
-                                      runSpacing: 1,
-                                      spacing: 1,
-                                      children: rules.map(
-                                        (rule) {
-                                          final ruleValidated =
-                                              rule.validate(value);
-                                          return Chip(
-                                            label: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                if (ruleValidated) ...[
-                                                  const Icon(
-                                                    Icons.check,
-                                                    color: Color(0xFF0A9471),
-                                                  ),
-                                                  const SizedBox(width: 8),
-                                                ],
-                                                Text(
-                                                  rule.name,
-                                                  style: TextStyle(
-                                                    color: ruleValidated
-                                                        ? const Color(
-                                                            0xFF0A9471)
-                                                        : const Color(
-                                                            0xFF9A9FAF),
-                                                  ),
-                                                ),
-                                              ],
+                                items: Requestor.map<DropdownMenuItem<String>>(
+                                    (item) => DropdownMenuItem<String>(
+                                          value: item,
+                                          child: Text(
+                                            item.toString(),
+                                            style: const TextStyle(
+                                              fontSize: 14,
                                             ),
-                                            backgroundColor: ruleValidated
-                                                ? const Color(0xFFD0F7ED)
-                                                : const Color(0xFFF4F5F6),
-                                          );
-                                        },
-                                      ).toList(),
-                                    );
-                                  },
+                                          ),
+                                        )).toList(),
+                                value: input,
+                                onChanged: (value) {
+                                  setState(() {
+                                    input = value as String;
+                                    print(input);
+                                  });
+                                },
+                                buttonStyleData: const ButtonStyleData(
+                                  height: 40,
+                                  width: 200,
+                                ),
+                                dropdownStyleData: const DropdownStyleData(
+                                  maxHeight: 200,
+                                ),
+                                menuItemStyleData: const MenuItemStyleData(
+                                  height: 40,
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: TextFormField(
-                                  validator: (val) {
-                                    if (val!.isEmpty)
-                                      return 'please enter password';
-                                    if (val != _pass.text)
-                                      return 'Password does not match';
-                                    return null;
-                                  },
-                                  decoration: InputDecoration(
-                                      prefixIcon: Icon(Icons.password_outlined),
-                                      hintText: 'Confirm Password',
-                                      isDense: true,
-                                      enabledBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          borderSide: BorderSide.none),
-                                      focusedBorder: OutlineInputBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          borderSide: BorderSide.none),
-                                      fillColor: Colors.grey.shade200,
-                                      filled: true,
-                                      focusColor: Colors.grey),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: CheckboxListTile(
-                                  title: Text(
-                                      "I read and accept terms & conditions"),
-                                  value: checkedValue,
-                                  onChanged: (newValue) {
-                                    setState(() {
-                                      checkedValue = newValue!;
-                                    });
-                                  },
-                                  controlAffinity: ListTileControlAffinity
-                                      .leading, //  <-- leading Checkbox
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: MaterialButton(
-                                  onPressed: () {
-                                    if (_formKey.currentState!.validate()) {
-                                      setState(() {
-                                        SignUpPhoneAPI();
-                                      });
-
-                                    }
-                                  },
-                                  child: Text(
-                                    'Register',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  color: Colors.blueAccent,
-                                ),
-                              )
-                            ])
-                          : Center(
-                              child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Image.asset(
-                                        'assets/new Updated images/success.gif'),
-                                    SizedBox(
-                                      height: 20,
-                                    ),
-                                    Text(
-                                      'Sucessfully Registered',
-                                      style: GoogleFonts.nunitoSans(
-                                          fontSize: 19.0,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.black),
-                                    ),
-                                    MaterialButton(
-                                      onPressed: () {
-                                         Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Login(
-                        screenHeight: MediaQuery.of(context).size.height,
-                      )));
-                                      },
-                                      child: Text('Login'),
-                                      color: Colors.blueAccent,
-                                    )
-                                  ]),
                             ),
-                    ),
-                  ),
-                )
-              ]),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: TextFormField(
+                              controller: username,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Pls enter Username';
+                                }
+                                ;
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                  prefixIcon: Icon(Icons.person),
+                                  hintText: 'Username',
+                                  isDense: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide.none),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide.none),
+                                  fillColor: Colors.grey.shade200,
+                                  filled: true,
+                                  focusColor: Colors.grey),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: FancyPasswordField(
+                              controller: _pass,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Pls enter Password';
+                                }
+                                ;
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                  prefixIcon: Icon(Icons.key),
+                                  hintText: 'Password',
+                                  isDense: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide.none),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide.none),
+                                  fillColor: Colors.grey.shade200,
+                                  filled: true,
+                                  focusColor: Colors.grey),
+                              validationRules: {
+                                UppercaseValidationRule(),
+                                LowercaseValidationRule(),
+                                DigitValidationRule(),
+                                SpecialCharacterValidationRule(),
+                              },
+                              strengthIndicatorBuilder: (strength) {
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 4),
+                                  child: StepProgressIndicator(
+                                    totalSteps: 6,
+                                    currentStep: getStep(strength),
+                                    selectedColor: getColor(strength)!,
+                                    unselectedColor: Colors.grey[300]!,
+                                  ),
+                                );
+                              },
+                              validationRuleBuilder: (rules, value) {
+                                return Wrap(
+                                  runSpacing: 1,
+                                  spacing: 1,
+                                  children: rules.map(
+                                    (rule) {
+                                      final ruleValidated =
+                                          rule.validate(value);
+                                      return Chip(
+                                        label: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            if (ruleValidated) ...[
+                                              const Icon(
+                                                Icons.check,
+                                                color: Color(0xFF0A9471),
+                                              ),
+                                              const SizedBox(width: 8),
+                                            ],
+                                            Text(
+                                              rule.name,
+                                              style: TextStyle(
+                                                color: ruleValidated
+                                                    ? const Color(0xFF0A9471)
+                                                    : const Color(0xFF9A9FAF),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        backgroundColor: ruleValidated
+                                            ? const Color(0xFFD0F7ED)
+                                            : const Color(0xFFF4F5F6),
+                                      );
+                                    },
+                                  ).toList(),
+                                );
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: FancyPasswordField(
+                              validator: (val) {
+                                if (val!.isEmpty)
+                                  return 'please enter password';
+                                if (val != _pass.text)
+                                  return 'Password does not match';
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                  prefixIcon: Icon(Icons.key),
+                                  hintText: 'Confirm Password',
+                                  isDense: true,
+                                  enabledBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide.none),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(15),
+                                      borderSide: BorderSide.none),
+                                  fillColor: Colors.grey.shade200,
+                                  filled: true,
+                                  focusColor: Colors.grey),
+
+                              strengthIndicatorBuilder: (strength) {
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 4),
+                                  child: StepProgressIndicator(
+                                    totalSteps: 6,
+                                    currentStep: getStep(strength),
+                                    selectedColor: getColor(strength)!,
+                                    unselectedColor: Colors.grey[300]!,
+                                  ),
+                                );
+                              },
+                              validationRuleBuilder: (rules, value) {
+                                return Wrap(
+                                  runSpacing: 1,
+                                  spacing: 1,
+                                  children: rules.map(
+                                    (rule) {
+                                      final ruleValidated =
+                                          rule.validate(value);
+                                      return Chip(
+                                        label: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            if (ruleValidated) ...[
+                                              const Icon(
+                                                Icons.check,
+                                                color: Color(0xFF0A9471),
+                                              ),
+                                              const SizedBox(width: 8),
+                                            ],
+                                            Text(
+                                              rule.name,
+                                              style: TextStyle(
+                                                color: ruleValidated
+                                                    ? const Color(0xFF0A9471)
+                                                    : const Color(0xFF9A9FAF),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        backgroundColor: ruleValidated
+                                            ? const Color(0xFFD0F7ED)
+                                            : const Color(0xFFF4F5F6),
+                                      );
+                                    },
+                                  ).toList(),
+                                );
+                              },
+                            ),
+                          ),
+
+                          Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: CheckboxListTile(
+                              title:
+                                  Text("I read and accept terms & conditions"),
+                              value: checkedValue,
+                              onChanged: (newValue) {
+                                setState(() {
+                                  checkedValue = newValue!;
+                                });
+                              },
+                              controlAffinity: ListTileControlAffinity
+                                  .leading, //  <-- leading Checkbox
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: MaterialButton(
+                              onPressed: checkedValue&&_formKey.currentState!.validate()?() {
+                                if (_formKey.currentState!.validate()) {
+                                  setState(() {
+                                    SignUpPhoneAPI();
+                                  });
+                                }
+                              }:null,
+                              disabledColor: Colors.grey,
+                              child: Text(
+                                'Register',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              color: Colors.blueAccent,
+                            ),
+                          )
+                        ])
+                      : Center(
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                    'assets/new Updated images/success.gif'),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  'Sucessfully Registered',
+                                  style: GoogleFonts.nunitoSans(
+                                      fontSize: 19.0,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black),
+                                ),
+                                MaterialButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => Login(
+                                                  screenHeight:
+                                                      MediaQuery.of(context)
+                                                          .size
+                                                          .height,
+                                                )));
+                                  },
+                                  child: Text('Login'),
+                                  color: Colors.blueAccent,
+                                )
+                              ]),
+                        ),
+                ),
+              ),
+            )
+          ]),
         ),
       ),
     );
@@ -425,10 +482,10 @@ class _SignUpPhoneState extends State<SignUpPhone> {
     });*/
     print(body);
     var response = await post(
-      Uri.parse(INSIGHTS + 'auth/register'),
+      Uri.parse(INSIGHTS + '/auth/register'),
       headers: headers,
       body: json.encode({
-        "username": "${username.text}",
+        "userName": "${username.text}",
         "email": "Byphone@piloggroup.com",
         "password": "${_pass.text}",
         "role": "${input}",
@@ -442,36 +499,11 @@ class _SignUpPhoneState extends State<SignUpPhone> {
     print(response.body);
     if (response.statusCode == 201) {
       formdata = json.decode(response.body);
-      response.body;
-      if (formdata['message']== 'Success') {
+      if (formdata['message'].toString() == 'Success') {
         setState(() {
           registered = true;
-
         });
-      }
-
-      else if(response.statusCode==400){
-        if(formdata['message']=='username already exists: ${username.text.toString()}'){
-          Fluttertoast.showToast(
-              msg: "User Already Exists",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.SNACKBAR,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
-        }else if(formdata['message']=='userName or Email not set'){
-          Fluttertoast.showToast(
-              msg: "Username or Password Empty",
-              toastLength: Toast.LENGTH_SHORT,
-              gravity: ToastGravity.SNACKBAR,
-              backgroundColor: Colors.red,
-              textColor: Colors.white,
-              fontSize: 16.0);
-        }
-      }
-
-
-      else {
+      } else {
         Fluttertoast.showToast(
             msg: "Error",
             toastLength: Toast.LENGTH_SHORT,
@@ -484,8 +516,15 @@ class _SignUpPhoneState extends State<SignUpPhone> {
       print(response.body);
 
       print(formdata);
-    }
-    else {
+    } else if (response.statusCode == 400) {
+      Fluttertoast.showToast(
+          msg: "username already exists: ${username.text}",
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.SNACKBAR,
+          backgroundColor: Colors.red,
+          textColor: Colors.white,
+          fontSize: 16.0);
+    } else {
       print(response.reasonPhrase);
     }
     return formdata;

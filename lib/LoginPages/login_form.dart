@@ -8,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:intellensense/HomeScreen_Pages/HomeScreen.dart';
 import 'package:intellensense/LoginPages/widgets/fade_slide_transition.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import '../SignUpPages/SignUp.dart';
 import '../main.dart';
 import '../Constants/constants.dart';
 
@@ -53,8 +54,8 @@ class _LoginFormState extends State<LoginForm> {
   @override
   initState() {
     super.initState();
-    userNameText.text= 'david';
-    passWordText.text = 'David@06';
+   /* userNameText.text= 'david';
+    passWordText.text = 'David@06';*/
 
   }
   final ValueNotifier<bool> popup = ValueNotifier<bool>(false);
@@ -209,6 +210,31 @@ border: InputBorder.none,
                   }),
             ),
           ),
+            SizedBox(height: 5,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Don't have an account?  "),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SignUp(
+                                  screenHeight:
+                                  MediaQuery.of(context)
+                                      .size
+                                      .height)));
+                    },
+                    child: Text(
+                      'Sign Up',
+                      style: GoogleFonts.nunitoSans(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.blue),
+                    ))
+              ],
+            ),
             // InkWell(
             //     onTap: () async {
             //
@@ -267,13 +293,10 @@ print(response.body);
     print(response.statusCode);
     try {
       setState(() {
-
         loginData =json.decode(response.body);
-
       });
       if(loginData['message'].toString()=='Success'){
         logindata.setBool('login', false);
-
         Navigator.push(
             context,
             MaterialPageRoute(
@@ -281,8 +304,7 @@ print(response.body);
                   HomeScreen(),
             ));
         popup.value=false;
-
-      }else if(loginData['message'].toString()=='Error: Invid Username Or Passwordal.'){
+      }else if(loginData['message'].toString()=='Error: Invid Username Or Password.'){
 
 
         setState(() {

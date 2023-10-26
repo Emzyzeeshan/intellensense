@@ -3,26 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intellensense/SignUpPages/SIgnUpRegister_Phone.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
-import 'package:provider/provider.dart';
-
-import '../main.dart';
 
 enum PhoneVerificationState { SHOW_PHONE_FORM_STATE, SHOW_OTP_FORM_STATE }
 
 class PhoneAuthPage extends StatefulWidget {
   @override
-  _PhoneAuthPageState createState() => _PhoneAuthPageState();
+  PhoneAuthPageState createState() => PhoneAuthPageState();
 }
 
-class _PhoneAuthPageState extends State<PhoneAuthPage> {
-
+class PhoneAuthPageState extends State<PhoneAuthPage> {
   final GlobalKey<ScaffoldState> _scaffoldKeyForSnackBar =
-      GlobalKey<ScaffoldState>();
+  GlobalKey<ScaffoldState>();
   PhoneVerificationState currentState =
       PhoneVerificationState.SHOW_PHONE_FORM_STATE;
-  final phoneController = TextEditingController();
+
   final otpController = TextEditingController();
   String? verificationIDFromFirebase;
   bool spinnerLoading = false;
@@ -30,12 +27,12 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   _verifyPhoneButton() async {
-    print("Phone Number:" '+91' + "${phoneController.text}");
+    print("Phone Number:"+ phonenumber);
     setState(() {
       spinnerLoading = true;
     });
     await _firebaseAuth.verifyPhoneNumber(
-        phoneNumber: '+91' + phoneController.text,
+        phoneNumber: phonenumber,
         verificationCompleted: (phoneAuthCredential) async {
           setState(() {
             spinnerLoading = false;
@@ -63,10 +60,10 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
   }
 
   _verifyOTPButton() async {
-    if (phoneController.text.length == 10) {
+    if (phonenumber.length == 10) {
       // SendDatatoSheet();
     } else {
-      print('Enter 10 digit mobile');
+      print('Enter valid mobile');
     }
     PhoneAuthCredential phoneAuthCredential = PhoneAuthProvider.credential(
         verificationId: verificationIDFromFirebase!, smsCode: OTp);
@@ -80,19 +77,19 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
     });
     try {
       final authCredential =
-          await _firebaseAuth.signInWithCredential(phoneAuthCredential);
+      await _firebaseAuth.signInWithCredential(phoneAuthCredential);
       setState(() {
         spinnerLoading = false;
       });
       if (authCredential.user != null) {
-       
-              
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              SignUpPhone(phoneController.text)));
-   
+
+
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    SignUpPhone(phonenumber)));
+
       }
     } on FirebaseAuthException catch (e) {
       setState(() {
@@ -102,7 +99,7 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
-
+  String phonenumber='';
   getPhoneFormWidget(context) {
     return Column(
       children: [
@@ -113,24 +110,27 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
         const SizedBox(
           height: 40.0,
         ),
-        TextField(
-          keyboardType: TextInputType.phone,
-          maxLength: 10,
-          inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-          controller: phoneController,
-          textAlign: TextAlign.start,
-          decoration: const InputDecoration(
-              filled: true,
-              fillColor: Color.fromARGB(166, 240, 237, 237),
-              isDense: true,
-              focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(Radius.circular(15))),
-              hintText: "Phone Number",
-              prefixIcon: Icon(Icons.phone_android_rounded)),
+
+        IntlPhoneField(
+          decoration: InputDecoration( filled: true,
+            fillColor: Color.fromARGB(166, 240, 237, 237),
+            isDense: true,
+            focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.all(Radius.circular(15))),
+            enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide.none,
+                borderRadius: BorderRadius.all(Radius.circular(15))),
+            labelText: 'Phone Number',
+            border: OutlineInputBorder(
+              borderSide: BorderSide(),
+            ),
+          ),
+          initialCountryCode: 'IN',
+          onChanged: (phone) {
+            print(phone.completeNumber);
+            phonenumber=phone.completeNumber;
+          },
         ),
         const SizedBox(
           height: 20.0,
@@ -166,7 +166,8 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
           style: TextStyle(fontSize: 17),
           textFieldAlignment: MainAxisAlignment.center,
           fieldStyle: FieldStyle.box,
-          onCompleted: (pin) {
+          onCompleted: (pin)
+          {
             print("Completed: " + pin);
             setState(() {
               OTp = pin;
@@ -196,65 +197,47 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
 
   @override
   Widget build(BuildContext context) {
-    final themeMode = Provider.of<DarkMode>(context);
     return SafeArea(
         child: Scaffold(
-      backgroundColor: Colors.white,
-      key: _scaffoldKeyForSnackBar,
-      appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: themeMode.darkMode ? Colors.white:Colors.black, //change your color here
-        ),
-        elevation: 0,
-        backgroundColor: themeMode.darkMode ? Colors.black:Colors.white,
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset(
-                'assets/icons/IntelliSense-Logo-Finall.gif',
-                height: 200,
-                width: 200,
-              ),
-              const SizedBox(
-                height: 40.0,
-              ),
-              spinnerLoading
-                  ? const Center(
-                      child: SpinKitCircle(
-                        color: Color.fromARGB(255, 243, 33, 58),
-                        size: 75,
-                      ),
-                    )
-                  : currentState == PhoneVerificationState.SHOW_PHONE_FORM_STATE
+          backgroundColor: Color(0xffd2dfff),
+          key: _scaffoldKeyForSnackBar,
+          body: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SafeArea(
+                    child: Row(
+                      children: [
+                        IconButton(onPressed: (){
+                          Navigator.pop(context);
+                        }, icon: Icon(Icons.arrow_back_ios)),
+                      ],
+                    ),
+                  ),
+                  Image.asset(
+                    'assets/icons/IntelliSense-Logo-Finall.gif',
+                    height: 200,
+                    width: 200,
+                  ),
+                  const SizedBox(
+                    height: 40.0,
+                  ),
+                  spinnerLoading
+                      ? const Center(
+                    child: SpinKitCircle(
+                      color: Color.fromARGB(255, 243, 33, 58),
+                      size: 75,
+                    ),
+                  )
+                      : currentState == PhoneVerificationState.SHOW_PHONE_FORM_STATE
                       ? getPhoneFormWidget(context)
                       : getOTPFormWidget(context),
-            ],
+                ],
+              ),
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
-
-  // void SendDatatoSheet() async {
-  //   const String scriptURL =
-  //       'https://script.google.com/macros/s/AKfycbzeEtxTVd-vRNFpG7zqw0yHM0kGtG_ccXmRXqHR7pgFkAZyI7520Y7Era8l0to1IuSG/exec';
-
-  //   String tempName = phoneController.text;
-  //   String tempSex = OTp;
-  //   String tempAge = OTp;
-
-  //   String queryString = "?name=$tempName&sex=$tempSex&age=$tempAge";
-
-  //   var finalURI = Uri.parse(scriptURL + queryString);
-  //   var response = await http.get(finalURI);
-  //   //print(finalURI);
-  //   if (response.statusCode == 200) {
-  //     var bodyR = convert.jsonDecode(response.body);
-  //     print(bodyR);
-  //   }
-  // }
 }

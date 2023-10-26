@@ -1,49 +1,52 @@
 import 'dart:convert';
 import 'package:animate_do/animate_do.dart';
 import 'package:animations/animations.dart';
+import 'package:draggable_fab/draggable_fab.dart';
 import 'package:flip_card/flip_card_controller.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
-//import 'package:google_mobile_ads/google_mobile_ads.dart';
-//import 'package:intellensense/HomeScreen_Pages/Banners.dart/YoutubeBanner.dart';
-//import 'package:intellensense/HomeScreen_Pages/Banners.dart/twitterbanner.dart';
+import 'package:intellensense/HomeScreen_Pages/NewsPage.dart';
+
 import 'package:intellensense/HomeScreen_Pages/NewsWIdget/FaceBookScreen.dart';
-import 'package:intellensense/HomeScreen_Pages/NewsWIdget/NewsPaperScreen.dart';
+//import 'package:intellensense/HomeScreen_Pages/SocialMediaPage.dart';
+
 import 'package:intellensense/HomeScreen_Pages/Widgets/Newstemplate.dart';
 import 'package:intellensense/HomeScreen_Pages/Drawers/DrawerScreens/ScoreCard/ScoreCardsScreen.dart';
 import 'package:intellensense/HomeScreen_Pages/NotificationsPages/Notification.dart';
-import 'package:intellensense/Constants/constants.dart';
+
 import 'package:intellensense/HomeScreen_Pages/Drawers/Drawer.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:http/http.dart';
 import 'package:intellensense/HomeScreen_Pages/Widgets/Socialmediatemplate.dart';
+import 'package:intellensense/HomeScreen_Pages/Widgets/opencontainers.dart';
+//import 'package:intellensense/HomeScreen_Pages/constants.dart';
 import 'package:intellensense/LoginPages/widgets/ChartSampleData.dart';
-import 'package:intellensense/Services/ApiServices.dart';
+//import 'package:intellensense/Payments/PaymentPage.dart';
+import 'package:intellensense/HomeScreen_Pages/Controllers/HomeScreenController.dart';
 import 'package:intellensense/main.dart';
-import 'package:liquid_swipe/liquid_swipe.dart';
 
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:provider/provider.dart';
-import 'package:simple_speed_dial/simple_speed_dial.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:showcaseview/showcaseview.dart';
 
-//import 'Banners.dart/FaceBookBanner.dart';
-//import 'Banners.dart/NewsChannelBanner.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+import '../constants.dart';
 import 'Banners.dart/FaceBookExpScreen.dart';
 import 'Banners.dart/NewsChannelExpScreen.dart';
 import 'Banners.dart/YoutubeExpScreen.dart';
 import 'Banners.dart/twitterExpScreen.dart';
 import 'Drawers/DrawerScreens/CandidatureAnalysis/AllCandidateList.dart';
-import 'Drawers/DrawerScreens/CandidatureAnalysis/CandidatureAnalysis.dart';
 import 'Drawers/DrawerScreens/Constituency Analysis/ConstituencyAnalysis.dart';
 import 'Drawers/DrawerScreens/ElectoralAnalysis/ElectoralAnalysis.dart';
-import 'NewsWIdget/GoogleTrendsScreen.dart';
+
 import 'NewsWIdget/InstagramScreen.dart';
-import 'NewsWIdget/LiveUpdatesScreen.dart';
-import 'NewsWIdget/NewsChannelScreen.dart';
+
 import 'NewsWIdget/TwitterScreen.dart';
 import 'NewsWIdget/YouTubeScreen.dart';
 import 'StateOverViewScreens/StateOverview.dart';
@@ -56,39 +59,29 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ScrollController? _scrollController;
-  bool lastStatus = true;
-  double height = 200;
-
-  void _scrollListener() {
-    if (_isShrink != lastStatus) {
-      setState(() {
-        lastStatus = _isShrink;
-      });
-    }
-  }
-
+  bool isoverlayOn = false;
   String NewsHeading = '';
-  var _currIndex = 0;
   bool isnewshidden = false;
   bool shownews = true;
   bool showSocialnews = true;
   bool newson = false;
   bool newson1 = false;
-  bool get _isShrink {
-    return _scrollController != null &&
-        _scrollController!.hasClients &&
-        _scrollController!.offset > (height - kToolbarHeight);
-  }
+  bool isanimationcomplete = true;
 
-  late Future<dynamic> LineChartfuturecall = YoutubeBannerGraphApi();
+  late Future<dynamic> LineChartfuturecall;
   TooltipBehavior? _tooltipBehavior;
   TooltipBehavior? _tooltipBehavior1;
   List<ChartSampleData>? chartData;
+  HomePageController homePageController = Get.put(HomePageController());
   @override
   void initState() {
+    homePageController.newspaperApi();
+    homePageController.socialMediaApi();
     super.initState();
-    _scrollController = ScrollController()..addListener(_scrollListener);
+    YoutubeTopPartylistApi();
+    NewsChannelTopPartylistApi();
+    FaceBookTopPartylistApi();
+    TwitterTopParty();
     //_initBannerAd();
     chartData = <ChartSampleData>[
       ChartSampleData(
@@ -142,43 +135,11 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    _scrollController?.removeListener(_scrollListener);
-    _scrollController?.dispose();
     super.dispose();
   }
 
-  /*late BannerAd _bannerAd;
-  bool _isAdLoaded = false;
-  _initBannerAd() {
-    _bannerAd = BannerAd(
-      size: AdSize.banner,
-      adUnitId: 'ca-app-pub-8354581033947644/1220452753',
-      listener: BannerAdListener(
-        onAdLoaded: (ad) {
-          setState(() {
-            _isAdLoaded = true;
-          });
-        },
-        onAdFailedToLoad: (ad, error) {
-          print(error);
-        },
-      ), // BannerAdListener
-      request: AdRequest(),
-    ); // BannerAd
-    _bannerAd.load();
-  }*/
-
   bool tempbool = false;
-  List<Widget> DailyNewsPages = [
-    NewsPaperScreen(),
-    NewsChannelScreen(),
-    LiveUpdatesScreen(),
-    GoogleTrendsScreen(),
-    YouTubeScreen(),
-    TwitterScreen(),
-    FaceBookScreen(),
-    InstagramScreen()
-  ];
+
   SwiperLayout swiperlayout = SwiperLayout.DEFAULT;
   PageController PageCount = PageController();
 
@@ -186,15 +147,6 @@ class _HomeScreenState extends State<HomeScreen> {
   bool carddirection = false;
   List youtubelink = [];
   int duration = Duration.microsecondsPerMillisecond;
-  late Future<dynamic> finaldata = NEWSpaperAPI();
-  late Future<dynamic> stockdata1 = TeslaStocksDataAPI();
-  late Future<dynamic> Newschanneldata = NewsChannelAPI();
-  late Future<dynamic> liveNewsdata = LiveUpdatesAPI();
-  late Future<dynamic> googletrendsdata = GoogleTrendsAPI();
-  late Future<dynamic> youtubedata = YouTubeAPI();
-  late Future<dynamic> twitterdata = TwitterAPI();
-  late Future<dynamic> facebookdata = FacebookAPI();
-  late Future<dynamic> instagramdata = InstagramAPI();
   List<String> assetimage = [
     'assets/news.gif',
     'assets/social.gif',
@@ -207,11 +159,18 @@ class _HomeScreenState extends State<HomeScreen> {
   var WeatherDataResult;
 
   final GlobalKey<ScaffoldState> _key = GlobalKey();
-
+  final GlobalKey _first = GlobalKey();
+  final GlobalKey _second = GlobalKey();
+  final GlobalKey _fourth = GlobalKey();
+  final GlobalKey _third = GlobalKey();
+  final GlobalKey _fifth = GlobalKey();
+  final GlobalKey _sixth = GlobalKey();
   bool selected = false;
 
-  double _height = 450;
-  double _width = 370;
+  double _height = 270;
+
+  bool ishidden = true;
+
   @override
   Widget build(BuildContext context) {
     List<Widget>? swipeimage = [
@@ -219,2287 +178,960 @@ class _HomeScreenState extends State<HomeScreen> {
       NewsChannelBanner(),
       FaceBookBanner(),
       TwitterBanner(),
-      // 'assets/Image/Intellisense-banners-01.jpg',
-      // 'assets/Image/Intellisense-banners-02.jpg',
-      // 'assets/Image/Intellisense-banners-03.jpg'
     ];
-    List<Widget>? ExpSwipeImage = [
+    List<Widget>? Expswiperimage = [
       YoutubeExpBanner(),
       NewsChannelExpBanner(),
       FacebookExpBanner(),
       TwitterExpBanner(),
     ];
-
     final themeMode = Provider.of<DarkMode>(context);
 
     return WillPopScope(
-      onWillPop: () async => false,
-      child: Scaffold(
-        // backgroundColor: Color(0xff5555555),
-        /*bottomNavigationBar: _isAdLoaded?Container(
-        height: _bannerAd.size.height.toDouble(),
-        width: _bannerAd.size.width.toDouble(),
-        child: AdWidget(ad: _bannerAd),
-      ):Text('Loading'),*/
-          key: _key,
+        onWillPop: () async => false,
+        child: Scaffold(
+            floatingActionButton: DraggableFab(
+              child: SpeedDial(
+                //Speed dial menu
+                //margin bottom
+                icon: Icons
+                    .dashboard_customize_outlined, //icon on Floating action button
+                activeIcon: Icons.close, //icon when menu is expanded on button
+                backgroundColor: Color(0xff86a8e7), //background color of button
+                foregroundColor:
+                Colors.black, //font color, icon color in button
+                activeBackgroundColor:
+                Color(0xff86a8e7), //background color when menu is expanded
+                activeForegroundColor: Colors.black,
+                buttonSize: Size(56, 56), //button size
+                visible: true,
+                closeManually: false,
+                curve: Curves.bounceIn,
+                overlayColor: Colors.black,
+                overlayOpacity: 0.0,
+                onOpen: () => print('OPENING DIAL'), // action when menu opens
+                onClose: () => print('DIAL CLOSED'), //action when menu closes
 
-          drawer: drawer(),
-          // backgroundColor: HomeColor,
-          body: NestedScrollView(
-            controller: _scrollController,
-            headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [
-                SliverAppBar(
-                  title: Image.asset(
-                    'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                    fit: BoxFit.contain,
-                    height: 40,
-                    width: 180,
-                  ),
-                  leading: IconButton(
-                    icon: Icon(
-                      Icons.menu,
-                      color: themeMode.darkMode ? Colors.white:Colors.black,
-                    ),
-                    onPressed: () {
-                      _key.currentState!.openDrawer();
+                elevation: 8.0, //shadow elevation of button
+                shape: CircleBorder(), //shape of button
+
+                children: [
+                  SpeedDialChild(
+                    //speed dial child
+                    child: Icon(Icons.info),
+                    backgroundColor: Colors.indigo,
+                    foregroundColor: Colors.white,
+                    label: 'TUTORIAL',
+                    labelStyle: TextStyle(fontSize: 13.0),
+                    onTap: () {
+                      WidgetsBinding.instance.addPostFrameCallback(
+                            (_) => ShowCaseWidget.of(context).startShowCase(
+                            [_fifth, _second, _sixth, _first, _third, _fourth]),
+                      );
                     },
+                    onLongPress: () => print('FIRST CHILD LONG PRESS'),
                   ),
-                  elevation: 0,
-                  backgroundColor:
-                  themeMode.darkMode ? Color(0xff333333) : Colors.white,
-                  pinned: true,
-                  expandedHeight: 310,
-                  flexibleSpace: FlexibleSpaceBar(
-                    collapseMode: CollapseMode.parallax,
-                    // title: _isShrink == true
-                    //     ? Image.asset(
-                    //
-                    //       'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-                    //       fit: BoxFit.cover,
-                    //       height: 50,
-                    //   width: 180,
-                    //     )
-                    //     : null,
-                    background: Container(
-
-                      child: SafeArea(
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 50),
-                              child: Container(
-
-                                height: 260,
-                                width: MediaQuery.of(context).size.width,
-                                child: Swiper(
-                                  duration: 20,
-                                  itemBuilder: (BuildContext context, int index) {
-                                    return OpenContainer(
-                                      closedColor:     themeMode.darkMode ? Color(0xff333333) : Colors.white,
-                                      closedElevation: 0,
-                                      closedShape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10.0)),
+                  SpeedDialChild(
+                    child: Icon(Icons.brush),
+                    backgroundColor: Colors.indigo,
+                    foregroundColor: Colors.white,
+                    label: 'CUSTOMISATION',
+                    labelStyle: TextStyle(fontSize: 13.0),
+                    onTap: () {
+                      showMaterialModalBottomSheet(
+                          elevation: 10,
+                          bounce: true,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15))),
+                          context: context,
+                          builder: (context) {
+                            return SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              child: SingleChildScrollView(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                        height: 10,
                                       ),
-                                      transitionType:
-                                      ContainerTransitionType.fade,
-                                      transitionDuration:
-                                      const Duration(milliseconds: 1200),
-                                      openBuilder: (context, action) {
-                                        return ExpSwipeImage[index];
-                                      },
-                                      closedBuilder: (context, action) {
-                                        return swipeimage[index];
-                                      },
-                                    );
+                                      Text('PREFERENCES',
+                                          style: GoogleFonts.bebasNeue(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15)),
+                                      SizedBox(
+                                        height: 15,
+                                      ),
+                                      ListTile(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(15)),
+                                          tileColor: Colors.blue.shade100,
+                                          onTap: () {
+                                            setState(() {
+                                              carddirection = !carddirection;
+                                            });
+                                            Navigator.pop(context);
+                                          },
+                                          leading: Text(
+                                            'Scroll Direction',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                                          trailing: carddirection == false
+                                              ? Text('Vertical')
+                                              : Text('Horizontal')),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      ExpansionTile(
+                                        collapsedShape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(15)),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(15)),
+                                        title: Text(''),
+                                        backgroundColor: Colors.blue.shade100,
+                                        leading: Text('Custom Swipe'),
+                                        collapsedBackgroundColor:
+                                        Colors.blue.shade100,
+                                        children: [
+                                          ListTile(
+                                            onTap: () {
+                                              setState(() {
+                                                swiperlayout =
+                                                    SwiperLayout.STACK;
+                                              });
 
-                                  },
-                                  itemCount: 4,
-                                  autoplay: false,
-                                  /* pagination: SwiperPagination(
-                                    builder: new DotSwiperPaginationBuilder(
-                                        color: Colors.grey,
-                                        activeColor: Color(0xff38547C))),*/
-                                  control: new SwiperControl(
-                                    size: 18,
-                                    padding: EdgeInsets.all(2),
-                                    color: themeMode.darkMode ? Colors.white:Colors.black,
+                                              Navigator.pop(context);
+                                            },
+                                            leading: Text(
+                                              'STACKED',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                          ListTile(
+                                            onTap: () {
+                                              setState(() {
+                                                swiperlayout =
+                                                    SwiperLayout.TINDER;
+                                              });
+
+                                              Navigator.pop(context);
+                                            },
+                                            leading: Text(
+                                              'SHADOW VIEW',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                          ListTile(
+                                            onTap: () {
+                                              setState(() {
+                                                swiperlayout =
+                                                    SwiperLayout.DEFAULT;
+                                              });
+
+                                              Navigator.pop(context);
+                                            },
+                                            leading: Text(
+                                              'DEFAULT VIEW',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                      ExpansionTile(
+                                        collapsedShape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(15)),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                            BorderRadius.circular(15)),
+                                        title: Text(''),
+                                        backgroundColor: Colors.blue.shade100,
+                                        leading: Text('Swipe Speed'),
+                                        collapsedBackgroundColor:
+                                        Colors.blue.shade100,
+                                        children: [
+                                          ListTile(
+                                            onTap: () {
+                                              setState(() {
+                                                duration = 2200;
+                                              });
+
+                                              Navigator.pop(context);
+                                            },
+                                            leading: Text(
+                                              'SLOW',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                          ListTile(
+                                            onTap: () {
+                                              setState(() {
+                                                duration = Duration
+                                                    .microsecondsPerMillisecond;
+                                              });
+
+                                              Navigator.pop(context);
+                                            },
+                                            leading: Text(
+                                              'MEDIUM',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                          ListTile(
+                                            onTap: () {
+                                              setState(() {
+                                                duration = 10;
+                                              });
+
+                                              Navigator.pop(context);
+                                            },
+                                            leading: Text(
+                                              'FAST',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(
+                                        height: 10,
+                                      ),
+                                    ],
                                   ),
-                                  // Swiper(controller: SwiperController(),
-                                  //   duration: 1500,
-                                  //   itemBuilder: (BuildContext context, int index) {
-                                  //     return swipeimage![index];
-                                  //   },
-                                  //   itemCount: 4,
-                                  //   autoplay: false,
-                                  //   pagination: SwiperPagination(
-                                  //       builder: new DotSwiperPaginationBuilder(
-                                  //           color: Colors.grey,
-                                  //           activeColor: Color(0xff38547C))),
-                                  //   control: new SwiperControl(
-                                  //     size: 18,
-                                  //     padding: EdgeInsets.all(2),
-                                  //     color: Color(0xff38547C),
-                                  //   ),
-                                  // ),
                                 ),
                               ),
+                            );
+                          });
+                    },
+                    onLongPress: () => print('SECOND CHILD LONG PRESS'),
+                  ),
+
+                  //add more menu item childs here
+                ],
+              ),
+            ),
+            key: _key,
+            appBar: AppBar(
+              leading: Showcase(
+                tooltipBackgroundColor: Colors.green.shade100,
+                title: "APP DRAWER",
+                description: "DS Knowlegde Base",
+                descTextStyle: TextStyle(fontSize: 13, color: Colors.black),
+                descriptionPadding: EdgeInsets.all(4),
+                titleAlignment: TextAlign.center,
+                titleTextStyle: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
+                key: _fifth,
+                child: Column(
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        Icons.menu,
+                        color: Colors.black,
+                      ),
+                      onPressed: () {
+                        _key.currentState!.openDrawer();
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              title: Image.asset(
+                'assets/new Updated images/AppIcon.gif',
+                fit: BoxFit.contain,
+                height: 45,
+                width: 200,
+              ),
+              elevation: 0,
+              backgroundColor:
+              themeMode.darkMode ? Color(0xff333333) : Colors.white,
+              actions: [
+                Showcase(
+                  tooltipBackgroundColor: Colors.green.shade100,
+                  key: _second,
+                  title: "STATE ANALYTICS",
+                  descTextStyle: TextStyle(fontSize: 13, color: Colors.black),
+                  descriptionPadding: EdgeInsets.all(4),
+                  titleAlignment: TextAlign.center,
+                  titleTextStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                  description:
+                  'Trending\nShow data based on keyword, hashtag and etc.',
+                  child: IconButton(
+                      color: Colors.black,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StateOverviewScreen()));
+                      },
+                      icon: Image.asset(
+                        'assets/new Updated images/megaphone.png',
+                        height: 20,
+                      )),
+                ),
+                Showcase(
+                  tooltipBackgroundColor: Colors.green.shade100,
+                  key: _sixth,
+                  title: "NOTIFICATION",
+                  description: "Show analytics data",
+                  descTextStyle: TextStyle(fontSize: 13, color: Colors.black),
+                  descriptionPadding: EdgeInsets.all(4),
+                  titleAlignment: TextAlign.center,
+                  titleTextStyle: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black),
+                  child: IconButton(
+                      color: Colors.black,
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Notifications()));
+                      },
+                      icon: Image.asset(
+                        'assets/new Updated images/Notifications.png',
+                        height: 20,
+                      )),
+                ),
+                // IconButton(
+                //     onPressed: () {
+
+                //     },
+                //     icon: Icon(
+                //       Icons.info_rounded,
+                //       color: Colors.blueAccent,
+                //     )),
+              ],
+            ),
+            drawer: drawer(),
+            body: ListView(shrinkWrap: true, children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: FadeInUp(
+                  from: 100,
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/new Updated images/animation-lnk4dhsw-small-unscreen.gif',
+                        height: 25,
+                        width: 25,
+                      ),
+                      Text(
+                        'QUICK BATTLES',
+                        style: GoogleFonts.teko(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Spacer(),
+                      IconButton(
+                          onPressed: () {
+                            setState(() {
+                              ishidden = !ishidden;
+                            });
+                          },
+                          icon: Icon(ishidden
+                              ? Icons.arrow_drop_up_outlined
+                              : Icons.arrow_drop_down_outlined)),
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 2),
+                child: Showcase(
+                  tooltipBackgroundColor: Colors.green.shade100,
+                  key: _first,
+                  description: 'Banners with latest analytics',
+                  child: FadeInUp(
+                    from: 350,
+                    duration: Duration(milliseconds: 700),
+                    child: AnimatedContainer(
+                      duration: Duration(milliseconds: 500),
+                      height: ishidden ? _height : 0,
+                      onEnd: () {
+                        setState(() {
+                          if (ishidden == false) {
+                            isanimationcomplete = false;
+                          } else if (ishidden == true) {
+                            isanimationcomplete = true;
+                          }
+                        });
+                      },
+                      width: MediaQuery.of(context).size.width,
+                      child: ishidden
+                          ? Swiper(
+                        duration: 1500,
+                        itemBuilder: (BuildContext context, int index) {
+                          return OpenContainer(
+                            closedElevation: 0,
+                            closedColor: themeMode.darkMode
+                                ? Color(0xff333333)
+                                : Colors.white,
+                            openShape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15)),
+                            closedShape: const RoundedRectangleBorder(
+                              borderRadius:
+                              BorderRadius.all(Radius.circular(10.0)),
+                            ),
+                            transitionType: ContainerTransitionType.fade,
+                            transitionDuration:
+                            const Duration(milliseconds: 1500),
+                            openBuilder: (context, action) {
+                              return Expswiperimage[index];
+                            },
+                            closedBuilder: (context, action) {
+                              return isanimationcomplete
+                                  ? swipeimage[index]
+                                  : Container();
+                            },
+                          );
+                        },
+                        itemCount: 4,
+                        autoplay: true,
+                      )
+                          : Container(),
+                    ),
+                  ),
+                ),
+              ),
+
+              FadeInUp(
+                from: 300,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    children: [
+                      Image.asset(
+                        'assets/NotificationIcons/News-Paper.png',
+                        height: 25,
+                        width: 25,
+                      ),
+                      SizedBox(width: 5,),
+                      Text(
+                        'NEWS',
+                        style: GoogleFonts.teko(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                      Spacer(),
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            shownews = !shownews;
+                          });
+                        },
+                        icon: shownews == true
+                            ? Icon(Icons.arrow_drop_up_outlined)
+                            : Icon(Icons.arrow_drop_down_outlined),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+
+              //main card
+              Padding(
+                  padding: const EdgeInsets.only(left: 8.0, right: 8),
+                  child: shownews == true
+                      ? FadeInUp(
+                    from: 350,
+                    duration: Duration(milliseconds: 700),
+                    child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Showcase(
+                          tooltipBackgroundColor: Colors.green.shade100,
+                          key: _third,
+                          description: "Television Media News Analytics",
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment:
+                              CrossAxisAlignment.center,
+                              children: [
+                                homePageController.newsdata == null
+                                    ? loader()
+                                    : NewsPaperWidget(),
+                                //Newschannel
+                                homePageController.newchannelldata == null
+                                    ? loader()
+                                    : NewsChannelWidget(),
+                                //Live News
+                                homePageController.Livenewsdata == null
+                                    ? loader()
+                                    : LiveNewsWidget(),
+                                //Google Trends
+                                homePageController.GoogleTrendsdata ==
+                                    null
+                                    ? loader()
+                                    : GoogletrendsWidget()
+                              ]),
+                        )),
+                  )
+                      : Container()),
+
+              //todo:social media
+
+              FadeInUp(
+                from: 300,
+                child: Padding(
+                    padding: const EdgeInsets.only(left: 20),
+                    child: AnimatedContainer(
+                        duration: Duration(seconds: 2),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              'assets/new Updated images/social-media-icons-unscreen.gif',
+                              height: 30,
+                              width: 30,
+                            ),
+                            Text(
+                              'SOCIAL MEDIA',
+                              style: GoogleFonts.teko(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Spacer(),
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  showSocialnews = !showSocialnews;
+                                });
+                              },
+                              icon: showSocialnews == true
+                                  ? Icon(Icons.arrow_drop_up_outlined)
+                                  : Icon(Icons.arrow_drop_down_outlined),
                             ),
                           ],
-                        ),
+                        ))),
+              ),
+
+              showSocialnews == true
+                  ? FadeInUp(
+                from: 400,
+                child: Padding(
+                  padding:  EdgeInsets.only(left: 8.0, right: 8),
+                  child: SingleChildScrollView(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    scrollDirection: Axis.horizontal,
+                    child: Showcase(
+                      tooltipBackgroundColor: Colors.green.shade100,
+                      key: _fourth,
+                      description: "Social Media News Analytics",
+                      child: Row(
+                        children: [
+                          //Youtube News
+                          homePageController.Youtubedata == null
+                              ? loader()
+                              : YoutubeWidget(),
+
+                          //Twitter news
+                          homePageController.TwitterData == null
+                              ? loader()
+                              : TwitterWidget(),
+                          //FaceBook News
+                          homePageController.Facebookdata == null
+                              ? loader()
+                              : FacebookWidget(),
+                          //Instagram news
+                          homePageController.Instagramdata == null
+                              ? loader()
+                              : InstagramWidget(),
+                        ],
                       ),
                     ),
                   ),
-                  actions: [
-                    /*Padding(
-                        padding: EdgeInsets.only(bottom: 12.0, top: 10),
-                        child: _isShrink == false
-                            ? Container(
-                                child: CarouselSlider(
-                                  options: CarouselOptions(
-                                    height: 400.0,
-                                    scrollDirection: Axis.vertical,
-                                    autoPlay: true,
-                                    autoPlayInterval: Duration(seconds: 3),
-                                    autoPlayAnimationDuration:
-                                        Duration(milliseconds: 800),
-                                  ),
-                                  items: [
-                                    'YuvaGalamAndrapradesh',
-                                    'YuvaGalamPadayatra',
-                                    '#PsychoPovaliCycleRavali',
-                                    '#LokeshPadayatra',
-                                    '#YuvaGalamPadayatra'
-                                  ].map((i) {
-                                    return Builder(
-                                      builder: (BuildContext context) {
-                                        return Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            margin: EdgeInsets.symmetric(
-                                                horizontal: 5.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Text(
-                                                  '$i',
-                                                  style: TextStyle(
-                                                      fontSize: 16.0,
-                                                      color: Colors.black),
-                                                ),
-                                                Icon(
-                                                  Icons.data_usage,
-                                                  size: 18,
-                                                  color: Colors.black,
-                                                ),
-                                              ],
-                                            ));
-                                      },
-                                    );
-                                  }).toList(),
-                                ),
-                                width: 240,
-                                decoration: BoxDecoration(
-                                  border:
-                                      Border.all(width: 2, color: Colors.blue),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
-                                ),
-                                //color: Colors.white,
-                              )
-                            : null,
-                      ),*/
-
-                    /*Padding(
-                        padding:  EdgeInsets.only(bottom: 12.0, top: 10),
-                        child: _isShrink==false? Container(
-                          child: CarouselSlider(
-                            options: CarouselOptions(
-                              height: 400.0,
-                              scrollDirection: Axis.vertical,
-                              autoPlay: true,
-                              autoPlayInterval: Duration(seconds: 3),
-                              autoPlayAnimationDuration:
-                                  Duration(milliseconds: 800),
-                            ),
-                            items: ['YuvaGalamAndrapradesh', 'YuvaGalamPadayatra', '#PsychoPovaliCycleRavali', '#LokeshPadayatra', '#YuvaGalamPadayatra'].map((i) {
-                              return Builder(
-                                builder: (BuildContext context) {
-                                  return Container(
-                                      width: MediaQuery.of(context).size.width,
-                                      margin:
-                                          EdgeInsets.symmetric(horizontal: 5.0),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            '$i',
-                                            style: TextStyle(fontSize: 16.0, color: Colors.black),
-                                          ),
-                                          Icon(Icons.data_usage,size: 18,color: Colors.black,),
-                                        ],
-                                      ));
-                                },
-                              );
-                            }).toList(),
-                          ),
-                          width: 240,
-                          decoration: BoxDecoration(
-                            border: Border.all(width: 2, color: Colors.blue),
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                          ),
-                          //color: Colors.white,
-                        ):null,
-                      ),*/
-                    /*Row(
-                        children: [
+                ),
+              )
+                  : Container(),
+              SingleChildScrollView(
+                physics: ScrollPhysics(),
+                child: Column(
+                  children: [
+                    GridView.count(
+                      physics: NeverScrollableScrollPhysics(),
+                      crossAxisCount: 5,
+                      crossAxisSpacing: 0,
+                      shrinkWrap: true,
+                      children: [
+                        Column(children: [
                           GestureDetector(
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => WeatherScreen()));
+                                      builder: (context) =>
+                                          AllCandidateList()));
                             },
-                            child: Row(
-                              children: [
-                                Column(
-                                  children: [
-                                    FutureBuilder<Weather>(
-                                      future: dataState.getWeather(),
-                                      builder: (context, snapshot) {
-                                        return snapshot.hasData
-                                            ? Container(
-                                                height: 45,
-                                                width: 150,
-                                                child: SingleChildScrollView(
-                                                  child: Column(
-                                                    children: <Widget>[
-                                                      Container(
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  bottom: 6,
-                                                                  left: 10),
-                                                          child: Column(
-                                                            children: <Widget>[
-                                                              Row(
-                                                                children: <
-                                                                    Widget>[
-                                                                  Column(
-                                                                    children: [
-                                                                      Text(
-                                                                        '${(snapshot.data!.main.temp - 273.15).toInt()}°',
-                                                                        style: GoogleFonts.nunitoSans(
-                                                                            fontSize:
-                                                                                12.0,
-                                                                            fontWeight:
-                                                                                FontWeight.w700,
-                                                                            color: Colors.black),
-                                                                      ),
-                                                                      Text(
-                                                                        '${(snapshot.data!.name)}',
-                                                                        style: GoogleFonts
-                                                                            .nunitoSans(
-                                                                          color:
-                                                                              Colors.black,
-                                                                          fontSize:
-                                                                              12.0,
-                                                                          fontWeight:
-                                                                              FontWeight.w700,
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: 2,
-                                                                  ),
-                                                                  Column(
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .min,
-                                                                    children: <
-                                                                        Widget>[
-                                                                      Image
-                                                                          .network(
-                                                                        'http://openweathermap.org/img/wn/${snapshot.data!.weather[0].icon}.png',
-                                                                        height:
-                                                                            50,
-                                                                      ),
-                                                                    ],
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
-                                              )
-                                            : Center(
-                                                child:
-                                                    CircularProgressIndicator(
-                                                        backgroundColor:
-                                                            Colors.black),
-                                              );
-                                      },
-                                    ),
-                                  ],
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/new Updated images/intellisensesolutions-Icons-62.png",
+                                  height: 30,
                                 ),
-                              ],
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: EdgeInsets.all(8),
+                            ),
+                          ),
+                          Expanded(
+                            child: Text(
+                              'Candidature Analysis',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 10),
                             ),
                           )
-                        ],
-                      ),*/
-                    IconButton(
-
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => StateOverviewScreen()));
-                        },
-                        icon: Image.asset(
-                          'assets/new Updated images/megaphone.png',
-                          height: 20,
-                          color: themeMode.darkMode ? Colors.white:null,
-                        )),
-                    IconButton(
-
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Notifications()));
-                        },
-                        icon: Image.asset(
-                          'assets/new Updated images/Notifications.png',
-                          height: 20,
-                          color: themeMode.darkMode ? Colors.white:null,
-                        )),
-                    IconButton(
-                        onPressed: () {
-                          showMaterialModalBottomSheet(
-                            // backgroundColor: Color(0xffd2dfff),
-                              elevation: 10,
-                              bounce: true,
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(15),
-                                      topRight: Radius.circular(15))),
-                              context: context,
-                              builder: (context) {
-                                return SizedBox(
-                                  height:
-                                  MediaQuery.of(context).size.height * 0.32,
-                                  child: SingleChildScrollView(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        children: [
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          Text('PREFERENCES',
-                                              style: GoogleFonts.bebasNeue(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15)),
-                                          SizedBox(
-                                            height: 15,
-                                          ),
-                                          ListTile(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(
-                                                      15)),
-                                              tileColor: Colors.blue.shade100,
-                                              onTap: () {
-                                                setState(() {
-                                                  carddirection =
-                                                  !carddirection;
-                                                });
-                                                Navigator.pop(context);
-                                              },
-                                              leading: Text(
-                                                'Scroll Direction',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                    FontWeight.w600),
-                                              ),
-                                              trailing: carddirection == false
-                                                  ? Text('Vertical')
-                                                  : Text('Horizontal')),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          ExpansionTile(
-                                            collapsedShape:
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.circular(
-                                                    15)),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.circular(15)),
-                                            title: Text(''),
-                                            backgroundColor:
-                                            Colors.blue.shade100,
-                                            leading: Text('Custom Swipe'),
-                                            collapsedBackgroundColor:
-                                            Colors.blue.shade100,
-                                            children: [
-                                              ListTile(
-                                                onTap: () {
-                                                  setState(() {
-                                                    swiperlayout =
-                                                        SwiperLayout.STACK;
-                                                  });
-
-                                                  Navigator.pop(context);
-                                                },
-                                                leading: Text(
-                                                  'STACKED',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                      FontWeight.w600),
-                                                ),
-                                              ),
-                                              ListTile(
-                                                onTap: () {
-                                                  setState(() {
-                                                    swiperlayout =
-                                                        SwiperLayout.TINDER;
-                                                  });
-
-                                                  Navigator.pop(context);
-                                                },
-                                                leading: Text(
-                                                  'SHADOW VIEW',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                      FontWeight.w600),
-                                                ),
-                                              ),
-                                              ListTile(
-                                                onTap: () {
-                                                  setState(() {
-                                                    swiperlayout =
-                                                        SwiperLayout.DEFAULT;
-                                                  });
-
-                                                  Navigator.pop(context);
-                                                },
-                                                leading: Text(
-                                                  'DEFAULT VIEW',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                      FontWeight.w600),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          ExpansionTile(
-                                            collapsedShape:
-                                            RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.circular(
-                                                    15)),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                BorderRadius.circular(15)),
-                                            title: Text(''),
-                                            backgroundColor:
-                                            Colors.blue.shade100,
-                                            leading: Text('Swipe Speed'),
-                                            collapsedBackgroundColor:
-                                            Colors.blue.shade100,
-                                            children: [
-                                              ListTile(
-                                                onTap: () {
-                                                  setState(() {
-                                                    duration = 2200;
-                                                  });
-
-                                                  Navigator.pop(context);
-                                                },
-                                                leading: Text(
-                                                  'SLOW',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                      FontWeight.w600),
-                                                ),
-                                              ),
-                                              ListTile(
-                                                onTap: () {
-                                                  setState(() {
-                                                    duration = Duration
-                                                        .microsecondsPerMillisecond;
-                                                  });
-
-                                                  Navigator.pop(context);
-                                                },
-                                                leading: Text(
-                                                  'MEDIUM',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                      FontWeight.w600),
-                                                ),
-                                              ),
-                                              ListTile(
-                                                onTap: () {
-                                                  setState(() {
-                                                    duration = 10;
-                                                  });
-
-                                                  Navigator.pop(context);
-                                                },
-                                                leading: Text(
-                                                  'FAST',
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                      FontWeight.w600),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: 10,
-                                          ),
-                                          /*ListTile(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius
-                                                  .circular(
-                                                  15)),
-                                          tileColor: Colors
-                                              .blue.shade100,
-                                          leading:
-                                          Text('Darkmode'),
-                                          onTap: () {
-                                            setState(() {
-                                              // themeChange
-                                              //         .darkTheme =
-                                              //     !themeChange
-                                              //         .darkTheme;
-                                            });
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),*/
-                                          /*ListTile(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius
-                                                  .circular(
-                                                  15)),
-                                          tileColor: Colors
-                                              .blue.shade100,
-                                          leading: shownews ==
-                                              false
-                                              ? Text(
-                                              'Show News Tab')
-                                              : Text(
-                                              'Hide News Tab'),
-                                          onTap: () {
-                                            setState(() {
-                                              shownews =
-                                              !shownews;
-                                            });
-                                            Navigator.pop(
-                                                context);
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        ListTile(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius
-                                                  .circular(
-                                                  15)),
-                                          tileColor: Colors
-                                              .blue.shade100,
-                                          leading: showSocialnews ==
-                                              false
-                                              ? Text(
-                                              'Show SocialNews Tab')
-                                              : Text(
-                                              'Hide SocialNews Tab'),
-                                          onTap: () {
-                                            setState(() {
-                                              showSocialnews =
-                                              !showSocialnews;
-                                            });
-                                            Navigator.pop(
-                                                context);
-                                          },
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        ListTile(
-                                          shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                              BorderRadius
-                                                  .circular(
-                                                  15)),
-                                          tileColor: Colors
-                                              .blue.shade100,
-                                          leading: Text(
-                                              'Hide News Card'),
-                                          onTap: () {
-                                            setState(() {
-                                              viewnews = false;
-                                            });
-                                            Navigator.pop(
-                                                context);
-                                          },
-                                        ),*/
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              });
-                        },
-                        icon: Icon(
-                          Icons.settings,
-                          color: themeMode.darkMode ? Colors.white:Colors.black,
-                        )),
-                    /*PopupMenuButton(onSelected: (value) {
-                        if (value == 'notifications') {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Notifications()));
-                        } else if (value == 'weather') {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => WeatherScreen()));
-                        }
-                      }, itemBuilder: (BuildContext bc) {
-                        return [
-                          PopupMenuItem(
-                            value: 'Reader',
-                            onTap: () {
-                              setState(() {
-                                viewnews = false;
-                              });
-                            },
-                            child: Text("Hide News"),
-                          ),
-                          PopupMenuItem(
-                            value: 'logout',
-                            child: Text("Logout"),
-                            onTap: () {
-                              CoolAlert.show(
-                                confirmBtnColor: Color(0xff00186a),
-                                backgroundColor: Color(0xff001969),
-                                context: context,
-                                type: CoolAlertType.confirm,
-                                onConfirmBtnTap: () => LogoutAPI(context),
-                              );
-                            },
-                          ),
-                          PopupMenuItem(
-                            value: 'notifications',
-                            child: Text("Notifications"),
+                        ]),
+                        Column(children: [
+                          GestureDetector(
                             onTap: () {},
-                          ),
-                          PopupMenuItem(
-                            value: 'weather',
-                            child: Text("Weather"),
-                            onTap: () {},
-                          ),
-                        ];
-                      }),*/
-                  ],
-                ),
-              ];
-            },
-            body: CustomScrollView(slivers: [
-              SliverList(
-                delegate: SliverChildListDelegate([
-                  Container(
-                    // color: Color(0xffd2dfff),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  'assets/icons/newspaperhead.gif',
-                                  height: 25,
-                                  width: 25,
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/new Updated images/intellisensesolutions-Icons-73 (1).png",
+                                  height: 30,
                                 ),
-                                Text(
-                                  'NEWS',
-                                  style: TextStyle(
-                                    fontFamily: 'Segoe UI',
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                Spacer(),
-                                IconButton(
-                                  onPressed: () {
-                                    setState(() {
-                                      shownews = !shownews;
-                                    });
-                                  },
-                                  icon: shownews == true
-                                      ? Icon(Icons.arrow_drop_down)
-                                      : Icon(Icons.arrow_drop_up_outlined),
-                                ),
-                              ],
+                              ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: EdgeInsets.all(8),
                             ),
                           ),
-                          //main card
-                          Padding(
-                              padding:
-                              const EdgeInsets.only(left: 8.0, right: 8),
-                              child: shownews == true
-                                  ? SlideInUp(
-                                duration: Duration(seconds: 3),
-                                child: SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                        mainAxisAlignment:
-                                        MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                        children: [
-                                          FutureBuilder(
-                                              future: finaldata,
-                                              builder:
-                                              ((context, snapshot) {
-                                                if (snapshot
-                                                    .connectionState ==
-                                                    ConnectionState
-                                                        .waiting) {
-                                                  return Padding(
-                                                    padding:
-                                                    const EdgeInsets
-                                                        .only(
-                                                        top: 70.0),
-                                                    child: SizedBox(
-                                                      height: 150,
-                                                      width: 150,
-                                                      child: Center(
-                                                          child:
-                                                          SpinKitWave(
-                                                            color:
-                                                            Colors.blue,
-                                                            size: 18,
-                                                          )),
-                                                    ),
-                                                  );
-                                                } else if (snapshot
-                                                    .connectionState ==
-                                                    ConnectionState
-                                                        .done) {
-                                                  if (snapshot.hasError) {
-                                                    return const Text(
-                                                        'Data Error');
-                                                  } else if (snapshot
-                                                      .hasData) {
-                                                    List Newpaperlist = [
-                                                      NewsTemplate2(
-                                                          "${newsdata[0]['mediaName']}".length >
-                                                              16
-                                                              ? ' ${newsdata[0]['mediaName'].substring(0, 10)}...'
-                                                              : ' ${newsdata[0]['mediaName']}',
-                                                          '${newsdata[0]['headLine']}',
-                                                          'assets/icons/newspaperdxp.png',
-                                                          '${newsdata[0]['candidateName']}'
-                                                              .length >
-                                                              16
-                                                              ? '- ${newsdata[0]['candidateName'].substring(0, 10)}...'
-                                                              : '- ${newsdata[0]['candidateName']}'),
-                                                      NewsTemplate3(
-                                                          "${newsdata[1]['mediaName']}".length >
-                                                              16
-                                                              ? ' ${newsdata[1]['mediaName'].substring(0, 10)}...'
-                                                              : ' ${newsdata[1]['mediaName']}',
-                                                          '${newsdata[0]['headLine']}'
-                                                          '${newsdata[1]['headLine']}',
-                                                          'assets/icons/newspaperdxp.png',
-                                                          '${newsdata[1]['candidateName']}'
-                                                              .length >
-                                                              16
-                                                              ? '- ${newsdata[1]['candidateName'].substring(0, 10)}...'
-                                                              : '- ${newsdata[1]['candidateName']}'),
-                                                      NewsTemplate1(
-                                                          "${newsdata[2]['mediaName']}".length >
-                                                              16
-                                                              ? ' ${newsdata[2]['mediaName'].substring(0, 10)}...'
-                                                              : ' ${newsdata[2]['mediaName']}',
-                                                          '${newsdata[0]['headLine']}'
-                                                          '${newsdata[2]['headLine']}',
-                                                          'assets/icons/newspaperdxp.png',
-                                                          '${newsdata[2]['candidateName']}'
-                                                              .length >
-                                                              16
-                                                              ? '- ${newsdata[2]['candidateName'].substring(0, 10)}...'
-                                                              : '- ${newsdata[2]['candidateName']}'),
-                                                      NewsTemplate4(
-                                                          "${newsdata[3]['mediaName']}".length >
-                                                              16
-                                                              ? ' ${newsdata[3]['mediaName'].substring(0, 10)}...'
-                                                              : ' ${newsdata[3]['mediaName']}',
-                                                          '${newsdata[0]['headLine']}'
-                                                          '${newsdata[3]['headLine']}',
-                                                          'assets/icons/newspaperdxp.png',
-                                                          '${newsdata[3]['candidateName']}'
-                                                              .length >
-                                                              16
-                                                              ? '- ${newsdata[3]['candidateName'].substring(0, 10)}...'
-                                                              : '- ${newsdata[3]['candidateName']}'),
-                                                    ];
-                                                    return GestureDetector(
-                                                      onTap: () {
-                                                        showCupertinoModalPopup(
-
-                                                            context:
-                                                            context,
-                                                            barrierColor:Colors.grey.withOpacity(0.8) ,
-                                                            // duration:
-                                                            // Duration(
-                                                            //     seconds:
-                                                            //     1),
-                                                            // animationCurve:
-                                                            // Curves
-                                                            //     .easeInQuad,
-                                                            // shape: RoundedRectangleBorder(
-                                                            //     borderRadius: BorderRadius.only(
-                                                            //         topLeft: Radius.circular(
-                                                            //             15),
-                                                            //         topRight: Radius.circular(
-                                                            //             15))),
-                                                            builder:
-                                                                (context) {
-                                                              return Container(
-                                                                  height: MediaQuery.of(context).size.height *
-                                                                      0.65,
-                                                                  child:
-                                                                  NewsPaperScreen());
-                                                            });
-                                                        // setState(() {
-                                                        //   viewnews = true;
-                                                        //   newson = true;
-                                                        //   NewsHeading =
-                                                        //       'NewsPaper';
-                                                        //   _currIndex = 0;P
-                                                        // });
-                                                        // PageCount
-                                                        //     .jumpToPage(
-                                                        //         0);
-                                                      },
-                                                      child: SizedBox(
-                                                        height: 130,
-                                                        width: 150,
-                                                        child: Swiper(
-                                                            itemWidth:
-                                                            150,
-                                                            itemHeight:
-                                                            130,
-                                                            duration:
-                                                            duration,
-                                                            layout:
-                                                            swiperlayout,
-                                                            scrollDirection: carddirection ==
-                                                                false
-                                                                ? Axis
-                                                                .vertical
-                                                                : Axis
-                                                                .horizontal,
-                                                            autoplay:
-                                                            true,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                            context,
-                                                                int
-                                                                index) {
-                                                              return Newpaperlist[
-                                                              index];
-                                                            },
-                                                            itemCount: 4,
-                                                            pagination:
-                                                            SwiperPagination(
-                                                                builder:
-                                                                DotSwiperPaginationBuilder(
-                                                                  size: 7,
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  activeColor:
-                                                                  Colors
-                                                                      .blue
-                                                                      .shade200,
-                                                                ))),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    return const Text(
-                                                        'Server Error');
-                                                  }
-                                                } else {
-                                                  return Text(
-                                                      'State: ${snapshot.connectionState}');
-                                                }
-                                              })),
-                                          //Newschannel
-                                          FutureBuilder(
-                                              future: Newschanneldata,
-                                              builder:
-                                              ((context, snapshot) {
-                                                if (snapshot
-                                                    .connectionState ==
-                                                    ConnectionState
-                                                        .waiting) {
-                                                  return Padding(
-                                                    padding:
-                                                    const EdgeInsets
-                                                        .only(
-                                                        top: 70.0),
-                                                    child: SizedBox(
-                                                      height: 150,
-                                                      width: 150,
-                                                      child: Center(
-                                                          child:
-                                                          SpinKitWave(
-                                                            color:
-                                                            Colors.blue,
-                                                            size: 18,
-                                                          )),
-                                                    ),
-                                                  );
-                                                } else if (snapshot
-                                                    .connectionState ==
-                                                    ConnectionState
-                                                        .done) {
-                                                  if (snapshot.hasError) {
-                                                    return const Text(
-                                                        'Data Error');
-                                                  } else if (snapshot
-                                                      .hasData) {
-                                                    List NewschannelList =
-                                                    [
-                                                      NewsTemplate2(
-                                                          "${newchannelldata[0]['mediaChannelName']}".length >
-                                                              16
-                                                              ? ' ${newchannelldata[0]['mediaChannelName'].substring(0, 10)}...'
-                                                              : ' ${newchannelldata[0]['mediaChannelName']}',
-                                                          '${newsdata[0]['headLine']}'
-                                                          '${newchannelldata[0]['videoTitle']}',
-                                                          'assets/icons/newsdxps.png',
-                                                          '- ${newchannelldata[0]['candidateName']}'),
-                                                      NewsTemplate3(
-                                                          "${newchannelldata[1]['mediaChannelName']}".length >
-                                                              16
-                                                              ? ' ${newchannelldata[1]['mediaChannelName'].substring(0, 10)}...'
-                                                              : ' ${newchannelldata[1]['mediaChannelName']}',
-                                                          '${newchannelldata[1]['videoTitle']}',
-                                                          'assets/icons/newsdxps.png',
-                                                          '${newchannelldata[1]['candidateName']}'
-                                                              .length >
-                                                              16
-                                                              ? '- ${newchannelldata[1]['candidateName'].substring(0, 10)}...'
-                                                              : '- ${newchannelldata[1]['candidateName']}'),
-                                                      NewsTemplate1(
-                                                          "${newchannelldata[2]['mediaChannelName']}".length >
-                                                              16
-                                                              ? ' ${newchannelldata[2]['mediaChannelName'].substring(0, 10)}...'
-                                                              : ' ${newchannelldata[2]['mediaChannelName']}',
-                                                          '${newchannelldata[2]['videoTitle']}',
-                                                          'assets/icons/newsdxps.png',
-                                                          '- ${newsdata[2]['candidateName']}'),
-                                                      NewsTemplate4(
-                                                          "${newchannelldata[3]['mediaChannelName']}".length >
-                                                              16
-                                                              ? ' ${newchannelldata[3]['mediaChannelName'].substring(0, 10)}...'
-                                                              : ' ${newchannelldata[3]['mediaChannelName']}',
-                                                          '${newchannelldata[3]['videoTitle']}',
-                                                          'assets/icons/newsdxps.png',
-                                                          '- ${newchannelldata[3]['candidateName']}'),
-                                                    ];
-                                                    return GestureDetector(
-                                                      onTap: () {
-                                                        showMaterialModalBottomSheet(
-                                                            context:
-                                                            context,
-                                                            duration:
-                                                            Duration(
-                                                                seconds:
-                                                                1),
-                                                            animationCurve:
-                                                            Curves
-                                                                .easeInQuad,
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.only(
-                                                                    topLeft: Radius.circular(
-                                                                        15),
-                                                                    topRight: Radius.circular(
-                                                                        15))),
-                                                            builder:
-                                                                (context) {
-                                                              return Container(
-                                                                height: MediaQuery.of(context)
-                                                                    .size
-                                                                    .height *
-                                                                    0.6,
-                                                                child:
-                                                                NewsChannelScreen(),
-                                                              );
-                                                            });
-                                                        // setState(() {
-                                                        //   viewnews = true;
-                                                        //   newson = true;
-                                                        //   NewsHeading =
-                                                        //       'NewsChannel';
-                                                        //   _currIndex = 0;
-                                                        // });
-                                                        // PageCount
-                                                        //     .jumpToPage(
-                                                        //         1);
-                                                      },
-                                                      child: SizedBox(
-                                                        height: 130,
-                                                        width: 150,
-                                                        child: Swiper(
-                                                            itemWidth:
-                                                            150,
-                                                            itemHeight:
-                                                            130,
-                                                            duration:
-                                                            duration,
-                                                            layout:
-                                                            swiperlayout,
-                                                            scrollDirection: carddirection ==
-                                                                false
-                                                                ? Axis
-                                                                .vertical
-                                                                : Axis
-                                                                .horizontal,
-                                                            autoplay:
-                                                            true,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                            context,
-                                                                int
-                                                                index) {
-                                                              return NewschannelList[
-                                                              index];
-                                                            },
-                                                            itemCount: 4,
-                                                            pagination:
-                                                            SwiperPagination(
-                                                                builder:
-                                                                DotSwiperPaginationBuilder(
-                                                                  size: 7,
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  activeColor:
-                                                                  Colors
-                                                                      .blue
-                                                                      .shade200,
-                                                                ))),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    return const Text(
-                                                        'Server Error');
-                                                  }
-                                                } else {
-                                                  return Text(
-                                                      'State: ${snapshot.connectionState}');
-                                                }
-                                              })),
-                                          //Live News
-                                          FutureBuilder(
-                                              future: liveNewsdata,
-                                              builder:
-                                              ((context, snapshot) {
-                                                if (snapshot
-                                                    .connectionState ==
-                                                    ConnectionState
-                                                        .waiting) {
-                                                  return Padding(
-                                                    padding:
-                                                    const EdgeInsets
-                                                        .only(
-                                                        top: 70.0),
-                                                    child: SizedBox(
-                                                      height: 150,
-                                                      width: 150,
-                                                      child: Center(
-                                                          child:
-                                                          SpinKitWave(
-                                                            color:
-                                                            Colors.blue,
-                                                            size: 18,
-                                                          )),
-                                                    ),
-                                                  );
-                                                } else if (snapshot
-                                                    .connectionState ==
-                                                    ConnectionState
-                                                        .done) {
-                                                  if (snapshot.hasError) {
-                                                    return const Text(
-                                                        'Data Error');
-                                                  } else if (snapshot
-                                                      .hasData) {
-                                                    List LiveNewsList = [
-                                                      NewsTemplate2(
-                                                          "${Livenewsdata[0]['mediaName']}".length >
-                                                              14
-                                                              ? ' ${Livenewsdata[0]['mediaName'].substring(0, 10)}...'
-                                                              : ' ${Livenewsdata[0]['mediaName']}',
-                                                          '${Livenewsdata[0]['headLine']}',
-                                                          'assets/icons/live.gif',
-                                                          '${Livenewsdata[0]['publishedDate']}'),
-                                                      NewsTemplate3(
-                                                          "${Livenewsdata[1]['mediaName']}".length >
-                                                              16
-                                                              ? ' ${Livenewsdata[1]['mediaName'].substring(0, 10)}...'
-                                                              : ' ${Livenewsdata[1]['mediaName']}',
-                                                          '${Livenewsdata[1]['headLine']}',
-                                                          'assets/icons/live.gif',
-                                                          '${Livenewsdata[1]['publishedDate']}'),
-                                                      NewsTemplate1(
-                                                          "${Livenewsdata[2]['mediaName']}".length >
-                                                              16
-                                                              ? ' ${Livenewsdata[2]['mediaName'].substring(0, 10)}...'
-                                                              : ' ${Livenewsdata[2]['mediaName']}',
-                                                          '${Livenewsdata[2]['headLine']}',
-                                                          'assets/icons/live.gif',
-                                                          '${Livenewsdata[2]['publishedDate']}'),
-                                                      NewsTemplate4(
-                                                          "${Livenewsdata[3]['mediaName']}".length >
-                                                              14
-                                                              ? ' ${Livenewsdata[3]['mediaName'].substring(0, 10)}...'
-                                                              : ' ${Livenewsdata[3]['mediaName']}',
-
-                                                          '${Livenewsdata[3]['headLine']}',
-                                                          'assets/icons/live.gif',
-                                                          '${Livenewsdata[3]['publishedDate']}'),
-                                                    ];
-                                                    return GestureDetector(
-                                                      onTap: () {
-                                                        showMaterialModalBottomSheet(
-                                                            context:
-                                                            context,
-                                                            duration:
-                                                            Duration(
-                                                                seconds:
-                                                                1),
-                                                            animationCurve:
-                                                            Curves
-                                                                .easeInQuad,
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.only(
-                                                                    topLeft: Radius.circular(
-                                                                        15),
-                                                                    topRight: Radius.circular(
-                                                                        15))),
-                                                            builder:
-                                                                (context) {
-                                                              return Container(
-                                                                height: MediaQuery.of(context)
-                                                                    .size
-                                                                    .height *
-                                                                    0.6,
-                                                                child:
-                                                                LiveUpdatesScreen(),
-                                                              );
-                                                            });
-                                                      },
-                                                      child: SizedBox(
-                                                        height: 130,
-                                                        width: 150,
-                                                        child: Swiper(
-                                                            itemWidth:
-                                                            150,
-                                                            itemHeight:
-                                                            130,
-                                                            duration:
-                                                            duration,
-                                                            layout:
-                                                            swiperlayout,
-                                                            scrollDirection: carddirection ==
-                                                                false
-                                                                ? Axis
-                                                                .vertical
-                                                                : Axis
-                                                                .horizontal,
-                                                            autoplay:
-                                                            true,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                            context,
-                                                                int
-                                                                index) {
-                                                              return LiveNewsList[
-                                                              index];
-                                                            },
-                                                            itemCount: 4,
-                                                            pagination:
-                                                            SwiperPagination(
-                                                                builder:
-                                                                DotSwiperPaginationBuilder(
-                                                                  size: 7,
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  activeColor:
-                                                                  Colors
-                                                                      .blue
-                                                                      .shade200,
-                                                                ))),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    return const Text(
-                                                        'Server Error');
-                                                  }
-                                                } else {
-                                                  return Text(
-                                                      'State: ${snapshot.connectionState}');
-                                                }
-                                              })),
-                                          //Google Trends
-                                          FutureBuilder(
-                                              future: googletrendsdata,
-                                              builder:
-                                              ((context, snapshot) {
-                                                if (snapshot
-                                                    .connectionState ==
-                                                    ConnectionState
-                                                        .waiting) {
-                                                  return Padding(
-                                                    padding:
-                                                    const EdgeInsets
-                                                        .only(
-                                                        top: 70.0),
-                                                    child: SizedBox(
-                                                      height: 150,
-                                                      width: 150,
-                                                      child: Center(
-                                                          child:
-                                                          SpinKitWave(
-                                                            color:
-                                                            Colors.blue,
-                                                            size: 18,
-                                                          )),
-                                                    ),
-                                                  );
-                                                } else if (snapshot
-                                                    .connectionState ==
-                                                    ConnectionState
-                                                        .done) {
-                                                  if (snapshot.hasError) {
-                                                    return const Text(
-                                                        'Data Error');
-                                                  } else if (snapshot
-                                                      .hasData) {
-                                                    List
-                                                    GoogleTrendsList =
-                                                    [
-                                                      NewsTemplate2(
-                                                          "${GoogleTrendsdata[0]['partyName']}".length >
-                                                              16
-                                                              ? ' ${GoogleTrendsdata[0]['partyName'].substring(0, 10)}...'
-                                                              : ' ${GoogleTrendsdata[0]['partyName']}',
-
-                                                          '${GoogleTrendsdata[0]['id']['region']}',
-                                                          'assets/icons/googleTrends.png',
-                                                          '- ${GoogleTrendsdata[0]['id']['candidateName']}'),
-                                                      NewsTemplate3(
-                                                          "${GoogleTrendsdata[1]['partyName']}".length >
-                                                              16
-                                                              ? ' ${GoogleTrendsdata[1]['partyName'].substring(0, 10)}...'
-                                                              : ' ${GoogleTrendsdata[1]['partyName']}',
-                                                          '${GoogleTrendsdata[1]['id']['region']}',
-                                                          'assets/icons/googleTrends.png',
-                                                          '- ${GoogleTrendsdata[1]['id']['candidateName']}'),
-                                                      NewsTemplate1(
-                                                          "${GoogleTrendsdata[2]['partyName']}".length >
-                                                              16
-                                                              ? ' ${GoogleTrendsdata[2]['partyName'].substring(0, 10)}...'
-                                                              : ' ${GoogleTrendsdata[2]['partyName']}',
-                                                          '${GoogleTrendsdata[2]['id']['region']}',
-                                                          'assets/icons/googleTrends.png',
-                                                          '- ${GoogleTrendsdata[2]['id']['candidateName']}'),
-                                                      NewsTemplate4(
-                                                          "${GoogleTrendsdata[3]['partyName']}".length >
-                                                              16
-                                                              ? ' ${GoogleTrendsdata[3]['partyName'].substring(0, 10)}...'
-                                                              : ' ${GoogleTrendsdata[3]['partyName']}',
-                                                          '${GoogleTrendsdata[3]['id']['region']}',
-                                                          'assets/icons/googleTrends.png',
-                                                          '- ${GoogleTrendsdata[3]['id']['candidateName']}'),
-                                                    ];
-                                                    return GestureDetector(
-                                                      onTap: () {
-                                                        showMaterialModalBottomSheet(
-                                                            context:
-                                                            context,
-                                                            duration:
-                                                            Duration(
-                                                                seconds:
-                                                                1),
-                                                            animationCurve:
-                                                            Curves
-                                                                .easeInQuad,
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius: BorderRadius.only(
-                                                                    topLeft: Radius.circular(
-                                                                        15),
-                                                                    topRight: Radius.circular(
-                                                                        15))),
-                                                            builder:
-                                                                (context) {
-                                                              return Container(
-                                                                  height: MediaQuery.of(context).size.height *
-                                                                      0.6,
-                                                                  child:
-                                                                  GoogleTrendsScreen());
-                                                            });
-                                                      },
-                                                      child: SizedBox(
-                                                        height: 130,
-                                                        width: 150,
-                                                        child: Swiper(
-                                                            itemWidth:
-                                                            150,
-                                                            itemHeight:
-                                                            130,
-                                                            duration:
-                                                            duration,
-                                                            layout:
-                                                            swiperlayout,
-                                                            scrollDirection: carddirection ==
-                                                                false
-                                                                ? Axis
-                                                                .vertical
-                                                                : Axis
-                                                                .horizontal,
-                                                            autoplay:
-                                                            true,
-                                                            itemBuilder:
-                                                                (BuildContext
-                                                            context,
-                                                                int
-                                                                index) {
-                                                              return GoogleTrendsList[
-                                                              index];
-                                                            },
-                                                            itemCount: 4,
-                                                            pagination:
-                                                            SwiperPagination(
-                                                                builder:
-                                                                DotSwiperPaginationBuilder(
-                                                                  size: 7,
-                                                                  color: Colors
-                                                                      .grey,
-                                                                  activeColor:
-                                                                  Colors
-                                                                      .blue
-                                                                      .shade200,
-                                                                ))),
-                                                      ),
-                                                    );
-                                                  } else {
-                                                    return const Text(
-                                                        'Server Error');
-                                                  }
-                                                } else {
-                                                  return Text(
-                                                      'State: ${snapshot.connectionState}');
-                                                }
-                                              })),
-                                        ])),
-                              )
-                                  : Container()),
-
-                          //todo:social media
-
-                          Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: AnimatedContainer(
-                                  duration: Duration(seconds: 2),
-                                  child: Row(
-                                    children: [
-                                      Image.asset(
-                                        'assets/new Updated images/social-media-icons-unscreen.gif',
-                                        height: 30,
-                                        width: 30,
-                                      ),
-                                      Text(
-                                        'SOCIAL MEDIA',
-                                        style: TextStyle(
-                                          fontFamily: 'Segoe UI',
-                                          fontSize: 16,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                      IconButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            showSocialnews = !showSocialnews;
-                                          });
-                                        },
-                                        icon: showSocialnews == true
-                                            ? Icon(Icons.arrow_drop_down)
-                                            : Icon(
-                                            Icons.arrow_drop_up_outlined),
-                                      ),
-                                    ],
-                                  )))
-                        ],
-                      ),
-                    ),
-                  ),
-                  showSocialnews == true
-                      ? SlideInDown(
-                    duration: Duration(seconds: 3),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0, right: 8),
-                      child: SingleChildScrollView(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            FutureBuilder(
-                                future: youtubedata,
-                                builder: ((context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 70.0),
-                                      child: SizedBox(
-                                        height: 150,
-                                        width: 150,
-                                        child: Center(
-                                            child: SpinKitWave(
-                                              color: Colors.blue,
-                                              size: 18,
-                                            )),
-                                      ),
-                                    );
-                                  } else if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    if (snapshot.hasError) {
-                                      return const Text('Data Error');
-                                    } else if (snapshot.hasData) {
-                                      List YoutubeList = [
-                                        SocialMediaTemplate1(
-                                            '${Youtubedata[0]['mediaChannelName']}',
-                                            '${Youtubedata[0]['videoTitle']}',
-                                            'Views - ${Youtubedata[0]['videoViews']}    Likes - ${Youtubedata[0]['videoLikes']}'),
-                                        SocialMediaTemplate1(
-                                            '${Youtubedata[1]['mediaChannelName']}',
-                                            '${Youtubedata[1]['videoTitle']}',
-                                            'Views - ${Youtubedata[1]['videoViews']}    Likes - ${Youtubedata[1]['videoLikes']}'),
-                                        SocialMediaTemplate1(
-                                            '${Youtubedata[2]['mediaChannelName']}',
-                                            '${Youtubedata[2]['videoTitle']}',
-                                            'Views - ${Youtubedata[2]['videoViews']}    Likes - ${Youtubedata[2]['videoLikes']}'),
-                                        SocialMediaTemplate1(
-                                            '${Youtubedata[3]['mediaChannelName']}',
-                                            '${Youtubedata[3]['videoTitle']}',
-                                            'Views - ${Youtubedata[3]['videoViews']}    Likes - ${Youtubedata[3]['videoLikes']}'),
-                                      ];
-                                      return SizedBox(
-                                        height: 130,
-                                        width: 150,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            showMaterialModalBottomSheet(
-                                                context: context,
-                                                duration:
-                                                Duration(seconds: 1),
-                                                animationCurve:
-                                                Curves.easeInQuad,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius.only(
-                                                        topLeft: Radius
-                                                            .circular(
-                                                            15),
-                                                        topRight: Radius
-                                                            .circular(
-                                                            15))),
-                                                builder: (context) {
-                                                  return Container(
-                                                    height: MediaQuery.of(
-                                                        context)
-                                                        .size
-                                                        .height *
-                                                        0.6,
-                                                    child:
-                                                    YouTubeScreen(),
-                                                  );
-                                                });
-                                          },
-                                          child: Swiper(
-                                              itemWidth: 150,
-                                              itemHeight: 130,
-                                              duration: duration,
-                                              layout: swiperlayout,
-                                              scrollDirection:
-                                              carddirection == false
-                                                  ? Axis.vertical
-                                                  : Axis.horizontal,
-                                              autoplay: true,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                  int index) {
-                                                return YoutubeList[index];
-                                              },
-                                              itemCount: 4,
-                                              pagination:
-                                              SwiperPagination(
-                                                  builder:
-                                                  DotSwiperPaginationBuilder(
-                                                    size: 7,
-                                                    color: Colors.grey,
-                                                    activeColor:
-                                                    Colors.blue.shade200,
-                                                  ))),
-                                        ),
-                                      );
-                                    } else {
-                                      return const Text('Server Error');
-                                    }
-                                  } else {
-                                    return Text(
-                                        'State: ${snapshot.connectionState}');
-                                  }
-                                })),
-
-                            //Twitter news
-                            FutureBuilder(
-                                future: twitterdata,
-                                builder: ((context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 70.0),
-                                      child: SizedBox(
-                                        height: 150,
-                                        width: 150,
-                                        child: Center(
-                                            child: SpinKitWave(
-                                              color: Colors.blue,
-                                              size: 18,
-                                            )),
-                                      ),
-                                    );
-                                  } else if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    if (snapshot.hasError) {
-                                      return const Text('Data Error');
-                                    } else if (snapshot.hasData) {
-                                      List TwitterList = [
-                                        SocialMediaTemplate2(
-                                            '${TwitterData[0]['candidateName']}',
-                                            '${TwitterData[0]['tweetContent']}',
-                                            '- ${TwitterData[0]['candidatePartyName']}'),
-                                        SocialMediaTemplate2(
-                                            '${TwitterData[1]['candidateName']}',
-                                            '${TwitterData[1]['tweetContent']}',
-                                            '- ${TwitterData[1]['candidatePartyName']}'),
-                                        SocialMediaTemplate2(
-                                            '${TwitterData[2]['candidateName']}',
-                                            '${TwitterData[2]['tweetContent']}',
-                                            '- ${TwitterData[2]['candidatePartyName']}'),
-                                        SocialMediaTemplate2(
-                                            '${TwitterData[3]['candidateName']}',
-                                            '${TwitterData[3]['tweetContent']}',
-                                            '- ${TwitterData[3]['candidatePartyName']}'),
-                                      ];
-                                      return SizedBox(
-                                        height: 130,
-                                        width: 150,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            showMaterialModalBottomSheet(
-                                                context: context,
-                                                duration:
-                                                Duration(seconds: 1),
-                                                animationCurve:
-                                                Curves.easeInQuad,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius.only(
-                                                        topLeft: Radius
-                                                            .circular(
-                                                            15),
-                                                        topRight: Radius
-                                                            .circular(
-                                                            15))),
-                                                builder: (context) {
-                                                  return Container(
-                                                    height: MediaQuery.of(
-                                                        context)
-                                                        .size
-                                                        .height *
-                                                        0.6,
-                                                    child:
-                                                    TwitterScreen(),
-                                                  );
-                                                });
-                                          },
-                                          child: Swiper(
-                                              itemWidth: 150,
-                                              itemHeight: 130,
-                                              duration: duration,
-                                              layout: swiperlayout,
-                                              scrollDirection:
-                                              carddirection == false
-                                                  ? Axis.vertical
-                                                  : Axis.horizontal,
-                                              autoplay: true,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                  int index) {
-                                                return TwitterList[index];
-                                              },
-                                              itemCount: 4,
-                                              pagination:
-                                              SwiperPagination(
-                                                  builder:
-                                                  DotSwiperPaginationBuilder(
-                                                    size: 7,
-                                                    color: Colors.grey,
-                                                    activeColor:
-                                                    Colors.blue.shade200,
-                                                  ))),
-                                        ),
-                                      );
-                                    } else {
-                                      return const Text('Server Error');
-                                    }
-                                  } else {
-                                    return Text(
-                                        'State: ${snapshot.connectionState}');
-                                  }
-                                })),
-                            //FaceBook News
-                            FutureBuilder(
-                                future: facebookdata,
-                                builder: ((context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 70.0),
-                                      child: SizedBox(
-                                        height: 150,
-                                        width: 150,
-                                        child: Center(
-                                            child: SpinKitWave(
-                                              color: Colors.blue,
-                                              size: 18,
-                                            )),
-                                      ),
-                                    );
-                                  } else if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    if (snapshot.hasError) {
-                                      return const Text('Data Error');
-                                    } else if (snapshot.hasData) {
-                                      List FaceBookList = [
-                                        SocialMediaTemplate3(
-                                            '${Facebookdata[0]['keyWords']}',
-                                            '${Facebookdata[0]['titleContent']}',
-                                            '${Facebookdata[0]['candidateName']}'
-                                                .length >
-                                                16
-                                                ? '- ${Facebookdata[0]['candidateName'].substring(0, 10)}...'
-                                                : '- ${Facebookdata[0]['candidateName']}'
-
-                                          // '${Facebookdata[0]['candidateName']}'
-                                        ),
-                                        SocialMediaTemplate3(
-                                            '${Facebookdata[1]['keyWords']}',
-                                            '${Facebookdata[1]['titleContent']}',
-                                            '${Facebookdata[1]['candidateName']}'
-                                                .length >
-                                                16
-                                                ? '- ${Facebookdata[1]['candidateName'].substring(0, 10)}...'
-                                                : '- ${Facebookdata[1]['candidateName']}'
-                                          // ,'${Facebookdata[1]['candidateName']}'
-                                        ),
-                                        SocialMediaTemplate3(
-                                            '${Facebookdata[2]['keyWords']}',
-                                            '${Facebookdata[2]['titleContent']}',
-                                            '${Facebookdata[2]['candidateName']}'
-                                                .length >
-                                                16
-                                                ? '- ${Facebookdata[2]['candidateName'].substring(0, 10)}...'
-                                                : '- ${Facebookdata[2]['candidateName']}'
-
-                                          // '${Facebookdata[2]['candidateName']}'
-                                        ),
-                                        SocialMediaTemplate3(
-                                            '${Facebookdata[3]['keyWords']}',
-                                            '${Facebookdata[3]['titleContent']}',
-                                            '${Facebookdata[3]['candidateName']}'
-                                                .length >
-                                                16
-                                                ? '- ${Facebookdata[3]['candidateName'].substring(0, 10)}...'
-                                                : '- ${Facebookdata[3]['candidateName']}'
-                                          // '${Facebookdata[3]['candidateName']}'
-                                        ),
-                                      ];
-                                      return SizedBox(
-                                        height: 130,
-                                        width: 150,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            showMaterialModalBottomSheet(
-                                                context: context,
-                                                duration:
-                                                Duration(seconds: 1),
-                                                animationCurve:
-                                                Curves.easeInQuad,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius.only(
-                                                        topLeft: Radius
-                                                            .circular(
-                                                            15),
-                                                        topRight: Radius
-                                                            .circular(
-                                                            15))),
-                                                builder: (context) {
-                                                  return Container(
-                                                    height: MediaQuery.of(
-                                                        context)
-                                                        .size
-                                                        .height *
-                                                        0.6,
-                                                    child:
-                                                    FaceBookScreen(),
-                                                  );
-                                                });
-                                          },
-                                          child: Swiper(
-                                              itemWidth: 150,
-                                              itemHeight: 130,
-                                              duration: duration,
-                                              layout: swiperlayout,
-                                              scrollDirection:
-                                              carddirection == false
-                                                  ? Axis.vertical
-                                                  : Axis.horizontal,
-                                              autoplay: true,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                  int index) {
-                                                return FaceBookList[
-                                                index];
-                                              },
-                                              itemCount: 4,
-                                              pagination:
-                                              SwiperPagination(
-                                                  builder:
-                                                  DotSwiperPaginationBuilder(
-                                                    size: 7,
-                                                    color: Colors.grey,
-                                                    activeColor:
-                                                    Colors.blue.shade200,
-                                                  ))),
-                                        ),
-                                      );
-                                    } else {
-                                      return const Text('Server Error');
-                                    }
-                                  } else {
-                                    return Text(
-                                        'State: ${snapshot.connectionState}');
-                                  }
-                                })),
-                            //Instagram news
-                            FutureBuilder(
-                                future: instagramdata,
-                                builder: ((context, snapshot) {
-                                  if (snapshot.connectionState ==
-                                      ConnectionState.waiting) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(
-                                          top: 70.0),
-                                      child: SizedBox(
-                                        height: 150,
-                                        width: 150,
-                                        child: Center(
-                                            child: SpinKitWave(
-                                              color: Colors.blue,
-                                              size: 18,
-                                            )),
-                                      ),
-                                    );
-                                  } else if (snapshot.connectionState ==
-                                      ConnectionState.done) {
-                                    if (snapshot.hasError) {
-                                      return const Text('Data Error');
-                                    } else if (snapshot.hasData) {
-                                      List InstagramList = [
-                                        SocialMediaTemplate4(
-                                            '${Instagramdata[0]['candidateName']}',
-                                            '${Instagramdata[0]['titleContent']}',
-                                            'Likes- ${Instagramdata[0]['likesCount']}   Comments- ${Instagramdata[0]['commentsCount']}'),
-                                        SocialMediaTemplate4(
-                                            '${Instagramdata[1]['candidateName']}',
-                                            '${Instagramdata[1]['titleContent']}',
-                                            'Likes- ${Instagramdata[1]['likesCount']}   Comments- ${Instagramdata[1]['commentsCount']}'),
-                                        SocialMediaTemplate4(
-                                            '${Instagramdata[2]['candidateName']}',
-                                            '${Instagramdata[2]['titleContent']}',
-                                            'Likes- ${Instagramdata[2]['likesCount']}   Comments- ${Instagramdata[2]['commentsCount']}'),
-                                        SocialMediaTemplate4(
-                                            '${Instagramdata[3]['candidateName']}',
-                                            '${Instagramdata[3]['titleContent']}',
-                                            'Likes- ${Instagramdata[3]['likesCount']}   Comments- ${Instagramdata[3]['commentsCount']}'),
-                                      ];
-                                      return SizedBox(
-                                        height: 130,
-                                        width: 150,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            showMaterialModalBottomSheet(
-                                                context: context,
-                                                duration:
-                                                Duration(seconds: 1),
-                                                animationCurve:
-                                                Curves.easeInQuad,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                    BorderRadius.only(
-                                                        topLeft: Radius
-                                                            .circular(
-                                                            15),
-                                                        topRight: Radius
-                                                            .circular(
-                                                            15))),
-                                                builder: (context) {
-                                                  return Container(
-                                                      height: MediaQuery.of(
-                                                          context)
-                                                          .size
-                                                          .height *
-                                                          0.6,
-                                                      child:
-                                                      InstagramScreen());
-                                                });
-                                          },
-                                          child: Swiper(
-                                              itemWidth: 150,
-                                              itemHeight: 130,
-                                              duration: duration,
-                                              layout: swiperlayout,
-                                              scrollDirection:
-                                              carddirection == false
-                                                  ? Axis.vertical
-                                                  : Axis.horizontal,
-                                              autoplay: true,
-                                              itemBuilder:
-                                                  (BuildContext context,
-                                                  int index) {
-                                                return InstagramList[
-                                                index];
-                                              },
-                                              itemCount: 4,
-                                              pagination:
-                                              SwiperPagination(
-                                                  builder:
-                                                  DotSwiperPaginationBuilder(
-                                                    size: 7,
-                                                    color: Colors.grey,
-                                                    activeColor:
-                                                    Colors.blue.shade200,
-                                                  ))),
-                                        ),
-                                      );
-                                    } else {
-                                      return const Text('Server Error');
-                                    }
-                                  } else {
-                                    return Text(
-                                        'State: ${snapshot.connectionState}');
-                                  }
-                                })),
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
-                      : Container(),
-                  SingleChildScrollView(
-                    physics: ScrollPhysics(),
-                    child: Column(
-                      children: [
-                        GridView.count(
-                          physics: NeverScrollableScrollPhysics(),
-                          crossAxisCount: 5,
-                          crossAxisSpacing: 0,
-                          shrinkWrap: true,
-                          children: [
-                            Column(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              AllCandidateList()));
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/new Updated images/intellisensesolutions-Icons-62.png",
-                                      height: 30,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(8),
+                          Text(
+                            'Constituency Analysis',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 10),
+                          )
+                        ]),
+                        Column(children: [
+                          GestureDetector(
+                            onTap: () {
+                              PageCount.jumpToPage(7);
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/new Updated images/intellisensesolutions-Icons-78.png",
+                                  height: 30,
                                 ),
                               ),
-                              Expanded(
-                                child: Text(
-                                  'Candidature Analysis',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 10),
-                                ),
-                              )
-                            ]),
-                            Column(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ConstituencyAnalysis()));
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/new Updated images/intellisensesolutions-Icons-73 (1).png",
-                                      height: 30,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: EdgeInsets.all(8),
+                            ),
+                          ),
+                          Text(
+                            'District Analysis',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 10),
+                          )
+                        ]),
+                        Column(children: [
+                          GestureDetector(
+                            onTap: () {
+                              PageCount.jumpToPage(7);
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/new Updated images/intellisensesolutions-Icons-74.png",
+                                  height: 30,
                                 ),
                               ),
-                              Text(
-                                'Constituency Analysis',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 10),
-                              )
-                            ]),
-                            Column(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  PageCount.jumpToPage(7);
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/new Updated images/intellisensesolutions-Icons-78.png",
-                                      height: 30,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: EdgeInsets.all(8),
+                            ),
+                          ),
+                          Text(
+                            'Communication Channel',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 10),
+                          )
+                        ]),
+                        Column(children: [
+                          GestureDetector(
+                            onTap: () {
+                              PageCount.jumpToPage(7);
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/new Updated images/intellisensesolutions-Icons-75.png",
+                                  height: 30,
                                 ),
                               ),
-                              Text(
-                                'District Analysis',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 10),
-                              )
-                            ]),
-                            Column(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  PageCount.jumpToPage(7);
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/new Updated images/intellisensesolutions-Icons-74.png",
-                                      height: 30,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: EdgeInsets.all(8),
+                            ),
+                          ),
+                          Text(
+                            'Survey',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 10),
+                          )
+                        ]),
+                        Column(children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ElectoralAnalysis()));
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/new Updated images/intellisensesolutions-Icons-79.png",
+                                  height: 30,
                                 ),
                               ),
-                              Text(
-                                'Communication Channel',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 10),
-                              )
-                            ]),
-                            Column(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  PageCount.jumpToPage(7);
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/new Updated images/intellisensesolutions-Icons-75.png",
-                                      height: 30,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: EdgeInsets.all(8),
+                            ),
+                          ),
+                          Text(
+                            'Electoral Analysis',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 10),
+                          )
+                        ]),
+                        Column(children: [
+                          GestureDetector(
+                            onTap: () {
+                              PageCount.jumpToPage(7);
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/new Updated images/news-71.png",
+                                  height: 30,
                                 ),
                               ),
-                              Text(
-                                'Survey',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 10),
-                              )
-                            ]),
-                            Column(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ElectoralAnalysis()));
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/new Updated images/intellisensesolutions-Icons-79.png",
-                                      height: 30,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: EdgeInsets.all(8),
+                            ),
+                          ),
+                          Text(
+                            'News Feed',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 10),
+                          )
+                        ]),
+                        Column(children: [
+                          GestureDetector(
+                            onTap: () {
+                              PageCount.jumpToPage(7);
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/new Updated images/intellisensesolutions-Icons-80.png",
+                                  height: 30,
                                 ),
                               ),
-                              Text(
-                                'Electoral Analysis',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 10),
-                              )
-                            ]),
-                            Column(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  PageCount.jumpToPage(7);
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/new Updated images/news-71.png",
-                                      height: 30,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: EdgeInsets.all(8),
+                            ),
+                          ),
+                          Text(
+                            'Face Emotion Analysis',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 10),
+                          )
+                        ]),
+                        Column(children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ScoreCardsScreen()));
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/new Updated images/intellisensesolutions-Icons-77.png",
+                                  height: 30,
                                 ),
                               ),
-                              Text(
-                                'News Feed',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 10),
-                              )
-                            ]),
-                            Column(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  PageCount.jumpToPage(7);
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/new Updated images/intellisensesolutions-Icons-80.png",
-                                      height: 30,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: EdgeInsets.all(8),
+                            ),
+                          ),
+                          Text(
+                            'Score Card',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 10),
+                          )
+                        ]),
+                        Column(children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          ScoreCardsScreen()));
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/new Updated images/intellisensesolutions-Icons-81.png",
+                                  height: 30,
                                 ),
                               ),
-                              Text(
-                                'Face Emotion Analysis',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 10),
-                              )
-                            ]),
-                            Column(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ScoreCardsScreen()));
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/new Updated images/intellisensesolutions-Icons-77.png",
-                                      height: 30,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              padding: EdgeInsets.all(8),
+                            ),
+                          ),
+                          Text(
+                            'Chat Analysis',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 10),
+                          )
+                        ]),
+                        Column(children: [
+                          GestureDetector(
+                            onTap: () {
+                              PageCount.jumpToPage(7);
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              child: Center(
+                                child: Image.asset(
+                                  "assets/new Updated images/intellisensesolutions-Icons-76.png",
+                                  height: 30,
                                 ),
                               ),
-                              Text(
-                                'Score Card',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 10),
-                              )
-                            ]),
-                            Column(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              ScoreCardsScreen()));
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/new Updated images/intellisensesolutions-Icons-81.png",
-                                      height: 30,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(8),
-                                ),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                              Text(
-                                'Chat Analysis',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 10),
-                              )
-                            ]),
-                            Column(children: [
-                              GestureDetector(
-                                onTap: () {
-                                  PageCount.jumpToPage(7);
-                                },
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  child: Center(
-                                    child: Image.asset(
-                                      "assets/new Updated images/intellisensesolutions-Icons-76.png",
-                                      height: 30,
-                                    ),
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  padding: EdgeInsets.all(8),
-                                ),
-                              ),
-                              Text(
-                                'Sentiment Analysis',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 10),
-                              )
-                            ]),
-                          ],
-                        ),
+                              padding: EdgeInsets.all(8),
+                            ),
+                          ),
+                          Text(
+                            'Sentiment Analysis',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 10),
+                          )
+                        ]),
                       ],
                     ),
-                  ),
-                ]),
+                  ],
+                ),
               ),
-            ]),
-          )),
-    );
+
+
+            ])));
+  }
+
+  OverlayEntry? overlay1;
+  void _showOverlay(BuildContext context) async {
+    OverlayState? overlayState = Overlay.of(context);
+
+    overlay1 = OverlayEntry(builder: (context) {
+      return Positioned(
+        left: MediaQuery.of(context).size.width * 0.1,
+        top: MediaQuery.of(context).size.height * 0.3,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            padding: EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
+            width: MediaQuery.of(context).size.width * 0.8,
+            height: MediaQuery.of(context).size.height * 0.11,
+            color: Colors.white,
+            child: Material(
+              color: Colors.transparent,
+              child: Text('The Flutter app developers at FlutterDevs have',
+                  style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.height * 0.03,
+                      //fontWeight: FontWeight.bold,
+                      color: Colors.black)),
+            ),
+          ),
+        ),
+      );
+    });
+
+    overlayState.insertAll([
+      overlay1!,
+    ]);
   }
 
   bool viewnews = true;
@@ -2512,340 +1144,367 @@ class _HomeScreenState extends State<HomeScreen> {
     "https://cdn.pixabay.com/photo/2019/12/22/04/18/x-mas-4711785__340.jpg",
     "https://cdn.pixabay.com/photo/2016/11/22/07/09/spruce-1848543__340.jpg"
   ];
+  bool isytvisible = false;
   YoutubeBanner() {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              elevation: 5,
-              child: Container(
-                height: 250,
-                width: MediaQuery.of(context).size.width * 0.9,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: FutureBuilder<dynamic>(
-                  future: LineChartfuturecall,
-                  builder: (
-                      BuildContext context,
-                      AsyncSnapshot<dynamic> snapshot,
-                      ) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SpinKitWave(
-                        color: Colors.blue,
-                        size: 18,
-                      );
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.done) {
-                      if (snapshot.hasError) {
-                        return const Text('Error');
-                      } else if (snapshot.hasData) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Stack(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                              color: Colors.redAccent,
-                                            ),
-                                            borderRadius:
-                                            BorderRadius.circular(15)),
-                                        height: 120,
-                                        width: 120,
-                                        child: SfCircularChart(
-                                            tooltipBehavior: _tooltipBehavior1,
-                                            palette: [
-                                              Color.fromRGBO(254, 1, 117, 0),
-                                              Color.fromRGBO(19, 136, 8, 0),
-                                              Color.fromRGBO(249, 125, 9, 0),
+    final themeMode = Provider.of<DarkMode>(context);
+    return Center(
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        elevation: 5,
+        child: Container(
+          height: 250,
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: isytvisible
+              ? FutureBuilder<dynamic>(
+            future: LineChartfuturecall,
+            builder: (
+                BuildContext context,
+                AsyncSnapshot<dynamic> snapshot,
+                ) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return SpinKitCubeGrid(
+                  color: Colors.blue,
+                  size: 50,
+                );
+              } else if (snapshot.connectionState ==
+                  ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else if (snapshot.hasData) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          top: 40,
+                          left: 105,
+                          child: Image.asset(
+                            'assets/new Updated images/versus.png',
+                            height: 84,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.redAccent,
+                                      ),
+                                      borderRadius:
+                                      BorderRadius.circular(15)),
+                                  height: 120,
+                                  width: 120,
+                                  child: SfCircularChart(
+                                      tooltipBehavior: _tooltipBehavior1,
+                                      palette: [
+                                        Color.fromRGBO(19, 136, 8, 0),
+                                        Color.fromRGBO(254, 1, 117, 0),
+                                        Color.fromRGBO(249, 125, 9, 0),
+                                      ],
+                                      series: <PieSeries<ChartSampleData,
+                                          String>>[
+                                        PieSeries<ChartSampleData,
+                                            String>(
+                                            explode: true,
+                                            explodeIndex: 0,
+                                            explodeOffset: '10%',
+                                            dataSource: <ChartSampleData>[
+                                              ...PiegraphChartData
                                             ],
-                                            series: <PieSeries<ChartSampleData,
-                                                String>>[
-                                              PieSeries<ChartSampleData,
-                                                  String>(
-                                                  explode: true,
-                                                  explodeIndex: 0,
-                                                  explodeOffset: '10%',
-                                                  dataSource: <ChartSampleData>[
-                                                    ...PiegraphChartData
-                                                  ],
-                                                  xValueMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.x as String,
-                                                  yValueMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.y,
-                                                  dataLabelMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.text,
-                                                  startAngle: 90,
-                                                  endAngle: 90,
-                                                  dataLabelSettings:
-                                                  const DataLabelSettings(
-                                                      isVisible: true)),
-                                            ]),
-                                      ),
-                                      Text(
-                                        'FOLLOWERS',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
+                                            xValueMapper:
+                                                (ChartSampleData data,
+                                                _) =>
+                                            data.x as String,
+                                            yValueMapper:
+                                                (ChartSampleData data,
+                                                _) =>
+                                            data.y,
+                                            dataLabelMapper:
+                                                (ChartSampleData data,
+                                                _) =>
+                                            data.text,
+                                            startAngle: 90,
+                                            endAngle: 90,
+                                            dataLabelSettings:
+                                            const DataLabelSettings(
+                                                isVisible: true)),
+                                      ]),
+                                ),
+                                Text(
+                                  'FOLLOWERS',
+                                  style: GoogleFonts.bitter(fontSize: 10),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 60,
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.redAccent),
+                                        borderRadius:
+                                        BorderRadius.circular(15)),
+                                    height: 120,
+                                    width: 120,
+                                    child: SfFunnelChart(
+                                        palette: [
+                                          Color.fromRGBO(19, 136, 8, 0),
+                                          Color.fromRGBO(254, 1, 117, 0),
+                                          Color.fromRGBO(249, 125, 9, 0),
+                                        ],
+                                        //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
+                                        tooltipBehavior:
+                                        TooltipBehavior(enable: true),
+                                        series: FunnelSeries<
+                                            ChartSampleData, String>(
+                                            dataSource: <ChartSampleData>[
+                                              ...FunnelgraphChartData,
+                                            ],
+                                            xValueMapper:
+                                                (ChartSampleData data, _) =>
+                                            data.x as String,
+                                            yValueMapper:
+                                                (ChartSampleData data, _) =>
+                                            data.y,
+                                            /*  explode: isCardView ? false : explode,
+                              gapRatio: isCardView ? 0 : gapRatio,*/
+                                            neckHeight: /*isCardView ? */
+                                            '20%' /*: neckHeight.toString()*/ +
+                                                '%',
+                                            neckWidth: /*isCardView ?*/
+                                            '25%' /*: neckWidth.toString()*/ +
+                                                '%',
+                                            dataLabelSettings:
+                                            const DataLabelSettings(
+                                                textStyle:
+                                                TextStyle(fontSize: 8),
+                                                isVisible: true)))),
+                                Text(
+                                  'Re-Tweet',
+                                  style: GoogleFonts.bitter(fontSize: 10),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 1.0, top: 60),
+                              child: Image.asset(
+                                'assets/icons/Social-Media-Icons-IS-10.png',
+                                height: 18,
+                                width: 18,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 140.0, left: 5),
+                              child: Container(
+                                height: 150,
+                                width: 150,
+                                child: RichText(
+                                  text: new TextSpan(
+                                    style: new TextStyle(
+                                      fontSize: 12.0,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: BarGraphdata['lead'][0],
+                                          style:  GoogleFonts.bitter(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green,
+                                            fontSize: 16,
+                                          )),
+                                      TextSpan(
+                                          text: ' is overpowering ',
+                                          style: GoogleFonts.bitter(
+                                            fontWeight: FontWeight.bold,
+                                            color: themeMode.darkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: 16,
+                                          )),
+                                      TextSpan(
+                                          text: "BJP",
+                                          style:  GoogleFonts.bitter(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.red,
+                                            fontSize: 16,
+                                          )),
+                                      TextSpan(
+                                          text: ' in all aspects',
+                                          style: GoogleFonts.bitter(
+                                            fontWeight: FontWeight.bold,
+                                            color: themeMode.darkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: 16,
+                                          )),
                                     ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 35.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(BarGraphdata['lead'][0]),
-                                            Image.asset(
-                                              'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
-                                              height: 30,
-                                            )
+                                ),
+                              ),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.only(top: 100.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.redAccent),
+                                        borderRadius:
+                                        BorderRadius.circular(15)),
+                                    height: 100,
+                                    width: 135,
+                                    child: SfCartesianChart(
+                                      palette: <Color>[
+                                        Color(0xffff7f50),
+                                        Color(0xfff0ead6),
+                                        Color(0xffffd700),
+                                      ],
+                                      plotAreaBorderWidth: 0,
+                                      primaryXAxis: CategoryAxis(
+                                        labelStyle: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 8),
+                                        axisLine:
+                                        const AxisLine(width: 0),
+                                        labelPosition:
+                                        ChartDataLabelPosition
+                                            .outside,
+                                        majorTickLines:
+                                        const MajorTickLines(
+                                            width: 0),
+                                        majorGridLines:
+                                        const MajorGridLines(
+                                            width: 0),
+                                      ),
+                                      primaryYAxis: NumericAxis(
+                                          labelStyle: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 8),
+                                          labelPosition:
+                                          ChartDataLabelPosition
+                                              .outside,
+                                          isVisible: false,
+                                          minimum: 0,
+                                          maximum: 2000),
+                                      series: <ColumnSeries<
+                                          ChartSampleData, String>>[
+                                        ColumnSeries<ChartSampleData,
+                                            String>(
+                                          width: 0.9,
+                                          dataLabelSettings:
+                                          const DataLabelSettings(
+                                              isVisible: false,
+                                              labelAlignment:
+                                              ChartDataLabelAlignment
+                                                  .top),
+                                          dataSource: <ChartSampleData>[
+                                            ...BargraphChartdata
                                           ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Image.asset(
-                                                  'assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',
-                                                  height: 30,
-                                                ),
-                                                Text('BJP'),
-                                              ],
-                                            ),
-                                          ],
+                                          borderRadius:
+                                          BorderRadius.circular(10),
+                                          xValueMapper:
+                                              (ChartSampleData sales,
+                                              _) =>
+                                          sales.x as String,
+                                          yValueMapper:
+                                              (ChartSampleData sales,
+                                              _) =>
+                                          sales.y,
                                         ),
                                       ],
+                                      tooltipBehavior: _tooltipBehavior,
                                     ),
                                   ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.redAccent),
-                                              borderRadius:
-                                              BorderRadius.circular(15)),
-                                          height: 120,
-                                          width: 120,
-                                          child: SfFunnelChart(
-                                              palette: [
-                                                Color.fromRGBO(254, 1, 117, 0),
-                                                Color.fromRGBO(19, 136, 8, 0),
-                                                Color.fromRGBO(249, 125, 9, 0),
-                                              ],
-                                              //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
-                                              tooltipBehavior:
-                                              TooltipBehavior(enable: true),
-                                              series: FunnelSeries<
-                                                  ChartSampleData, String>(
-                                                  dataSource: <ChartSampleData>[
-                                                    ...FunnelgraphChartData,
-                                                  ],
-                                                  xValueMapper:
-                                                      (ChartSampleData data, _) =>
-                                                  data.x as String,
-                                                  yValueMapper:
-                                                      (ChartSampleData data, _) =>
-                                                  data.y,
-                                                  /*  explode: isCardView ? false : explode,
-                                    gapRatio: isCardView ? 0 : gapRatio,*/
-                                                  neckHeight: /*isCardView ? */
-                                                  '20%' /*: neckHeight.toString()*/ +
-                                                      '%',
-                                                  neckWidth: /*isCardView ?*/
-                                                  '25%' /*: neckWidth.toString()*/ +
-                                                      '%',
-                                                  dataLabelSettings:
-                                                  const DataLabelSettings(
-                                                      textStyle:
-                                                      TextStyle(fontSize: 8),
-                                                      isVisible: true)))),
-                                      Text(
-                                        'Re-Tweet',
-                                        style: TextStyle(fontSize: 10),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 1.0, top: 60),
-                                    child: Image.asset(
-                                      'assets/icons/Social-Media-Icons-IS-10.png',
-                                      height: 18,
-                                      width: 18,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 140.0, left: 5),
-                                    child: Container(
-                                      height: 150,
-                                      width: 150,
-                                      child: RichText(
-                                        text: new TextSpan(
-                                          style: new TextStyle(
-                                            fontSize: 12.0,
-                                          ),
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                                text: BarGraphdata['lead'][0],
-                                                style: new TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.green,
-                                                    fontSize: 20,
-                                                    fontFamily: 'Segoe UI')),
-                                            TextSpan(
-                                                text: ' is overpowering ',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                    fontSize: 18,
-                                                    fontFamily: 'Segoe UI')),
-                                            TextSpan(
-                                                text: "BJP",
-                                                style: new TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.red,
-                                                    fontSize: 20,
-                                                    fontFamily: 'Segoe UI')),
-                                            TextSpan(
-                                                text: ' in all aspects',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                    fontSize: 18,
-                                                    fontFamily: 'Segoe UI')),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                        const EdgeInsets.only(top: 100.0),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.redAccent),
-                                              borderRadius:
-                                              BorderRadius.circular(15)),
-                                          height: 100,
-                                          width: 135,
-                                          child: SfCartesianChart(
-                                            palette: <Color>[
-                                              Color(0xffff7f50),
-                                              Color(0xfff0ead6),
-                                              Color(0xffffd700),
-                                              Color(0xff264348),
-                                            ],
-                                            plotAreaBorderWidth: 0,
-                                            primaryXAxis: CategoryAxis(
-                                              labelStyle: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 8),
-                                              axisLine:
-                                              const AxisLine(width: 0),
-                                              labelPosition:
-                                              ChartDataLabelPosition
-                                                  .outside,
-                                              majorTickLines:
-                                              const MajorTickLines(
-                                                  width: 0),
-                                              majorGridLines:
-                                              const MajorGridLines(
-                                                  width: 0),
-                                            ),
-                                            primaryYAxis: NumericAxis(
-                                                labelStyle: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 8),
-                                                labelPosition:
-                                                ChartDataLabelPosition
-                                                    .outside,
-                                                isVisible: false,
-                                                minimum: 0,
-                                                maximum: 2000),
-                                            series: <ColumnSeries<
-                                                ChartSampleData, String>>[
-                                              ColumnSeries<ChartSampleData,
-                                                  String>(
-                                                width: 0.9,
-                                                dataLabelSettings:
-                                                const DataLabelSettings(
-                                                    isVisible: false,
-                                                    labelAlignment:
-                                                    ChartDataLabelAlignment
-                                                        .top),
-                                                dataSource: <ChartSampleData>[
-                                                  ...BargraphChartdata
-                                                ],
-                                                borderRadius:
-                                                BorderRadius.circular(10),
-                                                xValueMapper:
-                                                    (ChartSampleData sales,
-                                                    _) =>
-                                                sales.x as String,
-                                                yValueMapper:
-                                                    (ChartSampleData sales,
-                                                    _) =>
-                                                sales.y,
-                                              ),
-                                            ],
-                                            tooltipBehavior: _tooltipBehavior,
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Likes',
-                                        style: TextStyle(fontSize: 10),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        );
-                      } else {
-                        return const Text('Empty data');
-                      }
-                    } else {
-                      return Text('State: ${snapshot.connectionState}');
-                    }
-                  },
-                ),
-              ),
-            ),
+                                ),
+                                Text(
+                                  'Likes',
+                                  style: GoogleFonts.bitter(fontSize: 10),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
           )
-        ]);
+              : Center(
+              child: SpinKitCubeGrid(
+                color: Colors.blue,
+                size: 50,
+              )
+
+            // Text('Loading...'),
+          ),
+        ),
+      ),
+    );
+  }
+
+//Youtube top party list api
+  var YoutubeTopPartylistdata;
+  var locallist = [];
+  List<DataColumn> Youtubetablecolumn = [];
+  YoutubeTopPartylistApi() async {
+    //print('YT top');
+    var body = json.encode({
+      "type": "top_parties",
+      "STATE": "TELANGANA",
+      "social_handle": "YOUTUBE"
+    });
+    var headers = {'Content-Type': 'application/json'};
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6659/social_media_YT/'),
+        headers: headers,
+        body: body);
+
+    //print(response.statusCode);
+    if (response.statusCode == 200) {
+      //debugPrint("i have loaded");
+      try {
+        setState(() {
+          YoutubeTopPartylistdata = jsonDecode(utf8.decode(response.bodyBytes));
+          locallist = YoutubeTopPartylistdata['top_parties'];
+          LineChartfuturecall = YoutubeBannerGraphApi();
+          isytvisible = true;
+        });
+        //print(locallist.toList());
+      } catch (e) {
+        //print(YoutubeTopPartylistdata);
+      }
+    } else {
+      //print(response.reasonPhrase);
+    }
+    return YoutubeTopPartylistdata;
   }
 
   //Bar Graph data
@@ -2858,7 +1517,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var body = json.encode({
       "type": "party_data",
       "STATE": 'TELANGANA',
-      "party_list": 'INC',
+      "party_list": locallist.join(""),
       "social_handle": "YOUTUBE"
     });
     var headers = {'Content-Type': 'application/json'};
@@ -2866,15 +1525,15 @@ class _HomeScreenState extends State<HomeScreen> {
         Uri.parse('http://idxp.pilogcloud.com:6659/social_media_YT/'),
         headers: headers,
         body: body);
-    print(response.statusCode);
+    //print(response.statusCode);
     if (response.statusCode == 200) {
-      print('inside loop');
+      //print('inside loop');
       try {
-        print('inside try');
+        //print('inside try');
         BarGraphdata = jsonDecode(utf8.decode(response.bodyBytes));
 
         BarGraphdata['party_data'].forEach((key, value) {
-          print(key);
+          //print(key);
 
           BargraphChartdata.add(
             ChartSampleData(
@@ -2894,68 +1553,124 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         });
 
-        // for(int i=0;i<BarGraphdata['party_data'])
-        // BargraphChartdata.add(ChartSampleData(x: 'TDP', y: 8683),);
-
-        print('data here');
-        print(BarGraphdata);
+        //print('data here');
+        //print(BarGraphdata);
       } catch (e) {
-        print(BarGraphdata);
+        //print(BarGraphdata);
       }
     } else {
-      print(response.reasonPhrase);
+      //print(response.reasonPhrase);
     }
     return BarGraphdata;
   }
 
   //Twitter Banner
-  late Future<dynamic> TwitterLineChartfuturecall = TwitterBannerGraphApi();
+  late Future<dynamic> TwitterLineChartfuturecall;
   TooltipBehavior? _TwittertooltipBehavior;
   TooltipBehavior? _TwittertooltipBehavior1;
+  bool isTwitterdataloaded = false;
   TwitterBanner() {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              elevation: 5,
-              child: Container(
-                height: 250,
-                width: MediaQuery.of(context).size.width * 0.9,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: FutureBuilder<dynamic>(
-                  future: TwitterLineChartfuturecall,
-                  builder: (
-                      BuildContext context,
-                      AsyncSnapshot<dynamic> snapshot,
-                      ) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SpinKitWave(
-                        color: Colors.blue,
-                        size: 18,
-                      );
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.done) {
-                      if (snapshot.hasError) {
-                        return const Text('Error');
-                      } else if (snapshot.hasData) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Stack(
+    final themeMode = Provider.of<DarkMode>(context);
+    return Center(
+        child: Card(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          elevation: 5,
+          child: Container(
+            height: 250,
+            width: MediaQuery.of(context).size.width * 0.9,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: isTwitterdataloaded
+                ? FutureBuilder<dynamic>(
+              future: TwitterLineChartfuturecall,
+              builder: (
+                  BuildContext context,
+                  AsyncSnapshot<dynamic> snapshot,
+                  ) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return SpinKitCubeGrid(
+                    color: Colors.blue,
+                    size: 50,
+                  );
+                } else if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.hasError) {
+                    return const Text('Error');
+                  } else if (snapshot.hasData) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            top: 40,
+                            left: 105,
+                            child: Image.asset(
+                              'assets/new Updated images/versus.png',
+                              height: 84,
+                            ),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                              Column(
                                 children: [
-                                  Column(
-                                    children: [
-                                      Container(
+                                  Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.blue.shade600),
+                                        borderRadius:
+                                        BorderRadius.circular(15)),
+                                    height: 120,
+                                    width: 120,
+                                    child: SfCircularChart(
+                                        tooltipBehavior:
+                                        _TwittertooltipBehavior1,
+                                        palette: [
+                                          Colors.yellow,
+                                          Colors.yellowAccent,
+                                          Color.fromRGBO(218, 40, 36, 0),
+                                        ],
+                                        series: <PieSeries<ChartSampleData,
+                                            String>>[
+                                          PieSeries<ChartSampleData, String>(
+                                              explode: true,
+                                              explodeIndex: 0,
+                                              explodeOffset: '10%',
+                                              dataSource: <ChartSampleData>[
+                                                ...TwitterPiegraphChartData
+                                              ],
+                                              xValueMapper:
+                                                  (ChartSampleData data, _) =>
+                                              data.x as String,
+                                              yValueMapper:
+                                                  (ChartSampleData data, _) =>
+                                              data.y,
+                                              dataLabelMapper:
+                                                  (ChartSampleData data, _) =>
+                                              data.text,
+                                              startAngle: 90,
+                                              endAngle: 90,
+                                              dataLabelSettings:
+                                              const DataLabelSettings(
+                                                  isVisible: true)),
+                                        ]),
+                                  ),
+                                  Text(
+                                    'FOLLOWERS',
+                                    style: GoogleFonts.bitter(fontSize: 10),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 50,
+                              ),
+                              Column(
+                                children: [
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.only(right: 8.0),
+                                    child: Container(
                                         decoration: BoxDecoration(
                                             border: Border.all(
                                                 color: Colors.blue.shade600),
@@ -2963,294 +1678,246 @@ class _HomeScreenState extends State<HomeScreen> {
                                             BorderRadius.circular(15)),
                                         height: 120,
                                         width: 120,
-                                        child: SfCircularChart(
-                                            tooltipBehavior:
-                                            _TwittertooltipBehavior1,
+                                        child: SfFunnelChart(
                                             palette: [
-                                              Color.fromRGBO(19, 136, 8, 0),
-                                              Color.fromRGBO(254, 1, 117, 0),
-                                              Color.fromRGBO(249, 125, 9, 0),
+                                              Colors.yellow,
+                                              Colors.yellowAccent,
+                                              Color.fromRGBO(218, 40, 36, 0),
                                             ],
-                                            series: <PieSeries<ChartSampleData,
-                                                String>>[
-                                              PieSeries<ChartSampleData,
-                                                  String>(
-                                                  explode: true,
-                                                  explodeIndex: 0,
-                                                  explodeOffset: '10%',
-                                                  dataSource: <ChartSampleData>[
-                                                    ...TwitterPiegraphChartData
-                                                  ],
-                                                  xValueMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.x as String,
-                                                  yValueMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.y,
-                                                  dataLabelMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.text,
-                                                  startAngle: 90,
-                                                  endAngle: 90,
-                                                  dataLabelSettings:
-                                                  const DataLabelSettings(
-                                                      isVisible: true)),
-                                            ]),
-                                      ),
-                                      Text(
-                                        'FOLLOWERS',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 35.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(TwiterBarGraphdata['lead'][0]),
-                                            Image.asset(
-                                              'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
-                                              height: 30,
-                                            )
-                                          ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Image.asset(
-                                                  'assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',
-                                                  height: 30,
-                                                ),
-                                                Text('TRS'),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    children: [
-                                      Padding(
-                                        padding:
-                                        const EdgeInsets.only(right: 8.0),
-                                        child: Container(
-                                            decoration: BoxDecoration(
-                                                border: Border.all(
-                                                    color:
-                                                    Colors.blue.shade600),
-                                                borderRadius:
-                                                BorderRadius.circular(15)),
-                                            height: 120,
-                                            width: 120,
-                                            child: SfFunnelChart(
-                                                palette: [
-                                                  Color.fromRGBO(19, 136, 8, 0),
-                                                  Color.fromRGBO(
-                                                      254, 1, 117, 0),
-                                                  Color.fromRGBO(
-                                                      249, 125, 9, 0),
+                                            //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
+                                            tooltipBehavior:
+                                            TooltipBehavior(enable: true),
+                                            series: FunnelSeries<
+                                                ChartSampleData, String>(
+                                                dataSource: <ChartSampleData>[
+                                                  ...TwitterFunnelgraphChartData,
                                                 ],
-                                                //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
-                                                tooltipBehavior: TooltipBehavior(
-                                                    enable: true),
-                                                series: FunnelSeries<
-                                                    ChartSampleData,
-                                                    String>(
-                                                    dataSource: <ChartSampleData>[
-                                                      ...TwitterFunnelgraphChartData,
-                                                    ],
-                                                    xValueMapper:
-                                                        (ChartSampleData data, _) =>
-                                                    data.x as String,
-                                                    yValueMapper:
-                                                        (ChartSampleData data, _) =>
-                                                    data.y,
-                                                    /*  explode: isCardView ? false : explode,
-                    gapRatio: isCardView ? 0 : gapRatio,*/
-                                                    neckHeight: /*isCardView ? */
-                                                    '20%' /*: neckHeight.toString()*/ +
-                                                        '%',
-                                                    neckWidth: /*isCardView ?*/
-                                                    '25%' /*: neckWidth.toString()*/ +
-                                                        '%',
-                                                    dataLabelSettings:
-                                                    const DataLabelSettings(
-                                                        textStyle: TextStyle(fontSize: 8),
-                                                        isVisible: true)))),
-                                      ),
-                                      Text(
-                                        'Re-Tweet',
-                                        style: TextStyle(fontSize: 10),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 1.0, top: 50),
-                                    child: Image.asset(
-                                      'assets/icons/Social-Media-Icons-IS-08.png',
-                                      height: 18,
-                                      width: 18,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 140.0, left: 5),
-                                    child: Container(
-                                      height: 165,
-                                      width: 165,
-                                      child: RichText(
-                                        text: new TextSpan(
-                                          // Note: Styles for TextSpans must be explicitly defined.
-                                          // Child text spans will inherit styles from parent
-                                          style: new TextStyle(
-                                            fontSize: 12.0,
-                                            // color: Colors.black,
-                                          ),
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                                text:
-                                                'With Huge Difference In counts for Tweets and Re-Tweets reports says that ',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                    fontFamily: 'Segoe UI')),
-                                            TextSpan(
-                                                text: TwiterBarGraphdata['lead']
-                                                [0],
-                                                style: new TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.green,
-                                                    fontSize: 20,
-                                                    fontFamily: 'Segoe UI')),
-                                            TextSpan(
-                                                text:
-                                                ' is relatively Dominant in Twitter Data.',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                    fontFamily: 'Segoe UI')),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                        const EdgeInsets.only(top: 100.0),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.blue.shade600),
-                                              borderRadius:
-                                              BorderRadius.circular(15)),
-                                          height: 100,
-                                          width: 135,
-                                          child: SfCartesianChart(
-                                            palette: <Color>[
-                                              Color(0xffff7f50),
-                                              Color(0xfff0ead6),
-                                              Color(0xffffd700),
-                                              Color(0xff264348),
-                                            ],
-                                            plotAreaBorderWidth: 0,
-                                            primaryXAxis: CategoryAxis(
-                                              labelStyle: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 8),
-                                              axisLine:
-                                              const AxisLine(width: 0),
-                                              labelPosition:
-                                              ChartDataLabelPosition
-                                                  .outside,
-                                              majorTickLines:
-                                              const MajorTickLines(
-                                                  width: 0),
-                                              majorGridLines:
-                                              const MajorGridLines(
-                                                  width: 0),
-                                            ),
-                                            primaryYAxis: NumericAxis(
-                                                labelStyle: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 8),
-                                                labelPosition:
-                                                ChartDataLabelPosition
-                                                    .outside,
-                                                isVisible: false,
-                                                minimum: 0,
-                                                maximum: 3000),
-                                            series: <ColumnSeries<
-                                                ChartSampleData, String>>[
-                                              ColumnSeries<ChartSampleData,
-                                                  String>(
-                                                width: 0.9,
+                                                xValueMapper:
+                                                    (ChartSampleData data, _) =>
+                                                data.x as String,
+                                                yValueMapper:
+                                                    (ChartSampleData data, _) =>
+                                                data.y,
+                                                /*  explode: isCardView ? false : explode,
+              gapRatio: isCardView ? 0 : gapRatio,*/
+                                                neckHeight: /*isCardView ? */
+                                                '20%' /*: neckHeight.toString()*/ +
+                                                    '%',
+                                                neckWidth: /*isCardView ?*/
+                                                '25%' /*: neckWidth.toString()*/ +
+                                                    '%',
                                                 dataLabelSettings:
                                                 const DataLabelSettings(
-                                                    isVisible: false,
-                                                    labelAlignment:
-                                                    ChartDataLabelAlignment
-                                                        .top),
-                                                dataSource: <ChartSampleData>[
-                                                  ...TwitterBargraphChartdata
-                                                ],
-                                                borderRadius:
-                                                BorderRadius.circular(10),
-                                                xValueMapper:
-                                                    (ChartSampleData sales,
-                                                    _) =>
-                                                sales.x as String,
-                                                yValueMapper:
-                                                    (ChartSampleData sales,
-                                                    _) =>
-                                                sales.y,
-                                              ),
-                                            ],
-                                            tooltipBehavior:
-                                            _TwittertooltipBehavior,
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Likes',
-                                        style: TextStyle(fontSize: 10),
-                                      )
-                                    ],
+                                                    textStyle:
+                                                    TextStyle(fontSize: 8),
+                                                    isVisible: true)))),
                                   ),
+                                  Text(
+                                    'Re-Tweet',
+                                    style: GoogleFonts.bitter(fontSize: 10),
+                                  )
                                 ],
                               ),
                             ],
                           ),
-                        );
-                      } else {
-                        return const Text('Empty data');
-                      }
-                    } else {
-                      return Text('State: ${snapshot.connectionState}');
-                    }
-                  },
-                ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Padding(
+                                padding:
+                                const EdgeInsets.only(left: 1.0, top: 50),
+                                child: Image.asset(
+                                  'assets/icons/Social-Media-Icons-IS-08.png',
+                                  height: 18,
+                                  width: 18,
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 140.0, left: 5),
+                                child: Container(
+                                  height: 165,
+                                  width: 165,
+                                  child: RichText(
+                                    text: new TextSpan(
+                                      // Note: Styles for TextSpans must be explicitly defined.
+                                      // Child text spans will inherit styles from parent
+                                      style: new TextStyle(
+                                        fontSize: 12.0,
+                                        // color: Colors.black,
+                                      ),
+                                      children: <TextSpan>[
+                                        TextSpan(
+                                            text:
+                                            'With Huge Difference In counts for Tweets and Re-Tweets reports says that ',
+                                            style: GoogleFonts.bitter(
+                                                fontWeight: FontWeight.bold,
+                                                color: themeMode.darkMode
+                                                    ? Colors.white
+                                                    : Colors.black,
+                                                fontSize: 13
+                                            )),
+                                        TextSpan(
+                                            text: TwiterBarGraphdata['lead']
+                                            [0],
+                                            style:  GoogleFonts.bitter(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.green,
+                                              fontSize: 13,
+                                            )),
+                                        TextSpan(
+                                            text:
+                                            ' is relatively Dominant in Twitter Data.',
+                                            style: GoogleFonts.bitter(
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.bold,
+                                              color: themeMode.darkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                            )),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.only(top: 100.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.blue.shade600),
+                                          borderRadius:
+                                          BorderRadius.circular(15)),
+                                      height: 100,
+                                      width: 135,
+                                      child: SfCartesianChart(
+                                        palette: <Color>[
+                                          Color(0xffff7f50),
+                                          Color(0xfff0ead6),
+                                          Color(0xffffd700),
+                                          Color(0xff264348),
+                                        ],
+                                        plotAreaBorderWidth: 0,
+                                        primaryXAxis: CategoryAxis(
+                                          labelStyle: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 8),
+                                          axisLine: const AxisLine(width: 0),
+                                          labelPosition:
+                                          ChartDataLabelPosition.outside,
+                                          majorTickLines:
+                                          const MajorTickLines(width: 0),
+                                          majorGridLines:
+                                          const MajorGridLines(width: 0),
+                                        ),
+                                        primaryYAxis: NumericAxis(
+                                            labelStyle: const TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 8),
+                                            labelPosition:
+                                            ChartDataLabelPosition
+                                                .outside,
+                                            isVisible: false,
+                                            minimum: 0,
+                                            maximum: 3000),
+                                        series: <ColumnSeries<ChartSampleData,
+                                            String>>[
+                                          ColumnSeries<ChartSampleData,
+                                              String>(
+                                            width: 0.9,
+                                            dataLabelSettings:
+                                            const DataLabelSettings(
+                                                isVisible: false,
+                                                labelAlignment:
+                                                ChartDataLabelAlignment
+                                                    .top),
+                                            dataSource: <ChartSampleData>[
+                                              ...TwitterBargraphChartdata
+                                            ],
+                                            borderRadius:
+                                            BorderRadius.circular(10),
+                                            xValueMapper:
+                                                (ChartSampleData sales, _) =>
+                                            sales.x as String,
+                                            yValueMapper:
+                                                (ChartSampleData sales, _) =>
+                                            sales.y,
+                                          ),
+                                        ],
+                                        tooltipBehavior:
+                                        _TwittertooltipBehavior,
+                                      ),
+                                    ),
+                                  ),
+                                  Text(
+                                    'Likes',
+                                    style: GoogleFonts.bitter(fontSize: 10),
+                                  )
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  } else {
+                    return const Text('Empty data');
+                  }
+                } else {
+                  return Text('State: ${snapshot.connectionState}');
+                }
+              },
+            )
+                : Center(
+              child: SpinKitCubeGrid(
+                color: Colors.blue,
+                size: 50,
               ),
             ),
-          )
-        ]);
+          ),
+        ));
+  }
+
+//twitter top party list
+  var TopPartylistdata;
+  Map TopPartylistquery = new Map<String, dynamic>();
+  List twittertoppartyList = [];
+  TwitterTopParty() async {
+    setState(() {
+      TopPartylistquery['type'] = 'top_parties';
+      TopPartylistquery['STATE'] = "ANDHRA PRADESH";
+    });
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6659/social_media/'),
+        body: TopPartylistquery);
+
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      print("in");
+      try {
+        print("i am dodo");
+        setState(() {
+          TopPartylistdata = json.decode(response.body);
+          twittertoppartyList = TopPartylistdata["top_parties"];
+
+          isTwitterdataloaded = true;
+          TwitterLineChartfuturecall = TwitterBannerGraphApi();
+        });
+
+        print(twittertoppartyList.toList());
+      } catch (e) {
+        print(e);
+        //print(TopPartylistdata);
+      }
+    } else {
+      //print(response.reasonPhrase);
+    }
+    return TopPartylistdata;
   }
 
   //Bar Graph data
@@ -3262,8 +1929,8 @@ class _HomeScreenState extends State<HomeScreen> {
   List<ChartSampleData> TwitterFunnelgraphChartData = [];
   Future<dynamic> TwitterBannerGraphApi() async {
     TwitterSelectionquery1['type'] = 'party_data';
-    TwitterSelectionquery1['STATE'] = 'TELANGANA';
-    TwitterSelectionquery1['party_list'] = 'INC,TRS,BJP';
+    TwitterSelectionquery1['STATE'] = 'ANDHRA PRADESH';
+    TwitterSelectionquery1['party_list'] = "${twittertoppartyList.join(",")}";
     //Selectionquery['channel'] = 'YOUTUBE';
 
     var response = await post(
@@ -3272,13 +1939,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
     print(response.statusCode);
     if (response.statusCode == 200) {
-      print('inside loop');
+      //print('inside loop');
       try {
-        print('inside try');
-        TwiterBarGraphdata = jsonDecode(utf8.decode(response.bodyBytes));
-
+        //print('inside try');
+        TwiterBarGraphdata = json.decode(response.body);
+        print(TwiterBarGraphdata);
         TwiterBarGraphdata['party_data'].forEach((key, value) {
-          print(key);
+          //print(key);
 
           TwitterBargraphChartdata.add(
             ChartSampleData(
@@ -3299,379 +1966,391 @@ class _HomeScreenState extends State<HomeScreen> {
           );
         });
 
-        // for(int i=0;i<TwiterBarGraphdata['party_data'])
-        // TwitterBargraphChartdata.add(ChartSampleData(x: 'TDP', y: 8683),);
 
-        print('data here');
-        print(TwiterBarGraphdata);
       } catch (e) {
-        print(TwiterBarGraphdata);
+        //print(TwiterBarGraphdata);
       }
     } else {
-      print(response.reasonPhrase);
+      //print(response.reasonPhrase);
     }
     return TwiterBarGraphdata;
   }
 
+//FaceBook top party list api
+  var FaceBookTopPartylistdata;
+  var FaceBooklocallist = [];
+
+  FaceBookTopPartylistApi() async {
+    //print('FaceBook top');
+    var body = json.encode({
+      "type": "top_parties",
+      "STATE": "TELANGANA",
+    });
+    var headers = {'Content-Type': 'application/json'};
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6659/social_media_FB/'),
+        headers: headers,
+        body: body);
+
+    //print(response.statusCode);
+    if (response.statusCode == 200) {
+      try {
+        setState(() {
+          FaceBookTopPartylistdata = json.decode(response.body);
+          FaceBooklocallist = FaceBookTopPartylistdata['top_parties'];
+          // Youtubefinaldata=YoutubeOverViewApi();
+          FacebookLineChartfuturecall = FaceBookBannerGraphApi();
+          isFacebookBannerVisible = true;
+        });
+        //print(FaceBooklocallist.toList());
+      } catch (e) {
+        //print(FaceBookTopPartylistdata);
+      }
+    } else {
+      //print(response.reasonPhrase);
+    }
+    return FaceBookTopPartylistdata;
+  }
+
 //FaceBookBanners
-  late Future<dynamic> FacebookLineChartfuturecall = FaceBookBannerGraphApi();
+  late Future<dynamic> FacebookLineChartfuturecall;
   TooltipBehavior? _FacebooktooltipBehavior;
   TooltipBehavior? _FacebooktooltipBehavior1;
+  bool isFacebookBannerVisible = false;
   FaceBookBanner() {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              elevation: 5,
-              child: Container(
-                height: 250,
-                width: MediaQuery.of(context).size.width * 0.9,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: FutureBuilder<dynamic>(
-                  future: FacebookLineChartfuturecall,
-                  builder: (
-                      BuildContext context,
-                      AsyncSnapshot<dynamic> snapshot,
-                      ) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SpinKitWave(
-                        color: Colors.blue,
-                        size: 18,
-                      );
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.done) {
-                      if (snapshot.hasError) {
-                        return const Text('Error');
-                      } else if (snapshot.hasData) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Stack(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.blueAccent),
-                                            borderRadius:
-                                            BorderRadius.circular(15)),
-                                        height: 120,
-                                        width: 120,
-                                        child: SfCircularChart(
-                                            tooltipBehavior:
-                                            _FacebooktooltipBehavior1,
-                                            palette: [
-                                              Colors.yellow,
-                                              Colors.yellowAccent,
+    final themeMode = Provider.of<DarkMode>(context);
+    return Center(
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        elevation: 5,
+        child: Container(
+          height: 250,
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: isFacebookBannerVisible
+              ? FutureBuilder<dynamic>(
+            future: FacebookLineChartfuturecall,
+            builder: (
+                BuildContext context,
+                AsyncSnapshot<dynamic> snapshot,
+                ) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return SpinKitCubeGrid(
+                  color: Colors.blue,
+                  size: 50,
+                );
+              } else if (snapshot.connectionState ==
+                  ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else if (snapshot.hasData) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          top: 40,
+                          left: 105,
+                          child: Image.asset(
+                            'assets/new Updated images/versus.png',
+                            height: 84,
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.blueAccent),
+                                      borderRadius:
+                                      BorderRadius.circular(15)),
+                                  height: 120,
+                                  width: 120,
+                                  child: SfCircularChart(
+                                      tooltipBehavior:
+                                      _FacebooktooltipBehavior1,
+                                      palette: [
+                                        Color.fromRGBO(19, 136, 8, 0),
+                                        Color.fromRGBO(254, 1, 117, 0),
+                                        Color.fromRGBO(249, 125, 9, 0),
+                                      ],
+                                      series: <PieSeries<ChartSampleData,
+                                          String>>[
+                                        PieSeries<ChartSampleData,
+                                            String>(
+                                            explode: true,
+                                            explodeIndex: 0,
+                                            explodeOffset: '10%',
+                                            dataSource: <ChartSampleData>[
+                                              ...FaceBookPiegraphChartData
                                             ],
-                                            series: <PieSeries<ChartSampleData,
-                                                String>>[
-                                              PieSeries<ChartSampleData,
-                                                  String>(
-                                                  explode: true,
-                                                  explodeIndex: 0,
-                                                  explodeOffset: '10%',
-                                                  dataSource: <ChartSampleData>[
-                                                    ...FaceBookPiegraphChartData
-                                                    // ChartSampleData(
-                                                    //     x: 'David', y: 13, text: 'Dav \n 13%'),
-                                                    // ChartSampleData(
-                                                    //     x: 'Steve', y: 24, text: 'Ste\n 24%'),
-                                                    // ChartSampleData(
-                                                    //     x: 'Jack', y: 25, text: 'Jack \n 25%'),
-                                                    // ChartSampleData(
-                                                    //     x: 'Others', y: 38, text: 'Other \n 38%'),
-                                                  ],
-                                                  xValueMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.x as String,
-                                                  yValueMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.y,
-                                                  dataLabelMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.text,
-                                                  startAngle: 90,
-                                                  endAngle: 90,
-                                                  dataLabelSettings:
-                                                  const DataLabelSettings(
-                                                      isVisible: true)),
-                                            ]),
-                                      ),
-                                      Text(
-                                        'Likes',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
+                                            xValueMapper:
+                                                (ChartSampleData data,
+                                                _) =>
+                                            data.x as String,
+                                            yValueMapper:
+                                                (ChartSampleData data,
+                                                _) =>
+                                            data.y,
+                                            dataLabelMapper:
+                                                (ChartSampleData data,
+                                                _) =>
+                                            data.text,
+                                            startAngle: 90,
+                                            endAngle: 90,
+                                            dataLabelSettings:
+                                            const DataLabelSettings(
+                                                isVisible: true)),
+                                      ]),
+                                ),
+                                Text(
+                                  'Likes',
+                                  style: GoogleFonts.bitter(fontSize: 10),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: 60,
+                            ),
+                            Column(
+                              children: [
+                                Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.blueAccent),
+                                        borderRadius:
+                                        BorderRadius.circular(15)),
+                                    height: 120,
+                                    width: 120,
+                                    child: SfFunnelChart(
+                                        palette: [
+                                          Color.fromRGBO(254, 1, 117, 0),
+                                          Color.fromRGBO(19, 136, 8, 0),
+                                          Color.fromRGBO(249, 125, 9, 0),
+                                        ],
+                                        tooltipBehavior:
+                                        TooltipBehavior(enable: true),
+                                        series: FunnelSeries<
+                                            ChartSampleData, String>(
+                                            dataSource: <ChartSampleData>[
+                                              ...FaceBookFunnelgraphChartData,
+                                            ],
+                                            xValueMapper:
+                                                (ChartSampleData data, _) =>
+                                            data.x as String,
+                                            yValueMapper:
+                                                (ChartSampleData data, _) =>
+                                            data.y,
+                                            /*  explode: isCardView ? false : explode,
+              gapRatio: isCardView ? 0 : gapRatio,*/
+                                            neckHeight: /*isCardView ? */
+                                            '20%' /*: neckHeight.toString()*/ +
+                                                '%',
+                                            neckWidth: /*isCardView ?*/
+                                            '25%' /*: neckWidth.toString()*/ +
+                                                '%',
+                                            dataLabelSettings:
+                                            const DataLabelSettings(
+                                                textStyle:
+                                                TextStyle(fontSize: 8),
+                                                isVisible: true)))),
+                                Text(
+                                  'Comments',
+                                  style: GoogleFonts.bitter(fontSize: 10),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 1.0, top: 60),
+                              child: Image.asset(
+                                'assets/icons/Social-Media-Icons-IS-06.png',
+                                height: 18,
+                                width: 18,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 140.0, left: 5),
+                              child: Container(
+                                height: 150,
+                                width: 150,
+                                child: RichText(
+                                  text: new TextSpan(
+                                    // Note: Styles for TextSpans must be explicitly defined.
+                                    // Child text spans will inherit styles from parent
+                                    style: new TextStyle(
+                                      fontSize: 12.0,
+                                      // color: Colors.black,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text:
+                                          ' From Posts to public response ',
+                                          style: GoogleFonts.bitter(
+                                            fontWeight: FontWeight.bold,
+                                            color: themeMode.darkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: 14,
+                                          )),
+                                      TextSpan(
+                                          text:
+                                          FaceBookBarGraphdata['lead']
+                                          [0],
+                                          style:  GoogleFonts.bitter(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green,
+                                            fontSize: 14,
+                                          )),
+                                      TextSpan(
+                                          text:
+                                          ' is leading in all aspects',
+                                          style: GoogleFonts.bitter(
+                                            fontWeight: FontWeight.bold,
+                                            color: themeMode.darkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: 14,
+                                          )),
                                     ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 35.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(FaceBookBarGraphdata['lead']
-                                            [0]),
-                                            Image.asset(
-                                              'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
-                                              height: 30,
-                                            )
+                                ),
+                              ),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.only(top: 100.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.blueAccent),
+                                        borderRadius:
+                                        BorderRadius.circular(15)),
+                                    height: 100,
+                                    width: 135,
+                                    child: SfCartesianChart(
+                                      palette: <Color>[
+                                        Color(0xffff7f50),
+                                        Color(0xfff0ead6),
+                                        Color(0xffffd700),
+                                        Color(0xff264348),
+                                      ],
+                                      plotAreaBorderWidth: 0,
+                                      primaryXAxis: CategoryAxis(
+                                        labelStyle: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 8),
+                                        axisLine:
+                                        const AxisLine(width: 0),
+                                        labelPosition:
+                                        ChartDataLabelPosition
+                                            .outside,
+                                        majorTickLines:
+                                        const MajorTickLines(
+                                            width: 0),
+                                        majorGridLines:
+                                        const MajorGridLines(
+                                            width: 0),
+                                      ),
+                                      primaryYAxis: NumericAxis(
+                                          labelStyle: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 8),
+                                          labelPosition:
+                                          ChartDataLabelPosition
+                                              .outside,
+                                          isVisible: false,
+                                          minimum: 0,
+                                          maximum: 2000),
+                                      series: <ColumnSeries<
+                                          ChartSampleData, String>>[
+                                        ColumnSeries<ChartSampleData,
+                                            String>(
+                                          width: 0.9,
+                                          dataLabelSettings:
+                                          const DataLabelSettings(
+                                              isVisible: false,
+                                              labelAlignment:
+                                              ChartDataLabelAlignment
+                                                  .top),
+                                          dataSource: <ChartSampleData>[
+                                            ...FaceBookBargraphChartdata
                                           ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Image.asset(
-                                                  'assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',
-                                                  height: 30,
-                                                ),
-                                                Text('YSRCP'),
-                                              ],
-                                            ),
-                                          ],
+                                          borderRadius:
+                                          BorderRadius.circular(10),
+                                          xValueMapper:
+                                              (ChartSampleData sales,
+                                              _) =>
+                                          sales.x as String,
+                                          yValueMapper:
+                                              (ChartSampleData sales,
+                                              _) =>
+                                          sales.y,
                                         ),
                                       ],
+                                      tooltipBehavior:
+                                      _FacebooktooltipBehavior,
                                     ),
                                   ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.blueAccent),
-                                              borderRadius:
-                                              BorderRadius.circular(15)),
-                                          height: 120,
-                                          width: 120,
-                                          child: SfFunnelChart(
-                                              palette: [
-                                                Colors.yellow,
-                                                Colors.yellowAccent,
-                                              ],
-                                              //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
-                                              tooltipBehavior:
-                                              TooltipBehavior(enable: true),
-                                              series: FunnelSeries<
-                                                  ChartSampleData, String>(
-                                                  dataSource: <ChartSampleData>[
-                                                    ...FaceBookFunnelgraphChartData,
-                                                  ],
-                                                  xValueMapper:
-                                                      (ChartSampleData data, _) =>
-                                                  data.x as String,
-                                                  yValueMapper:
-                                                      (ChartSampleData data, _) =>
-                                                  data.y,
-                                                  /*  explode: isCardView ? false : explode,
-                    gapRatio: isCardView ? 0 : gapRatio,*/
-                                                  neckHeight: /*isCardView ? */
-                                                  '20%' /*: neckHeight.toString()*/ +
-                                                      '%',
-                                                  neckWidth: /*isCardView ?*/
-                                                  '25%' /*: neckWidth.toString()*/ +
-                                                      '%',
-                                                  dataLabelSettings:
-                                                  const DataLabelSettings(
-                                                      textStyle:
-                                                      TextStyle(fontSize: 8),
-                                                      isVisible: true)))),
-                                      Text(
-                                        'Comments',
-                                        style: TextStyle(fontSize: 10),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 1.0, top: 60),
-                                    child: Image.asset(
-                                      'assets/icons/Social-Media-Icons-IS-06.png',
-                                      height: 18,
-                                      width: 18,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 140.0, left: 5),
-                                    child: Container(
-                                      height: 150,
-                                      width: 150,
-                                      child: RichText(
-                                        text: new TextSpan(
-                                          // Note: Styles for TextSpans must be explicitly defined.
-                                          // Child text spans will inherit styles from parent
-                                          style: new TextStyle(
-                                            fontSize: 12.0,
-                                            // color: Colors.black,
-                                          ),
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                                text:
-                                                ' From Posts to public response ',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,color: Colors.black,
-                                                    fontSize: 18,
-                                                    fontFamily: 'Segoe UI')),
-                                            TextSpan(
-                                                text:
-                                                FaceBookBarGraphdata['lead']
-                                                [0],
-                                                style: new TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.green,
-                                                    fontSize: 20,
-                                                    fontFamily: 'Segoe UI')),
-                                            TextSpan(
-                                                text:
-                                                ' is leading in all aspects',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                    fontSize: 18,
-                                                    fontFamily: 'Segoe UI')),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                        const EdgeInsets.only(top: 100.0),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.blueAccent),
-                                              borderRadius:
-                                              BorderRadius.circular(15)),
-                                          height: 100,
-                                          width: 135,
-                                          child: SfCartesianChart(
-                                            palette: <Color>[
-                                              Color(0xffff7f50),
-                                              Color(0xfff0ead6),
-                                              Color(0xffffd700),
-                                              Color(0xff264348),
-                                            ],
-                                            plotAreaBorderWidth: 0,
-                                            primaryXAxis: CategoryAxis(
-                                              labelStyle: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 8),
-                                              axisLine:
-                                              const AxisLine(width: 0),
-                                              labelPosition:
-                                              ChartDataLabelPosition
-                                                  .outside,
-                                              majorTickLines:
-                                              const MajorTickLines(
-                                                  width: 0),
-                                              majorGridLines:
-                                              const MajorGridLines(
-                                                  width: 0),
-                                            ),
-                                            primaryYAxis: NumericAxis(
-                                                labelStyle: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 8),
-                                                labelPosition:
-                                                ChartDataLabelPosition
-                                                    .outside,
-                                                isVisible: false,
-                                                minimum: 0,
-                                                maximum: 2000),
-                                            series: <ColumnSeries<
-                                                ChartSampleData, String>>[
-                                              ColumnSeries<ChartSampleData,
-                                                  String>(
-                                                width: 0.9,
-                                                dataLabelSettings:
-                                                const DataLabelSettings(
-                                                    isVisible: false,
-                                                    labelAlignment:
-                                                    ChartDataLabelAlignment
-                                                        .top),
-                                                dataSource: <ChartSampleData>[
-                                                  ...FaceBookBargraphChartdata
-                                                ],
-                                                borderRadius:
-                                                BorderRadius.circular(10),
-                                                xValueMapper:
-                                                    (ChartSampleData sales,
-                                                    _) =>
-                                                sales.x as String,
-                                                yValueMapper:
-                                                    (ChartSampleData sales,
-                                                    _) =>
-                                                sales.y,
-                                              ),
-                                            ],
-                                            tooltipBehavior:
-                                            _FacebooktooltipBehavior,
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Views',
-                                        style: TextStyle(fontSize: 10),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        );
-                      } else {
-                        return const Text('Empty data');
-                      }
-                    } else {
-                      return Text('State: ${snapshot.connectionState}');
-                    }
-                  },
-                ),
-              ),
-            ),
+                                ),
+                                Text(
+                                  'Views',
+                                  style: GoogleFonts.bitter(fontSize: 10),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
           )
-        ]);
+              : Center(
+              child: SpinKitCubeGrid(
+                color: Colors.blue,
+                size: 50,
+              )),
+        ),
+      ),
+    );
   }
 
   //Bar Graph data
   var FaceBookBarGraphdata;
-
-  Map FaceBookSelectionquery1 = new Map<String, dynamic>();
   List<ChartSampleData> FaceBookBargraphChartdata = [];
   List<ChartSampleData> FaceBookPiegraphChartData = [];
   List<ChartSampleData> FaceBookFunnelgraphChartData = [];
   Future<dynamic> FaceBookBannerGraphApi() async {
+    //debugPrint("Facebook top party ${FaceBooklocallist.toList()}");
     var body = json.encode({
       "type": "party_data",
-      "STATE": 'ANDHRA PRADESH',
-      "party_list": 'TDP, YSRCP',
+      "STATE": 'TELANGANA',
+      "party_list": FaceBooklocallist.join(","),
       //"social_handle": "YOUTUBE"
     });
     var headers = {'Content-Type': 'application/json'};
@@ -3680,15 +2359,15 @@ class _HomeScreenState extends State<HomeScreen> {
         headers: headers,
         body: body);
 
-    print(response.statusCode);
+    //print(response.statusCode);
     if (response.statusCode == 200) {
-      print('inside loop');
+      //print('inside Facebook');
       try {
-        print('inside try');
-        FaceBookBarGraphdata = jsonDecode(utf8.decode(response.bodyBytes));
+
+        FaceBookBarGraphdata = json.decode(response.body);
         setState(() {
           FaceBookBarGraphdata['party_data'].forEach((key, value) {
-            print(key);
+            //print(key);
 
             FaceBookBargraphChartdata.add(
               ChartSampleData(
@@ -3709,374 +2388,411 @@ class _HomeScreenState extends State<HomeScreen> {
             );
           });
 
-          // for(int i=0;i<FaceBookBarGraphdata['party_data'])
-          // FaceBookBargraphChartdata.add(ChartSampleData(x: 'TDP', y: 8683),);
+
         });
-        print('data here');
-        print(FaceBookBarGraphdata);
+        //print('data here');
+        //print(FaceBookBarGraphdata);
       } catch (e) {
-        print(FaceBookBarGraphdata);
+        //print(FaceBookBarGraphdata);
       }
     } else {
-      print(response.reasonPhrase);
+      //print(response.reasonPhrase);
     }
     return FaceBookBarGraphdata;
   }
 
+//NewsChannel top party list api
+  var NewsChannelTopPartylistdata;
+  var NewsChannellocallist = [];
+
+  NewsChannelTopPartylistApi() async {
+    //print('YT top');
+    var body = json.encode({
+      "type": "top_parties",
+      "STATE": "ANDHRA PRADESH",
+      "social_handle": "NEWS_CHANNEL"
+    });
+    var headers = {'Content-Type': 'application/json'};
+    var response = await post(
+        Uri.parse('http://idxp.pilogcloud.com:6659/social_media_YT/'),
+        headers: headers,
+        body: body);
+
+    //print(response.statusCode);
+    if (response.statusCode == 200) {
+      try {
+        setState(() {
+          NewsChannelTopPartylistdata =
+              jsonDecode(utf8.decode(response.bodyBytes));
+          NewsChannellocallist = NewsChannelTopPartylistdata['top_parties'];
+          NewschannelLineChartfuturecall = NewsChannelBannerGraphApi();
+          isNewsChannelBannerisible = true;
+        });
+
+      } catch (e) {
+        //print(NewsChannelTopPartylistdata);
+      }
+    } else {
+
+    }
+    return NewsChannelTopPartylistdata;
+  }
+
   //NewsChannel Banner
-  late Future<dynamic> NewschannelLineChartfuturecall =
-  NewsChannelBannerGraphApi();
+  late Future<dynamic> NewschannelLineChartfuturecall;
   TooltipBehavior? _NewsChanneltooltipBehavior;
   TooltipBehavior? _NewsChanneltooltipBehavior1;
+
+  bool isNewsChannelBannerisible = false;
   NewsChannelBanner() {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Center(
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              elevation: 5,
-              child: Container(
-                height: 250,
-                width: MediaQuery.of(context).size.width * 0.9,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: FutureBuilder<dynamic>(
-                  future: NewschannelLineChartfuturecall,
-                  builder: (
-                      BuildContext context,
-                      AsyncSnapshot<dynamic> snapshot,
-                      ) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return SpinKitWave(
-                        color: Colors.blue,
-                        size: 18,
-                      );
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.done) {
-                      if (snapshot.hasError) {
-                        return const Text('Error');
-                      } else if (snapshot.hasData) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: Stack(
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Column(
-                                    children: [
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            border: Border.all(
-                                                color: Colors.greenAccent),
-                                            borderRadius:
-                                            BorderRadius.circular(15)),
-                                        height: 120,
-                                        width: 120,
-                                        child: SfCircularChart(
-                                            tooltipBehavior:
-                                            _NewsChanneltooltipBehavior1,
-                                            palette: [
-                                              Color.fromRGBO(0, 142, 70, 0),
-                                              Color.fromRGBO(255, 255, 0, 0),
-                                              Color.fromRGBO(236, 13, 195, 0),
+    final themeMode = Provider.of<DarkMode>(context);
+    return Center(
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        elevation: 5,
+        child: Container(
+          height: 250,
+          width: MediaQuery.of(context).size.width * 0.9,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: isNewsChannelBannerisible
+              ? FutureBuilder<dynamic>(
+            future: NewschannelLineChartfuturecall,
+            builder: (
+                BuildContext context,
+                AsyncSnapshot<dynamic> snapshot,
+                ) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return SpinKitCubeGrid(
+                  color: Colors.blue,
+                  size: 50,
+                );
+              } else if (snapshot.connectionState ==
+                  ConnectionState.done) {
+                if (snapshot.hasError) {
+                  return const Text('Error');
+                } else if (snapshot.hasData) {
+                  return Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Stack(
+                      children: [
+                        Positioned(
+                          top: 40,
+                          left: 105,
+                          child: Image.asset(
+                            'assets/new Updated images/versus.png',
+                            height: 84,
+                          ),
+                        ),
+                        Positioned(
+                          top: 40,
+                          left: 140,
+                          child: Text(
+                            NewsChannelBarGraphdata['lead'][0],
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Positioned(
+                          top: 105,
+                          left: 180,
+                          child: Text(
+                            'INC',
+                            style: GoogleFonts.bitter(fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Column(
+                              children: [
+                                Container(
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: Colors.greenAccent),
+                                      borderRadius:
+                                      BorderRadius.circular(15)),
+                                  height: 120,
+                                  width: 120,
+                                  child: SfCircularChart(
+                                      tooltipBehavior:
+                                      _NewsChanneltooltipBehavior1,
+                                      palette: [
+                                        Color.fromRGBO(255, 255, 0, 0),
+                                        Color.fromRGBO(254, 1, 117, 0),
+                                        Color(0x00008E46),
+                                        Color.fromRGBO(236, 13, 195, 0),
+                                      ],
+                                      series: <PieSeries<ChartSampleData,
+                                          String>>[
+                                        PieSeries<ChartSampleData,
+                                            String>(
+                                            explode: true,
+                                            explodeIndex: 0,
+                                            explodeOffset: '10%',
+                                            dataSource: <ChartSampleData>[
+                                              ...NewsChannelPiegraphChartData
+
                                             ],
-                                            series: <PieSeries<ChartSampleData,
-                                                String>>[
-                                              PieSeries<ChartSampleData,
-                                                  String>(
-                                                  explode: true,
-                                                  explodeIndex: 0,
-                                                  explodeOffset: '10%',
-                                                  dataSource: <ChartSampleData>[
-                                                    ...NewsChannelPiegraphChartData
-                                                    // ChartSampleData(
-                                                    //     x: 'David', y: 13, text: 'Dav \n 13%'),
-                                                    // ChartSampleData(
-                                                    //     x: 'Steve', y: 24, text: 'Ste\n 24%'),
-                                                    // ChartSampleData(
-                                                    //     x: 'Jack', y: 25, text: 'Jack \n 25%'),
-                                                    // ChartSampleData(
-                                                    //     x: 'Others', y: 38, text: 'Other \n 38%'),
-                                                  ],
-                                                  xValueMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.x as String,
-                                                  yValueMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.y,
-                                                  dataLabelMapper:
-                                                      (ChartSampleData data,
-                                                      _) =>
-                                                  data.text,
-                                                  startAngle: 90,
-                                                  endAngle: 90,
-                                                  dataLabelSettings:
-                                                  const DataLabelSettings(
-                                                      isVisible: true)),
-                                            ]),
-                                      ),
-                                      Text(
-                                        'Likes',
-                                        style: TextStyle(fontSize: 10),
-                                      ),
+                                            xValueMapper:
+                                                (ChartSampleData data,
+                                                _) =>
+                                            data.x as String,
+                                            yValueMapper:
+                                                (ChartSampleData data,
+                                                _) =>
+                                            data.y,
+                                            dataLabelMapper:
+                                                (ChartSampleData data,
+                                                _) =>
+                                            data.text,
+                                            startAngle: 90,
+                                            endAngle: 90,
+                                            dataLabelSettings:
+                                            const DataLabelSettings(
+                                                isVisible: true)),
+                                      ]),
+                                ),
+                                Text(
+                                  'Likes',
+                                  style: GoogleFonts.bitter(fontSize: 10),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(
+                              width: 60,
+                            ),
+
+                            Column(
+                              children: [
+                                Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.greenAccent),
+                                        borderRadius:
+                                        BorderRadius.circular(15)),
+                                    height: 120,
+                                    width: 120,
+                                    child: SfFunnelChart(
+                                        palette: [
+                                          Color.fromRGBO(255, 255, 0, 0),
+                                          Color.fromRGBO(0, 142, 70, 0),
+                                          Color.fromRGBO(255, 255, 0, 0),
+                                          Color.fromRGBO(236, 13, 195, 0),
+                                        ],
+                                        //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
+                                        tooltipBehavior:
+                                        TooltipBehavior(enable: true),
+                                        series: FunnelSeries<
+                                            ChartSampleData, String>(
+                                            dataSource: <ChartSampleData>[
+                                              ...NewsChannelFunnelgraphChartData,
+                                            ],
+                                            xValueMapper:
+                                                (ChartSampleData data, _) =>
+                                            data.x as String,
+                                            yValueMapper:
+                                                (ChartSampleData data, _) =>
+                                            data.y,
+                                            /*  explode: isCardView ? false : explode,
+              gapRatio: isCardView ? 0 : gapRatio,*/
+                                            neckHeight: /*isCardView ? */
+                                            '20%' /*: neckHeight.toString()*/ +
+                                                '%',
+                                            neckWidth: /*isCardView ?*/
+                                            '25%' /*: neckWidth.toString()*/ +
+                                                '%',
+                                            dataLabelSettings:
+                                            const DataLabelSettings(
+                                                textStyle:
+                                                TextStyle(fontSize: 8),
+                                                isVisible: true)))),
+                                Text(
+                                  'Comments',
+                                  style: GoogleFonts.bitter(fontSize: 10),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment:
+                          MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 5.0, top: 60),
+                              child: Image.asset(
+                                'assets/NotificationIcons/News-Paper.png',
+                                height: 29,
+                                width: 29,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 140.0, left: 5),
+                              child: Container(
+                                height: 100,
+                                width: 150,
+                                child: RichText(
+                                  text: new TextSpan(
+                                    // Note: Styles for TextSpans must be explicitly defined.
+                                    // Child text spans will inherit styles from parent
+                                    style: new TextStyle(
+                                      fontSize: 12.0,
+                                      // color: Colors.black,
+                                    ),
+                                    children: <TextSpan>[
+                                      TextSpan(
+                                          text: NewsChannelBarGraphdata[
+                                          'lead'][0],
+                                          style:  GoogleFonts.bitter(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.green,
+                                            fontSize: 20,
+                                          )),
+                                      TextSpan(
+                                          text: ' is overpowering ',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: themeMode.darkMode
+                                                  ? Colors.white
+                                                  : Colors.black,
+                                              fontSize: 16,
+                                              fontFamily: 'Segoe UI')),
+                                      TextSpan(
+                                          text: "Multiple Parties",
+                                          style:  GoogleFonts.bitter(
+                                            fontWeight: FontWeight.bold,
+                                            color: themeMode.darkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            //color: Colors.red,
+                                            fontSize: 16,
+                                          )),
+                                      TextSpan(
+                                          text: ' in all aspects.',
+                                          style: GoogleFonts.bitter(
+                                            fontWeight: FontWeight.bold,
+                                            color: themeMode.darkMode
+                                                ? Colors.white
+                                                : Colors.black,
+                                            fontSize: 16,
+                                          )),
                                     ],
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 35.0),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(NewsChannelBarGraphdata['lead']
-                                            [0]),
-                                            Image.asset(
-                                              'assets/new Updated images/image_2023_07_12T10_18_35_331Z.png',
-                                              height: 30,
-                                            )
+                                ),
+                              ),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.only(top: 100.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.greenAccent),
+                                        borderRadius:
+                                        BorderRadius.circular(15)),
+                                    height: 100,
+                                    width: 135,
+                                    child: SfCartesianChart(
+                                      palette: <Color>[
+                                        Color(0xffff7f50),
+                                        Color(0xfff0ead6),
+                                        Color(0xffffd700),
+                                        Color(0xff264348),
+                                      ],
+                                      plotAreaBorderWidth: 0,
+                                      primaryXAxis: CategoryAxis(
+                                        labelStyle: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 8),
+                                        axisLine:
+                                        const AxisLine(width: 0),
+                                        labelPosition:
+                                        ChartDataLabelPosition
+                                            .outside,
+                                        majorTickLines:
+                                        const MajorTickLines(
+                                            width: 0),
+                                        majorGridLines:
+                                        const MajorGridLines(
+                                            width: 0),
+                                      ),
+                                      primaryYAxis: NumericAxis(
+                                          labelStyle: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 8),
+                                          labelPosition:
+                                          ChartDataLabelPosition
+                                              .outside,
+                                          isVisible: false,
+                                          minimum: 0,
+                                          maximum: 800),
+                                      series: <ColumnSeries<
+                                          ChartSampleData, String>>[
+                                        ColumnSeries<ChartSampleData,
+                                            String>(
+                                          width: 0.9,
+                                          dataLabelSettings:
+                                          const DataLabelSettings(
+                                              isVisible: false,
+                                              labelAlignment:
+                                              ChartDataLabelAlignment
+                                                  .top),
+                                          dataSource: <ChartSampleData>[
+                                            ...NewsChannelBargraphChartdata
                                           ],
-                                        ),
-                                        Column(
-                                          children: [
-                                            Row(
-                                              children: [
-                                                Image.asset(
-                                                  'assets/new Updated images/image_2023_07_12T10_18_25_781Z.png',
-                                                  height: 30,
-                                                ),
-                                                Text('TDP'),
-                                              ],
-                                            ),
-                                          ],
+                                          borderRadius:
+                                          BorderRadius.circular(10),
+                                          xValueMapper:
+                                              (ChartSampleData sales,
+                                              _) =>
+                                          sales.x as String,
+                                          yValueMapper:
+                                              (ChartSampleData sales,
+                                              _) =>
+                                          sales.y,
                                         ),
                                       ],
+                                      tooltipBehavior:
+                                      _NewsChanneltooltipBehavior,
                                     ),
                                   ),
-                                  Column(
-                                    children: [
-                                      Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.greenAccent),
-                                              borderRadius:
-                                              BorderRadius.circular(15)),
-                                          height: 120,
-                                          width: 120,
-                                          child: SfFunnelChart(
-                                              palette: [
-                                                Color.fromRGBO(0, 142, 70, 0),
-                                                Color.fromRGBO(255, 255, 0, 0),
-                                                Color.fromRGBO(236, 13, 195, 0),
-                                              ],
-                                              //title: ChartTitle(text: isCardView ? '' : 'Website conversion rate'),
-                                              tooltipBehavior:
-                                              TooltipBehavior(enable: true),
-                                              series: FunnelSeries<
-                                                  ChartSampleData, String>(
-                                                  dataSource: <ChartSampleData>[
-                                                    ...NewsChannelFunnelgraphChartData,
-                                                  ],
-                                                  xValueMapper:
-                                                      (ChartSampleData data, _) =>
-                                                  data.x as String,
-                                                  yValueMapper:
-                                                      (ChartSampleData data, _) =>
-                                                  data.y,
-                                                  /*  explode: isCardView ? false : explode,
-                    gapRatio: isCardView ? 0 : gapRatio,*/
-                                                  neckHeight: /*isCardView ? */
-                                                  '20%' /*: neckHeight.toString()*/ +
-                                                      '%',
-                                                  neckWidth: /*isCardView ?*/
-                                                  '25%' /*: neckWidth.toString()*/ +
-                                                      '%',
-                                                  dataLabelSettings:
-                                                  const DataLabelSettings(
-                                                      textStyle:
-                                                      TextStyle(fontSize: 8),
-                                                      isVisible: true)))),
-                                      Text(
-                                        'Comments',
-                                        style: TextStyle(fontSize: 10),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                MainAxisAlignment.spaceEvenly,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 5.0, top: 60),
-                                    child: Image.asset(
-                                      'assets/NotificationIcons/News-Paper.png',
-                                      height: 29,
-                                      width: 29,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 140.0, left: 5),
-                                    child: Container(
-                                      height: 100,
-                                      width: 150,
-                                      child: RichText(
-                                        text: new TextSpan(
-                                          // Note: Styles for TextSpans must be explicitly defined.
-                                          // Child text spans will inherit styles from parent
-                                          style: new TextStyle(
-                                            fontSize: 12.0,
-                                            // color: Colors.black,
-                                          ),
-                                          children: <TextSpan>[
-                                            TextSpan(
-                                                text: NewsChannelBarGraphdata[
-                                                'lead'][0],
-                                                style: new TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.green,
-                                                    fontSize: 20,
-                                                    fontFamily: 'Segoe UI')),
-                                            TextSpan(
-                                                text: ' is overpowering ',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                    fontSize: 18,
-                                                    fontFamily: 'Segoe UI')),
-                                            TextSpan(
-                                                text: "Multiple Parties",
-                                                style: new TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                    //color: Colors.red,
-                                                    fontSize: 18,
-                                                    fontFamily: 'Segoe UI')),
-                                            TextSpan(
-                                                text: ' in all aspects.',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                    fontSize: 18,
-                                                    fontFamily: 'Segoe UI')),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                        const EdgeInsets.only(top: 100.0),
-                                        child: Container(
-                                          decoration: BoxDecoration(
-                                              border: Border.all(
-                                                  color: Colors.greenAccent),
-                                              borderRadius:
-                                              BorderRadius.circular(15)),
-                                          height: 100,
-                                          width: 135,
-                                          child: SfCartesianChart(
-                                            palette: <Color>[
-                                              Color(0xffff7f50),
-                                              Color(0xfff0ead6),
-                                              Color(0xffffd700),
-                                              Color(0xff264348),
-                                            ],
-                                            plotAreaBorderWidth: 0,
-                                            primaryXAxis: CategoryAxis(
-                                              labelStyle: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 8),
-                                              axisLine:
-                                              const AxisLine(width: 0),
-                                              labelPosition:
-                                              ChartDataLabelPosition
-                                                  .outside,
-                                              majorTickLines:
-                                              const MajorTickLines(
-                                                  width: 0),
-                                              majorGridLines:
-                                              const MajorGridLines(
-                                                  width: 0),
-                                            ),
-                                            primaryYAxis: NumericAxis(
-                                                labelStyle: const TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 8),
-                                                labelPosition:
-                                                ChartDataLabelPosition
-                                                    .outside,
-                                                isVisible: false,
-                                                minimum: 0,
-                                                maximum: 800),
-                                            series: <ColumnSeries<
-                                                ChartSampleData, String>>[
-                                              ColumnSeries<ChartSampleData,
-                                                  String>(
-                                                width: 0.9,
-                                                dataLabelSettings:
-                                                const DataLabelSettings(
-                                                    isVisible: false,
-                                                    labelAlignment:
-                                                    ChartDataLabelAlignment
-                                                        .top),
-                                                dataSource: <ChartSampleData>[
-                                                  ...NewsChannelBargraphChartdata
-                                                ],
-                                                borderRadius:
-                                                BorderRadius.circular(10),
-                                                xValueMapper:
-                                                    (ChartSampleData sales,
-                                                    _) =>
-                                                sales.x as String,
-                                                yValueMapper:
-                                                    (ChartSampleData sales,
-                                                    _) =>
-                                                sales.y,
-                                              ),
-                                            ],
-                                            tooltipBehavior:
-                                            _NewsChanneltooltipBehavior,
-                                          ),
-                                        ),
-                                      ),
-                                      Text(
-                                        'Views',
-                                        style: TextStyle(fontSize: 10),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        );
-                      } else {
-                        return const Text('Empty data');
-                      }
-                    } else {
-                      return Text('State: ${snapshot.connectionState}');
-                    }
-                  },
-                ),
-              ),
-            ),
+                                ),
+                                Text(
+                                  'Views',
+                                  style: GoogleFonts.bitter(fontSize: 10),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return const Text('Empty data');
+                }
+              } else {
+                return Text('State: ${snapshot.connectionState}');
+              }
+            },
           )
-        ]);
+              : SpinKitCubeGrid(
+            color: Colors.blue,
+            size: 50,
+          ),
+        ),
+      ),
+    );
   }
 
   //Bar Graph data
@@ -4090,7 +2806,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var body = json.encode({
       "type": "party_data",
       "STATE": 'ANDHRA PRADESH',
-      "party_list": 'TDP',
+      "party_list": NewsChannellocallist.join(""),
       "social_handle": "NEWS_CHANNEL"
     });
     var headers = {'Content-Type': 'application/json'};
@@ -4099,16 +2815,11 @@ class _HomeScreenState extends State<HomeScreen> {
         headers: headers,
         body: body);
 
-    print(response.statusCode);
     if (response.statusCode == 200) {
-      print('inside loop');
       try {
-        print('inside try');
         NewsChannelBarGraphdata = jsonDecode(utf8.decode(response.bodyBytes));
         setState(() {
           NewsChannelBarGraphdata['party_data'].forEach((key, value) {
-            print(key);
-
             NewsChannelBargraphChartdata.add(
               ChartSampleData(
                   x: '$key',
@@ -4127,18 +2838,103 @@ class _HomeScreenState extends State<HomeScreen> {
                   text: '$key'),
             );
           });
-
-          // for(int i=0;i<NewsChannelBarGraphdata['party_data'])
-          // NewsChannelBargraphChartdata.add(ChartSampleData(x: 'TDP', y: 8683),);
         });
-        print('data here');
-        print(NewsChannelBarGraphdata);
-      } catch (e) {
-        print(NewsChannelBarGraphdata);
-      }
-    } else {
-      print(response.reasonPhrase);
-    }
+      } catch (e) {}
+    } else {}
     return NewsChannelBarGraphdata;
+  }
+
+  Widget loader() {
+    return Padding(
+      padding: const EdgeInsets.only(top: 70.0),
+      child: SizedBox(
+        height: 150,
+        width: 150,
+        child: Center(
+            child: SpinKitWave(
+              color: Colors.blue,
+              size: 18,
+            )),
+      ),
+    );
+  }
+
+  Widget NewsPaperWidget() {
+    return Opencontainer(
+      openBuilder: DiscoverPage(initialPage: 0),
+      closedBuilder: Newpaperlist,
+      duration: duration,
+      swiperLayout: swiperlayout,
+      axis: carddirection,
+    );
+  }
+
+  //NewsChannel widget
+  Widget NewsChannelWidget() {
+    return Opencontainer(
+        openBuilder: DiscoverPage(initialPage: 1),
+        closedBuilder: NewschannelList,
+        duration: duration,
+        swiperLayout: swiperlayout,
+        axis: carddirection);
+  }
+
+  Widget LiveNewsWidget() {
+    return Opencontainer(
+        openBuilder: DiscoverPage(initialPage: 2),
+        closedBuilder: LiveNewsList,
+        duration: duration,
+        swiperLayout: swiperlayout,
+        axis: carddirection);
+  }
+
+  //Google trends
+  Widget GoogletrendsWidget() {
+    return Opencontainer(
+        openBuilder: DiscoverPage(initialPage: 3),
+        closedBuilder: GoogleTrendsList,
+        duration: duration,
+        swiperLayout: swiperlayout,
+        axis: carddirection);
+  }
+
+//Youtube news
+  Widget YoutubeWidget() {
+    return Opencontainer(
+        openBuilder: YouTubeScreen(),
+        closedBuilder:  YoutubeList,
+        duration: duration,
+        swiperLayout: swiperlayout,
+        axis: carddirection);
+  }
+
+  //twitter news
+  Widget TwitterWidget() {
+    return Opencontainer(
+        openBuilder: TwitterScreen(),
+        closedBuilder: TwitterList,
+        duration: duration,
+        swiperLayout: swiperlayout,
+        axis: carddirection);
+  }
+
+//FaceBook news
+  Widget FacebookWidget() {
+    return Opencontainer(
+        openBuilder: FaceBookScreen(),
+        closedBuilder: FaceBookList,
+        duration: duration,
+        swiperLayout: swiperlayout,
+        axis: carddirection);
+  }
+
+//Instagram News
+  Widget InstagramWidget() {
+    return Opencontainer(
+        openBuilder: InstagramScreen(),
+        closedBuilder: InstagramList,
+        duration: duration,
+        swiperLayout: swiperlayout,
+        axis: carddirection);
   }
 }

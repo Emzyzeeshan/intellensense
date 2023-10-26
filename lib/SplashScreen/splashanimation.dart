@@ -197,7 +197,7 @@ class _SplashAnimationState extends State<SplashAnimation>
                         offset: Offset(-0.6, 0.6),
                         // scale: _animationController.value,
                         child: Image.asset(
-                            'assets/icons/IntelliSense-Logo-Finall.gif'))),
+                            'assets/new Updated images/AppIcon.gif'))),
               ),
             ),
             //  Transform.rotate(

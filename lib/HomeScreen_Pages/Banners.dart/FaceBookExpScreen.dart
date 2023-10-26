@@ -49,8 +49,8 @@ class _FacebookExpBannerState extends State<FacebookExpBanner> {
           backgroundColor: Colors.white,
           centerTitle: true,
           title: Image.asset(
-            'assets/icons/IntelliSense-Logo-Finall_01022023_A.gif',
-            width: 160,
+            'assets/new Updated images/AppIcon.gif',
+            width: 60,
           ),
           leading: new IconButton(
             icon: new Icon(Icons.arrow_back_ios_new, color: Colors.black),
@@ -86,8 +86,9 @@ class _FacebookExpBannerState extends State<FacebookExpBanner> {
                                 borderColor: Colors.blue,
                                 tooltipBehavior: _tooltipBehavior1,
                                 palette: [
-                                  Colors.yellow,
-                                  Colors.yellowAccent,
+                                  Color.fromRGBO(19, 136, 8, 0),
+                                  Color.fromRGBO(254, 1, 117, 0),
+
                                   Color.fromRGBO(249, 125, 9, 0),
                                 ],
                                 series: <PieSeries<ChartSampleData, String>>[
@@ -125,8 +126,9 @@ class _FacebookExpBannerState extends State<FacebookExpBanner> {
                                 legend: Legend(isVisible: true),
                                 borderColor: Colors.blue,
                                 palette: [
-                                  Colors.yellow,
-                                  Colors.yellowAccent,
+                                  Color.fromRGBO(19, 136, 8, 0),
+                                  Color.fromRGBO(254, 1, 117, 0),
+
                                   Color.fromRGBO(249, 125, 9, 0),
                                 ],
                                 title: ChartTitle(text:'Views Data In Twitter'),
@@ -221,8 +223,8 @@ class _FacebookExpBannerState extends State<FacebookExpBanner> {
   Future<dynamic> FaceBookBannerGraphApi() async {
     var body = json.encode({
       "type": "party_data",
-      "STATE": 'ANDHRA PRADESH',
-      "party_list": 'TDP, YSRCP',
+      "STATE": 'Telangana',
+      "party_list": 'INC, TRS, BJP',
       //"social_handle": "YOUTUBE"
     });
     var headers = {'Content-Type': 'application/json'};

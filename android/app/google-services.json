@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:741226273836:android:aa19bdcea261b1f85ac589",
         "android_client_info": {
-          "package_name": "com.example.intellensense"
+          "package_name": "com.political.pulse"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "741226273836-s8f548mq7t68sr8lcg29ql8ntnccv86p.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.intellensense",
+            "package_name": "com.political.pulse",
             "certificate_hash": "a748ccedbf76d3ccbc9b20e66ac009c3c59bacc5"
           }
         },
@@ -42,7 +42,7 @@
               "client_id": "741226273836-b5r29simfarfbfqebkjl4ta96pqjhbeu.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.intellensense"
+                "bundle_id": "com.political.pulse"
               }
             }
           ]

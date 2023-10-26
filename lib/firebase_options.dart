@@ -69,7 +69,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'intellensense.appspot.com',
     androidClientId: '741226273836-s8f548mq7t68sr8lcg29ql8ntnccv86p.apps.googleusercontent.com',
     iosClientId: '741226273836-b5r29simfarfbfqebkjl4ta96pqjhbeu.apps.googleusercontent.com',
-    iosBundleId: 'com.example.intellensense',
+    iosBundleId: 'com.political.pulse',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -80,6 +80,6 @@ class DefaultFirebaseOptions {
     storageBucket: 'intellensense.appspot.com',
     androidClientId: '741226273836-s8f548mq7t68sr8lcg29ql8ntnccv86p.apps.googleusercontent.com',
     iosClientId: '741226273836-b5r29simfarfbfqebkjl4ta96pqjhbeu.apps.googleusercontent.com',
-    iosBundleId: 'com.example.intellensense',
+    iosBundleId: 'com.political.pulse',
   );
 }
